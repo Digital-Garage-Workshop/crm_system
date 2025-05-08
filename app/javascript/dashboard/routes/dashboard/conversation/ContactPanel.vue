@@ -19,6 +19,7 @@ import CustomAttributes from './customAttributes/CustomAttributes.vue';
 import Draggable from 'vuedraggable';
 import MacrosList from './Macros/List.vue';
 import ShopifyOrdersList from '../../../components/widgets/conversation/ShopifyOrdersList.vue';
+import GarageOrdersList from '../../../components/widgets/conversation/GarageOrdersList.vue';
 
 const props = defineProps({
   conversationId: {
@@ -48,9 +49,16 @@ const shopifyIntegration = useFunctionGetter(
   'integrations/getIntegration',
   'shopify'
 );
+const garageIntegration = useFunctionGetter(
+  'integrations/getIntegration',
+  'garage'
+);
 
 const isShopifyFeatureEnabled = computed(
   () => shopifyIntegration.value.enabled
+);
+const isGarageFeatureEnabled = computed(
+  () => garageIntegration.value?.enabled || true
 );
 
 const store = useStore();
@@ -98,8 +106,27 @@ const onDragEnd = () => {
   });
 };
 
+const initSidebarItems = () => {
+  let items = [...conversationSidebarItemsOrder.value];
+
+  // Check if garage_orders item already exists
+  if (!items.find(item => item.name === 'garage_orders')) {
+    // Add garage_orders after shopify_orders
+    const shopifyIndex = items.findIndex(
+      item => item.name === 'shopify_orders'
+    );
+    if (shopifyIndex !== -1) {
+      items.splice(shopifyIndex + 1, 0, { name: 'garage_orders' });
+    } else {
+      items.push({ name: 'garage_orders' });
+    }
+  }
+
+  conversationSidebarItems.value = items;
+};
+
 onMounted(() => {
-  conversationSidebarItems.value = conversationSidebarItemsOrder.value;
+  initSidebarItems();
   getContactDetails();
   store.dispatch('attributes/get', 0);
 });
@@ -244,6 +271,22 @@ onMounted(() => {
                 "
               >
                 <ShopifyOrdersList :contact-id="contactId" />
+              </AccordionItem>
+            </div>
+            <div
+              v-else-if="
+                element.name === 'garage_orders' && isGarageFeatureEnabled
+              "
+            >
+              <AccordionItem
+                :title="$t('CONVERSATION_SIDEBAR.ACCORDION.GARAGE_ORDERS')"
+                :is-open="isContactSidebarItemOpen('is_garage_orders_open')"
+                compact
+                @toggle="
+                  value => toggleSidebarUIState('is_garage_orders_open', value)
+                "
+              >
+                <GarageOrdersList :contact-id="contactId" />
               </AccordionItem>
             </div>
             <div v-else-if="element.name === 'contact_notes'">
