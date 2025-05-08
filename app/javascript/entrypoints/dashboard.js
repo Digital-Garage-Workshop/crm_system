@@ -20,6 +20,7 @@ import { sync } from 'vuex-router-sync';
 import router, { initalizeRouter } from 'dashboard/routes';
 import store from 'dashboard/store';
 import constants from 'dashboard/constants/globals';
+
 import * as Sentry from '@sentry/vue';
 import {
   initializeAnalyticsEvents,
