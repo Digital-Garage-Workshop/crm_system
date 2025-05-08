@@ -75,7 +75,7 @@ post:
             description: Conversation source id
           inbox_id:
             type: string
-            description: "Id of inbox in which the conversation is created <br/> Allowed Inbox Types: Website, Phone, Api, Email "
+            description: 'Id of inbox in which the conversation is created <br/> Allowed Inbox Types: Website, Phone, Api, Email '
           contact_id:
             type: string
             description: Contact Id for which conversation is created
@@ -85,7 +85,11 @@ post:
           custom_attributes:
             type: object
             description: The object to save custom attributes for conversation, accepts custom attributes key and value
-            example: { attribute_key: attribute_value, priority_conversation_number: 3 }
+            example:
+              {
+                attribute_key: attribute_value,
+                priority_conversation_number: 3,
+              }
           status:
             type: string
             enum: ['open', 'resolved', 'pending']
@@ -120,11 +124,11 @@ post:
                     type: string
                     description: Language of the template
                     example: en_US
-                  processed_params: 
+                  processed_params:
                     type: object
                     description: The processed param values for template variables in template
-                    example: 
-                      1: "Chatwoot"
+                    example:
+                      1: 'Digital Garage CRM'
   responses:
     200:
       description: Success
