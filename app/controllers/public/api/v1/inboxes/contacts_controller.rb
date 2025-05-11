@@ -69,3 +69,31 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     params.permit(:push_token, :plate_number)
   end
 end
+
+# Add to your existing controller
+def update_push_token
+  source_id = params[:source_id]
+
+  begin
+    contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: source_id)
+    @contact = contact_inbox.contact
+
+    if @contact.update(push_token_params)
+      Rails.logger.info "ContactsController: Updated push token for contact #{@contact.id}, source_id #{source_id}"
+      render json: { success: true, message: 'Push token updated successfully' }
+    else
+      Rails.logger.error "ContactsController: Failed to update push token: #{@contact.errors.full_messages}"
+      render json: { error: @contact.errors.full_messages.join(', ') }, status: :unprocessable_entity
+    end
+  rescue ActiveRecord::RecordNotFound => e
+    Rails.logger.error "ContactsController: Failed to find contact with source_id #{source_id}: #{e.message}"
+    render json: { error: 'Contact not found' }, status: :not_found
+  end
+end
+
+# Add this to existing controller
+private
+
+def push_token_params
+  params.permit(:push_token, :plate_number)
+end
