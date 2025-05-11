@@ -417,6 +417,10 @@ Rails.application.routes.draw do
         resources :inboxes do
           scope module: :inboxes do
             resources :contacts, only: [:create, :show, :update] do
+              collection do
+                patch :update_push_token # Add this line for push token updates
+              end
+
               resources :conversations, only: [:index, :create, :show] do
                 member do
                   post :toggle_status
