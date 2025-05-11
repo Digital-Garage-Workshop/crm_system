@@ -48,7 +48,7 @@ class Contact < ApplicationRecord
   validates :email, allow_blank: true, uniqueness: { scope: [:account_id], case_sensitive: false },
                     format: { with: Devise.email_regexp, message: I18n.t('errors.contacts.email.invalid') }
   validates :identifier, allow_blank: true, uniqueness: { scope: [:account_id] }
-  validates :push_token, presence: true, length: { maximum: 500 }
+  validates :push_token, length: { maximum: 500 }, allow_blank: true
   validates :plate_number, length: { maximum: 12 }
   validates :phone_number,
             allow_blank: true, uniqueness: { scope: [:account_id] },
