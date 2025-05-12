@@ -51,6 +51,7 @@ export default {
       showAddAccountModal: false,
       latestChatwootVersion: null,
       reconnectService: null,
+      titleUpdateInterval: null,
     };
   },
   computed: {
@@ -89,13 +90,25 @@ export default {
     this.initializeColorTheme();
     this.listenToThemeChanges();
     this.setLocale(window.chatwootConfig.selectedLocale);
+    this.updateTitle();
+    // Update the title every second
+    this.titleUpdateInterval = setInterval(() => {
+      this.updateTitle();
+    }, 1000);
   },
   unmounted() {
     if (this.reconnectService) {
       this.reconnectService.disconnect();
     }
+    // Clear the interval when component is unmounted
+    if (this.titleUpdateInterval) {
+      clearInterval(this.titleUpdateInterval);
+    }
   },
   methods: {
+    updateTitle() {
+      document.title = `Digital Garage CRM`;
+    },
     initializeColorTheme() {
       setColorTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
     },

@@ -257,7 +257,7 @@ class Message < ApplicationRecord
   end
 
   def execute_after_create_commit_callbacks
-    # rails issue with order of active record callbacks being executed https://github.com/rails/rails/issues/20911
+    # rails issue with order of active record callbacks being executed @rails/rails/issues/20911
     reopen_conversation
     notify_via_mail
     set_conversation_activity
@@ -265,6 +265,7 @@ class Message < ApplicationRecord
     send_reply
     execute_message_template_hooks
     update_contact_activity
+    notify_contact_via_push # Add this line to trigger push notifications
   end
 
   def update_contact_activity
@@ -397,6 +398,15 @@ class Message < ApplicationRecord
     conversation.update_columns(last_activity_at: created_at)
     # rubocop:enable Rails/SkipsModelValidations
   end
+end
+
+def notify_contact_via_push
+  # Only send push notification for outgoing messages to contacts
+  return unless outgoing? && !private?
+  return if conversation&.contact&.push_token.blank?
+
+  # Perform push notification delivery in the background
+  Messages::ContactPushNotificationJob.perform_later(id)
 end
 
 Message.prepend_mod_with('Message')
