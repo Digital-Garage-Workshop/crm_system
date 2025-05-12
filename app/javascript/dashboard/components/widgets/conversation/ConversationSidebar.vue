@@ -27,6 +27,7 @@ const CONTACT_TABS_OPTIONS = [
 
 const tabs = computed(() => {
   return CONTACT_TABS_OPTIONS.map(tab => ({
+    // eslint-disable-next-line @intlify/vue-i18n/no-dynamic-keys
     label: t(`CONVERSATION.SIDEBAR.${tab.key}`),
     value: tab.value,
   }));

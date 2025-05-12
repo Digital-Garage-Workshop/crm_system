@@ -26,9 +26,10 @@
 node_modules
 master.key
 *.rdb
+.pnpm-store
 
 # Ignore env files
-.env
+# .env
 
 public/uploads
 public/packs*
