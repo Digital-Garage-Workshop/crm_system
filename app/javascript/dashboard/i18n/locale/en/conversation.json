@@ -290,6 +290,19 @@
     "SELECT": {
       "PLACEHOLDER": "None"
     },
+    "GARAGE_ORDERS": {
+      "VIEW_ORDERS": "View Garage Orders",
+      "TITLE": "Garage Orders",
+      "CLOSE": "Close",
+      "LOADING": "Loading...",
+      "NO_ORDERS": "No orders found.",
+      "ORDER_ID": "Order #{id}",
+      "TYPE": "Type",
+      "QUANTITY": "Quantity",
+      "TOTAL": "Total"
+    },
+    "PRICE": "{price} ₮",
+    "PRICE_WITH_CURRENCY": "{price} ₮",
     "ACCORDION": {
       "CONTACT_DETAILS": "Contact Details",
       "CONVERSATION_ACTIONS": "Conversation Actions",
@@ -299,7 +312,14 @@
       "CONTACT_ATTRIBUTES": "Contact Attributes",
       "PREVIOUS_CONVERSATION": "Previous Conversations",
       "MACROS": "Macros",
-      "SHOPIFY_ORDERS": "Shopify Orders"
+      "GARAGE_ORDERS": "Garage Orders",
+      "SHOPIFY_ORDERS": "Shopify Orders",
+      "ORDER_ID": "Order ID",
+      "ORDER_TYPE": "Order Type",
+      "QUANTITY": "Quantity",
+      "TOTAL": "Total",
+
+      "LOADING": "Loading..."
     },
     "SHOPIFY": {
       "ORDER_ID": "Order #{id}",
@@ -314,6 +334,7 @@
         "REFUNDED": "Refunded",
         "VOIDED": "Voided"
       },
+
       "FULFILLMENT_STATUS": {
         "FULFILLED": "Fulfilled",
         "PARTIALLY_FULFILLED": "Partially Fulfilled",

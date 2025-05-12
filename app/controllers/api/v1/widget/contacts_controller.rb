@@ -2,11 +2,17 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
   include WidgetHelper
 
   before_action :validate_hmac, only: [:set_user]
+  before_action :ensure_contact_present, except: [:set_user]
+  rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
 
-  def show; end
+  def show
+    render json: @contact.present? ? contact_with_push_token : { error: 'Contact not found' }, status: @contact.present? ? :ok : :not_found
+  end
 
   def update
     identify_contact(@contact)
+    update_push_token if push_token_param.present?
+    render json: contact_with_push_token
   end
 
   def set_user
@@ -22,13 +28,23 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
     @contact_inbox.update(hmac_verified: true) if should_verify_hmac? && valid_hmac?
 
     identify_contact(contact)
+    update_push_token if push_token_param.present?
+    render json: contact_with_push_token
   end
 
   # TODO : clean up this with proper routes delete contacts/custom_attributes
   def destroy_custom_attributes
     @contact.custom_attributes = @contact.custom_attributes.excluding(params[:custom_attributes])
     @contact.save!
-    render json: @contact
+    render json: contact_with_push_token
+  end
+
+  # Method to update push token
+  def update_push_token
+    render json: { error: 'Contact not found' }, status: :not_found and return unless @contact.present?
+
+    @contact.update!(push_token: push_token_param)
+    render json: contact_with_push_token
   end
 
   private
@@ -70,7 +86,24 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
   end
 
   def permitted_params
-    params.permit(:website_token, :identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, custom_attributes: {},
-                                                                                                            additional_attributes: {})
+    params.permit(:website_token, :identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token, :plate_number,
+                  custom_attributes: {}, additional_attributes: {})
+  end
+
+  def push_token_param
+    params[:push_token]
+  end
+
+  def ensure_contact_present
+    render json: { error: 'Contact not found' }, status: :not_found unless @contact.present?
+  end
+
+  def render_record_invalid(exception)
+    render json: { error: exception.record.errors.full_messages.join(', ') }, status: :unprocessable_entity
+  end
+
+  # Include push token in response
+  def contact_with_push_token
+    @contact.attributes
   end
 end
