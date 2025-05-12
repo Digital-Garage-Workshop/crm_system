@@ -1,6 +1,6 @@
 class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesController
   before_action :contact_inbox, except: [:create, :update_push_token]
-  before_action :process_hmac, except: [:update_push_token]
+  before_action :process_hmac, except: [:create, :update_push_token]
   before_action :set_contact, only: [:update_push_token]
 
   def show; end
@@ -15,6 +15,14 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
 
     # Log the token for debugging
     Rails.logger.info "Contact created with ID: #{@contact_inbox.contact.id}, Push token present: #{permitted_params[:push_token].present?}"
+
+    # Update push token if provided during creation
+    if permitted_params[:push_token].present?
+      @contact_inbox.contact.update(push_token: permitted_params[:push_token])
+      Rails.logger.info "Push token set during contact creation for contact #{@contact_inbox.contact.id}"
+    end
+
+    render json: @contact_inbox.contact
   end
 
   def update
@@ -25,73 +33,77 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     render json: contact_identify_action.perform
   end
 
-  # Enhanced method for push token updates with logging
   def update_push_token
-    if update_contact_with_token
-      render_success_response
+    Rails.logger.info "Push token update request received for source_id: #{params[:source_id]}"
+    Rails.logger.info "Params: #{params.to_json}"
+
+    unless @contact
+      Rails.logger.error "Contact not found for source_id: #{params[:source_id]}"
+      return render json: { error: 'Contact not found' }, status: :not_found
+    end
+
+    token = params[:push_token].presence
+    plate = params[:plate_number].presence
+
+    Rails.logger.info "Processing push token update for contact ##{@contact.id}"
+    Rails.logger.info "Token present: #{token.present?}, Plate present: #{plate.present?}"
+
+    # Handle missing token
+    unless token
+      Rails.logger.error 'No push token provided in request'
+      return render json: { error: 'No push token provided' }, status: :bad_request
+    end
+
+    # Directly update attributes for better error tracking
+    @contact.push_token = token
+    @contact.plate_number = plate if plate
+
+    if @contact.save
+      Rails.logger.info "Successfully updated push token for contact ##{@contact.id}"
+      render json: {
+        success: true,
+        message: 'Push token updated successfully',
+        contact_id: @contact.id
+      }
     else
-      render_validation_errors
+      Rails.logger.error "Failed to save push token: #{@contact.errors.full_messages.join(', ')}"
+      render json: {
+        error: @contact.errors.full_messages.join(', ')
+      }, status: :unprocessable_entity
     end
   rescue StandardError => e
-    handle_generic_error(e)
+    Rails.logger.error "Exception in update_push_token: #{e.class} - #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
+    render json: {
+      error: 'An error occurred while processing your request',
+      message: e.message
+    }, status: :internal_server_error
   end
 
   private
-
-  def find_contact_and_update_token(source_id)
-    contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: source_id)
-    @contact = contact_inbox.contact
-
-    if update_contact_with_token
-      render_success_response
-    else
-      render_validation_errors
-    end
-  end
-
-  def update_contact_with_token
-    log_token_update_attempt
-    @contact.update(push_token_params)
-  end
-
-  def log_token_update_attempt
-    Rails.logger.info "Updating push token for contact #{@contact.id}, token present: #{params[:push_token].present?}"
-  end
-
-  def render_success_response
-    Rails.logger.info "Push token updated successfully for contact #{@contact.id}"
-    render json: { success: true, message: 'Push token updated successfully' }
-  end
-
-  def render_validation_errors
-    Rails.logger.error "Failed to update push token: #{@contact.errors.full_messages}"
-    render json: { error: @contact.errors.full_messages.join(', ') }, status: :unprocessable_entity
-  end
-
-  def handle_contact_not_found(source_id, exception)
-    Rails.logger.error "Failed to find contact with source_id #{source_id}: #{exception.message}"
-    render json: { error: 'Contact not found' }, status: :not_found
-  end
-
-  def handle_generic_error(exception)
-    Rails.logger.error "Error during push token update: #{exception.class} - #{exception.message}"
-    render json: { error: 'An error occurred while processing your request' }, status: :internal_server_error
-  end
-
-  def push_token_params
-    params.permit(:push_token, :plate_number)
-  end
 
   def contact_inbox
     @contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: params[:id])
   end
 
   def set_contact
-    contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: params[:source_id])
+    source_id = params[:source_id]
+    Rails.logger.info "Looking up contact with source_id: #{source_id}"
+
+    contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by(source_id: source_id)
+
+    if contact_inbox.nil?
+      Rails.logger.error "No contact inbox found with source_id: #{source_id}"
+      @contact = nil
+      return
+    end
+
     @contact = contact_inbox.contact
-  rescue ActiveRecord::RecordNotFound => e
-    Rails.logger.error "ContactsController: Failed to find contact with source_id #{params[:source_id]}: #{e.message}"
-    render json: { error: 'Contact not found' }, status: :not_found
+    Rails.logger.info "Found contact ##{@contact.id} for source_id: #{source_id}"
+  rescue StandardError => e
+    Rails.logger.error "Error finding contact: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
+    @contact = nil
   end
 
   def process_hmac
@@ -107,6 +119,14 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       @inbox_channel.hmac_token,
       params[:identifier].to_s
     )
+  end
+
+  def push_token_params
+    # Explicitly permit and extract only the parameters we need
+    {
+      push_token: params[:push_token],
+      plate_number: params[:plate_number]
+    }.compact
   end
 
   def permitted_params
