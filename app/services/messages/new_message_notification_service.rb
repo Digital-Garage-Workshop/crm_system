@@ -6,6 +6,7 @@ class Messages::NewMessageNotificationService
 
     notify_conversation_assignee
     notify_participating_users
+    process_contact_notification # Add this line to call the new method
   end
 
   private
@@ -41,6 +42,15 @@ class Messages::NewMessageNotificationService
         secondary_actor: message
       ).perform
     end
+  end
+
+  # Add the missing method
+  def process_contact_notification
+    return unless message.incoming? || message.template?
+    return if conversation.contact.nil?
+
+    # Fix the namespace - use Notification::Services instead of NotificationServices
+    Notification::Services.push_message_notification(message)
   end
 
   # The user could already have been notified via a mention or via assignment
