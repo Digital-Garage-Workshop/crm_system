@@ -4,7 +4,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   before_action :set_contact, only: [:update_push_token]
 
   def show
-    render json: format_contact_response(@contact_inbox.contact)
+    render json: contact_response_json(@contact_inbox.contact, @contact_inbox)
   end
 
   def create
@@ -24,7 +24,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       Rails.logger.info "Push token set during contact creation for contact #{@contact_inbox.contact.id}"
     end
 
-    render json: format_contact_response(@contact_inbox.contact)
+    render json: contact_response_json(@contact_inbox.contact, @contact_inbox)
   end
 
   def update
@@ -32,8 +32,10 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       contact: @contact_inbox.contact,
       params: permitted_params.to_h.deep_symbolize_keys.except(:identifier)
     )
-    contact = contact_identify_action.perform
-    render json: format_contact_response(contact)
+    updated_contact = contact_identify_action.perform
+
+    # The contact_inbox remains the same even after the update
+    render json: contact_response_json(updated_contact, @contact_inbox)
   end
 
   def update_push_token
@@ -58,12 +60,14 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     end
 
     # Directly update attributes for better error tracking
-    @contact.push_token = token
-    @contact.plate_number = plate if plate
+    @contact.push_token = token if @contact.respond_to?(:push_token=)
+    @contact.plate_number = plate if plate && @contact.respond_to?(:plate_number=)
 
     if @contact.save
       Rails.logger.info "Successfully updated push token for contact ##{@contact.id}"
-      render json: format_contact_response(@contact)
+      # Find the appropriate contact_inbox for this contact
+      inbox_contact = @inbox_channel.inbox.contact_inboxes.find_by(contact_id: @contact.id)
+      render json: contact_response_json(@contact, inbox_contact)
     else
       Rails.logger.error "Failed to save push token: #{@contact.errors.full_messages.join(', ')}"
       render json: {
@@ -81,25 +85,30 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
 
   private
 
-  def format_contact_response(contact)
-    contact_inbox = contact.contact_inboxes.find_by(inbox_id: @inbox_channel.inbox_id)
+  def contact_response_json(contact, contact_inbox)
+    # This ensures we don't try to access attributes that don't exist
+    source_id = contact_inbox&.source_id || ''
+    pubsub_token = contact.respond_to?(:pubsub_token) ? contact.pubsub_token : ''
+
+    # If the token is missing and we should generate one
+    if pubsub_token.blank? && contact.respond_to?(:pubsub_token=)
+      begin
+        pubsub_token = SecureRandom.uuid
+        contact.update_column(:pubsub_token, pubsub_token) if contact.has_attribute?(:pubsub_token)
+      rescue StandardError => e
+        Rails.logger.error "Failed to generate pubsub_token: #{e.message}"
+        pubsub_token = ''
+      end
+    end
 
     {
       id: contact.id,
-      name: contact.name,
+      name: contact.name || '',
       email: contact.email,
-      phone_number: contact.phone_number,
-      source_id: contact_inbox&.source_id,
-      pubsub_token: contact.pubsub_token || generate_pubsub_token(contact)
+      phone_number: contact.respond_to?(:phone_number) ? contact.phone_number : nil,
+      source_id: source_id,
+      pubsub_token: pubsub_token
     }
-  end
-
-  def generate_pubsub_token(contact)
-    # Generate a pubsub token if not already present
-    # This is a placeholder - implement according to your application's requirements
-    token = SecureRandom.uuid
-    contact.update(pubsub_token: token)
-    token
   end
 
   def contact_inbox
