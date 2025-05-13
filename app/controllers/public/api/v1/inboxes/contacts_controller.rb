@@ -3,7 +3,9 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   before_action :process_hmac, except: [:create, :update_push_token]
   before_action :set_contact, only: [:update_push_token]
 
-  def show; end
+  def show
+    render json: format_contact_response(@contact_inbox.contact)
+  end
 
   def create
     source_id = params[:source_id] || SecureRandom.uuid
@@ -22,7 +24,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       Rails.logger.info "Push token set during contact creation for contact #{@contact_inbox.contact.id}"
     end
 
-    render json: @contact_inbox.contact
+    render json: format_contact_response(@contact_inbox.contact)
   end
 
   def update
@@ -30,7 +32,8 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       contact: @contact_inbox.contact,
       params: permitted_params.to_h.deep_symbolize_keys.except(:identifier)
     )
-    render json: contact_identify_action.perform
+    contact = contact_identify_action.perform
+    render json: format_contact_response(contact)
   end
 
   def update_push_token
@@ -60,11 +63,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
 
     if @contact.save
       Rails.logger.info "Successfully updated push token for contact ##{@contact.id}"
-      render json: {
-        success: true,
-        message: 'Push token updated successfully',
-        contact_id: @contact.id
-      }
+      render json: format_contact_response(@contact)
     else
       Rails.logger.error "Failed to save push token: #{@contact.errors.full_messages.join(', ')}"
       render json: {
@@ -81,6 +80,27 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   end
 
   private
+
+  def format_contact_response(contact)
+    contact_inbox = contact.contact_inboxes.find_by(inbox_id: @inbox_channel.inbox_id)
+
+    {
+      id: contact.id,
+      name: contact.name,
+      email: contact.email,
+      phone_number: contact.phone_number,
+      source_id: contact_inbox&.source_id,
+      pubsub_token: contact.pubsub_token || generate_pubsub_token(contact)
+    }
+  end
+
+  def generate_pubsub_token(contact)
+    # Generate a pubsub token if not already present
+    # This is a placeholder - implement according to your application's requirements
+    token = SecureRandom.uuid
+    contact.update(pubsub_token: token)
+    token
+  end
 
   def contact_inbox
     @contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: params[:id])
