@@ -1,142 +1,142 @@
 {
   "COMPONENTS": {
     "FILE_BUBBLE": {
-      "DOWNLOAD": "Download",
-      "UPLOADING": "Uploading..."
+      "DOWNLOAD": "Татаж авах",
+      "UPLOADING": "Илгээж байна..."
     },
     "FORM_BUBBLE": {
-      "SUBMIT": "Submit"
+      "SUBMIT": "Илгээх"
     },
     "MESSAGE_BUBBLE": {
-      "RETRY": "Send message again",
-      "ERROR_MESSAGE": "Couldn't send, try again"
+      "RETRY": "Мессежийг дахин илгээх",
+      "ERROR_MESSAGE": "Илгээж чадсангүй, дахин оролдоно уу"
     }
   },
   "TEAM_AVAILABILITY": {
-    "ONLINE": "We are online",
-    "OFFLINE": "We are away at the moment"
+    "ONLINE": "Бид онлайн байна",
+    "OFFLINE": "Одоогоор бид холбогдоогүй байна"
   },
   "REPLY_TIME": {
-    "IN_A_FEW_MINUTES": "Typically replies in a few minutes",
-    "IN_A_FEW_HOURS": "Typically replies in a few hours",
-    "IN_A_DAY": "Typically replies in a day",
-    "BACK_IN": "We will be back online"
+    "IN_A_FEW_MINUTES": "Хэдхэн минутын дараа хариу өгдөг",
+    "IN_A_FEW_HOURS": "Хэдэн цагийн дараа хариу өгдөг",
+    "IN_A_DAY": "Нэг өдрийн дотор хариу өгдөг",
+    "BACK_IN": "Удалгүй онлайн болно"
   },
   "DAY_NAMES": {
-    "SUNDAY": "Sunday",
-    "MONDAY": "Monday",
-    "TUESDAY": "Tuesday",
-    "WEDNESDAY": "Wednesday",
-    "THURSDAY": "Thursday",
-    "FRIDAY": "Friday",
-    "SATURDAY": "Saturday"
+    "SUNDAY": "Ням",
+    "MONDAY": "Даваа",
+    "TUESDAY": "Мягмар",
+    "WEDNESDAY": "Лхагва",
+    "THURSDAY": "Пүрэв",
+    "FRIDAY": "Баасан",
+    "SATURDAY": "Бямба"
   },
-  "START_CONVERSATION": "Start Conversation",
-  "END_CONVERSATION": "End Conversation",
-  "CONTINUE_CONVERSATION": "Continue conversation",
-  "YOU": "You",
-  "START_NEW_CONVERSATION": "Start a new conversation",
-  "VIEW_UNREAD_MESSAGES": "You have unread messages",
+  "START_CONVERSATION": "Яриа эхлүүлэх",
+  "END_CONVERSATION": "Яриаг дуусгах",
+  "CONTINUE_CONVERSATION": "Яриаг үргэлжлүүлэх",
+  "YOU": "Та",
+  "START_NEW_CONVERSATION": "Шинэ яриа эхлүүлэх",
+  "VIEW_UNREAD_MESSAGES": "Танд уншаагүй зурвасууд байна",
   "UNREAD_VIEW": {
-    "VIEW_MESSAGES_BUTTON": "See new messages",
-    "CLOSE_MESSAGES_BUTTON": "Close",
-    "COMPANY_FROM": "from",
-    "BOT": "Bot"
+    "VIEW_MESSAGES_BUTTON": "Шинэ зурвасуудыг үзэх",
+    "CLOSE_MESSAGES_BUTTON": "Хаах",
+    "COMPANY_FROM": "–аас",
+    "BOT": "Бот"
   },
   "BUBBLE": {
-    "LABEL": "Chat with us"
+    "LABEL": "Бидэнтэй чатлах"
   },
-  "POWERED_BY": "Powered by Digital GARAGE CRM",
-  "EMAIL_PLACEHOLDER": "Please enter your email",
-  "CHAT_PLACEHOLDER": "Type your message",
-  "TODAY": "Today",
-  "YESTERDAY": "Yesterday",
+  "POWERED_BY": "Digital GARAGE CRM –ээр ажилладаг",
+  "EMAIL_PLACEHOLDER": "И-мэйлээ оруулна уу",
+  "CHAT_PLACEHOLDER": "Зурвасаа бичнэ үү",
+  "TODAY": "Өнөөдөр",
+  "YESTERDAY": "Өчигдөр",
   "PRE_CHAT_FORM": {
     "FIELDS": {
       "FULL_NAME": {
-        "LABEL": "Full Name",
-        "PLACEHOLDER": "Please enter your full name",
-        "REQUIRED_ERROR": "Full Name is required"
+        "LABEL": "Бүтэн нэр",
+        "PLACEHOLDER": "Бүтэн нэрээ оруулна уу",
+        "REQUIRED_ERROR": "Бүтэн нэр заавал шаардлагатай"
       },
       "EMAIL_ADDRESS": {
-        "LABEL": "Email Address",
-        "PLACEHOLDER": "Please enter your email address",
-        "REQUIRED_ERROR": "Email Address is required",
-        "VALID_ERROR": "Please enter a valid email address"
+        "LABEL": "И-мэйл хаяг",
+        "PLACEHOLDER": "И-мэйл хаягаа оруулна уу",
+        "REQUIRED_ERROR": "И-мэйл хаяг шаардлагатай",
+        "VALID_ERROR": "Зөв и-мэйл хаяг оруулна уу"
       },
       "PHONE_NUMBER": {
-        "LABEL": "Phone Number",
-        "PLACEHOLDER": "Please enter your phone number",
-        "REQUIRED_ERROR": "Phone Number is required",
-        "DIAL_CODE_VALID_ERROR": "Please select a country code",
-        "VALID_ERROR": "Please enter a valid phone number",
-        "DROPDOWN_EMPTY": "No results found",
-        "DROPDOWN_SEARCH": "Search country"
+        "LABEL": "Утасны дугаар",
+        "PLACEHOLDER": "Утасны дугаараа оруулна уу",
+        "REQUIRED_ERROR": "Утасны дугаар шаардлагатай",
+        "DIAL_CODE_VALID_ERROR": "Улсын кодоо сонгоно уу",
+        "VALID_ERROR": "Зөв утасны дугаар оруулна уу",
+        "DROPDOWN_EMPTY": "Үр дүн олдсонгүй",
+        "DROPDOWN_SEARCH": "Улс хайх"
       },
       "MESSAGE": {
-        "LABEL": "Message",
-        "PLACEHOLDER": "Please enter your message",
-        "ERROR": "Message too short"
+        "LABEL": "Зурвас",
+        "PLACEHOLDER": "Зурвасаа оруулна уу",
+        "ERROR": "Зурвас хэт богино байна"
       }
     },
-    "CAMPAIGN_HEADER": "Please provide your name and email before starting the conversation",
-    "IS_REQUIRED": "is required",
-    "REQUIRED": "Required",
-    "REGEX_ERROR": "Please provide a valid input"
+    "CAMPAIGN_HEADER": "Яриа эхлэхийн өмнө нэр болон и-мэйлээ өгнө үү",
+    "IS_REQUIRED": "шаардлагатай",
+    "REQUIRED": "Шаардлагатай",
+    "REGEX_ERROR": "Зөв утга оруулна уу"
   },
-  "FILE_SIZE_LIMIT": "File exceeds the {MAXIMUM_FILE_UPLOAD_SIZE} attachment limit",
+  "FILE_SIZE_LIMIT": "Файл {MAXIMUM_FILE_UPLOAD_SIZE} хэмжээний хязгаараас давсан байна",
   "CHAT_FORM": {
     "INVALID": {
-      "FIELD": "Invalid field"
+      "FIELD": "Буруу талбар"
     }
   },
   "EMOJI": {
-    "PLACEHOLDER": "Search emojis",
-    "NOT_FOUND": "No emoji match your search",
-    "ARIA_LABEL": "Emoji picker"
+    "PLACEHOLDER": "Еможи хайх",
+    "NOT_FOUND": "Хайлтад тохирох еможи олдсонгүй",
+    "ARIA_LABEL": "Еможи сонгогч"
   },
   "CSAT": {
-    "TITLE": "Rate your conversation",
-    "SUBMITTED_TITLE": "Thank you for submitting the rating",
-    "PLACEHOLDER": "Tell us more..."
+    "TITLE": "Яриагаа үнэлэх",
+    "SUBMITTED_TITLE": "Үнэлгээ илгээсэнд баярлалаа",
+    "PLACEHOLDER": "Илүү их мэдээлэл өгнө үү..."
   },
   "EMAIL_TRANSCRIPT": {
-    "BUTTON_TEXT": "Request a conversation transcript",
-    "SEND_EMAIL_SUCCESS": "The chat transcript was sent successfully",
-    "SEND_EMAIL_ERROR": "There was an error, please try again"
+    "BUTTON_TEXT": "Ярианы хуулга хүсэх",
+    "SEND_EMAIL_SUCCESS": "Ярианы хуулга амжилттай илгээгдлээ",
+    "SEND_EMAIL_ERROR": "Алдаа гарлаа, дахин оролдоно уу"
   },
   "INTEGRATIONS": {
     "DYTE": {
-      "CLICK_HERE_TO_JOIN": "Click here to join",
-      "LEAVE_THE_ROOM": "Leave the call"
+      "CLICK_HERE_TO_JOIN": "Нэгдэхийн тулд энд дарна уу",
+      "LEAVE_THE_ROOM": "Дуудлагаас гарсан"
     }
   },
   "PORTAL": {
-    "POPULAR_ARTICLES": "Popular Articles",
-    "VIEW_ALL_ARTICLES": "View all articles",
-    "IFRAME_LOAD_ERROR": "There was an error loading the article, please refresh the page and try again."
+    "POPULAR_ARTICLES": "Алдартай нийтлэлүүд",
+    "VIEW_ALL_ARTICLES": "Бүх нийтлэлийг үзэх",
+    "IFRAME_LOAD_ERROR": "Нийтлэл ачаалахад алдаа гарлаа, хуудсыг шинэчилээд дахин оролдоно уу."
   },
   "ATTACHMENTS": {
     "image": {
-      "CONTENT": "Picture message"
+      "CONTENT": "Зурагтай зурвас"
     },
     "audio": {
-      "CONTENT": "Audio message"
+      "CONTENT": "Дууны зурвас"
     },
     "video": {
-      "CONTENT": "Video message"
+      "CONTENT": "Видео зурвас"
     },
     "file": {
-      "CONTENT": "File Attachment"
+      "CONTENT": "Файл хавсаргах"
     },
     "location": {
-      "CONTENT": "Location"
+      "CONTENT": "Байршил"
     },
     "fallback": {
-      "CONTENT": "has shared a url"
+      "CONTENT": "нь url хуваалцсан"
     }
   },
   "FOOTER_REPLY_TO": {
-    "REPLY_TO": "Replying to:"
+    "REPLY_TO": "Хариу бичиж байна:"
   }
 }
