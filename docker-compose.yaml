@@ -40,7 +40,7 @@ services:
       - .:/app
       - node_modules:/app/node_modules
     entrypoint: ""
-    command: ["pnpm", "run", "build"]  # or your custom build command
+    command: ["pnpm", "run", "build"]  
     environment:
       - NODE_ENV=production
 
