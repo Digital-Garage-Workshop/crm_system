@@ -1,0 +1,33 @@
+FROM node:23-alpine
+
+ARG NODE_VERSION="23.7.0"
+ARG PNPM_VERSION="10.2.0"
+ENV NODE_VERSION=${NODE_VERSION}
+ENV PNPM_VERSION=${PNPM_VERSION}
+
+# Set Node options for build process
+ENV NODE_OPTIONS="--max-old-space-size=3072 --openssl-legacy-provider"
+
+# Install pnpm
+RUN npm install -g pnpm@${PNPM_VERSION}
+
+# Configure pnpm
+RUN echo 'export PNPM_HOME="/root/.local/share/pnpm"' >> /root/.shrc \
+    && echo 'export PATH="$PNPM_HOME:$PATH"' >> /root/.shrc \
+    && export PNPM_HOME="/root/.local/share/pnpm" \
+    && export PATH="$PNPM_HOME:$PATH"
+
+# Persist the environment variables in Docker
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+WORKDIR /app
+
+# Only copy package files initially
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# The rest of the source code will be mounted as a volume
+# Command is specified in docker-compose.yaml
