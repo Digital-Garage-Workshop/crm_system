@@ -210,3 +210,47 @@ export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
     updated_at: '2024-10-30T16:15:03.157Z',
   },
 ];
+
+// NEW: Bulk SMS Campaign Empty State Content export
+export const BULK_SMS_CAMPAIGN_EMPTY_STATE_CONTENT = [
+  {
+    id: 1,
+    title: 'Bulk Onboarding Promo',
+    inbox: {
+      id: 6,
+      name: 'PaperLayer Bulk SMS',
+      channel_type: 'Channel::Sms',
+      phone_number: '+29818373149903',
+      provider: 'default',
+    },
+    message: 'Welcome! 🎊 Send a bulk SMS to onboard new customers today.',
+    campaign_status: 'scheduled',
+    enabled: true,
+    campaign_type: 'bulk_sms',
+    scheduled_at: 1731000000,
+    trigger_rules: {},
+    trigger_only_during_business_hours: false,
+    created_at: '2024-10-30T08:00:00.000Z',
+    updated_at: '2024-10-30T08:00:00.000Z',
+  },
+  {
+    id: 2,
+    title: 'Seasonal Discount Blast',
+    inbox: {
+      id: 6,
+      name: 'PaperLayer Bulk SMS',
+      channel_type: 'Channel::Sms',
+      phone_number: '+29818373149903',
+      provider: 'default',
+    },
+    message: 'It’s sale season! 🎉 Let your customers know via SMS.',
+    campaign_status: 'draft',
+    enabled: false,
+    campaign_type: 'bulk_sms',
+    scheduled_at: null,
+    trigger_rules: {},
+    trigger_only_during_business_hours: false,
+    created_at: '2024-10-31T09:00:00.000Z',
+    updated_at: '2024-10-31T09:00:00.000Z',
+  },
+];

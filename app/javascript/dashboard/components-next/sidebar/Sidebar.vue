@@ -325,6 +325,21 @@ const menuItems = computed(() => {
           label: t('SIDEBAR.SMS'),
           to: accountScopedRoute('campaigns_sms_index'),
         },
+        {
+          name: 'Bulk SMS',
+          label: t('SIDEBAR.BULK_SMS'),
+          to: accountScopedRoute('campaigns_livechat_index'),
+        },
+        {
+          name: 'Bulk Email',
+          label: t('SIDEBAR.BULK_EMAIL'),
+          to: accountScopedRoute('campaigns_sms_index'),
+        },
+        {
+          name: 'Bulk In-App',
+          label: t('SIDEBAR.BULK_IN_APP'),
+          to: accountScopedRoute('campaigns_sms_index'),
+        },
       ],
     },
     {
