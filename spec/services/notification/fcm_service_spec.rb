@@ -11,8 +11,8 @@ describe Notification::FcmService do
   end
 
   before do
-    allow(FCM).to receive(:new).and_return(fcm_double)
-    allow(fcm_service).to receive(:generate_token).and_return(token_info)
+    allow(FCM).to receive(:new).with(anything, anything, anything).and_return(fcm_double)
+    allow(fcm_service).to receive(:generate_token).and_call_original
     allow(Google::Auth::ServiceAccountCredentials).to receive(:make_creds).and_return(creds_double)
   end
 
@@ -20,15 +20,14 @@ describe Notification::FcmService do
     it 'returns an FCM client' do
       expect(fcm_service.fcm_client).to eq(fcm_double)
       expect(FCM).to have_received(:new).with('test_token', anything, project_id)
+      expect(fcm_service).to have_received(:generate_token).once
     end
 
     it 'generates a new token if expired' do
-      allow(fcm_service).to receive(:generate_token).and_return(token_info)
-      allow(fcm_service).to receive(:token_expired?).and_return(true)
+      fcm_service.instance_variable_set(:@token_info, { token: 'expired', expires_at: 1.hour.ago })
 
       expect(fcm_service.fcm_client).to eq(fcm_double)
       expect(FCM).to have_received(:new).with('test_token', anything, project_id)
-      expect(fcm_service).to have_received(:generate_token)
     end
   end
 
@@ -42,10 +41,20 @@ describe Notification::FcmService do
       it 'generates a new token if expired' do
         expired_token_info = { token: 'expired_token', expires_at: 1.hour.ago }
         fcm_service.instance_variable_set(:@token_info, expired_token_info)
-        allow(fcm_service).to receive(:generate_token).and_return(token_info)
+        allow(fcm_service).to receive(:generate_token).and_call_original
 
         expect(fcm_service.send(:current_token)).to eq('test_token')
-        expect(fcm_service).to have_received(:generate_token)
+        expect(fcm_service).to have_received(:generate_token).once
+      end
+    end
+
+    describe '#token_expired?' do
+      it 'returns true if the token is expired' do
+        fcm_service.instance_variable_set(:@token_info, { token: 'expired', expires_at: 1.hour.ago })
+        expect(fcm_service.send(:token_expired?)).to be(true)
+
+        fcm_service.instance_variable_set(:@token_info, { token: 'valid', expires_at: 1.hour.from_now })
+        expect(fcm_service.send(:token_expired?)).to be(false)
       end
     end
 
