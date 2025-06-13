@@ -18,6 +18,8 @@
 #  middle_name           :string           default("")
 #  name                  :string           default("")
 #  phone_number          :string
+#  plate_number          :string
+#  push_token            :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  account_id            :integer          not null
@@ -31,6 +33,8 @@
 #  index_contacts_on_name_email_phone_number_identifier  (name,email,phone_number,identifier) USING gin
 #  index_contacts_on_nonempty_fields                     (account_id,email,phone_number,identifier) WHERE (((email)::text <> ''::text) OR ((phone_number)::text <> ''::text) OR ((identifier)::text <> ''::text))
 #  index_contacts_on_phone_number_and_account_id         (phone_number,account_id)
+#  index_contacts_on_plate_number                        (plate_number)
+#  index_contacts_on_push_token                          (push_token)
 #  index_resolved_contact_account_id                     (account_id) WHERE (((email)::text <> ''::text) OR ((phone_number)::text <> ''::text) OR ((identifier)::text <> ''::text))
 #  uniq_email_per_account_contact                        (email,account_id) UNIQUE
 #  uniq_identifier_per_account_contact                   (identifier,account_id) UNIQUE

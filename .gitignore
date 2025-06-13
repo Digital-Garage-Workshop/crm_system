@@ -29,7 +29,7 @@ master.key
 .pnpm-store
 
 # Ignore env files
-# .env
+.env
 
 public/uploads
 public/packs*

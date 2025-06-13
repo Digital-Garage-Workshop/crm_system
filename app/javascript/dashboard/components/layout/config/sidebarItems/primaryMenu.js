@@ -34,6 +34,14 @@ const primaryMenuItems = accountId => [
     toStateName: 'contacts_dashboard_index',
   },
   {
+    icon: 'captain',
+    key: 'bulknotification',
+    label: 'BULK_NOTIFICATION',
+    featureFlag: FEATURE_FLAGS.MASS_NOTIFICATION,
+    toState: frontendURL(`accounts/${accountId}/bulknotification`),
+    toStateName: 'bulk_notification',
+  },
+  {
     icon: 'arrow-trending-lines',
     key: 'reports',
     label: 'REPORTS',

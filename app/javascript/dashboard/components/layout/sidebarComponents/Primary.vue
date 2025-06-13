@@ -80,6 +80,7 @@ export default {
         :account-id="accountId"
         class="m-4 mb-10"
       />
+
       <PrimaryNavItem
         v-for="menuItem in menuItems"
         :id="menuItem.key"
