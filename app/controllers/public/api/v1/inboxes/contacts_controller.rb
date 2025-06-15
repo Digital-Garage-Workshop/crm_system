@@ -130,6 +130,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     @contact = contact_inbox.contact
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Contact not found' }, status: :not_found
+    refs / remotes / origin / main
   end
 
   def process_hmac
@@ -159,6 +160,8 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   def permitted_params
     params.permit(:identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token, :plate_number, custom_attributes: {})
   end
+
+  # Add a separate method for push token updates
 end
 
 # Add to your existing controller
