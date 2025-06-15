@@ -2,6 +2,7 @@
 import { reactive, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useVuelidate } from '@vuelidate/core';
+// Removed 'required' from selectedAudience, so we only need minLength from validators
 import { required, minLength } from '@vuelidate/validators';
 import { useMapGetter } from 'dashboard/composables/store';
 
@@ -10,6 +11,21 @@ import TextArea from 'dashboard/components-next/textarea/TextArea.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
 import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
 import TagMultiSelectComboBox from 'dashboard/components-next/combobox/TagMultiSelectComboBox.vue';
+
+const props = defineProps({
+  selectedBrands: {
+    type: Array,
+    default: () => [],
+  },
+  selectedModels: {
+    type: Array,
+    default: () => [],
+  },
+  notificationTypes: {
+    type: Object,
+    default: () => ({}),
+  },
+});
 
 const emit = defineEmits(['submit', 'cancel']);
 
@@ -26,7 +42,7 @@ const initialState = {
   message: '',
   inboxId: null,
   scheduledAt: null,
-  selectedAudience: [],
+  selectedAudience: [], // This is now an optional, additional filter
 };
 
 const state = reactive({ ...initialState });
@@ -36,7 +52,9 @@ const rules = {
   message: { required, minLength: minLength(1) },
   inboxId: { required },
   scheduledAt: { required },
-  selectedAudience: { required },
+  // The audience is now defined by the parent filters, so this is no longer required.
+  // A user can still add a label to further narrow down the filtered audience.
+  selectedAudience: {},
 };
 
 const v$ = useVuelidate(rules, state);
@@ -44,7 +62,6 @@ const v$ = useVuelidate(rules, state);
 const isCreating = computed(() => formState.uiFlags.value.isCreating);
 
 const currentDateTime = computed(() => {
-  // Added to disable the scheduled at field from being set to the current time
   const now = new Date();
   const localTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
   return localTime.toISOString().slice(0, 16);
@@ -66,7 +83,7 @@ const inboxOptions = computed(() =>
 
 const getErrorMessage = (field, errorKey) => {
   const baseKey = 'CAMPAIGN.SMS.CREATE.FORM';
-  return v$.value[field].$error ? t(`${baseKey}.${errorKey}.ERROR`) : '';
+  return v$.value[field]?.$error ? t(`${baseKey}.${errorKey}.ERROR`) : '';
 };
 
 const formErrors = computed(() => ({
@@ -77,26 +94,46 @@ const formErrors = computed(() => ({
   audience: getErrorMessage('selectedAudience', 'AUDIENCE'),
 }));
 
-const isSubmitDisabled = computed(() => v$.value.$invalid);
+const isSubmitDisabled = computed(
+  () =>
+    v$.value.title.$invalid ||
+    v$.value.message.$invalid ||
+    v$.value.inboxId.$invalid ||
+    v$.value.scheduledAt.$invalid
+);
 
 const formatToUTCString = localDateTime =>
   localDateTime ? new Date(localDateTime).toISOString() : null;
 
-const resetState = () => {
-  Object.assign(state, initialState);
-};
-
 const handleCancel = () => emit('cancel');
 
+/**
+ * Prepares the complete campaign payload, including form data
+ * and the filter data passed down from the parent component.
+ */
 const prepareCampaignDetails = () => ({
+  // Core campaign details from the form
   title: state.title,
   message: state.message,
   inbox_id: state.inboxId,
   scheduled_at: formatToUTCString(state.scheduledAt),
-  audience: state.selectedAudience?.map(id => ({
-    id,
-    type: 'Label',
-  })),
+
+  // Audience definition, combining filters and optional labels
+  audience: {
+    // Audience defined by car brand/model filters from the parent
+    filters: {
+      brands: props.selectedBrands,
+      models: props.selectedModels,
+    },
+    // Optional additional filtering by labels
+    labels: state.selectedAudience?.map(id => ({
+      id,
+      type: 'Label',
+    })),
+  },
+
+  // Notification types from the parent
+  notification_types: props.notificationTypes,
 });
 
 const handleSubmit = async () => {
@@ -104,8 +141,8 @@ const handleSubmit = async () => {
   if (!isFormValid) return;
 
   emit('submit', prepareCampaignDetails());
-  resetState();
-  handleCancel();
+  // We don't reset or cancel here, as the parent component controls the modal flow.
+  // The parent will show a preview first.
 };
 </script>
 
@@ -143,9 +180,13 @@ const handleSubmit = async () => {
       />
     </div>
 
+    <!-- This is now an optional field to further refine the audience -->
     <div class="flex flex-col gap-1">
       <label for="audience" class="mb-0.5 text-sm font-medium text-n-slate-12">
         {{ t('CAMPAIGN.SMS.CREATE.FORM.AUDIENCE.LABEL') }}
+        <span class="text-xs text-slate-500 dark:text-slate-400">
+          ({{ t('CAMPAIGN.SMS.OPTIONAL') }})
+        </span>
       </label>
       <TagMultiSelectComboBox
         v-model="state.selectedAudience"
@@ -177,8 +218,9 @@ const handleSubmit = async () => {
         class="w-full bg-n-alpha-2 n-blue-text hover:bg-n-alpha-3"
         @click="handleCancel"
       />
+      <!-- Changed button text to reflect the next step is a preview -->
       <Button
-        :label="t('CAMPAIGN.SMS.CREATE.FORM.BUTTONS.CREATE')"
+        :label="t('CAMPAIGN.BULK.GENERATE_PREVIEW')"
         class="w-full"
         type="submit"
         :is-loading="isCreating"

@@ -135,75 +135,131 @@
             "ERROR_MESSAGE": "There was an error. Please try again."
           }
         }
-      }
+      },
+      "API_CONNECTION_ERROR": "API Connection Error",
+      "RETRY": "Retry",
+      "CAR_FILTERS": "Car Filters",
+      "SELECTED_FILTERS": "Selected Filters"
     },
-    "CONFIRM_DELETE": {
-      "TITLE": "Are you sure to delete?",
-      "DESCRIPTION": "The delete action is permanent and cannot be reversed.",
-      "CONFIRM": "Delete",
+    "BULK": {
+      "HEADER_TITLE": "Bulk SMS Campaigns",
+      "NEW_CAMPAIGN": "Create Campaign",
+      "EMPTY_STATE": {
+        "TITLE": "No Bulk SMS campaigns are available",
+        "SUBTITLE": "Launch a targeted SMS campaign to reach your customers. Send offers or make announcements with ease. Click 'Create campaign' to get started."
+      },
+      "CARD": {
+        "STATUS": {
+          "COMPLETED": "Completed",
+          "SCHEDULED": "Scheduled"
+        },
+        "CAMPAIGN_DETAILS": {
+          "SENT_FROM": "Sent from",
+          "ON": "on"
+        }
+      },
+      "CREATE": {
+        "TITLE": "Create Bulk Campaign",
+        "DESCRIPTION": "Target specific customers based on car brands, models, and more.",
+        "CANCEL_BUTTON_TEXT": "Cancel",
+        "CREATE_BUTTON_TEXT": "Create"
+      },
+      "NOTIFICATION_TYPES": "Notification Types",
+      "SMS_TITLE": "SMS",
+      "SMS_DESCRIPTION": "Send a standard text message. Carrier fees may apply.",
+      "EMAIL_TITLE": "Email",
+      "EMAIL_DESCRIPTION": "Send a rich content email to the customer's registered address.",
+      "IN_APP_TITLE": "In-App Notification",
+      "IN_APP_DESCRIPTION": "Push a notification directly inside your mobile application.",
+      "TYPES_SELECTED": "{count} type selected | {count} types selected",
+      "USER_COUNT_FILTER": "User Count Filter",
+      "ENABLE_USER_COUNT_FILTERING": "Enable filtering by user count",
+      "MINIMUM_USERS": "Minimum Users",
+      "MAXIMUM_USERS": "Maximum Users",
+      "FILTERING_BY_USER_COUNT": "Filtering for items with {min} to {max} users.",
+      "CAMPAIGN_CONTENT": "Campaign Content",
+      "TITLE": "Title",
+      "TITLE_PLACEHOLDER": "e.g., Summer Service Special",
+      "MESSAGE": "Message",
+      "MESSAGE_PLACEHOLDER": "Enter your message here. Use {customer_name}, {brand}, {model} for personalization.",
+      "VARIABLES_HELP_TEXT": "You can use {customer_name}, {brand}, and {model} as dynamic variables.",
+      "IMAGE_URL": "Image URL",
+      "OPTIONAL": "Optional",
+      "IMAGE_URL_PLACEHOLDER": "https://example.com/image.png",
+      "GENERATE_PREVIEW": "Generate Preview",
+      "SEND_CAMPAIGN": "Confirm and Send Campaign",
+      "EDIT_CAMPAIGN": "Edit Campaign",
+      "FETCHING_CUSTOMERS": "Fetching Customers...",
+      "CAMPAIGN_CREATED_SUCCESS_WITH_COUNT": "Campaign created successfully for {count} customer. | Campaign created successfully for {count} customers.",
+      "NO_FILTERS_SELECTED_FOR_FETCH": "Please select at least one brand or model to fetch customers.",
       "API": {
-        "SUCCESS_MESSAGE": "Campaign deleted successfully",
+        "SUCCESS_MESSAGE": "Bulk SMS campaign created successfully",
         "ERROR_MESSAGE": "There was an error. Please try again."
       }
+    },
+    "PREVIEW": {
+      "READY_TO_PREVIEW": "Ready to Preview",
+      "FILL_FORM_MESSAGE": "Fill out the campaign content and select an audience to generate a preview.",
+      "OVERVIEW": "Campaign Overview",
+      "TITLE": "Title",
+      "UNTITLED": "Untitled Campaign",
+      "TARGET_AUDIENCE": "Target Audience",
+      "ALL_CUSTOMERS": "All Customers",
+      "ESTIMATED_REACH": "Estimated Reach",
+      "CUSTOMERS": "Customers",
+      "SMS_PREVIEW": "SMS Preview",
+      "EMAIL_PREVIEW": "Email Preview",
+      "IN_APP_PREVIEW": "In-App Notification Preview",
+      "ANY_BRAND": "any brand",
+      "ANY_MODEL": "any model",
+      "SENDER_INITIALS": "ME",
+      "SENDER_NAME": "Your Company Name",
+      "DEAR_CUSTOMER": "Dear {customer_name},",
+      "EMAIL_SIGNATURE": "Sincerely,<br>The Team",
+      "NOW": "now"
+    },
+    "ERRORS": {
+      "NETWORK_ERROR": "Network error. Please check your connection.",
+      "AUTH_FAILED": "Authentication failed. Please check your API token.",
+      "ACCESS_DENIED": "Access Denied. You do not have permission to perform this action.",
+      "ENDPOINT_NOT_FOUND": "The requested API endpoint was not found (404).",
+      "INVALID_REQUEST": "Invalid request. Please check the provided data (422).",
+      "TOO_MANY_REQUESTS": "Too many requests. Please wait a moment before trying again.",
+      "INTERNAL_SERVER_ERROR": "An internal server error occurred (500). Please try again later.",
+      "SERVER_ERROR": "A server error occurred: {status} {statusText}",
+      "REQUEST_TIMEOUT": "The request timed out. Please try again.",
+      "NO_RESPONSE": "No response from the server. Please check your network.",
+      "INVALID_DATA_FORMAT": "Received invalid data format from the API.",
+      "FAILED_FETCH_BRANDS": "Failed to fetch car brands. Please try again.",
+      "FAILED_FETCH_MODELS": "Failed to fetch car models. Please try again.",
+      "INVALID_CUSTOMER_DATA": "Received invalid data format from the customer API.",
+      "FAILED_FETCH_CUSTOMERS": "Failed to fetch customer data. Please check the filters and try again."
     }
   },
-  "BULK_SMS": {
-    "HEADER_TITLE": "BULK_SMS campaigns",
-    "NEW_CAMPAIGN": "Create campaign",
-    "EMPTY_STATE": {
-      "TITLE": "No BULK_SMS campaigns are available",
-      "SUBTITLE": "Launch an SMS campaign to reach your customers directly. Send offers or make announcements with ease. Click 'Create campaign' to get started."
-    },
-    "CARD": {
-      "STATUS": {
-        "COMPLETED": "Completed",
-        "SCHEDULED": "Scheduled"
-      },
-      "CAMPAIGN_DETAILS": {
-        "SENT_FROM": "Sent from",
-        "ON": "on"
-      }
-    },
-    "CREATE": {
-      "TITLE": "Create BULK_SMS campaign",
-      "CANCEL_BUTTON_TEXT": "Cancel",
-      "CREATE_BUTTON_TEXT": "Create",
-      "FORM": {
-        "TITLE": {
-          "LABEL": "Title",
-          "PLACEHOLDER": "Please enter the title of campaign",
-          "ERROR": "Title is required"
-        },
-        "MESSAGE": {
-          "LABEL": "Message",
-          "PLACEHOLDER": "Please enter the message of campaign",
-          "ERROR": "Message is required"
-        },
-        "INBOX": {
-          "LABEL": "Select Inbox",
-          "PLACEHOLDER": "Select Inbox",
-          "ERROR": "Inbox is required"
-        },
-        "AUDIENCE": {
-          "LABEL": "Audience",
-          "PLACEHOLDER": "Select the customer labels",
-          "ERROR": "Audience is required"
-        },
-        "SCHEDULED_AT": {
-          "LABEL": "Scheduled time",
-          "PLACEHOLDER": "Please select the time",
-          "ERROR": "Scheduled time is required"
-        },
-        "BUTTONS": {
-          "CREATE": "Create",
-          "CANCEL": "Cancel"
-        },
-        "API": {
-          "SUCCESS_MESSAGE": "BULK_SMS campaign created successfully",
-          "ERROR_MESSAGE": "There was an error. Please try again."
-        }
-      }
-    }
+  "CUSTOMERS": {
+    "SELECT_BRANDS": "Select Brands",
+    "SELECT_MODELS": "Select Models",
+    "SELECTED": "selected",
+    "BRANDS": "Brands",
+    "MODELS": "Models",
+    "USERS": "users",
+    "CLEAR_ALL": "Clear All",
+    "SELECT_ALL": "Select All",
+    "LOADING_BRANDS": "Loading Brands...",
+    "LOADING_MODELS": "Loading Models...",
+    "SEARCH_BRANDS": "Search brands...",
+    "SEARCH_MODELS": "Search models...",
+    "SELECT_BRANDS_PLACEHOLDER": "Select one or more brands",
+    "SELECT_MODELS_PLACEHOLDER": "Select one or more models",
+    "BRANDS_SELECTED": "{count} brand selected | {count} brands selected",
+    "MODELS_SELECTED": "{count} model selected | {count} models selected",
+    "NO_BRANDS_FOUND": "No brands found.",
+    "NO_MODELS_FOUND": "No models found.",
+    "NO_BRANDS_MATCH_FILTER": "No brands match the current user count filter.",
+    "NO_MODELS_MATCH_FILTER": "No models match the current user count filter.",
+    "NO_BRANDS_AVAILABLE": "No brands available from the API.",
+    "NO_MODELS_AVAILABLE": "No models available for selected brand(s).",
+    "SELECT_BRAND_FIRST": "Select a brand first"
   },
   "CONFIRM_DELETE": {
     "TITLE": "Are you sure to delete?",
