@@ -28,22 +28,6 @@ const campaigns = accountId => ({
       toState: frontendURL(`accounts/${accountId}/campaigns/bulk_sms`),
       toStateName: 'campaigns_sms_index',
     },
-    {
-      key: 'emailCampaigns',
-      icon: 'sound-source',
-      label: 'BULK_EMAIL',
-      hasSubMenu: false,
-      toState: frontendURL(`accounts/${accountId}/campaigns/email`),
-      toStateName: 'campaigns_sms_index',
-    },
-    {
-      key: 'inAppCampaigns',
-      icon: 'sound-source',
-      label: 'BULK_IN_APP',
-      hasSubMenu: false,
-      toState: frontendURL(`accounts/${accountId}/campaigns/in_app`),
-      toStateName: 'campaigns_sms_index',
-    },
   ],
 });
 
