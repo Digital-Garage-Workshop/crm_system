@@ -124,33 +124,12 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     @contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: params[:id])
   end
 
-<<<<<<< HEAD
   # Add this method to find contact by source_id
   def set_contact
     contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: params[:source_id])
     @contact = contact_inbox.contact
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Contact not found' }, status: :not_found
-=======
-  def set_contact
-    source_id = params[:source_id]
-    Rails.logger.info "Looking up contact with source_id: #{source_id}"
-
-    contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by(source_id: source_id)
-
-    if contact_inbox.nil?
-      Rails.logger.error "No contact inbox found with source_id: #{source_id}"
-      @contact = nil
-      return
-    end
-
-    @contact = contact_inbox.contact
-    Rails.logger.info "Found contact ##{@contact.id} for source_id: #{source_id}"
-  rescue StandardError => e
-    Rails.logger.error "Error finding contact: #{e.message}"
-    Rails.logger.error e.backtrace.join("\n")
-    @contact = nil
->>>>>>> refs/remotes/origin/main
   end
 
   def process_hmac
@@ -167,7 +146,8 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       params[:identifier].to_s
     )
   end
-# aaa
+
+  # aaa
   def push_token_params
     # Explicitly permit and extract only the parameters we need
     {
@@ -178,14 +158,6 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
 
   def permitted_params
     params.permit(:identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token, :plate_number, custom_attributes: {})
-<<<<<<< HEAD
-  end
-
-  # Add a separate method for push token updates
-  def push_token_params
-    params.permit(:push_token, :plate_number)
-=======
->>>>>>> refs/remotes/origin/main
   end
 end
 

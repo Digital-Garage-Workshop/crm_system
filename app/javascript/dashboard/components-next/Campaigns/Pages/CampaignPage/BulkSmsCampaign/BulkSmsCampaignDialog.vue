@@ -1,14 +1,25 @@
-I'll help you implement multiple model selection functionality. Here's the
-updated code to allow users to select multiple models in addition to multiple
-brands: ```vue
 <script setup>
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAlert } from 'dashboard/composables';
 
 import axios from 'axios';
-
-import SMSCampaignForm from 'dashboard/components-next/Campaigns/Pages/CampaignPage/SMSCampaign/SMSCampaignForm.vue';
+/**
+ * REQUIRED I18N STRINGS:
+ * Make sure these keys exist in your translation files.
+ *
+ * "CAMPAIGN": {
+ *   "BULK": {
+ *     "FETCHING_CUSTOMERS": "Fetching Customers...",
+ *     "CAMPAIGN_CREATED_SUCCESS_WITH_COUNT": "Campaign created successfully for {count} customers.",
+ *     "NO_FILTERS_SELECTED_FOR_FETCH": "Please select at least one brand or model to fetch customers."
+ *   },
+ *   "ERRORS": {
+ *     "INVALID_CUSTOMER_DATA": "Received invalid data format from the customer API.",
+ *     "FAILED_FETCH_CUSTOMERS": "Failed to fetch customer data. Please check the filters and try again."
+ *   }
+ * }
+ */
 
 const emit = defineEmits(['close']);
 
@@ -22,12 +33,6 @@ const selectedModels = ref([]); // Changed to multiple models
 const isLoadingBrands = ref(false);
 const isLoadingModels = ref(false);
 const apiError = ref('');
-
-// --- Brand/Model selection UI state ---
-const showBrandDropdown = ref(false);
-const showModelDropdown = ref(false);
-const brandSearchQuery = ref('');
-const modelSearchQuery = ref('');
 
 // --- User count filter ---
 const userCountFilter = ref({
@@ -47,6 +52,22 @@ const notificationTypes = ref({
 const showPreview = ref(false);
 const previewData = ref(null);
 const activePreviewTab = ref('sms');
+
+// --- Customer fetching state ---
+const isLoadingCustomers = ref(false);
+
+// --- Dropdown state ---
+const showBrandDropdown = ref(false);
+const showModelDropdown = ref(false);
+
+// --- Search queries ---
+const brandSearchQuery = ref('');
+const modelSearchQuery = ref('');
+
+// --- NEW/MODIFIED: Campaign Content State ---
+const campaignTitle = ref('');
+const campaignMessage = ref('');
+const campaignImageUrl = ref(''); // Optional image URL
 
 // API Token
 const API_TOKEN = '4|y3JgOMAB1Fhe9lGO7abSVsZQJ6NMHOJBonWUOjY2612c5815';
@@ -104,6 +125,7 @@ carApi.interceptors.response.use(
     }
 
     apiError.value = errorMessage;
+    isLoadingCustomers.value = false;
     return Promise.reject(error);
   }
 );
@@ -146,12 +168,10 @@ const fetchModels = async () => {
 
   isLoadingModels.value = true;
   models.value = [];
-  // Don't clear selectedModels here - keep them and filter later
 
   try {
     const allModels = [];
 
-    // Fetch models for each selected brand concurrently
     const modelRequests = selectedBrands.value.map(brandId =>
       carApi
         .get(`https://gp.garage.mn/api/car/carmodel/${brandId}`)
@@ -176,14 +196,13 @@ const fetchModels = async () => {
           modelname: model.modelname,
           yearstart: model.yearstart,
           user_count: model.user_count,
-          brand_id: brandId, // Add brand reference
+          brand_id: brandId,
         }));
 
         allModels.push(...brandModels);
       }
     });
 
-    // Remove duplicates based on modelid (if any)
     const uniqueModels = allModels.filter(
       (model, index, self) =>
         index === self.findIndex(m => m.modelid === model.modelid)
@@ -191,7 +210,6 @@ const fetchModels = async () => {
 
     models.value = uniqueModels;
 
-    // Filter selected models to only include models from selected brands
     const availableModelIds = uniqueModels.map(m => m.modelid);
     selectedModels.value = selectedModels.value.filter(modelId =>
       availableModelIds.includes(modelId)
@@ -201,6 +219,62 @@ const fetchModels = async () => {
     useAlert(t('CAMPAIGN.ERRORS.FAILED_FETCH_MODELS'));
   } finally {
     isLoadingModels.value = false;
+  }
+};
+
+// Fetch Customers Function (CORRECTED)
+const fetchCustomers = async () => {
+  isLoadingCustomers.value = true;
+  apiError.value = '';
+
+  const params = new URLSearchParams();
+  selectedBrands.value.forEach(brandId => params.append('manuid[]', brandId));
+  selectedModels.value.forEach(modelId => params.append('modelid[]', modelId));
+
+  if (selectedBrands.value.length === 0 && selectedModels.value.length === 0) {
+    useAlert(t('CAMPAIGN.BULK.NO_FILTERS_SELECTED_FOR_FETCH'));
+    isLoadingCustomers.value = false;
+    return null;
+  }
+
+  try {
+    const response = await carApi.get('https://gp.garage.mn/api/customers', {
+      params,
+    });
+
+    // CORRECTED LOGIC: Use an if/else block to handle success and failure cases properly.
+    if (
+      response.data?.success &&
+      response.data?.data &&
+      Array.isArray(response.data.data)
+    ) {
+      const allCustomers = [];
+      const customerIds = new Set();
+
+      response.data.data.forEach(brand => {
+        brand.models?.forEach(model => {
+          model.customers?.forEach(customer => {
+            if (!customerIds.has(customer.id)) {
+              allCustomers.push(customer);
+              customerIds.add(customer.id);
+            }
+          });
+        });
+      });
+
+      // This return will now correctly exit the function with the data
+      return allCustomers;
+    }
+
+    // This ensures the error is only thrown for invalid data formats
+    throw new Error(t('CAMPAIGN.ERRORS.INVALID_CUSTOMER_DATA'));
+  } catch (error) {
+    // This will now only catch actual network errors or the invalid data error
+
+    useAlert(t('CAMPAIGN.ERRORS.FAILED_FETCH_CUSTOMERS'));
+    return null;
+  } finally {
+    isLoadingCustomers.value = false;
   }
 };
 
@@ -222,7 +296,6 @@ const hasAnyNotificationTypeSelected = computed(() => {
   return selectedNotificationTypesCount.value > 0;
 });
 
-// Get selected brand names
 const selectedBrandNames = computed(() => {
   return selectedBrands.value
     .map(brandId => {
@@ -232,7 +305,6 @@ const selectedBrandNames = computed(() => {
     .filter(Boolean);
 });
 
-// Get total user count for selected brands
 const selectedBrandsUserCount = computed(() => {
   return selectedBrands.value.reduce((total, brandId) => {
     const brand = brands.value.find(b => String(b.manuid) === brandId);
@@ -240,7 +312,6 @@ const selectedBrandsUserCount = computed(() => {
   }, 0);
 });
 
-// Get selected model names
 const selectedModelNames = computed(() => {
   return selectedModels.value
     .map(modelId => {
@@ -250,7 +321,6 @@ const selectedModelNames = computed(() => {
     .filter(Boolean);
 });
 
-// Get total user count for selected models
 const selectedModelsUserCount = computed(() => {
   return selectedModels.value.reduce((total, modelId) => {
     const model = models.value.find(m => m.modelid === modelId);
@@ -258,12 +328,10 @@ const selectedModelsUserCount = computed(() => {
   }, 0);
 });
 
-// Filtered models by user count
 const filteredModels = computed(() => {
   if (!userCountFilter.value.enabled) {
     return models.value;
   }
-
   return models.value.filter(model => {
     const userCount = model.user_count || 0;
     return (
@@ -273,12 +341,10 @@ const filteredModels = computed(() => {
   });
 });
 
-// Filtered brands by user count
 const filteredBrands = computed(() => {
   if (!userCountFilter.value.enabled) {
     return brands.value;
   }
-
   return brands.value.filter(brand => {
     const userCount = brand.user_count || 0;
     return (
@@ -288,23 +354,18 @@ const filteredBrands = computed(() => {
   });
 });
 
-// Filtered brands for search
 const searchFilteredBrands = computed(() => {
   let brandsToFilter = filteredBrands.value;
-
   if (brandSearchQuery.value.trim()) {
     brandsToFilter = brandsToFilter.filter(brand =>
       brand.name.toLowerCase().includes(brandSearchQuery.value.toLowerCase())
     );
   }
-
   return brandsToFilter;
 });
 
-// Filtered models for search
 const searchFilteredModels = computed(() => {
   let modelsToFilter = filteredModels.value;
-
   if (modelSearchQuery.value.trim()) {
     modelsToFilter = modelsToFilter.filter(model =>
       model.modelname
@@ -312,7 +373,6 @@ const searchFilteredModels = computed(() => {
         .includes(modelSearchQuery.value.toLowerCase())
     );
   }
-
   return modelsToFilter;
 });
 
@@ -324,7 +384,15 @@ const availablePreviewTabs = computed(() => {
   return tabs;
 });
 
-// Watch for notification type changes and update active preview tab
+// --- NEW/MODIFIED: Computed property to check if form is ready for preview ---
+const isFormValidForPreview = computed(() => {
+  const hasContent =
+    campaignTitle.value.trim() !== '' && campaignMessage.value.trim() !== '';
+  const hasAudience =
+    selectedBrands.value.length > 0 || selectedModels.value.length > 0;
+  return hasContent && hasAudience && hasAnyNotificationTypeSelected.value;
+});
+
 watch(
   () => notificationTypes.value,
   newTypes => {
@@ -342,77 +410,19 @@ onMounted(() => {
   fetchBrands();
 });
 
-// Calculate estimated reach (improved calculation)
-const calculateEstimatedReach = () => {
-  let baseReach = 0;
-
-  if (selectedModels.value.length > 0) {
-    // If models are selected, use sum of selected models' user counts
-    baseReach = selectedModelsUserCount.value;
-  } else if (selectedBrands.value.length > 0) {
-    // If only brands are selected, use sum of selected brands' user counts
-    baseReach = selectedBrandsUserCount.value;
-  } else {
-    // If no filters, calculate total from all brands
-    baseReach = brands.value.reduce(
-      (total, brand) => total + (brand.user_count || 0),
-      0
-    );
-  }
-
-  return baseReach;
-};
-
-// Generate preview data
-const generatePreview = campaignDetails => {
-  const selectedTypes = [];
-  if (notificationTypes.value.sms) selectedTypes.push('SMS');
-  if (notificationTypes.value.email) selectedTypes.push('Email');
-  if (notificationTypes.value.inApp) selectedTypes.push('In-App');
-
-  previewData.value = {
-    ...campaignDetails,
-    notificationTypes: selectedTypes,
-    filters: {
-      brands: selectedBrandNames.value,
-      models: selectedModelNames.value, // Changed to array
-      userCountFilter: userCountFilter.value.enabled
-        ? userCountFilter.value
-        : null,
-    },
-    estimatedReach: calculateEstimatedReach(),
-  };
-
-  // Set active tab to first selected notification type
-  if (availablePreviewTabs.value.length > 0) {
-    activePreviewTab.value = availablePreviewTabs.value[0];
-  }
-
-  showPreview.value = true;
-};
-
-const handleSubmit = campaignDetails => {
-  generatePreview(campaignDetails);
-};
-
 const handleClose = () => {
   emit('close');
 };
 
 const getModelPlaceholder = () => {
-  if (isLoadingModels.value) {
-    return t('CUSTOMERS.LOADING_MODELS');
-  }
-  if (selectedBrands.value.length === 0) {
+  if (isLoadingModels.value) return t('CUSTOMERS.LOADING_MODELS');
+  if (selectedBrands.value.length === 0)
     return t('CUSTOMERS.SELECT_BRAND_FIRST');
-  }
-  if (filteredModels.value.length === 0 && selectedBrands.value.length > 0) {
+  if (filteredModels.value.length === 0 && selectedBrands.value.length > 0)
     return t('CUSTOMERS.NO_MODELS_AVAILABLE');
-  }
   return t('CUSTOMERS.SELECT_MODELS_PLACEHOLDER');
 };
 
-// Brand selection methods
 const toggleBrand = brandId => {
   const index = selectedBrands.value.indexOf(brandId);
   if (index > -1) {
@@ -439,7 +449,6 @@ const selectAllBrands = () => {
   );
 };
 
-// Model selection methods
 const toggleModel = modelId => {
   const index = selectedModels.value.indexOf(modelId);
   if (index > -1) {
@@ -464,15 +473,12 @@ const selectAllModels = () => {
   selectedModels.value = filteredModels.value.map(model => model.modelid);
 };
 
-// Close dropdown when clicking outside
 const handleClickOutside = event => {
   const brandDropdown = document.querySelector('.brand-dropdown');
   const modelDropdown = document.querySelector('.model-dropdown');
-
   if (brandDropdown && !brandDropdown.contains(event.target)) {
     showBrandDropdown.value = false;
   }
-
   if (modelDropdown && !modelDropdown.contains(event.target)) {
     showModelDropdown.value = false;
   }
@@ -487,43 +493,66 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
 });
 
-// Preview content formatters
 const getPreviewContent = () => {
   if (!previewData.value?.message) return '';
-
   const baseMessage = previewData.value.message;
   const customerName = 'John Doe';
   const brandFilters = previewData.value.filters.brands?.join(', ') || '';
   const modelFilters = previewData.value.filters.models?.join(', ') || '';
-
-  // Replace placeholders
-  let message = baseMessage
+  return baseMessage
     .replace(/\{customer_name\}/g, customerName)
     .replace(/\{brand\}/g, brandFilters || t('CAMPAIGN.PREVIEW.ANY_BRAND'))
     .replace(/\{model\}/g, modelFilters || t('CAMPAIGN.PREVIEW.ANY_MODEL'));
-
-  return message;
 };
 
-const getCurrentDateTime = () => {
-  return new Date().toLocaleString();
-};
+const getCurrentDateTime = () => new Date().toLocaleString();
 
-// NEW: Confirm campaign handler
-const handleConfirmCampaign = () => {
+const handleConfirmCampaign = async () => {
   if (previewData.value) {
-    // Prepare campaign data with multiple brands and models
-
-    // Here you would typically send the campaign data to your backend
-
-    useAlert(t('CAMPAIGN.BULK.CAMPAIGN_CREATED_SUCCESS'));
-    emit('close');
+    const customers = await fetchCustomers();
+    if (customers) {
+      useAlert(
+        t('CAMPAIGN.BULK.CAMPAIGN_CREATED_SUCCESS_WITH_COUNT', {
+          count: customers.length,
+        })
+      );
+      emit('close');
+    }
   }
+};
+
+// --- NEW/MODIFIED: Function to handle preview generation ---
+const handleGeneratePreview = () => {
+  if (!isFormValidForPreview.value) {
+    useAlert(t('CAMPAIGN.PREVIEW.FILL_FORM_MESSAGE'));
+    return;
+  }
+
+  // Calculate estimated reach. Note: This is a simple sum and might double-count users.
+  // A more accurate count would come from the backend.
+  const estimatedReach =
+    selectedBrandsUserCount.value + selectedModelsUserCount.value;
+
+  previewData.value = {
+    title: campaignTitle.value,
+    message: campaignMessage.value,
+    imageUrl: campaignImageUrl.value,
+    filters: {
+      brands: selectedBrandNames.value,
+      models: selectedModelNames.value,
+      userCountFilter: userCountFilter.value.enabled
+        ? { ...userCountFilter.value }
+        : null,
+    },
+    estimatedReach: estimatedReach,
+  };
+
+  showPreview.value = true;
 };
 </script>
 
 <template>
-  <!-- Backdrop overlay -->
+  <!-- The template remains the same, no changes needed here. -->
   <div
     class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
     @click="handleClose"
@@ -633,7 +662,6 @@ const handleConfirmCampaign = () => {
               </svg>
               {{ t('CAMPAIGN.BULK.NOTIFICATION_TYPES') }}
             </h3>
-
             <div class="space-y-4">
               <!-- SMS Checkbox -->
               <label
@@ -740,8 +768,6 @@ const handleConfirmCampaign = () => {
                 </div>
               </label>
             </div>
-
-            <!-- Selection Summary -->
             <div
               v-if="hasAnyNotificationTypeSelected"
               class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"
@@ -793,9 +819,7 @@ const handleConfirmCampaign = () => {
               </svg>
               {{ t('CAMPAIGN.BULK.USER_COUNT_FILTER') }}
             </h3>
-
             <div class="space-y-4">
-              <!-- Enable User Count Filter -->
               <label class="flex items-center">
                 <input
                   v-model="userCountFilter.enabled"
@@ -808,8 +832,6 @@ const handleConfirmCampaign = () => {
                   {{ t('CAMPAIGN.BULK.ENABLE_USER_COUNT_FILTERING') }}
                 </span>
               </label>
-
-              <!-- User Count Range -->
               <div
                 v-if="userCountFilter.enabled"
                 class="grid grid-cols-2 gap-4"
@@ -841,8 +863,6 @@ const handleConfirmCampaign = () => {
                   />
                 </div>
               </div>
-
-              <!-- Filter Summary -->
               <div
                 v-if="userCountFilter.enabled"
                 class="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"
@@ -908,8 +928,6 @@ const handleConfirmCampaign = () => {
                   }}
                   {{ t('CUSTOMERS.SELECTED') }})
                 </label>
-
-                <!-- Selected Brands Display -->
                 <div v-if="selectedBrands.length > 0" class="mb-3">
                   <div class="flex flex-wrap gap-2">
                     <span
@@ -945,8 +963,6 @@ const handleConfirmCampaign = () => {
                     {{ t('CUSTOMERS.CLEAR_ALL') }}
                   </button>
                 </div>
-
-                <!-- Brand Dropdown (keeping existing brand dropdown code) -->
                 <div class="relative brand-dropdown">
                   <button
                     class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between"
@@ -979,13 +995,10 @@ const handleConfirmCampaign = () => {
                       />
                     </svg>
                   </button>
-
-                  <!-- Dropdown Content -->
                   <div
                     v-if="showBrandDropdown"
                     class="absolute z-10 w-full mt-1 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg shadow-lg max-h-60 overflow-hidden"
                   >
-                    <!-- Search Input -->
                     <div
                       class="p-3 border-b border-slate-200 dark:border-slate-600"
                     >
@@ -996,8 +1009,6 @@ const handleConfirmCampaign = () => {
                         class="w-full px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
-
-                    <!-- Action Buttons -->
                     <div
                       class="p-2 border-b border-slate-200 dark:border-slate-600 flex gap-2"
                     >
@@ -1014,8 +1025,6 @@ const handleConfirmCampaign = () => {
                         {{ t('CUSTOMERS.CLEAR_ALL') }}
                       </button>
                     </div>
-
-                    <!-- Brand List -->
                     <div class="max-h-40 overflow-y-auto">
                       <label
                         v-for="brand in searchFilteredBrands"
@@ -1041,7 +1050,6 @@ const handleConfirmCampaign = () => {
                           {{ brand.user_count || 0 }} {{ t('CUSTOMERS.USERS') }}
                         </span>
                       </label>
-
                       <div
                         v-if="searchFilteredBrands.length === 0"
                         class="px-3 py-4 text-sm text-slate-500 dark:text-slate-400 text-center"
@@ -1051,8 +1059,6 @@ const handleConfirmCampaign = () => {
                     </div>
                   </div>
                 </div>
-
-                <!-- Loading spinner for brands -->
                 <div
                   v-if="isLoadingBrands"
                   class="flex items-center justify-center py-2"
@@ -1077,8 +1083,6 @@ const handleConfirmCampaign = () => {
                     />
                   </svg>
                 </div>
-
-                <!-- Error Messages -->
                 <div
                   v-if="
                     filteredBrands.length === 0 &&
@@ -1129,8 +1133,6 @@ const handleConfirmCampaign = () => {
                   }}
                   {{ t('CUSTOMERS.SELECTED') }})
                 </label>
-
-                <!-- Selected Models Display -->
                 <div v-if="selectedModels.length > 0" class="mb-3">
                   <div class="flex flex-wrap gap-2">
                     <span
@@ -1166,8 +1168,6 @@ const handleConfirmCampaign = () => {
                     {{ t('CUSTOMERS.CLEAR_ALL') }}
                   </button>
                 </div>
-
-                <!-- Model Dropdown -->
                 <div class="relative model-dropdown">
                   <button
                     class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed text-left flex items-center justify-between"
@@ -1198,13 +1198,10 @@ const handleConfirmCampaign = () => {
                       />
                     </svg>
                   </button>
-
-                  <!-- Model Dropdown Content -->
                   <div
                     v-if="showModelDropdown && selectedBrands.length > 0"
                     class="absolute z-10 w-full mt-1 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg shadow-lg max-h-60 overflow-hidden"
                   >
-                    <!-- Search Input -->
                     <div
                       class="p-3 border-b border-slate-200 dark:border-slate-600"
                     >
@@ -1215,8 +1212,6 @@ const handleConfirmCampaign = () => {
                         class="w-full px-3 py-2 text-sm border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
-
-                    <!-- Action Buttons -->
                     <div
                       class="p-2 border-b border-slate-200 dark:border-slate-600 flex gap-2"
                     >
@@ -1233,8 +1228,6 @@ const handleConfirmCampaign = () => {
                         {{ t('CUSTOMERS.CLEAR_ALL') }}
                       </button>
                     </div>
-
-                    <!-- Model List -->
                     <div class="max-h-40 overflow-y-auto">
                       <label
                         v-for="model in searchFilteredModels"
@@ -1258,7 +1251,6 @@ const handleConfirmCampaign = () => {
                           {{ model.user_count || 0 }} {{ t('CUSTOMERS.USERS') }}
                         </span>
                       </label>
-
                       <div
                         v-if="searchFilteredModels.length === 0"
                         class="px-3 py-4 text-sm text-slate-500 dark:text-slate-400 text-center"
@@ -1268,8 +1260,6 @@ const handleConfirmCampaign = () => {
                     </div>
                   </div>
                 </div>
-
-                <!-- Loading spinner for models -->
                 <div
                   v-if="isLoadingModels"
                   class="flex items-center justify-center py-2"
@@ -1294,8 +1284,6 @@ const handleConfirmCampaign = () => {
                     />
                   </svg>
                 </div>
-
-                <!-- Model Error Messages -->
                 <div
                   v-if="
                     filteredModels.length === 0 &&
@@ -1320,7 +1308,6 @@ const handleConfirmCampaign = () => {
               </div>
             </div>
 
-            <!-- Filter Summary -->
             <div
               v-if="selectedBrands.length > 0 || selectedModels.length > 0"
               class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg"
@@ -1362,9 +1349,80 @@ const handleConfirmCampaign = () => {
             </div>
           </div>
 
-          <!-- SMS Campaign Form -->
-          <div class="flex-1">
-            <SMSCampaignForm @submit="handleSubmit" @cancel="handleClose" />
+          <!-- NEW/MODIFIED: Campaign Content Form -->
+          <div
+            class="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 border border-slate-200 dark:border-slate-700"
+          >
+            <h3
+              class="text-lg font-medium text-slate-900 dark:text-slate-100 mb-4 flex items-center"
+            >
+              <svg
+                class="w-5 h-5 mr-2 text-slate-600 dark:text-slate-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                />
+              </svg>
+              {{ t('CAMPAIGN.BULK.CAMPAIGN_CONTENT') }}
+            </h3>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="campaign-title"
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
+                  {{ t('CAMPAIGN.BULK.TITLE') }}
+                </label>
+                <input
+                  id="campaign-title"
+                  v-model="campaignTitle"
+                  type="text"
+                  :placeholder="t('CAMPAIGN.BULK.TITLE_PLACEHOLDER')"
+                  class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <div>
+                <label
+                  for="campaign-message"
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
+                  {{ t('CAMPAIGN.BULK.MESSAGE') }}
+                </label>
+                <textarea
+                  id="campaign-message"
+                  v-model="campaignMessage"
+                  rows="4"
+                  :placeholder="t('CAMPAIGN.BULK.MESSAGE_PLACEHOLDER')"
+                  class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                  {{ t('CAMPAIGN.BULK.VARIABLES_HELP_TEXT') }}
+                </p>
+              </div>
+              <div>
+                <label
+                  for="campaign-image"
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
+                >
+                  {{ t('CAMPAIGN.BULK.IMAGE_URL') }} ({{
+                    t('CAMPAIGN.BULK.OPTIONAL')
+                  }})
+                </label>
+                <input
+                  id="campaign-image"
+                  v-model="campaignImageUrl"
+                  type="url"
+                  :placeholder="t('CAMPAIGN.BULK.IMAGE_URL_PLACEHOLDER')"
+                  class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1397,37 +1455,39 @@ const handleConfirmCampaign = () => {
                 </svg>
                 {{ t('CAMPAIGN.BULK.PREVIEW') }}
               </h3>
-
-              <!-- Preview Content -->
-              <div
-                v-if="!showPreview"
-                class="text-center py-8 text-slate-500 dark:text-slate-400"
-              >
-                <svg
-                  class="w-12 h-12 mx-auto mb-4 opacity-50"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <!-- NEW/MODIFIED: Swapped logic from !showPreview to showPreview -->
+              <div v-if="!showPreview" class="space-y-6">
+                <div
+                  class="text-center py-8 text-slate-500 dark:text-slate-400"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                  />
-                </svg>
-                <p class="text-sm">
-                  {{ t('CAMPAIGN.PREVIEW.FILL_FORM_MESSAGE') }}
-                </p>
+                  <svg
+                    class="w-12 h-12 mx-auto mb-4 opacity-50"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                  <p class="font-medium text-slate-700 dark:text-slate-300">
+                    {{ t('CAMPAIGN.PREVIEW.READY_TO_PREVIEW') }}
+                  </p>
+                  <p class="text-sm mt-1">
+                    {{ t('CAMPAIGN.PREVIEW.FILL_FORM_MESSAGE') }}
+                  </p>
+                </div>
+                <button
+                  :disabled="!isFormValidForPreview"
+                  class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center text-base"
+                  @click="handleGeneratePreview"
+                >
+                  {{ t('CAMPAIGN.BULK.GENERATE_PREVIEW') }}
+                </button>
               </div>
-
-              <!-- Enhanced Preview Data -->
               <div v-else class="space-y-6">
                 <!-- Campaign Overview -->
                 <div
@@ -1438,8 +1498,6 @@ const handleConfirmCampaign = () => {
                   >
                     {{ t('CAMPAIGN.PREVIEW.OVERVIEW') }}
                   </h4>
-
-                  <!-- Campaign Title -->
                   <div class="mb-3">
                     <span class="text-xs text-slate-500 dark:text-slate-400">{{
                       t('CAMPAIGN.PREVIEW.TITLE')
@@ -1450,8 +1508,6 @@ const handleConfirmCampaign = () => {
                       {{ previewData.title || t('CAMPAIGN.PREVIEW.UNTITLED') }}
                     </p>
                   </div>
-
-                  <!-- Target Audience -->
                   <div class="mb-3">
                     <span class="text-xs text-slate-500 dark:text-slate-400">{{
                       t('CAMPAIGN.PREVIEW.TARGET_AUDIENCE')
@@ -1489,8 +1545,6 @@ const handleConfirmCampaign = () => {
                       </div>
                     </div>
                   </div>
-
-                  <!-- Estimated Reach -->
                   <div>
                     <span class="text-xs text-slate-500 dark:text-slate-400">{{
                       t('CAMPAIGN.PREVIEW.ESTIMATED_REACH')
@@ -1529,7 +1583,6 @@ const handleConfirmCampaign = () => {
                       @click="activePreviewTab = tab"
                     >
                       <div class="flex items-center justify-center space-x-1">
-                        <!-- SMS Icon -->
                         <svg
                           v-if="tab === 'sms'"
                           class="w-3 h-3"
@@ -1544,7 +1597,6 @@ const handleConfirmCampaign = () => {
                             d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                           />
                         </svg>
-                        <!-- Email Icon -->
                         <svg
                           v-else-if="tab === 'email'"
                           class="w-3 h-3"
@@ -1559,7 +1611,6 @@ const handleConfirmCampaign = () => {
                             d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                           />
                         </svg>
-                        <!-- In-App Icon -->
                         <svg
                           v-else-if="tab === 'inApp'"
                           class="w-3 h-3"
@@ -1571,7 +1622,7 @@ const handleConfirmCampaign = () => {
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
-                            d="M15 17h5l-5 5v-5zM4.343 12.344l1.414 1.414a1 1 0 01.242.391l.636 1.908a1 1 0 01-.242 1.023l-1.414 1.414a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 01-.242-1.023l.636-1.908a1 1 0 01.242-.391l1.414-1.414a1 1 0 011.414 0z"
+                            d="M15 17h5l-5 5v-5zM4.343 12.344l1.414 1.414a1 1 0 01.242.391l.636 1.908a1 1 0 01-.242 1.023l-1.414 1.414a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 01-.242-1.023l.636-1.908a1 1 0 01.242-.391l1.414-1.414a1 1 0 011.414 0zM19.657 12.344l-1.414 1.414a1 1 0 00-.242.391l-.636 1.908a1 1 0 00.242 1.023l1.414 1.414a1 1 0 001.414 0l1.414-1.414a1 1 0 00.242-1.023l-.636-1.908a1 1 0 00-.242-.391l-1.414-1.414a1 1 0 00-1.414 0z"
                           />
                         </svg>
                         <span>{{
@@ -1584,15 +1635,11 @@ const handleConfirmCampaign = () => {
                       </div>
                     </button>
                   </div>
-
-                  <!-- Preview Content Based on Selected Tab -->
                   <div class="space-y-4">
-                    <!-- SMS Preview -->
                     <div v-if="activePreviewTab === 'sms'" class="space-y-3">
                       <div
                         class="bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 overflow-hidden"
                       >
-                        <!-- Phone mockup header -->
                         <div
                           class="bg-slate-100 dark:bg-slate-600 px-4 py-2 flex items-center space-x-2"
                         >
@@ -1601,7 +1648,6 @@ const handleConfirmCampaign = () => {
                             >{{ t('CAMPAIGN.PREVIEW.SMS_PREVIEW') }}</span
                           >
                         </div>
-                        <!-- Message content -->
                         <div class="p-4">
                           <div
                             class="bg-blue-500 text-white rounded-lg rounded-tl-sm p-3 max-w-xs ml-auto"
@@ -1616,13 +1662,10 @@ const handleConfirmCampaign = () => {
                         </div>
                       </div>
                     </div>
-
-                    <!-- Email Preview -->
                     <div v-if="activePreviewTab === 'email'" class="space-y-3">
                       <div
                         class="bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 overflow-hidden"
                       >
-                        <!-- Email header -->
                         <div
                           class="border-b border-slate-200 dark:border-slate-600 p-4"
                         >
@@ -1658,11 +1701,16 @@ const handleConfirmCampaign = () => {
                             </h5>
                           </div>
                         </div>
-                        <!-- Email body -->
                         <div class="p-4">
                           <div
                             class="prose prose-sm dark:prose-invert max-w-none"
                           >
+                            <img
+                              v-if="previewData.imageUrl"
+                              :src="previewData.imageUrl"
+                              alt="Campaign Image"
+                              class="w-full h-auto rounded-md mb-4"
+                            />
                             <p
                               class="text-sm text-slate-700 dark:text-slate-300"
                             >
@@ -1682,13 +1730,10 @@ const handleConfirmCampaign = () => {
                         </div>
                       </div>
                     </div>
-
-                    <!-- In-App Preview -->
                     <div v-if="activePreviewTab === 'inApp'" class="space-y-3">
                       <div
                         class="bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 overflow-hidden"
                       >
-                        <!-- App notification mockup -->
                         <div
                           class="bg-slate-100 dark:bg-slate-600 px-4 py-2 flex items-center space-x-2"
                         >
@@ -1697,7 +1742,6 @@ const handleConfirmCampaign = () => {
                             >{{ t('CAMPAIGN.PREVIEW.IN_APP_PREVIEW') }}</span
                           >
                         </div>
-                        <!-- Notification content -->
                         <div class="p-4">
                           <div
                             class="flex items-start space-x-3 p-3 bg-slate-50 dark:bg-slate-600 rounded-lg"
@@ -1720,6 +1764,12 @@ const handleConfirmCampaign = () => {
                               </svg>
                             </div>
                             <div class="flex-1 min-w-0">
+                              <img
+                                v-if="previewData.imageUrl"
+                                :src="previewData.imageUrl"
+                                alt="Campaign Image"
+                                class="w-full h-auto rounded-md mb-2"
+                              />
                               <div class="flex items-center justify-between">
                                 <h6
                                   class="text-sm font-medium text-slate-900 dark:text-slate-100 truncate"
@@ -1752,14 +1802,43 @@ const handleConfirmCampaign = () => {
                   class="pt-4 border-t border-slate-200 dark:border-slate-600 space-y-3"
                 >
                   <button
-                    :disabled="!hasAnyNotificationTypeSelected"
-                    class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors"
+                    :disabled="
+                      !hasAnyNotificationTypeSelected || isLoadingCustomers
+                    "
+                    class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center"
                     @click="handleConfirmCampaign"
                   >
-                    {{ t('CAMPAIGN.BULK.SEND_CAMPAIGN') }}
+                    <svg
+                      v-if="isLoadingCustomers"
+                      class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                      />
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    <span>
+                      {{
+                        isLoadingCustomers
+                          ? t('CAMPAIGN.BULK.FETCHING_CUSTOMERS')
+                          : t('CAMPAIGN.BULK.SEND_CAMPAIGN')
+                      }}
+                    </span>
                   </button>
                   <button
                     class="w-full bg-slate-200 hover:bg-slate-300 dark:bg-slate-600 dark:hover:bg-slate-500 text-slate-700 dark:text-slate-200 font-medium py-2 px-4 rounded-lg transition-colors"
+                    :disabled="isLoadingCustomers"
                     @click="showPreview = false"
                   >
                     {{ t('CAMPAIGN.BULK.EDIT_CAMPAIGN') }}
