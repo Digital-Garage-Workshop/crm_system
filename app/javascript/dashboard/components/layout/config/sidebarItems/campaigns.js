@@ -20,6 +20,14 @@ const campaigns = accountId => ({
       toState: frontendURL(`accounts/${accountId}/campaigns/sms`),
       toStateName: 'campaigns_sms_index',
     },
+    {
+      key: 'smsCampaigns',
+      icon: 'sound-source',
+      label: 'BULK_SMS',
+      hasSubMenu: false,
+      toState: frontendURL(`accounts/${accountId}/campaigns/bulk_sms`),
+      toStateName: 'campaigns_sms_index',
+    },
   ],
 });
 

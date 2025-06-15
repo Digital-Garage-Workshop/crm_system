@@ -5,12 +5,14 @@ import campaigns from './sidebarItems/campaigns';
 import settings from './sidebarItems/settings';
 import notifications from './sidebarItems/notifications';
 import primaryMenu from './sidebarItems/primaryMenu';
+import massNotificationItems from './sidebarItems/massNotication';
 
 export const getSidebarItems = accountId => ({
   primaryMenu: primaryMenu(accountId),
   secondaryMenu: [
     conversations(accountId),
     contacts(accountId),
+    massNotificationItems(accountId),
     reports(accountId),
     campaigns(accountId),
     settings(accountId),

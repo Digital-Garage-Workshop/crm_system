@@ -96,5 +96,3 @@ yarn-debug.log*
 # Claude.ai config file
 CLAUDE.md
 .env
-core.*
-core.*

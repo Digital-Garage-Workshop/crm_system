@@ -3,16 +3,15 @@ module Messages
     queue_as :medium
 
     def perform(message_id)
-      Rails.logger.info "[PUSH-JOB] ContactPushNotificationJob эхэллээ. message_id=#{message_id}"
+      message = Message.find_by(id: message_id)
 
-      @message = Message.find_by(id: message_id)
-      if @message.blank?
-        Rails.logger.warn '[PUSH-JOB] @message хоосон байна. Push notification илгээхгүй.'
+      if message.nil?
+        Rails.logger.error "ContactPushNotificationJob: Message #{message_id} not found"
         return
       end
 
-      Rails.logger.info "[PUSH-JOB] @message олдлоо (id=#{@message.id}), push notification сервис рүү илгээж байна."
-      Messages::ContactPushNotificationService.new(message: @message).perform
+      Rails.logger.info "ContactPushNotificationJob: Processing push notification for message #{message_id}"
+      Messages::ContactPushNotificationService.new(message: message).perform
     end
   end
 end
