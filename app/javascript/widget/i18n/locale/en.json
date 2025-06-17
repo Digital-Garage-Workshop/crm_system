@@ -17,9 +17,9 @@
     "OFFLINE": "Одоогоор бид холбогдоогүй байна"
   },
   "REPLY_TIME": {
-    "IN_A_FEW_MINUTES": "Хэдхэн минутын дараа хариу өгдөг",
-    "IN_A_FEW_HOURS": "Хэдэн цагийн дараа хариу өгдөг",
-    "IN_A_DAY": "Нэг өдрийн дотор хариу өгдөг",
+    "IN_A_FEW_MINUTES": "Хэдхэн минутын дараа хариу өгнө",
+    "IN_A_FEW_HOURS": "Хэдэн цагийн дараа хариу өгнө",
+    "IN_A_DAY": "Нэг өдрийн дотор хариу өгнө",
     "BACK_IN": "Удалгүй онлайн болно"
   },
   "DAY_NAMES": {
@@ -31,11 +31,11 @@
     "FRIDAY": "Баасан",
     "SATURDAY": "Бямба"
   },
-  "START_CONVERSATION": "Яриа эхлүүлэх",
-  "END_CONVERSATION": "Яриаг дуусгах",
-  "CONTINUE_CONVERSATION": "Яриаг үргэлжлүүлэх",
+  "START_CONVERSATION": "Чат эхлүүлэх",
+  "END_CONVERSATION": "Чат дуусгах",
+  "CONTINUE_CONVERSATION": "Чат үргэлжлүүлэх",
   "YOU": "Та",
-  "START_NEW_CONVERSATION": "Шинэ яриа эхлүүлэх",
+  "START_NEW_CONVERSATION": "Шинэ Чат эхлүүлэх",
   "VIEW_UNREAD_MESSAGES": "Танд уншаагүй зурвасууд байна",
   "UNREAD_VIEW": {
     "VIEW_MESSAGES_BUTTON": "Шинэ зурвасуудыг үзэх",

@@ -47,7 +47,7 @@ const handleDelete = campaign => {
 
 <template>
   <CampaignLayout
-    :header-title="t('CAMPAIGN.BULK_SMS.HEADER_TITLE___TEMKAKAK')"
+    :header-title="t('CAMPAIGN.BULK_SMS.HEADER_TITLE')"
     :button-label="t('CAMPAIGN.BULK_SMS.NEW_CAMPAIGN')"
     @click="toggleBulkSmsCampaignDialog()"
     @close="toggleBulkSmsCampaignDialog(false)"

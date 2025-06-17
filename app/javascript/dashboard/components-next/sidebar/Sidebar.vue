@@ -321,11 +321,6 @@ const menuItems = computed(() => {
           to: accountScopedRoute('campaigns_livechat_index'),
         },
         {
-          name: 'SMS',
-          label: t('SIDEBAR.SMS'),
-          to: accountScopedRoute('campaigns_sms_index'),
-        },
-        {
           name: 'Bulk SMS',
           label: t('SIDEBAR.BULK_SMS'),
           to: accountScopedRoute('campaigns_livechat_index'),
