@@ -13,14 +13,6 @@ const campaigns = accountId => ({
       toStateName: 'campaigns_livechat_index',
     },
     {
-      key: 'oneOffCampaigns',
-      icon: 'sound-source',
-      label: 'SMS',
-      hasSubMenu: false,
-      toState: frontendURL(`accounts/${accountId}/campaigns/sms`),
-      toStateName: 'campaigns_sms_index',
-    },
-    {
       key: 'smsCampaigns',
       icon: 'sound-source',
       label: 'BULK_SMS',
