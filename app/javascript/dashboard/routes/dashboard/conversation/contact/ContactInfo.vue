@@ -256,6 +256,14 @@ export default {
             emoji="🌍"
             :title="$t('CONTACT_PANEL.LOCATION')"
           />
+          <ContactInfoRow
+            :href="contact.plate_number ? `${contact.plate_number}` : ''"
+            :value="contact.email"
+            icon="mail"
+            emoji="✉️"
+            :title="$t('CONTACT_PANEL.PLATE_NUMBER')"
+            show-copy
+          />
           <SocialIcons :social-profiles="socialProfiles" />
         </div>
       </div>
