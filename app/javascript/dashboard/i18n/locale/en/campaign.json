@@ -1,273 +1,312 @@
 {
   "CAMPAIGN": {
     "LIVE_CHAT": {
-      "HEADER_TITLE": "Live chat campaigns",
-      "NEW_CAMPAIGN": "Create campaign",
+      "HEADER_TITLE": "Шууд чатын кампаниуд",
+      "NEW_CAMPAIGN": "Кампани үүсгэх",
       "CARD": {
         "STATUS": {
-          "ENABLED": "Enabled",
-          "DISABLED": "Disabled"
+          "ENABLED": "Идэвхтэй",
+          "DISABLED": "Идэвхгүй"
         },
         "CAMPAIGN_DETAILS": {
-          "SENT_BY": "Sent by",
-          "BOT": "Bot",
-          "FROM": "from",
+          "SENT_BY": "Илгээгч",
+          "BOT": "Бот",
+          "FROM": "-аас",
           "URL": "URL:"
         }
       },
       "EMPTY_STATE": {
-        "TITLE": "No live chat campaigns are available",
-        "SUBTITLE": "Connect with your customers using proactive messages.  Click 'Create campaign' to get started."
+        "TITLE": "Шууд чатын кампани байхгүй байна",
+        "SUBTITLE": "Үйлчлүүлэгчидтэйгээ идэвхтэй зурвас илгээн холбогдоорой. Эхлүүлэхийн тулд 'Кампани үүсгэх' товчийг дарна уу."
       },
       "CREATE": {
-        "TITLE": "Create a live chat campaign",
-        "CANCEL_BUTTON_TEXT": "Cancel",
-        "CREATE_BUTTON_TEXT": "Create",
+        "TITLE": "Шууд чатын кампани үүсгэх",
+        "CANCEL_BUTTON_TEXT": "Цуцлах",
+        "CREATE_BUTTON_TEXT": "Үүсгэх",
         "FORM": {
           "TITLE": {
-            "LABEL": "Title",
-            "PLACEHOLDER": "Please enter the title of campaign",
-            "ERROR": "Title is required"
+            "LABEL": "Гарчиг",
+            "PLACEHOLDER": "Кампанийн гарчгийг оруулна уу",
+            "ERROR": "Гарчиг оруулах шаардлагатай"
           },
           "MESSAGE": {
-            "LABEL": "Message",
-            "PLACEHOLDER": "Please enter the message of campaign",
-            "ERROR": "Message is required"
+            "LABEL": "Зурвас",
+            "PLACEHOLDER": "Кампанийн зурвасыг оруулна уу",
+            "ERROR": "Зурвас оруулах шаардлагатай"
           },
           "INBOX": {
-            "LABEL": "Select Inbox",
-            "PLACEHOLDER": "Select Inbox",
-            "ERROR": "Inbox is required"
+            "LABEL": "Орох хайрцаг сонгох",
+            "PLACEHOLDER": "Орох хайрцаг сонгох",
+            "ERROR": "Орох хайрцаг сонгох шаардлагатай"
           },
           "SENT_BY": {
-            "LABEL": "Sent by",
-            "PLACEHOLDER": "Please select sender",
-            "ERROR": "Sender is required"
+            "LABEL": "Илгээгч",
+            "PLACEHOLDER": "Илгээгч сонгоно уу",
+            "ERROR": "Илгээгч сонгох шаардлагатай"
           },
           "END_POINT": {
             "LABEL": "URL",
-            "PLACEHOLDER": "Please enter the URL",
-            "ERROR": "Please enter a valid URL"
+            "PLACEHOLDER": "URL-г оруулна уу",
+            "ERROR": "Хүчинтэй URL оруулна уу"
           },
           "TIME_ON_PAGE": {
-            "LABEL": "Time on page(Seconds)",
-            "PLACEHOLDER": "Please enter the time",
-            "ERROR": "Time on page is required"
+            "LABEL": "Хуудсан дээр байх хугацаа (Секунд)",
+            "PLACEHOLDER": "Хугацааг оруулна уу",
+            "ERROR": "Хуудсан дээр байх хугацааг оруулах шаардлагатай"
           },
           "OTHER_PREFERENCES": {
-            "TITLE": "Other preferences",
-            "ENABLED": "Enable campaign",
-            "TRIGGER_ONLY_BUSINESS_HOURS": "Trigger only during business hours"
+            "TITLE": "Бусад тохиргоо",
+            "ENABLED": "Кампанийг идэвхжүүлэх",
+            "TRIGGER_ONLY_BUSINESS_HOURS": "Зөвхөн ажлын цагаар идэвхжүүлэх"
           },
           "BUTTONS": {
-            "CREATE": "Create",
-            "CANCEL": "Cancel"
+            "CREATE": "Үүсгэх",
+            "CANCEL": "Цуцлах"
           },
           "API": {
-            "SUCCESS_MESSAGE": "Live chat campaign created successfully",
-            "ERROR_MESSAGE": "There was an error. Please try again."
+            "SUCCESS_MESSAGE": "Шууд чатын кампани амжилттай үүслээ",
+            "ERROR_MESSAGE": "Алдаа гарлаа. Дахин оролдоно уу."
           }
         }
       },
       "EDIT": {
-        "TITLE": "Edit live chat campaign",
+        "TITLE": "Шууд чатын кампани засварлах",
         "FORM": {
           "API": {
-            "SUCCESS_MESSAGE": "Live chat campaign updated successfully",
-            "ERROR_MESSAGE": "There was an error. Please try again."
+            "SUCCESS_MESSAGE": "Шууд чатын кампани амжилттай шинэчлэгдлээ",
+            "ERROR_MESSAGE": "Алдаа гарлаа. Дахин оролдоно уу."
           }
         }
       }
     },
-    "SMS": {
-      "HEADER_TITLE": "SMS campaigns",
-      "NEW_CAMPAIGN": "Create campaign",
+    "BULK_SMS": {
+      "HEADER_TITLE": "SMS кампаниуд",
+      "NEW_CAMPAIGN": "Кампани үүсгэх",
       "EMPTY_STATE": {
-        "TITLE": "No SMS campaigns are available",
-        "SUBTITLE": "Launch an SMS campaign to reach your customers directly. Send offers or make announcements with ease. Click 'Create campaign' to get started."
+        "TITLE": "SMS кампани байхгүй байна",
+        "SUBTITLE": "Үйлчлүүлэгчидтэйгээ шууд холбогдохын тулд SMS кампани эхлүүлээрэй. Санал болгох, зарлал хийх зэргийг хялбархан илгээнэ үү. Эхлүүлэхийн тулд 'Кампани үүсгэх' товчийг дарна уу."
       },
       "CARD": {
         "STATUS": {
-          "COMPLETED": "Completed",
-          "SCHEDULED": "Scheduled"
+          "COMPLETED": "Дууссан",
+          "SCHEDULED": "Төлөвлөгдсөн"
         },
         "CAMPAIGN_DETAILS": {
-          "SENT_FROM": "Sent from",
-          "ON": "on"
+          "SENT_FROM": "Илгээгч",
+          "ON": "өдөр"
         }
       },
       "CREATE": {
-        "TITLE": "Create SMS campaign",
-        "CANCEL_BUTTON_TEXT": "Cancel",
-        "CREATE_BUTTON_TEXT": "Create",
+        "TITLE": "SMS кампани үүсгэх",
+        "CANCEL_BUTTON_TEXT": "Цуцлах",
+        "CREATE_BUTTON_TEXT": "Үүсгэх",
         "FORM": {
           "TITLE": {
-            "LABEL": "Title",
-            "PLACEHOLDER": "Please enter the title of campaign",
-            "ERROR": "Title is required"
+            "LABEL": "Гарчиг",
+            "PLACEHOLDER": "Кампанийн гарчгийг оруулна уу",
+            "ERROR": "Гарчиг оруулах шаардлагатай"
           },
           "MESSAGE": {
-            "LABEL": "Message",
-            "PLACEHOLDER": "Please enter the message of campaign",
-            "ERROR": "Message is required"
+            "LABEL": "Зурвас",
+            "PLACEHOLDER": "Кампанийн зурвасыг оруулна уу",
+            "ERROR": "Зурвас оруулах шаардлагатай"
           },
           "INBOX": {
-            "LABEL": "Select Inbox",
-            "PLACEHOLDER": "Select Inbox",
-            "ERROR": "Inbox is required"
+            "LABEL": "Орох хайрцаг сонгох",
+            "PLACEHOLDER": "Орох хайрцаг сонгох",
+            "ERROR": "Орох хайрцаг сонгох шаардлагатай"
           },
           "AUDIENCE": {
-            "LABEL": "Audience",
-            "PLACEHOLDER": "Select the customer labels",
-            "ERROR": "Audience is required"
+            "LABEL": "Хүлээн авагчид",
+            "PLACEHOLDER": "Хэрэглэгчийн шошгыг сонгоно уу",
+            "ERROR": "Хүлээн авагчдыг сонгох шаардлагатай"
           },
           "SCHEDULED_AT": {
-            "LABEL": "Scheduled time",
-            "PLACEHOLDER": "Please select the time",
-            "ERROR": "Scheduled time is required"
+            "LABEL": "Төлөвлөсөн цаг",
+            "PLACEHOLDER": "Цагийг сонгоно уу",
+            "ERROR": "Төлөвлөсөн цагийг сонгох шаардлагатай"
           },
           "BUTTONS": {
-            "CREATE": "Create",
-            "CANCEL": "Cancel"
+            "CREATE": "Үүсгэх",
+            "CANCEL": "Цуцлах"
           },
           "API": {
-            "SUCCESS_MESSAGE": "SMS campaign created successfully",
-            "ERROR_MESSAGE": "There was an error. Please try again."
+            "SUCCESS_MESSAGE": "SMS кампани амжилттай үүслээ",
+            "ERROR_MESSAGE": "Алдаа гарлаа. Дахин оролдоно уу."
           }
         }
       },
-      "API_CONNECTION_ERROR": "API Connection Error",
-      "RETRY": "Retry",
-      "CAR_FILTERS": "Car Filters",
-      "SELECTED_FILTERS": "Selected Filters"
+      "API_CONNECTION_ERROR": "API холболтын алдаа",
+      "RETRY": "Дахин оролдох",
+      "CAR_FILTERS": "Машины шүүлтүүр",
+      "SELECTED_FILTERS": "Сонгогдсон шүүлтүүрүүд"
     },
     "BULK": {
-      "HEADER_TITLE": "Bulk SMS Campaigns",
-      "NEW_CAMPAIGN": "Create Campaign",
+      "HEADER_TITLE": "Бөөнөөр SMS илгээх кампаниуд",
+      "NEW_CAMPAIGN": "Кампани үүсгэх",
       "EMPTY_STATE": {
-        "TITLE": "No Bulk SMS campaigns are available",
-        "SUBTITLE": "Launch a targeted SMS campaign to reach your customers. Send offers or make announcements with ease. Click 'Create campaign' to get started."
+        "TITLE": "Бөөнөөр SMS илгээх кампани байхгүй байна",
+        "SUBTITLE": "Зорилтот үйлчлүүлэгчдэд хүрэхийн тулд SMS кампани эхлүүлээрэй. Санал болгох, зарлал хийх зэргийг хялбархан илгээнэ үү. Эхлүүлэхийн тулд 'Кампани үүсгэх' товчийг дарна уу."
       },
+      "VALID": "Кампани үүсгэхэд бэлэн",
       "CARD": {
         "STATUS": {
-          "COMPLETED": "Completed",
-          "SCHEDULED": "Scheduled"
+          "COMPLETED": "Дууссан",
+          "SCHEDULED": "Төлөвлөгдсөн"
         },
         "CAMPAIGN_DETAILS": {
-          "SENT_FROM": "Sent from",
-          "ON": "on"
+          "SENT_FROM": "Илгээгч",
+          "ON": "өдөр"
         }
       },
       "CREATE": {
-        "TITLE": "Create Bulk Campaign",
-        "DESCRIPTION": "Target specific customers based on car brands, models, and more.",
-        "CANCEL_BUTTON_TEXT": "Cancel",
-        "CREATE_BUTTON_TEXT": "Create"
+        "TITLE": "Бөөнөөр кампани үүсгэх",
+        "DESCRIPTION": "Машины брэнд, загвар зэрэгт тулгуурлан тодорхой үйлчлүүлэгчдэд чиглээрэй.",
+        "CANCEL_BUTTON_TEXT": "Цуцлах",
+        "CREATE_BUTTON_TEXT": "Үүсгэх"
       },
-      "NOTIFICATION_TYPES": "Notification Types",
+      "NOTIFICATION_TYPES": "Мэдэгдлийн төрлүүд",
       "SMS_TITLE": "SMS",
-      "SMS_DESCRIPTION": "Send a standard text message. Carrier fees may apply.",
-      "EMAIL_TITLE": "Email",
-      "EMAIL_DESCRIPTION": "Send a rich content email to the customer's registered address.",
-      "IN_APP_TITLE": "In-App Notification",
-      "IN_APP_DESCRIPTION": "Push a notification directly inside your mobile application.",
-      "TYPES_SELECTED": "{count} type selected | {count} types selected",
-      "USER_COUNT_FILTER": "User Count Filter",
-      "ENABLE_USER_COUNT_FILTERING": "Enable filtering by user count",
-      "MINIMUM_USERS": "Minimum Users",
-      "MAXIMUM_USERS": "Maximum Users",
-      "FILTERING_BY_USER_COUNT": "Filtering for items with {min} to {max} users.",
-      "CAMPAIGN_CONTENT": "Campaign Content",
-      "TITLE": "Title",
-      "TITLE_PLACEHOLDER": "e.g., Summer Service Special",
-      "MESSAGE": "Message",
-      "MESSAGE_PLACEHOLDER": "Enter your message here. Use {customer_name}, {brand}, {model} for personalization.",
-      "VARIABLES_HELP_TEXT": "You can use {customer_name}, {brand}, and {model} as dynamic variables.",
-      "IMAGE_URL": "Image URL",
-      "OPTIONAL": "Optional",
+      "SMS_DESCRIPTION": "Энгийн текст мессеж илгээх. Операторын төлбөр нэмэгдэж болзошгүй.",
+      "EMAIL_TITLE": "Имэйл",
+      "EMAIL_DESCRIPTION": "Үйлчлүүлэгчийн бүртгэлтэй хаяг руу баялаг агуулгатай имэйл илгээх.",
+      "IN_APP_TITLE": "Апп доторх мэдэгдэл",
+      "IN_APP_DESCRIPTION": "Гар утасны аппликейшн дотор шууд мэдэгдэл илгээх.",
+      "TYPES_SELECTED": "{count} төрөл сонгогдлоо",
+      "USER_COUNT_FILTER": "Хэрэглэгчийн тоогоор шүүх",
+      "ENABLE_USER_COUNT_FILTERING": "Хэрэглэгчийн тоогоор шүүх боломжийг идэвхжүүлэх",
+      "MINIMUM_USERS": "Хамгийн бага хэрэглэгч",
+      "MAXIMUM_USERS": "Хамгийн их хэрэглэгч",
+      "FILTERING_BY_USER_COUNT": "{min}-аас {max} хүртэлх хэрэглэгчтэй зүйлсийг шүүж байна.",
+      "CAMPAIGN_CONTENT": "Кампанийн агуулга",
+      "TITLE": "Гарчиг",
+      "TITLE_PLACEHOLDER": "Жишээ нь: Зуны үйлчилгээний онцгой санал",
+      "MESSAGE": "Зурвас",
+      "MESSAGE_PLACEHOLDER": "Зурвасаа энд оруулна уу. Хувийн тохиргоо хийхдээ {customer_name}, {brand}, {model} ашиглана уу.",
+      "VARIABLES_HELP_TEXT": "Та {customer_name}, {brand}, болон {model}-г хувьсагч болгон ашиглаж болно.",
+      "IMAGE_URL": "Зургийн URL",
+      "OPTIONAL": "Заавал биш",
       "IMAGE_URL_PLACEHOLDER": "https://example.com/image.png",
-      "GENERATE_PREVIEW": "Generate Preview",
-      "SEND_CAMPAIGN": "Confirm and Send Campaign",
-      "EDIT_CAMPAIGN": "Edit Campaign",
-      "FETCHING_CUSTOMERS": "Fetching Customers...",
-      "CAMPAIGN_CREATED_SUCCESS_WITH_COUNT": "Campaign created successfully for {count} customer. | Campaign created successfully for {count} customers.",
-      "NO_FILTERS_SELECTED_FOR_FETCH": "Please select at least one brand or model to fetch customers.",
+      "GENERATE_PREVIEW": "Урьдчилсан харалт үүсгэх",
+      "SEND_CAMPAIGN": "Кампанийг баталгаажуулж, илгээх",
+      "EDIT_CAMPAIGN": "Кампани засварлах",
+      "FETCHING_CUSTOMERS": "Үйлчлүүлэгчдийг татаж байна...",
+      "CAMPAIGN_CREATED_SUCCESS_WITH_COUNT": "Кампани {count} үйлчлүүлэгчид амжилттай үүслээ.",
+      "NO_FILTERS_SELECTED_FOR_FETCH": "Үйлчлүүлэгчдийг татахын тулд дор хаяж нэг брэнд эсвэл загвар сонгоно уу.",
+      "IMAGE_HELP": "Зургийн URL нь олон нийтэд нээлттэй холбоос байх ёстой. Энэ нь имэйл болон апп доторх мэдэгдэлд харагдана.",
+      "DEEP_LINK": "Гүн холбоос",
+      "DEFAULT_DEEP_LINK_NOTICE": "Хэрэв гүн холбоос оруулаагүй бол мэдэгдэл нь аппын нүүр хуудсыг нээнэ.",
+      "DEFAULT_DEEP_LINK_DESCRIPTION": "Гүн холбоос нь хэрэглэгчид мэдэгдэл дээр дарах үед тэднийг апп доторх тодорхой хуудас руу чиглүүлэхэд ашиглагдана.",
+      "DEEP_LINK_HELP": "Гүн холбоос нь таны апп-д зориулсан хүчинтэй URL байх ёстой. Энэ нь хэрэглэгчид мэдэгдэл дээр дарах үед тэднийг апп доторх тодорхой хуудас руу чиглүүлэхэд ашиглагдана.",
+      "COMMON_SCHEMES": "Түгээмэл схемүүд:",
+      "DEEP_LINK_PREVIEW": "Гүн холбоосын урьдчилсан харалт",
+      "DEFAULT": "Үндсэн ",
+      "FORM_VALID": " Маягт хүчинтэй байна",
+      "PREVIEW": "Урьдчилан харах",
       "API": {
-        "SUCCESS_MESSAGE": "Bulk SMS campaign created successfully",
-        "ERROR_MESSAGE": "There was an error. Please try again."
+        "SUCCESS_MESSAGE": "Бөөнөөр SMS илгээх кампани амжилттай үүслээ",
+        "ERROR_MESSAGE": "Алдаа гарлаа. Дахин оролдоно уу."
+      },
+      "PREVIEW": {
+        "LIVE_PREVIEW": "Шууд урьдчилсан харалт",
+        "READINESS_CHECK": "Бэлэн байдлын шалгалт",
+        "TITLE_SET": "Кампанийн гарчиг тохируулагдсан",
+        "MESSAGE_SET": "Кампанийн зурвас тохируулагдсан",
+        "NOTIFICATION_TYPES_SELECTED": "Мэдэгдлийн төрлүүд сонгогдсон",
+        "READY_TO_PREVIEW": "Урьдчилсан харалт үүсгэхэд бэлэн",
+        "COMPLETE_FORM_FIRST": "Эхлээд маягтыг бөглөнө үү",
+        "CLICK_TO_GENERATE": "Шууд урьдчилсан харалт үүсгэхийн тулд доорх товчийг дарна уу",
+        "FILL_REQUIRED_FIELDS": "Үргэлжлүүлэхийн тулд шаардлагатай талбаруудыг бөглөнө үү",
+        "OVERVIEW": "Кампанийн тойм",
+        "TITLE": "Кампанийн гарчиг",
+        "UNTITLED": "Гарчиггүй кампани",
+        "TARGET_AUDIENCE": "Зорилтот хэрэглэгчид",
+        "ALL_CUSTOMERS": "Бүх үйлчлүүлэгчид (шүүлтүүр ашиглаагүй)",
+        "ESTIMATED_REACH": "Тооцоолсон хүртээмж",
+        "CUSTOMERS": "үйлчлүүлэгчид",
+        "EXCELLENT_REACH": "Маш сайн хүртээмж",
+        "MODERATE_REACH": "Дундаж хүртээмж",
+        "NO_REACH": "Энэ кампани ямар ч үйлчлүүлэгчид хүрэхгүй",
+        "DELIVERY_CHANNELS": "Хүргэлтийн сувгууд",
+        "TABS_ARIA_LABEL": "Мэдэгдлийн төрлийн табууд",
+        "SMS_PREVIEW": "SMS урьдчилан харах",
+        "SMS_CHAR_COUNT": "{count}/{max} тэмдэгт",
+        "EMAIL_SUBJECT": "Сэдэв",
+        "ANY_BRAND": "Ямар ч брэнд",
+        "ANY_MODEL": "Ямар ч загвар"
       }
     },
     "PREVIEW": {
-      "READY_TO_PREVIEW": "Ready to Preview",
-      "FILL_FORM_MESSAGE": "Fill out the campaign content and select an audience to generate a preview.",
-      "OVERVIEW": "Campaign Overview",
-      "TITLE": "Title",
-      "UNTITLED": "Untitled Campaign",
-      "TARGET_AUDIENCE": "Target Audience",
-      "ALL_CUSTOMERS": "All Customers",
-      "ESTIMATED_REACH": "Estimated Reach",
-      "CUSTOMERS": "Customers",
-      "SMS_PREVIEW": "SMS Preview",
-      "EMAIL_PREVIEW": "Email Preview",
-      "IN_APP_PREVIEW": "In-App Notification Preview",
-      "ANY_BRAND": "any brand",
-      "ANY_MODEL": "any model",
-      "SENDER_INITIALS": "ME",
-      "SENDER_NAME": "Your Company Name",
-      "DEAR_CUSTOMER": "Dear {customer_name},",
-      "EMAIL_SIGNATURE": "Sincerely,<br>The Team",
-      "NOW": "now"
+      "LIVE_PREVIEW": "Шууд урьдчилсан харалт",
+      "READINESS_CHECK": "Бэлэн байдлын шалгалт",
+      "TITLE_SET": "Кампанийн гарчиг тохируулагдсан",
+      "MESSAGE_SET": "Кампанийн зурвас тохируулагдсан",
+      "NOTIFICATION_TYPES_SELECTED": "Мэдэгдлийн төрлүүд сонгогдсон",
+      "READY_TO_PREVIEW": "Урьдчилсан харалт үүсгэхэд бэлэн",
+      "COMPLETE_FORM_FIRST": "Эхлээд маягтыг бөглөнө үү",
+      "CLICK_TO_GENERATE": "Шууд урьдчилсан харалт үүсгэхийн тулд доорх товчийг дарна уу",
+      "FILL_REQUIRED_FIELDS": "Үргэлжлүүлэхийн тулд шаардлагатай талбаруудыг бөглөнө үү",
+      "OVERVIEW": "Кампанийн тойм",
+      "TITLE": "Кампанийн гарчиг",
+      "UNTITLED": "Гарчиггүй кампани",
+      "TARGET_AUDIENCE": "Зорилтот хэрэглэгчид",
+      "ALL_CUSTOMERS": "Бүх үйлчлүүлэгчид (шүүлтүүр ашиглаагүй)",
+      "ESTIMATED_REACH": "Тооцоолсон хүртээмж",
+      "CUSTOMERS": "үйлчлүүлэгчид",
+      "EXCELLENT_REACH": "Маш сайн хүртээмж",
+      "MODERATE_REACH": "Дундаж хүртээмж",
+      "NO_REACH": "Энэ кампани ямар ч үйлчлүүлэгчид хүрэхгүй",
+      "DELIVERY_CHANNELS": "Хүргэлтийн сувгууд",
+      "TABS_ARIA_LABEL": "Мэдэгдлийн төрлийн табууд",
+      "SMS_PREVIEW": "SMS урьдчилан харах",
+      "SMS_CHAR_COUNT": "{count}/{max} тэмдэгт",
+      "EMAIL_SUBJECT": "Сэдэв",
+      "ANY_BRAND": "Ямар ч брэнд",
+      "ANY_MODEL": "Ямар ч загвар"
     },
     "ERRORS": {
-      "NETWORK_ERROR": "Network error. Please check your connection.",
-      "AUTH_FAILED": "Authentication failed. Please check your API token.",
-      "ACCESS_DENIED": "Access Denied. You do not have permission to perform this action.",
-      "ENDPOINT_NOT_FOUND": "The requested API endpoint was not found (404).",
-      "INVALID_REQUEST": "Invalid request. Please check the provided data (422).",
-      "TOO_MANY_REQUESTS": "Too many requests. Please wait a moment before trying again.",
-      "INTERNAL_SERVER_ERROR": "An internal server error occurred (500). Please try again later.",
-      "SERVER_ERROR": "A server error occurred: {status} {statusText}",
-      "REQUEST_TIMEOUT": "The request timed out. Please try again.",
-      "NO_RESPONSE": "No response from the server. Please check your network.",
-      "INVALID_DATA_FORMAT": "Received invalid data format from the API.",
-      "FAILED_FETCH_BRANDS": "Failed to fetch car brands. Please try again.",
-      "FAILED_FETCH_MODELS": "Failed to fetch car models. Please try again.",
-      "INVALID_CUSTOMER_DATA": "Received invalid data format from the customer API.",
-      "FAILED_FETCH_CUSTOMERS": "Failed to fetch customer data. Please check the filters and try again."
+      "NETWORK_ERROR": "Сүлжээний алдаа. Холболтоо шалгана уу.",
+      "AUTH_FAILED": "Нэвтрэлт амжилтгүй боллоо. API токеноо шалгана уу.",
+      "ACCESS_DENIED": "Хандах эрхгүй. Та энэ үйлдлийг хийх зөвшөөрөлгүй байна.",
+      "ENDPOINT_NOT_FOUND": "Хүсэлт гаргасан API эцсийн цэг олдсонгүй (404).",
+      "INVALID_REQUEST": "Хүчингүй хүсэлт. Оруулсан өгөгдлийг шалгана уу (422).",
+      "TOO_MANY_REQUESTS": "Хэт олон хүсэлт илгээлээ. Түр хүлээгээд дахин оролдоно уу.",
+      "INTERNAL_SERVER_ERROR": "Серверийн дотоод алдаа гарлаа (500). Дараа дахин оролдоно уу.",
+      "SERVER_ERROR": "Серверийн алдаа гарлаа: {status} {statusText}",
+      "REQUEST_TIMEOUT": "Хүсэлтийн хугацаа дууссан. Дахин оролдоно уу.",
+      "NO_RESPONSE": "Серверээс хариу ирсэнгүй. Сүлжээгээ шалгана уу.",
+      "INVALID_DATA_FORMAT": "API-аас хүчингүй өгөгдлийн формат ирлээ.",
+      "FAILED_FETCH_BRANDS": "Машины брэндүүдийг татахад алдаа гарлаа. Дахин оролдоно уу.",
+      "FAILED_FETCH_MODELS": "Машины загваруудыг татахад алдаа гарлаа. Дахин оролдоно уу.",
+      "INVALID_CUSTOMER_DATA": "Үйлчлүүлэгчийн API-аас хүчингүй өгөгдлийн формат ирлээ.",
+      "FAILED_FETCH_CUSTOMERS": "Үйлчлүүлэгчийн мэдээллийг татахад алдаа гарлаа. Шүүлтүүрээ шалгаад дахин оролдоно уу."
     }
   },
   "CUSTOMERS": {
-    "SELECT_BRANDS": "Select Brands",
-    "SELECT_MODELS": "Select Models",
-    "SELECTED": "selected",
-    "BRANDS": "Brands",
-    "MODELS": "Models",
-    "USERS": "users",
-    "CLEAR_ALL": "Clear All",
-    "SELECT_ALL": "Select All",
-    "LOADING_BRANDS": "Loading Brands...",
-    "LOADING_MODELS": "Loading Models...",
-    "SEARCH_BRANDS": "Search brands...",
-    "SEARCH_MODELS": "Search models...",
-    "SELECT_BRANDS_PLACEHOLDER": "Select one or more brands",
-    "SELECT_MODELS_PLACEHOLDER": "Select one or more models",
-    "BRANDS_SELECTED": "{count} brand selected | {count} brands selected",
-    "MODELS_SELECTED": "{count} model selected | {count} models selected",
-    "NO_BRANDS_FOUND": "No brands found.",
-    "NO_MODELS_FOUND": "No models found.",
-    "NO_BRANDS_MATCH_FILTER": "No brands match the current user count filter.",
-    "NO_MODELS_MATCH_FILTER": "No models match the current user count filter.",
-    "NO_BRANDS_AVAILABLE": "No brands available from the API.",
-    "NO_MODELS_AVAILABLE": "No models available for selected brand(s).",
-    "SELECT_BRAND_FIRST": "Select a brand first"
+    "SELECT_BRANDS": "Брэнд сонгох",
+    "SELECT_MODELS": "Загвар сонгох",
+    "SELECTED": "сонгогдсон",
+    "BRANDS": "Брэндүүд",
+    "MODELS": "Загварууд",
+    "USERS": "хэрэглэгчид",
+    "CLEAR_ALL": "Бүгдийг цэвэрлэх",
+    "SELECT_ALL": "Бүгдийг сонгох",
+    "LOADING_BRANDS": "Брэндүүдийг ачааллаж байна...",
+    "LOADING_MODELS": "Загваруудыг ачааллаж байна...",
+    "SEARCH_BRANDS": "Брэнд хайх...",
+    "SEARCH_MODELS": "Загвар хайх...",
+    "SELECT_BRANDS_PLACEHOLDER": "Брэнд сонгох...",
+    "SELECT_MODELS_PLACEHOLDER": "Загвар сонгох...",
+    "SELECT_BRAND_FIRST": "Эхлээд брэнд сонгоно уу",
+    "NO_MODELS_AVAILABLE": "Сонгосон брэндэд тохирох загвар байхгүй байна"
   },
   "CONFIRM_DELETE": {
-    "TITLE": "Are you sure to delete?",
-    "DESCRIPTION": "The delete action is permanent and cannot be reversed.",
-    "CONFIRM": "Delete",
+    "TITLE": "Устгахдаа итгэлтэй байна уу?",
+    "DESCRIPTION": "Устгах үйлдэл нь буцаагдах боломжгүй бөгөөд байнгын үйлдэл юм.",
+    "CONFIRM": "Устгах",
     "API": {
-      "SUCCESS_MESSAGE": "Campaign deleted successfully",
-      "ERROR_MESSAGE": "There was an error. Please try again."
+      "SUCCESS_MESSAGE": "Кампани амжилттай устгагдлаа",
+      "ERROR_MESSAGE": "Алдаа гарлаа. Дахин оролдоно уу."
     }
   }
 }
