@@ -264,7 +264,6 @@ export default {
             emoji="🌍"
             :title="$t('CONTACT_PANEL.LOCATION')"
           />
-
           <SocialIcons :social-profiles="socialProfiles" />
         </div>
       </div>

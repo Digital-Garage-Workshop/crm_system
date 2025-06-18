@@ -202,7 +202,15 @@
       "DEEP_LINK_PREVIEW": "Гүн холбоосын урьдчилсан харалт",
       "DEFAULT": "Үндсэн ",
       "FORM_VALID": " Маягт хүчинтэй байна",
+<<<<<<< HEAD
 
+=======
+      "PREVIEW": "Урьдчилан харах",
+      "API": {
+        "SUCCESS_MESSAGE": "Бөөнөөр SMS илгээх кампани амжилттай үүслээ",
+        "ERROR_MESSAGE": "Алдаа гарлаа. Дахин оролдоно уу."
+      },
+>>>>>>> refs/remotes/origin/main
       "PREVIEW": {
         "LIVE_PREVIEW": "Шууд урьдчилсан харалт",
         "READINESS_CHECK": "Бэлэн байдлын шалгалт",

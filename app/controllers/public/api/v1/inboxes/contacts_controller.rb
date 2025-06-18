@@ -120,6 +120,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     )
   end
 
+  # aaa
   def push_token_params
     params.permit(:push_token, :plate_number)
   end
@@ -127,4 +128,6 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   def permitted_params
     params.permit(:identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token, :plate_number, custom_attributes: {})
   end
+
+  # Add a separate method for push token updates
 end
