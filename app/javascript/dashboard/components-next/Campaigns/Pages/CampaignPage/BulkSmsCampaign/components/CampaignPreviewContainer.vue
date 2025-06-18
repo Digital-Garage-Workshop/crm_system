@@ -835,7 +835,7 @@ const setActiveTab = tabKey => {
             />
           </svg>
         </div>
-        {{ t('CAMPAIGN.BULK.PREVIEW') }}
+        {{ t('CAMPAIGN.BULK_SMS.PREVIEW') }}
       </h3>
 
       <!-- Preview Status Indicator -->

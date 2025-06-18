@@ -237,6 +237,14 @@ export default {
             show-copy
           />
           <ContactInfoRow
+            :href="contact.plate_number ? `tel:${contact.plate_number}` : ''"
+            :value="contact.plate_number"
+            icon="map"
+            emoji="🚗"
+            :title="$t('CONTACT_PANEL.PLATE_NUMBER')"
+            show-copy
+          />
+          <ContactInfoRow
             v-if="contact.identifier"
             :value="contact.identifier"
             icon="contact-identify"
@@ -256,14 +264,7 @@ export default {
             emoji="🌍"
             :title="$t('CONTACT_PANEL.LOCATION')"
           />
-          <ContactInfoRow
-            :href="contact.plate_number ? `${contact.plate_number}` : ''"
-            :value="contact.email"
-            icon="mail"
-            emoji="✉️"
-            :title="$t('CONTACT_PANEL.PLATE_NUMBER')"
-            show-copy
-          />
+
           <SocialIcons :social-profiles="socialProfiles" />
         </div>
       </div>

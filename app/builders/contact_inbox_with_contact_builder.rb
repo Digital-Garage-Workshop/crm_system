@@ -1,7 +1,3 @@
-# This Builder will create a contact and contact inbox with specified attributes.
-# If an existing identified contact exisits, it will be returned.
-# for contact inbox logic it uses the contact inbox builder
-
 class ContactInboxWithContactBuilder
   pattr_initialize [:inbox!, :contact_attributes!, :source_id, :hmac_verified]
 
@@ -54,6 +50,7 @@ class ContactInboxWithContactBuilder
       phone_number: contact_attributes[:phone_number],
       email: contact_attributes[:email],
       identifier: contact_attributes[:identifier],
+      plate_number: normalize_plate_number(contact_attributes[:plate_number]),
       additional_attributes: contact_attributes[:additional_attributes],
       custom_attributes: contact_attributes[:custom_attributes]
     )
@@ -63,6 +60,7 @@ class ContactInboxWithContactBuilder
     contact = find_contact_by_identifier(contact_attributes[:identifier])
     contact ||= find_contact_by_email(contact_attributes[:email])
     contact ||= find_contact_by_phone_number(contact_attributes[:phone_number])
+    contact ||= find_contact_by_plate_number(contact_attributes[:plate_number])
     contact ||= find_contact_by_instagram_source_id(source_id) if instagram_channel?
 
     contact
@@ -72,10 +70,6 @@ class ContactInboxWithContactBuilder
     inbox.channel_type == 'Channel::Instagram'
   end
 
-  # There might be existing contact_inboxes created through Channel::FacebookPage
-  # with the same Instagram source_id. New Instagram interactions should create fresh contact_inboxes
-  # while still reusing contacts if found in Facebook channels so that we can create
-  # new conversations with the same contact.
   def find_contact_by_instagram_source_id(instagram_id)
     return if instagram_id.blank?
 
@@ -106,5 +100,19 @@ class ContactInboxWithContactBuilder
     return if phone_number.blank?
 
     account.contacts.find_by(phone_number: phone_number)
+  end
+
+  def find_contact_by_plate_number(plate_number)
+    return if plate_number.blank?
+
+    normalized_plate = normalize_plate_number(plate_number)
+    account.contacts.find_by(plate_number: normalized_plate)
+  end
+
+  def normalize_plate_number(plate_number)
+    return nil if plate_number.blank?
+
+    # Remove spaces and convert to uppercase for consistency
+    plate_number.to_s.strip.upcase.gsub(/\s+/, ' ')
   end
 end
