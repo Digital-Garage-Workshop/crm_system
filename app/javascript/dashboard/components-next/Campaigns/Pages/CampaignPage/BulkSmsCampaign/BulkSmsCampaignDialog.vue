@@ -49,7 +49,7 @@ const allBrands = ref([]);
 const allModels = ref([]);
 
 // API Token (could be moved to an environment variable)
-const API_TOKEN = '4|y3JgOMAB1Fhe9lGO7abSVsZQJ6NMHOJBonWUOjY2612c5815';
+const API_TOKEN = '6|Y70N13NFsbP3HNw6Dw6WI2CVgvNuGk5J2am0iZGO36a662d3';
 
 // API instance for customer fetching (Car API is now inside CarFilterSection)
 const customerApi = axios.create({
@@ -424,9 +424,10 @@ const handleEditCampaign = () => {
               :selected-brand-ids="selectedBrands"
               :selected-model-ids="selectedModels"
               :user-count-filter="userCountFilter"
-              :estimated-reach="estimatedReach"
-              :is-form-valid="isFormValidForPreview"
-              :is-loading="isLoadingCustomers || isCreatingCampaign"
+              :customers="fetchedCustomers"
+              :estimated-reach="fetchedCustomers.length"
+              :is-form-valid="isFormValidForCreation"
+              :is-loading="isCreatingCampaign"
               @confirm-campaign="handleConfirmCampaign"
               @edit-campaign="handleEditCampaign"
             />

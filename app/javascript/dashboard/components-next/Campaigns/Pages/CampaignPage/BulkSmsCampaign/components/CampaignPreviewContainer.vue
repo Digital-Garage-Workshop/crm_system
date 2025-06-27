@@ -10,10 +10,9 @@ const props = defineProps({
   notificationTypes: { type: Object, required: true },
   selectedBrandNames: { type: Array, default: () => [] },
   selectedModelNames: { type: Array, default: () => [] },
-  selectedBrandIds: { type: Array, default: () => [] },
-  selectedModelIds: { type: Array, default: () => [] },
+
   userCountFilter: { type: Object, required: true },
-  estimatedReach: { type: Number, default: 0 },
+  customers: { type: Array, default: () => [] }, // ADD THIS LINE
   isFormValid: { type: Boolean, default: false },
 });
 
@@ -40,11 +39,13 @@ const CAMPAIGN_TYPES = {
   SCHEDULED: 'scheduled',
 };
 
-// Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): 2025-06-17 04:42:00
+// Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): 2025-06-26 04:11:50
 // Current User's Login: temuujinnn
+const CURRENT_TIMESTAMP = '2025-06-26 04:11:50';
+const CURRENT_USER = 'temuujinnn';
 
 // API Token for customer fetching and SMS
-const API_TOKEN = '4|y3JgOMAB1Fhe9lGO7abSVsZQJ6NMHOJBonWUOjY2612c5815';
+const API_TOKEN = '6|Y70N13NFsbP3HNw6Dw6WI2CVgvNuGk5J2am0iZGO36a662d3';
 
 const { t } = useI18n();
 const store = useStore();
@@ -56,17 +57,6 @@ const isGeneratingPreview = ref(false);
 const isCreatingCampaign = ref(false);
 const isSendingSMS = ref(false);
 
-// Customer API instance
-const customerApi = axios.create({
-  timeout: 45000,
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-    Authorization: `Bearer ${API_TOKEN}`,
-    'X-Requested-With': 'XMLHttpRequest',
-  },
-});
-
 // SMS API instance - Updated to use form data and Authorization header
 const smsApi = axios.create({
   baseURL: 'https://smsgateway.garage.mn/api',
@@ -76,71 +66,9 @@ const smsApi = axios.create({
   },
 });
 
-// --- Brand and Model Mapping - TEMPORARY SOLUTION ---
-
-// --- Operator Detection Logic - FIXED ---
-const getOperatorId = phone => {
-  if (!phone) {
-    return null;
-  }
-
-  // Convert phone to string and remove all non-digit characters
-  const phoneStr = String(phone);
-  const cleanPhone = phoneStr.replace(/\D/g, '');
-
-  // Extract the first 2 digits for operator detection
-  let phonePrefix = '';
-  if (cleanPhone.length === 8 && cleanPhone.startsWith('8')) {
-    // 8-digit format: get first 2 digits
-    phonePrefix = cleanPhone.substring(0, 2);
-  } else if (cleanPhone.length === 11 && cleanPhone.startsWith('976')) {
-    // 11-digit format with country code: get digits 3-4 (after 976)
-    phonePrefix = cleanPhone.substring(3, 5);
-  } else {
-    return null; // Invalid phone format
-  }
-
-  // Operator mapping based on phone prefixes - FIXED: Use string keys
-  const operatorMap = {
-    // Mobicom - ID 1
-    99: 1,
-    85: 1,
-    95: 1,
-    94: 1,
-    // Unitel - ID 2
-    88: 2,
-    80: 2,
-    86: 2,
-    89: 2,
-    // Skytel - ID 3
-    96: 3,
-    90: 3,
-    91: 3,
-    // Gmobile - ID 4
-    98: 4,
-    93: 4,
-    97: 4,
-    83: 4,
-    // Ondo - ID 5
-    60: 5,
-  };
-
-  const operatorId = operatorMap[phonePrefix] || null;
-
-  return operatorId;
-};
+// --- Helper Functions for Customer Data ---
 
 // Get operator name for logging/tracking
-const getOperatorName = operatorId => {
-  const operatorNames = {
-    1: 'Mobicom',
-    2: 'Unitel',
-    3: 'Skytel',
-    4: 'Gmobile',
-    5: 'Ondo',
-  };
-  return operatorNames[operatorId] || 'Unknown';
-};
 
 // --- Computed Properties ---
 const availablePreviewTabs = computed(() => {
@@ -165,7 +93,7 @@ const previewData = computed(() => ({
       ? { ...props.userCountFilter }
       : null,
   },
-  estimatedReach: props.estimatedReach || 0,
+  estimatedReach: props.customers.length || 0, // USE CUSTOMERS LENGTH INSTEAD
 }));
 
 const hasTargetingFilters = computed(() => {
@@ -183,6 +111,30 @@ const canGeneratePreview = computed(() => {
     previewData.value.message &&
     availablePreviewTabs.value.length > 0
   );
+});
+
+// NEW: Computed properties for customer analysis
+const validSMSCustomers = computed(() => {
+  return props.customers.filter(
+    customer => customer.phone && customer.operatorId && customer.operatorName
+  );
+});
+
+const customersByOperator = computed(() => {
+  const breakdown = {};
+  validSMSCustomers.value.forEach(customer => {
+    const operator = customer.operatorName || 'Unknown';
+    if (!breakdown[operator]) {
+      breakdown[operator] = { total: 0, customers: [] };
+    }
+    breakdown[operator].total += 1;
+    breakdown[operator].customers.push(customer);
+  });
+  return breakdown;
+});
+
+const sampleCustomers = computed(() => {
+  return props.customers.slice(0, 3); // Show first 3 for preview
 });
 
 // --- Watchers ---
@@ -209,122 +161,7 @@ watch(
   }
 );
 
-// --- Methods ---
-const getBrandIds = () => {
-  // Directly use the IDs passed from the parent component. No conversion needed.
-  return props.selectedBrandIds || [];
-};
-// Convert model names to IDs
-const getModelIds = () => {
-  // Directly use the IDs passed from the parent component.
-  return props.selectedModelIds || [];
-};
-// Phone number validation function - FIXED WITH DEBUG
-const isValidPhoneNumber = phone => {
-  if (!phone) {
-    return false;
-  }
-
-  // Convert phone to string first
-  const phoneStr = String(phone);
-
-  // Remove all non-digit characters
-  const cleanPhone = phoneStr.replace(/\D/g, '');
-
-  // Check if it's a valid Mongolian phone number AND has a valid operator
-  const isValidFormat =
-    (cleanPhone.length === 8 && cleanPhone.startsWith('8')) ||
-    (cleanPhone.length === 11 && cleanPhone.startsWith('976'));
-
-  const operatorId = getOperatorId(phone);
-  const hasValidOperator = operatorId !== null;
-
-  const result = isValidFormat && hasValidOperator;
-
-  return result;
-};
-
-// Format phone number for SMS API - FIXED
-const formatPhoneNumber = phone => {
-  if (!phone) return null;
-
-  // Convert phone to string first
-  const phoneStr = String(phone);
-  const cleanPhone = phoneStr.replace(/\D/g, '');
-
-  // Return 8-digit format for SMS API
-  if (cleanPhone.length === 8 && cleanPhone.startsWith('8')) {
-    return cleanPhone;
-  }
-  if (cleanPhone.length === 11 && cleanPhone.startsWith('976')) {
-    const formatted = cleanPhone.substring(3); // Remove 976 prefix
-    return formatted;
-  }
-
-  return null;
-};
-
-// Fetch customers for SMS sending - FIXED TO USE CORRECT IDS
-const fetchCustomersForSMS = async () => {
-  const params = new URLSearchParams();
-
-  // Get correct IDs using mapping
-  const brandIds = getBrandIds();
-  const modelIds = getModelIds();
-
-  // Add brand IDs to params
-  brandIds.forEach(brandId => {
-    params.append('manuid[]', brandId);
-  });
-
-  // Add model IDs to params
-  modelIds.forEach(modelId => {
-    params.append('modelid[]', modelId);
-  });
-
-  const response = await customerApi.get('https://gp.garage.mn/api/customers', {
-    params,
-  });
-
-  if (response.data?.success && Array.isArray(response.data?.data)) {
-    const customers = [];
-
-    response.data.data.forEach(brand => {
-      brand.models?.forEach(model => {
-        model.customers?.forEach(customer => {
-          const phoneValid = isValidPhoneNumber(customer.phone);
-
-          if (customer.phone && phoneValid) {
-            const operatorId = getOperatorId(customer.phone);
-            const operatorName = getOperatorName(operatorId);
-
-            const processedCustomer = {
-              id: customer.id,
-              name: customer.name,
-              phone: formatPhoneNumber(customer.phone),
-              originalPhone: customer.phone, // Keep original for logging
-              email: customer.email,
-              brandId: brand.manuid,
-              brandName: brand.manuname, // Fixed: use manuname instead of name
-              modelId: model.modelid,
-              modelName: model.modelname,
-              operatorId: operatorId,
-              operatorName: operatorName,
-            };
-
-            customers.push(processedCustomer);
-          }
-        });
-      });
-    });
-
-    return customers;
-  }
-
-  throw new Error('Invalid customer data received');
-};
-
-// Send SMS to a single customer - ENHANCED DEBUG
+// --- SMS Sending Functions (Updated to use passed customers) ---
 const sendSMSToCustomer = async (customer, message) => {
   try {
     // Personalize message for customer
@@ -333,7 +170,7 @@ const sendSMSToCustomer = async (customer, message) => {
       .replace(/\{brand\}/g, customer.brandName || '')
       .replace(/\{model\}/g, customer.modelName || '');
 
-    // Create FormData for the SMS API (matching your curl example)
+    // Create FormData for the SMS API
     const formData = new FormData();
     formData.append('phone', customer.phone);
     formData.append('message', personalizedMessage);
@@ -350,8 +187,7 @@ const sendSMSToCustomer = async (customer, message) => {
       useTrack(CAMPAIGNS_EVENTS.SMS_SENT, {
         customerId: customer.id,
         customerName: customer.name,
-        phone: customer.originalPhone,
-        formattedPhone: customer.phone,
+        phone: customer.phone,
         operatorId: customer.operatorId,
         operatorName: customer.operatorName,
         brandName: customer.brandName,
@@ -373,12 +209,10 @@ const sendSMSToCustomer = async (customer, message) => {
     useTrack(CAMPAIGNS_EVENTS.SMS_FAILED, {
       customerId: customer.id,
       customerName: customer.name,
-      phone: customer.originalPhone,
-      formattedPhone: customer.phone,
+      phone: customer.phone,
       operatorId: customer.operatorId,
       operatorName: customer.operatorName,
       error: error.message,
-
       errorDetails: error.response?.data || null,
     });
 
@@ -411,12 +245,13 @@ const processSMSBatch = async (batch, message) => {
   const batchPromises = batch.map(customer =>
     sendSMSToCustomer(customer, message)
   );
-
   return Promise.all(batchPromises);
 };
 
-// Send SMS to multiple customers with rate limiting - FIXED VERSION
-const sendBulkSMS = async (customers, message) => {
+// Send SMS to multiple customers with rate limiting - UPDATED TO USE PROPS.CUSTOMERS
+const sendBulkSMS = async message => {
+  const customers = validSMSCustomers.value; // Use computed property instead
+
   const results = {
     total: customers.length,
     sent: 0,
@@ -444,7 +279,7 @@ const sendBulkSMS = async (customers, message) => {
   // Split customers into batches
   const batches = chunkArray(customers, batchSize);
 
-  // Process batches sequentially using reduce to avoid linting warning
+  // Process batches sequentially
   const processBatches = async () => {
     return batches.reduce(async (previousBatch, currentBatch, index) => {
       // Wait for the previous batch to complete
@@ -494,6 +329,7 @@ const sendBulkSMS = async (customers, message) => {
   return results;
 };
 
+// --- Campaign Creation Functions ---
 const handleGeneratePreview = async () => {
   if (!canGeneratePreview.value) return;
 
@@ -505,6 +341,8 @@ const handleGeneratePreview = async () => {
       campaignTitle: previewData.value.title,
       estimatedReach: previewData.value.estimatedReach,
       channels: availablePreviewTabs.value.map(tab => tab.key),
+      actualCustomers: props.customers.length, // Add actual customer count
+      validSMSCustomers: validSMSCustomers.value.length, // Add valid SMS count
     });
 
     // Simulate preview generation delay for better UX
@@ -528,7 +366,7 @@ const getPreviewContent = (type = activePreviewTab.value) => {
   if (!previewData.value?.message) return '';
 
   const baseMessage = previewData.value.message;
-  const customerName = 'John Doe'; // Example customer name for preview
+  const customerName = sampleCustomers.value[0]?.name || 'John Doe'; // Use real customer name if available
   const brandFilters = previewData.value.filters.brands?.join(', ') || '';
   const modelFilters = previewData.value.filters.models?.join(', ') || '';
 
@@ -562,7 +400,7 @@ const getReachSeverity = reach => {
   return 'primary';
 };
 
-// Campaign creation integration - Fixed data structure
+// Campaign creation integration - Updated to use customers from props
 const addCampaign = async campaignDetails => {
   try {
     // Create campaign using Vuex store with simplified structure
@@ -579,9 +417,10 @@ const addCampaign = async campaignDetails => {
       estimatedReach: previewData.value.estimatedReach,
       brandCount: props.selectedBrandNames.length,
       modelCount: props.selectedModelNames.length,
-
       campaignTitle: previewData.value.title,
       channels: availablePreviewTabs.value.map(tab => tab.key),
+      actualCustomers: props.customers.length, // Use actual customer data
+      validSMSCustomers: validSMSCustomers.value.length,
       success: true,
     });
 
@@ -592,7 +431,6 @@ const addCampaign = async campaignDetails => {
     // Track failed campaign creation
     useTrack(CAMPAIGNS_EVENTS.CAMPAIGN_CREATION_FAILED, {
       error: error.message,
-
       estimatedReach: previewData.value.estimatedReach,
       title: previewData.value.title,
       errorType: error.name || 'Unknown',
@@ -620,7 +458,7 @@ const handleConfirm = async () => {
   try {
     // Prepare campaign details in the correct format for your backend
     const campaignDetails = {
-      // Basic campaign information (matching your backend structure)
+      // Basic campaign information
       title: previewData.value.title,
       message: previewData.value.message,
 
@@ -654,15 +492,33 @@ const handleConfirm = async () => {
         ? JSON.stringify(previewData.value.filters.userCountFilter)
         : null,
 
+      // UPDATED: Include actual customer data
+      target_customers: JSON.stringify(
+        props.customers.map(c => ({
+          id: c.id,
+          name: c.name,
+          phone: c.phone,
+          email: c.email,
+          brandName: c.brandName,
+          modelName: c.modelName,
+        }))
+      ),
+
       // Additional metadata as JSON string
       campaign_metadata: JSON.stringify({
         previewGenerated: showPreview.value,
         channels: availablePreviewTabs.value.map(tab => tab.key),
         hasTargeting: hasTargetingFilters.value,
         formValid: props.isFormValid,
-        timestamp: new Date().toISOString(),
+        timestamp: CURRENT_TIMESTAMP,
+        createdBy: CURRENT_USER,
         source: 'bulk_campaign_preview',
         version: '1.0.0',
+        customerAnalysis: {
+          totalCustomers: props.customers.length,
+          validSMSCustomers: validSMSCustomers.value.length,
+          operatorBreakdown: customersByOperator.value,
+        },
         filterSummary: {
           totalBrands: props.selectedBrandNames.length,
           totalModels: props.selectedModelNames.length,
@@ -689,38 +545,24 @@ const handleConfirm = async () => {
       isSendingSMS.value = true;
 
       try {
-        useAlert(t('CAMPAIGN.SMS.FETCHING_CUSTOMERS'), 'info');
-
-        // Fetch customers with valid phone numbers
-        const customers = await fetchCustomersForSMS();
-
-        if (customers.length === 0) {
+        if (validSMSCustomers.value.length === 0) {
           useAlert(t('CAMPAIGN.SMS.NO_VALID_PHONES'), 'warning');
         } else {
           // Show operator breakdown
-          const operatorBreakdown = {};
-          customers.forEach(customer => {
-            operatorBreakdown[customer.operatorName] =
-              (operatorBreakdown[customer.operatorName] || 0) + 1;
-          });
-
-          const operatorSummary = Object.entries(operatorBreakdown)
-            .map(([operator, count]) => `${operator}: ${count}`)
+          const operatorSummary = Object.entries(customersByOperator.value)
+            .map(([operator, data]) => `${operator}: ${data.total}`)
             .join(', ');
 
           useAlert(
             t('CAMPAIGN.SMS.STARTING_BULK_SEND_WITH_OPERATORS', {
-              count: customers.length,
+              count: validSMSCustomers.value.length,
               operators: operatorSummary,
             }),
             'info'
           );
 
-          // Send bulk SMS
-          const smsResults = await sendBulkSMS(
-            customers,
-            previewData.value.message
-          );
+          // Send bulk SMS using the customers from props
+          const smsResults = await sendBulkSMS(previewData.value.message);
 
           // Show final results with operator breakdown
           if (smsResults.sent > 0) {
@@ -921,7 +763,7 @@ const setActiveTab = tabKey => {
                   : 'text-slate-400'
               "
             >
-              {{ availablePreviewTabs.length > 0 ? $t('✓') : '○' }}
+              {{ availablePreviewTabs.length > 0 ? '✓' : '○' }}
             </div>
             <span
               class="ml-2"
@@ -939,6 +781,105 @@ const setActiveTab = tabKey => {
                 ({{ availablePreviewTabs.map(t => t.label).join(', ') }})
               </span>
             </span>
+          </div>
+
+          <!-- NEW: Customer Data Check -->
+          <div class="flex items-center text-sm">
+            <div
+              :class="
+                props.customers.length > 0 ? 'text-green-500' : 'text-slate-400'
+              "
+            >
+              {{ props.customers.length > 0 ? '✓' : '○' }}
+            </div>
+            <span
+              class="ml-2"
+              :class="
+                props.customers.length > 0
+                  ? 'text-slate-700 dark:text-slate-300'
+                  : 'text-slate-500'
+              "
+            >
+              {{ t('CAMPAIGN.PREVIEW.CUSTOMERS_LOADED') }}
+              <span
+                v-if="props.customers.length > 0"
+                class="text-xs text-slate-500 ml-1"
+              >
+                ({{ props.customers.length }} {{ validSMSCustomers.length }}
+                {{ t('CAMPAIGN.PREVIEW.VALID_FOR_SMS') }})
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW: Customer Summary -->
+      <div
+        v-if="props.customers.length > 0"
+        class="bg-white dark:bg-slate-700/50 rounded-lg p-4 border border-slate-200 dark:border-slate-600"
+      >
+        <h4 class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
+          {{ t('CAMPAIGN.PREVIEW.CUSTOMER_SUMMARY') }}
+        </h4>
+
+        <div class="grid grid-cols-2 gap-4 mb-3">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              {{ props.customers.length }}
+            </div>
+            <div class="text-xs text-slate-500">
+              {{ t('CAMPAIGN.PREVIEW.TOTAL') }}
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-green-600 dark:text-green-400">
+              {{ validSMSCustomers.length }}
+            </div>
+            <div class="text-xs text-slate-500">
+              {{ t('CAMPAIGN.PREVIEW.VALID_FOR_SMS') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Operator Breakdown -->
+        <div
+          v-if="Object.keys(customersByOperator).length > 0"
+          class="space-y-2"
+        >
+          <div class="text-xs font-medium text-slate-600 dark:text-slate-400">
+            {{ t('CAMPAIGN.PREVIEW.OPERATOR_BREAKDOWN') }}
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="(data, operator) in customersByOperator"
+              :key="operator"
+              class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-slate-100 dark:bg-slate-600 text-slate-700 dark:text-slate-300"
+            >
+              {{ operator }}: {{ data.total }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Sample Customers -->
+        <div
+          v-if="sampleCustomers.length > 0"
+          class="mt-3 pt-3 border-t border-slate-200 dark:border-slate-600"
+        >
+          <div
+            class="text-xs font-medium text-slate-600 dark:text-slate-400 mb-2"
+          >
+            {{ customer.name }} ({{ customer.brandName }} -
+            {{ customer.modelName }})
+          </div>
+          <div class="space-y-1">
+            <div
+              v-for="customer in sampleCustomers"
+              :key="customer.id"
+              class="text-xs text-slate-600 dark:text-slate-400"
+            >
+              {{ customer.name }} ({{ customer.brandName }} -
+              {{ customer.modelName }})
+            </div>
           </div>
         </div>
       </div>
@@ -1174,6 +1115,30 @@ const setActiveTab = tabKey => {
                 </span>
               </div>
 
+              <!-- NEW: SMS-specific breakdown -->
+              <div
+                v-if="
+                  props.notificationTypes.sms && validSMSCustomers.length > 0
+                "
+                class="mt-2"
+              >
+                <div class="text-xs text-slate-600 dark:text-slate-400">
+                  {{ t('CAMPAIGN.PREVIEW.VALID_SMS_CUSTOMERS') }}
+                  <span class="font-semibold">{{
+                    validSMSCustomers.length
+                  }}</span>
+                </div>
+                <div class="mt-1 flex flex-wrap gap-1">
+                  <span
+                    v-for="(data, operator) in customersByOperator"
+                    :key="operator"
+                    class="text-xs bg-slate-100 dark:bg-slate-600 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded"
+                  >
+                    {{ operator }}: {{ data.total }}
+                  </span>
+                </div>
+              </div>
+
               <!-- Reach Quality Indicator -->
               <div class="mt-2">
                 <div
@@ -1230,6 +1195,7 @@ const setActiveTab = tabKey => {
         </div>
       </div>
 
+      <!-- Rest of your existing template continues here... -->
       <!-- Notification Preview Tabs -->
       <div
         v-if="availablePreviewTabs.length > 0"

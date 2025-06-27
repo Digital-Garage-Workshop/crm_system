@@ -79,6 +79,17 @@
         }
       }
     },
+    "SMS": {
+      "NO_VALID_PHONES": "Илгээх боломжтой хүчинтэй утасны дугаар олдсонгүй.",
+      "APPLYING_PER_MANUFACTURER_LIMIT": "Үйлдвэрлэгч бүрээр {limit} хязгаарлалтыг хэрэгжүүлж байна...",
+      "STARTING_BULK_SEND_WITH_OPERATORS": "Нийт {count} үйлчлүүлэгчид SMS илгээж эхэллээ. Операторууд: {operators}",
+      "BULK_COMPLETE_WITH_OPERATORS": "{total}-с {sent} SMS амжилттай илгээгдэж, {failed} амжилтгүй боллоо. Операторын задаргаа: {operators}",
+      "ALL_FAILED": "Бүх SMS-г илгээхэд алдаа гарлаа.",
+      "SEND_ERROR": "SMS илгээхэд алдаа гарлаа: {error}",
+      "PROGRESS_WITH_OPERATORS": "Явц: {sent}/{total} илгээгдлээ ({operators})",
+      "FETCHING_CUSTOMERS": "Үйлчлүүлэгчдийг татаж байна...",
+      "SAMPLING_NOTICE": "Энэ кампанид нийт {total} үйлчлүүлэгчээс санамсаргүй байдлаар {limit}-г сонгон хамруулна."
+    },
     "BULK_SMS": {
       "HEADER_TITLE": "SMS кампаниуд",
       "NEW_CAMPAIGN": "Кампани үүсгэх",
@@ -162,6 +173,8 @@
       "CREATE": {
         "TITLE": "Бөөнөөр кампани үүсгэх",
         "DESCRIPTION": "Машины брэнд, загвар зэрэгт тулгуурлан тодорхой үйлчлүүлэгчдэд чиглээрэй.",
+        "SUCCESS_MESSAGE": "Кампани амжилттай үүслээ.",
+        "ERROR_MESSAGE": "Кампани үүсгэхэд алдаа гарлаа.",
         "CANCEL_BUTTON_TEXT": "Цуцлах",
         "CREATE_BUTTON_TEXT": "Үүсгэх"
       },
@@ -191,7 +204,7 @@
       "SEND_CAMPAIGN": "Кампанийг баталгаажуулж, илгээх",
       "EDIT_CAMPAIGN": "Кампани засварлах",
       "FETCHING_CUSTOMERS": "Үйлчлүүлэгчдийг татаж байна...",
-      "CAMPAIGN_CREATED_SUCCESS_WITH_COUNT": "Кампани {count} үйлчлүүлэгчид амжилттай үүслээ.",
+      "CAMPAIGN_CREATED_SUCCESS": "Кампани '{title}' ({reach} үйлчлүүлэгчид) амжилттай үүслээ.",
       "NO_FILTERS_SELECTED_FOR_FETCH": "Үйлчлүүлэгчдийг татахын тулд дор хаяж нэг брэнд эсвэл загвар сонгоно уу.",
       "IMAGE_HELP": "Зургийн URL нь олон нийтэд нээлттэй холбоос байх ёстой. Энэ нь имэйл болон апп доторх мэдэгдэлд харагдана.",
       "DEEP_LINK": "Гүн холбоос",
@@ -202,6 +215,9 @@
       "DEEP_LINK_PREVIEW": "Гүн холбоосын урьдчилсан харалт",
       "DEFAULT": "Үндсэн ",
       "FORM_VALID": " Маягт хүчинтэй байна",
+      "SENDING_SMS": "SMS илгээж байна...",
+      "CREATING_CAMPAIGN": "Кампани үүсгэж байна...",
+      "GENERATING_PREVIEW": "Урьдчилсан харалт үүсгэж байна...",
       "PREVIEW": {
         "LIVE_PREVIEW": "Шууд урьдчилсан харалт",
         "READINESS_CHECK": "Бэлэн байдлын шалгалт",
@@ -226,6 +242,8 @@
         "TABS_ARIA_LABEL": "Мэдэгдлийн төрлийн табууд",
         "SMS_PREVIEW": "SMS урьдчилан харах",
         "SMS_CHAR_COUNT": "{count}/{max} тэмдэгт",
+        "SMS_LIMIT_NOTICE": "SMS илгээхдээ санамсаргүй байдлаар {count} үйлчлүүлэгчийг сонгож кампанийн хязгаарлалтыг мөрдөнө.",
+        "SMS_LIMIT_PER_MANUFACTURER_NOTICE": "SMS илгээхдээ **үйлдвэрлэгч бүрээс** санамсаргүй байдлаар {count} хүртэлх үйлчлүүлэгчийг сонгоно.",
         "EMAIL_SUBJECT": "Сэдэв",
         "ANY_BRAND": "Ямар ч брэнд",
         "ANY_MODEL": "Ямар ч загвар"

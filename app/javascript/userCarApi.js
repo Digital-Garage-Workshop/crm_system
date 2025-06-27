@@ -16,7 +16,7 @@ export function useCarApi() {
   const apiError = ref('');
 
   // --- API Configuration ---
-  const API_TOKEN = '4|y3JgOMAB1Fhe9lGO7abSVsZQJ6NMHOJBonWUOjY2612c5815';
+  const API_TOKEN = '6|Y70N13NFsbP3HNw6Dw6WI2CVgvNuGk5J2am0iZGO36a662d3';
 
   const carApi = axios.create({
     baseURL: 'https://gp.garage.mn/api',
