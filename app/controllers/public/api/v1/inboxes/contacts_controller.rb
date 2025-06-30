@@ -16,7 +16,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       source_id: source_id,
       inbox: @inbox_channel.inbox,
       contact_attributes: permitted_params.except(:identifier_hash)
-    ).performcontact.json.jbuilder
+    ).perform
 
     Rails.logger.info "Contact created - ID: #{@contact_inbox.contact.id}, Plate: #{@contact_inbox.contact.plate_number}"
 
@@ -120,7 +120,6 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     )
   end
 
-  # aaa
   def push_token_params
     params.permit(:push_token, :plate_number)
   end
@@ -128,6 +127,4 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   def permitted_params
     params.permit(:identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token, :plate_number, custom_attributes: {})
   end
-
-  # Add a separate method for push token updates
 end
