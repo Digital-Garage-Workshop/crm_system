@@ -5,17 +5,14 @@ import axios from 'axios';
 
 // --- Props ---
 const props = defineProps({
-  // Use v-model:selectedBrands in the parent
   selectedBrands: {
     type: Array,
     required: true,
   },
-  // Use v-model:selectedModels in the parent
   selectedModels: {
     type: Array,
     required: true,
   },
-  // Receive the API token for making requests
   apiToken: {
     type: String,
     required: true,
@@ -32,14 +29,13 @@ const emit = defineEmits([
   'customersUpdated',
 ]);
 
-// This would come from your i18n setup. We'll use a mock for this example.
 const { t } = useI18n();
 
 // --- Local State ---
 const brands = ref([]);
 const models = ref([]);
 const customers = ref([]);
-const allFetchedCustomers = ref([]); // Store all customers before applying limits
+const allFetchedCustomers = ref([]);
 const isLoadingBrands = ref(false);
 const isLoadingModels = ref(false);
 const isLoadingCustomers = ref(false);
@@ -52,16 +48,15 @@ const brandSearchQuery = ref('');
 const modelSearchQuery = ref('');
 
 // --- Per-Item Limit and Fetch State ---
-const brandLimits = ref({}); // e.g., { 'brandId1': 100, 'brandId2': 50 }
-const modelLimits = ref({}); // e.g., { 'modelId1': 20 }
-const isCustomerDataStale = ref(true); // Track if customer data is outdated
+const brandLimits = ref({});
+const modelLimits = ref({});
+const isCustomerDataStale = ref(true);
 
 // --- V-Model Implementation ---
 const localSelectedBrands = computed({
   get: () => props.selectedBrands,
   set: value => emit('update:selectedBrands', value),
 });
-
 const localSelectedModels = computed({
   get: () => props.selectedModels,
   set: value => emit('update:selectedModels', value),
@@ -69,7 +64,7 @@ const localSelectedModels = computed({
 
 // --- API Client ---
 const carApi = axios.create({
-  timeout: 10000,
+  timeout: 100000,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -77,9 +72,8 @@ const carApi = axios.create({
     'X-Requested-With': 'XMLHttpRequest',
   },
 });
-
 const customerApi = axios.create({
-  timeout: 10000,
+  timeout: 100000,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -87,7 +81,6 @@ const customerApi = axios.create({
     'X-Requested-With': 'XMLHttpRequest',
   },
 });
-
 const apiErrorHandler = error => {
   const message =
     error.response?.data?.message ||
@@ -101,7 +94,6 @@ const apiErrorHandler = error => {
   isCustomerDataStale.value = true;
   return Promise.reject(error);
 };
-
 carApi.interceptors.response.use(response => response, apiErrorHandler);
 customerApi.interceptors.response.use(response => response, apiErrorHandler);
 
@@ -130,35 +122,28 @@ const shuffleArray = array => {
 // --- Apply Limits and Random Selection ---
 const applyLimitsAndRandomSelection = allCustomers => {
   const result = [];
-
-  // Group customers by brand and model
   const customersByBrand = {};
   const customersByModel = {};
 
   allCustomers.forEach(customer => {
-    // Group by brand
     if (!customersByBrand[customer.brandId]) {
       customersByBrand[customer.brandId] = [];
     }
     customersByBrand[customer.brandId].push(customer);
 
-    // Group by model
     if (!customersByModel[customer.modelId]) {
       customersByModel[customer.modelId] = [];
     }
     customersByModel[customer.modelId].push(customer);
   });
 
-  // Track already selected customers to avoid duplicates
   const selectedCustomerIds = new Set();
 
-  // Apply model limits first (more specific)
   Object.keys(modelLimits.value).forEach(modelId => {
     const limit = parseInt(modelLimits.value[modelId], 10);
     if (limit > 0 && customersByModel[modelId]) {
       const shuffledCustomers = shuffleArray(customersByModel[modelId]);
       const limitedCustomers = shuffledCustomers.slice(0, limit);
-
       limitedCustomers.forEach(customer => {
         if (!selectedCustomerIds.has(customer.id)) {
           result.push(customer);
@@ -168,18 +153,14 @@ const applyLimitsAndRandomSelection = allCustomers => {
     }
   });
 
-  // Apply brand limits for remaining customers
   Object.keys(brandLimits.value).forEach(brandId => {
     const limit = parseInt(brandLimits.value[brandId], 10);
     if (limit > 0 && customersByBrand[brandId]) {
-      // Filter out already selected customers
       const remainingCustomers = customersByBrand[brandId].filter(
         customer => !selectedCustomerIds.has(customer.id)
       );
-
       const shuffledCustomers = shuffleArray(remainingCustomers);
       const limitedCustomers = shuffledCustomers.slice(0, limit);
-
       limitedCustomers.forEach(customer => {
         if (!selectedCustomerIds.has(customer.id)) {
           result.push(customer);
@@ -189,11 +170,9 @@ const applyLimitsAndRandomSelection = allCustomers => {
     }
   });
 
-  // If no limits are set for some selected brands/models, include all their customers
   allCustomers.forEach(customer => {
-    const hasModelLimit = modelLimits.value[customer.modelId] > 0;
-    const hasBrandLimit = brandLimits.value[customer.brandId] > 0;
-
+    const hasModelLimit = parseInt(modelLimits.value[customer.modelId], 10) > 0;
+    const hasBrandLimit = parseInt(brandLimits.value[customer.brandId], 10) > 0;
     if (
       !hasModelLimit &&
       !hasBrandLimit &&
@@ -225,23 +204,21 @@ const fetchBrands = async () => {
     isLoadingBrands.value = false;
   }
 };
-
 const fetchCustomersForSMS = async () => {
   if (
     localSelectedBrands.value.length === 0 &&
     localSelectedModels.value.length === 0
   ) {
+    customers.value = [];
+    allFetchedCustomers.value = [];
+    emit('customersUpdated', []);
     return;
   }
   isLoadingCustomers.value = true;
   apiError.value = '';
-  customers.value = [];
-  allFetchedCustomers.value = [];
 
   try {
     const params = new URLSearchParams();
-
-    // Add selected brand and model IDs
     localSelectedBrands.value.forEach(brandId =>
       params.append('manuid[]', brandId)
     );
@@ -254,19 +231,32 @@ const fetchCustomersForSMS = async () => {
       { params }
     );
 
+    console.log('Raw API Response from /api/customers:', response.data);
+
+    const processedCustomers = []; // Start with an empty array
+
     if (response.data?.success && Array.isArray(response.data?.data)) {
-      const processedCustomers = response.data.data.flatMap(
-        brand =>
-          brand.models?.flatMap(
-            model =>
-              model.customers
-                ?.map(customer => {
-                  if (!isValidPhoneNumber(customer.phone)) return null;
-                  const operatorId = getOperatorId(customer.phone);
-                  return {
+      // Use readable forEach loops instead of a complex flatMap chain
+      response.data.data.forEach(brand => {
+        // Ensure brand.models is an array before looping
+        if (Array.isArray(brand.models)) {
+          brand.models.forEach(model => {
+            // Ensure model.customers is an array before looping
+            if (Array.isArray(model.customers)) {
+              model.customers.forEach(customer => {
+                // First, ensure the phone is a string and format it
+                const formattedPhone = formatPhoneNumber(
+                  String(customer.phone || '')
+                );
+
+                // Now, perform validation on the guaranteed string
+                if (isValidPhoneNumber(formattedPhone)) {
+                  const operatorId = getOperatorId(formattedPhone);
+
+                  processedCustomers.push({
                     id: customer.id,
                     name: customer.name,
-                    phone: formatPhoneNumber(customer.phone),
+                    phone: formattedPhone,
                     email: customer.email,
                     brandId: brand.manuid,
                     brandName: brand.manuname,
@@ -274,35 +264,37 @@ const fetchCustomersForSMS = async () => {
                     modelName: model.modelname,
                     operatorId: operatorId,
                     operatorName: getOperatorName(operatorId),
-                  };
-                })
-                .filter(Boolean) ?? []
-          ) ?? []
-      );
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
 
-      // Store all fetched customers
-      allFetchedCustomers.value = processedCustomers;
-
-      // Apply limits and random selection
+    // This logic remains the same
+    allFetchedCustomers.value = processedCustomers;
+    if (processedCustomers.length > 0) {
       const finalCustomers = applyLimitsAndRandomSelection(processedCustomers);
-
       customers.value = finalCustomers;
       emit('customersUpdated', finalCustomers);
-      isCustomerDataStale.value = false; // Data is now fresh
     } else {
+      // Handle case where no valid customers were found after processing
       customers.value = [];
-      allFetchedCustomers.value = [];
       emit('customersUpdated', []);
-      isCustomerDataStale.value = true;
+      console.warn(
+        'API returned no customers that passed validation for the selected filters.'
+      );
     }
   } catch (error) {
-    // Interceptor handles the UI error. We just clean up state.
+    // This will be handled by the interceptor, but we still need to reset state
     customers.value = [];
     allFetchedCustomers.value = [];
     emit('customersUpdated', []);
-    isCustomerDataStale.value = true;
   } finally {
     isLoadingCustomers.value = false;
+    isCustomerDataStale.value = false;
   }
 };
 
@@ -335,7 +327,6 @@ const fetchModels = async () => {
     }));
     emit('update:allModels', models.value);
 
-    // Prune selections that are no longer valid
     const availableModelIds = new Set(models.value.map(m => m.modelid));
     localSelectedModels.value = localSelectedModels.value.filter(id =>
       availableModelIds.has(id)
@@ -348,7 +339,6 @@ const fetchModels = async () => {
   }
 };
 
-// --- Function to re-apply limits when they change ---
 const reapplyLimits = () => {
   if (allFetchedCustomers.value.length > 0) {
     const finalCustomers = applyLimitsAndRandomSelection(
@@ -366,25 +356,20 @@ const searchFilteredBrands = computed(() => {
     brand.name.toLowerCase().includes(brandSearchQuery.value.toLowerCase())
   );
 });
-
 const searchFilteredModels = computed(() => {
   if (!modelSearchQuery.value.trim()) return models.value;
   return models.value.filter(model =>
     model.modelname.toLowerCase().includes(modelSearchQuery.value.toLowerCase())
   );
 });
-
 const canFetchCustomers = computed(
   () =>
     !isLoadingCustomers.value &&
     (localSelectedBrands.value.length > 0 ||
       localSelectedModels.value.length > 0)
 );
-
 const customerCount = computed(() => customers.value.length);
-
 const totalFetchedCount = computed(() => allFetchedCustomers.value.length);
-
 const getModelPlaceholder = () => {
   if (isLoadingModels.value) return t('CUSTOMERS.LOADING_MODELS');
   if (localSelectedBrands.value.length === 0)
@@ -399,7 +384,6 @@ const markDataAsStale = () => {
   emit('customersUpdated', []);
   isCustomerDataStale.value = true;
 };
-
 watch(
   localSelectedBrands,
   () => {
@@ -408,10 +392,7 @@ watch(
   },
   { deep: true }
 );
-
 watch(localSelectedModels, markDataAsStale, { deep: true });
-
-// Watch for changes in limits and reapply them
 watch(brandLimits, reapplyLimits, { deep: true });
 watch(modelLimits, reapplyLimits, { deep: true });
 
@@ -421,93 +402,82 @@ const handleFetchCustomersClick = () => {
     fetchCustomersForSMS();
   }
 };
-
 const toggleBrand = brandId => {
   const current = [...localSelectedBrands.value];
   const index = current.indexOf(brandId);
   if (index > -1) {
     current.splice(index, 1);
-    delete brandLimits.value[brandId]; // Clean up limit when deselecting
+    delete brandLimits.value[brandId];
   } else {
     current.push(brandId);
-    // Set default limit of 10 for new brand
-    brandLimits.value[brandId] = 10;
+    // --- FIX: Do NOT set a default limit. Let the user decide.
   }
   localSelectedBrands.value = current;
 };
-
 const removeBrand = brandId => {
   localSelectedBrands.value = localSelectedBrands.value.filter(
     id => id !== brandId
   );
-  delete brandLimits.value[brandId]; // Clean up limit
+  delete brandLimits.value[brandId];
 };
-
 const clearAllBrands = () => {
   localSelectedBrands.value = [];
-  localSelectedModels.value = []; // Clearing brands implies clearing models
-  brandLimits.value = {}; // Clean up all limits
+  localSelectedModels.value = [];
+  brandLimits.value = {};
   modelLimits.value = {};
 };
-
 const selectAllBrands = () => {
   localSelectedBrands.value = searchFilteredBrands.value.map(b =>
     String(b.manuid)
   );
-  // Set default limits for all selected brands
-  searchFilteredBrands.value.forEach(brand => {
-    brandLimits.value[String(brand.manuid)] = 10;
-  });
+  // --- FIX: Do not set default limits on "select all"
 };
-
 const toggleModel = modelId => {
   const current = [...localSelectedModels.value];
   const index = current.indexOf(modelId);
   if (index > -1) {
     current.splice(index, 1);
-    delete modelLimits.value[modelId]; // Clean up limit
+    delete modelLimits.value[modelId];
   } else {
     current.push(modelId);
-    // Set default limit of 10 for new model
-    modelLimits.value[modelId] = 10;
+    // --- FIX: Do NOT set a default limit. Let the user decide.
   }
   localSelectedModels.value = current;
 };
-
 const removeModel = modelId => {
   localSelectedModels.value = localSelectedModels.value.filter(
     id => id !== modelId
   );
-  delete modelLimits.value[modelId]; // Clean up limit
+  delete modelLimits.value[modelId];
 };
-
 const clearAllModels = () => {
   localSelectedModels.value = [];
   modelLimits.value = {};
 };
-
 const selectAllModels = () => {
   localSelectedModels.value = searchFilteredModels.value.map(m => m.modelid);
-  // Set default limits for all selected models
-  searchFilteredModels.value.forEach(model => {
-    modelLimits.value[model.modelid] = 10;
-  });
+  // --- FIX: Do not set default limits on "select all"
 };
-
 const handleClickOutside = event => {
   if (!event.target.closest('.brand-dropdown')) showBrandDropdown.value = false;
   if (!event.target.closest('.model-dropdown')) showModelDropdown.value = false;
 };
-
-// --- Lifecycle Hooks ---
 onMounted(() => {
   fetchBrands();
   document.addEventListener('click', handleClickOutside);
 });
-
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
 });
+
+// --- Debug: Log all customers on update ---
+watch(
+  customers,
+  newVal => {
+    console.log('Final selected/limited customers list updated:', newVal);
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -547,8 +517,8 @@ onUnmounted(() => {
         <label
           class="block text-sm font-medium text-slate-700 dark:text-slate-300"
         >
-          {{ t('CUSTOMERS.SELECT_BRANDS') }} ({{ localSelectedBrands.length }}
-          {{ t('CUSTOMERS.SELECTED') }})
+          {{ t('CUSTOMERS.SELECT_BRANDS') }} {{ localSelectedBrands.length }}
+          {{ t('CUSTOMERS.SELECTED') }}
         </label>
         <div v-if="localSelectedBrands.length > 0" class="mb-3">
           <div class="flex flex-wrap gap-2">
@@ -558,8 +528,12 @@ onUnmounted(() => {
               class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
             >
               {{ brands.find(b => String(b.manuid) === brandId)?.name }}
-              <span class="ml-1 text-blue-600 font-semibold">
-                ({{ brandLimits[brandId] || '∞' }})
+              <!-- Display limit only if it's set -->
+              <span
+                v-if="brandLimits[brandId]"
+                class="ml-1 text-blue-600 font-semibold"
+              >
+                {{ brandLimits[brandId] }}
               </span>
               <button
                 class="ml-2 -mr-1 p-0.5 inline-flex items-center justify-center text-blue-400 hover:text-blue-600 hover:bg-blue-200 rounded-full"
@@ -681,8 +655,12 @@ onUnmounted(() => {
               class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
             >
               {{ models.find(m => m.modelid === modelId)?.modelname }}
-              <span class="ml-1 text-green-600 font-semibold">
-                ({{ modelLimits[modelId] || '∞' }})
+              <!-- Display limit only if it's set -->
+              <span
+                v-if="modelLimits[modelId]"
+                class="ml-1 text-green-600 font-semibold"
+              >
+                {{ modelLimits[modelId] }}
               </span>
               <button
                 class="ml-2 -mr-1 p-0.5 inline-flex items-center justify-center text-green-400 hover:text-green-600 hover:bg-green-200 rounded-full"
@@ -903,6 +881,17 @@ onUnmounted(() => {
               {{ t('CUSTOMERS.RANDOMLY_SELECTED') }}:
               <span class="font-bold">{{ customerCount }}</span>
             </div>
+          </div>
+          <!-- --- IMPROVEMENT: Add a message for when no customers are found --- -->
+          <div
+            v-if="
+              !isCustomerDataStale &&
+              totalFetchedCount === 0 &&
+              !isLoadingCustomers
+            "
+            class="p-3 rounded-md bg-slate-100 dark:bg-slate-900/30 text-slate-600 dark:text-slate-300"
+          >
+            {{ t('CUSTOMERS.NO_CUSTOMERS_FOUND') }}
           </div>
         </div>
         <div class="flex flex-col gap-2">
