@@ -231,8 +231,6 @@ const fetchCustomersForSMS = async () => {
       { params }
     );
 
-    console.log('Raw API Response from /api/customers:', response.data);
-
     const processedCustomers = []; // Start with an empty array
 
     if (response.data?.success && Array.isArray(response.data?.data)) {
@@ -283,9 +281,6 @@ const fetchCustomersForSMS = async () => {
       // Handle case where no valid customers were found after processing
       customers.value = [];
       emit('customersUpdated', []);
-      console.warn(
-        'API returned no customers that passed validation for the selected filters.'
-      );
     }
   } catch (error) {
     // This will be handled by the interceptor, but we still need to reset state
@@ -471,13 +466,6 @@ onUnmounted(() => {
 });
 
 // --- Debug: Log all customers on update ---
-watch(
-  customers,
-  newVal => {
-    console.log('Final selected/limited customers list updated:', newVal);
-  },
-  { deep: true }
-);
 </script>
 
 <template>

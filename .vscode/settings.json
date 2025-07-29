@@ -1,8 +1,6 @@
 {
-    "cSpell.words": [
-        "chatwoot",
-        "dompurify"
-    ],
-    "IDX.aI.enableInlineCompletion": true,
-    "IDX.aI.enableCodebaseIndexing": true
+  "cSpell.words": ["chatwoot", "dompurify"],
+  "IDX.aI.enableInlineCompletion": true,
+  "IDX.aI.enableCodebaseIndexing": true,
+  "makefile.configureOnOpen": true
 }

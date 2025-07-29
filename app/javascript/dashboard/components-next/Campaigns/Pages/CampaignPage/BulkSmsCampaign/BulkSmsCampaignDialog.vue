@@ -3,9 +3,6 @@ import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAlert, useTrack } from 'dashboard/composables';
 import { useStore } from 'vuex';
-// axios is no longer needed here since the child component handles fetching
-// import axios from 'axios';
-
 import CampaignHeader from './components/CampaignHeader.vue';
 import ApiErrorDisplay from './components/ApiErrorDisplay.vue';
 import NotificationTypeSelector from './components/NotificationTypeSelector.vue';
@@ -48,7 +45,7 @@ const allModels = ref([]);
 const selectedCustomers = ref([]); // This will be our source of truth
 
 // API Token
-const API_TOKEN = '6|Y70N13NFsbP3HNw6Dw6WI2CVgvNuGk5J2am0iZGO36a662d3';
+const API_TOKEN = '1384|2ZjPXOQlQFUtlgYApzefQgHmSTCogMl0b5popJ0Daa3a7f9c';
 
 // --- Computed Properties for the Preview ---
 const hasAnyNotificationTypeSelected = computed(() => {

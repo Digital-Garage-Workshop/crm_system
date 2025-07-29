@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, watch, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
 import { useAlert, useTrack } from 'dashboard/composables';
 import axios from 'axios';
 
@@ -10,7 +9,6 @@ const props = defineProps({
   notificationTypes: { type: Object, required: true },
   selectedBrandNames: { type: Array, default: () => [] },
   selectedModelNames: { type: Array, default: () => [] },
-
   userCountFilter: { type: Object, required: true },
   customers: { type: Array, default: () => [] },
   isFormValid: { type: Boolean, default: false },
@@ -30,6 +28,8 @@ const CAMPAIGNS_EVENTS = {
   CAMPAIGN_CREATION_FAILED: 'campaign_creation_failed',
   SMS_SENT: 'sms_sent',
   SMS_FAILED: 'sms_failed',
+  EMAIL_SENT: 'email_sent',
+  EMAIL_FAILED: 'email_failed',
 };
 
 const CAMPAIGN_TYPES = {
@@ -48,7 +48,6 @@ const CURRENT_USER = 'temuujinnn';
 const API_TOKEN = '6|Y70N13NFsbP3HNw6Dw6WI2CVgvNuGk5J2am0iZGO36a662d3';
 
 const { t } = useI18n();
-const store = useStore();
 
 // --- Local State ---
 const showPreview = ref(false);
@@ -56,12 +55,23 @@ const activePreviewTab = ref('sms');
 const isGeneratingPreview = ref(false);
 const isCreatingCampaign = ref(false);
 const isSendingSMS = ref(false);
+const isSendingEmail = ref(false);
 
 // SMS API instance - Updated to use form data and Authorization header
 const smsApi = axios.create({
   baseURL: 'https://smsgateway.garage.mn/api',
   timeout: 30000,
   headers: {
+    Authorization: `Bearer ${API_TOKEN}`,
+  },
+});
+
+// Email API instance
+const emailApi = axios.create({
+  baseURL: 'https://microservice.garage.mn/api',
+  timeout: 30000,
+  headers: {
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${API_TOKEN}`,
   },
 });
@@ -116,6 +126,12 @@ const validSMSCustomers = computed(() => {
   );
 });
 
+const validEmailCustomers = computed(() => {
+  return props.customers.filter(
+    customer => customer.email && customer.email.includes('@')
+  );
+});
+
 const customersByOperator = computed(() => {
   const breakdown = {};
   validSMSCustomers.value.forEach(customer => {
@@ -129,12 +145,7 @@ const customersByOperator = computed(() => {
   return breakdown;
 });
 
-// --- FIX #1: Define `sampleCustomers` ---
-// This computed property was missing, which caused the application to crash
-// when trying to access `.length` on an undefined variable in the template.
 const sampleCustomers = computed(() => {
-  // Safely take the first 5 customers from the props to display as a sample.
-  // The `default` on the prop ensures `props.customers` is always an array.
   return props.customers.slice(0, 5);
 });
 
@@ -151,13 +162,8 @@ watch(
   },
   { deep: true }
 );
-watch(
-  () => props.customers,
-  newVal => {
-    console.log('Updated customers in Preview Container:', newVal);
-  },
-  { immediate: true, deep: true }
-);
+
+watch(() => props.customers, { immediate: true, deep: true });
 
 watch(
   () => props.isFormValid,
@@ -168,18 +174,28 @@ watch(
   }
 );
 
-// --- All other functions (sendBulkSMS, handleGeneratePreview, handleConfirm, etc.) remain the same ---
-// (No changes needed in the rest of the script logic)
-// --- SMS Sending Functions (Updated to use passed customers) ---
+// --- Helper Functions ---
+const delay = ms =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+
+const chunkArray = (array, size) => {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+};
+
+// --- SMS Functions ---
 const sendSMSToCustomer = async (customer, message) => {
   try {
-    // Personalize message for customer
     const personalizedMessage = message
       .replace(/\{customer_name\}/g, customer.name || 'Үйлчлүүлэгч')
       .replace(/\{brand\}/g, customer.brandName || '')
       .replace(/\{model\}/g, customer.modelName || '');
 
-    // Create FormData for the SMS API
     const formData = new FormData();
     formData.append('phone', customer.phone);
     formData.append('message', personalizedMessage);
@@ -234,22 +250,6 @@ const sendSMSToCustomer = async (customer, message) => {
   }
 };
 
-// Helper function to create delay
-const delay = ms =>
-  new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-
-// Helper function to chunk array into batches
-const chunkArray = (array, size) => {
-  const chunks = [];
-  for (let i = 0; i < array.length; i += size) {
-    chunks.push(array.slice(i, i + size));
-  }
-  return chunks;
-};
-
-// Process a single batch of SMS
 const processSMSBatch = async (batch, message) => {
   const batchPromises = batch.map(customer =>
     sendSMSToCustomer(customer, message)
@@ -257,19 +257,17 @@ const processSMSBatch = async (batch, message) => {
   return Promise.all(batchPromises);
 };
 
-// Send SMS to multiple customers with rate limiting - UPDATED TO USE PROPS.CUSTOMERS
 const sendBulkSMS = async message => {
-  const customers = validSMSCustomers.value; // Use computed property instead
+  const customers = validSMSCustomers.value;
 
   const results = {
     total: customers.length,
     sent: 0,
     failed: 0,
     details: [],
-    operatorBreakdown: {}, // Track by operator
+    operatorBreakdown: {},
   };
 
-  // Initialize operator breakdown
   customers.forEach(customer => {
     if (!results.operatorBreakdown[customer.operatorName]) {
       results.operatorBreakdown[customer.operatorName] = {
@@ -281,23 +279,16 @@ const sendBulkSMS = async message => {
     results.operatorBreakdown[customer.operatorName].total += 1;
   });
 
-  // Rate limiting configuration
-  const batchSize = 1; // Reduced to 1 for debugging
-  const batchDelay = 2000; // 2 second delay between batches
-
-  // Split customers into batches
+  const batchSize = 1;
+  const batchDelay = 2000;
   const batches = chunkArray(customers, batchSize);
 
-  // Process batches sequentially
   const processBatches = async () => {
     return batches.reduce(async (previousBatch, currentBatch, index) => {
-      // Wait for the previous batch to complete
       await previousBatch;
 
-      // Process current batch
       const batchResults = await processSMSBatch(currentBatch, message);
 
-      // Process batch results
       batchResults.forEach(result => {
         results.details.push(result);
         const operatorName = result.operatorUsed || 'Unknown';
@@ -311,7 +302,6 @@ const sendBulkSMS = async message => {
         }
       });
 
-      // Show progress with operator info
       const operatorStats = Object.entries(results.operatorBreakdown)
         .map(([operator, stats]) => `${operator}: ${stats.sent}/${stats.total}`)
         .join(', ');
@@ -325,7 +315,160 @@ const sendBulkSMS = async message => {
         'info'
       );
 
-      // Add delay between batches (except for the last batch)
+      if (index < batches.length - 1) {
+        await delay(batchDelay);
+      }
+
+      return Promise.resolve();
+    }, Promise.resolve());
+  };
+
+  await processBatches();
+  return results;
+};
+
+// --- Email Functions ---
+const sendEmailToCustomer = async (customer, title, message) => {
+  try {
+    const personalizedMessage = message
+      .replace(/\{customer_name\}/g, customer.name || 'Valued Customer')
+      .replace(/\{brand\}/g, customer.brandName || '')
+      .replace(/\{model\}/g, customer.modelName || '');
+
+    const personalizedTitle = title
+      .replace(/\{customer_name\}/g, customer.name || 'Valued Customer')
+      .replace(/\{brand\}/g, customer.brandName || '')
+      .replace(/\{model\}/g, customer.modelName || '');
+
+    const htmlContent = personalizedMessage
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+    const emailData = {
+      to: customer.email,
+      subject: personalizedTitle,
+      htmlContent: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
+            ${personalizedTitle}
+          </h1>
+          ${previewData.value.imageUrl ? `<img src="${previewData.value.imageUrl}" alt="Campaign Image" style="max-width: 100%; height: auto; margin: 20px 0;">` : ''}
+          <div style="line-height: 1.6; color: #555;">
+            ${htmlContent}
+          </div>
+          <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+          <p style="font-size: 12px; color: #888;">
+            This email was sent from Garage.mn CRM system.
+          </p>
+        </div>
+      `,
+      textContent: personalizedMessage,
+      customerData: {
+        id: customer.id,
+        name: customer.name,
+        brandName: customer.brandName,
+        modelName: customer.modelName,
+      },
+    };
+
+    const response = await emailApi.post('/send-email', emailData);
+
+    if (response.data?.success !== false) {
+      useTrack(CAMPAIGNS_EVENTS.EMAIL_SENT, {
+        customerId: customer.id,
+        customerName: customer.name,
+        email: customer.email,
+        brandName: customer.brandName,
+        modelName: customer.modelName,
+        subject: personalizedTitle,
+        messageLength: personalizedMessage.length,
+        apiResponse: response.data?.message || 'Email sent successfully',
+      });
+
+      return {
+        success: true,
+        customer: customer,
+        message: personalizedMessage,
+        response: response.data,
+        email: customer.email,
+      };
+    }
+    throw new Error(response.data?.message || 'Email sending failed');
+  } catch (error) {
+    useTrack(CAMPAIGNS_EVENTS.EMAIL_FAILED, {
+      customerId: customer.id,
+      customerName: customer.name,
+      email: customer.email,
+      error: error.message,
+      errorDetails: error.response?.data || null,
+    });
+
+    return {
+      success: false,
+      customer: customer,
+      error: error.message,
+      email: customer.email,
+    };
+  }
+};
+
+const processEmailBatch = async (batch, title, message) => {
+  const batchPromises = batch.map(customer =>
+    sendEmailToCustomer(customer, title, message)
+  );
+  return Promise.all(batchPromises);
+};
+
+const sendBulkEmail = async (title, message) => {
+  const customers = validEmailCustomers.value;
+
+  const results = {
+    total: customers.length,
+    sent: 0,
+    failed: 0,
+    details: [],
+  };
+
+  if (customers.length === 0) {
+    useAlert(
+      t('CAMPAIGN.EMAIL.NO_VALID_EMAILS') || 'No valid email addresses found',
+      'warning'
+    );
+    return results;
+  }
+
+  const batchSize = 5;
+  const batchDelay = 1000;
+  const batches = chunkArray(customers, batchSize);
+
+  const processBatches = async () => {
+    return batches.reduce(async (previousBatch, currentBatch, index) => {
+      await previousBatch;
+
+      const batchResults = await processEmailBatch(
+        currentBatch,
+        title,
+        message
+      );
+
+      batchResults.forEach(result => {
+        results.details.push(result);
+        if (result.success) {
+          results.sent += 1;
+        } else {
+          results.failed += 1;
+        }
+      });
+
+      useAlert(
+        t('CAMPAIGN.EMAIL.PROGRESS', {
+          sent: results.sent,
+          total: results.total,
+        }) || `Emails sent: ${results.sent}/${results.total}`,
+        'info'
+      );
+
       if (index < batches.length - 1) {
         await delay(batchDelay);
       }
@@ -345,20 +488,18 @@ const handleGeneratePreview = async () => {
   isGeneratingPreview.value = true;
 
   try {
-    // Track preview generation
     useTrack(CAMPAIGNS_EVENTS.CAMPAIGN_PREVIEW_GENERATED, {
       campaignTitle: previewData.value.title,
       estimatedReach: previewData.value.estimatedReach,
       channels: availablePreviewTabs.value.map(tab => tab.key),
-      actualCustomers: props.customers.length, // Add actual customer count
-      validSMSCustomers: validSMSCustomers.value.length, // Add valid SMS count
+      actualCustomers: props.customers.length,
+      validSMSCustomers: validSMSCustomers.value.length,
+      validEmailCustomers: validEmailCustomers.value.length,
     });
 
-    // Simulate preview generation delay for better UX
     await delay(500);
     showPreview.value = true;
 
-    // Ensure we have a valid active tab
     await nextTick();
     if (
       !props.notificationTypes[activePreviewTab.value] &&
@@ -375,27 +516,22 @@ const getPreviewContent = (type = activePreviewTab.value) => {
   if (!previewData.value?.message) return '';
 
   const baseMessage = previewData.value.message;
-
   const brandFilters = previewData.value.filters.brands?.join(', ') || '';
   const modelFilters = previewData.value.filters.models?.join(', ') || '';
 
   let processedMessage = baseMessage
-    .replace(/\{customer_name\}/g)
+    .replace(/\{customer_name\}/g, 'Sample Customer')
     .replace(/\{brand\}/g, brandFilters || t('CAMPAIGN.PREVIEW.ANY_BRAND'))
     .replace(/\{model\}/g, modelFilters || t('CAMPAIGN.PREVIEW.ANY_MODEL'));
 
-  // Type-specific formatting
   switch (type) {
     case 'sms':
-      // SMS has character limits, show truncated version if needed
       return processedMessage.length > 160
         ? processedMessage.substring(0, 157) + '...'
         : processedMessage;
     case 'email':
-      // Email can include HTML formatting
       return processedMessage.replace(/\n/g, '<br>');
     case 'inApp':
-      // In-app notifications are usually shorter
       return processedMessage;
     default:
       return processedMessage;
@@ -409,8 +545,6 @@ const getReachSeverity = reach => {
   return 'primary';
 };
 
-// Campaign creation integration - Updated to use customers from props
-
 const handleConfirm = async () => {
   if (isCreatingCampaign.value || previewData.value.estimatedReach === 0) {
     return;
@@ -419,46 +553,27 @@ const handleConfirm = async () => {
   isCreatingCampaign.value = true;
 
   try {
-    // Prepare campaign details in the correct format for your backend
     const campaignDetails = {
-      // Basic campaign information
       title: previewData.value.title,
       message: previewData.value.message,
-
-      // Required fields based on successful request
       inbox_id: 1,
       sender_id: null,
       enabled: true,
-
-      // Campaign type and metadata
       trigger_only_during_business_hours: false,
-
-      // --- FIX: This was the cause of the 500 error ---
-      // The backend expects `trigger_rules` as a JSON string, not a nested object.
-      // We must stringify it to match the format of other complex fields like
-      // `target_brands` and `campaign_metadata`.
       trigger_rules: JSON.stringify({
         url: 'https://garage.mn/',
         time_on_page: 10,
       }),
-
-      // Additional campaign data
       campaign_type: CAMPAIGN_TYPES.ONE_TIME,
       estimated_reach: previewData.value.estimatedReach,
-
-      // Notification channels as simple flags
       notification_sms: props.notificationTypes.sms,
       notification_email: props.notificationTypes.email,
       notification_in_app: props.notificationTypes.inApp,
-
-      // Filters as JSON string (these were already correct)
       target_brands: JSON.stringify(previewData.value.filters.brands),
       target_models: JSON.stringify(previewData.value.filters.models),
       user_count_filter: previewData.value.filters.userCountFilter
         ? JSON.stringify(previewData.value.filters.userCountFilter)
         : null,
-
-      // UPDATED: Include actual customer data
       target_customers: JSON.stringify(
         props.customers.map(c => ({
           id: c.id,
@@ -469,8 +584,6 @@ const handleConfirm = async () => {
           modelName: c.modelName,
         }))
       ),
-
-      // Additional metadata as JSON string (already correct)
       campaign_metadata: JSON.stringify({
         previewGenerated: showPreview.value,
         channels: availablePreviewTabs.value.map(tab => tab.key),
@@ -483,6 +596,7 @@ const handleConfirm = async () => {
         customerAnalysis: {
           totalCustomers: props.customers.length,
           validSMSCustomers: validSMSCustomers.value.length,
+          validEmailCustomers: validEmailCustomers.value.length,
           operatorBreakdown: customersByOperator.value,
         },
         filterSummary: {
@@ -503,18 +617,13 @@ const handleConfirm = async () => {
       }),
     };
 
-    // Create campaign first
-    // const result = await addCampaign(campaignDetails);
-
-    // If SMS is enabled, send SMS to customers
+    // Send SMS
     if (props.notificationTypes.sms) {
       isSendingSMS.value = true;
-
       try {
         if (validSMSCustomers.value.length === 0) {
           useAlert(t('CAMPAIGN.SMS.NO_VALID_PHONES'), 'warning');
         } else {
-          // Show operator breakdown
           const operatorSummary = Object.entries(customersByOperator.value)
             .map(([operator, data]) => `${operator}: ${data.total}`)
             .join(', ');
@@ -527,10 +636,8 @@ const handleConfirm = async () => {
             'info'
           );
 
-          // Send bulk SMS using the customers from props
           const smsResults = await sendBulkSMS(previewData.value.message);
 
-          // Show final results with operator breakdown
           if (smsResults.sent > 0) {
             const operatorResultsSummary = Object.entries(
               smsResults.operatorBreakdown
@@ -554,7 +661,6 @@ const handleConfirm = async () => {
             useAlert(t('CAMPAIGN.SMS.ALL_FAILED'), 'error');
           }
 
-          // Update campaign with SMS results
           campaignDetails.sms_results = {
             total_customers: smsResults.total,
             sms_sent: smsResults.sent,
@@ -574,7 +680,64 @@ const handleConfirm = async () => {
       }
     }
 
-    // Show success notification with campaign details
+    // Send Emails
+    if (props.notificationTypes.email) {
+      isSendingEmail.value = true;
+      try {
+        if (validEmailCustomers.value.length === 0) {
+          useAlert(
+            t('CAMPAIGN.EMAIL.NO_VALID_EMAILS') ||
+              'No valid email addresses found',
+            'warning'
+          );
+        } else {
+          useAlert(
+            t('CAMPAIGN.EMAIL.STARTING_BULK_SEND', {
+              count: validEmailCustomers.value.length,
+            }) ||
+              `Starting to send emails to ${validEmailCustomers.value.length} customers`,
+            'info'
+          );
+
+          const emailResults = await sendBulkEmail(
+            previewData.value.title,
+            previewData.value.message
+          );
+
+          if (emailResults.sent > 0) {
+            useAlert(
+              t('CAMPAIGN.EMAIL.BULK_COMPLETE', {
+                sent: emailResults.sent,
+                failed: emailResults.failed,
+                total: emailResults.total,
+              }) || `Emails sent: ${emailResults.sent}/${emailResults.total}`,
+              emailResults.failed > 0 ? 'warning' : 'success'
+            );
+          } else {
+            useAlert(
+              t('CAMPAIGN.EMAIL.ALL_FAILED') || 'All emails failed to send',
+              'error'
+            );
+          }
+
+          campaignDetails.email_results = {
+            total_customers: emailResults.total,
+            emails_sent: emailResults.sent,
+            emails_failed: emailResults.failed,
+          };
+        }
+      } catch (emailError) {
+        useAlert(
+          t('CAMPAIGN.EMAIL.SEND_ERROR', {
+            error: emailError.message,
+          }) || `Email sending error: ${emailError.message}`,
+          'error'
+        );
+      } finally {
+        isSendingEmail.value = false;
+      }
+    }
+
     useAlert(
       t('CAMPAIGN.BULK.CAMPAIGN_CREATED_SUCCESS', {
         title: previewData.value.title,
@@ -583,17 +746,28 @@ const handleConfirm = async () => {
       'success'
     );
 
-    // Emit success event to parent component with campaign details
+    let result = null;
+    try {
+      const response = await axios.post('/api/campaigns', campaignDetails);
+      result = response.data;
+    } catch (apiError) {
+      result = null;
+    }
+
     emit('campaignCreated', {
       ...campaignDetails,
       id: result?.id || null,
       success: true,
     });
 
-    // Also emit the original event for backward compatibility
     emit('confirmCampaign', campaignDetails);
   } catch (error) {
-    // Error tracking is handled in addCampaign function
+    useAlert(
+      t('CAMPAIGN.BULK.CAMPAIGN_CREATION_ERROR', {
+        error: error.message,
+      }) || `Campaign creation error: ${error.message}`,
+      'error'
+    );
   } finally {
     isCreatingCampaign.value = false;
   }
@@ -749,7 +923,7 @@ const setActiveTab = tabKey => {
             </span>
           </div>
 
-          <!-- NEW: Customer Data Check -->
+          <!-- Customer Data Check -->
           <div class="flex items-center text-sm">
             <div
               :class="
@@ -787,7 +961,7 @@ const setActiveTab = tabKey => {
           {{ t('CAMPAIGN.PREVIEW.CUSTOMER_SUMMARY') }}
         </h4>
 
-        <div class="grid grid-cols-2 gap-4 mb-3">
+        <div class="grid grid-cols-3 gap-4 mb-3">
           <div class="text-center">
             <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
               {{ props.customers.length }}
@@ -802,6 +976,16 @@ const setActiveTab = tabKey => {
             </div>
             <div class="text-xs text-slate-500">
               {{ t('CAMPAIGN.PREVIEW.VALID_FOR_SMS') }}
+            </div>
+          </div>
+          <div class="text-center">
+            <div
+              class="text-2xl font-bold text-purple-600 dark:text-purple-400"
+            >
+              {{ validEmailCustomers.length }}
+            </div>
+            <div class="text-xs text-slate-500">
+              {{ t('CAMPAIGN.PREVIEW.VALID_FOR_EMAIL') || 'Valid for Email' }}
             </div>
           </div>
         </div>
@@ -825,9 +1009,21 @@ const setActiveTab = tabKey => {
           </div>
         </div>
 
-        <!-- FIX #2: Corrected the Sample Customers list -->
-        <!-- This block was causing the crash. It now correctly uses the `sampleCustomers` computed property -->
-        <!-- and has a static title instead of a buggy reference to the `customer` variable. -->
+        <!-- Email Customer Info -->
+        <div
+          v-if="props.notificationTypes.email && validEmailCustomers.length > 0"
+          class="mt-2"
+        >
+          <div class="text-xs text-slate-600 dark:text-slate-400">
+            {{
+              t('CAMPAIGN.PREVIEW.VALID_EMAIL_CUSTOMERS') ||
+              'Valid Email Customers'
+            }}
+            <span class="font-semibold">{{ validEmailCustomers.length }}</span>
+          </div>
+        </div>
+
+        <!-- Sample Customers -->
         <div
           v-if="sampleCustomers.length > 0"
           class="mt-3 pt-3 border-t border-slate-200 dark:border-slate-600"
@@ -1052,9 +1248,8 @@ const setActiveTab = tabKey => {
                 {{ t('CAMPAIGN.PREVIEW.ALL_CUSTOMERS') }}
               </p>
             </div>
-            <!-- FIX #3: Corrected the full customer list in the preview -->
-            <!-- This block had a buggy `v-if` condition (`.length < 0`) that prevented it from ever showing. -->
-            <!-- It's now corrected to show a scrollable list of all targeted customers. -->
+
+            <!-- Full Customer List -->
             <div
               v-if="props.customers.length > 0"
               class="mt-3 pt-3 border-t border-slate-200 dark:border-slate-600"
@@ -1073,7 +1268,7 @@ const setActiveTab = tabKey => {
                   v-for="customer in props.customers"
                   :key="customer.id"
                   class="text-xs text-slate-600 dark:text-slate-400 truncate"
-                  :title="`${customer.name || 'N/A'} - ${customer.phone || 'N/A'}`"
+                  :title="`${customer.name || 'N/A'} - ${customer.phone || 'N/A'} - ${customer.email || 'N/A'}`"
                 >
                   {{ customer.name || t('CAMPAIGN.PREVIEW.NO_NAME') }}
                   <span
@@ -1089,12 +1284,13 @@ const setActiveTab = tabKey => {
                     )
                   </span>
                   <span v-if="customer.phone">- {{ customer.phone }}</span>
+                  <span v-if="customer.email">- {{ customer.email }}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Right Column (No changes needed here) -->
+          <!-- Right Column -->
           <div class="space-y-4">
             <div>
               <label
@@ -1126,7 +1322,7 @@ const setActiveTab = tabKey => {
                 </span>
               </div>
 
-              <!-- NEW: SMS-specific breakdown -->
+              <!-- SMS-specific breakdown -->
               <div
                 v-if="
                   props.notificationTypes.sms && validSMSCustomers.length > 0
@@ -1147,6 +1343,25 @@ const setActiveTab = tabKey => {
                   >
                     {{ operator }}: {{ data.total }}
                   </span>
+                </div>
+              </div>
+
+              <!-- Email-specific breakdown -->
+              <div
+                v-if="
+                  props.notificationTypes.email &&
+                  validEmailCustomers.length > 0
+                "
+                class="mt-2"
+              >
+                <div class="text-xs text-slate-600 dark:text-slate-400">
+                  {{
+                    t('CAMPAIGN.PREVIEW.VALID_EMAIL_CUSTOMERS') ||
+                    'Valid Email Customers'
+                  }}
+                  <span class="font-semibold">{{
+                    validEmailCustomers.length
+                  }}</span>
                 </div>
               </div>
 
@@ -1206,8 +1421,7 @@ const setActiveTab = tabKey => {
         </div>
       </div>
 
-      <!-- Notification Previews & Action Buttons (No changes needed) -->
-      <!-- ... your existing template for this section ... -->
+      <!-- Notification Previews -->
       <div
         v-if="availablePreviewTabs.length > 0"
         class="bg-white dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-600 shadow-sm overflow-hidden"
@@ -1276,7 +1490,7 @@ const setActiveTab = tabKey => {
               <div class="border-b border-slate-200 dark:border-slate-600 p-4">
                 <div class="flex items-center mb-2">
                   <span class="text-xs text-slate-500 dark:text-slate-400">
-                    {{ t('CAMPAIGN.PREVIEW.EMAIL_SUBJECT') }}
+                    {{ t('CAMPAIGN.PREVIEW.EMAIL_SUBJECT') || 'Email Subject' }}
                   </span>
                 </div>
                 <div class="font-medium text-slate-900 dark:text-slate-100">
@@ -1341,13 +1555,14 @@ const setActiveTab = tabKey => {
           :disabled="
             isCreatingCampaign ||
             isSendingSMS ||
+            isSendingEmail ||
             previewData.estimatedReach === 0
           "
           class="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md disabled:shadow-none"
           @click="handleConfirm"
         >
           <svg
-            v-if="isCreatingCampaign || isSendingSMS"
+            v-if="isCreatingCampaign || isSendingSMS || isSendingEmail"
             class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
             fill="none"
             viewBox="0 0 24 24"

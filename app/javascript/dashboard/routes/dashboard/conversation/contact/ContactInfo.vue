@@ -11,6 +11,7 @@ import ContactMergeModal from 'dashboard/modules/contact/ContactMergeModal.vue';
 import ComposeConversation from 'dashboard/components-next/NewConversation/ComposeConversation.vue';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+import axios from 'axios';
 
 import {
   isAConversationRoute,
@@ -18,6 +19,12 @@ import {
   getConversationDashboardRoute,
 } from '../../../../helper/routeHelpers';
 import { emitter } from 'shared/helpers/mitt';
+
+// --- SMS API Configuration ---
+const SMS_API_BASE = 'https://smsgateway.garage.mn/api';
+// IMPORTANT: Replace with your actual token.
+// It is highly recommended to use environment variables for security.
+const API_TOKEN = 'YOUR_GARAGE_MN_API_TOKEN';
 
 export default {
   components: {
@@ -51,6 +58,9 @@ export default {
       showEditModal: false,
       showMergeModal: false,
       showDeleteModal: false,
+      showSmsModal: false,
+      smsMessage: '',
+      isSendingSms: false,
     };
   },
   computed: {
@@ -86,15 +96,23 @@ export default {
         ...(socialProfiles || {}),
       };
     },
-    // Delete Modal
     confirmDeleteMessage() {
       return ` ${this.contact.name}?`;
+    },
+    // ++ NEW COMPUTED PROPERTY ++
+    phoneOperator() {
+      if (!this.contact.phone_number) {
+        return null;
+      }
+      return this.getOperatorFromPhone(this.contact.phone_number);
     },
   },
   watch: {
     'contact.id': {
       handler(id) {
-        this.$store.dispatch('contacts/fetchContactableInbox', id);
+        if (id) {
+          this.$store.dispatch('contacts/fetchContactableInbox', id);
+        }
       },
       immediate: true,
     },
@@ -106,13 +124,9 @@ export default {
     },
     openComposeConversationModal(toggleFn) {
       toggleFn();
-      // Flag to prevent triggering drag n drop,
-      // When compose modal is active
       emitter.emit(BUS_EVENTS.NEW_CONVERSATION_MODAL, true);
     },
     closeComposeConversationModal() {
-      // Flag to enable drag n drop,
-      // When compose modal is closed
       emitter.emit(BUS_EVENTS.NEW_CONVERSATION_MODAL, false);
     },
     toggleDeleteModal() {
@@ -149,13 +163,9 @@ export default {
             name: getConversationDashboardRoute(this.$route.name),
           });
         } else if (isAInboxViewRoute(this.$route.name)) {
-          this.$router.push({
-            name: 'inbox_view',
-          });
+          this.$router.push({ name: 'inbox_view' });
         } else if (this.$route.name !== 'contacts_dashboard') {
-          this.$router.push({
-            name: 'contacts_dashboard',
-          });
+          this.$router.push({ name: 'contacts_dashboard' });
         }
       } catch (error) {
         useAlert(
@@ -170,6 +180,88 @@ export default {
     },
     openMergeModal() {
       this.showMergeModal = true;
+    },
+    openSmsModal() {
+      this.showSmsModal = true;
+    },
+    closeSmsModal() {
+      this.showSmsModal = false;
+      this.smsMessage = '';
+    },
+    async handleSendSms() {
+      if (!this.smsMessage.trim()) {
+        useAlert(
+          this.$t('CONTACT_PANEL.SEND_SMS_MODAL.EMPTY_MESSAGE_ERROR'),
+          'error'
+        );
+        return;
+      }
+      this.isSendingSms = true;
+      try {
+        const response = await axios.post(`${SMS_API_BASE}/send`, {
+          phone: this.contact.phone_number,
+          message: this.smsMessage,
+          token: API_TOKEN,
+        });
+        if (response.data.status !== 'success') {
+          throw new Error(response.data.message || 'SMS sending failed');
+        }
+        useAlert(
+          this.$t('CONTACT_PANEL.SEND_SMS_MODAL.SUCCESS_MESSAGE'),
+          'success'
+        );
+        this.closeSmsModal();
+      } catch (error) {
+        const errorMessage = error.response?.data?.message || error.message;
+        useAlert(errorMessage, 'error');
+      } finally {
+        this.isSendingSms = false;
+      }
+    },
+    // ++ NEW METHOD ++
+    getOperatorFromPhone(phone) {
+      const cleanPhone = phone.replace(/\D/g, '');
+
+      if (cleanPhone.startsWith('976')) {
+        const prefix = cleanPhone.substring(3, 5);
+        switch (prefix) {
+          case '99':
+          case '95':
+          case '94':
+          case '93':
+          case '92':
+          case '91':
+          case '90':
+            return 'Mobicom';
+          case '88':
+          case '89':
+          case '85':
+          case '84':
+          case '83':
+          case '82':
+          case '80':
+            return 'Unitel';
+          case '77':
+          case '75':
+          case '74':
+          case '73':
+          case '72':
+          case '71':
+          case '70':
+            return 'Skytel';
+          case '68':
+          case '67':
+          case '66':
+          case '65':
+          case '64':
+          case '63':
+          case '60':
+            return 'G-Mobile';
+          default:
+            return 'Unknown';
+        }
+      }
+      return 'Unknown';
     },
   },
 };
@@ -236,6 +328,16 @@ export default {
             :title="$t('CONTACT_PANEL.PHONE_NUMBER')"
             show-copy
           />
+          <!-- ++ NEW OPERATOR INFO ROW ++ -->
+          <!-- Note: You may need to add 'CONTACT_PANEL.OPERATOR' to your language files -->
+          <ContactInfoRow
+            v-if="phoneOperator && phoneOperator !== 'Unknown'"
+            :value="phoneOperator"
+            icon="signal-high"
+            emoji="📶"
+            :title="$t('CONTACT_PANEL.OPERATOR')"
+          />
+          <!-- -- END OF NEW OPERATOR INFO ROW -- -->
           <ContactInfoRow
             :href="contact.plate_number ? `tel:${contact.plate_number}` : ''"
             :value="contact.plate_number"
@@ -284,6 +386,15 @@ export default {
             />
           </template>
         </ComposeConversation>
+        <NextButton
+          v-if="contact.phone_number"
+          v-tooltip.top-end="$t('CONTACT_PANEL.SEND_SMS')"
+          icon="i-ph-device-mobile"
+          slate
+          faded
+          sm
+          @click="openSmsModal"
+        />
         <NextButton
           v-tooltip.top-end="$t('EDIT_CONTACT.BUTTON_LABEL')"
           icon="i-ph-pencil-simple"
@@ -337,5 +448,50 @@ export default {
       :confirm-text="$t('DELETE_CONTACT.CONFIRM.YES')"
       :reject-text="$t('DELETE_CONTACT.CONFIRM.NO')"
     />
+    <div
+      v-if="showSmsModal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      @click.self="closeSmsModal"
+    >
+      <div
+        class="relative flex flex-col w-full max-w-lg mx-4 bg-white dark:bg-n-slate-800 rounded-lg shadow-xl"
+      >
+        <div
+          class="flex items-center justify-between p-4 border-b border-solid border-n-slate-50 dark:border-n-slate-700"
+        >
+          <h3 class="text-lg font-medium text-n-slate-12">
+            {{ $t('CONTACT_PANEL.SEND_SMS_MODAL.TITLE') }}
+          </h3>
+          <NextButton
+            icon="i-ph-x"
+            variant="clear"
+            color="secondary"
+            @click="closeSmsModal"
+          />
+        </div>
+        <div class="p-4">
+          <textarea
+            v-model="smsMessage"
+            rows="5"
+            class="w-full p-2 text-sm leading-6 transition-colors duration-200 ease-in-out bg-white border border-solid rounded-md resize-none border-n-slate-50 dark:bg-n-slate-900 text-n-slate-12 dark:border-n-slate-600 focus:border-w-primary-500"
+            :placeholder="$t('CONTACT_PANEL.SEND_SMS_MODAL.PLACEHOLDER')"
+          />
+        </div>
+        <div
+          class="flex justify-end p-4 gap-2 bg-n-slate-25 dark:bg-n-slate-900 border-t border-solid border-n-slate-50 dark:border-n-slate-700 rounded-b-lg"
+        >
+          <NextButton color="secondary" variant="clear" @click="closeSmsModal">
+            {{ $t('CONTACT_PANEL.SEND_SMS_MODAL.CANCEL') }}
+          </NextButton>
+          <NextButton
+            :disabled="!smsMessage.trim() || isSendingSms"
+            :loading="isSendingSms"
+            @click="handleSendSms"
+          >
+            {{ $t('CONTACT_PANEL.SEND_SMS_MODAL.SEND') }}
+          </NextButton>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
