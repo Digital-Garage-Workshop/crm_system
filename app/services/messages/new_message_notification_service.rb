@@ -46,11 +46,11 @@ class Messages::NewMessageNotificationService
 
   # Add the missing method
   def process_contact_notification
-    return unless message.incoming? || message.template?
+    return unless message.outgoing? && !message.private?
     return if conversation.contact.nil?
 
-    # Fix the namespace - use Notification::Services instead of NotificationServices
-    Notification::Services.push_message_notification(message)
+    # Trigger contact push notification directly
+    message.notify_contact_via_push
   end
 
   # The user could already have been notified via a mention or via assignment

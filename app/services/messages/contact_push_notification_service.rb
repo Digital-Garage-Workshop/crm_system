@@ -112,7 +112,7 @@ module Messages
         'android': fcm_android_options,
         'apns': fcm_apns_options,
         'fcm_options': {
-          analytics_label: 'contact_message'
+          analytics_label: 'Label'
         }
       }
     end
@@ -122,12 +122,8 @@ module Messages
         payload: {
           data: {
             message_id: message.id,
-            conversation_id: conversation.display_id,
-            account_id: account.id,
-            inbox_id: message.inbox_id,
-            message_content: message.content,
-            created_at: message.created_at.to_i,
-            plate_number: contact.respond_to?(:plate_number) ? contact.plate_number : nil
+            conversation_id: conversation.id,
+            account_id: account.id
           }
         }.to_json
       }
@@ -151,8 +147,7 @@ module Messages
         payload: {
           aps: {
             sound: 'default',
-            category: Time.zone.now.to_i.to_s,
-            'mutable-content': 1
+            category: Time.zone.now.to_i.to_s
           }
         }
       }
