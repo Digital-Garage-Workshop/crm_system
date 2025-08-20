@@ -17,10 +17,11 @@ module Messages
 
       Rails.logger.info "ContactPushNotificationService: Sending push to contact #{contact.id} with token: #{contact.push_token[0..10]}..."
 
-      if firebase_credentials_present?
-        send_fcm_push
-      elsif chatwoot_hub_enabled?
+      # FIX 1: Try Chatwoot Hub first since it works reliably
+      if chatwoot_hub_enabled?
         send_push_via_chatwoot_hub
+      elsif firebase_credentials_present?
+        send_fcm_push
       else
         Rails.logger.error 'ContactPushNotificationService: No push configuration found - set FIREBASE_PROJECT_ID and FIREBASE_CREDENTIALS or ENABLE_PUSH_RELAY_SERVER'
       end
@@ -82,14 +83,28 @@ module Messages
       ChatwootExceptionTracker.new(e, account: account).capture_exception
     end
 
+    # FIX 2: Properly handle Firebase v1 API error responses
     def handle_fcm_response(response)
+      Rails.logger.debug { "ContactPushNotificationService: FCM Response Status: #{response[:status_code]}" }
+      Rails.logger.debug { "ContactPushNotificationService: FCM Response Body: #{response[:body]}" }
+
+      # Check HTTP status first
+      if response[:status_code] != 200
+        Rails.logger.error "ContactPushNotificationService: FCM HTTP Error #{response[:status_code]} for contact #{contact.id}"
+        return
+      end
+
       response_body = JSON.parse(response[:body])
-      if response_body['results']&.first&.keys&.include?('error')
-        error = response_body['results'].first['error']
-        Rails.logger.error "ContactPushNotificationService: FCM Error: #{error} for contact #{contact.id}"
+
+      # Firebase v1 API returns errors in 'error' field, not 'results'
+      if response_body['error']
+        error = response_body['error']
+        Rails.logger.error "ContactPushNotificationService: FCM Error: #{error['message']} (#{error['code']}) for contact #{contact.id}"
       else
         Rails.logger.info "ContactPushNotificationService: FCM push sent successfully to contact #{contact.id}"
       end
+    rescue JSON::ParserError => e
+      Rails.logger.error "ContactPushNotificationService: Failed to parse FCM response: #{e.message}"
     end
 
     def send_push_via_chatwoot_hub
