@@ -218,6 +218,15 @@ class Message < ApplicationRecord
     save!
   end
 
+  def notify_contact_via_push
+    # Only send push notification for outgoing messages to contacts
+    return unless outgoing? && !private?
+    return if conversation&.contact&.push_token.blank?
+
+    # Perform push notification delivery in the background
+    Messages::ContactPushNotificationJob.perform_later(id)
+  end
+
   private
 
   def prevent_message_flooding
@@ -397,15 +406,6 @@ class Message < ApplicationRecord
     # rubocop:disable Rails/SkipsModelValidations
     conversation.update_columns(last_activity_at: created_at)
     # rubocop:enable Rails/SkipsModelValidations
-  end
-
-  def notify_contact_via_push
-    # Only send push notification for outgoing messages to contacts
-    return unless outgoing? && !private?
-    return if conversation&.contact&.push_token.blank?
-
-    # Perform push notification delivery in the background
-    Messages::ContactPushNotificationJob.perform_later(id)
   end
 end
 

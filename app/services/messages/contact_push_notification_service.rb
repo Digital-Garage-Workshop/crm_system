@@ -10,6 +10,11 @@ module Messages
       return unless should_send_push?
       return if contact.push_token.blank?
 
+      Rails.logger.debug { "ContactPushNotificationService: Checking if should send push for message #{message.id}" }
+      Rails.logger.debug { "ContactPushNotificationService: Contact push token is #{contact.push_token.present? ? 'present' : 'absent'}" }
+      Rails.logger.debug { "ContactPushNotificationService: Firebase credentials present: #{firebase_credentials_present?}" }
+      Rails.logger.debug { "ContactPushNotificationService: Chatwoot Hub enabled: #{chatwoot_hub_enabled?}" }
+
       Rails.logger.info "ContactPushNotificationService: Sending push to contact #{contact.id} with token: #{contact.push_token[0..10]}..."
 
       if firebase_credentials_present?
