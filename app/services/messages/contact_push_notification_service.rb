@@ -1,3 +1,4 @@
+# Create a backup first
 module Messages
   class ContactPushNotificationService
     include Rails.application.routes.url_helpers
