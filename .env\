@@ -232,7 +232,6 @@ FCM_SERVER_KEY=AAAACZLnazw:APA91bHoB-3r5vWCB5jSX4s3RXHZs754rHvB2-_Cpa97Wg_eXq4YY
 
 # If you want to use official mobile app,
 # the notifications would be relayed via a Chatwoot server
-
 ENABLE_PUSH_RELAY_SERVER=false
 # Stripe API key
 STRIPE_SECRET_KEY=
