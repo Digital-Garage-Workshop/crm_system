@@ -8,9 +8,6 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   end
 
   def create
-    Rails.logger.info '=== CREATE CONTACT DEBUG ==='
-    Rails.logger.info "Permitted params: #{permitted_params.to_json}"
-
     source_id = params[:source_id] || SecureRandom.uuid
     @contact_inbox = ::ContactInboxWithContactBuilder.new(
       source_id: source_id,
@@ -18,7 +15,14 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       contact_attributes: permitted_params.except(:identifier_hash)
     ).perform
 
-    Rails.logger.info "Contact created - ID: #{@contact_inbox.contact.id}, Plate: #{@contact_inbox.contact.plate_number}"
+    # Log the token for debugging
+    Rails.logger.info "Contact created with ID: #{@contact_inbox.contact.id}, Push token present: #{permitted_params[:push_token].present?}"
+
+    # Update push token if provided during creation
+    if permitted_params[:push_token].present?
+      @contact_inbox.contact.update(push_token: permitted_params[:push_token])
+      Rails.logger.info "Push token set during contact creation for contact #{@contact_inbox.contact.id}"
+    end
 
     render json: contact_response_json(@contact_inbox.contact, @contact_inbox)
   end
@@ -30,29 +34,49 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     )
     updated_contact = contact_identify_action.perform
 
+    # The contact_inbox remains the same even after the update
     render json: contact_response_json(updated_contact, @contact_inbox)
   end
 
   def update_push_token
     Rails.logger.info "Push token update request received for source_id: #{params[:source_id]}"
+    Rails.logger.info "Params: #{params.to_json}"
 
     unless @contact
       Rails.logger.error "Contact not found for source_id: #{params[:source_id]}"
       return render json: { error: 'Contact not found' }, status: :not_found
     end
 
-    if @contact.update(push_token_params)
-      Rails.logger.info "Successfully updated contact ##{@contact.id}"
-      contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by(contact_id: @contact.id)
-      render json: contact_response_json(@contact, contact_inbox)
+    token = params[:push_token].presence
+    plate = params[:plate_number].presence
+
+    Rails.logger.info "Processing push token update for contact ##{@contact.id}"
+    Rails.logger.info "Token present: #{token.present?}, Plate present: #{plate.present?}"
+
+    # Handle missing token
+    unless token
+      Rails.logger.error 'No push token provided in request'
+      return render json: { error: 'No push token provided' }, status: :bad_request
+    end
+
+    # Directly update attributes for better error tracking
+    @contact.push_token = token if @contact.respond_to?(:push_token=)
+    @contact.plate_number = plate if plate && @contact.respond_to?(:plate_number=)
+
+    if @contact.save
+      Rails.logger.info "Successfully updated push token for contact ##{@contact.id}"
+      # Find the appropriate contact_inbox for this contact
+      inbox_contact = @inbox_channel.inbox.contact_inboxes.find_by(contact_id: @contact.id)
+      render json: contact_response_json(@contact, inbox_contact)
     else
-      Rails.logger.error "Failed to update contact: #{@contact.errors.full_messages.join(', ')}"
+      Rails.logger.error "Failed to save push token: #{@contact.errors.full_messages.join(', ')}"
       render json: {
         error: @contact.errors.full_messages.join(', ')
       }, status: :unprocessable_entity
     end
   rescue StandardError => e
     Rails.logger.error "Exception in update_push_token: #{e.class} - #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
     render json: {
       error: 'An error occurred while processing your request',
       message: e.message
@@ -62,13 +86,11 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   private
 
   def contact_response_json(contact, contact_inbox)
-    Rails.logger.info '=== CONTACT RESPONSE JSON DEBUG ==='
-    Rails.logger.info "Contact ID: #{contact.id}, Plate Number: #{contact.plate_number.inspect}"
-
+    # This ensures we don't try to access attributes that don't exist
     source_id = contact_inbox&.source_id || ''
     pubsub_token = contact.respond_to?(:pubsub_token) ? contact.pubsub_token : ''
 
-    # Generate pubsub_token if missing
+    # If the token is missing and we should generate one
     if pubsub_token.blank? && contact.respond_to?(:pubsub_token=)
       begin
         pubsub_token = SecureRandom.uuid
@@ -79,18 +101,14 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       end
     end
 
-    response = {
+    {
       id: contact.id,
       name: contact.name || '',
       email: contact.email,
-      phone_number: contact.phone_number,
-      plate_number: contact.plate_number,
+      phone_number: contact.respond_to?(:phone_number) ? contact.phone_number : nil,
       source_id: source_id,
       pubsub_token: pubsub_token
     }
-
-    Rails.logger.info "API Response: #{response.to_json}"
-    response
   end
 
   def contact_inbox
@@ -98,11 +116,23 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
   end
 
   def set_contact
-    contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by!(source_id: params[:source_id])
+    source_id = params[:source_id]
+    Rails.logger.info "Looking up contact with source_id: #{source_id}"
+
+    contact_inbox = @inbox_channel.inbox.contact_inboxes.find_by(source_id: source_id)
+
+    if contact_inbox.nil?
+      Rails.logger.error "No contact inbox found with source_id: #{source_id}"
+      @contact = nil
+      return
+    end
+
     @contact = contact_inbox.contact
-  rescue ActiveRecord::RecordNotFound
-    Rails.logger.error "Contact not found for source_id: #{params[:source_id]}"
-    render json: { error: 'Contact not found' }, status: :not_found
+    Rails.logger.info "Found contact ##{@contact.id} for source_id: #{source_id}"
+  rescue StandardError => e
+    Rails.logger.error "Error finding contact: #{e.message}"
+    Rails.logger.error e.backtrace.join("\n")
+    @contact = nil
   end
 
   def process_hmac
@@ -120,8 +150,13 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     )
   end
 
+  # aaa
   def push_token_params
-    params.permit(:push_token, :plate_number)
+    # Explicitly permit and extract only the parameters we need
+    {
+      push_token: params[:push_token],
+      plate_number: params[:plate_number]
+    }.compact
   end
 
   def permitted_params
