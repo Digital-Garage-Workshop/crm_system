@@ -274,7 +274,7 @@ class Message < ApplicationRecord
     send_reply
     execute_message_template_hooks
     update_contact_activity
-    notify_contact_via_push # Add this line to trigger push notifications
+    # Push notifications are handled in the notification listener to avoid duplicates
   end
 
   def update_contact_activity

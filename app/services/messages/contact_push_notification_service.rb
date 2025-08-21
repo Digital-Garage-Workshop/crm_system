@@ -10,9 +10,16 @@ module Messages
       return unless should_send_push?
       return if contact.push_token.blank?
 
+      # Validate push token format (basic validation)
+      unless valid_push_token?
+        Rails.logger.warn "ContactPushNotificationService: Invalid push token format for contact #{contact.id}: #{contact.push_token[0..20]}..."
+        return
+      end
+
       Rails.logger.info "ContactPushNotificationService: Sending push to contact #{contact.id} with token: #{contact.push_token[0..10]}..."
 
       if firebase_credentials_present?
+        Rails.logger.info 'ContactPushNotificationService: Using Firebase FCM directly'
         send_fcm_push
       elsif chatwoot_hub_enabled?
         send_push_via_chatwoot_hub
@@ -22,6 +29,19 @@ module Messages
     end
 
     private
+
+    def valid_push_token?
+      return false if contact.push_token.blank?
+
+      # Basic validation - FCM tokens are typically 152+ characters long
+      token = contact.push_token.strip
+      return false if token.length < 50
+
+      # FCM tokens are base64-like strings with specific patterns
+      return false unless token.match?(/^[A-Za-z0-9_-]+$/)
+
+      true
+    end
 
     def contact
       @contact ||= message.conversation.contact
@@ -89,15 +109,50 @@ module Messages
 
     def send_push_via_chatwoot_hub
       Rails.logger.info 'ContactPushNotificationService: Using Chatwoot Hub for push delivery'
-      ChatwootHub.send_push(fcm_options)
-      Rails.logger.info "ContactPushNotificationService: Push notification sent via Chatwoot Hub to contact #{contact.id}"
-    rescue StandardError => e
-      Rails.logger.error "ContactPushNotificationService: Error sending via Hub: #{e.message}"
+
+      begin
+        response = ChatwootHub.send_push(fcm_options)
+
+        if response && response.code == 200
+          Rails.logger.info "ContactPushNotificationService: Push notification sent via Chatwoot Hub to contact #{contact.id}"
+        else
+          Rails.logger.error "ContactPushNotificationService: Chatwoot Hub returned status #{response&.code} for contact #{contact.id}"
+          Rails.logger.error "ContactPushNotificationService: Hub response: #{response&.body}" if response&.body
+        end
+      rescue Net::TimeoutError => e
+        Rails.logger.error "ContactPushNotificationService: Hub timeout: #{e.message}"
+        raise e
+      rescue StandardError => e
+        Rails.logger.error "ContactPushNotificationService: Error sending via Hub: #{e.message}"
+        raise e
+      end
     end
 
     def firebase_credentials_present?
-      GlobalConfigService.load('FIREBASE_PROJECT_ID', nil).present? &&
-        GlobalConfigService.load('FIREBASE_CREDENTIALS', nil).present?
+      firebase_project_id = GlobalConfigService.load('FIREBASE_PROJECT_ID', nil)
+      firebase_credentials = GlobalConfigService.load('FIREBASE_CREDENTIALS', nil)
+
+      # Also check for the firebase-credentials.json file
+      credentials_file_path = Rails.root.join('firebase-credentials.json')
+      file_exists = File.exist?(credentials_file_path)
+
+      if firebase_project_id.present? && firebase_credentials.present?
+        true
+      elsif firebase_project_id.present? && file_exists
+        # Set the credentials from the file if they're not in the environment
+        begin
+          credentials_content = File.read(credentials_file_path)
+          GlobalConfigService.store('FIREBASE_CREDENTIALS', credentials_content)
+          Rails.logger.info 'ContactPushNotificationService: Loaded Firebase credentials from file'
+          true
+        rescue StandardError => e
+          Rails.logger.error "ContactPushNotificationService: Failed to load Firebase credentials from file: #{e.message}"
+          false
+        end
+      else
+        Rails.logger.warn "ContactPushNotificationService: Firebase configuration incomplete - PROJECT_ID: #{firebase_project_id.present?}, CREDENTIALS: #{firebase_credentials.present?}, FILE: #{file_exists}"
+        false
+      end
     end
 
     def chatwoot_hub_enabled?
