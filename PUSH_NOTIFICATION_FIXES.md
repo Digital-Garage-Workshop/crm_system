@@ -1,142 +1,104 @@
-# Push Notification Issues Fixed
+# Push Notification Debugging Guide
 
-## Issues Identified and Fixed:
+## Issue: Notifications not reaching devices
 
-### 1. **Duplicate Job Executions** ✅ FIXED
+The system reports "Push notification sent via Chatwoot Hub" but devices don't receive notifications.
 
-**Issue**: Each message was triggering push notifications twice:
+## Root Cause
 
-- Once from `message.notify_contact_via_push` in `execute_after_create_commit_callbacks`
-- Once from `Messages::NewMessageNotificationService` in the notification listener
+The original code had insufficient error handling, making it appear successful even when the Chatwoot Hub failed to deliver notifications.
 
-**Fix**: Removed the duplicate call from the message model, keeping only the one in the notification service.
+## Fixes Applied
 
-### 2. **Silent Chatwoot Hub Failures** ✅ FIXED
+### 1. Enhanced Logging (`app/services/messages/contact_push_notification_service.rb`)
 
-**Issue**: `ChatwootHub.send_push` was catching all exceptions and logging them but not re-raising, making failures appear successful.
+- Added detailed logging to show push tokens and delivery method
+- Enhanced error handling for Chatwoot Hub responses
+- Added proper success/failure return values
 
-**Fix**: Added proper error handling with HTTP status code checking and re-raising exceptions for better visibility.
+### 2. Improved Hub Communication (`lib/chatwoot_hub.rb`)
 
-### 3. **Missing Firebase Credentials** ✅ FIXED
+- Enhanced error logging with response bodies
+- Return actual response instead of swallowing it
+- Better exception handling and tracking
 
-**Issue**: `FIREBASE_CREDENTIALS` environment variable was not set, even though `firebase-credentials.json` file exists.
+### 3. Added FCM Fallback
 
-**Fix**: Added automatic loading of Firebase credentials from the JSON file and storing them in InstallationConfig for persistence.
+- If Chatwoot Hub fails and Firebase credentials are available, falls back to direct FCM
+- Prevents total notification failure
 
-### 4. **Poor Push Token Validation** ✅ FIXED
+## To Debug Further
 
-**Issue**: No validation of push token format, allowing invalid tokens to be processed.
+### Check Your Logs
 
-**Fix**: Added basic FCM token validation (length and character pattern checks).
+After the fixes, you should see detailed logs like:
 
-### 5. **Insufficient Logging** ✅ FIXED
+```
+ContactPushNotificationService: Sending push to contact 636 with token: cXd2...
+ContactPushNotificationService: Using Chatwoot Hub
+ContactPushNotificationService: Sending to Hub with FCM options: {...}
+ChatwootHub: Sending push to https://hub.2.chatwoot.com/send_push
+ChatwootHub: Push response status 200, body: {"success":true}
+```
 
-**Issue**: Limited debugging information made it hard to identify issues.
+### Potential Issues to Check
 
-**Fix**: Added comprehensive logging at each step of the push notification process.
+1. **Invalid Push Tokens**
 
-## Files Modified:
+   - Tokens expire when app is uninstalled/reinstalled
+   - Look for logs: "ContactPushNotificationService: No push token for contact X"
 
-1. **app/models/message.rb**
-   - Removed duplicate push notification trigger
-2. **app/services/messages/contact_push_notification_service.rb**
+2. **Chatwoot Hub Issues**
 
-   - Added push token validation
-   - Enhanced Firebase credentials loading from file
-   - Improved Chatwoot Hub error handling
-   - Added detailed logging
+   - Hub server might be down or unreachable
+   - Look for logs: "ChatwootHub REST Exception" or "No response from Chatwoot Hub"
 
-3. **lib/push_notification_test.rb** (NEW)
-   - Comprehensive testing tool for push notification system
+3. **Network/Firewall Issues**
 
-## Testing Steps:
+   - Your server might not be able to reach hub.2.chatwoot.com
+   - Check connectivity: `curl -v https://hub.2.chatwoot.com/ping`
 
-### 1. Test the Configuration
+4. **App Not Configured for Notifications**
+   - Device settings might block notifications
+   - App might not be properly configured for FCM
+
+## Alternative: Set Up Direct Firebase
+
+To bypass Chatwoot Hub entirely, set up Firebase credentials:
+
+1. Go to Firebase Console → Project Settings → Service Accounts
+2. Generate new private key (JSON file)
+3. Set environment variables:
+   ```bash
+   FIREBASE_PROJECT_ID=your-project-id
+   FIREBASE_CREDENTIALS='{"type":"service_account",...}'  # Full JSON content
+   ```
+
+## Testing Commands
+
+Test Chatwoot Hub connectivity:
 
 ```bash
-docker-compose exec rails bash
-rails runner "PushNotificationTest.test_configuration"
+# Check if hub is reachable
+curl -v https://hub.2.chatwoot.com/ping
+
+# Test your installation config
+rails console
+> ChatwootHub.installation_identifier
+> ChatwootHub.instance_config
 ```
 
-### 2. Test with Actual Contact
+Check contact push tokens:
 
 ```bash
-rails runner "PushNotificationTest.test_with_actual_contact(636)"
+rails console
+> Contact.where.not(push_token: nil).count  # How many contacts have tokens
+> Contact.find(636).push_token              # Check specific contact token
 ```
 
-### 3. Check System Status
+## Environment Variables to Check
 
-```bash
-rails runner "NotificationDiagnostics.run_diagnostics"
-```
-
-### 4. Monitor Logs
-
-```bash
-docker-compose logs -f sidekiq | grep -i "ContactPushNotificationService"
-```
-
-## Expected Changes:
-
-### Before Fix:
-
-```
-sidekiq-1  | ContactPushNotificationService: Starting push notification for message 3799
-sidekiq-1  | ContactPushNotificationService: Starting push notification for message 3799  # DUPLICATE
-sidekiq-1  | ContactPushNotificationService: Using Chatwoot Hub for push delivery
-sidekiq-1  | ContactPushNotificationService: Push notification sent via Chatwoot Hub  # FAKE SUCCESS
-```
-
-### After Fix:
-
-```
-sidekiq-1  | ContactPushNotificationService: Starting push notification for message 3799  # ONLY ONCE
-sidekiq-1  | ContactPushNotificationService: Using Firebase FCM directly  # IF CREDENTIALS LOADED
-sidekiq-1  | ContactPushNotificationService: FCM push sent successfully  # REAL SUCCESS
-```
-
-## Restart Services:
-
-```bash
-docker-compose restart sidekiq
-docker-compose restart rails
-```
-
-## Additional Recommendations:
-
-1. **Monitor Firebase Quotas**: Check Firebase Console for any quota/billing issues
-2. **Verify Device Tokens**: Ensure mobile app is generating valid FCM tokens
-3. **Check Network Connectivity**: Ensure server can reach Firebase/Google services
-4. **Review Firebase Project Settings**: Verify project configuration in Firebase Console
-
-## Environment Variables to Set (Optional):
-
-```env
-# In docker-compose.yml or .env file
-FIREBASE_PROJECT_ID=digital-garage-34a42
-FIREBASE_CREDENTIALS=<contents-of-firebase-credentials.json>
-ENABLE_PUSH_RELAY_SERVER=false  # To force Firebase usage over Hub
-```
-
-## Troubleshooting Commands:
-
-```bash
-# Test Firebase connection directly
-rails runner "
-  service = Notification::FcmService.new('digital-garage-34a42', File.read('firebase-credentials.json'))
-  puts 'Firebase service initialized successfully'
-"
-
-# Check contact's push token
-rails runner "
-  contact = Contact.find(636)
-  puts \"Token: #{contact.push_token}\"
-  puts \"Valid: #{contact.push_token.present? && contact.push_token.length > 50}\"
-"
-
-# Send test notification
-rails runner "
-  message = Message.find(3799)  # Replace with actual message ID
-  Messages::ContactPushNotificationService.new(message: message).perform
-"
-```
+- `ENABLE_PUSH_RELAY_SERVER=true` (enables Hub)
+- `CHATWOOT_HUB_URL=https://hub.2.chatwoot.com` (default hub URL)
+- `FIREBASE_PROJECT_ID` (for direct FCM)
+- `FIREBASE_CREDENTIALS` (for direct FCM)

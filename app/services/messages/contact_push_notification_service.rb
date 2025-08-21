@@ -6,12 +6,29 @@ module Messages
 
     def perform
       return unless should_send_push?
-      return if contact.push_token.blank?
+
+      if contact.push_token.blank?
+        Rails.logger.info("ContactPushNotificationService: No push token for contact #{contact.id}")
+        return
+      end
+
+      Rails.logger.info("ContactPushNotificationService: Sending push to contact #{contact.id} with token: #{contact.push_token[0..20]}...")
 
       if firebase_credentials_present?
+        Rails.logger.info('ContactPushNotificationService: Using direct FCM')
         send_fcm_push
       elsif chatwoot_hub_enabled?
-        send_push_via_chatwoot_hub
+        Rails.logger.info('ContactPushNotificationService: Using Chatwoot Hub')
+        hub_success = send_push_via_chatwoot_hub
+
+        # Fallback to direct FCM if hub fails and credentials are available
+        if !hub_success && firebase_credentials_present?
+          Rails.logger.info('ContactPushNotificationService: Hub failed, attempting direct FCM fallback')
+          send_fcm_push
+        end
+      else
+        Rails.logger.error('ContactPushNotificationService: No push notification method available')
+        Rails.logger.error('To enable push notifications, set up Firebase credentials or enable Chatwoot Hub')
       end
     end
 
@@ -67,10 +84,30 @@ module Messages
     end
 
     def send_push_via_chatwoot_hub
-      ChatwootHub.send_push(fcm_options)
-      Rails.logger.info("Push notification sent via Chatwoot Hub to contact #{contact.id}")
+      Rails.logger.info("ContactPushNotificationService: Sending to Hub with FCM options: #{fcm_options.except(:token).inspect}")
+      response = ChatwootHub.send_push(fcm_options)
+
+      if response
+        parsed_response = begin
+          JSON.parse(response.body)
+        rescue StandardError
+          {}
+        end
+        if parsed_response['success'] == false
+          Rails.logger.error("Chatwoot Hub push failed for contact #{contact.id}: #{parsed_response['error']}")
+          false
+        else
+          Rails.logger.info("Push notification sent via Chatwoot Hub to contact #{contact.id}")
+          true
+        end
+      else
+        Rails.logger.error("No response from Chatwoot Hub for contact #{contact.id}")
+        false
+      end
     rescue StandardError => e
-      Rails.logger.error("Failed to send push via Chatwoot Hub: #{e.message}")
+      Rails.logger.error("Failed to send push via Chatwoot Hub to contact #{contact.id}: #{e.class} - #{e.message}")
+      Rails.logger.error("Full backtrace: #{e.backtrace.first(5).join("\n")}")
+      false
     end
 
     def firebase_credentials_present?

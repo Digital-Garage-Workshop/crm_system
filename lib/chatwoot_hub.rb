@@ -85,11 +85,18 @@ class ChatwootHub
 
   def self.send_push(fcm_options)
     info = { fcm_options: fcm_options }
-    RestClient.post(PUSH_NOTIFICATION_URL, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+    Rails.logger.info "ChatwootHub: Sending push to #{PUSH_NOTIFICATION_URL}"
+    response = RestClient.post(PUSH_NOTIFICATION_URL, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+    Rails.logger.info "ChatwootHub: Push response status #{response.code}, body: #{response.body}"
+    response
   rescue *ExceptionList::REST_CLIENT_EXCEPTIONS => e
-    Rails.logger.error "Exception: #{e.message}"
+    Rails.logger.error "ChatwootHub REST Exception: #{e.class} - #{e.message}"
+    Rails.logger.error "Response body: #{e.response.body if e.respond_to?(:response) && e.response}"
+    nil
   rescue StandardError => e
+    Rails.logger.error "ChatwootHub Exception: #{e.class} - #{e.message}"
     ChatwootExceptionTracker.new(e).capture_exception
+    nil
   end
 
   def self.get_captain_settings(account)
