@@ -82,12 +82,25 @@ class Notification::PushNotificationService
     return unless firebase_credentials_present?
     return unless subscription.fcm?
 
-    fcm_service = Notification::FcmService.new(
-      GlobalConfigService.load('FIREBASE_PROJECT_ID', nil), GlobalConfigService.load('FIREBASE_CREDENTIALS', nil)
-    )
+    project_id = GlobalConfigService.load('FIREBASE_PROJECT_ID', nil)
+    credentials = GlobalConfigService.load('FIREBASE_CREDENTIALS', nil)
+
+    if project_id.blank? || credentials.blank?
+      Rails.logger.error("PushNotificationService: Firebase credentials not configured for user #{user.email}")
+      return
+    end
+
+    Rails.logger.info("PushNotificationService: Attempting FCM push to user #{user.email}")
+
+    fcm_service = Notification::FcmService.new(project_id, credentials)
     fcm = fcm_service.fcm_client
     response = fcm.send_v1(fcm_options(subscription))
     remove_subscription_if_error(subscription, response)
+  rescue ArgumentError => e
+    Rails.logger.error("PushNotificationService: Invalid Firebase configuration for user #{user.email}: #{e.message}")
+  rescue StandardError => e
+    Rails.logger.error("PushNotificationService: FCM error for user #{user.email}: #{e.class} - #{e.message}")
+    ChatwootExceptionTracker.new(e, account: notification.account).capture_exception
   end
 
   def send_push_via_chatwoot_hub(subscription)
