@@ -40,7 +40,7 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
   end
 
   def update_push_token
-    render json: { error: 'Contact not found' }, status: :not_found and return unless @contact.present?
+    return render json: { error: 'Contact not found' }, status: :not_found if @contact.blank?
 
     Contacts::PushTokenRenewalService.new(
       contact: @contact,
@@ -98,7 +98,7 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
   end
 
   def ensure_contact_present
-    render json: { error: 'Contact not found' }, status: :not_found unless @contact.present?
+    render json: { error: 'Contact not found' }, status: :not_found if @contact.blank?
   end
 
   def render_record_invalid(exception)
