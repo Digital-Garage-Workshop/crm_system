@@ -192,13 +192,15 @@ class Conversation < ApplicationRecord
 
   # Virtual attribute till we switch completely to polymorphic assignee
   def assignee_type
-    return 'AgentBot' if assignee_agent_bot_id.present?
+    return 'AgentBot' if assignee_agent_bot_enabled? && assignee_agent_bot_id.present?
     return 'User' if assignee_id.present?
 
     nil
   end
 
   def assigned_entity
+    return assignee unless assignee_agent_bot_enabled?
+
     assignee_agent_bot || assignee
   end
 
@@ -249,6 +251,7 @@ class Conversation < ApplicationRecord
   end
 
   def reset_agent_bot_when_assignee_present
+    return unless assignee_agent_bot_enabled?
     return if assignee_id.blank?
 
     self.assignee_agent_bot_id = nil
@@ -285,8 +288,14 @@ class Conversation < ApplicationRecord
   end
 
   def list_of_keys
-    %w[team_id assignee_id assignee_agent_bot_id status snoozed_until custom_attributes label_list waiting_since
-       first_reply_created_at priority]
+    keys = %w[team_id assignee_id status snoozed_until custom_attributes label_list waiting_since
+              first_reply_created_at priority]
+    keys << 'assignee_agent_bot_id' if assignee_agent_bot_enabled?
+    keys
+  end
+
+  def assignee_agent_bot_enabled?
+    self.class.column_names.include?('assignee_agent_bot_id')
   end
 
   def allowed_keys?
