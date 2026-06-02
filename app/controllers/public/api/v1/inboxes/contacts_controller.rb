@@ -20,7 +20,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
 
     # Update push token if provided during creation
     if permitted_params[:push_token].present?
-      @contact_inbox.contact.update(push_token: permitted_params[:push_token])
+      renew_contact_push_token(@contact_inbox.contact)
       Rails.logger.info "Push token set during contact creation for contact #{@contact_inbox.contact.id}"
     end
 
@@ -33,6 +33,7 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
       params: permitted_params.to_h.deep_symbolize_keys.except(:identifier)
     )
     updated_contact = contact_identify_action.perform
+    renew_contact_push_token(updated_contact) if permitted_params[:push_token].present?
 
     # The contact_inbox remains the same even after the update
     render json: contact_response_json(updated_contact, @contact_inbox)
@@ -53,27 +54,18 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     Rails.logger.info "Processing push token update for contact ##{@contact.id}"
     Rails.logger.info "Token present: #{token.present?}, Plate present: #{plate.present?}"
 
-    # Handle missing token
     unless token
       Rails.logger.error 'No push token provided in request'
       return render json: { error: 'No push token provided' }, status: :bad_request
     end
 
-    # Directly update attributes for better error tracking
-    @contact.push_token = token if @contact.respond_to?(:push_token=)
     @contact.plate_number = plate if plate && @contact.respond_to?(:plate_number=)
+    @contact.save! if plate && @contact.changed?
 
-    if @contact.save
-      Rails.logger.info "Successfully updated push token for contact ##{@contact.id}"
-      # Find the appropriate contact_inbox for this contact
-      inbox_contact = @inbox_channel.inbox.contact_inboxes.find_by(contact_id: @contact.id)
-      render json: contact_response_json(@contact, inbox_contact)
-    else
-      Rails.logger.error "Failed to save push token: #{@contact.errors.full_messages.join(', ')}"
-      render json: {
-        error: @contact.errors.full_messages.join(', ')
-      }, status: :unprocessable_entity
-    end
+    renewed_contact = renew_contact_push_token(@contact)
+    Rails.logger.info "Successfully updated push token for contact ##{renewed_contact.id}"
+    inbox_contact = @inbox_channel.inbox.contact_inboxes.find_by(contact_id: renewed_contact.id)
+    render json: contact_response_json(renewed_contact, inbox_contact)
   rescue StandardError => e
     Rails.logger.error "Exception in update_push_token: #{e.class} - #{e.message}"
     Rails.logger.error e.backtrace.join("\n")
@@ -150,16 +142,16 @@ class Public::Api::V1::Inboxes::ContactsController < Public::Api::V1::InboxesCon
     )
   end
 
-  # aaa
-  def push_token_params
-    # Explicitly permit and extract only the parameters we need
-    {
-      push_token: params[:push_token],
-      plate_number: params[:plate_number]
-    }.compact
+  def renew_contact_push_token(contact)
+    Contacts::PushTokenRenewalService.new(
+      contact: contact,
+      new_token: params[:push_token],
+      old_token: params[:old_push_token]
+    ).perform
   end
 
   def permitted_params
-    params.permit(:identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token, :plate_number, custom_attributes: {})
+    params.permit(:identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token,
+                  :old_push_token, :plate_number, custom_attributes: {})
   end
 end

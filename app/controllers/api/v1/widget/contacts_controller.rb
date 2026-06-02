@@ -39,11 +39,14 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
     render json: contact_with_push_token
   end
 
-  # Method to update push token
   def update_push_token
     render json: { error: 'Contact not found' }, status: :not_found and return unless @contact.present?
 
-    @contact.update!(push_token: push_token_param)
+    Contacts::PushTokenRenewalService.new(
+      contact: @contact,
+      new_token: push_token_param,
+      old_token: params[:old_push_token]
+    ).perform
     render json: contact_with_push_token
   end
 
@@ -86,8 +89,8 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
   end
 
   def permitted_params
-    params.permit(:website_token, :identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token, :plate_number,
-                  custom_attributes: {}, additional_attributes: {})
+    params.permit(:website_token, :identifier, :identifier_hash, :email, :name, :avatar_url, :phone_number, :push_token,
+                  :old_push_token, :plate_number, custom_attributes: {}, additional_attributes: {})
   end
 
   def push_token_param
