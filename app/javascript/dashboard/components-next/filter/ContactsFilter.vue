@@ -9,6 +9,10 @@ import { useContactFilterContext } from './contactProvider.js';
 import { useSnakeCase } from 'dashboard/composables/useTransformKeys';
 
 import Button from 'next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import Input from 'dashboard/components-next/input/Input.vue';
+>>>>>>> upstream/develop
 import ConditionRow from './ConditionRow.vue';
 
 const props = defineProps({
@@ -103,12 +107,17 @@ const outsideClickHandler = [
 <template>
   <div
     v-on-click-outside="outsideClickHandler"
+<<<<<<< HEAD
     class="z-40 max-w-3xl lg:w-[750px] overflow-visible w-full border border-n-weak bg-n-alpha-3 backdrop-blur-[100px] shadow-lg rounded-xl p-6 grid gap-6"
+=======
+    class="z-40 max-w-3xl min-w-96 lg:w-[750px] overflow-visible w-full border border-n-weak bg-n-alpha-3 backdrop-blur-[100px] shadow-lg rounded-xl p-6 grid gap-6"
+>>>>>>> upstream/develop
   >
     <h3 class="text-base font-medium leading-6 text-n-slate-12">
       {{ filterModalHeaderTitle }}
     </h3>
     <div v-if="props.isSegmentView">
+<<<<<<< HEAD
       <label class="pb-6 border-b border-n-weak">
         <div class="mb-2 text-sm text-n-slate-11">
           {{ $t('CONTACTS_LAYOUT.FILTER.SEGMENT.LABEL') }}
@@ -119,6 +128,15 @@ const outsideClickHandler = [
           :placeholder="t('CONTACTS_LAYOUT.FILTER.SEGMENT.INPUT_PLACEHOLDER')"
         />
       </label>
+=======
+      <div class="pb-6 border-b border-n-weak">
+        <Input
+          v-model="segmentNameLocal"
+          :label="$t('CONTACTS_LAYOUT.FILTER.SEGMENT.LABEL')"
+          :placeholder="t('CONTACTS_LAYOUT.FILTER.SEGMENT.INPUT_PLACEHOLDER')"
+        />
+      </div>
+>>>>>>> upstream/develop
     </div>
     <ul class="grid gap-4 list-none">
       <template v-for="(filter, index) in filters" :key="filter.id">
@@ -148,10 +166,17 @@ const outsideClickHandler = [
       </template>
     </ul>
     <div class="flex justify-between gap-2">
+<<<<<<< HEAD
       <Button sm ghost blue @click="addFilter">
         {{ $t('CONTACTS_LAYOUT.FILTER.BUTTONS.ADD_FILTER') }}
       </Button>
       <div class="flex gap-2">
+=======
+      <Button sm ghost blue class="flex-shrink-0" @click="addFilter">
+        {{ $t('CONTACTS_LAYOUT.FILTER.BUTTONS.ADD_FILTER') }}
+      </Button>
+      <div class="flex gap-2 flex-shrink-0">
+>>>>>>> upstream/develop
         <Button sm faded slate @click="resetFilter">
           {{ $t('CONTACTS_LAYOUT.FILTER.BUTTONS.CLEAR_FILTERS') }}
         </Button>

@@ -3,6 +3,10 @@ import { frontendURL } from 'dashboard/helper/URLHelper.js';
 import CampaignsPageRouteView from './pages/CampaignsPageRouteView.vue';
 import LiveChatCampaignsPage from './pages/LiveChatCampaignsPage.vue';
 import SMSCampaignsPage from './pages/SMSCampaignsPage.vue';
+<<<<<<< HEAD
+=======
+import WhatsAppCampaignsPage from './pages/WhatsAppCampaignsPage.vue';
+>>>>>>> upstream/develop
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
 const meta = {
@@ -50,6 +54,18 @@ const campaignsRoutes = {
           meta,
           component: SMSCampaignsPage,
         },
+<<<<<<< HEAD
+=======
+        {
+          path: 'whatsapp',
+          name: 'campaigns_whatsapp_index',
+          meta: {
+            ...meta,
+            featureFlag: FEATURE_FLAGS.WHATSAPP_CAMPAIGNS,
+          },
+          component: WhatsAppCampaignsPage,
+        },
+>>>>>>> upstream/develop
       ],
     },
   ],

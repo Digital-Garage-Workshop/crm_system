@@ -6,6 +6,16 @@ import { useAccount } from 'dashboard/composables/useAccount';
 
 import BasePaywallModal from 'dashboard/routes/dashboard/settings/components/BasePaywallModal.vue';
 
+<<<<<<< HEAD
+=======
+defineProps({
+  featurePrefix: {
+    type: String,
+    default: 'CAPTAIN',
+  },
+});
+
+>>>>>>> upstream/develop
 const router = useRouter();
 const currentUser = useMapGetter('getCurrentUser');
 
@@ -27,11 +37,19 @@ const openBilling = () => {
 
 <template>
   <div
+<<<<<<< HEAD
     class="w-full max-w-[60rem] mx-auto h-full max-h-[448px] grid place-content-center"
   >
     <BasePaywallModal
       class="mx-auto"
       feature-prefix="CAPTAIN"
+=======
+    class="w-full max-w-5xl mx-auto h-full max-h-[448px] grid place-content-center"
+  >
+    <BasePaywallModal
+      class="mx-auto"
+      :feature-prefix="featurePrefix"
+>>>>>>> upstream/develop
       :i18n-key="i18nKey"
       :is-super-admin="isSuperAdmin"
       :is-on-chatwoot-cloud="isOnChatwootCloud"

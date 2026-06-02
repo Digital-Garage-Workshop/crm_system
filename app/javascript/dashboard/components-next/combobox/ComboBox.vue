@@ -56,8 +56,18 @@ const selectedLabel = computed(() => {
 });
 
 const selectOption = option => {
+<<<<<<< HEAD
   selectedValue.value = option.value;
   emit('update:modelValue', option.value);
+=======
+  if (selectedValue.value === option.value) {
+    selectedValue.value = '';
+    emit('update:modelValue', '');
+  } else {
+    selectedValue.value = option.value;
+    emit('update:modelValue', option.value);
+  }
+>>>>>>> upstream/develop
   open.value = false;
   search.value = '';
 };
@@ -96,8 +106,18 @@ watch(
         :label="selectedLabel"
         trailing-icon
         :disabled="disabled"
+<<<<<<< HEAD
         class="justify-between w-full !px-3 !py-2.5 text-n-slate-12 font-normal group-hover/combobox:border-n-slate-6 [&:not(.focused)]:hover:enabled:outline-n-slate-6 [&:not(.focused)]:dark:hover:enabled:outline-n-slate-6 [&:not(.focused)]:dark:outline-n-weak focus:outline-n-brand"
         :class="{ focused: open }"
+=======
+        no-animation
+        class="justify-between w-full !px-3 !py-2.5 text-n-slate-12 font-normal group-hover/combobox:border-n-slate-6 focus:outline-n-brand"
+        :class="{
+          focused: open,
+          '[&:not(.focused)]:dark:outline-n-weak [&:not(.focused)]:hover:enabled:outline-n-slate-6 [&:not(.focused)]:dark:hover:enabled:outline-n-slate-6':
+            !hasError,
+        }"
+>>>>>>> upstream/develop
         :icon="open ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
         @click="toggleDropdown"
       />

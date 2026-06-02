@@ -3,6 +3,12 @@
     "FETCHING": "連携情報を取得中",
     "NO_HOOK_CONFIGURED": "このアカウントには{integrationId}の連携が設定されていません。",
     "HEADER": "アプリケーション",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "検索...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "有効",
       "DISABLED": "無効"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "連携設定を取得中",
       "INBOX": "受信トレイ",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "操作",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "削除"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "受信トレイを選択"
         },
         "SUBMIT": "作成",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "キャンセル"
       },
       "API": {

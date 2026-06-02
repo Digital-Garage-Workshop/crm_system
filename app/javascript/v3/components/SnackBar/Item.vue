@@ -17,7 +17,11 @@ export default {
 
 <template>
   <div
+<<<<<<< HEAD
     class="bg-slate-900 dark:bg-slate-800 rounded-md drop-shadow-md mb-4 max-w-[40rem] inline-flex items-center min-w-[22rem] py-3 px-4"
+=======
+    class="bg-n-slate-12 dark:bg-n-slate-7 rounded-md drop-shadow-md mb-4 max-w-[40rem] inline-flex items-center min-w-[22rem] py-3 px-4"
+>>>>>>> upstream/develop
     :class="isActionPresent ? 'justify-between' : 'justify-center'"
   >
     <div class="text-sm font-medium text-white">

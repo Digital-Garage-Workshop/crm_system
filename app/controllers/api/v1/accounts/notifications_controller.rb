@@ -41,9 +41,15 @@ class Api::V1::Accounts::NotificationsController < Api::V1::Accounts::BaseContro
 
   def destroy_all
     if params[:type] == 'read'
+<<<<<<< HEAD
       ::Notification::DeleteNotificationJob.perform_later(Current.user, type: :read)
     else
       ::Notification::DeleteNotificationJob.perform_later(Current.user, type: :all)
+=======
+      ::Notification::DeleteNotificationJob.perform_later(Current.user, Current.account, type: :read)
+    else
+      ::Notification::DeleteNotificationJob.perform_later(Current.user, Current.account, type: :all)
+>>>>>>> upstream/develop
     end
     head :ok
   end
@@ -69,7 +75,11 @@ class Api::V1::Accounts::NotificationsController < Api::V1::Accounts::BaseContro
   end
 
   def fetch_notification
+<<<<<<< HEAD
     @notification = current_user.notifications.find(params[:id])
+=======
+    @notification = current_user.notifications.where(account_id: Current.account.id).find(params[:id])
+>>>>>>> upstream/develop
   end
 
   def set_current_page

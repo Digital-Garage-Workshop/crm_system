@@ -1,6 +1,10 @@
 <script>
 import { mapGetters } from 'vuex';
 import { MESSAGE_VARIABLES } from 'shared/constants/messages';
+<<<<<<< HEAD
+=======
+import { sanitizeVariableSearchKey } from 'dashboard/helper/commons';
+>>>>>>> upstream/develop
 import MentionBox from '../mentions/MentionBox.vue';
 
 export default {
@@ -16,6 +20,12 @@ export default {
     ...mapGetters({
       customAttributes: 'attributes/getAttributes',
     }),
+<<<<<<< HEAD
+=======
+    sanitizedSearchKey() {
+      return sanitizeVariableSearchKey(this.searchKey);
+    },
+>>>>>>> upstream/develop
     items() {
       return [
         ...this.standardAttributeVariables,
@@ -25,8 +35,13 @@ export default {
     standardAttributeVariables() {
       return MESSAGE_VARIABLES.filter(variable => {
         return (
+<<<<<<< HEAD
           variable.label.includes(this.searchKey) ||
           variable.key.includes(this.searchKey)
+=======
+          variable.label.includes(this.sanitizedSearchKey) ||
+          variable.key.includes(this.sanitizedSearchKey)
+>>>>>>> upstream/develop
         );
       }).map(variable => ({
         label: variable.key,
@@ -69,6 +84,10 @@ export default {
 
 <style scoped>
 .variable--list-label {
+<<<<<<< HEAD
   font-weight: var(--font-weight-bold);
+=======
+  font-weight: 600;
+>>>>>>> upstream/develop
 }
 </style>

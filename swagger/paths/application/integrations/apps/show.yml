@@ -2,6 +2,7 @@ tags:
   - Integrations
 operationId: get-details-of-all-integrations
 summary: List all the Integrations
+<<<<<<< HEAD
 description: Get the details of all Integrations available for the account
 responses:
   200:
@@ -15,3 +16,33 @@ responses:
     description: Unauthorized
   404:
     description: Url not found
+=======
+security:
+  - userApiKey: []
+description: Get the details of all Integrations available for the account
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            payload:
+              type: array
+              description: 'Array of Integration apps'
+              items:
+                $ref: '#/components/schemas/integrations_app'
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '404':
+    description: Url not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

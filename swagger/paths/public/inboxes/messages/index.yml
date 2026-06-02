@@ -1,5 +1,6 @@
 tags:
   - Messages API
+<<<<<<< HEAD
 operationId: list-all-converation-messages
 summary: List all messages
 description: List all messages in the conversation
@@ -13,3 +14,25 @@ responses:
         $ref: '#/definitions/public_message'
   401:
     description: Unauthorized
+=======
+operationId: list-all-conversation-messages
+summary: List all messages
+description: List all messages in the conversation
+security: []
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: array
+          description: 'Array of messages'
+          items:
+            $ref: '#/components/schemas/public_message'
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

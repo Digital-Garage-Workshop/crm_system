@@ -5,7 +5,11 @@ class Api::V1::Accounts::UploadController < Api::V1::Accounts::BaseController
              elsif params[:external_url].present?
                create_from_url
              else
+<<<<<<< HEAD
                render_error('No file or URL provided', :unprocessable_entity)
+=======
+               render_error(I18n.t('errors.upload.missing_input'), :unprocessable_entity)
+>>>>>>> upstream/develop
              end
 
     render_success(result) if result.is_a?(ActiveStorage::Blob)
@@ -19,6 +23,7 @@ class Api::V1::Accounts::UploadController < Api::V1::Accounts::BaseController
   end
 
   def create_from_url
+<<<<<<< HEAD
     uri = parse_uri(params[:external_url])
     return if performed?
 
@@ -48,6 +53,23 @@ class Api::V1::Accounts::UploadController < Api::V1::Accounts::BaseController
     render_error('Invalid URL provided', :unprocessable_entity)
   rescue StandardError
     render_error('An unexpected error occurred', :internal_server_error)
+=======
+    SafeFetch.fetch(params[:external_url].to_s) do |result|
+      create_and_save_blob(result.tempfile, result.filename, result.content_type)
+    end
+  rescue SafeFetch::HttpError => e
+    render_error(I18n.t('errors.upload.fetch_failed_with_message', message: e.message), :unprocessable_entity)
+  rescue SafeFetch::FetchError
+    render_error(I18n.t('errors.upload.fetch_failed'), :unprocessable_entity)
+  rescue SafeFetch::FileTooLargeError
+    render_error(I18n.t('errors.upload.file_too_large'), :unprocessable_entity)
+  rescue SafeFetch::UnsupportedContentTypeError
+    render_error(I18n.t('errors.upload.unsupported_content_type'), :unprocessable_entity)
+  rescue SafeFetch::Error
+    render_error(I18n.t('errors.upload.invalid_url'), :unprocessable_entity)
+  rescue StandardError
+    render_error(I18n.t('errors.upload.unexpected'), :internal_server_error)
+>>>>>>> upstream/develop
   end
 
   def create_and_save_blob(io, filename, content_type)
@@ -59,7 +81,11 @@ class Api::V1::Accounts::UploadController < Api::V1::Accounts::BaseController
   end
 
   def render_success(file_blob)
+<<<<<<< HEAD
     render json: { file_url: url_for(file_blob), blob_key: file_blob.key, blob_id: file_blob.id }
+=======
+    render json: { file_url: url_for(file_blob), blob_id: file_blob.signed_id }
+>>>>>>> upstream/develop
   end
 
   def render_error(message, status)

@@ -1,5 +1,6 @@
 {
   "ATTRIBUTES_MGMT": {
+<<<<<<< HEAD
     "HEADER": "Attributi personalizzati",
     "HEADER_BTN_TXT": "Aggiungi attributo personalizzato",
     "LOADING": "Recupero degli attributi personalizzati",
@@ -7,17 +8,49 @@
     "LEARN_MORE": "Learn more about custom attributes",
     "ADD": {
       "TITLE": "Aggiungi attributo personalizzato",
+=======
+    "HEADER": "Attributi Personalizzati",
+    "HEADER_BTN_TXT": "Aggiungi Attributo Personalizzato",
+    "LOADING": "Caricamento attributi personalizzati",
+    "DESCRIPTION": "Un attributo personalizzato tiene traccia di informazioni aggiuntive sui tuoi contatti o sulle conversazioni — ad esempio il piano di abbonamento o la data del primo acquisto. Puoi aggiungere diversi tipi di attributi personalizzati, come testo, elenchi o numeri, per raccogliere le informazioni specifiche di cui hai bisogno.",
+    "LEARN_MORE": "Scopri di più sugli attributi personalizzati",
+    "COUNT": "{n} attributo | {n} attributi",
+    "SEARCH_PLACEHOLDER": "Cerca attributi...",
+    "NO_RESULTS": "Nessun attributo trovato corrispondente alla tua ricerca",
+    "ATTRIBUTE_MODELS": {
+      "CONVERSATION": "Conversazione",
+      "CONTACT": "Contatto",
+      "COMPANY": "Azienda"
+    },
+    "ATTRIBUTE_TYPES": {
+      "TEXT": "Testo",
+      "NUMBER": "Numero",
+      "LINK": "Link",
+      "DATE": "Data",
+      "LIST": "Elenco",
+      "CHECKBOX": "Checkbox"
+    },
+    "ADD": {
+      "TITLE": "Aggiungi Attributo Personalizzato",
+>>>>>>> upstream/develop
       "SUBMIT": "Crea",
       "CANCEL_BUTTON_TEXT": "Annulla",
       "FORM": {
         "NAME": {
+<<<<<<< HEAD
           "LABEL": "Nome visualizzato",
           "PLACEHOLDER": "Inserisci il nome di visualizzazione dell'attributo personalizzato",
           "ERROR": "Il nome è obbligatorio"
+=======
+          "LABEL": "Nome Visualizzato",
+          "PLACEHOLDER": "Inserisci il nome da mostrare per l’attributo personalizzato",
+          "ERROR": "Nome richiesto"
+>>>>>>> upstream/develop
         },
         "DESC": {
           "LABEL": "Descrizione",
           "PLACEHOLDER": "Inserisci una descrizione dell'attributo personalizzato",
+<<<<<<< HEAD
           "ERROR": "La descrizione è obbligatoria"
         },
         "MODEL": {
@@ -32,12 +65,29 @@
           "LIST": {
             "LABEL": "Elenco valori",
             "PLACEHOLDER": "Inserisci il valore e premi il tasto Invio",
+=======
+          "ERROR": "Descrizione richiesta"
+        },
+        "MODEL": {
+          "LABEL": "Si applica a",
+          "PLACEHOLDER": "Selezionane uno",
+          "ERROR": "Modello richiesto"
+        },
+        "TYPE": {
+          "LABEL": "Tipo",
+          "PLACEHOLDER": "Seleziona un tipo di attributo",
+          "ERROR": "Tipo richiesto",
+          "LIST": {
+            "LABEL": "Valori dell’elenco",
+            "PLACEHOLDER": "Inserisci un valore da aggiungere all'elenco e premi il tasto invio",
+>>>>>>> upstream/develop
             "ERROR": "Deve avere almeno un valore"
           }
         },
         "KEY": {
           "LABEL": "Chiave",
           "PLACEHOLDER": "Inserisci la chiave dell'attributo personalizzato",
+<<<<<<< HEAD
           "ERROR": "La chiave è obbligatoria",
           "IN_VALID": "Chiave non valida"
         },
@@ -51,17 +101,44 @@
         },
         "ENABLE_REGEX": {
           "LABEL": "Enable regex validation"
+=======
+          "ERROR": "Chiave richiesta",
+          "IN_VALID": "Chiave non valida"
+        },
+        "REGEX_PATTERN": {
+          "LABEL": "Espressione regolare",
+          "PLACEHOLDER": "Inserisci un'espressione regolare per validare gli attributi personalizzati. (Opzionale)"
+        },
+        "REGEX_CUE": {
+          "LABEL": "Suggerimento espressione regolare",
+          "PLACEHOLDER": "Inserisci un suggerimento per l'espressione regolare. (Opzionale)"
+        },
+        "ENABLE_REGEX": {
+          "LABEL": "Abilita convalida espressione regolare"
+        },
+        "BADGES": {
+          "PRE_CHAT": "Pre-chat",
+          "RESOLUTION": "Risoluzione"
+>>>>>>> upstream/develop
         }
       },
       "API": {
         "SUCCESS_MESSAGE": "Attributo personalizzato aggiunto con successo!",
+<<<<<<< HEAD
         "ERROR_MESSAGE": "Could not create a Custom Attribute. Please try again later."
+=======
+        "ERROR_MESSAGE": "Impossibile creare un Attributo Personalizzato. Riprova più tardi."
+>>>>>>> upstream/develop
       }
     },
     "DELETE": {
       "BUTTON_TEXT": "Elimina",
       "API": {
+<<<<<<< HEAD
         "SUCCESS_MESSAGE": "Attributo personalizzato eliminato con successo.",
+=======
+        "SUCCESS_MESSAGE": "Attributo Personalizzato eliminato con successo.",
+>>>>>>> upstream/develop
         "ERROR_MESSAGE": "Impossibile eliminare l'attributo personalizzato. Riprova."
       },
       "CONFIRM": {
@@ -73,6 +150,7 @@
       }
     },
     "EDIT": {
+<<<<<<< HEAD
       "TITLE": "Modifica attributo personalizzato",
       "UPDATE_BUTTON_TEXT": "Aggiorna",
       "TYPE": {
@@ -90,6 +168,26 @@
       "HEADER": "Attributi personalizzati",
       "CONVERSATION": "Conversazioni",
       "CONTACT": "Contatto"
+=======
+      "TITLE": "Modifica Attributo Personalizzato",
+      "UPDATE_BUTTON_TEXT": "Aggiorna",
+      "TYPE": {
+        "LIST": {
+          "LABEL": "Valori dell’elenco",
+          "PLACEHOLDER": "Inserisci i valori da aggiungere all'elenco e premi il tasto invio"
+        }
+      },
+      "API": {
+        "SUCCESS_MESSAGE": "Attributo Personalizzato aggiornato correttamente",
+        "ERROR_MESSAGE": "Si è verificato un errore durante l'aggiornamento dell'attributo personalizzato, riprova"
+      }
+    },
+    "TABS": {
+      "HEADER": "Attributi Personalizzati",
+      "CONVERSATION": "Conversazione",
+      "CONTACT": "Contatto",
+      "COMPANY": "Azienda"
+>>>>>>> upstream/develop
     },
     "LIST": {
       "TABLE_HEADER": {
@@ -107,6 +205,7 @@
         "NOT_FOUND": "Non ci sono attributi personalizzati configurati"
       },
       "REGEX_PATTERN": {
+<<<<<<< HEAD
         "LABEL": "Regex Pattern",
         "PLACEHOLDER": "Please enter custom attribute regex pattern. (Optional)"
       },
@@ -117,6 +216,22 @@
       "ENABLE_REGEX": {
         "LABEL": "Enable regex validation"
       }
+=======
+        "LABEL": "Espressione regolare",
+        "PLACEHOLDER": "Inserisci un'espressione regolare per validare gli attributi personalizzati. (Opzionale)"
+      },
+      "REGEX_CUE": {
+        "LABEL": "Suggerimento espressione regolare",
+        "PLACEHOLDER": "Inserisci un suggerimento per l'espressione regolare. (Opzionale)"
+      },
+      "ENABLE_REGEX": {
+        "LABEL": "Abilita convalida espressione regolare"
+      }
+    },
+    "BADGES": {
+      "PRE_CHAT": "Pre-chat",
+      "RESOLUTION": "Risoluzione"
+>>>>>>> upstream/develop
     }
   }
 }

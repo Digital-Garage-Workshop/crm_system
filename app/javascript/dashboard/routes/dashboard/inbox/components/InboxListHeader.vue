@@ -79,9 +79,17 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex items-center justify-between w-full gap-1 h-14 px-4 mb-2">
     <div class="flex items-center gap-2 min-w-0 flex-1">
       <h1 class="min-w-0 text-lg font-medium truncate text-n-slate-12">
+=======
+  <div
+    class="flex items-center justify-between w-full gap-1 h-[3.25rem] ltr:pl-4 rtl:pr-4 ltr:pr-3 rtl:pl-3"
+  >
+    <div class="flex items-center gap-2 min-w-0 flex-1">
+      <h1 class="text-heading-2 truncate text-n-slate-12 min-w-0">
+>>>>>>> upstream/develop
         {{ $t('INBOX.LIST.TITLE') }}
       </h1>
       <div class="relative">
@@ -91,7 +99,11 @@ export default {
           trailing-icon
           slate
           xs
+<<<<<<< HEAD
           faded
+=======
+          :variant="showInboxDisplayMenu ? 'faded' : 'solid'"
+>>>>>>> upstream/develop
           @click="openInboxDisplayMenu"
         />
         <InboxDisplayMenu
@@ -106,8 +118,13 @@ export default {
       <NextButton
         icon="i-lucide-sliders-vertical"
         slate
+<<<<<<< HEAD
         xs
         faded
+=======
+        sm
+        :variant="showInboxOptionMenu ? 'faded' : 'ghost'"
+>>>>>>> upstream/develop
         @click="openInboxOptionsMenu"
       />
       <InboxOptionMenu

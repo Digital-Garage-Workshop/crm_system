@@ -5,6 +5,13 @@ export default {
       type: String,
       default: '',
     },
+<<<<<<< HEAD
+=======
+    bg: {
+      type: String,
+      default: 'bg-white dark:bg-n-solid-2',
+    },
+>>>>>>> upstream/develop
   },
 };
 </script>
@@ -15,7 +22,11 @@ export default {
       <div class="w-full border-t border-n-strong" />
     </div>
     <div v-if="label" class="relative flex justify-center text-sm">
+<<<<<<< HEAD
       <span class="bg-white dark:bg-n-solid-2 px-2 text-n-slate-10">
+=======
+      <span class="px-2 text-n-slate-10" :class="bg">
+>>>>>>> upstream/develop
         {{ label }}
       </span>
     </div>

@@ -1,5 +1,10 @@
 in: path
 name: inbox_identifier
+<<<<<<< HEAD
 type: string
+=======
+schema:
+  type: string
+>>>>>>> upstream/develop
 required: true
 description: The identifier obtained from API inbox channel

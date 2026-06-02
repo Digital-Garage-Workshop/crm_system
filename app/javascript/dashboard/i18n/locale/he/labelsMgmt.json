@@ -3,8 +3,16 @@
     "HEADER": "תוויות",
     "HEADER_BTN_TXT": "הוסף תווית",
     "LOADING": "מביא תוויות",
+<<<<<<< HEAD
     "DESCRIPTION": "Labels help you categorize and prioritize conversations and leads. You can assign a label to a conversation or contact using the side panel.",
     "LEARN_MORE": "Learn more about labels",
+=======
+    "DESCRIPTION": "תוויות עוזרות לך לסווג ולתעדף שיחות ולידים. תוכל להקצות תווית לשיחה או לאיש קשר באמצעות החלונית הצדדית.",
+    "LEARN_MORE": "למד עוד על תוויות",
+    "COUNT": "{n} label | {n} labels",
+    "SEARCH_PLACEHOLDER": "חפש תוויות...",
+    "NO_RESULTS": "No labels found matching your search",
+>>>>>>> upstream/develop
     "SEARCH_404": "אין פריטים התואמים לשאילתה זו",
     "LIST": {
       "404": "אין תוויות זמינות בחשבון זה.",
@@ -13,7 +21,12 @@
       "TABLE_HEADER": {
         "NAME": "שם",
         "DESCRIPTION": "תיאור",
+<<<<<<< HEAD
         "COLOR": "צֶבַע"
+=======
+        "COLOR": "צֶבַע",
+        "ACTION": "פעולות"
+>>>>>>> upstream/develop
       }
     },
     "FORM": {
@@ -41,6 +54,7 @@
     },
     "SUGGESTIONS": {
       "TOOLTIP": {
+<<<<<<< HEAD
         "SINGLE_SUGGESTION": "Add label to conversation",
         "MULTIPLE_SUGGESTION": "Select this label",
         "DESELECT": "Deselect label",
@@ -52,6 +66,19 @@
       "ADD_SELECTED_LABEL": "Add selected label",
       "ADD_ALL_LABELS": "Add all labels",
       "SUGGESTED_LABELS": "Suggested labels"
+=======
+        "SINGLE_SUGGESTION": "הוסף תווית לשיחה",
+        "MULTIPLE_SUGGESTION": "בחר תווית זו",
+        "DESELECT": "בטל בחירת תווית",
+        "DISMISS": "בטל הצעה"
+      },
+      "POWERED_BY": "Chatwoot AI",
+      "DISMISS": "סגור",
+      "ADD_SELECTED_LABELS": "הוסף תוויות שנבחרו",
+      "ADD_SELECTED_LABEL": "הוסף תווית שנבחרה",
+      "ADD_ALL_LABELS": "הוסף את כל התוויות",
+      "SUGGESTED_LABELS": "תוויות מוצעות"
+>>>>>>> upstream/develop
     },
     "ADD": {
       "TITLE": "הוסף תווית",

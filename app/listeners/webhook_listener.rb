@@ -83,13 +83,46 @@ class WebhookListener < BaseListener
     deliver_account_webhooks(payload, account)
   end
 
+<<<<<<< HEAD
   private
 
+=======
+  def conversation_typing_on(event)
+    handle_typing_status(__method__.to_s, event)
+  end
+
+  def conversation_typing_off(event)
+    handle_typing_status(__method__.to_s, event)
+  end
+
+  private
+
+  def handle_typing_status(event_name, event)
+    conversation = event.data[:conversation]
+    user = event.data[:user]
+    inbox = conversation.inbox
+
+    payload = {
+      event: event_name,
+      user: user.webhook_data,
+      conversation: conversation.webhook_data,
+      is_private: event.data[:is_private] || false
+    }
+    deliver_webhook_payloads(payload, inbox)
+  end
+
+>>>>>>> upstream/develop
   def deliver_account_webhooks(payload, account)
     account.webhooks.account_type.each do |webhook|
       next unless webhook.subscriptions.include?(payload[:event])
 
+<<<<<<< HEAD
       WebhookJob.perform_later(webhook.url, payload)
+=======
+      WebhookJob.perform_later(webhook.url, payload, :account_webhook,
+                               secret: webhook.secret,
+                               delivery_id: SecureRandom.uuid)
+>>>>>>> upstream/develop
     end
   end
 
@@ -97,7 +130,12 @@ class WebhookListener < BaseListener
     return unless inbox.channel_type == 'Channel::Api'
     return if inbox.channel.webhook_url.blank?
 
+<<<<<<< HEAD
     WebhookJob.perform_later(inbox.channel.webhook_url, payload, :api_inbox_webhook)
+=======
+    WebhookJob.perform_later(inbox.channel.webhook_url, payload, :api_inbox_webhook,
+                             secret: inbox.channel.secret, delivery_id: SecureRandom.uuid)
+>>>>>>> upstream/develop
   end
 
   def deliver_webhook_payloads(payload, inbox)

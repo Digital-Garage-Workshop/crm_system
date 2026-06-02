@@ -37,12 +37,21 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+<<<<<<< HEAD
 .chat-bubble.user::v-deep {
   p code {
     @apply bg-n-alpha-2 dark:bg-n-alpha-1 text-white;
   }
 
   pre {
+=======
+.chat-bubble.user {
+  :deep(p code) {
+    @apply bg-n-alpha-2 dark:bg-n-alpha-1 text-white;
+  }
+
+  :deep(pre) {
+>>>>>>> upstream/develop
     @apply text-white bg-n-alpha-2 dark:bg-n-alpha-1;
 
     code {
@@ -50,7 +59,11 @@ export default {
     }
   }
 
+<<<<<<< HEAD
   blockquote {
+=======
+  :deep(blockquote) {
+>>>>>>> upstream/develop
     @apply bg-transparent border-n-slate-7 ltr:border-l-2 rtl:border-r-2 border-solid;
 
     p {

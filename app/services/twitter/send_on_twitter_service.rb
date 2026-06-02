@@ -37,7 +37,11 @@ class Twitter::SendOnTwitterService < Base::SendOnChannelService
   def send_direct_message
     twitter_client.send_direct_message(
       recipient_id: contact_inbox.source_id,
+<<<<<<< HEAD
       message: message.content
+=======
+      message: message.outgoing_content
+>>>>>>> upstream/develop
     )
   end
 
@@ -52,7 +56,11 @@ class Twitter::SendOnTwitterService < Base::SendOnChannelService
   def send_tweet_reply
     response = twitter_client.send_tweet_reply(
       reply_to_tweet_id: reply_to_message.source_id,
+<<<<<<< HEAD
       tweet: "#{screen_name} #{message.content}"
+=======
+      tweet: "#{screen_name} #{message.outgoing_content}"
+>>>>>>> upstream/develop
     )
     if response.status == '200'
       tweet_data = response.body

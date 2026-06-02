@@ -3,9 +3,18 @@
     "HEADER": "Macros",
     "DESCRIPTION": "Makro ir saglabātu darbību kopa, kas palīdz klientu apkalpošanas aģentiem viegli veikt uzdevumus. Aģenti var definēt darbību kopu, piemēram, sarunas marķēšanu ar etiķeti, sarunas transkripta nosūtīšanu uz e-pastu, pielāgota atribūta atjaunināšanu utt., un viņi var veikt šīs darbības ar vienu klikšķi.",
     "LEARN_MORE": "Uzzināt vairāk par makro",
+<<<<<<< HEAD
     "HEADER_BTN_TXT": "Pievienot jaunu makro",
     "HEADER_BTN_TXT_SAVE": "Saglabāt makro",
     "LOADING": "Notiek makro iegūšana",
+=======
+    "COUNT": "{n} macro | {n} macros",
+    "HEADER_BTN_TXT": "Pievienot jaunu makro",
+    "HEADER_BTN_TXT_SAVE": "Saglabāt makro",
+    "LOADING": "Notiek makro iegūšana",
+    "SEARCH_PLACEHOLDER": "Search macros...",
+    "NO_RESULTS": "No macros found matching your search",
+>>>>>>> upstream/develop
     "ERROR": "Radās kļūda. Lūdzu, mēģiniet vēlreiz",
     "ORDER_INFO": "Makro darbosies tādā secībā, kādā Jūs pievienosit savas darbības. Jūs varat tos pārkārtot, velkot tos aiz roktura kas atrodas blakus katram mezglam.",
     "ADD": {
@@ -29,7 +38,12 @@
         "NAME": "Nosaukums",
         "CREATED BY": "Izveidoja",
         "LAST_UPDATED_BY": "Pēdējo reizi atjaunināja",
+<<<<<<< HEAD
         "VISIBILITY": "Redzamība"
+=======
+        "VISIBILITY": "Redzamība",
+        "ACTIONS": "Darbības"
+>>>>>>> upstream/develop
       },
       "404": "Nav atrasts neviens makro"
     },
@@ -45,6 +59,12 @@
         "ERROR_MESSAGE": "Dzēšot makro radās kļūda. Lūdzu, vēlāk mēģiniet vēlreiz"
       }
     },
+<<<<<<< HEAD
+=======
+    "VIEW": {
+      "TOOLTIP": "View macro"
+    },
+>>>>>>> upstream/develop
     "EDIT": {
       "TOOLTIP": "Rediģēt makro",
       "API": {
@@ -62,7 +82,13 @@
         "LABEL": "Makro Redzamība",
         "GLOBAL": {
           "LABEL": "Publisks",
+<<<<<<< HEAD
           "DESCRIPTION": "Šis makro ir publiski pieejams visiem šī konta aģentiem."
+=======
+          "DESCRIPTION": "Šis makro ir publiski pieejams visiem šī konta aģentiem.",
+          "CREATE_DISABLED_DESCRIPTION": "Only administrators can create public macros.",
+          "EDIT_DISABLED_DESCRIPTION": "Only administrators can edit public macros."
+>>>>>>> upstream/develop
         },
         "PERSONAL": {
           "LABEL": "Privāts",
@@ -89,6 +115,10 @@
       "ASSIGN_AGENT": "Piešķirt Aģentu",
       "ADD_LABEL": "Pievienot Etiķeti",
       "REMOVE_LABEL": "Noņemt Etiķeti",
+<<<<<<< HEAD
+=======
+      "REMOVE_ASSIGNED_AGENT": "Remove Assigned Agent",
+>>>>>>> upstream/develop
       "REMOVE_ASSIGNED_TEAM": "Noņemt Piešķirto Komandu",
       "SEND_EMAIL_TRANSCRIPT": "Nosūtīt uz E-pastu Transkriptu",
       "MUTE_CONVERSATION": "Izslēgt Sarunu",
@@ -99,6 +129,16 @@
       "CHANGE_PRIORITY": "Mainīt prioritāti",
       "ADD_PRIVATE_NOTE": "Pievienot Privātu Piezīmi",
       "SEND_WEBHOOK_EVENT": "Nosūtīt Webhook Notikumu"
+<<<<<<< HEAD
+=======
+    },
+    "PRIORITY_TYPES": {
+      "NONE": "Nav",
+      "LOW": "Zema",
+      "MEDIUM": "Vidēja",
+      "HIGH": "Augsta",
+      "URGENT": "Steidzama"
+>>>>>>> upstream/develop
     }
   }
 }

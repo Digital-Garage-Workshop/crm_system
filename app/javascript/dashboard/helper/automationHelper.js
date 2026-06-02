@@ -5,11 +5,17 @@ import {
 } from 'dashboard/routes/dashboard/settings/automation/operators';
 import {
   DEFAULT_MESSAGE_CREATED_CONDITION,
+<<<<<<< HEAD
   DEFAULT_CONVERSATION_OPENED_CONDITION,
   DEFAULT_OTHER_CONDITION,
   DEFAULT_ACTIONS,
   MESSAGE_CONDITION_VALUES,
   PRIORITY_CONDITION_VALUES,
+=======
+  DEFAULT_CONVERSATION_CONDITION,
+  DEFAULT_OTHER_CONDITION,
+  DEFAULT_ACTIONS,
+>>>>>>> upstream/develop
 } from 'dashboard/constants/automation';
 import filterQueryGenerator from './filterQueryGenerator';
 import actionQueryGenerator from './actionQueryGenerator';
@@ -103,6 +109,10 @@ export const getActionOptions = ({
   slaPolicies,
   type,
   addNoneToListFn,
+<<<<<<< HEAD
+=======
+  priorityOptions,
+>>>>>>> upstream/develop
 }) => {
   const actionsMap = {
     assign_agent: addNoneToListFn ? addNoneToListFn(agents) : agents,
@@ -110,7 +120,11 @@ export const getActionOptions = ({
     send_email_to_team: teams,
     add_label: generateConditionOptions(labels, 'title'),
     remove_label: generateConditionOptions(labels, 'title'),
+<<<<<<< HEAD
     change_priority: PRIORITY_CONDITION_VALUES,
+=======
+    change_priority: priorityOptions,
+>>>>>>> upstream/develop
     add_sla: slaPolicies,
   };
   return actionsMap[type];
@@ -125,9 +139,18 @@ export const getConditionOptions = ({
   customAttributes,
   inboxes,
   languages,
+<<<<<<< HEAD
   statusFilterOptions,
   teams,
   type,
+=======
+  labels,
+  statusFilterOptions,
+  teams,
+  type,
+  priorityOptions,
+  messageTypeOptions,
+>>>>>>> upstream/develop
 }) => {
   if (isCustomAttributeCheckbox(customAttributes, type)) {
     return booleanFilterOptions;
@@ -147,8 +170,15 @@ export const getConditionOptions = ({
     browser_language: languages,
     conversation_language: languages,
     country_code: countries,
+<<<<<<< HEAD
     message_type: MESSAGE_CONDITION_VALUES,
     priority: PRIORITY_CONDITION_VALUES,
+=======
+    message_type: messageTypeOptions,
+    private_note: booleanFilterOptions,
+    priority: priorityOptions,
+    labels: generateConditionOptions(labels, 'title'),
+>>>>>>> upstream/develop
   };
 
   return conditionFilterMaps[type];
@@ -166,6 +196,7 @@ export const getFileName = (action, files = []) => {
 
 export const getDefaultConditions = eventName => {
   if (eventName === 'message_created') {
+<<<<<<< HEAD
     return DEFAULT_MESSAGE_CREATED_CONDITION;
   }
   if (eventName === 'conversation_opened') {
@@ -176,6 +207,21 @@ export const getDefaultConditions = eventName => {
 
 export const getDefaultActions = () => {
   return DEFAULT_ACTIONS;
+=======
+    return structuredClone(DEFAULT_MESSAGE_CREATED_CONDITION);
+  }
+  if (
+    eventName === 'conversation_opened' ||
+    eventName === 'conversation_resolved'
+  ) {
+    return structuredClone(DEFAULT_CONVERSATION_CONDITION);
+  }
+  return structuredClone(DEFAULT_OTHER_CONDITION);
+};
+
+export const getDefaultActions = () => {
+  return structuredClone(DEFAULT_ACTIONS);
+>>>>>>> upstream/develop
 };
 
 export const filterCustomAttributes = customAttributes => {

@@ -7,6 +7,10 @@
 #  hmac_mandatory        :boolean          default(FALSE)
 #  hmac_token            :string
 #  identifier            :string
+<<<<<<< HEAD
+=======
+#  secret                :string
+>>>>>>> upstream/develop
 #  webhook_url           :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
@@ -26,6 +30,10 @@ class Channel::Api < ApplicationRecord
 
   has_secure_token :identifier
   has_secure_token :hmac_token
+<<<<<<< HEAD
+=======
+  include WebhookSecretable
+>>>>>>> upstream/develop
   validate :ensure_valid_agent_reply_time_window
   validates :webhook_url, length: { maximum: Limits::URL_LENGTH_LIMIT }
 

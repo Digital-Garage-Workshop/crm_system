@@ -44,6 +44,7 @@ const bccEmailsArray = computed(() =>
 );
 
 const contactEmailsList = computed(() => {
+<<<<<<< HEAD
   return props.contacts?.map(({ name, id, email }) => ({
     id,
     label: email,
@@ -52,6 +53,18 @@ const contactEmailsList = computed(() => {
     value: id,
     action: 'email',
   }));
+=======
+  return props.contacts
+    ?.filter(contact => contact.email)
+    .map(({ name, id, email }) => ({
+      id,
+      label: email,
+      email,
+      thumbnail: { name: name, src: '' },
+      value: id,
+      action: 'email',
+    }));
+>>>>>>> upstream/develop
 });
 
 // Handle updates from TagInput and convert array back to string
@@ -95,8 +108,13 @@ const inputClass = computed(() => {
           :show-dropdown="showCcEmailsDropdown"
           :is-loading="isLoading"
           type="email"
+<<<<<<< HEAD
           class="flex-1 min-h-7"
           @focus="emit('updateDropdown', 'cc', true)"
+=======
+          allow-create
+          class="flex-1 min-h-7"
+>>>>>>> upstream/develop
           @input="emit('searchCcEmails', $event)"
           @on-click-outside="emit('updateDropdown', 'cc', false)"
           @update:model-value="handleCcUpdate"
@@ -127,9 +145,15 @@ const inputClass = computed(() => {
         :show-dropdown="showBccEmailsDropdown"
         :is-loading="isLoading"
         type="email"
+<<<<<<< HEAD
         class="flex-1 min-h-7"
         focus-on-mount
         @focus="emit('updateDropdown', 'bcc', true)"
+=======
+        allow-create
+        class="flex-1 min-h-7"
+        focus-on-mount
+>>>>>>> upstream/develop
         @input="emit('searchBccEmails', $event)"
         @on-click-outside="emit('updateDropdown', 'bcc', false)"
         @update:model-value="handleBccUpdate"

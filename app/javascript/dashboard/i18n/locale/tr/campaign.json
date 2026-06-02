@@ -1,26 +1,43 @@
 {
   "CAMPAIGN": {
     "LIVE_CHAT": {
+<<<<<<< HEAD
       "HEADER_TITLE": "Live chat campaigns",
       "NEW_CAMPAIGN": "Create campaign",
+=======
+      "HEADER_TITLE": "Canlı sohbet kampanyaları",
+      "NEW_CAMPAIGN": "Kampanya Oluştur",
+>>>>>>> upstream/develop
       "CARD": {
         "STATUS": {
           "ENABLED": "Etkin",
           "DISABLED": "Devre dışı"
         },
         "CAMPAIGN_DETAILS": {
+<<<<<<< HEAD
           "SENT_BY": "Tarafından gönderildi",
+=======
+          "SENT_BY": "Gönderen",
+>>>>>>> upstream/develop
           "BOT": "Bot",
           "FROM": "dan",
           "URL": "URL:"
         }
       },
       "EMPTY_STATE": {
+<<<<<<< HEAD
         "TITLE": "No live chat campaigns are available",
         "SUBTITLE": "Connect with your customers using proactive messages.  Click 'Create campaign' to get started."
       },
       "CREATE": {
         "TITLE": "Create a live chat campaign",
+=======
+        "TITLE": "Canlı sohbet kampanyası mevcut değil",
+        "SUBTITLE": "Proaktif mesajlar kullanarak müşterilerinizle iletişim kurun. Başlamak için 'Kampanya Oluştur' butonuna tıklayın."
+      },
+      "CREATE": {
+        "TITLE": "Canlı sohbet kampanyası oluşturun",
+>>>>>>> upstream/develop
         "CANCEL_BUTTON_TEXT": "İptal Et",
         "CREATE_BUTTON_TEXT": "Yarat",
         "FORM": {
@@ -41,7 +58,11 @@
           },
           "SENT_BY": {
             "LABEL": "Tarafından gönderildi",
+<<<<<<< HEAD
             "PLACEHOLDER": "Please select sender",
+=======
+            "PLACEHOLDER": "Lütfen göndereni seçin",
+>>>>>>> upstream/develop
             "ERROR": "Gönderen bilgisi gerekli"
           },
           "END_POINT": {
@@ -55,41 +76,72 @@
             "ERROR": "Yayın süresi seçiniz"
           },
           "OTHER_PREFERENCES": {
+<<<<<<< HEAD
             "TITLE": "Other preferences",
+=======
+            "TITLE": "Diğer tercihler",
+>>>>>>> upstream/develop
             "ENABLED": "Kampanyayı başlat",
             "TRIGGER_ONLY_BUSINESS_HOURS": "Sadece çalışma saatleri içerisinde tetikle"
           },
           "BUTTONS": {
+<<<<<<< HEAD
             "CREATE": "Yarat",
             "CANCEL": "İptal Et"
           },
           "API": {
             "SUCCESS_MESSAGE": "Live chat campaign created successfully",
+=======
+            "CREATE": "Oluştur",
+            "CANCEL": "İptal Et"
+          },
+          "API": {
+            "SUCCESS_MESSAGE": "Canlı sohbet kampanyası başarıyla oluşturuldu",
+>>>>>>> upstream/develop
             "ERROR_MESSAGE": "Bir hata oluştu, lütfen tekrar deneyin."
           }
         }
       },
       "EDIT": {
+<<<<<<< HEAD
         "TITLE": "Edit live chat campaign",
         "FORM": {
           "API": {
             "SUCCESS_MESSAGE": "Live chat campaign updated successfully",
+=======
+        "TITLE": "Canlı sohbet kampanyasını düzenle",
+        "FORM": {
+          "API": {
+            "SUCCESS_MESSAGE": "Canlı sohbet kampanyası başarıyla güncellendi",
+>>>>>>> upstream/develop
             "ERROR_MESSAGE": "Bir hata oluştu, lütfen tekrar deneyin."
           }
         }
       }
     },
     "SMS": {
+<<<<<<< HEAD
       "HEADER_TITLE": "SMS campaigns",
       "NEW_CAMPAIGN": "Create campaign",
       "EMPTY_STATE": {
         "TITLE": "No SMS campaigns are available",
         "SUBTITLE": "Launch an SMS campaign to reach your customers directly. Send offers or make announcements with ease. Click 'Create campaign' to get started."
+=======
+      "HEADER_TITLE": "SMS kampanyaları",
+      "NEW_CAMPAIGN": "Kampanya oluştur",
+      "EMPTY_STATE": {
+        "TITLE": "SMS kampanyası mevcut değil",
+        "SUBTITLE": "Müşterilerinize doğrudan ulaşmak için bir SMS kampanyası başlatın. Kolaylıkla teklifler gönderin veya duyurular yapın. Başlamak için 'Kampanya oluştur'a tıklayın."
+>>>>>>> upstream/develop
       },
       "CARD": {
         "STATUS": {
           "COMPLETED": "Tamamlandı",
+<<<<<<< HEAD
           "SCHEDULED": "Scheduled"
+=======
+          "SCHEDULED": "Planlanmış"
+>>>>>>> upstream/develop
         },
         "CAMPAIGN_DETAILS": {
           "SENT_FROM": "Sent from",
@@ -99,7 +151,11 @@
       "CREATE": {
         "TITLE": "Create SMS campaign",
         "CANCEL_BUTTON_TEXT": "İptal Et",
+<<<<<<< HEAD
         "CREATE_BUTTON_TEXT": "Yarat",
+=======
+        "CREATE_BUTTON_TEXT": "Oluştur",
+>>>>>>> upstream/develop
         "FORM": {
           "TITLE": {
             "LABEL": "Başlık",
@@ -127,11 +183,83 @@
             "ERROR": "Planlanan zaman seçimi gerekli"
           },
           "BUTTONS": {
+<<<<<<< HEAD
             "CREATE": "Yarat",
             "CANCEL": "İptal Et"
           },
           "API": {
             "SUCCESS_MESSAGE": "SMS campaign created successfully",
+=======
+            "CREATE": "Oluştur",
+            "CANCEL": "İptal Et"
+          },
+          "API": {
+            "SUCCESS_MESSAGE": "SMS kampanyası başarıyla oluşturuldu",
+            "ERROR_MESSAGE": "Bir hata oluştu, lütfen tekrar deneyin."
+          }
+        }
+      }
+    },
+    "WHATSAPP": {
+      "HEADER_TITLE": "WhatsApp kampanyaları",
+      "NEW_CAMPAIGN": "Kampanya Oluştur",
+      "EMPTY_STATE": {
+        "TITLE": "WhatsApp kampanyası mevcut değil",
+        "SUBTITLE": "Müşterilerinize doğrudan ulaşmak için bir WhatsApp kampanyası başlatın. Kolaylıkla teklifler gönderin veya duyurular yapın. Başlamak için 'Kampanya oluştur'a tıklayın."
+      },
+      "CARD": {
+        "STATUS": {
+          "COMPLETED": "Tamamlandı",
+          "SCHEDULED": "Planlanmış"
+        },
+        "CAMPAIGN_DETAILS": {
+          "SENT_FROM": "Sent from",
+          "ON": "on"
+        }
+      },
+      "CREATE": {
+        "TITLE": "Create WhatsApp campaign",
+        "CANCEL_BUTTON_TEXT": "İptal Et",
+        "CREATE_BUTTON_TEXT": "Yarat",
+        "FORM": {
+          "TITLE": {
+            "LABEL": "Başlık",
+            "PLACEHOLDER": "Lütfen kampanya başlığını giriniz",
+            "ERROR": "Başlık gerekli"
+          },
+          "INBOX": {
+            "LABEL": "Gelen Kutu Seç",
+            "PLACEHOLDER": "Gelen Kutu Seç",
+            "ERROR": "Gelen kutusu seçimi gerekli"
+          },
+          "TEMPLATE": {
+            "LABEL": "WhatsApp Template",
+            "PLACEHOLDER": "Şablon seçin",
+            "INFO": "Bu kampanya için kullanılacak şablonu seçin.",
+            "ERROR": "Template is required",
+            "PREVIEW_TITLE": "{templateName} işleniyor",
+            "LANGUAGE": "Dil",
+            "CATEGORY": "Kategori",
+            "VARIABLES_LABEL": "Değişkenler",
+            "VARIABLE_PLACEHOLDER": "Enter value for {variable}"
+          },
+          "AUDIENCE": {
+            "LABEL": "Kitle",
+            "PLACEHOLDER": "Müşteri etiketlerini seçin",
+            "ERROR": "Kitle seçimi gerekli"
+          },
+          "SCHEDULED_AT": {
+            "LABEL": "Planlanan zaman",
+            "PLACEHOLDER": "Lütfen saati seçiniz",
+            "ERROR": "Planlanan zaman seçimi gerekli"
+          },
+          "BUTTONS": {
+            "CREATE": "Oluştur",
+            "CANCEL": "İptal Et"
+          },
+          "API": {
+            "SUCCESS_MESSAGE": "WhatsApp campaign created successfully",
+>>>>>>> upstream/develop
             "ERROR_MESSAGE": "Bir hata oluştu, lütfen tekrar deneyin."
           }
         }
@@ -139,7 +267,11 @@
     },
     "CONFIRM_DELETE": {
       "TITLE": "Silmek istediğinizden emin misiniz?",
+<<<<<<< HEAD
       "DESCRIPTION": "The delete action is permanent and cannot be reversed.",
+=======
+      "DESCRIPTION": "Silme işlemi kalıcıdır ve geri alınamaz.",
+>>>>>>> upstream/develop
       "CONFIRM": "Sil",
       "API": {
         "SUCCESS_MESSAGE": "Kampanya başarıyla silindi",

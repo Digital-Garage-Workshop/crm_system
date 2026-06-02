@@ -12,6 +12,10 @@ describe('#InboxesAPI', () => {
     expect(inboxesAPI).toHaveProperty('getCampaigns');
     expect(inboxesAPI).toHaveProperty('getAgentBot');
     expect(inboxesAPI).toHaveProperty('setAgentBot');
+<<<<<<< HEAD
+=======
+    expect(inboxesAPI).toHaveProperty('syncTemplates');
+>>>>>>> upstream/develop
   });
 
   describe('API calls', () => {
@@ -40,5 +44,15 @@ describe('#InboxesAPI', () => {
       inboxesAPI.deleteInboxAvatar(2);
       expect(axiosMock.delete).toHaveBeenCalledWith('/api/v1/inboxes/2/avatar');
     });
+<<<<<<< HEAD
+=======
+
+    it('#syncTemplates', () => {
+      inboxesAPI.syncTemplates(2);
+      expect(axiosMock.post).toHaveBeenCalledWith(
+        '/api/v1/inboxes/2/sync_templates'
+      );
+    });
+>>>>>>> upstream/develop
   });
 });

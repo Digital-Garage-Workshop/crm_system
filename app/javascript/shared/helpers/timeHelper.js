@@ -3,6 +3,10 @@ import {
   isSameYear,
   fromUnixTime,
   formatDistanceToNow,
+<<<<<<< HEAD
+=======
+  differenceInDays,
+>>>>>>> upstream/develop
 } from 'date-fns';
 
 /**
@@ -67,6 +71,10 @@ export const shortTimestamp = (time, withAgo = false) => {
   const suffix = withAgo ? ' ago' : '';
   const timeMappings = {
     'less than a minute ago': 'now',
+<<<<<<< HEAD
+=======
+    'in less than a minute': 'now',
+>>>>>>> upstream/develop
     'a minute ago': `1m${suffix}`,
     'an hour ago': `1h${suffix}`,
     'a day ago': `1d${suffix}`,
@@ -91,3 +99,51 @@ export const shortTimestamp = (time, withAgo = false) => {
     .replace(' years ago', `y${suffix}`);
   return convertToShortTime;
 };
+<<<<<<< HEAD
+=======
+
+/**
+ * Formats a duration in seconds into mm:ss or hh:mm:ss.
+ * @param {number|string} durationInSeconds - Duration in seconds.
+ * @returns {string} Formatted duration string. Empty string for invalid input.
+ */
+export const formatDuration = durationInSeconds => {
+  if (durationInSeconds === null || durationInSeconds === undefined) return '';
+
+  const totalSeconds = Number(durationInSeconds);
+  if (Number.isNaN(totalSeconds) || totalSeconds < 0) return '';
+
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  const mm = minutes.toString().padStart(2, '0');
+  const ss = seconds.toString().padStart(2, '0');
+  if (hours > 0) {
+    return `${hours.toString().padStart(2, '0')}:${mm}:${ss}`;
+  }
+  return `${mm}:${ss}`;
+};
+
+/**
+ * Calculates the difference in days between now and a given timestamp.
+ * @param {Date} now - Current date/time.
+ * @param {number} timestampInSeconds - Unix timestamp in seconds.
+ * @returns {number} Number of days difference.
+ */
+export const getDayDifferenceFromNow = (now, timestampInSeconds) => {
+  const date = new Date(timestampInSeconds * 1000);
+  return differenceInDays(now, date);
+};
+
+/**
+ * Checks if more than 24 hours have passed since a given timestamp.
+ * Useful for determining if retry/refresh actions should be disabled.
+ * @param {number} timestamp - Unix timestamp.
+ * @returns {boolean} True if more than 24 hours have passed.
+ */
+export const hasOneDayPassed = timestamp => {
+  if (!timestamp) return true; // Defensive check
+  return getDayDifferenceFromNow(new Date(), timestamp) >= 1;
+};
+>>>>>>> upstream/develop

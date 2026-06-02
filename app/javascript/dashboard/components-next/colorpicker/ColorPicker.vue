@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { ref, defineProps, defineEmits } from 'vue';
+=======
+import { ref } from 'vue';
+>>>>>>> upstream/develop
 import { Chrome } from '@lk77/vue3-color';
 import { OnClickOutside } from '@vueuse/components';
 
@@ -90,7 +94,11 @@ const pickerRef = ref(null);
 
     input,
     .vc-input__input {
+<<<<<<< HEAD
       @apply bg-n-background text-slate-900 dark:text-slate-50 rounded-md shadow-none;
+=======
+      @apply bg-n-background text-n-slate-12 rounded-md shadow-none;
+>>>>>>> upstream/develop
     }
 
     .vc-input__label {

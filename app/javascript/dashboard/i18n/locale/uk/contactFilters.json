@@ -48,7 +48,12 @@
       "CREATED_AT": "Створений в",
       "LAST_ACTIVITY": "Остання активність",
       "REFERER_LINK": "Реферальне посилання",
+<<<<<<< HEAD
       "BLOCKED": "Заблоковано"
+=======
+      "BLOCKED": "Заблоковано",
+      "LABELS": "Мітки"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Стандартні фільтри",

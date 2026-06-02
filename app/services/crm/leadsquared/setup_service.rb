@@ -25,11 +25,19 @@ class Crm::Leadsquared::SetupService
     response = @client.get('Authentication.svc/UserByAccessKey.Get')
     endpoint_host = response['LSQCommonServiceURLs']['api']
     app_host = response['LSQCommonServiceURLs']['app']
+<<<<<<< HEAD
+=======
+    timezone = response['TimeZone']
+>>>>>>> upstream/develop
 
     endpoint_url = "https://#{endpoint_host}/v2/"
     app_url = "https://#{app_host}/"
 
+<<<<<<< HEAD
     update_hook_settings({ :endpoint_url => endpoint_url, :app_url => app_url })
+=======
+    update_hook_settings({ :endpoint_url => endpoint_url, :app_url => app_url, :timezone => timezone })
+>>>>>>> upstream/develop
 
     # replace the clients
     @client = Crm::Leadsquared::Api::BaseClient.new(@access_key, @secret_key, endpoint_url)

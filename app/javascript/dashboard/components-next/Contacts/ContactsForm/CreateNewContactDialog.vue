@@ -40,7 +40,16 @@ defineExpose({ dialogRef, contactsFormRef, onSuccess });
 </script>
 
 <template>
+<<<<<<< HEAD
   <Dialog ref="dialogRef" width="3xl" @confirm="handleDialogConfirm">
+=======
+  <Dialog
+    ref="dialogRef"
+    width="3xl"
+    overflow-y-auto
+    @confirm="handleDialogConfirm"
+  >
+>>>>>>> upstream/develop
     <ContactsForm
       ref="contactsFormRef"
       is-new-contact

@@ -14,7 +14,12 @@ module GoogleConcern
 
   private
 
+<<<<<<< HEAD
   def base_url
     ENV.fetch('FRONTEND_URL', 'http://localhost:3000')
+=======
+  def scope
+    'email profile https://mail.google.com/'
+>>>>>>> upstream/develop
   end
 end

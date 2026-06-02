@@ -1,6 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { defineProps } from 'vue';
 
+=======
+>>>>>>> upstream/develop
 defineProps({
   config: {
     type: Object,
@@ -28,7 +31,11 @@ defineProps({
       </div>
 
       <div
+<<<<<<< HEAD
         class="bg-white shadow rounded-[1.25rem] rounded-bl-[0.25rem] px-4 py-3 inline-block text-sm text-slate-900 dark:text-white dark:bg-slate-700"
+=======
+        class="shadow rounded-[1.25rem] rounded-bl-[0.25rem] px-4 py-3 inline-block text-sm text-n-slate-12 bg-n-background dark:bg-n-solid-3"
+>>>>>>> upstream/develop
       >
         <div>
           <p class="m-0">

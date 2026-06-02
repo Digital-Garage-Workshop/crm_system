@@ -46,7 +46,12 @@ class Base::SendOnChannelService
   def invalid_message?
     # private notes aren't send to the channels
     # we should also avoid the case of message loops, when outgoing messages are created from channel
+<<<<<<< HEAD
     message.private? || outgoing_message_originated_from_channel?
+=======
+    # voice_call bubbles are call status indicators, not deliverable messages
+    message.private? || outgoing_message_originated_from_channel? || message.content_type == 'voice_call'
+>>>>>>> upstream/develop
   end
 
   def validate_target_channel

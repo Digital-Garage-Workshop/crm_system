@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { ref, computed, defineOptions } from 'vue';
+=======
+import { ref, computed } from 'vue';
+>>>>>>> upstream/develop
 import FilterButton from 'dashboard/components/ui/Dropdown/DropdownButton.vue';
 import FilterListDropdown from 'dashboard/components/ui/Dropdown/DropdownList.vue';
 

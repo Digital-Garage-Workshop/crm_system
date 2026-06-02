@@ -13,6 +13,20 @@ module Telegram::ParamHelpers
     {}
   end
 
+<<<<<<< HEAD
+=======
+  def business_message?
+    telegram_params_business_connection_id.present?
+  end
+
+  # In business bot mode we will receive messages from our telegram.
+  # This is our messages posted via telegram client.
+  # Such messages should be outgoing (from us to client)
+  def business_message_outgoing?
+    business_message? && telegram_params_base_object[:chat][:id] != telegram_params_base_object[:from][:id]
+  end
+
+>>>>>>> upstream/develop
   def message_params?
     params[:message].present?
   end
@@ -29,11 +43,26 @@ module Telegram::ParamHelpers
     end
   end
 
+<<<<<<< HEAD
   def telegram_params_from_id
+=======
+  def contact_params
+    if business_message_outgoing?
+      telegram_params_base_object[:chat]
+    else
+      telegram_params_base_object[:from]
+    end
+  end
+
+  def telegram_params_from_id
+    return telegram_params_base_object[:chat][:id] if business_message?
+
+>>>>>>> upstream/develop
     telegram_params_base_object[:from][:id]
   end
 
   def telegram_params_first_name
+<<<<<<< HEAD
     telegram_params_base_object[:from][:first_name]
   end
 
@@ -47,6 +76,21 @@ module Telegram::ParamHelpers
 
   def telegram_params_language_code
     telegram_params_base_object[:from][:language_code]
+=======
+    contact_params[:first_name]
+  end
+
+  def telegram_params_last_name
+    contact_params[:last_name]
+  end
+
+  def telegram_params_username
+    contact_params[:username]
+  end
+
+  def telegram_params_language_code
+    contact_params[:language_code]
+>>>>>>> upstream/develop
   end
 
   def telegram_params_chat_id
@@ -57,6 +101,17 @@ module Telegram::ParamHelpers
     end
   end
 
+<<<<<<< HEAD
+=======
+  def telegram_params_business_connection_id
+    if callback_query_params?
+      params[:callback_query][:message][:business_connection_id]
+    else
+      telegram_params_base_object[:business_connection_id]
+    end
+  end
+
+>>>>>>> upstream/develop
   def telegram_params_message_content
     if callback_query_params?
       params[:callback_query][:data]

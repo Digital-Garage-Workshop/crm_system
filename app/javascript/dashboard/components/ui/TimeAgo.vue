@@ -24,6 +24,13 @@ export default {
       type: [String, Date, Number],
       default: '',
     },
+<<<<<<< HEAD
+=======
+    conversationId: {
+      type: [String, Number],
+      default: '',
+    },
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -74,6 +81,18 @@ export default {
     createdAtTimestamp() {
       this.createdAtTimeAgo = dynamicTime(this.createdAtTimestamp);
     },
+<<<<<<< HEAD
+=======
+    conversationId() {
+      // Reset display values and timer when the row is recycled to a different conversation.
+      this.lastActivityAtTimeAgo = dynamicTime(this.lastActivityTimestamp);
+      this.createdAtTimeAgo = dynamicTime(this.createdAtTimestamp);
+      if (this.isAutoRefreshEnabled) {
+        clearTimeout(this.timer);
+        this.createTimer();
+      }
+    },
+>>>>>>> upstream/develop
   },
   mounted() {
     if (this.isAutoRefreshEnabled) {
@@ -111,9 +130,14 @@ export default {
     v-tooltip.top="{
       content: tooltipText,
       delay: { show: 1000, hide: 0 },
+<<<<<<< HEAD
       hideOnClick: true,
     }"
     class="ml-auto leading-4 text-xxs text-n-slate-10 hover:text-slate-11"
+=======
+    }"
+    class="ml-auto leading-4 text-xxs text-n-slate-10 hover:text-n-slate-11"
+>>>>>>> upstream/develop
   >
     <span>{{ `${createdAtTime} • ${lastActivityTime}` }}</span>
   </div>

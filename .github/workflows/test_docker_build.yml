@@ -7,6 +7,12 @@ on:
       - master
   workflow_dispatch:
 
+<<<<<<< HEAD
+=======
+permissions:
+  contents: read
+
+>>>>>>> upstream/develop
 jobs:
   test-build:
     strategy:
@@ -36,5 +42,10 @@ jobs:
           platforms: ${{ matrix.platform }}
           push: false
           load: false
+<<<<<<< HEAD
           cache-from: type=gha
           cache-to: type=gha,mode=max
+=======
+          cache-from: type=gha,scope=${{ matrix.platform }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.platform }}
+>>>>>>> upstream/develop

@@ -5,6 +5,10 @@ class Survey::ResponsesController < ActionController::Base
   private
 
   def set_global_config
+<<<<<<< HEAD
     @global_config = GlobalConfig.get('LOGO_THUMBNAIL', 'BRAND_NAME', 'WIDGET_BRAND_URL')
+=======
+    @global_config = GlobalConfig.get('LOGO_THUMBNAIL', 'BRAND_NAME', 'WIDGET_BRAND_URL', 'INSTALLATION_NAME')
+>>>>>>> upstream/develop
   end
 end

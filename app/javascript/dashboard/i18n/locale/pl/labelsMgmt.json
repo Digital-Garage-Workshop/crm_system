@@ -5,6 +5,12 @@
     "LOADING": "Pobieranie etykiet",
     "DESCRIPTION": "Labels help you categorize and prioritize conversations and leads. You can assign a label to a conversation or contact using the side panel.",
     "LEARN_MORE": "Learn more about labels",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} label | {n} labels",
+    "SEARCH_PLACEHOLDER": "Szukaj etykiet...",
+    "NO_RESULTS": "No labels found matching your search",
+>>>>>>> upstream/develop
     "SEARCH_404": "Brak elementów pasujących do tego zapytania",
     "LIST": {
       "404": "Brak etykiet na tym koncie.",
@@ -13,7 +19,12 @@
       "TABLE_HEADER": {
         "NAME": "Imię",
         "DESCRIPTION": "Opis",
+<<<<<<< HEAD
         "COLOR": "Kolor"
+=======
+        "COLOR": "Kolor",
+        "ACTION": "Akcje"
+>>>>>>> upstream/develop
       }
     },
     "FORM": {

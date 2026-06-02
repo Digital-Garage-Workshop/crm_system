@@ -7,6 +7,10 @@ import { useMapGetter } from 'dashboard/composables/store.js';
 import HelpCenterLayout from 'dashboard/components-next/HelpCenter/HelpCenterLayout.vue';
 import PortalBaseSettings from 'dashboard/components-next/HelpCenter/Pages/PortalSettingsPage/PortalBaseSettings.vue';
 import PortalConfigurationSettings from './PortalConfigurationSettings.vue';
+<<<<<<< HEAD
+=======
+import PortalLayoutContentSettings from './PortalLayoutContentSettings.vue';
+>>>>>>> upstream/develop
 import ConfirmDeletePortalDialog from 'dashboard/components-next/HelpCenter/Pages/PortalSettingsPage/ConfirmDeletePortalDialog.vue';
 import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
@@ -26,6 +30,11 @@ const emit = defineEmits([
   'updatePortal',
   'updatePortalConfiguration',
   'deletePortal',
+<<<<<<< HEAD
+=======
+  'refreshStatus',
+  'sendCnameInstructions',
+>>>>>>> upstream/develop
 ]);
 
 const { t } = useI18n();
@@ -36,6 +45,10 @@ const confirmDeletePortalDialogRef = ref(null);
 const currentPortalSlug = computed(() => route.params.portalSlug);
 
 const isSwitchingPortal = useMapGetter('portals/isSwitchingPortal');
+<<<<<<< HEAD
+=======
+const isFetchingSSLStatus = useMapGetter('portals/isFetchingSSLStatus');
+>>>>>>> upstream/develop
 
 const activePortal = computed(() => {
   return props.portals?.find(portal => portal.slug === currentPortalSlug.value);
@@ -53,6 +66,17 @@ const handleUpdatePortalConfiguration = portal => {
   emit('updatePortalConfiguration', portal);
 };
 
+<<<<<<< HEAD
+=======
+const fetchSSLStatus = () => {
+  emit('refreshStatus');
+};
+
+const handleSendCnameInstructions = payload => {
+  emit('sendCnameInstructions', payload);
+};
+
+>>>>>>> upstream/develop
 const openConfirmDeletePortalDialog = () => {
   confirmDeletePortalDialogRef.value.dialogRef.open();
 };
@@ -81,6 +105,7 @@ const handleDeletePortal = () => {
           :is-fetching="isFetching"
           @update-portal="handleUpdatePortal"
         />
+<<<<<<< HEAD
         <div class="w-full h-px bg-slate-50 dark:bg-slate-800/50" />
         <PortalConfigurationSettings
           :active-portal="activePortal"
@@ -88,6 +113,24 @@ const handleDeletePortal = () => {
           @update-portal-configuration="handleUpdatePortalConfiguration"
         />
         <div class="w-full h-px bg-slate-50 dark:bg-slate-800/50" />
+=======
+        <div class="w-full h-px bg-n-weak" />
+        <PortalConfigurationSettings
+          :active-portal="activePortal"
+          :is-fetching="isFetching"
+          :is-fetching-status="isFetchingSSLStatus"
+          @update-portal-configuration="handleUpdatePortalConfiguration"
+          @refresh-status="fetchSSLStatus"
+          @send-cname-instructions="handleSendCnameInstructions"
+        />
+        <div class="w-full h-px bg-n-weak" />
+        <PortalLayoutContentSettings
+          :active-portal="activePortal"
+          :is-fetching="isFetching"
+          @update-portal-configuration="handleUpdatePortalConfiguration"
+        />
+        <div class="w-full h-px bg-n-weak" />
+>>>>>>> upstream/develop
         <div class="flex items-end justify-between w-full gap-4">
           <div class="flex flex-col gap-2">
             <h6 class="text-base font-medium text-n-slate-12">

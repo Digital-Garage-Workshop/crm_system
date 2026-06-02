@@ -6,6 +6,7 @@ description: Get Details of Agents in an Inbox
 security:
   - userApiKey: []
 parameters:
+<<<<<<< HEAD
   - $ref: '#/parameters/inbox_id'
 responses:
   200:
@@ -19,3 +20,31 @@ responses:
     description: Inbox not found
   403:
     description: Access denied
+=======
+  - $ref: '#/components/parameters/inbox_id'
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            payload:
+              type: array
+              description: 'Array of all active agents'
+              items:
+                $ref: '#/components/schemas/agent'
+  '404':
+    description: Inbox not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '403':
+    description: Access denied
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

@@ -30,6 +30,7 @@ export const actions = {
       commit('setConversationUIFlag', { isCreating: false });
     }
   },
+<<<<<<< HEAD
   sendMessage: async ({ dispatch }, params) => {
     const { content, replyTo } = params;
     const message = createTemporaryMessage({ content, replyTo });
@@ -37,11 +38,43 @@ export const actions = {
   },
   sendMessageWithData: async ({ commit }, message) => {
     const { id, content, replyTo, meta = {} } = message;
+=======
+  sendMessage: async ({ dispatch, state: conversationState }, params) => {
+    const { content, replyTo } = params;
+    const message = createTemporaryMessage({ content, replyTo });
+    const { pendingCustomAttributes, pendingLabels } = conversationState;
+    dispatch('sendMessageWithData', {
+      message,
+      pendingCustomAttributes,
+      pendingLabels,
+    });
+  },
+  sendMessageWithData: async (
+    { commit },
+    { message, pendingCustomAttributes = {}, pendingLabels = [] }
+  ) => {
+    const { id, content, replyTo, meta = {} } = message;
+    const hasPendingMetadata =
+      Object.keys(pendingCustomAttributes).length > 0 ||
+      pendingLabels.length > 0;
+>>>>>>> upstream/develop
 
     commit('pushMessageToConversation', message);
     commit('updateMessageMeta', { id, meta: { ...meta, error: '' } });
     try {
+<<<<<<< HEAD
       const { data } = await sendMessageAPI(content, replyTo);
+=======
+      const { data } = await sendMessageAPI(content, replyTo, {
+        customAttributes: hasPendingMetadata
+          ? pendingCustomAttributes
+          : undefined,
+        labels: hasPendingMetadata ? pendingLabels : undefined,
+      });
+      if (hasPendingMetadata) {
+        commit('clearPendingConversationMetadata');
+      }
+>>>>>>> upstream/develop
 
       // [VITE] Don't delete this manually, since `pushMessageToConversation` does the replacement for us anyway
       // commit('deleteMessage', message.id);
@@ -59,7 +92,11 @@ export const actions = {
     commit('setLastMessageId');
   },
 
+<<<<<<< HEAD
   sendAttachment: async ({ commit }, params) => {
+=======
+  sendAttachment: async ({ commit, state: conversationState }, params) => {
+>>>>>>> upstream/develop
     const {
       attachment: { thumbUrl, fileType },
       meta = {},
@@ -74,9 +111,28 @@ export const actions = {
       attachments: [attachment],
       replyTo: params.replyTo,
     });
+<<<<<<< HEAD
     commit('pushMessageToConversation', tempMessage);
     try {
       const { data } = await sendAttachmentAPI(params);
+=======
+    const { pendingCustomAttributes, pendingLabels } = conversationState;
+    const hasPendingMetadata =
+      Object.keys(pendingCustomAttributes).length > 0 ||
+      pendingLabels.length > 0;
+
+    commit('pushMessageToConversation', tempMessage);
+    try {
+      const { data } = await sendAttachmentAPI(params, {
+        customAttributes: hasPendingMetadata
+          ? pendingCustomAttributes
+          : undefined,
+        labels: hasPendingMetadata ? pendingLabels : undefined,
+      });
+      if (hasPendingMetadata) {
+        commit('clearPendingConversationMetadata');
+      }
+>>>>>>> upstream/develop
       commit('updateAttachmentMessageStatus', {
         message: data,
         tempId: tempMessage.id,
@@ -180,7 +236,18 @@ export const actions = {
     await toggleStatus();
   },
 
+<<<<<<< HEAD
   setCustomAttributes: async (_, customAttributes = {}) => {
+=======
+  setCustomAttributes: async (
+    { commit, rootGetters },
+    customAttributes = {}
+  ) => {
+    if (!rootGetters['conversationAttributes/getConversationParams']?.id) {
+      commit('setPendingCustomAttributes', customAttributes);
+      return;
+    }
+>>>>>>> upstream/develop
     try {
       await setCustomAttributes(customAttributes);
     } catch (error) {
@@ -188,7 +255,15 @@ export const actions = {
     }
   },
 
+<<<<<<< HEAD
   deleteCustomAttribute: async (_, customAttribute) => {
+=======
+  deleteCustomAttribute: async ({ commit, rootGetters }, customAttribute) => {
+    if (!rootGetters['conversationAttributes/getConversationParams']?.id) {
+      commit('removePendingCustomAttribute', customAttribute);
+      return;
+    }
+>>>>>>> upstream/develop
     try {
       await deleteCustomAttribute(customAttribute);
     } catch (error) {

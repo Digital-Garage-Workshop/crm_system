@@ -1,6 +1,10 @@
 class V2::ReportBuilder
   include DateRangeHelper
   include ReportHelper
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
   attr_reader :account, :params
 
   DEFAULT_GROUP_BY = 'day'.freeze

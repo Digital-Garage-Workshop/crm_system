@@ -155,7 +155,11 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="relative bg-white dark:bg-slate-900">
+=======
+  <div class="relative">
+>>>>>>> upstream/develop
     <div class="flex justify-between">
       <div class="flex justify-between w-full mb-1">
         <div>
@@ -163,7 +167,11 @@ export default {
             <Spinner v-if="watchersUiFlas.isFetching" size="tiny" />
             {{ totalWatchersText }}
           </p>
+<<<<<<< HEAD
           <p v-else class="m-0 text-sm text-slate-400 dark:text-slate-700">
+=======
+          <p v-else class="m-0 text-sm text-n-slate-10">
+>>>>>>> upstream/develop
             {{ $t('CONVERSATION_PARTICIPANTS.NO_PARTICIPANTS_TEXT') }}
           </p>
         </div>
@@ -185,10 +193,14 @@ export default {
         :show-more-thumbnails-count="showMoreThumbs"
         :users-list="thumbnailList"
       />
+<<<<<<< HEAD
       <p
         v-if="isUserWatching"
         class="m-0 text-sm text-slate-300 dark:text-slate-300"
       >
+=======
+      <p v-if="isUserWatching" class="m-0 text-sm text-n-slate-10">
+>>>>>>> upstream/develop
         {{ $t('CONVERSATION_PARTICIPANTS.YOU_ARE_WATCHING') }}
       </p>
       <NextButton
@@ -207,12 +219,24 @@ export default {
           onCloseDropdown();
         }
       "
+<<<<<<< HEAD
       :class="{ 'dropdown-pane--open': showDropDown }"
       class="dropdown-pane"
     >
       <div class="flex items-center justify-between mb-1">
         <h4
           class="m-0 overflow-hidden text-sm whitespace-nowrap text-ellipsis text-slate-800 dark:text-slate-100"
+=======
+      :class="{
+        'block visible': showDropDown,
+        'hidden invisible': !showDropDown,
+      }"
+      class="border rounded-lg shadow-lg bg-n-alpha-3 absolute backdrop-blur-[100px] border-n-strong dark:border-n-strong p-2 z-[9999] box-border top-8 w-full"
+    >
+      <div class="flex items-center justify-between mb-1">
+        <h4
+          class="m-0 overflow-hidden text-sm whitespace-nowrap text-ellipsis text-n-slate-12"
+>>>>>>> upstream/develop
         >
           {{ $t('CONVERSATION_PARTICIPANTS.ADD_PARTICIPANTS') }}
         </h4>
@@ -227,9 +251,12 @@ export default {
     </div>
   </div>
 </template>
+<<<<<<< HEAD
 
 <style lang="scss" scoped>
 .dropdown-pane {
   @apply box-border top-8 w-full;
 }
 </style>
+=======
+>>>>>>> upstream/develop

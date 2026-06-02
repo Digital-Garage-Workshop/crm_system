@@ -1,7 +1,11 @@
 <script>
 import V4Button from 'dashboard/components-next/button/Button.vue';
 import { useAlert, useTrack } from 'dashboard/composables';
+<<<<<<< HEAD
 import ReportFilterSelector from './components/FilterSelector.vue';
+=======
+import ReportFilters from './components/ReportFilters.vue';
+>>>>>>> upstream/develop
 import { GROUP_BY_FILTER } from './constants';
 import { REPORTS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
 import { generateFileName } from 'dashboard/helper/downloadHelper';
@@ -22,7 +26,11 @@ export default {
   name: 'ConversationReports',
   components: {
     ReportHeader,
+<<<<<<< HEAD
     ReportFilterSelector,
+=======
+    ReportFilters,
+>>>>>>> upstream/develop
     ReportContainer,
     V4Button,
   },
@@ -76,6 +84,7 @@ export default {
         businessHours,
       };
     },
+<<<<<<< HEAD
     downloadAgentReports() {
       const { from, to } = this;
       const fileName = generateFileName({
@@ -84,6 +93,16 @@ export default {
         businessHours: this.businessHours,
       });
       this.$store.dispatch('downloadAgentReports', {
+=======
+    downloadConversationReports() {
+      const { from, to } = this;
+      const fileName = generateFileName({
+        type: 'conversation',
+        to,
+        businessHours: this.businessHours,
+      });
+      this.$store.dispatch('downloadConversationsSummaryReports', {
+>>>>>>> upstream/develop
         from,
         to,
         fileName,
@@ -109,6 +128,7 @@ export default {
 <template>
   <ReportHeader :header-title="$t('REPORT.HEADER')">
     <V4Button
+<<<<<<< HEAD
       :label="$t('REPORT.DOWNLOAD_AGENT_REPORTS')"
       icon="i-ph-download-simple"
       size="sm"
@@ -119,6 +139,18 @@ export default {
     <ReportFilterSelector
       :show-agents-filter="false"
       show-group-by-filter
+=======
+      :label="$t('REPORT.DOWNLOAD_CONVERSATION_REPORTS')"
+      icon="i-ph-download-simple"
+      size="sm"
+      @click="downloadConversationReports"
+    />
+  </ReportHeader>
+  <div class="flex flex-col">
+    <ReportFilters
+      :show-entity-filter="false"
+      show-group-by
+>>>>>>> upstream/develop
       @filter-change="onFilterChange"
     />
     <ReportContainer :group-by="groupBy" />

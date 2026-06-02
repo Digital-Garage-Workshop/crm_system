@@ -37,11 +37,20 @@ module Reauthorizable
   # Performed automatically if error threshold is breached
   # could used to manually prompt reauthorization if auth scope changes
   def prompt_reauthorization!
+<<<<<<< HEAD
+=======
+    state_changed = !reauthorization_required?
+
+>>>>>>> upstream/develop
     ::Redis::Alfred.set(reauthorization_required_key, true)
 
     reauthorization_handlers[self.class.name]&.call(self)
 
     invalidate_inbox_cache unless instance_of?(::AutomationRule)
+<<<<<<< HEAD
+=======
+    dispatch_inbox_reauthorization_event(true) if state_changed
+>>>>>>> upstream/develop
   end
 
   def process_integration_hook_reauthorization_emails
@@ -63,19 +72,42 @@ module Reauthorizable
 
   # call this after you successfully Reauthorized the object in UI
   def reauthorized!
+<<<<<<< HEAD
+=======
+    state_changed = reauthorization_required?
+
+>>>>>>> upstream/develop
     ::Redis::Alfred.delete(authorization_error_count_key)
     ::Redis::Alfred.delete(reauthorization_required_key)
 
     invalidate_inbox_cache unless instance_of?(::AutomationRule)
+<<<<<<< HEAD
+=======
+    dispatch_inbox_reauthorization_event(false) if state_changed
+>>>>>>> upstream/develop
   end
 
   private
 
+<<<<<<< HEAD
+=======
+  def dispatch_inbox_reauthorization_event(reauthorization_required)
+    return unless respond_to?(:inbox)
+    return if inbox.blank?
+
+    inbox.dispatch_reauthorization_event(reauthorization_required)
+  end
+
+>>>>>>> upstream/develop
   def reauthorization_handlers
     {
       'Integrations::Hook' => ->(obj) { obj.process_integration_hook_reauthorization_emails },
       'Channel::FacebookPage' => ->(obj) { obj.send_channel_reauthorization_email(:facebook_disconnect) },
       'Channel::Instagram' => ->(obj) { obj.send_channel_reauthorization_email(:instagram_disconnect) },
+<<<<<<< HEAD
+=======
+      'Channel::Tiktok' => ->(obj) { obj.send_channel_reauthorization_email(:tiktok_disconnect) },
+>>>>>>> upstream/develop
       'Channel::Whatsapp' => ->(obj) { obj.send_channel_reauthorization_email(:whatsapp_disconnect) },
       'Channel::Email' => ->(obj) { obj.send_channel_reauthorization_email(:email_disconnect) },
       'AutomationRule' => ->(obj) { obj.handle_automation_rule_reauthorization }

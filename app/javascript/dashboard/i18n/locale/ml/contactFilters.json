@@ -48,7 +48,12 @@
       "CREATED_AT": "Created At",
       "LAST_ACTIVITY": "അവസാന പ്രവർത്തനം",
       "REFERER_LINK": "Referrer link",
+<<<<<<< HEAD
       "BLOCKED": "Blocked"
+=======
+      "BLOCKED": "Blocked",
+      "LABELS": "ലേബലുകൾ"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Standard Filters",

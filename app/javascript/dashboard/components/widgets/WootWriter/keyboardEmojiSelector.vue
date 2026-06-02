@@ -52,13 +52,21 @@ onMounted(() => {
   >
     <template #default="{ item, selected }">
       <span
+<<<<<<< HEAD
         class="max-w-full inline-flex items-center gap-0.5 min-w-0 mb-0 text-sm font-medium text-slate-900 dark:text-slate-100 group-hover:text-woot-500 dark:group-hover:text-woot-500 truncate"
+=======
+        class="max-w-full inline-flex items-center gap-0.5 min-w-0 mb-0 text-sm font-medium text-n-slate-12 group-hover:text-n-brand truncate"
+>>>>>>> upstream/develop
       >
         {{ item.emoji }}
         <p
           class="relative mb-0 truncate bottom-px"
           :class="{
+<<<<<<< HEAD
             'text-woot-500 dark:text-woot-500': selected,
+=======
+            'text-n-brand': selected,
+>>>>>>> upstream/develop
             'font-normal': !selected,
           }"
         >

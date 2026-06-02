@@ -1,5 +1,9 @@
 <script>
+<<<<<<< HEAD
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
+=======
+import { useBranding } from 'shared/composables/useBranding';
+>>>>>>> upstream/develop
 
 const {
   LOGO_THUMBNAIL: logoThumbnail,
@@ -8,13 +12,25 @@ const {
 } = window.globalConfig || {};
 
 export default {
+<<<<<<< HEAD
   mixins: [globalConfigMixin],
+=======
+>>>>>>> upstream/develop
   props: {
     disableBranding: {
       type: Boolean,
       default: false,
     },
   },
+<<<<<<< HEAD
+=======
+  setup() {
+    const { replaceInstallationName } = useBranding();
+    return {
+      replaceInstallationName,
+    };
+  },
+>>>>>>> upstream/develop
   data() {
     return {
       globalConfig: {
@@ -28,6 +44,7 @@ export default {
     brandRedirectURL() {
       try {
         const referrerHost = this.$store.getters['appConfig/getReferrerHost'];
+<<<<<<< HEAD
         const baseURL = `${this.globalConfig.widgetBrandURL}?utm_source=${
           referrerHost ? 'widget_branding' : 'survey_branding'
         }`;
@@ -35,6 +52,17 @@ export default {
           return `${baseURL}&utm_referrer=${referrerHost}`;
         }
         return baseURL;
+=======
+        const url = new URL(this.globalConfig.widgetBrandURL);
+        if (referrerHost) {
+          url.searchParams.set('utm_source', referrerHost);
+          url.searchParams.set('utm_medium', 'widget');
+        } else {
+          url.searchParams.set('utm_medium', 'survey');
+        }
+        url.searchParams.set('utm_campaign', 'branding');
+        return url.toString();
+>>>>>>> upstream/develop
       } catch (e) {
         // Suppressing the error as getter is not defined in some cases
       }
@@ -61,7 +89,11 @@ export default {
         :src="globalConfig.logoThumbnail"
       />
       <span>
+<<<<<<< HEAD
         {{ useInstallationName($t('POWERED_BY'), globalConfig.brandName) }}
+=======
+        {{ replaceInstallationName($t('POWERED_BY')) }}
+>>>>>>> upstream/develop
       </span>
     </a>
   </div>

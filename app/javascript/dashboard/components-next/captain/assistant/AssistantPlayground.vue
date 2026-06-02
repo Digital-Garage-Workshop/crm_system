@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { ref } from 'vue';
+=======
+import { ref, watch } from 'vue';
+>>>>>>> upstream/develop
 import { useI18n } from 'vue-i18n';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import MessageList from './MessageList.vue';
@@ -18,10 +22,25 @@ const newMessage = ref('');
 const isLoading = ref(false);
 
 const formatMessagesForApi = () => {
+<<<<<<< HEAD
   return messages.value.map(message => ({
     role: message.sender,
     content: message.content,
   }));
+=======
+  return messages.value.map(message => {
+    const payload = {
+      role: message.sender,
+      content: message.content,
+    };
+
+    if (message.sender === 'assistant' && message.agentName) {
+      payload.agent_name = message.agentName;
+    }
+
+    return payload;
+  });
+>>>>>>> upstream/develop
 };
 
 const resetConversation = () => {
@@ -29,6 +48,19 @@ const resetConversation = () => {
   newMessage.value = '';
 };
 
+<<<<<<< HEAD
+=======
+// Watch for assistant ID changes and reset conversation
+watch(
+  () => assistantId,
+  (newId, oldId) => {
+    if (oldId && newId !== oldId) {
+      resetConversation();
+    }
+  }
+);
+
+>>>>>>> upstream/develop
 const sendMessage = async () => {
   if (!newMessage.value.trim() || isLoading.value) return;
 
@@ -52,6 +84,10 @@ const sendMessage = async () => {
     messages.value.push({
       content: data.response,
       sender: 'assistant',
+<<<<<<< HEAD
+=======
+      agentName: data.agent_name,
+>>>>>>> upstream/develop
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
@@ -61,20 +97,40 @@ const sendMessage = async () => {
     isLoading.value = false;
   }
 };
+<<<<<<< HEAD
+=======
+
+const handleEnterKey = event => {
+  if (event.isComposing) return;
+  event.preventDefault();
+  sendMessage();
+};
+>>>>>>> upstream/develop
 </script>
 
 <template>
   <div
+<<<<<<< HEAD
     class="flex flex-col h-full rounded-lg p-4 border border-n-slate-4 text-n-slate-11"
   >
     <div class="mb-4">
+=======
+    class="flex flex-col h-full rounded-xl border py-6 border-n-weak text-n-slate-11"
+  >
+    <div class="mb-8 px-6">
+>>>>>>> upstream/develop
       <div class="flex justify-between items-center mb-1">
         <h3 class="text-lg font-medium">
           {{ t('CAPTAIN.PLAYGROUND.HEADER') }}
         </h3>
         <NextButton
           ghost
+<<<<<<< HEAD
           size="small"
+=======
+          sm
+          slate
+>>>>>>> upstream/develop
           icon="i-lucide-rotate-ccw"
           @click="resetConversation"
         />
@@ -87,6 +143,7 @@ const sendMessage = async () => {
     <MessageList :messages="messages" :is-loading="isLoading" />
 
     <div
+<<<<<<< HEAD
       class="flex items-center bg-n-solid-1 outline outline-n-container rounded-lg p-3"
     >
       <input
@@ -98,6 +155,19 @@ const sendMessage = async () => {
       <NextButton
         ghost
         size="small"
+=======
+      class="flex items-center mx-6 bg-n-background outline outline-1 outline-n-weak rounded-xl p-3"
+    >
+      <input
+        v-model="newMessage"
+        class="flex-1 bg-transparent border-none focus:outline-none text-sm mb-0 text-n-slate-12 placeholder:text-n-slate-10"
+        :placeholder="t('CAPTAIN.PLAYGROUND.MESSAGE_PLACEHOLDER')"
+        @keydown.enter.exact="handleEnterKey"
+      />
+      <NextButton
+        ghost
+        sm
+>>>>>>> upstream/develop
         :disabled="!newMessage.trim()"
         icon="i-lucide-send"
         @click="sendMessage"

@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, inject, defineModel } from 'vue';
+=======
+import { computed, inject } from 'vue';
+>>>>>>> upstream/develop
 import { useMacros } from 'dashboard/composables/useMacros';
 import { useI18n } from 'vue-i18n';
 import ActionInput from 'dashboard/components/widgets/AutomationActionInput.vue';
@@ -61,10 +65,17 @@ const dropdownValues = () => {
       sm
       slate
       icon="i-lucide-menu"
+<<<<<<< HEAD
       class="absolute cursor-move -left-10 mr-2 macros__node-drag-handle"
     />
     <div
       class="flex-grow p-2 mr-2 rounded-md shadow-sm outline outline-1 outline-n-weak"
+=======
+      class="absolute cursor-move ltr:-left-10 rtl:-right-10 ltr:mr-2 rtl:ml-2 macros__node-drag-handle"
+    />
+    <div
+      class="flex-grow p-2 ltr:mr-2 rtl:ml-2 rounded-md shadow-sm outline outline-1 outline-n-weak"
+>>>>>>> upstream/develop
       :class="
         errorKey
           ? 'animate-shake bg-n-ruby-8/20 outline-n-ruby-5 dark:outline-n-ruby-5'

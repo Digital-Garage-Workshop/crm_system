@@ -25,7 +25,11 @@ const props = defineProps({
   },
 });
 
+<<<<<<< HEAD
 const emit = defineEmits(['localeChange']);
+=======
+const emit = defineEmits(['localeChange', 'newArticle']);
+>>>>>>> upstream/develop
 
 const route = useRoute();
 const router = useRouter();
@@ -142,15 +146,24 @@ const handleBreadcrumbClick = () => {
             v-if="isLocaleMenuOpen"
             :menu-items="localeMenuItems"
             show-search
+<<<<<<< HEAD
             class="left-0 w-40 mt-2 overflow-y-auto xl:right-0 top-full max-h-60"
+=======
+            class="left-0 w-40 mt-2 xl:right-0 top-full max-h-60"
+>>>>>>> upstream/develop
             @action="handleLocaleAction"
           />
         </OnClickOutside>
       </div>
+<<<<<<< HEAD
       <div class="w-px h-3.5 rounded my-auto bg-slate-75 dark:bg-slate-800" />
       <span
         class="min-w-0 text-sm font-medium truncate text-slate-800 dark:text-slate-100"
       >
+=======
+      <div class="w-px h-3.5 rounded my-auto bg-n-weak" />
+      <span class="min-w-0 text-sm font-medium truncate text-n-slate-12">
+>>>>>>> upstream/develop
         {{
           t('HELP_CENTER.CATEGORY_PAGE.CATEGORY_HEADER.CATEGORIES_COUNT', {
             n: categoriesCount,
@@ -181,7 +194,11 @@ const handleBreadcrumbClick = () => {
         />
       </OnClickOutside>
     </div>
+<<<<<<< HEAD
     <div v-else class="relative">
+=======
+    <div v-else class="relative flex items-center gap-2">
+>>>>>>> upstream/develop
       <OnClickOutside @trigger="isEditCategoryDialogOpen = false">
         <Button
           :label="t('HELP_CENTER.CATEGORY_PAGE.CATEGORY_HEADER.EDIT_CATEGORY')"
@@ -198,6 +215,15 @@ const handleBreadcrumbClick = () => {
           @close="isEditCategoryDialogOpen = false"
         />
       </OnClickOutside>
+<<<<<<< HEAD
+=======
+      <Button
+        :label="t('HELP_CENTER.ARTICLES_PAGE.ARTICLES_HEADER.NEW_ARTICLE')"
+        icon="i-lucide-plus"
+        size="sm"
+        @click="emit('newArticle')"
+      />
+>>>>>>> upstream/develop
     </div>
   </div>
 </template>

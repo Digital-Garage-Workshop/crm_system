@@ -54,6 +54,10 @@ const closeMacroPreview = () => {
 <template>
   <div
     class="relative flex items-center justify-between leading-4 rounded-md h-10 pl-3 pr-2"
+<<<<<<< HEAD
+=======
+    :class="showPreview ? 'cursor-default' : 'drag-handle cursor-grab'"
+>>>>>>> upstream/develop
   >
     <span
       class="overflow-hidden whitespace-nowrap text-ellipsis font-medium text-n-slate-12"

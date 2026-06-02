@@ -38,6 +38,14 @@ class Api::V2::Accounts::ReportsController < Api::V1::Accounts::BaseController
     generate_csv('teams_report', 'api/v2/accounts/reports/teams')
   end
 
+<<<<<<< HEAD
+=======
+  def conversations_summary
+    @report_data = generate_conversations_report
+    generate_csv('conversations_summary_report', 'api/v2/accounts/reports/conversations_summary')
+  end
+
+>>>>>>> upstream/develop
   def conversation_traffic
     @report_data = generate_conversations_heatmap_report
     timezone_offset = (params[:timezone_offset] || 0).to_f
@@ -57,6 +65,34 @@ class Api::V2::Accounts::ReportsController < Api::V1::Accounts::BaseController
     render json: bot_metrics
   end
 
+<<<<<<< HEAD
+=======
+  def inbox_label_matrix
+    builder = V2::Reports::InboxLabelMatrixBuilder.new(
+      account: Current.account,
+      params: inbox_label_matrix_params
+    )
+    render json: builder.build
+  end
+
+  def first_response_time_distribution
+    builder = V2::Reports::FirstResponseTimeDistributionBuilder.new(
+      account: Current.account,
+      params: first_response_time_distribution_params
+    )
+    render json: builder.build
+  end
+
+  OUTGOING_MESSAGES_ALLOWED_GROUP_BY = %w[agent team inbox label].freeze
+
+  def outgoing_messages_count
+    return head :unprocessable_entity unless OUTGOING_MESSAGES_ALLOWED_GROUP_BY.include?(params[:group_by])
+
+    builder = V2::Reports::OutgoingMessagesCountBuilder.new(Current.account, outgoing_messages_count_params)
+    render json: builder.build
+  end
+
+>>>>>>> upstream/develop
   private
 
   def generate_csv(filename, template)
@@ -134,4 +170,31 @@ class Api::V2::Accounts::ReportsController < Api::V1::Accounts::BaseController
   def conversation_metrics
     V2::ReportBuilder.new(Current.account, conversation_params).conversation_metrics
   end
+<<<<<<< HEAD
+=======
+
+  def inbox_label_matrix_params
+    {
+      since: params[:since],
+      until: params[:until],
+      inbox_ids: params[:inbox_ids],
+      label_ids: params[:label_ids]
+    }
+  end
+
+  def first_response_time_distribution_params
+    {
+      since: params[:since],
+      until: params[:until]
+    }
+  end
+
+  def outgoing_messages_count_params
+    {
+      group_by: params[:group_by],
+      since: params[:since],
+      until: params[:until]
+    }
+  end
+>>>>>>> upstream/develop
 end

@@ -5,11 +5,19 @@ import validations from './validations';
 import SlaTimeInput from './SlaTimeInput.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import { useVuelidate } from '@vuelidate/core';
+<<<<<<< HEAD
+=======
+import ToggleSwitch from 'dashboard/components-next/switch/Switch.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     SlaTimeInput,
     NextButton,
+<<<<<<< HEAD
+=======
+    ToggleSwitch,
+>>>>>>> upstream/develop
   },
   props: {
     selectedResponse: {
@@ -200,10 +208,17 @@ export default {
       <div
         class="mt-3 flex h-10 items-center text-sm w-full gap-2 border border-solid border-n-strong px-3 py-1.5 rounded-xl justify-between"
       >
+<<<<<<< HEAD
         <span for="sla_bh" class="text-slate-700 dark:text-slate-200">
           {{ $t('SLA.FORM.BUSINESS_HOURS.PLACEHOLDER') }}
         </span>
         <woot-switch id="sla_bh" v-model="onlyDuringBusinessHours" />
+=======
+        <span for="sla_bh" class="text-n-slate-11">
+          {{ $t('SLA.FORM.BUSINESS_HOURS.PLACEHOLDER') }}
+        </span>
+        <ToggleSwitch id="sla_bh" v-model="onlyDuringBusinessHours" />
+>>>>>>> upstream/develop
       </div>
 
       <div class="flex items-center justify-end w-full gap-2 mt-8">

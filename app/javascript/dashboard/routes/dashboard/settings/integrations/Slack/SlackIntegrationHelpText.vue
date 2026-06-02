@@ -25,6 +25,7 @@ const formattedHelpText = computed(() => {
 
 <template>
   <div
+<<<<<<< HEAD
     class="flex-1 w-full px-6 py-5 outline outline-n-container outline-1 bg-n-alpha-3 rounded-md shadow"
   >
     <div class="prose-lg max-w-5xl">
@@ -32,6 +33,18 @@ const formattedHelpText = computed(() => {
         {{ t('INTEGRATION_SETTINGS.SLACK.HELP_TEXT.TITLE') }}
       </h5>
       <div v-dompurify-html="formattedHelpText" class="text-n-slate-11" />
+=======
+    class="flex-1 w-full px-6 py-5 outline outline-n-container outline-1 bg-n-card rounded-xl"
+  >
+    <div class="prose-lg max-w-5xl">
+      <h5 class="text-n-slate-12 text-heading-1 tracking-tight">
+        {{ t('INTEGRATION_SETTINGS.SLACK.HELP_TEXT.TITLE') }}
+      </h5>
+      <div
+        v-dompurify-html="formattedHelpText"
+        class="text-n-slate-11 text-body-main"
+      />
+>>>>>>> upstream/develop
     </div>
   </div>
 </template>

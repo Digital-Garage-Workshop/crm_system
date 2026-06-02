@@ -16,6 +16,10 @@ FactoryBot.define do
       imap_login { 'email@example.com' }
       imap_password { '' }
       imap_enable_ssl { true }
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
       provider_config do
         {
           expires_on: Time.zone.now + 3600,
@@ -33,6 +37,10 @@ FactoryBot.define do
       imap_login { 'email@example.com' }
       imap_password { 'random-password' }
       imap_enable_ssl { true }
+<<<<<<< HEAD
+=======
+      imap_authentication { 'plain' }
+>>>>>>> upstream/develop
     end
   end
 end

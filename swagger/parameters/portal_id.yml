@@ -1,5 +1,13 @@
 in: path
+<<<<<<< HEAD
 name: portal_id
 type: integer
 required: true
 description: The numeric ID of the portal
+=======
+name: id
+schema:
+  type: string
+required: true
+description: The slug identifier of the portal
+>>>>>>> upstream/develop

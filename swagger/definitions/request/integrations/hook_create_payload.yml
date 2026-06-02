@@ -1,6 +1,7 @@
 type: object
 properties:
   app_id:
+<<<<<<< HEAD
     type: string
     description: The ID of app for which integration hook is being created
   inbox_id:
@@ -9,3 +10,20 @@ properties:
   settings:
     type: object
     description: The settings required by the integration
+=======
+    type: integer
+    description: The ID of app for which integration hook is being created
+    example: 1
+  inbox_id:
+    type: integer
+    description: The inbox ID, if the hook is an inbox hook
+    example: 1
+  status:
+    type: integer
+    description: The status of the integration (0 for inactive, 1 for active)
+    example: 1
+  settings:
+    type: object
+    description: The settings required by the integration
+    example: {}
+>>>>>>> upstream/develop

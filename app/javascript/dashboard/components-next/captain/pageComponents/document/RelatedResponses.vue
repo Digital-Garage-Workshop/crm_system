@@ -18,7 +18,13 @@ const dialogRef = ref(null);
 
 const uiFlags = useMapGetter('captainResponses/getUIFlags');
 const responses = useMapGetter('captainResponses/getRecords');
+<<<<<<< HEAD
 const isFetching = computed(() => uiFlags.value.fetchingList);
+=======
+const meta = useMapGetter('captainResponses/getMeta');
+const isFetching = computed(() => uiFlags.value.fetchingList);
+const totalCount = computed(() => meta.value.totalCount || 0);
+>>>>>>> upstream/develop
 
 const handleClose = () => {
   emit('close');
@@ -37,7 +43,11 @@ defineExpose({ dialogRef });
   <Dialog
     ref="dialogRef"
     type="edit"
+<<<<<<< HEAD
     :title="t('CAPTAIN.DOCUMENTS.RELATED_RESPONSES.TITLE')"
+=======
+    :title="`${t('CAPTAIN.DOCUMENTS.RELATED_RESPONSES.TITLE')} (${totalCount})`"
+>>>>>>> upstream/develop
     :description="t('CAPTAIN.DOCUMENTS.RELATED_RESPONSES.DESCRIPTION')"
     :show-cancel-button="false"
     :show-confirm-button="false"

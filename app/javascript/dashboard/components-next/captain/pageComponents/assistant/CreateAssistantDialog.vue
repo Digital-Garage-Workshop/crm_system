@@ -18,7 +18,11 @@ const props = defineProps({
     validator: value => ['create', 'edit'].includes(value),
   },
 });
+<<<<<<< HEAD
 const emit = defineEmits(['close']);
+=======
+const emit = defineEmits(['close', 'created']);
+>>>>>>> upstream/develop
 const { t } = useI18n();
 const store = useStore();
 
@@ -35,8 +39,23 @@ const i18nKey = computed(
   () => `CAPTAIN.ASSISTANTS.${props.type.toUpperCase()}`
 );
 
+<<<<<<< HEAD
 const createAssistant = assistantDetails =>
   store.dispatch('captainAssistants/create', assistantDetails);
+=======
+const createAssistant = async assistantDetails => {
+  try {
+    const newAssistant = await store.dispatch(
+      'captainAssistants/create',
+      assistantDetails
+    );
+    emit('created', newAssistant);
+  } catch (error) {
+    const errorMessage = error?.message || t(`${i18nKey.value}.ERROR_MESSAGE`);
+    useAlert(errorMessage);
+  }
+};
+>>>>>>> upstream/develop
 
 const handleSubmit = async updatedAssistant => {
   try {

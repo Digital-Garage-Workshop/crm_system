@@ -51,6 +51,13 @@ const endPoints = {
   resendConfirmation: {
     url: '/api/v1/profile/resend_confirmation',
   },
+<<<<<<< HEAD
+=======
+
+  resetAccessToken: {
+    url: '/api/v1/profile/reset_access_token',
+  },
+>>>>>>> upstream/develop
 };
 
 export default page => {

@@ -1,6 +1,12 @@
 <script setup>
+<<<<<<< HEAD
 import { ref, watch, computed } from 'vue';
 import { useKeyboardNavigableList } from 'dashboard/composables/useKeyboardNavigableList';
+=======
+import { ref, watch, computed, nextTick } from 'vue';
+import { useKeyboardNavigableList } from 'dashboard/composables/useKeyboardNavigableList';
+import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   items: {
@@ -15,10 +21,16 @@ const props = defineProps({
 
 const emit = defineEmits(['mentionSelect']);
 
+<<<<<<< HEAD
+=======
+const { getPlainText } = useMessageFormatter();
+
+>>>>>>> upstream/develop
 const mentionsListContainerRef = ref(null);
 const selectedIndex = ref(0);
 
 const adjustScroll = () => {
+<<<<<<< HEAD
   const container = mentionsListContainerRef.value;
   const item = container.querySelector(`#mention-item-${selectedIndex.value}`);
   if (item) {
@@ -32,6 +44,18 @@ const adjustScroll = () => {
       container.scrollTop = itemBottom - container.offsetHeight + 34;
     }
   }
+=======
+  nextTick(() => {
+    const container = mentionsListContainerRef.value;
+    if (!container) return;
+    const selectedElement = container.querySelector(
+      `#mention-item-${selectedIndex.value}`
+    );
+    if (selectedElement) {
+      selectedElement.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+    }
+  });
+>>>>>>> upstream/develop
 };
 
 const onSelect = () => {
@@ -92,15 +116,26 @@ const variableKey = (item = {}) => {
         >
           <slot :item="item" :index="index" :selected="index === selectedIndex">
             <p
+<<<<<<< HEAD
               class="max-w-full min-w-0 mb-0 overflow-hidden text-sm font-medium text-n-slate-11 group-hover:text-n-slate-11 text-ellipsis whitespace-nowrap"
+=======
+              class="max-w-full min-w-0 mb-0 overflow-hidden text-sm font-medium text-n-slate-11 group-hover:text-n-slate-12 text-ellipsis whitespace-nowrap"
+>>>>>>> upstream/develop
               :class="{
                 'text-n-slate-12': index === selectedIndex,
               }"
             >
+<<<<<<< HEAD
               {{ item.description }}
             </p>
             <p
               class="max-w-full min-w-0 mb-0 overflow-hidden text-xs text-slate-500 dark:text-slate-300 group-hover:text-n-slate-11 text-ellipsis whitespace-nowrap"
+=======
+              {{ getPlainText(item.description) }}
+            </p>
+            <p
+              class="max-w-full min-w-0 mb-0 overflow-hidden text-xs text-n-slate-11 group-hover:text-n-slate-12 text-ellipsis whitespace-nowrap"
+>>>>>>> upstream/develop
               :class="{
                 'text-n-slate-12': index === selectedIndex,
               }"
@@ -121,7 +156,11 @@ const variableKey = (item = {}) => {
   }
 }
 
+<<<<<<< HEAD
 .canned-item__button::v-deep .button__content {
+=======
+.canned-item__button :deep(.button__content) {
+>>>>>>> upstream/develop
   @apply overflow-hidden text-ellipsis whitespace-nowrap;
 }
 </style>

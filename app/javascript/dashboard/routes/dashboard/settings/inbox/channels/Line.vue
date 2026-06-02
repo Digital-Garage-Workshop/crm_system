@@ -45,7 +45,11 @@ export default {
         const lineChannel = await this.$store.dispatch(
           'inboxes/createChannel',
           {
+<<<<<<< HEAD
             name: this.channelName,
+=======
+            name: this.channelName?.trim(),
+>>>>>>> upstream/develop
             channel: {
               type: 'line',
               line_channel_id: this.lineChannelId,
@@ -71,9 +75,13 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div
     class="border border-n-weak bg-n-solid-1 rounded-t-lg border-b-0 h-full w-full p-6 col-span-6 overflow-auto"
   >
+=======
+  <div class="h-full w-full p-6 col-span-6">
+>>>>>>> upstream/develop
     <PageHeader
       :header-title="$t('INBOX_MGMT.ADD.LINE_CHANNEL.TITLE')"
       :header-content="$t('INBOX_MGMT.ADD.LINE_CHANNEL.DESC')"

@@ -22,7 +22,11 @@ const defaultSansFonts = [
 const tailwindConfig = {
   darkMode: 'class',
   content: [
+<<<<<<< HEAD
     './enterprise/app/views/**/*.html.erb',
+=======
+    './enterprise/app/views/**/*.erb',
+>>>>>>> upstream/develop
     './app/javascript/widget/**/*.vue',
     './app/javascript/v3/**/*.vue',
     './app/javascript/dashboard/**/*.vue',
@@ -31,16 +35,34 @@ const tailwindConfig = {
     './app/javascript/survey/**/*.vue',
     './app/javascript/dashboard/components-next/**/*.vue',
     './app/javascript/dashboard/helper/**/*.js',
+<<<<<<< HEAD
     './app/javascript/dashboard/components-next/**/*.js',
     './app/javascript/dashboard/routes/dashboard/**/**/*.js',
     './app/views/**/*.html.erb',
+=======
+    './app/javascript/dashboard/composables/**/*.js',
+    './app/javascript/dashboard/components-next/**/*.js',
+    './app/javascript/dashboard/routes/dashboard/**/**/*.js',
+    './app/views/**/*.erb',
+>>>>>>> upstream/develop
   ],
   theme: {
     extend: {
       fontFamily: {
         sans: defaultSansFonts,
         inter: ['Inter', ...defaultSansFonts],
+<<<<<<< HEAD
         interDisplay: ['Inter Display', ...defaultSansFonts],
+=======
+        interDisplay: ['InterDisplay', ...defaultSansFonts],
+      },
+      fontWeight: {
+        420: '420',
+        440: '440',
+        460: '460',
+        520: '520',
+        620: '620',
+>>>>>>> upstream/develop
       },
       typography: {
         bubble: {
@@ -186,6 +208,10 @@ const tailwindConfig = {
       lg: '1024px',
       xl: '1280px',
       '2xl': '1536px',
+<<<<<<< HEAD
+=======
+      '3xl': '1900px',
+>>>>>>> upstream/develop
     },
     fontSize: {
       ...defaultTheme.fontSize,
@@ -258,6 +284,10 @@ const tailwindConfig = {
           'ph',
           'material-symbols',
           'teenyicons',
+<<<<<<< HEAD
+=======
+          'fluent',
+>>>>>>> upstream/develop
         ]),
       },
     }),

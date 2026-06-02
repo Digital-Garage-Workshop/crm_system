@@ -8,6 +8,10 @@ import bulkActions from './bulkActions.json';
 import campaign from './campaign.json';
 import cannedMgmt from './cannedMgmt.json';
 import chatlist from './chatlist.json';
+<<<<<<< HEAD
+=======
+import companies from './companies.json';
+>>>>>>> upstream/develop
 import components from './components.json';
 import contact from './contact.json';
 import contactFilters from './contactFilters.json';
@@ -33,8 +37,18 @@ import setNewPassword from './setNewPassword.json';
 import settings from './settings.json';
 import signup from './signup.json';
 import sla from './sla.json';
+<<<<<<< HEAD
 import teamsSettings from './teamsSettings.json';
 import whatsappTemplates from './whatsappTemplates.json';
+=======
+import snooze from './snooze.json';
+import teamsSettings from './teamsSettings.json';
+import whatsappTemplates from './whatsappTemplates.json';
+import contentTemplates from './contentTemplates.json';
+import mfa from './mfa.json';
+import onboarding from './onboarding.json';
+import yearInReview from './yearInReview.json';
+>>>>>>> upstream/develop
 
 export default {
   ...advancedFilters,
@@ -47,6 +61,10 @@ export default {
   ...campaign,
   ...cannedMgmt,
   ...chatlist,
+<<<<<<< HEAD
+=======
+  ...companies,
+>>>>>>> upstream/develop
   ...components,
   ...contact,
   ...contactFilters,
@@ -72,6 +90,16 @@ export default {
   ...settings,
   ...signup,
   ...sla,
+<<<<<<< HEAD
   ...teamsSettings,
   ...whatsappTemplates,
+=======
+  ...snooze,
+  ...teamsSettings,
+  ...whatsappTemplates,
+  ...contentTemplates,
+  ...mfa,
+  ...onboarding,
+  ...yearInReview,
+>>>>>>> upstream/develop
 };

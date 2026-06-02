@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Administrators",
       "AGENT": "Aģents"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Šim kontam nav piesaistīts neviens aģents",
       "TITLE": "Pārvaldīt Jūsu komandas aģentus",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Nevar izveidot savienojumu ar Woot serveri. Lūdzu, vēlāk pamēģiniet vēlreiz"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Meklēt aģentus...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Nav atrasts."
     },

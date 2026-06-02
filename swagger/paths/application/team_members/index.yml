@@ -6,6 +6,7 @@ description: Get Details of Agents in an Team
 security:
   - userApiKey: []
 parameters:
+<<<<<<< HEAD
   - $ref: '#/parameters/account_id'
   - $ref: '#/parameters/team_id'
 responses:
@@ -20,3 +21,29 @@ responses:
     description: Inbox not found
   403:
     description: Access denied
+=======
+  - $ref: '#/components/parameters/account_id'
+  - $ref: '#/components/parameters/team_id'
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: array
+          description: 'Array of all agents in the team'
+          items:
+            $ref: '#/components/schemas/agent'
+  '403':
+    description: Access denied
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '404':
+    description: Team not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

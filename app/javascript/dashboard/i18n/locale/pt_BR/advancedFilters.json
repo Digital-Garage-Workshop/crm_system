@@ -45,7 +45,11 @@
       "FALSE": "Falso"
     },
     "ATTRIBUTES": {
+<<<<<<< HEAD
       "STATUS": "Situação",
+=======
+      "STATUS": "Status",
+>>>>>>> upstream/develop
       "ASSIGNEE_NAME": "Agente atribuído",
       "INBOX_NAME": "Caixa de Entrada",
       "TEAM_NAME": "Nome do Time",

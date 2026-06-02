@@ -85,7 +85,16 @@ export default {
         useAlert(this.$t('EMAIL_TRANSCRIPT.SEND_EMAIL_SUCCESS'));
         this.onCancel();
       } catch (error) {
+<<<<<<< HEAD
         useAlert(this.$t('EMAIL_TRANSCRIPT.SEND_EMAIL_ERROR'));
+=======
+        const status = error?.response?.status;
+        if (status === 402) {
+          useAlert(this.$t('EMAIL_TRANSCRIPT.SEND_EMAIL_PAYMENT_REQUIRED'));
+        } else {
+          useAlert(this.$t('EMAIL_TRANSCRIPT.SEND_EMAIL_ERROR'));
+        }
+>>>>>>> upstream/develop
       } finally {
         this.isSubmitting = false;
       }

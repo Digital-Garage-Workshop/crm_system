@@ -48,7 +48,12 @@
       "CREATED_AT": "Created At",
       "LAST_ACTIVITY": "Последна активност",
       "REFERER_LINK": "Referrer link",
+<<<<<<< HEAD
       "BLOCKED": "Blocked"
+=======
+      "BLOCKED": "Blocked",
+      "LABELS": "Labels"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Standard Filters",

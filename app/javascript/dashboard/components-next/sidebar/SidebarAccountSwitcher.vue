@@ -5,6 +5,10 @@ import { useMapGetter } from 'dashboard/composables/store';
 import { useI18n } from 'vue-i18n';
 import ButtonNext from 'next/button/Button.vue';
 import Icon from 'next/icon/Icon.vue';
+<<<<<<< HEAD
+=======
+import Logo from 'next/icon/Logo.vue';
+>>>>>>> upstream/develop
 
 import {
   DropdownContainer,
@@ -13,6 +17,16 @@ import {
   DropdownItem,
 } from 'next/dropdown-menu/base';
 
+<<<<<<< HEAD
+=======
+defineProps({
+  isCollapsed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+>>>>>>> upstream/develop
 const emit = defineEmits(['showCreateAccountModal']);
 
 const { t } = useI18n();
@@ -45,7 +59,23 @@ const emitNewAccount = () => {
 <template>
   <DropdownContainer>
     <template #trigger="{ toggle, isOpen }">
+<<<<<<< HEAD
       <button
+=======
+      <!-- Collapsed view: Logo trigger -->
+      <button
+        v-if="isCollapsed"
+        class="grid flex-shrink-0 place-content-center p-2 rounded-lg cursor-pointer hover:bg-n-alpha-1"
+        :class="{ 'bg-n-alpha-1': isOpen }"
+        :title="currentAccount.name"
+        @click="toggle"
+      >
+        <Logo class="size-7" />
+      </button>
+      <!-- Expanded view: Account name trigger -->
+      <button
+        v-else
+>>>>>>> upstream/develop
         id="sidebar-account-switcher"
         :data-account-id="accountId"
         aria-haspopup="listbox"
@@ -73,7 +103,14 @@ const emitNewAccount = () => {
         />
       </button>
     </template>
+<<<<<<< HEAD
     <DropdownBody v-if="showAccountSwitcher" class="min-w-80 z-50">
+=======
+    <DropdownBody
+      v-if="showAccountSwitcher || isCollapsed"
+      class="min-w-80 z-50"
+    >
+>>>>>>> upstream/develop
       <DropdownSection :title="t('SIDEBAR_ITEMS.SWITCH_ACCOUNT')">
         <DropdownItem
           v-for="account in sortedCurrentUserAccounts"

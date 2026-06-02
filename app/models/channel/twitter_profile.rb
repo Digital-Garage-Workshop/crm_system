@@ -19,6 +19,15 @@
 class Channel::TwitterProfile < ApplicationRecord
   include Channelable
 
+<<<<<<< HEAD
+=======
+  # TODO: Remove guard once encryption keys become mandatory (target 3-4 releases out).
+  if Chatwoot.encryption_configured?
+    encrypts :twitter_access_token
+    encrypts :twitter_access_token_secret
+  end
+
+>>>>>>> upstream/develop
   self.table_name = 'channel_twitter_profiles'
 
   validates :profile_id, uniqueness: { scope: :account_id }

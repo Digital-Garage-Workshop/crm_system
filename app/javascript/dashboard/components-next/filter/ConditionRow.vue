@@ -1,7 +1,14 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, defineModel, h, watch, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Button from 'next/button/Button.vue';
+=======
+import { computed, h, watch, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import Button from 'next/button/Button.vue';
+import Input from 'dashboard/components-next/input/Input.vue';
+>>>>>>> upstream/develop
 import FilterSelect from './inputs/FilterSelect.vue';
 import MultiSelect from './inputs/MultiSelect.vue';
 import SingleSelect from './inputs/SingleSelect.vue';
@@ -49,12 +56,20 @@ const currentFilter = computed(() =>
 );
 
 const getOperator = (filter, selectedOperator) => {
+<<<<<<< HEAD
   const operatorFromOptions = filter.filterOperators.find(
+=======
+  const operatorFromOptions = filter?.filterOperators?.find(
+>>>>>>> upstream/develop
     operator => operator.value === selectedOperator
   );
 
   if (!operatorFromOptions) {
+<<<<<<< HEAD
     return filter.filterOperators[0];
+=======
+    return filter?.filterOperators?.[0];
+>>>>>>> upstream/develop
   }
 
   return operatorFromOptions;
@@ -76,12 +91,20 @@ const queryOperatorOptions = computed(() => {
     {
       label: t(`FILTER.QUERY_DROPDOWN_LABELS.AND`),
       value: 'and',
+<<<<<<< HEAD
       icon: h('span', { class: 'i-lucide-ampersands !text-n-blue-text' }),
+=======
+      icon: h('span', { class: 'i-lucide-ampersands !text-n-blue-11' }),
+>>>>>>> upstream/develop
     },
     {
       label: t(`FILTER.QUERY_DROPDOWN_LABELS.OR`),
       value: 'or',
+<<<<<<< HEAD
       icon: h('span', { class: 'i-woot-logic-or !text-n-blue-text' }),
+=======
+      icon: h('span', { class: 'i-woot-logic-or !text-n-blue-11' }),
+>>>>>>> upstream/develop
     },
   ];
 });
@@ -102,6 +125,15 @@ const validationError = computed(() => {
   );
 });
 
+<<<<<<< HEAD
+=======
+const inputFieldType = computed(() => {
+  if (inputType.value === 'date') return 'date';
+  if (inputType.value === 'number') return 'number';
+  return 'text';
+});
+
+>>>>>>> upstream/develop
 const resetModelOnAttributeKeyChange = newAttributeKey => {
   /**
    * Resets the filter values and operator when the attribute key changes. This ensures that
@@ -131,7 +163,15 @@ const validate = () => {
   return !validationError.value;
 };
 
+<<<<<<< HEAD
 defineExpose({ validate });
+=======
+const resetValidation = () => {
+  showErrors.value = false;
+};
+
+defineExpose({ validate, resetValidation });
+>>>>>>> upstream/develop
 </script>
 
 <template>
@@ -159,18 +199,32 @@ defineExpose({ validate });
       <FilterSelect
         v-model="filterOperator"
         variant="ghost"
+<<<<<<< HEAD
         :options="currentFilter.filterOperators"
       />
       <template v-if="currentOperator.hasInput">
+=======
+        :options="currentFilter?.filterOperators"
+      />
+      <template v-if="currentOperator?.hasInput">
+>>>>>>> upstream/develop
         <MultiSelect
           v-if="inputType === 'multiSelect'"
           v-model="values"
           :options="currentFilter.options"
+<<<<<<< HEAD
+=======
+          dropdown-max-height="max-h-72"
+>>>>>>> upstream/develop
         />
         <SingleSelect
           v-else-if="inputType === 'searchSelect'"
           v-model="values"
           :options="currentFilter.options"
+<<<<<<< HEAD
+=======
+          dropdown-max-height="max-h-64"
+>>>>>>> upstream/develop
         />
         <SingleSelect
           v-else-if="inputType === 'booleanSelect'"
@@ -178,11 +232,19 @@ defineExpose({ validate });
           disable-search
           :options="booleanOptions"
         />
+<<<<<<< HEAD
         <input
           v-else
           v-model="values"
           :type="inputType === 'date' ? 'date' : 'text'"
           class="py-1.5 px-3 text-n-slate-12 bg-n-alpha-1 text-sm rounded-lg reset-base"
+=======
+        <Input
+          v-else
+          v-model="values"
+          :type="inputFieldType"
+          class="[&>input]:h-8 [&>input]:py-1.5 [&>input]:outline-offset-0"
+>>>>>>> upstream/develop
           :placeholder="t('FILTER.INPUT_PLACEHOLDER')"
         />
       </template>
@@ -191,6 +253,10 @@ defineExpose({ validate });
         solid
         slate
         icon="i-lucide-trash"
+<<<<<<< HEAD
+=======
+        class="flex-shrink-0"
+>>>>>>> upstream/develop
         @click.stop="emit('remove')"
       />
     </div>

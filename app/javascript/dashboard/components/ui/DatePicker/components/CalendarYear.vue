@@ -77,7 +77,11 @@ const selectYear = year => {
           'bg-n-brand text-white hover:bg-n-blue-10': year === activeYear,
           'hover:bg-n-alpha-2 dark:hover:bg-n-solid-3': year !== activeYear,
         }"
+<<<<<<< HEAD
         @click="selectYear(year)"
+=======
+        @click.stop="selectYear(year)"
+>>>>>>> upstream/develop
       >
         {{ year }}
       </button>

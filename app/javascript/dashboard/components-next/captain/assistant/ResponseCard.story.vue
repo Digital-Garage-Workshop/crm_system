@@ -12,7 +12,11 @@ import { responsesList } from 'dashboard/components-next/captain/pageComponents/
       <div
         v-for="(response, index) in responsesList"
         :key="index"
+<<<<<<< HEAD
         class="px-20 py-4 bg-white dark:bg-slate-900"
+=======
+        class="px-20 py-4 bg-n-background"
+>>>>>>> upstream/develop
       >
         <ResponseCard
           :id="response.id"

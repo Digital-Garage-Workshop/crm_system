@@ -16,7 +16,11 @@ onMounted(() => {
 
 <template>
   <div
+<<<<<<< HEAD
     class="flex flex-col justify-between flex-1 h-full m-0 overflow-auto bg-n-background"
+=======
+    class="flex flex-col justify-between flex-1 h-full m-0 overflow-auto bg-n-surface-1"
+>>>>>>> upstream/develop
   >
     <router-view v-slot="{ Component }">
       <keep-alive v-if="keepAlive">

@@ -1,5 +1,10 @@
 in: path
 name: id
+<<<<<<< HEAD
 type: integer
+=======
+schema:
+  type: integer
+>>>>>>> upstream/develop
 required: true
 description: The ID of the agentbot to be updated

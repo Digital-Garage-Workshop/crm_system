@@ -47,6 +47,10 @@ const isReel = computed(() => {
           'max-w-48': isReel,
           'max-w-full': !isReel,
         }"
+<<<<<<< HEAD
+=======
+        @click.stop
+>>>>>>> upstream/develop
         @error="handleError"
       />
     </div>

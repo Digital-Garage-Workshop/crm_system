@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 @import 'shared/assets/stylesheets/animations';
 @import 'shared/assets/stylesheets/colors';
 
+=======
+>>>>>>> upstream/develop
 @import 'reset';
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -104,6 +107,18 @@ select:not(.reset-base) {
   background-repeat: no-repeat;
   background-size: 9px 6px;
   font-family: inherit;
+<<<<<<< HEAD
+=======
+  @apply [color-scheme:light];
+
+  option:not(:disabled) {
+    @apply bg-n-solid-2 text-n-slate-12;
+  }
+}
+
+.dark select:not(.reset-base) {
+  @apply [color-scheme:dark];
+>>>>>>> upstream/develop
 }
 
 p code {

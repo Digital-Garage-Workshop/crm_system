@@ -84,6 +84,7 @@ const findCategoryFromSlug = slug => {
   return categories.value?.find(category => category.slug === slug);
 };
 
+<<<<<<< HEAD
 const assignCategoryFromSlug = slug => {
   const categoryFromSlug = findCategoryFromSlug(slug);
   if (categoryFromSlug) {
@@ -97,15 +98,30 @@ const selectedCategory = computed(() => {
   if (isNewArticle.value) {
     if (categorySlugFromRoute.value) {
       const categoryFromSlug = assignCategoryFromSlug(
+=======
+const selectedCategory = computed(() => {
+  if (isNewArticle.value) {
+    if (selectedCategoryId.value) {
+      return (
+        categories.value?.find(c => c.id === selectedCategoryId.value) || null
+      );
+    }
+    if (categorySlugFromRoute.value) {
+      const categoryFromSlug = findCategoryFromSlug(
+>>>>>>> upstream/develop
         categorySlugFromRoute.value
       );
       if (categoryFromSlug) return categoryFromSlug;
     }
+<<<<<<< HEAD
     return selectedCategoryId.value
       ? categories.value.find(
           category => category.id === selectedCategoryId.value
         )
       : categories.value[0] || null;
+=======
+    return categories.value?.[0] || null;
+>>>>>>> upstream/develop
   }
   return categories.value.find(
     category => category.id === props.article?.category?.id
@@ -201,12 +217,20 @@ onMounted(() => {
           v-if="openAgentsList && hasAgentList"
           :menu-items="agentList"
           show-search
+<<<<<<< HEAD
           class="z-[100] w-48 mt-2 overflow-y-auto ltr:left-0 rtl:right-0 top-full max-h-60"
+=======
+          class="z-[100] w-48 mt-2 ltr:left-0 rtl:right-0 top-full max-h-60"
+>>>>>>> upstream/develop
           @action="handleArticleAction"
         />
       </OnClickOutside>
     </div>
+<<<<<<< HEAD
     <div class="w-px h-3 bg-slate-50 dark:bg-slate-800" />
+=======
+    <div class="w-px h-3 bg-n-weak" />
+>>>>>>> upstream/develop
     <div class="relative">
       <OnClickOutside @trigger="openCategoryList = false">
         <Button
@@ -233,13 +257,21 @@ onMounted(() => {
           v-if="openCategoryList && hasCategoryMenuItems"
           :menu-items="categoryList"
           show-search
+<<<<<<< HEAD
           class="w-48 mt-2 z-[100] overflow-y-auto left-0 top-full max-h-60"
+=======
+          class="w-48 mt-2 z-[100] left-0 top-full max-h-60"
+>>>>>>> upstream/develop
           @action="handleArticleAction"
         />
       </OnClickOutside>
     </div>
 
+<<<<<<< HEAD
     <div class="w-px h-3 bg-slate-50 dark:bg-slate-800" />
+=======
+    <div class="w-px h-3 bg-n-weak" />
+>>>>>>> upstream/develop
     <div class="relative">
       <OnClickOutside @trigger="openProperties = false">
         <Button

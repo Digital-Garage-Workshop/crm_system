@@ -114,6 +114,10 @@ export default {
               v-model="content"
               class="message-editor [&>div]:px-1"
               :class="{ editor_warning: v$.content.$error }"
+<<<<<<< HEAD
+=======
+              channel-type="Context::Default"
+>>>>>>> upstream/develop
               enable-variables
               :enable-canned-responses="false"
               :placeholder="$t('CANNED_MGMT.EDIT.FORM.CONTENT.PLACEHOLDER')"
@@ -146,6 +150,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
+<<<<<<< HEAD
 ::v-deep {
   .ProseMirror-menubar {
     @apply hidden;
@@ -157,6 +162,17 @@ export default {
     p {
       @apply text-base;
     }
+=======
+:deep(.ProseMirror-menubar) {
+  @apply hidden;
+}
+
+:deep(.ProseMirror-woot-style) {
+  @apply min-h-[12.5rem];
+
+  p {
+    @apply text-base;
+>>>>>>> upstream/develop
   }
 }
 </style>

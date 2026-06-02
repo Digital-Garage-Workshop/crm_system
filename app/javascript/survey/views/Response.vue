@@ -5,8 +5,17 @@ import Spinner from 'shared/components/Spinner.vue';
 import Rating from 'survey/components/Rating.vue';
 import Feedback from 'survey/components/Feedback.vue';
 import Banner from 'survey/components/Banner.vue';
+<<<<<<< HEAD
 import { getSurveyDetails, updateSurvey } from 'survey/api/survey';
 
+=======
+import StarRating from 'shared/components/StarRating.vue';
+import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
+import { getSurveyDetails, updateSurvey } from 'survey/api/survey';
+
+import { CSAT_DISPLAY_TYPES } from 'shared/constants/messages';
+
+>>>>>>> upstream/develop
 export default {
   name: 'Response',
   components: {
@@ -15,6 +24,14 @@ export default {
     Spinner,
     Banner,
     Feedback,
+<<<<<<< HEAD
+=======
+    StarRating,
+  },
+  setup() {
+    const { formatMessage } = useMessageFormatter();
+    return { formatMessage };
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -23,9 +40,18 @@ export default {
       errorMessage: null,
       selectedRating: null,
       feedbackMessage: '',
+<<<<<<< HEAD
       isUpdating: false,
       logo: '',
       inboxName: '',
+=======
+      hasSubmittedFeedback: false,
+      isUpdating: false,
+      logo: '',
+      inboxName: '',
+      displayType: CSAT_DISPLAY_TYPES.EMOJI,
+      messageContent: '',
+>>>>>>> upstream/develop
     };
   },
   computed: {
@@ -37,10 +63,27 @@ export default {
       return this.surveyDetails && this.surveyDetails.rating;
     },
     isFeedbackSubmitted() {
+<<<<<<< HEAD
       return this.surveyDetails && this.surveyDetails.feedback_message;
     },
     isButtonDisabled() {
       return !(this.selectedRating && this.feedback);
+=======
+      return (
+        this.hasSubmittedFeedback || !!this.surveyDetails?.feedback_message
+      );
+    },
+    isButtonDisabled() {
+      if (!this.selectedRating) return true;
+      if (this.isUpdating) return true;
+      return false;
+    },
+    isEmojiType() {
+      return this.displayType === CSAT_DISPLAY_TYPES.EMOJI;
+    },
+    isStarType() {
+      return this.displayType === CSAT_DISPLAY_TYPES.STAR;
+>>>>>>> upstream/develop
     },
     shouldShowBanner() {
       return this.isRatingSubmitted || this.errorMessage;
@@ -48,10 +91,17 @@ export default {
     enableFeedbackForm() {
       return !this.isFeedbackSubmitted && this.isRatingSubmitted;
     },
+<<<<<<< HEAD
     shouldShowErrorMesage() {
       return !!this.errorMessage;
     },
     shouldShowSuccessMesage() {
+=======
+    shouldShowErrorMessage() {
+      return !!this.errorMessage;
+    },
+    shouldShowSuccessMessage() {
+>>>>>>> upstream/develop
       return !!this.isRatingSubmitted;
     },
     message() {
@@ -60,18 +110,32 @@ export default {
       }
       return this.$t('SURVEY.RATING.SUCCESS_MESSAGE');
     },
+<<<<<<< HEAD
+=======
+    formattedMessageContent() {
+      return this.formatMessage(this.messageContent, false);
+    },
+>>>>>>> upstream/develop
   },
   async mounted() {
     this.getSurveyDetails();
   },
   methods: {
     selectRating(rating) {
+<<<<<<< HEAD
+=======
+      if (this.isFeedbackSubmitted || this.isUpdating) return;
+>>>>>>> upstream/develop
       this.selectedRating = rating;
       this.updateSurveyDetails();
     },
     sendFeedback(message) {
       this.feedbackMessage = message;
+<<<<<<< HEAD
       this.updateSurveyDetails();
+=======
+      this.updateSurveyDetails({ markFeedbackSubmitted: true });
+>>>>>>> upstream/develop
     },
     async getSurveyDetails() {
       this.isLoading = true;
@@ -82,6 +146,13 @@ export default {
         this.surveyDetails = result?.data?.csat_survey_response;
         this.selectedRating = this.surveyDetails?.rating;
         this.feedbackMessage = this.surveyDetails?.feedback_message || '';
+<<<<<<< HEAD
+=======
+        this.displayType = result.data.display_type || CSAT_DISPLAY_TYPES.EMOJI;
+        this.messageContent =
+          result.data.content ||
+          this.$t('SURVEY.DESCRIPTION', { inboxName: this.inboxName });
+>>>>>>> upstream/develop
         this.setLocale(result.data.locale);
       } catch (error) {
         const errorMessage = error?.response?.data?.message;
@@ -90,7 +161,11 @@ export default {
         this.isLoading = false;
       }
     },
+<<<<<<< HEAD
     async updateSurveyDetails() {
+=======
+    async updateSurveyDetails({ markFeedbackSubmitted = false } = {}) {
+>>>>>>> upstream/develop
       this.isUpdating = true;
       try {
         const data = {
@@ -111,6 +186,12 @@ export default {
           rating: this.selectedRating,
           feedback_message: this.feedbackMessage,
         };
+<<<<<<< HEAD
+=======
+        if (markFeedbackSubmitted) {
+          this.hasSubmittedFeedback = true;
+        }
+>>>>>>> upstream/develop
       } catch (error) {
         const errorMessage = error?.response?.data?.error;
         this.errorMessage = errorMessage || this.$t('SURVEY.API.ERROR_MESSAGE');
@@ -129,12 +210,17 @@ export default {
 <template>
   <div
     v-if="isLoading"
+<<<<<<< HEAD
     class="flex items-center justify-center flex-1 h-full min-h-screen bg-black-25"
+=======
+    class="flex items-center justify-center flex-1 h-full min-h-screen bg-n-background"
+>>>>>>> upstream/develop
   >
     <Spinner size="" />
   </div>
   <div
     v-else
+<<<<<<< HEAD
     class="flex items-center justify-center w-full h-full min-h-screen overflow-auto bg-slate-50"
   >
     <div
@@ -152,16 +238,51 @@ export default {
           v-if="shouldShowBanner"
           :show-success="shouldShowSuccessMesage"
           :show-error="shouldShowErrorMesage"
+=======
+    class="flex items-center justify-center w-full h-full min-h-screen overflow-auto bg-n-background"
+  >
+    <div
+      class="flex flex-col w-full h-full bg-n-solid-1 rounded-lg border border-solid border-n-weak shadow-md lg:w-2/5 lg:h-auto"
+    >
+      <div class="w-full px-12 pt-12 pb-6 m-auto my-0">
+        <img v-if="logo" :src="logo" alt="Chatwoot logo" class="mb-6 logo" />
+        <div
+          v-if="!isRatingSubmitted"
+          v-dompurify-html="formattedMessageContent"
+          class="mb-8 text-lg leading-relaxed text-n-slate-12 prose prose-bubble"
+        />
+        <Banner
+          v-if="shouldShowBanner"
+          :show-success="shouldShowSuccessMessage"
+          :show-error="shouldShowErrorMessage"
+>>>>>>> upstream/develop
           :message="message"
         />
         <label
           v-if="!isRatingSubmitted"
+<<<<<<< HEAD
           class="mb-4 text-base font-medium text-black-800"
+=======
+          class="mb-4 text-base font-medium text-n-slate-11"
+>>>>>>> upstream/develop
         >
           {{ $t('SURVEY.RATING.LABEL') }}
         </label>
         <Rating
+<<<<<<< HEAD
           :selected-rating="selectedRating"
+=======
+          v-if="isEmojiType"
+          :selected-rating="selectedRating"
+          :is-disabled="isFeedbackSubmitted || isUpdating"
+          @select-rating="selectRating"
+        />
+        <StarRating
+          v-if="isStarType"
+          :selected-rating="selectedRating"
+          :is-disabled="isFeedbackSubmitted || isUpdating"
+          class="[&>button>span]:text-4xl !justify-start !px-0"
+>>>>>>> upstream/develop
           @select-rating="selectRating"
         />
         <Feedback

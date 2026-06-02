@@ -47,11 +47,15 @@ defineExpose({ dialogRef });
     ref="dialogRef"
     type="alert"
     :title="t('CONTACTS_LAYOUT.DETAILS.DELETE_DIALOG.TITLE')"
+<<<<<<< HEAD
     :description="
       t('CONTACTS_LAYOUT.DETAILS.DELETE_DIALOG.DESCRIPTION', {
         contactName: props.selectedContact.name,
       })
     "
+=======
+    :description="t('CONTACTS_LAYOUT.DETAILS.DELETE_DIALOG.DESCRIPTION')"
+>>>>>>> upstream/develop
     :confirm-button-label="t('CONTACTS_LAYOUT.DETAILS.DELETE_DIALOG.CONFIRM')"
     @confirm="handleDialogConfirm"
   />

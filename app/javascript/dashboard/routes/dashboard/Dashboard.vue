@@ -1,4 +1,5 @@
 <script>
+<<<<<<< HEAD
 import { defineAsyncComponent, ref } from 'vue';
 import { mapGetters } from 'vuex';
 
@@ -8,27 +9,53 @@ import AddAccountModal from 'dashboard/components/layout/sidebarComponents/AddAc
 import AccountSelector from 'dashboard/components/layout/sidebarComponents/AccountSelector.vue';
 import AddLabelModal from 'dashboard/routes/dashboard/settings/labels/AddLabel.vue';
 import NotificationPanel from 'dashboard/routes/dashboard/notifications/components/NotificationPanel.vue';
+=======
+import { defineAsyncComponent, ref, computed } from 'vue';
+
+import NextSidebar from 'next/sidebar/Sidebar.vue';
+import WootKeyShortcutModal from 'dashboard/components/widgets/modal/WootKeyShortcutModal.vue';
+import AddAccountModal from 'dashboard/components/app/AddAccountModal.vue';
+>>>>>>> upstream/develop
 import UpgradePage from 'dashboard/routes/dashboard/upgrade/UpgradePage.vue';
 
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useAccount } from 'dashboard/composables/useAccount';
+<<<<<<< HEAD
 
 import wootConstants from 'dashboard/constants/globals';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
+=======
+import { useWindowSize } from '@vueuse/core';
+
+import wootConstants from 'dashboard/constants/globals';
+>>>>>>> upstream/develop
 
 const CommandBar = defineAsyncComponent(
   () => import('./commands/commandbar.vue')
 );
 
+<<<<<<< HEAD
 const Sidebar = defineAsyncComponent(
   () => import('../../components/layout/Sidebar.vue')
 );
 import { emitter } from 'shared/helpers/mitt';
+=======
+const FloatingCallWidget = defineAsyncComponent(
+  () => import('dashboard/components-next/call/FloatingCallWidget.vue')
+);
+
+import CopilotLauncher from 'dashboard/components-next/copilot/CopilotLauncher.vue';
+import CopilotContainer from 'dashboard/components/copilot/CopilotContainer.vue';
+
+import MobileSidebarLauncher from 'dashboard/components-next/sidebar/MobileSidebarLauncher.vue';
+import { useCallsStore } from 'dashboard/stores/calls';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     NextSidebar,
+<<<<<<< HEAD
     Sidebar,
     CommandBar,
     WootKeyShortcutModal,
@@ -37,23 +64,45 @@ export default {
     AddLabelModal,
     NotificationPanel,
     UpgradePage,
+=======
+    CommandBar,
+    WootKeyShortcutModal,
+    AddAccountModal,
+    UpgradePage,
+    CopilotLauncher,
+    CopilotContainer,
+    FloatingCallWidget,
+    MobileSidebarLauncher,
+>>>>>>> upstream/develop
   },
   setup() {
     const upgradePageRef = ref(null);
     const { uiSettings, updateUISettings } = useUISettings();
     const { accountId } = useAccount();
+<<<<<<< HEAD
+=======
+    const { width: windowWidth } = useWindowSize();
+    const callsStore = useCallsStore();
+>>>>>>> upstream/develop
 
     return {
       uiSettings,
       updateUISettings,
       accountId,
       upgradePageRef,
+<<<<<<< HEAD
+=======
+      windowWidth,
+      hasActiveCall: computed(() => callsStore.hasActiveCall),
+      hasIncomingCall: computed(() => callsStore.hasIncomingCall),
+>>>>>>> upstream/develop
     };
   },
   data() {
     return {
       showAccountModal: false,
       showCreateAccountModal: false,
+<<<<<<< HEAD
       showAddLabelModal: false,
       showShortcutModal: false,
       isNotificationPanel: false,
@@ -67,6 +116,15 @@ export default {
     }),
     currentRoute() {
       return ' ';
+=======
+      showShortcutModal: false,
+      isMobileSidebarOpen: false,
+    };
+  },
+  computed: {
+    isSmallScreen() {
+      return this.windowWidth < wootConstants.SMALL_SCREEN_BREAKPOINT;
+>>>>>>> upstream/develop
     },
     showUpgradePage() {
       return this.upgradePageRef?.shouldShowUpgradePage;
@@ -75,6 +133,7 @@ export default {
       return [
         'billing_settings_index',
         'settings_inbox_list',
+<<<<<<< HEAD
         'agent_list',
       ].includes(this.$route.name);
     },
@@ -82,12 +141,19 @@ export default {
       const { show_secondary_sidebar: showSecondarySidebar } = this.uiSettings;
       return showSecondarySidebar;
     },
+=======
+        'general_settings_index',
+        'agent_list',
+      ].includes(this.$route.name);
+    },
+>>>>>>> upstream/develop
     previouslyUsedDisplayType() {
       const {
         previously_used_conversation_display_type: conversationDisplayType,
       } = this.uiSettings;
       return conversationDisplayType;
     },
+<<<<<<< HEAD
     previouslyUsedSidebarView() {
       const { previously_used_sidebar_view: showSecondarySidebar } =
         this.uiSettings;
@@ -157,6 +223,32 @@ export default {
         show_secondary_sidebar: !this.isSidebarOpen,
         previously_used_sidebar_view: !this.isSidebarOpen,
       });
+=======
+  },
+  watch: {
+    isSmallScreen: {
+      handler() {
+        const { LAYOUT_TYPES } = wootConstants;
+        if (window.innerWidth <= wootConstants.SMALL_SCREEN_BREAKPOINT) {
+          this.updateUISettings({
+            conversation_display_type: LAYOUT_TYPES.EXPANDED,
+          });
+        } else {
+          this.updateUISettings({
+            conversation_display_type: this.previouslyUsedDisplayType,
+          });
+        }
+      },
+      immediate: true,
+    },
+  },
+  methods: {
+    toggleMobileSidebar() {
+      this.isMobileSidebarOpen = !this.isMobileSidebarOpen;
+    },
+    closeMobileSidebar() {
+      this.isMobileSidebarOpen = false;
+>>>>>>> upstream/develop
     },
     openCreateAccountModal() {
       this.showAccountModal = false;
@@ -174,6 +266,7 @@ export default {
     closeKeyShortcutModal() {
       this.showShortcutModal = false;
     },
+<<<<<<< HEAD
     showAddLabelPopup() {
       this.showAddLabelModal = true;
     },
@@ -186,18 +279,27 @@ export default {
     closeNotificationPanel() {
       this.isNotificationPanel = false;
     },
+=======
+>>>>>>> upstream/develop
   },
 };
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex flex-wrap app-wrapper dark:text-slate-300">
     <NextSidebar
       v-if="showNextSidebar"
+=======
+  <div class="flex flex-grow overflow-hidden text-n-slate-12">
+    <NextSidebar
+      :is-mobile-sidebar-open="isMobileSidebarOpen"
+>>>>>>> upstream/develop
       @toggle-account-modal="toggleAccountModal"
       @open-key-shortcut-modal="toggleKeyShortcutModal"
       @close-key-shortcut-modal="closeKeyShortcutModal"
       @show-create-account-modal="openCreateAccountModal"
+<<<<<<< HEAD
     />
     <Sidebar
       v-else
@@ -211,10 +313,19 @@ export default {
       @show-add-label-popup="showAddLabelPopup"
     />
     <main class="flex flex-1 h-full min-h-0 px-0 overflow-hidden">
+=======
+      @close-mobile-sidebar="closeMobileSidebar"
+    />
+
+    <main
+      class="flex flex-1 h-full w-full min-h-0 px-0 overflow-hidden bg-n-surface-1"
+    >
+>>>>>>> upstream/develop
       <UpgradePage
         v-show="showUpgradePage"
         ref="upgradePageRef"
         :bypass-upgrade-page="bypassUpgradePage"
+<<<<<<< HEAD
       />
       <template v-if="!showUpgradePage">
         <router-view />
@@ -235,6 +346,25 @@ export default {
         @close-account-modal="toggleAccountModal"
         @show-create-account-modal="openCreateAccountModal"
       />
+=======
+      >
+        <MobileSidebarLauncher
+          :is-mobile-sidebar-open="isMobileSidebarOpen"
+          @toggle="toggleMobileSidebar"
+        />
+      </UpgradePage>
+      <template v-if="!showUpgradePage">
+        <router-view />
+        <CommandBar />
+        <CopilotLauncher />
+        <MobileSidebarLauncher
+          :is-mobile-sidebar-open="isMobileSidebarOpen"
+          @toggle="toggleMobileSidebar"
+        />
+        <CopilotContainer />
+        <FloatingCallWidget v-if="hasActiveCall || hasIncomingCall" />
+      </template>
+>>>>>>> upstream/develop
       <AddAccountModal
         :show="showCreateAccountModal"
         @close-account-create-modal="closeCreateAccountModal"

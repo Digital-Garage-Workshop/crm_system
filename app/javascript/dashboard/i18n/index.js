@@ -1,4 +1,8 @@
 import ar from './locale/ar';
+<<<<<<< HEAD
+=======
+import bg from './locale/bg';
+>>>>>>> upstream/develop
 import ca from './locale/ca';
 import cs from './locale/cs';
 import da from './locale/da';
@@ -6,6 +10,10 @@ import de from './locale/de';
 import el from './locale/el';
 import en from './locale/en';
 import es from './locale/es';
+<<<<<<< HEAD
+=======
+import et from './locale/et';
+>>>>>>> upstream/develop
 import fa from './locale/fa';
 import fi from './locale/fi';
 import fr from './locale/fr';
@@ -40,6 +48,10 @@ import lt from './locale/lt';
 
 export default {
   ar,
+<<<<<<< HEAD
+=======
+  bg,
+>>>>>>> upstream/develop
   ca,
   cs,
   da,
@@ -47,6 +59,10 @@ export default {
   el,
   en,
   es,
+<<<<<<< HEAD
+=======
+  et,
+>>>>>>> upstream/develop
   fa,
   fi,
   fr,

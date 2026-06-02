@@ -15,7 +15,12 @@ module MicrosoftConcern
 
   private
 
+<<<<<<< HEAD
   def base_url
     ENV.fetch('FRONTEND_URL', 'http://localhost:3000')
+=======
+  def scope
+    'offline_access https://outlook.office.com/IMAP.AccessAsUser.All https://outlook.office.com/SMTP.Send openid profile email'
+>>>>>>> upstream/develop
   end
 end

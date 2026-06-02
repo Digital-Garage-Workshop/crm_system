@@ -541,7 +541,11 @@ const countries = [
   },
   {
     name: 'Guyana',
+<<<<<<< HEAD
     dial_code: '+595',
+=======
+    dial_code: '+592',
+>>>>>>> upstream/develop
     emoji: '🇬🇾',
     id: 'GY',
   },

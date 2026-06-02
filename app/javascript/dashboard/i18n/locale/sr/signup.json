@@ -1,6 +1,10 @@
 {
   "REGISTER": {
     "TRY_WOOT": "Create an account",
+<<<<<<< HEAD
+=======
+    "GET_STARTED": "Get started with Chatwoot",
+>>>>>>> upstream/develop
     "TITLE": "Registruj",
     "TESTIMONIAL_HEADER": "All it takes is one step to move forward",
     "TESTIMONIAL_CONTENT": "You're one step away from engaging your customers, retaining them and finding new ones.",
@@ -27,11 +31,21 @@
       "LABEL": "Lozinka",
       "PLACEHOLDER": "Lozinka",
       "ERROR": "Lozinka je prekratka.",
+<<<<<<< HEAD
       "IS_INVALID_PASSWORD": "Lozinka bi trebalo da sadrži najmanje 1 veliko slovo, 1 malo slovo, 1 broj i 1 specijalni karakter."
+=======
+      "IS_INVALID_PASSWORD": "Lozinka bi trebalo da sadrži najmanje 1 veliko slovo, 1 malo slovo, 1 broj i 1 specijalni karakter.",
+      "REQUIREMENTS_LENGTH": "At least 6 characters long",
+      "REQUIREMENTS_UPPERCASE": "At least one uppercase letter",
+      "REQUIREMENTS_LOWERCASE": "At least one lowercase letter",
+      "REQUIREMENTS_NUMBER": "At least one number",
+      "REQUIREMENTS_SPECIAL": "At least one special character"
+>>>>>>> upstream/develop
     },
     "CONFIRM_PASSWORD": {
       "LABEL": "Confirm password",
       "PLACEHOLDER": "Confirm password",
+<<<<<<< HEAD
       "ERROR": "Lozinka se ne poklapa."
     },
     "API": {
@@ -40,5 +54,22 @@
     },
     "SUBMIT": "Create account",
     "HAVE_AN_ACCOUNT": "Već imate nalog?"
+=======
+      "ERROR": "Lozinke se ne poklapaju."
+    },
+    "API": {
+      "SUCCESS_MESSAGE": "Registration Successful",
+      "ERROR_MESSAGE": "Could not connect to Woot server. Please try again."
+    },
+    "SUBMIT": "Create account",
+    "HAVE_AN_ACCOUNT": "Već imate nalog?",
+    "VERIFY_EMAIL": {
+      "TITLE": "Check your inbox",
+      "DESCRIPTION": "We sent a verification link to {email}. Click the link to verify your email and get started.",
+      "RESEND": "Resend verification email",
+      "RESEND_SUCCESS": "Verification email sent. Please check your inbox.",
+      "RESEND_ERROR": "Could not send verification email. Please try again."
+    }
+>>>>>>> upstream/develop
   }
 }

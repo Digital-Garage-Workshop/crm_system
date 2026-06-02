@@ -2,8 +2,19 @@
 import { useAlert } from 'dashboard/composables';
 import { messageTimestamp } from 'shared/helpers/timeHelper';
 import { useStoreGetters, useStore } from 'dashboard/composables/store';
+<<<<<<< HEAD
 import TableFooter from 'dashboard/components/widgets/TableFooter.vue';
 import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
+=======
+import {
+  BaseTable,
+  BaseTableRow,
+  BaseTableCell,
+} from 'dashboard/components-next/table';
+import PaginationFooter from 'dashboard/components-next/pagination/PaginationFooter.vue';
+import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
+import SettingsLayout from '../SettingsLayout.vue';
+>>>>>>> upstream/develop
 import {
   generateTranslationPayload,
   generateLogActionKey,
@@ -75,6 +86,7 @@ const tableHeaders = computed(() => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex-1 overflow-auto">
     <BaseSettingsHeader
       :title="$t('AUDIT_LOGS.HEADER')"
@@ -134,4 +146,70 @@ const tableHeaders = computed(() => {
       </div>
     </div>
   </div>
+=======
+  <SettingsLayout
+    :is-loading="uiFlags.fetchingList"
+    :loading-message="$t('AUDIT_LOGS.LOADING')"
+    :no-records-found="!records.length"
+    :no-records-message="$t('AUDIT_LOGS.LIST.404')"
+  >
+    <template #header>
+      <BaseSettingsHeader
+        :title="$t('AUDIT_LOGS.HEADER')"
+        :description="$t('AUDIT_LOGS.DESCRIPTION')"
+        :link-text="$t('AUDIT_LOGS.LEARN_MORE')"
+        feature-name="audit_logs"
+      />
+    </template>
+    <template #body>
+      <div class="flex flex-col">
+        <BaseTable :headers="tableHeaders" :items="records">
+          <template #row="{ items }">
+            <BaseTableRow
+              v-for="auditLogItem in items"
+              :key="auditLogItem.id"
+              :item="auditLogItem"
+            >
+              <template #default>
+                <BaseTableCell>
+                  <span
+                    class="text-body-main text-n-slate-12 whitespace-nowrap"
+                  >
+                    {{ generateLogText(auditLogItem) }}
+                  </span>
+                </BaseTableCell>
+
+                <BaseTableCell>
+                  <span
+                    class="text-body-main text-n-slate-11 whitespace-nowrap"
+                  >
+                    {{
+                      messageTimestamp(
+                        auditLogItem.created_at,
+                        'MMM dd, yyyy hh:mm a'
+                      )
+                    }}
+                  </span>
+                </BaseTableCell>
+
+                <BaseTableCell class="w-36">
+                  <span class="text-body-main text-n-slate-11">
+                    {{ auditLogItem.remote_address }}
+                  </span>
+                </BaseTableCell>
+              </template>
+            </BaseTableRow>
+          </template>
+        </BaseTable>
+        <PaginationFooter
+          :current-page="Number(meta.currentPage)"
+          :total-items="meta.totalEntries"
+          :items-per-page="meta.perPage"
+          class="!px-0"
+          @update:current-page="onPageChange"
+        />
+      </div>
+    </template>
+  </SettingsLayout>
+>>>>>>> upstream/develop
 </template>

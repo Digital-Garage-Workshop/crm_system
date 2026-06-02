@@ -2,6 +2,7 @@ tags:
   - Webhooks
 operationId: list-all-webhooks
 summary: List all webhooks
+<<<<<<< HEAD
 description:  List all webhooks in the account
 responses:
   200:
@@ -13,3 +14,24 @@ responses:
         $ref: '#/definitions/webhook'
   401:
     description: Unauthorized
+=======
+security:
+  - userApiKey: []
+description: List all webhooks in the account
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          type: array
+          description: 'Array of webhook objects'
+          items:
+            $ref: '#/components/schemas/webhook'
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

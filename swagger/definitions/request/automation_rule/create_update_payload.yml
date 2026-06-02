@@ -13,6 +13,10 @@ properties:
     enum:
       - conversation_created
       - conversation_updated
+<<<<<<< HEAD
+=======
+      - conversation_resolved
+>>>>>>> upstream/develop
       - message_created
     example: message_created
     description: The event when you want to execute the automation actions
@@ -36,6 +40,10 @@ properties:
       example:
         attribute_key: content
         filter_operator: contains
+<<<<<<< HEAD
         query_operator: nil
+=======
+        query_operator: OR
+>>>>>>> upstream/develop
         values:
           - help

@@ -3,7 +3,11 @@
     "HEADER": "Razgovori",
     "LOADING_CHART": "Učitavanje podataka grafikona...",
     "NO_ENOUGH_DATA": "Nismo primili dovoljno podataka da bi smo generisali izveštaj, Molim vas pokušajte ponovo.",
+<<<<<<< HEAD
     "DOWNLOAD_AGENT_REPORTS": "Preuzmi izveštaj o agentima",
+=======
+    "DOWNLOAD_CONVERSATION_REPORTS": "Download conversation reports",
+>>>>>>> upstream/develop
     "DATA_FETCHING_FAILED": "Failed to fetch data, please try again later.",
     "SUMMARY_FETCHING_FAILED": "Failed to fetch summary, please try again later.",
     "METRICS": {
@@ -51,7 +55,14 @@
     },
     "DATE_RANGE_OPTIONS": {
       "LAST_7_DAYS": "Poslednjih 7 dana",
+<<<<<<< HEAD
       "LAST_30_DAYS": "Poslednjih 30 dana",
+=======
+      "LAST_14_DAYS": "Poslednjih 14 dana",
+      "LAST_30_DAYS": "Poslednjih 30 dana",
+      "THIS_MONTH": "This month",
+      "LAST_MONTH": "Last month",
+>>>>>>> upstream/develop
       "LAST_3_MONTHS": "Poslednja 3 meseca",
       "LAST_6_MONTHS": "Poslednjih 6 meseci",
       "LAST_YEAR": "Poslednja godina",
@@ -125,11 +136,23 @@
   },
   "AGENT_REPORTS": {
     "HEADER": "Pregled agenata",
+<<<<<<< HEAD
     "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent’s name to learn more.",
+=======
+    "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent's name to learn more.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Učitavanje podataka grafikona...",
     "NO_ENOUGH_DATA": "Nismo primili dovoljno podataka da bi smo generisali izveštaj, Molim vas pokušajte ponovo.",
     "DOWNLOAD_AGENT_REPORTS": "Preuzmi izveštaj o agentima",
     "FILTER_DROPDOWN_LABEL": "Izaberi agenta",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Traži agente"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Razgovori",
@@ -193,10 +216,22 @@
   },
   "LABEL_REPORTS": {
     "HEADER": "Pregled oznaka",
+<<<<<<< HEAD
+=======
+    "DESCRIPTION": "Track label performance with key metrics including conversations, response times, resolution times, and resolved cases. Click a label name for detailed insights.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Učitavanje podataka grafikona...",
     "NO_ENOUGH_DATA": "Nismo primili dovoljno podataka da bi smo generisali izveštaj, Molim vas pokušajte ponovo.",
     "DOWNLOAD_LABEL_REPORTS": "Preuzmi izveštaj o oznakama",
     "FILTER_DROPDOWN_LABEL": "Izaberi oznaku",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "LABELS": "Pretraži oznake"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Razgovori",
@@ -265,6 +300,16 @@
     "NO_ENOUGH_DATA": "Nismo primili dovoljno podataka da bi smo generisali izveštaj, Molim vas pokušajte ponovo.",
     "DOWNLOAD_INBOX_REPORTS": "Preuzmi izveštaj o prijemnim sandučićima",
     "FILTER_DROPDOWN_LABEL": "Izaberi prijemno sanduče",
+<<<<<<< HEAD
+=======
+    "ALL_INBOXES": "All Inboxes",
+    "SEARCH_INBOX": "Search Inbox",
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "INBOXES": "Search inboxes"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Razgovori",
@@ -328,11 +373,26 @@
   },
   "TEAM_REPORTS": {
     "HEADER": "Pregled tima",
+<<<<<<< HEAD
     "DESCRIPTION": "Get a snapshot of your team’s performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+=======
+    "DESCRIPTION": "Get a snapshot of your team's performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Učitavanje podataka grafikona...",
     "NO_ENOUGH_DATA": "Nismo primili dovoljno podataka da bi smo generisali izveštaj, Molim vas pokušajte ponovo.",
     "DOWNLOAD_TEAM_REPORTS": "Preuzmi izveštaj o timu",
     "FILTER_DROPDOWN_LABEL": "Izaberi tim",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "ADD_FILTER": "Add filter",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "TEAMS": "Traži tim"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Razgovori",
@@ -396,22 +456,65 @@
   },
   "CSAT_REPORTS": {
     "HEADER": "Izveštaji zadovoljstva korisnika",
+<<<<<<< HEAD
     "NO_RECORDS": "Nema dostupnih odgovora o zadovoljstvu korisnika.",
     "DOWNLOAD": "Preuzmite izveštaje o zadovoljstvu korisnika",
     "DOWNLOAD_FAILED": "Failed to download CSAT Reports",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Izaberite agente"
+=======
+    "NO_RECORDS": "No responses yet",
+    "NO_RECORDS_DESCRIPTION": "CSAT survey responses will appear here once customers start providing feedback.",
+    "DOWNLOAD": "Preuzmite izveštaje o zadovoljstvu korisnika",
+    "DOWNLOAD_FAILED": "Failed to download CSAT Reports",
+    "FILTERS": {
+      "ADD_FILTER": "Add filter",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Traži agente",
+        "INBOXES": "Search inboxes",
+        "TEAMS": "Traži tim",
+        "RATINGS": "Search ratings"
+      },
+      "AGENTS": {
+        "LABEL": "Agent"
+      },
+      "INBOXES": {
+        "LABEL": "Prijemno sanduče"
+      },
+      "TEAMS": {
+        "LABEL": "Tim"
+      },
+      "RATINGS": {
+        "LABEL": "Ocena"
+>>>>>>> upstream/develop
       }
     },
     "TABLE": {
       "HEADER": {
         "CONTACT_NAME": "Kontakt",
+<<<<<<< HEAD
         "AGENT_NAME": "Dodeljeni agent",
         "RATING": "Ocena",
         "FEEDBACK_TEXT": "Komentar povratne informacije"
       }
     },
+=======
+        "AGENT_NAME": "Agent",
+        "RATING": "Ocena",
+        "FEEDBACK_TEXT": "Komentar povratne informacije",
+        "CONVERSATION": "Razgovor",
+        "CUSTOMER": "Customer",
+        "RESPONSE": "Response",
+        "HANDLED_BY": "Handled by"
+      },
+      "UNKNOWN_CUSTOMER": "Unknown customer"
+    },
+    "NO_AGENT": "No assigned agent",
+    "NO_FEEDBACK": "No feedback provided",
+>>>>>>> upstream/develop
     "METRIC": {
       "TOTAL_RESPONSES": {
         "LABEL": "Ukupno odgovora",
@@ -424,6 +527,28 @@
       "RESPONSE_RATE": {
         "LABEL": "Procenat odgovora",
         "TOOLTIP": "Ukupan broj odgovora / Ukupan broj poruka o zadovoljstvu korisnika * 100"
+<<<<<<< HEAD
+=======
+      },
+      "RATING_DISTRIBUTION": "Rating distribution"
+    },
+    "REVIEW_NOTES": {
+      "TITLE": "Review notes",
+      "PLACEHOLDER": "Add review notes about this rating...",
+      "SAVE": "Save",
+      "CANCEL": "Otkaži",
+      "SAVING": "Saving...",
+      "SAVED": "Notes saved successfully",
+      "SAVE_ERROR": "Failed to save notes",
+      "UPDATED_BY": "Updated by {name} {time}",
+      "UPDATED_BY_LABEL": "Updated by",
+      "PAYWALL": {
+        "TITLE": "Upgrade to add review notes",
+        "AVAILABLE_ON": "The review notes feature is only available in the Business and Enterprise plans.",
+        "UPGRADE_PROMPT": "Add internal context to every CSAT response with review notes. Capture what really happened, spot patterns faster, and make better decisions from your feedback.",
+        "UPGRADE_NOW": "Upgrade now",
+        "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -466,6 +591,16 @@
       "CONVERSATIONS": "{count} conversations",
       "DOWNLOAD_REPORT": "Download report"
     },
+<<<<<<< HEAD
+=======
+    "RESOLUTION_HEATMAP": {
+      "HEADER": "Resolutions",
+      "NO_CONVERSATIONS": "No conversations",
+      "CONVERSATION": "{count} conversation",
+      "CONVERSATIONS": "{count} conversations",
+      "DOWNLOAD_REPORT": "Download report"
+    },
+>>>>>>> upstream/develop
     "AGENT_CONVERSATIONS": {
       "HEADER": "Razgovori prema agentima",
       "LOADING_MESSAGE": "Učitavanje metrike agenata...",
@@ -559,6 +694,10 @@
     "INBOX": "Prijemno sanduče",
     "AGENT": "Agent",
     "TEAM": "Tim",
+<<<<<<< HEAD
+=======
+    "LABEL": "Oznaka",
+>>>>>>> upstream/develop
     "AVG_RESOLUTION_TIME": "Avg. Resolution Time",
     "AVG_FIRST_RESPONSE_TIME": "Avg. First Response Time",
     "AVG_REPLY_TIME": "Avg. Customer Waiting Time",

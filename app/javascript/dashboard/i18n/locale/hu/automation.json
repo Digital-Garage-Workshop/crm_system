@@ -3,8 +3,16 @@
     "HEADER": "Automatizáció",
     "DESCRIPTION": "Automation can replace and streamline existing processes that require manual effort, such as adding labels and assigning conversations to the most suitable agent. This allows the team to focus on their strengths while reducing time spent on routine tasks.",
     "LEARN_MORE": "Learn more about automation",
+<<<<<<< HEAD
     "HEADER_BTN_TXT": "Automatikus szabály hozzáadása",
     "LOADING": "Automatizálási szabályok betöltése",
+=======
+    "COUNT": "{n} automation | {n} automations",
+    "HEADER_BTN_TXT": "Create Automation",
+    "LOADING": "Automatizálási szabályok betöltése",
+    "SEARCH_PLACEHOLDER": "Search automation rules...",
+    "NO_RESULTS": "No automation rules found matching your search",
+>>>>>>> upstream/develop
     "ADD": {
       "TITLE": "Automatikus szabály hozzáadása",
       "SUBMIT": "Létrehozás",
@@ -42,9 +50,15 @@
     "LIST": {
       "TABLE_HEADER": {
         "NAME": "Név",
+<<<<<<< HEAD
         "DESCRIPTION": "Leírás",
         "ACTIVE": "Aktív",
         "CREATED_ON": "Létrehozva"
+=======
+        "ACTIVE": "Aktív",
+        "CREATED_ON": "Létrehozva",
+        "ACTIONS": "Műveletek"
+>>>>>>> upstream/develop
       },
       "404": "Nem található automatizált szabály"
     },
@@ -127,15 +141,28 @@
       "ATLEAST_ONE_ACTION_REQUIRED": "At least one action is required"
     },
     "NONE_OPTION": "Nincs",
+<<<<<<< HEAD
+=======
+    "LAST_RESPONDING_AGENT": "Last Responding Agent",
+>>>>>>> upstream/develop
     "EVENTS": {
       "CONVERSATION_CREATED": "Beszélgetés létrehozva",
       "CONVERSATION_UPDATED": "Beszélgetés frissítve",
       "MESSAGE_CREATED": "Message Created",
+<<<<<<< HEAD
+=======
+      "CONVERSATION_RESOLVED": "Conversation Resolved",
+>>>>>>> upstream/develop
       "CONVERSATION_OPENED": "Conversation Opened"
     },
     "ACTIONS": {
       "ASSIGN_AGENT": "Assign to Agent",
       "ASSIGN_TEAM": "Assign a Team",
+<<<<<<< HEAD
+=======
+      "REMOVE_ASSIGNED_AGENT": "Remove Assigned Agent",
+      "REMOVE_ASSIGNED_TEAM": "Remove Assigned Team",
+>>>>>>> upstream/develop
       "ADD_LABEL": "Add a Label",
       "REMOVE_LABEL": "Remove a Label",
       "SEND_EMAIL_TO_TEAM": "Send an Email to Team",
@@ -146,11 +173,34 @@
       "SEND_WEBHOOK_EVENT": "Send Webhook Event",
       "SEND_ATTACHMENT": "Send Attachment",
       "SEND_MESSAGE": "Send a Message",
+<<<<<<< HEAD
       "CHANGE_PRIORITY": "Prioritás megváltoztatása",
       "ADD_SLA": "Add SLA"
     },
     "ATTRIBUTES": {
       "MESSAGE_TYPE": "Message Type",
+=======
+      "ADD_PRIVATE_NOTE": "Add a Private Note",
+      "CHANGE_PRIORITY": "Prioritás megváltoztatása",
+      "ADD_SLA": "Add SLA",
+      "OPEN_CONVERSATION": "Beszélgetés megnyitása",
+      "PENDING_CONVERSATION": "Mark conversation as pending"
+    },
+    "MESSAGE_TYPES": {
+      "INCOMING": "Incoming Message",
+      "OUTGOING": "Outgoing Message"
+    },
+    "PRIORITY_TYPES": {
+      "NONE": "Nincs",
+      "LOW": "Alacsony",
+      "MEDIUM": "Közepes",
+      "HIGH": "Magas",
+      "URGENT": "Sürgős"
+    },
+    "ATTRIBUTES": {
+      "MESSAGE_TYPE": "Message Type",
+      "PRIVATE_NOTE": "Privát üzenet",
+>>>>>>> upstream/develop
       "MESSAGE_CONTAINS": "Message Contains",
       "EMAIL": "E-mail",
       "INBOX": "Fiók",
@@ -160,10 +210,19 @@
       "BROWSER_LANGUAGE": "Böngésző nyelve",
       "MAIL_SUBJECT": "Email Subject",
       "COUNTRY_NAME": "Ország",
+<<<<<<< HEAD
       "REFERER_LINK": "Referrer Link",
       "ASSIGNEE_NAME": "Assignee",
       "TEAM_NAME": "Csapat",
       "PRIORITY": "Prioritás"
+=======
+      "COMPANY_NAME": "Cég",
+      "REFERER_LINK": "Referrer Link",
+      "ASSIGNEE_NAME": "Assignee",
+      "TEAM_NAME": "Csapat",
+      "PRIORITY": "Prioritás",
+      "LABELS": "Cimkék"
+>>>>>>> upstream/develop
     }
   }
 }

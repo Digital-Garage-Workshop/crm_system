@@ -9,6 +9,10 @@ import {
   isNumber,
   isDomain,
   getRegexp,
+<<<<<<< HEAD
+=======
+  normalizeRegexPattern,
+>>>>>>> upstream/develop
   isValidSlug,
 } from '../Validators';
 
@@ -155,6 +159,33 @@ describe('#getRegexp', () => {
   });
 });
 
+<<<<<<< HEAD
+=======
+describe('#normalizeRegexPattern', () => {
+  it('returns null for empty values', () => {
+    expect(normalizeRegexPattern('')).toBeNull();
+    expect(normalizeRegexPattern(null)).toBeNull();
+    expect(normalizeRegexPattern(undefined)).toBeNull();
+  });
+
+  it('canonicalises a bare source', () => {
+    expect(normalizeRegexPattern('^[0-9]+$')).toBe('/^[0-9]+$/');
+  });
+
+  it('strips slash wrapping the user may include', () => {
+    expect(normalizeRegexPattern('/^[0-9]+$/')).toBe('/^[0-9]+$/');
+  });
+
+  it('preserves flags on wrapped input', () => {
+    expect(normalizeRegexPattern('/hello/gi')).toBe('/hello/gi');
+  });
+
+  it('throws for an invalid regex source', () => {
+    expect(() => normalizeRegexPattern('[')).toThrow();
+  });
+});
+
+>>>>>>> upstream/develop
 describe('#isValidSlug', () => {
   it('should return true for valid slugs', () => {
     expect(isValidSlug('abc')).toEqual(true);

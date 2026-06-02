@@ -56,6 +56,10 @@ RSpec.describe Conversations::MessageWindowService do
   describe 'on Facebook channels' do
     before do
       stub_request(:post, /graph.facebook.com/)
+<<<<<<< HEAD
+=======
+      GlobalConfig.clear_cache
+>>>>>>> upstream/develop
     end
 
     let!(:facebook_channel) { create(:channel_facebook_page) }

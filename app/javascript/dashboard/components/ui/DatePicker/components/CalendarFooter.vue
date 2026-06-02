@@ -23,7 +23,10 @@ const onClickApply = () => {
     />
     <NextButton
       sm
+<<<<<<< HEAD
       ghost
+=======
+>>>>>>> upstream/develop
       :label="$t('DATE_PICKER.APPLY_BUTTON')"
       @click="onClickApply"
     />

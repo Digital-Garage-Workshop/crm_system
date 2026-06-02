@@ -3,6 +3,12 @@
     "FETCHING": "Integracijų gavimas",
     "NO_HOOK_CONFIGURED": "Šioje paskyroje nesukonfigūruota jokių {integrationId} integracijų.",
     "HEADER": "Programos",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Leisti",
       "DISABLED": "Išjungta"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Integravimo webhook gavimas",
       "INBOX": "Gautų laiškų aplankas",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Veiksmai",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Ištrinti"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Pasirinkti gautų laiškų aplanką"
         },
         "SUBMIT": "Sukurti",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Atšaukti"
       },
       "API": {

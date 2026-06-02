@@ -1,20 +1,37 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
+<<<<<<< HEAD
 import DashboardAppModal from './DashboardAppModal.vue';
 import DashboardAppsRow from './DashboardAppsRow.vue';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
 import BaseSettingsHeader from '../../components/BaseSettingsHeader.vue';
+=======
+import { picoSearch } from '@scmmishra/pico-search';
+import { BaseTable } from 'dashboard/components-next/table';
+import DashboardAppModal from './DashboardAppModal.vue';
+import DashboardAppsRow from './DashboardAppsRow.vue';
+import BaseSettingsHeader from '../../components/BaseSettingsHeader.vue';
+import SettingsLayout from '../../SettingsLayout.vue';
+>>>>>>> upstream/develop
 import NextButton from 'dashboard/components-next/button/Button.vue';
 
 export default {
   components: {
     BaseSettingsHeader,
+<<<<<<< HEAD
+=======
+    SettingsLayout,
+    BaseTable,
+>>>>>>> upstream/develop
     DashboardAppModal,
     DashboardAppsRow,
     NextButton,
   },
+<<<<<<< HEAD
   mixins: [globalConfigMixin],
+=======
+>>>>>>> upstream/develop
   data() {
     return {
       loading: {},
@@ -22,6 +39,10 @@ export default {
       showDeleteConfirmationPopup: false,
       selectedApp: {},
       mode: 'CREATE',
+<<<<<<< HEAD
+=======
+      searchQuery: '',
+>>>>>>> upstream/develop
     };
   },
   computed: {
@@ -29,12 +50,26 @@ export default {
       records: 'dashboardApps/getRecords',
       uiFlags: 'dashboardApps/getUIFlags',
     }),
+<<<<<<< HEAD
+=======
+    filteredRecords() {
+      const query = this.searchQuery.trim();
+      if (!query) return this.records;
+      return picoSearch(this.records, query, ['title']);
+    },
+>>>>>>> upstream/develop
     tableHeaders() {
       return [
         this.$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.LIST.TABLE_HEADER.NAME'),
         this.$t(
           'INTEGRATION_SETTINGS.DASHBOARD_APPS.LIST.TABLE_HEADER.ENDPOINT'
         ),
+<<<<<<< HEAD
+=======
+        this.$t(
+          'INTEGRATION_SETTINGS.DASHBOARD_APPS.LIST.TABLE_HEADER.ACTIONS'
+        ),
+>>>>>>> upstream/develop
       ];
     },
   },
@@ -86,6 +121,7 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex flex-col flex-1 gap-8 overflow-auto">
     <BaseSettingsHeader
       :title="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.TITLE')"
@@ -129,16 +165,71 @@ export default {
         <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
           <DashboardAppsRow
             v-for="(dashboardAppItem, index) in records"
+=======
+  <SettingsLayout
+    :is-loading="uiFlags.isFetching"
+    :loading-message="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.LIST.LOADING')"
+    :no-records-found="!records.length"
+    :no-records-message="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.LIST.404')"
+  >
+    <template #header>
+      <BaseSettingsHeader
+        v-model:search-query="searchQuery"
+        :title="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.TITLE')"
+        :description="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.DESCRIPTION')"
+        :link-text="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.LEARN_MORE')"
+        :search-placeholder="
+          $t('INTEGRATION_SETTINGS.DASHBOARD_APPS.SEARCH_PLACEHOLDER')
+        "
+        feature-name="dashboard_apps"
+        :back-button-label="$t('INTEGRATION_SETTINGS.HEADER')"
+      >
+        <template v-if="records?.length" #count>
+          <span class="text-body-main text-n-slate-11">
+            {{
+              $t('INTEGRATION_SETTINGS.DASHBOARD_APPS.COUNT', {
+                n: records.length,
+              })
+            }}
+          </span>
+        </template>
+        <template #actions>
+          <NextButton
+            :label="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.HEADER_BTN_TXT')"
+            size="sm"
+            @click="openCreatePopup"
+          />
+        </template>
+      </BaseSettingsHeader>
+    </template>
+    <template #body>
+      <span
+        v-if="!filteredRecords.length && searchQuery"
+        class="flex-1 flex items-center justify-center py-20 text-center text-body-main !text-base text-n-slate-11"
+      >
+        {{ $t('INTEGRATION_SETTINGS.DASHBOARD_APPS.NO_RESULTS') }}
+      </span>
+      <BaseTable v-else :headers="tableHeaders" :items="filteredRecords">
+        <template #row="{ items }">
+          <DashboardAppsRow
+            v-for="(dashboardAppItem, index) in items"
+>>>>>>> upstream/develop
             :key="dashboardAppItem.id"
             :index="index"
             :app="dashboardAppItem"
             @edit="editApp"
             @delete="openDeletePopup"
           />
+<<<<<<< HEAD
         </tbody>
       </table>
     </div>
 
+=======
+        </template>
+      </BaseTable>
+    </template>
+>>>>>>> upstream/develop
     <DashboardAppModal
       v-if="showDashboardAppPopup"
       :show="showDashboardAppPopup"
@@ -162,5 +253,9 @@ export default {
       "
       :reject-text="$t('INTEGRATION_SETTINGS.DASHBOARD_APPS.DELETE.CONFIRM_NO')"
     />
+<<<<<<< HEAD
   </div>
+=======
+  </SettingsLayout>
+>>>>>>> upstream/develop
 </template>

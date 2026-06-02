@@ -19,6 +19,10 @@ class Seeders::AccountSeeder
   def perform!
     set_up_account
     seed_teams
+<<<<<<< HEAD
+=======
+    seed_custom_roles
+>>>>>>> upstream/develop
     set_up_users
     seed_labels
     seed_canned_responses
@@ -32,6 +36,10 @@ class Seeders::AccountSeeder
     @account.labels.destroy_all
     @account.inboxes.destroy_all
     @account.contacts.destroy_all
+<<<<<<< HEAD
+=======
+    @account.custom_roles.destroy_all if @account.respond_to?(:custom_roles)
+>>>>>>> upstream/develop
   end
 
   def seed_teams
@@ -40,6 +48,21 @@ class Seeders::AccountSeeder
     end
   end
 
+<<<<<<< HEAD
+=======
+  def seed_custom_roles
+    return unless @account_data['custom_roles'].present? && @account.respond_to?(:custom_roles)
+
+    @account_data['custom_roles'].each do |role_data|
+      @account.custom_roles.create!(
+        name: role_data['name'],
+        description: role_data['description'],
+        permissions: role_data['permissions']
+      )
+    end
+  end
+
+>>>>>>> upstream/develop
   def seed_labels
     @account_data['labels'].each do |label|
       @account.labels.create!(label)
@@ -48,6 +71,7 @@ class Seeders::AccountSeeder
 
   def set_up_users
     @account_data['users'].each do |user|
+<<<<<<< HEAD
       user_record = User.create_with(name: user['name'], password: 'Password1!.').find_or_create_by!(email: (user['email']).to_s)
       user_record.skip_confirmation!
       user_record.save!
@@ -59,6 +83,36 @@ class Seeders::AccountSeeder
     end
   end
 
+=======
+      user_record = create_user_record(user)
+      create_account_user(user_record, user)
+      add_user_to_teams(user: user_record, teams: user['team']) if user['team'].present?
+    end
+  end
+
+  private
+
+  def create_user_record(user)
+    user_record = User.create_with(name: user['name'], password: 'Password1!.').find_or_create_by!(email: user['email'].to_s)
+    user_record.skip_confirmation!
+    user_record.save!
+    Avatar::AvatarFromUrlJob.perform_later(user_record, "https://xsgames.co/randomusers/avatar.php?g=#{user['gender']}")
+    user_record
+  end
+
+  def create_account_user(user_record, user)
+    account_user_attrs = build_account_user_attrs(user)
+    AccountUser.create_with(account_user_attrs).find_or_create_by!(account_id: @account.id, user_id: user_record.id)
+  end
+
+  def build_account_user_attrs(user)
+    attrs = { role: (user['role'] || 'agent') }
+    custom_role = find_custom_role(user['custom_role']) if user['custom_role'].present?
+    attrs[:custom_role] = custom_role if custom_role
+    attrs
+  end
+
+>>>>>>> upstream/develop
   def add_user_to_teams(user:, teams:)
     teams.each do |team|
       team_record = @account.teams.where('name LIKE ?', "%#{team.downcase}%").first if team.present?
@@ -66,6 +120,15 @@ class Seeders::AccountSeeder
     end
   end
 
+<<<<<<< HEAD
+=======
+  def find_custom_role(role_name)
+    return nil unless @account.respond_to?(:custom_roles)
+
+    @account.custom_roles.find_by(name: role_name)
+  end
+
+>>>>>>> upstream/develop
   def seed_canned_responses(count: 50)
     count.times do
       @account.canned_responses.create(content: Faker::Quote.fortune_cookie, short_code: Faker::Alphanumeric.alpha(number: 10))

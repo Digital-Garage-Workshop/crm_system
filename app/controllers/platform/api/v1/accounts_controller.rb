@@ -1,4 +1,14 @@
 class Platform::Api::V1::AccountsController < PlatformController
+<<<<<<< HEAD
+=======
+  def index
+    @resources = @platform_app.platform_app_permissibles
+                              .where(permissible_type: 'Account')
+                              .includes(:permissible)
+                              .map(&:permissible)
+  end
+
+>>>>>>> upstream/develop
   def show; end
 
   def create

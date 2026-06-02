@@ -116,4 +116,27 @@ export const actions = {
       isSwitching,
     });
   },
+<<<<<<< HEAD
+=======
+
+  sendCnameInstructions: async (_, { portalSlug, email }) => {
+    try {
+      await portalAPIs.sendCnameInstructions(portalSlug, email);
+    } catch (error) {
+      throwErrorMessage(error);
+    }
+  },
+
+  sslStatus: async ({ commit }, { portalSlug }) => {
+    try {
+      commit(types.SET_UI_FLAG, { isFetchingSSLStatus: true });
+      const { data } = await portalAPIs.sslStatus(portalSlug);
+      commit(types.SET_SSL_SETTINGS, { portalSlug, sslSettings: data });
+    } catch (error) {
+      throwErrorMessage(error);
+    } finally {
+      commit(types.SET_UI_FLAG, { isFetchingSSLStatus: false });
+    }
+  },
+>>>>>>> upstream/develop
 };

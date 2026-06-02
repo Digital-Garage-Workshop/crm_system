@@ -3,6 +3,12 @@
     "FETCHING": "واکشی ادغام ها",
     "NO_HOOK_CONFIGURED": "هیچ {integrationId} ادغامی در این اکانت انجام نشده است.",
     "HEADER": "برنامه های کاربردی",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "فعال",
       "DISABLED": "غیرفعال"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "واکشی ادغام های هوک",
       "INBOX": "صندوق ورودی",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "عملیات",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "حذف"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "انتخاب صندوق ورودی"
         },
         "SUBMIT": "ايجاد كردن",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "انصراف"
       },
       "API": {

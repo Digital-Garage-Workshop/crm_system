@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
 import availabilityMixin from 'widget/mixins/availability';
 import nextAvailabilityTime from 'widget/mixins/nextAvailabilityTime';
@@ -50,6 +51,31 @@ export default {
       this.replaceRoute('home');
     },
   },
+=======
+<script setup>
+import { toRef } from 'vue';
+import { useRouter } from 'vue-router';
+import FluentIcon from 'shared/components/FluentIcon/Index.vue';
+import HeaderActions from './HeaderActions.vue';
+import AvailabilityContainer from 'widget/components/Availability/AvailabilityContainer.vue';
+import { useAvailability } from 'widget/composables/useAvailability';
+
+const props = defineProps({
+  avatarUrl: { type: String, default: '' },
+  title: { type: String, default: '' },
+  showPopoutButton: { type: Boolean, default: false },
+  showBackButton: { type: Boolean, default: false },
+  availableAgents: { type: Array, default: () => [] },
+});
+
+const availableAgents = toRef(props, 'availableAgents');
+
+const router = useRouter();
+const { isOnline } = useAvailability(availableAgents);
+
+const onBackButtonClick = () => {
+  router.replace({ name: 'home' });
+>>>>>>> upstream/develop
 };
 </script>
 
@@ -76,12 +102,24 @@ export default {
           <span v-dompurify-html="title" class="ltr:mr-1 rtl:ml-1" />
           <div
             :class="`h-2 w-2 rounded-full
+<<<<<<< HEAD
               ${isOnline ? 'bg-green-500' : 'hidden'}`"
           />
         </div>
         <div class="text-xs leading-3 text-n-slate-11">
           {{ replyWaitMessage }}
         </div>
+=======
+              ${isOnline ? 'bg-n-teal-10' : 'hidden'}`"
+          />
+        </div>
+        <AvailabilityContainer
+          :agents="availableAgents"
+          :show-header="false"
+          :show-avatars="false"
+          text-classes="text-xs leading-3"
+        />
+>>>>>>> upstream/develop
       </div>
     </div>
     <HeaderActions :show-popout-button="showPopoutButton" />

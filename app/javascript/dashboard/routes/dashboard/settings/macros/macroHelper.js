@@ -17,6 +17,10 @@ export const resolveActionName = key => {
 export const resolveTeamIds = (teams, ids) => {
   return ids
     .map(id => {
+<<<<<<< HEAD
+=======
+      if (id === 'nil') return 'None';
+>>>>>>> upstream/develop
       const team = teams.find(i => i.id === id);
       return team ? team.name : '';
     })
@@ -35,6 +39,11 @@ export const resolveLabels = (labels, ids) => {
 export const resolveAgents = (agents, ids) => {
   return ids
     .map(id => {
+<<<<<<< HEAD
+=======
+      if (id === 'nil') return 'None';
+      if (id === 'self') return 'Self';
+>>>>>>> upstream/develop
       const agent = agents.find(i => i.id === id);
       return agent ? agent.name : '';
     })

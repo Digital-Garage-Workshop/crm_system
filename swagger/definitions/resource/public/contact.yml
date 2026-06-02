@@ -1,5 +1,9 @@
 type: object
+<<<<<<< HEAD
 properties: 
+=======
+properties:
+>>>>>>> upstream/develop
   id:
     type: integer
     description: Id of the contact
@@ -7,6 +11,7 @@ properties:
     type: string
     description: The session identifier of the contact
   name:
+<<<<<<< HEAD
     type: string
     description: Name of the contact
   email:
@@ -15,3 +20,22 @@ properties:
   pubsub_token:
     type: string
     description: The token to be used to connect to chatwoot websocket
+=======
+    type:
+      - string
+      - 'null'
+    description: Name of the contact when available
+  email:
+    type:
+      - string
+      - 'null'
+    description: Email of the contact
+  phone_number:
+    type:
+      - string
+      - 'null'
+    description: Phone number of the contact
+  pubsub_token:
+    type: string
+    description: The token to be used to connect to chatwoot websocket
+>>>>>>> upstream/develop

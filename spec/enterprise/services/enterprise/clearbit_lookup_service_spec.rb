@@ -49,6 +49,13 @@ RSpec.describe Enterprise::ClearbitLookupService do
     end
 
     context 'when Clearbit is not enabled' do
+<<<<<<< HEAD
+=======
+      before do
+        GlobalConfig.clear_cache
+      end
+
+>>>>>>> upstream/develop
       it 'returns nil without making an API call' do
         with_modified_env CLEARBIT_API_KEY: nil do
           expect(Net::HTTP).not_to receive(:start)

@@ -36,12 +36,25 @@ describe ContactIdentifyAction do
       expect(result.additional_attributes['social_profiles']).to eq({ 'linkedin' => 'saras', 'twitter' => 'saras' })
     end
 
+<<<<<<< HEAD
     it 'enques avatar job when avatar url parameter is passed' do
+=======
+    it 'enqueues avatar job when valid avatar url parameter is passed' do
+>>>>>>> upstream/develop
       params = { name: 'test', avatar_url: 'https://chatwoot-assets.local/sample.png' }
       expect(Avatar::AvatarFromUrlJob).to receive(:perform_later).with(contact, params[:avatar_url]).once
       described_class.new(contact: contact, params: params).perform
     end
 
+<<<<<<< HEAD
+=======
+    it 'does not enqueue avatar job when invalid avatar url parameter is passed' do
+      params = { name: 'test', avatar_url: 'invalid-url' }
+      expect(Avatar::AvatarFromUrlJob).not_to receive(:perform_later)
+      described_class.new(contact: contact, params: params).perform
+    end
+
+>>>>>>> upstream/develop
     context 'when contact with same identifier exists' do
       it 'merges the current contact to identified contact' do
         existing_identified_contact = create(:contact, account: account, identifier: 'test_id')
@@ -139,5 +152,27 @@ describe ContactIdentifyAction do
         expect(contact.phone_number).to be_nil
       end
     end
+<<<<<<< HEAD
+=======
+
+    context 'when params have not changed' do
+      it 'skips save and does not issue an UPDATE query' do
+        contact.update!(name: 'test', identifier: 'test_id', custom_attributes: { test: 'test', test1: 'test1' })
+        params = { name: 'test', identifier: 'test_id', custom_attributes: { test: 'test', test1: 'test1' } }
+
+        # any_instance is needed because merge lookup can reassign @contact to a different Ruby object
+        expect_any_instance_of(Contact).not_to receive(:save!) # rubocop:disable RSpec/AnyInstance
+        described_class.new(contact: contact, params: params).perform
+      end
+
+      it 'still enqueues avatar job even when attributes have not changed' do
+        contact.update!(name: 'test')
+        params = { name: 'test', avatar_url: 'https://chatwoot-assets.local/sample.png' }
+
+        expect(Avatar::AvatarFromUrlJob).to receive(:perform_later).with(contact, params[:avatar_url]).once
+        described_class.new(contact: contact, params: params).perform
+      end
+    end
+>>>>>>> upstream/develop
   end
 end

@@ -1,11 +1,19 @@
 <script>
 import { useAlert } from 'dashboard/composables';
+<<<<<<< HEAD
 import FormButton from 'v3/components/Form/Button.vue';
+=======
+import NextButton from 'dashboard/components-next/button/Button.vue';
+>>>>>>> upstream/develop
 import { useVuelidate } from '@vuelidate/core';
 import { required, minLength, email } from '@vuelidate/validators';
 export default {
   components: {
+<<<<<<< HEAD
     FormButton,
+=======
+    NextButton,
+>>>>>>> upstream/develop
   },
   props: {
     name: {
@@ -131,6 +139,7 @@ export default {
       @input="v$.userEmail.$touch"
       @blur="v$.userEmail.$touch"
     />
+<<<<<<< HEAD
     <FormButton
       type="submit"
       color-scheme="primary"
@@ -139,5 +148,10 @@ export default {
     >
       {{ $t('PROFILE_SETTINGS.BTN_TEXT') }}
     </FormButton>
+=======
+    <div>
+      <NextButton type="submit" :label="$t('PROFILE_SETTINGS.BTN_TEXT')" />
+    </div>
+>>>>>>> upstream/develop
   </form>
 </template>

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { ref, computed } from 'vue';
+=======
+import { ref, reactive, computed } from 'vue';
+>>>>>>> upstream/develop
 import { useStoreGetters } from 'dashboard/composables/store';
 import { useAlert } from 'dashboard/composables';
 import { useI18n } from 'vue-i18n';
@@ -40,7 +44,11 @@ export function useAutomation(startValue = null) {
   } = useAutomationValues();
 
   const automation = ref(startValue);
+<<<<<<< HEAD
   const automationTypes = structuredClone(AUTOMATIONS);
+=======
+  const automationTypes = reactive(structuredClone(AUTOMATIONS));
+>>>>>>> upstream/develop
   const eventName = computed(() => automation.value?.event_name);
 
   /**
@@ -160,14 +168,32 @@ export function useAutomation(startValue = null) {
       t('AUTOMATION.CONDITION.CONTACT_CUSTOM_ATTR_LABEL')
     );
 
+<<<<<<< HEAD
+=======
+    const CUSTOM_ATTR_HEADER_KEYS = new Set([
+      'conversation_custom_attribute',
+      'contact_custom_attribute',
+    ]);
+
+>>>>>>> upstream/develop
     [
       'message_created',
       'conversation_created',
       'conversation_updated',
       'conversation_opened',
     ].forEach(eventToUpdate => {
+<<<<<<< HEAD
       automationTypes[eventToUpdate].conditions = [
         ...automationTypes[eventToUpdate].conditions,
+=======
+      const standardConditions = automationTypes[
+        eventToUpdate
+      ].conditions.filter(
+        c => !c.customAttributeType && !CUSTOM_ATTR_HEADER_KEYS.has(c.key)
+      );
+      automationTypes[eventToUpdate].conditions = [
+        ...standardConditions,
+>>>>>>> upstream/develop
         ...manifestedCustomAttributes,
       ];
     });

@@ -32,6 +32,7 @@ class AccountBuilder
   end
 
   def validate_email
+<<<<<<< HEAD
     raise InvalidEmail.new({ domain_blocked: domain_blocked }) if domain_blocked?
 
     address = ValidEmail2::Address.new(@email)
@@ -40,6 +41,9 @@ class AccountBuilder
     else
       raise InvalidEmail.new({ valid: address.valid?, disposable: address.disposable? })
     end
+=======
+    Account::SignUpEmailValidationService.new(@email).perform
+>>>>>>> upstream/develop
   end
 
   def validate_user
@@ -51,7 +55,15 @@ class AccountBuilder
   end
 
   def create_account
+<<<<<<< HEAD
     @account = Account.create!(name: account_name, locale: I18n.locale)
+=======
+    @account = Account.create!(
+      name: account_name,
+      locale: I18n.locale,
+      custom_attributes: { 'onboarding_step' => 'account_details' }
+    )
+>>>>>>> upstream/develop
     Current.account = @account
   end
 
@@ -61,6 +73,7 @@ class AccountBuilder
       @user
     else
       raise UserErrors.new(errors: @user.errors)
+<<<<<<< HEAD
     end
   end
 
@@ -98,4 +111,26 @@ class AccountBuilder
 
     domains.split("\n").map(&:strip)
   end
+=======
+    end
+  end
+
+  def link_user_to_account(user, account)
+    AccountUser.create!(
+      account_id: account.id,
+      user_id: user.id,
+      role: AccountUser.roles['administrator']
+    )
+  end
+
+  def create_user
+    @user = User.new(email: @email,
+                     password: user_password,
+                     password_confirmation: user_password,
+                     name: user_full_name)
+    @user.type = 'SuperAdmin' if @super_admin
+    @user.confirm if @confirmed
+    @user.save!
+  end
+>>>>>>> upstream/develop
 end

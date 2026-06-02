@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Beheerder",
       "AGENT": "Medewerker"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Er zijn geen medewerkers gekoppeld aan dit account",
       "TITLE": "Beheer medewerkers in uw team",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Kan geen verbinding maken met Woot Server, probeer het later opnieuw"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Zoek agenten...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Geen resultaten gevonden."
     },

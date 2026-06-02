@@ -57,11 +57,19 @@ const state = {
     uiFlags: {
       isFetchingAccountConversationMetric: false,
       isFetchingAccountConversationsHeatmap: false,
+<<<<<<< HEAD
+=======
+      isFetchingAccountResolutionsHeatmap: false,
+>>>>>>> upstream/develop
       isFetchingAgentConversationMetric: false,
       isFetchingTeamConversationMetric: false,
     },
     accountConversationMetric: {},
     accountConversationHeatmap: [],
+<<<<<<< HEAD
+=======
+    accountResolutionHeatmap: [],
+>>>>>>> upstream/develop
     agentConversationMetric: [],
     teamConversationMetric: [],
   },
@@ -89,6 +97,12 @@ const getters = {
   getAccountConversationHeatmapData(_state) {
     return _state.overview.accountConversationHeatmap;
   },
+<<<<<<< HEAD
+=======
+  getAccountResolutionHeatmapData(_state) {
+    return _state.overview.accountResolutionHeatmap;
+  },
+>>>>>>> upstream/develop
   getAgentConversationMetric(_state) {
     return _state.overview.agentConversationMetric;
   },
@@ -130,6 +144,19 @@ export const actions = {
       commit(types.default.TOGGLE_HEATMAP_LOADING, false);
     });
   },
+<<<<<<< HEAD
+=======
+  fetchAccountResolutionHeatmap({ commit }, reportObj) {
+    commit(types.default.TOGGLE_RESOLUTION_HEATMAP_LOADING, true);
+    Report.getReports({ ...reportObj, groupBy: 'hour' }).then(heatmapData => {
+      let { data } = heatmapData;
+      data = clampDataBetweenTimeline(data, reportObj.from, reportObj.to);
+
+      commit(types.default.SET_RESOLUTION_HEATMAP_DATA, data);
+      commit(types.default.TOGGLE_RESOLUTION_HEATMAP_LOADING, false);
+    });
+  },
+>>>>>>> upstream/develop
   fetchAccountSummary({ commit }, reportObj) {
     commit(types.default.SET_ACCOUNT_SUMMARY_STATUS, STATUS.FETCHING);
     Report.getSummary(
@@ -219,6 +246,22 @@ export const actions = {
         console.error(error);
       });
   },
+<<<<<<< HEAD
+=======
+  downloadConversationsSummaryReports(_, reportObj) {
+    return Report.getConversationsSummaryReports(reportObj)
+      .then(response => {
+        downloadCsvFile(reportObj.fileName, response.data);
+        AnalyticsHelper.track(REPORTS_EVENTS.DOWNLOAD_REPORT, {
+          reportType: 'conversations_summary',
+          businessHours: reportObj?.businessHours,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },
+>>>>>>> upstream/develop
   downloadLabelReports(_, reportObj) {
     return Report.getLabelReports(reportObj)
       .then(response => {
@@ -287,6 +330,12 @@ const mutations = {
   [types.default.SET_HEATMAP_DATA](_state, heatmapData) {
     _state.overview.accountConversationHeatmap = heatmapData;
   },
+<<<<<<< HEAD
+=======
+  [types.default.SET_RESOLUTION_HEATMAP_DATA](_state, heatmapData) {
+    _state.overview.accountResolutionHeatmap = heatmapData;
+  },
+>>>>>>> upstream/develop
   [types.default.TOGGLE_ACCOUNT_REPORT_LOADING](_state, { metric, value }) {
     _state.accountReport.isFetching[metric] = value;
   },
@@ -299,6 +348,12 @@ const mutations = {
   [types.default.TOGGLE_HEATMAP_LOADING](_state, flag) {
     _state.overview.uiFlags.isFetchingAccountConversationsHeatmap = flag;
   },
+<<<<<<< HEAD
+=======
+  [types.default.TOGGLE_RESOLUTION_HEATMAP_LOADING](_state, flag) {
+    _state.overview.uiFlags.isFetchingAccountResolutionsHeatmap = flag;
+  },
+>>>>>>> upstream/develop
   [types.default.SET_ACCOUNT_SUMMARY](_state, summaryData) {
     _state.accountSummary = summaryData;
   },

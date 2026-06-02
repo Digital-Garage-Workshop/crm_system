@@ -18,7 +18,11 @@ db_namespace = namespace :db do
     ActiveRecord::Base.configurations.configs_for(env_name: Rails.env).each do |db_config|
       ActiveRecord::Base.establish_connection(db_config.configuration_hash)
       unless ActiveRecord::Base.connection.table_exists? 'ar_internal_metadata'
+<<<<<<< HEAD
         db_namespace['load_config'].invoke if ActiveRecord::Base.schema_format == :ruby
+=======
+        db_namespace['load_config'].invoke if ActiveRecord.schema_format == :ruby
+>>>>>>> upstream/develop
         ActiveRecord::Tasks::DatabaseTasks.load_schema_current(:ruby, ENV.fetch('SCHEMA', nil))
         db_namespace['seed'].invoke
       end

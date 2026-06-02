@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, ref, onMounted, nextTick } from 'vue';
 const props = defineProps({
   modelValue: {
@@ -33,11 +34,29 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+=======
+import { computed, ref, onMounted, nextTick, getCurrentInstance } from 'vue';
+const props = defineProps({
+  modelValue: { type: [String, Number], default: '' },
+  type: { type: String, default: 'text' },
+  customInputClass: { type: [String, Object, Array], default: '' },
+  placeholder: { type: String, default: '' },
+  label: { type: String, default: '' },
+  id: { type: String, default: '' },
+  size: {
+    type: String,
+    default: 'md',
+    validator: value => ['sm', 'md'].includes(value),
+  },
+  message: { type: String, default: '' },
+  disabled: { type: Boolean, default: false },
+>>>>>>> upstream/develop
   messageType: {
     type: String,
     default: 'info',
     validator: value => ['info', 'error', 'success'].includes(value),
   },
+<<<<<<< HEAD
   min: {
     type: String,
     default: '',
@@ -46,6 +65,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+=======
+  min: { type: String, default: '' },
+  max: { type: String, default: '' },
+  autofocus: { type: Boolean, default: false },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits([
@@ -56,6 +80,13 @@ const emit = defineEmits([
   'enter',
 ]);
 
+<<<<<<< HEAD
+=======
+// Generate a unique ID per component instance when `id` prop is not provided.
+const { uid } = getCurrentInstance();
+const uniqueId = computed(() => props.id || `input-${uid}`);
+
+>>>>>>> upstream/develop
 const isFocused = ref(false);
 const inputRef = ref(null);
 
@@ -64,7 +95,11 @@ const messageClass = computed(() => {
     case 'error':
       return 'text-n-ruby-9 dark:text-n-ruby-9';
     case 'success':
+<<<<<<< HEAD
       return 'text-green-500 dark:text-green-400';
+=======
+      return 'text-n-teal-10 dark:text-n-teal-10';
+>>>>>>> upstream/develop
     default:
       return 'text-n-slate-11 dark:text-n-slate-11';
   }
@@ -80,7 +115,16 @@ const inputOutlineClass = computed(() => {
 });
 
 const handleInput = event => {
+<<<<<<< HEAD
   emit('update:modelValue', event.target.value);
+=======
+  let value = event.target.value;
+  // Convert to number if type is number and value is not empty
+  if (props.type === 'number' && value !== '') {
+    value = Number(value);
+  }
+  emit('update:modelValue', value);
+>>>>>>> upstream/develop
   emit('input', event);
 };
 
@@ -89,6 +133,20 @@ const handleFocus = event => {
   isFocused.value = true;
 };
 
+<<<<<<< HEAD
+=======
+const sizeClass = computed(() => {
+  switch (props.size) {
+    case 'sm':
+      return 'h-8 !px-3 !py-2';
+    case 'md':
+      return 'h-10 !px-3 !py-2.5';
+    default:
+      return 'h-10 !px-3 !py-2.5';
+  }
+});
+
+>>>>>>> upstream/develop
 const handleBlur = event => {
   emit('blur', event);
   isFocused.value = false;
@@ -111,20 +169,34 @@ onMounted(() => {
   <div class="relative flex flex-col min-w-0 gap-1">
     <label
       v-if="label"
+<<<<<<< HEAD
       :for="id"
       class="mb-0.5 text-sm font-medium text-n-slate-12"
+=======
+      :for="uniqueId"
+      class="mb-0.5 text-heading-3 text-n-slate-12"
+>>>>>>> upstream/develop
     >
       {{ label }}
     </label>
     <!-- Added prefix slot to allow adding icons to the input -->
     <slot name="prefix" />
     <input
+<<<<<<< HEAD
       :id="id"
+=======
+      :id="uniqueId"
+      v-bind="$attrs"
+>>>>>>> upstream/develop
       ref="inputRef"
       :value="modelValue"
       :class="[
         customInputClass,
         inputOutlineClass,
+<<<<<<< HEAD
+=======
+        sizeClass,
+>>>>>>> upstream/develop
         {
           error: messageType === 'error',
           focus: isFocused,
@@ -134,7 +206,16 @@ onMounted(() => {
       :placeholder="placeholder"
       :disabled="disabled"
       :min="['date', 'datetime-local', 'time'].includes(type) ? min : undefined"
+<<<<<<< HEAD
       class="block w-full reset-base text-sm h-10 !px-3 !py-2.5 !mb-0 outline outline-1 border-none border-0 outline-offset-[-1px] rounded-lg bg-n-alpha-black2 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-n-slate-10 dark:placeholder:text-n-slate-10 disabled:cursor-not-allowed disabled:opacity-50 text-n-slate-12 transition-all duration-500 ease-in-out"
+=======
+      :max="
+        ['date', 'datetime-local', 'time', 'number'].includes(type)
+          ? max
+          : undefined
+      "
+      class="block w-full reset-base text-sm !mb-0 outline outline-1 border-none border-0 outline-offset-[-1px] rounded-lg bg-n-alpha-black2 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-n-slate-10 dark:placeholder:text-n-slate-10 disabled:cursor-not-allowed disabled:opacity-50 text-n-slate-12 transition-all duration-500 ease-in-out [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+>>>>>>> upstream/develop
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -142,7 +223,11 @@ onMounted(() => {
     />
     <p
       v-if="message"
+<<<<<<< HEAD
       class="min-w-0 mt-1 mb-0 text-xs truncate transition-all duration-500 ease-in-out"
+=======
+      class="min-w-0 mt-1 mb-0 text-label-small truncate transition-all duration-500 ease-in-out"
+>>>>>>> upstream/develop
       :class="messageClass"
     >
       {{ message }}

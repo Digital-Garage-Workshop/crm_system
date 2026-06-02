@@ -1,14 +1,25 @@
 <script>
 import { mapGetters } from 'vuex';
 import Spinner from 'shared/components/Spinner.vue';
+<<<<<<< HEAD
 import { CSAT_RATINGS } from 'shared/constants/messages';
 import FluentIcon from 'shared/components/FluentIcon/Index.vue';
+=======
+import { CSAT_RATINGS, CSAT_DISPLAY_TYPES } from 'shared/constants/messages';
+import FluentIcon from 'shared/components/FluentIcon/Index.vue';
+import StarRating from 'shared/components/StarRating.vue';
+import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
+>>>>>>> upstream/develop
 import { getContrastingTextColor } from '@chatwoot/utils';
 
 export default {
   components: {
     Spinner,
     FluentIcon,
+<<<<<<< HEAD
+=======
+    StarRating,
+>>>>>>> upstream/develop
   },
   props: {
     messageContentAttributes: {
@@ -19,6 +30,21 @@ export default {
       type: Number,
       required: true,
     },
+<<<<<<< HEAD
+=======
+    displayType: {
+      type: String,
+      default: CSAT_DISPLAY_TYPES.EMOJI,
+    },
+    message: {
+      type: String,
+      default: '',
+    },
+  },
+  setup() {
+    const { formatMessage } = useMessageFormatter();
+    return { formatMessage };
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -39,7 +65,13 @@ export default {
         ?.feedback_message;
     },
     isButtonDisabled() {
+<<<<<<< HEAD
       return !(this.selectedRating && this.feedback);
+=======
+      if (!(this.selectedRating && this.feedback)) return true;
+      if (this.isUpdating) return true;
+      return false;
+>>>>>>> upstream/develop
     },
     textColor() {
       return getContrastingTextColor(this.widgetColor);
@@ -47,7 +79,20 @@ export default {
     title() {
       return this.isRatingSubmitted
         ? this.$t('CSAT.SUBMITTED_TITLE')
+<<<<<<< HEAD
         : this.$t('CSAT.TITLE');
+=======
+        : this.message || this.$t('CSAT.TITLE');
+    },
+    formattedTitle() {
+      return this.formatMessage(this.title, false);
+    },
+    isEmojiType() {
+      return this.displayType === CSAT_DISPLAY_TYPES.EMOJI;
+    },
+    isStarType() {
+      return this.displayType === CSAT_DISPLAY_TYPES.STAR;
+>>>>>>> upstream/develop
     },
   },
 
@@ -63,14 +108,26 @@ export default {
 
   methods: {
     buttonClass(rating) {
+<<<<<<< HEAD
       return [
         { selected: rating.value === this.selectedRating },
         { disabled: this.isRatingSubmitted },
         { hover: this.isRatingSubmitted },
+=======
+      const isLocked = this.isFeedbackSubmitted || this.isUpdating;
+      return [
+        { selected: rating.value === this.selectedRating },
+        { disabled: isLocked },
+        { hover: isLocked },
+>>>>>>> upstream/develop
         'emoji-button',
       ];
     },
     async onSubmit() {
+<<<<<<< HEAD
+=======
+      if (this.isUpdating) return;
+>>>>>>> upstream/develop
       this.isUpdating = true;
       try {
         await this.$store.dispatch('message/update', {
@@ -88,10 +145,24 @@ export default {
         this.isUpdating = false;
       }
     },
+<<<<<<< HEAD
     selectRating(rating) {
       this.selectedRating = rating.value;
       this.onSubmit();
     },
+=======
+
+    selectRating(rating) {
+      if (this.isFeedbackSubmitted || this.isUpdating) return;
+      this.selectedRating = rating.value;
+      this.onSubmit();
+    },
+    selectStarRating(value) {
+      if (this.isFeedbackSubmitted || this.isUpdating) return;
+      this.selectedRating = value;
+      this.onSubmit();
+    },
+>>>>>>> upstream/develop
   },
 };
 </script>
@@ -101,10 +172,18 @@ export default {
     class="customer-satisfaction w-full bg-n-background dark:bg-n-solid-3 shadow-[0_0.25rem_6px_rgba(50,50,93,0.08),0_1px_3px_rgba(0,0,0,0.05)] ltr:rounded-bl-[0.25rem] rtl:rounded-br-[0.25rem] rounded-lg inline-block leading-[1.5] mt-1 border-t-2 border-t-n-brand border-solid"
     :style="{ borderColor: widgetColor }"
   >
+<<<<<<< HEAD
     <h6 class="text-n-slate-12 text-sm font-medium pt-5 px-2.5 text-center">
       {{ title }}
     </h6>
     <div class="ratings flex justify-around py-5 px-4">
+=======
+    <h6
+      v-dompurify-html="formattedTitle"
+      class="text-n-slate-12 text-sm font-medium pt-5 px-2.5 text-center prose prose-bubble"
+    />
+    <div v-if="isEmojiType" class="ratings flex justify-around py-5 px-4">
+>>>>>>> upstream/develop
       <button
         v-for="rating in ratings"
         :key="rating.key"
@@ -114,6 +193,15 @@ export default {
         {{ rating.emoji }}
       </button>
     </div>
+<<<<<<< HEAD
+=======
+    <StarRating
+      v-else-if="isStarType"
+      :selected-rating="selectedRating"
+      :is-disabled="isFeedbackSubmitted || isUpdating"
+      @select-rating="selectStarRating"
+    />
+>>>>>>> upstream/develop
     <form
       v-if="!isFeedbackSubmitted"
       class="feedback-form flex"

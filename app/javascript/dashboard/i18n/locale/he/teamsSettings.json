@@ -2,9 +2,18 @@
   "TEAMS_SETTINGS": {
     "NEW_TEAM": "צור צוות חדש",
     "HEADER": "צוותים",
+<<<<<<< HEAD
     "LOADING": "Fetching teams",
     "DESCRIPTION": "Teams allow you to organize agents into groups based on their responsibilities. An agent can belong to multiple teams. When working collaboratively, you can assign conversations to specific teams.",
     "LEARN_MORE": "Learn more about teams",
+=======
+    "LOADING": "מאחזר צוותים",
+    "DESCRIPTION": "צוותים מאפשרים לך לארגן סוכנים לקבוצות על בסיס תחומי האחריות שלהם. סוכן יכול להשתייך למספר צוותים. בעבודה שיתופית, תוכל להקצות שיחות לצוותים ספציפיים.",
+    "LEARN_MORE": "למד עוד על צוותים",
+    "COUNT": "{n} team | {n} teams",
+    "SEARCH_PLACEHOLDER": "חפש צוותים...",
+    "NO_RESULTS": "No teams found matching your search",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "לא נוצרו צוותים בחשבון זה.",
       "EDIT_TEAM": "ערוך צוות",
@@ -65,7 +74,11 @@
     },
     "AGENTS": {
       "AGENT": "סוכן",
+<<<<<<< HEAD
       "EMAIL": "מייל",
+=======
+      "EMAIL": "אימייל",
+>>>>>>> upstream/develop
       "BUTTON_TEXT": "הוסף נציגים",
       "ADD_AGENTS": "הוספת סוכנים לצוות שלך...",
       "SELECT": "בחר",
@@ -93,7 +106,11 @@
         "ERROR_MESSAGE": "לא ניתן למחוק את הצוות. נסה שוב."
       },
       "CONFIRM": {
+<<<<<<< HEAD
         "TITLE": "Are you sure you want to delete the team?",
+=======
+        "TITLE": "האם אתה בטוח שברצונך למחוק את הצוות?",
+>>>>>>> upstream/develop
         "PLACE_HOLDER": "אנא הקלד {teamName} כדי לאשר",
         "MESSAGE": "מחיקת הצוות תסיר את הקצאת הצוות מהשיחות שהוקצו לצוות זה.",
         "YES": "מחק ",

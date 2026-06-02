@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import { ref, computed, onMounted, watchEffect } from 'vue';
 import { useStore } from 'dashboard/composables/store';
 import Copilot from 'dashboard/components-next/copilot/Copilot.vue';
@@ -14,10 +15,29 @@ const props = defineProps({
   conversationInboxType: {
     type: String,
     required: true,
+=======
+import { ref, computed, onMounted } from 'vue';
+import { useAlert } from 'dashboard/composables';
+import { useStore } from 'dashboard/composables/store';
+import Copilot from 'dashboard/components-next/copilot/Copilot.vue';
+import { useMapGetter } from 'dashboard/composables/store';
+import { useUISettings } from 'dashboard/composables/useUISettings';
+import { useConfig } from 'dashboard/composables/useConfig';
+import { useWindowSize } from '@vueuse/core';
+import { vOnClickOutside } from '@vueuse/components';
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
+import wootConstants from 'dashboard/constants/globals';
+
+defineProps({
+  conversationInboxType: {
+    type: String,
+    default: '',
+>>>>>>> upstream/develop
   },
 });
 
 const store = useStore();
+<<<<<<< HEAD
 const currentUser = useMapGetter('getCurrentUser');
 const assistants = useMapGetter('captainAssistants/getRecords');
 const inboxAssistant = useMapGetter('getCopilotAssistant');
@@ -25,6 +45,34 @@ const { uiSettings, updateUISettings } = useUISettings();
 
 const messages = ref([]);
 const isCaptainTyping = ref(false);
+=======
+const { uiSettings, updateUISettings } = useUISettings();
+const { isEnterprise } = useConfig();
+const { width: windowWidth } = useWindowSize();
+
+const currentUser = useMapGetter('getCurrentUser');
+const assistants = useMapGetter('captainAssistants/getRecords');
+const uiFlags = useMapGetter('captainAssistants/getUIFlags');
+const inboxAssistant = useMapGetter('getCopilotAssistant');
+const currentChat = useMapGetter('getSelectedChat');
+
+const isSmallScreen = computed(
+  () => windowWidth.value < wootConstants.SMALL_SCREEN_BREAKPOINT
+);
+
+const selectedCopilotThreadId = ref(null);
+const messages = computed(() =>
+  store.getters['copilotMessages/getMessagesByThreadId'](
+    selectedCopilotThreadId.value
+  )
+);
+
+const currentAccountId = useMapGetter('getCurrentAccountId');
+const isFeatureEnabledonAccount = useMapGetter(
+  'accounts/isFeatureEnabledonAccount'
+);
+
+>>>>>>> upstream/develop
 const selectedAssistantId = ref(null);
 
 const activeAssistant = computed(() => {
@@ -48,6 +96,18 @@ const activeAssistant = computed(() => {
   return assistants.value[0];
 });
 
+<<<<<<< HEAD
+=======
+const closeCopilotPanel = () => {
+  if (isSmallScreen.value && uiSettings.value?.is_copilot_panel_open) {
+    updateUISettings({
+      is_contact_sidebar_open: false,
+      is_copilot_panel_open: false,
+    });
+  }
+};
+
+>>>>>>> upstream/develop
 const setAssistant = async assistant => {
   selectedAssistantId.value = assistant.id;
   await updateUISettings({
@@ -55,6 +115,7 @@ const setAssistant = async assistant => {
   });
 };
 
+<<<<<<< HEAD
 const handleReset = () => {
   messages.value = [];
 };
@@ -92,10 +153,48 @@ const sendMessage = async message => {
     console.log(error);
   } finally {
     isCaptainTyping.value = false;
+=======
+const shouldShowCopilotPanel = computed(() => {
+  if (!isEnterprise) {
+    return false;
+  }
+  const isCaptainEnabled = isFeatureEnabledonAccount.value(
+    currentAccountId.value,
+    FEATURE_FLAGS.CAPTAIN
+  );
+  const { is_copilot_panel_open: isCopilotPanelOpen } = uiSettings.value;
+  return isCaptainEnabled && isCopilotPanelOpen && !uiFlags.value.fetchingList;
+});
+
+const handleReset = () => {
+  selectedCopilotThreadId.value = null;
+};
+
+const sendMessage = async message => {
+  try {
+    if (selectedCopilotThreadId.value) {
+      await store.dispatch('copilotMessages/create', {
+        assistant_id: activeAssistant.value.id,
+        conversation_id: currentChat.value?.id,
+        threadId: selectedCopilotThreadId.value,
+        message,
+      });
+    } else {
+      const response = await store.dispatch('copilotThreads/create', {
+        assistant_id: activeAssistant.value.id,
+        conversation_id: currentChat.value?.id,
+        message,
+      });
+      selectedCopilotThreadId.value = response.id;
+    }
+  } catch (error) {
+    useAlert(error.message);
+>>>>>>> upstream/develop
   }
 };
 
 onMounted(() => {
+<<<<<<< HEAD
   store.dispatch('captainAssistants/get');
 });
 
@@ -103,11 +202,16 @@ watchEffect(() => {
   if (props.conversationId) {
     store.dispatch('getInboxCaptainAssistantById', props.conversationId);
     selectedAssistantId.value = activeAssistant.value?.id;
+=======
+  if (isEnterprise) {
+    store.dispatch('captainAssistants/get');
+>>>>>>> upstream/develop
   }
 });
 </script>
 
 <template>
+<<<<<<< HEAD
   <Copilot
     :messages="messages"
     :support-agent="currentUser"
@@ -119,4 +223,29 @@ watchEffect(() => {
     @send-message="sendMessage"
     @reset="handleReset"
   />
+=======
+  <div
+    v-if="shouldShowCopilotPanel"
+    v-on-click-outside="() => closeCopilotPanel()"
+    class="bg-n-surface-2 h-full overflow-hidden flex-col fixed top-0 ltr:right-0 rtl:left-0 z-40 w-full max-w-sm transition-transform duration-300 ease-in-out md:static md:w-[320px] md:min-w-[320px] ltr:border-l rtl:border-r border-n-weak 2xl:min-w-[360px] 2xl:w-[360px] shadow-lg md:shadow-none"
+    :class="[
+      {
+        'md:flex': shouldShowCopilotPanel,
+        'md:hidden': !shouldShowCopilotPanel,
+      },
+    ]"
+  >
+    <Copilot
+      :messages="messages"
+      :support-agent="currentUser"
+      :conversation-inbox-type="conversationInboxType"
+      :assistants="assistants"
+      :active-assistant="activeAssistant"
+      @set-assistant="setAssistant"
+      @send-message="sendMessage"
+      @reset="handleReset"
+    />
+  </div>
+  <template v-else />
+>>>>>>> upstream/develop
 </template>

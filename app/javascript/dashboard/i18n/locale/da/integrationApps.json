@@ -3,6 +3,12 @@
     "FETCHING": "Henter Integrationer",
     "NO_HOOK_CONFIGURED": "Der er ingen {integrationId} integrationer konfigureret på denne konto.",
     "HEADER": "Applikationer",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Aktiveret",
       "DISABLED": "Deaktiveret"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Henter integrationshoks",
       "INBOX": "Indbakke",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Handlinger",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Slet"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Vælg Indbakke"
         },
         "SUBMIT": "Opret",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Annuller"
       },
       "API": {

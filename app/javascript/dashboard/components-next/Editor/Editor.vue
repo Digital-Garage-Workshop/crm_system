@@ -4,6 +4,7 @@ import { computed, ref, watch, useSlots } from 'vue';
 import WootEditor from 'dashboard/components/widgets/WootWriter/Editor.vue';
 
 const props = defineProps({
+<<<<<<< HEAD
   modelValue: {
     type: String,
     default: '',
@@ -36,6 +37,17 @@ const props = defineProps({
     type: String,
     default: '',
   },
+=======
+  modelValue: { type: String, default: '' },
+  editorKey: { type: String, default: '' },
+  label: { type: String, default: '' },
+  placeholder: { type: String, default: '' },
+  focusOnMount: { type: Boolean, default: false },
+  maxLength: { type: Number, default: 200 },
+  showCharacterCount: { type: Boolean, default: true },
+  disabled: { type: Boolean, default: false },
+  message: { type: String, default: '' },
+>>>>>>> upstream/develop
   messageType: {
     type: String,
     default: 'info',
@@ -43,9 +55,21 @@ const props = defineProps({
   },
   enableVariables: { type: Boolean, default: false },
   enableCannedResponses: { type: Boolean, default: true },
+<<<<<<< HEAD
 });
 
 const emit = defineEmits(['update:modelValue']);
+=======
+  enableCaptainTools: { type: Boolean, default: false },
+  signature: { type: String, default: '' },
+  allowSignature: { type: Boolean, default: false },
+  sendWithSignature: { type: Boolean, default: false },
+  channelType: { type: String, default: '' },
+  medium: { type: String, default: '' },
+});
+
+const emit = defineEmits(['update:modelValue', 'executeCopilotAction']);
+>>>>>>> upstream/develop
 
 const slots = useSlots();
 
@@ -58,7 +82,11 @@ const messageClass = computed(() => {
     case 'error':
       return 'text-n-ruby-9 dark:text-n-ruby-9';
     case 'success':
+<<<<<<< HEAD
       return 'text-green-500 dark:text-green-400';
+=======
+      return 'text-n-teal-10 dark:text-n-teal-10';
+>>>>>>> upstream/develop
     default:
       return 'text-n-slate-11 dark:text-n-slate-11';
   }
@@ -114,15 +142,34 @@ watch(
       ]"
     >
       <WootEditor
+<<<<<<< HEAD
+=======
+        :editor-id="editorKey"
+>>>>>>> upstream/develop
         :model-value="modelValue"
         :placeholder="placeholder"
         :focus-on-mount="focusOnMount"
         :disabled="disabled"
         :enable-variables="enableVariables"
         :enable-canned-responses="enableCannedResponses"
+<<<<<<< HEAD
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
+=======
+        :enable-captain-tools="enableCaptainTools"
+        :signature="signature"
+        :allow-signature="allowSignature"
+        :send-with-signature="sendWithSignature"
+        :channel-type="channelType"
+        :medium="medium"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @execute-copilot-action="
+          (...args) => emit('executeCopilotAction', ...args)
+        "
+>>>>>>> upstream/develop
       />
       <div
         v-if="showCharacterCount || slots.actions"
@@ -149,6 +196,7 @@ watch(
 
 <style lang="scss" scoped>
 .editor-wrapper {
+<<<<<<< HEAD
   ::v-deep {
     .ProseMirror-menubar-wrapper {
       @apply gap-2 !important;
@@ -177,6 +225,28 @@ watch(
           }
         }
       }
+=======
+  :deep(.ProseMirror-menubar-wrapper) {
+    .ProseMirror.ProseMirror-woot-style {
+      p {
+        @apply first:mt-0 !important;
+      }
+
+      .empty-node {
+        @apply m-0 !important;
+
+        &::before {
+          @apply text-n-slate-11 dark:text-n-slate-11;
+        }
+      }
+    }
+
+    .ProseMirror-menubar {
+      width: fit-content !important;
+      position: relative !important;
+      top: unset !important;
+      @apply ltr:left-[-0.188rem] rtl:right-[-0.188rem] !important;
+>>>>>>> upstream/develop
     }
   }
 }

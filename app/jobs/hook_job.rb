@@ -3,6 +3,7 @@ class HookJob < MutexApplicationJob
 
   queue_as :medium
 
+<<<<<<< HEAD
   def perform(hook, event_name, event_data = {})
     return if hook.disabled?
 
@@ -16,6 +17,21 @@ class HookJob < MutexApplicationJob
     when 'leadsquared'
       process_leadsquared_integration_with_lock(hook, event_name, event_data)
     end
+=======
+  INTEGRATION_PROCESSORS = {
+    'slack' => :process_slack_integration,
+    'dialogflow' => :process_dialogflow_integration,
+    'google_translate' => :google_translate_integration,
+    'leadsquared' => :process_leadsquared_integration_with_lock,
+    'linear' => :process_linear_integration
+  }.freeze
+
+  def perform(hook, event_name, event_data = {})
+    return if hook.disabled?
+
+    processor = INTEGRATION_PROCESSORS[hook.app_id]
+    send(processor, hook, event_name, event_data) if processor
+>>>>>>> upstream/develop
   rescue StandardError => e
     Rails.logger.error e
   end
@@ -23,6 +39,7 @@ class HookJob < MutexApplicationJob
   private
 
   def process_slack_integration(hook, event_name, event_data)
+<<<<<<< HEAD
     return unless ['message.created'].include?(event_name)
 
     message = event_data[:message]
@@ -30,6 +47,26 @@ class HookJob < MutexApplicationJob
       ::SendOnSlackJob.perform_later(message, hook)
     else
       ::SendOnSlackJob.set(wait: 2.seconds).perform_later(message, hook)
+=======
+    message = event_data[:message]
+
+    case event_name
+    when 'message.created'
+      if message.attachments.blank?
+        ::SendOnSlackJob.perform_later(message, hook)
+      else
+        ::SendOnSlackJob.set(wait: 2.seconds).perform_later(message, hook)
+      end
+    when 'message.updated'
+      # Only interactive bot messages store responses via content_attributes (submitted_values / submitted_email).
+      # Skip other content types to avoid unnecessary job enqueues on every message update.
+      return unless message.content_type.in?(Integrations::Slack::UpdateSlackMessageService::SUPPORTED_CONTENT_TYPES)
+      # Guard against redundant Slack updates when unrelated attributes change (e.g. status)
+      # while submitted_values is already present on the message.
+      return unless event_data[:previous_changes]&.key?('content_attributes')
+
+      ::UpdateSlackMessageJob.perform_later(message, hook)
+>>>>>>> upstream/develop
     end
   end
 
@@ -46,6 +83,16 @@ class HookJob < MutexApplicationJob
     Integrations::GoogleTranslate::DetectLanguageService.new(hook: hook, message: message).perform
   end
 
+<<<<<<< HEAD
+=======
+  def process_linear_integration(hook, event_name, event_data)
+    return unless event_name == 'message.created'
+
+    message = event_data[:message]
+    Integrations::Linear::AutoLinkService.new(account: hook.account, message: message).perform
+  end
+
+>>>>>>> upstream/develop
   def process_leadsquared_integration_with_lock(hook, event_name, event_data)
     # Why do we need a mutex here? glad you asked
     # When a new conversation is created. We get a contact created event, immediately followed by

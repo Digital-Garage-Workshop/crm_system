@@ -10,6 +10,11 @@ module Labelable
   end
 
   def add_labels(new_labels = nil)
+<<<<<<< HEAD
+=======
+    return if new_labels.blank?
+
+>>>>>>> upstream/develop
     new_labels = Array(new_labels) # Make sure new_labels is an array
     combined_labels = labels + new_labels
     update!(label_list: combined_labels)

@@ -78,7 +78,11 @@ const selectMonth = index => {
           'hover:bg-n-alpha-2 dark:hover:bg-n-solid-3':
             index !== activeMonthIndex,
         }"
+<<<<<<< HEAD
         @click="selectMonth(index)"
+=======
+        @click.stop="selectMonth(index)"
+>>>>>>> upstream/develop
       >
         {{ month }}
       </button>

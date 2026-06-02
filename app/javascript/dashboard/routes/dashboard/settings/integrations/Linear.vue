@@ -7,7 +7,12 @@ import {
 } from 'dashboard/composables/store';
 
 import Integration from './Integration.vue';
+<<<<<<< HEAD
 import Spinner from 'shared/components/Spinner.vue';
+=======
+import SettingsLayout from '../SettingsLayout.vue';
+import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
+>>>>>>> upstream/develop
 
 const store = useStore();
 
@@ -35,8 +40,21 @@ onMounted(() => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex-grow flex-shrink p-4 overflow-auto max-w-6xl mx-auto">
     <div v-if="integrationLoaded && !uiFlags.isCreatingLinear">
+=======
+  <SettingsLayout :is-loading="!integrationLoaded || uiFlags.isCreatingLinear">
+    <template #header>
+      <BaseSettingsHeader
+        :title="$t('INTEGRATION_SETTINGS.LINEAR.HEADER')"
+        description=""
+        feature-name="linear_integration"
+        :back-button-label="$t('INTEGRATION_SETTINGS.HEADER')"
+      />
+    </template>
+    <template #body>
+>>>>>>> upstream/develop
       <Integration
         :integration-id="integration.id"
         :integration-logo="integration.logo"
@@ -49,9 +67,14 @@ onMounted(() => {
           message: $t('INTEGRATION_SETTINGS.LINEAR.DELETE.MESSAGE'),
         }"
       />
+<<<<<<< HEAD
     </div>
     <div v-else class="flex items-center justify-center flex-1">
       <Spinner size="" color-scheme="primary" />
     </div>
   </div>
+=======
+    </template>
+  </SettingsLayout>
+>>>>>>> upstream/develop
 </template>

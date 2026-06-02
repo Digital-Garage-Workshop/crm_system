@@ -14,6 +14,11 @@ const state = {
     isCreating: false,
   },
   lastMessageId: null,
+<<<<<<< HEAD
+=======
+  pendingCustomAttributes: {},
+  pendingLabels: [],
+>>>>>>> upstream/develop
 };
 
 export default {

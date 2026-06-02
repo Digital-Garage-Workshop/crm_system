@@ -31,7 +31,15 @@ class Crm::Leadsquared::LeadFinderService
   def find_by_phone_number(contact)
     return if contact.phone_number.blank?
 
+<<<<<<< HEAD
     search_by_field(contact.phone_number)
+=======
+    lead_data = Crm::Leadsquared::Mappers::ContactMapper.map(contact)
+
+    return if lead_data.blank? || lead_data['Mobile'].nil?
+
+    search_by_field(lead_data['Mobile'])
+>>>>>>> upstream/develop
   end
 
   def search_by_field(value)

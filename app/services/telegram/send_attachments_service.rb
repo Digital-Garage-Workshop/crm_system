@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+require 'faraday/multipart'
+
+>>>>>>> upstream/develop
 # Telegram Attachment APIs: ref: https://core.telegram.org/bots/api#inputfile
 
 # Media attachments like photos, videos can be clubbed together and sent as a media group
@@ -71,6 +76,10 @@ class Telegram::SendAttachmentsService
     HTTParty.post("#{channel.telegram_api_url}/sendMediaGroup",
                   body: {
                     chat_id: chat_id,
+<<<<<<< HEAD
+=======
+                    **business_connection_body,
+>>>>>>> upstream/develop
                     media: attachments.map { |hash| hash.except(:attachment) }.to_json,
                     reply_to_message_id: reply_to_message_id
                   })
@@ -95,16 +104,30 @@ class Telegram::SendAttachmentsService
   # Telegram picks up the file name from original field name, so we need to save the file with the original name.
   # Hence not using Tempfile here.
   def save_attachment_to_tempfile(attachment)
+<<<<<<< HEAD
     raw_data = attachment.file.download
     temp_dir = Rails.root.join('tmp/uploads')
     FileUtils.mkdir_p(temp_dir)
     temp_file_path = File.join(temp_dir, attachment.file.filename.to_s)
     File.write(temp_file_path, raw_data, mode: 'wb')
+=======
+    temp_dir = Rails.root.join('tmp/uploads', "telegram-#{attachment.message_id}")
+    FileUtils.mkdir_p(temp_dir)
+    temp_file_path = File.join(temp_dir, attachment.file.filename.to_s)
+
+    File.open(temp_file_path, 'wb') do |file|
+      attachment.file.blob.open do |blob_file|
+        IO.copy_stream(blob_file, file)
+      end
+    end
+
+>>>>>>> upstream/develop
     temp_file_path
   end
 
   def send_file(chat_id, file_path, reply_to_message_id)
     File.open(file_path, 'rb') do |file|
+<<<<<<< HEAD
       HTTParty.post("#{channel.telegram_api_url}/sendDocument",
                     body: {
                       chat_id: chat_id,
@@ -115,6 +138,35 @@ class Telegram::SendAttachmentsService
     end
   end
 
+=======
+      file_name = File.basename(file_path)
+      mime_type = Marcel::MimeType.for(name: file_name) || 'application/octet-stream'
+
+      payload = { chat_id: chat_id, document: Faraday::Multipart::FilePart.new(file, mime_type, file_name) }
+      payload[:reply_to_message_id] = reply_to_message_id if reply_to_message_id
+      payload.merge!(business_connection_body)
+
+      response = multipart_post_connection.post("#{channel.telegram_api_url}/sendDocument", payload)
+      parse_faraday_response(response)
+    end
+  end
+
+  def multipart_post_connection
+    @multipart_post_connection ||= Faraday.new do |f|
+      f.request :multipart
+      f.options.timeout = 300
+      f.options.open_timeout = 60
+    end
+  end
+
+  def parse_faraday_response(response)
+    parsed = JSON.parse(response.body)
+    OpenStruct.new(success?: response.success?, parsed_response: parsed)
+  rescue JSON::ParserError
+    OpenStruct.new(success?: false, parsed_response: { 'ok' => false, 'error_code' => response.status, 'description' => response.reason_phrase })
+  end
+
+>>>>>>> upstream/develop
   def handle_response(response)
     return true if response.success?
 
@@ -135,4 +187,17 @@ class Telegram::SendAttachmentsService
   def channel
     @channel ||= message.inbox.channel
   end
+<<<<<<< HEAD
+=======
+
+  def business_connection_id
+    @business_connection_id ||= channel.business_connection_id(message)
+  end
+
+  def business_connection_body
+    body = {}
+    body[:business_connection_id] = business_connection_id if business_connection_id
+    body
+  end
+>>>>>>> upstream/develop
 end

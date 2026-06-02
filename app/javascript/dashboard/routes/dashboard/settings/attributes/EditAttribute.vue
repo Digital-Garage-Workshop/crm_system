@@ -2,13 +2,24 @@
 import { useVuelidate } from '@vuelidate/core';
 import { useAlert } from 'dashboard/composables';
 import { required, minLength } from '@vuelidate/validators';
+<<<<<<< HEAD
 import { getRegexp } from 'shared/helpers/Validators';
 import { ATTRIBUTE_TYPES } from './constants';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+=======
+import { getRegexp, normalizeRegexPattern } from 'shared/helpers/Validators';
+import { ATTRIBUTE_TYPES } from './constants';
+import NextButton from 'dashboard/components-next/button/Button.vue';
+import TagInput from 'dashboard/components-next/taginput/TagInput.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     NextButton,
+<<<<<<< HEAD
+=======
+    TagInput,
+>>>>>>> upstream/develop
   },
   props: {
     selectedAttribute: {
@@ -32,6 +43,7 @@ export default {
       regexPattern: null,
       regexCue: null,
       regexEnabled: false,
+<<<<<<< HEAD
       types: ATTRIBUTE_TYPES,
       show: true,
       attributeKey: '',
@@ -51,6 +63,18 @@ export default {
       required,
       minLength: minLength(1),
     },
+=======
+      show: true,
+      attributeKey: '',
+      values: [],
+      tagInputTouched: false,
+    };
+  },
+  validations: {
+    displayName: { required },
+    attributeType: { required },
+    description: { required, minLength: minLength(1) },
+>>>>>>> upstream/develop
     attributeKey: {
       required,
       isKey(value) {
@@ -59,6 +83,7 @@ export default {
     },
   },
   computed: {
+<<<<<<< HEAD
     setAttributeListValue() {
       return this.selectedAttribute.attribute_values.map(values => ({
         name: values,
@@ -74,6 +99,28 @@ export default {
       return (
         this.isAttributeTypeList && this.isTouched && this.values.length === 0
       );
+=======
+    types() {
+      return ATTRIBUTE_TYPES.map(item => ({
+        ...item,
+        option: this.$t(`ATTRIBUTES_MGMT.ATTRIBUTE_TYPES.${item.key}`),
+      }));
+    },
+    setAttributeListValue() {
+      return this.selectedAttribute.attribute_values || [];
+    },
+    updatedAttributeListValues() {
+      return this.values;
+    },
+    isButtonDisabled() {
+      return this.v$.description.$invalid || this.isTagInputEmpty;
+    },
+    isTagInputEmpty() {
+      return this.isAttributeTypeList && this.values.length === 0;
+    },
+    isTagInputInvalid() {
+      return this.tagInputTouched && this.isTagInputEmpty;
+>>>>>>> upstream/develop
     },
 
     pageTitle() {
@@ -84,9 +131,15 @@ export default {
     selectedAttributeType() {
       return this.types.find(
         item =>
+<<<<<<< HEAD
           item.option.toLowerCase() ===
           this.selectedAttribute.attribute_display_type
       ).id;
+=======
+          item.key.toLowerCase() ===
+          this.selectedAttribute.attribute_display_type
+      )?.id;
+>>>>>>> upstream/develop
     },
     keyErrorMessage() {
       if (!this.v$.attributeKey.isKey) {
@@ -111,6 +164,7 @@ export default {
     onClose() {
       this.$emit('onClose');
     },
+<<<<<<< HEAD
     addTagValue(tagValue) {
       const tag = {
         name: tagValue,
@@ -121,6 +175,11 @@ export default {
     setFormValues() {
       const regexPattern = this.selectedAttribute.regex_pattern
         ? getRegexp(this.selectedAttribute.regex_pattern).source
+=======
+    setFormValues() {
+      const regexPattern = this.selectedAttribute.regex_pattern
+        ? getRegexp(this.selectedAttribute.regex_pattern).toString()
+>>>>>>> upstream/develop
         : null;
       this.displayName = this.selectedAttribute.attribute_display_name;
       this.description = this.selectedAttribute.attribute_description;
@@ -146,9 +205,13 @@ export default {
           attribute_description: this.description,
           attribute_display_name: this.displayName,
           attribute_values: this.updatedAttributeListValues,
+<<<<<<< HEAD
           regex_pattern: this.regexPattern
             ? new RegExp(this.regexPattern).toString()
             : null,
+=======
+          regex_pattern: normalizeRegexPattern(this.regexPattern),
+>>>>>>> upstream/develop
           regex_cue: this.regexCue,
         });
         this.alertMessage = this.$t('ATTRIBUTES_MGMT.EDIT.API.SUCCESS_MESSAGE');
@@ -220,6 +283,7 @@ export default {
             {{ $t('ATTRIBUTES_MGMT.ADD.FORM.TYPE.ERROR') }}
           </span>
         </label>
+<<<<<<< HEAD
         <div v-if="isAttributeTypeList" class="multiselect--wrap">
           <label>
             {{ $t('ATTRIBUTES_MGMT.EDIT.TYPE.LIST.LABEL') }}
@@ -237,6 +301,29 @@ export default {
             @tag="addTagValue"
           />
           <label v-show="isMultiselectInvalid" class="error-message">
+=======
+        <div v-if="isAttributeTypeList" class="mb-4">
+          <label class="mb-1 block">
+            {{ $t('ATTRIBUTES_MGMT.EDIT.TYPE.LIST.LABEL') }}
+          </label>
+          <div
+            class="rounded-xl border px-3 py-2"
+            :class="isTagInputInvalid ? 'border-n-ruby-9' : 'border-n-weak'"
+          >
+            <TagInput
+              v-model="values"
+              :placeholder="
+                $t('ATTRIBUTES_MGMT.ADD.FORM.TYPE.LIST.PLACEHOLDER')
+              "
+              allow-create
+              @blur="tagInputTouched = true"
+            />
+          </div>
+          <label
+            v-show="isTagInputInvalid"
+            class="text-n-ruby-9 dark:text-n-ruby-9 text-sm font-normal mt-1"
+          >
+>>>>>>> upstream/develop
             {{ $t('ATTRIBUTES_MGMT.ADD.FORM.TYPE.LIST.ERROR') }}
           </label>
         </div>
@@ -286,6 +373,7 @@ export default {
 
 <style lang="scss" scoped>
 .key-value {
+<<<<<<< HEAD
   padding: 0 var(--space-small) var(--space-small) 0;
   font-family: monospace;
 }
@@ -321,4 +409,9 @@ export default {
     border-radius: var(--border-radius-normal);
   }
 }
+=======
+  padding: 0 0.5rem 0.5rem 0;
+  font-family: monospace;
+}
+>>>>>>> upstream/develop
 </style>

@@ -61,7 +61,13 @@ const onCopy = async e => {
 
 <template>
   <div class="relative text-left">
+<<<<<<< HEAD
     <div class="top-1.5 absolute right-1.5 flex items-center gap-1">
+=======
+    <div
+      class="top-1.5 absolute ltr:right-1.5 rtl:left-1.5 flex backdrop-blur-sm rounded-lg items-center gap-1"
+    >
+>>>>>>> upstream/develop
       <form
         v-if="enableCodePen"
         class="flex items-center"
@@ -86,6 +92,15 @@ const onCopy = async e => {
         @click="onCopy"
       />
     </div>
+<<<<<<< HEAD
     <highlightjs v-if="script" :language="lang" :code="scrubbedScript" />
+=======
+    <highlightjs
+      v-if="script"
+      :language="lang"
+      :code="scrubbedScript"
+      class="[&_code]:text-start"
+    />
+>>>>>>> upstream/develop
   </div>
 </template>

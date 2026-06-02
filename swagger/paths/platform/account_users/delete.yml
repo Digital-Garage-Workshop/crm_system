@@ -5,6 +5,7 @@ summary: Delete an Account User
 description: Delete an Account User
 security:
   - platformAppApiKey: []
+<<<<<<< HEAD
 parameters:
   - name: data
     in: body
@@ -25,3 +26,20 @@ responses:
     description: Unauthorized
   404:
     description: The account does not exist
+=======
+responses:
+  '200':
+    description: Success
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '404':
+    description: The account does not exist
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

@@ -34,7 +34,11 @@ class Channel::Sms < ApplicationRecord
   end
 
   def send_message(contact_number, message)
+<<<<<<< HEAD
     body = message_body(contact_number, message.content)
+=======
+    body = message_body(contact_number, message.outgoing_content)
+>>>>>>> upstream/develop
     body['media'] = message.attachments.map(&:download_url) if message.attachments.present?
 
     send_to_bandwidth(body, message)

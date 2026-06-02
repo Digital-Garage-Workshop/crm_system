@@ -10,7 +10,12 @@ import { messageTimestamp } from 'shared/helpers/timeHelper';
 import { downloadFile } from '@chatwoot/utils';
 
 import NextButton from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
+=======
+import Avatar from 'next/avatar/Avatar.vue';
+import TeleportWithDirection from 'dashboard/components-next/TeleportWithDirection.vue';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   attachment: {
@@ -21,6 +26,13 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  autoPlay: {
+    type: Boolean,
+    default: false,
+  },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits(['close']);
@@ -166,7 +178,11 @@ onMounted(() => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <Teleport to="body">
+=======
+  <TeleportWithDirection to="body">
+>>>>>>> upstream/develop
     <woot-modal
       v-model:show="show"
       full-width
@@ -185,10 +201,19 @@ onMounted(() => {
             v-if="senderDetails"
             class="flex items-center min-w-[15rem] shrink-0"
           >
+<<<<<<< HEAD
             <Thumbnail
               v-if="senderDetails.avatar"
               :username="senderDetails.name"
               :src="senderDetails.avatar"
+=======
+            <Avatar
+              v-if="senderDetails.avatar"
+              :name="senderDetails.name"
+              :src="senderDetails.avatar"
+              :size="40"
+              rounded-full
+>>>>>>> upstream/develop
               class="flex-shrink-0"
             />
             <div class="flex flex-col ml-2 rtl:ml-0 rtl:mr-2 overflow-hidden">
@@ -258,7 +283,11 @@ onMounted(() => {
           <div class="flex items-center justify-center w-16 shrink-0">
             <NextButton
               v-if="hasMoreThanOneAttachment"
+<<<<<<< HEAD
               icon="i-lucide-chevron-left"
+=======
+              icon="ltr:i-lucide-chevron-left rtl:i-lucide-chevron-right"
+>>>>>>> upstream/develop
               class="z-10"
               blue
               faded
@@ -306,6 +335,10 @@ onMounted(() => {
               :src="activeAttachment.data_url"
               controls
               playsInline
+<<<<<<< HEAD
+=======
+              :autoplay="autoPlay"
+>>>>>>> upstream/develop
               class="max-h-full max-w-full object-contain"
               @click.stop
             />
@@ -314,6 +347,10 @@ onMounted(() => {
               v-if="isAudio"
               :key="activeAttachment.message_id"
               controls
+<<<<<<< HEAD
+=======
+              :autoplay="autoPlay"
+>>>>>>> upstream/develop
               class="w-full max-w-md"
               @click.stop
             >
@@ -324,7 +361,11 @@ onMounted(() => {
           <div class="flex items-center justify-center w-16 shrink-0">
             <NextButton
               v-if="hasMoreThanOneAttachment"
+<<<<<<< HEAD
               icon="i-lucide-chevron-right"
+=======
+              icon="ltr:i-lucide-chevron-right rtl:i-lucide-chevron-left"
+>>>>>>> upstream/develop
               class="z-10"
               blue
               faded
@@ -351,5 +392,9 @@ onMounted(() => {
         </footer>
       </div>
     </woot-modal>
+<<<<<<< HEAD
   </Teleport>
+=======
+  </TeleportWithDirection>
+>>>>>>> upstream/develop
 </template>

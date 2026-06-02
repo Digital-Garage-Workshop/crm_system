@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, onBeforeMount, onMounted, ref, nextTick } from 'vue';
 import {
   useMapGetter,
@@ -9,6 +10,13 @@ import { useRoute } from 'vue-router';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
 import BackButton from 'dashboard/components/widgets/BackButton.vue';
+=======
+import { computed, watch, ref, nextTick } from 'vue';
+import { useMapGetter, useStore } from 'dashboard/composables/store';
+import { useRoute } from 'vue-router';
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
+
+>>>>>>> upstream/develop
 import DeleteDialog from 'dashboard/components-next/captain/pageComponents/DeleteDialog.vue';
 import PageLayout from 'dashboard/components-next/captain/PageLayout.vue';
 import ConnectInboxDialog from 'dashboard/components-next/captain/pageComponents/inbox/ConnectInboxDialog.vue';
@@ -18,6 +26,11 @@ import InboxPageEmptyState from 'dashboard/components-next/captain/pageComponent
 const store = useStore();
 const dialogType = ref('');
 const route = useRoute();
+<<<<<<< HEAD
+=======
+
+const assistantId = computed(() => route.params.assistantId);
+>>>>>>> upstream/develop
 const assistantUiFlags = useMapGetter('captainAssistants/getUIFlags');
 const uiFlags = useMapGetter('captainInboxes/getUIFlags');
 const isFetchingAssistant = computed(() => assistantUiFlags.value.fetchingItem);
@@ -52,6 +65,7 @@ const handleCreateClose = () => {
   selectedInbox.value = null;
 };
 
+<<<<<<< HEAD
 const getters = useStoreGetters();
 const assistantId = Number(route.params.assistantId);
 const assistant = computed(() =>
@@ -63,16 +77,31 @@ onMounted(() =>
   store.dispatch('captainInboxes/get', {
     assistantId: assistantId,
   })
+=======
+watch(
+  assistantId,
+  newId => {
+    store.dispatch('captainInboxes/get', {
+      assistantId: newId,
+    });
+  },
+  { immediate: true }
+>>>>>>> upstream/develop
 );
 </script>
 
 <template>
   <PageLayout
+<<<<<<< HEAD
+=======
+    :header-title="$t('CAPTAIN.INBOXES.HEADER')"
+>>>>>>> upstream/develop
     :button-label="$t('CAPTAIN.INBOXES.ADD_NEW')"
     :button-policy="['administrator']"
     :is-fetching="isFetchingAssistant || isFetching"
     :is-empty="!captainInboxes.length"
     :show-pagination-footer="false"
+<<<<<<< HEAD
     :feature-flag="FEATURE_FLAGS.CAPTAIN"
     @click="handleCreate"
   >
@@ -89,6 +118,12 @@ onMounted(() =>
       </div>
     </template>
 
+=======
+    :show-know-more="false"
+    :feature-flag="FEATURE_FLAGS.CAPTAIN"
+    @click="handleCreate"
+  >
+>>>>>>> upstream/develop
     <template #emptyState>
       <InboxPageEmptyState @click="handleCreate" />
     </template>

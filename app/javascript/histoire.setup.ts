@@ -1,6 +1,11 @@
 import './design-system/histoire.scss';
 import { defineSetupVue3 } from '@histoire/plugin-vue';
+<<<<<<< HEAD
 import i18nMessages from 'dashboard/i18n';
+=======
+import dashboardI18n from 'dashboard/i18n';
+import widgetI18n from 'widget/i18n';
+>>>>>>> upstream/develop
 import { createI18n } from 'vue-i18n';
 import { vResizeObserver } from '@vueuse/components';
 import store from 'dashboard/store';
@@ -9,10 +14,37 @@ import VueDOMPurifyHTML from 'vue-dompurify-html';
 import { domPurifyConfig } from 'shared/helpers/HTMLSanitizer.js';
 import { directive as onClickaway } from 'vue3-click-away';
 
+<<<<<<< HEAD
 const i18n = createI18n({
   legacy: false, // https://github.com/intlify/vue-i18n/issues/1902
   locale: 'en',
   messages: i18nMessages,
+=======
+function mergeMessages(...sources) {
+  return sources.reduce((acc, src) => {
+    Object.keys(src).forEach(key => {
+      if (
+        acc[key] &&
+        typeof acc[key] === 'object' &&
+        typeof src[key] === 'object'
+      ) {
+        acc[key] = mergeMessages(acc[key], src[key]);
+      } else {
+        acc[key] = src[key];
+      }
+    });
+    return acc;
+  }, {});
+}
+
+const i18n = createI18n({
+  legacy: false, // https://github.com/intlify/vue-i18n/issues/1902
+  locale: 'en',
+  messages: mergeMessages(
+    structuredClone(dashboardI18n),
+    structuredClone(widgetI18n)
+  ),
+>>>>>>> upstream/develop
 });
 
 export const setupVue3 = defineSetupVue3(({ app }) => {

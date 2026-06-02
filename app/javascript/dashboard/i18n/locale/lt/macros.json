@@ -3,9 +3,18 @@
     "HEADER": "Makrokomandos",
     "DESCRIPTION": "A macro is a set of saved actions that help customer service agents easily complete tasks. The agents can define a set of actions like tagging a conversation with a label, sending an email transcript, updating a custom attribute, etc., and they can run these actions in a single click.",
     "LEARN_MORE": "Learn more about macros",
+<<<<<<< HEAD
     "HEADER_BTN_TXT": "Pridėti naują makrokomandą",
     "HEADER_BTN_TXT_SAVE": "Išsaugoti makrokomandą",
     "LOADING": "Gaunama makrokomanda",
+=======
+    "COUNT": "{n} macro | {n} macros",
+    "HEADER_BTN_TXT": "Pridėti naują makrokomandą",
+    "HEADER_BTN_TXT_SAVE": "Išsaugoti makrokomandą",
+    "LOADING": "Gaunama makrokomanda",
+    "SEARCH_PLACEHOLDER": "Search macros...",
+    "NO_RESULTS": "No macros found matching your search",
+>>>>>>> upstream/develop
     "ERROR": "Kažkas nepavyko. Bandykite dar kartą",
     "ORDER_INFO": "Makrokomandos bus paleistos ta tvarka, kuria pridėsite veiksmus. Galite juos pertvarkyti vilkdami už rankenos šalia kiekvieno mazgo.",
     "ADD": {
@@ -29,7 +38,12 @@
         "NAME": "Vardas",
         "CREATED BY": "Sukurtas",
         "LAST_UPDATED_BY": "Paskutinį kartą atnaujino",
+<<<<<<< HEAD
         "VISIBILITY": "Matomumas"
+=======
+        "VISIBILITY": "Matomumas",
+        "ACTIONS": "Veiksmai"
+>>>>>>> upstream/develop
       },
       "404": "Nerasta makrokomandų"
     },
@@ -45,6 +59,12 @@
         "ERROR_MESSAGE": "Ištrinant makrokomandą įvyko klaida. Pabandykite dar kartą vėliau"
       }
     },
+<<<<<<< HEAD
+=======
+    "VIEW": {
+      "TOOLTIP": "View macro"
+    },
+>>>>>>> upstream/develop
     "EDIT": {
       "TOOLTIP": "Redaguoti makrokomandą",
       "API": {
@@ -62,7 +82,13 @@
         "LABEL": "Makrokomandos matomumas",
         "GLOBAL": {
           "LABEL": "Viešas",
+<<<<<<< HEAD
           "DESCRIPTION": "Ši makrokomanda yra viešai prieinama visiems šios paskyros agentams."
+=======
+          "DESCRIPTION": "Ši makrokomanda yra viešai prieinama visiems šios paskyros agentams.",
+          "CREATE_DISABLED_DESCRIPTION": "Only administrators can create public macros.",
+          "EDIT_DISABLED_DESCRIPTION": "Only administrators can edit public macros."
+>>>>>>> upstream/develop
         },
         "PERSONAL": {
           "LABEL": "Privatus",
@@ -89,6 +115,10 @@
       "ASSIGN_AGENT": "Assign an Agent",
       "ADD_LABEL": "Add a Label",
       "REMOVE_LABEL": "Remove a Label",
+<<<<<<< HEAD
+=======
+      "REMOVE_ASSIGNED_AGENT": "Remove Assigned Agent",
+>>>>>>> upstream/develop
       "REMOVE_ASSIGNED_TEAM": "Remove Assigned Team",
       "SEND_EMAIL_TRANSCRIPT": "Send an Email Transcript",
       "MUTE_CONVERSATION": "Tildyti pokalbį",
@@ -99,6 +129,16 @@
       "CHANGE_PRIORITY": "Pakeisti Prioritetą",
       "ADD_PRIVATE_NOTE": "Add a Private Note",
       "SEND_WEBHOOK_EVENT": "Send Webhook Event"
+<<<<<<< HEAD
+=======
+    },
+    "PRIORITY_TYPES": {
+      "NONE": "Nėra",
+      "LOW": "Žemas",
+      "MEDIUM": "Vidutinis",
+      "HIGH": "Aukštas",
+      "URGENT": "Skubus"
+>>>>>>> upstream/develop
     }
   }
 }

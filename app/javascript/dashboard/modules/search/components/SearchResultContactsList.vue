@@ -34,15 +34,27 @@ const accountId = useMapGetter('getCurrentAccountId');
     :show-title="showTitle"
     :is-fetching="isFetching"
   >
+<<<<<<< HEAD
     <ul v-if="contacts.length" class="space-y-1.5 list-none">
+=======
+    <ul v-if="contacts.length" class="space-y-3 list-none">
+>>>>>>> upstream/develop
       <li v-for="contact in contacts" :key="contact.id">
         <SearchResultContactItem
           :id="contact.id"
           :name="contact.name"
           :email="contact.email"
+<<<<<<< HEAD
           :phone="contact.phone_number"
           :account-id="accountId"
           :thumbnail="contact.thumbnail"
+=======
+          :phone="contact.phoneNumber"
+          :additional-attributes="contact.additionalAttributes"
+          :account-id="accountId"
+          :thumbnail="contact.thumbnail"
+          :updated-at="contact.lastActivityAt"
+>>>>>>> upstream/develop
         />
       </li>
     </ul>

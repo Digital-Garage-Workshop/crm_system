@@ -5,6 +5,12 @@
     "LOADING": "Notiek komandu iegūšana",
     "DESCRIPTION": "Komandas ļauj organizēt aģentus grupās, pamatojoties uz viņu pienākumiem. Aģents var piederēt vairākām komandām. Kad strādājat sadarbojoties, varat piešķirt sarunas noteiktām komandām.",
     "LEARN_MORE": "Uzzināt vairāk par komandām",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} team | {n} teams",
+    "SEARCH_PLACEHOLDER": "Meklēt komandas...",
+    "NO_RESULTS": "No teams found matching your search",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Šajā kontā nav izveidota neviena komanda.",
       "EDIT_TEAM": "Rediģēt komandu",
@@ -64,8 +70,13 @@
       "ERROR_MESSAGE": "Nevarēja saglabāt komandas informāciju. Lūdzu, mēģiniet vēlreiz."
     },
     "AGENTS": {
+<<<<<<< HEAD
       "AGENT": "AĢENTS",
       "EMAIL": "Epasts",
+=======
+      "AGENT": "Aģents",
+      "EMAIL": "E-pasts",
+>>>>>>> upstream/develop
       "BUTTON_TEXT": "Pievienot aģentus",
       "ADD_AGENTS": "Notiek aģentu pievienošana Jūsu komandai...",
       "SELECT": "izvēlēties",

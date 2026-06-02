@@ -3,6 +3,12 @@
     "FETCHING": "Mengambil Integrasi",
     "NO_HOOK_CONFIGURED": "Tidak ada integrasi {integrationId} yang dikonfigurasi di akun ini.",
     "HEADER": "Aplikasi",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Diaktifkan",
       "DISABLED": "Nonaktif"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Mengambil hook integrasi",
       "INBOX": "Kotak masuk",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Aksi",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Hapus"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Pilih Kotak Masuk"
         },
         "SUBMIT": "Buat",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Batalkan"
       },
       "API": {

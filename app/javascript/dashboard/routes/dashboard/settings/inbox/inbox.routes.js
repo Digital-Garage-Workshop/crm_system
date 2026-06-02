@@ -3,7 +3,11 @@ import { frontendURL } from '../../../../helper/URLHelper';
 import ChannelFactory from './ChannelFactory.vue';
 
 import SettingsContent from '../Wrapper.vue';
+<<<<<<< HEAD
 import SettingWrapper from '../SettingsWrapper.vue';
+=======
+import SettingsWrapper from '../SettingsWrapper.vue';
+>>>>>>> upstream/develop
 import InboxHome from './Index.vue';
 import Settings from './Settings.vue';
 import InboxChannel from './InboxChannels.vue';
@@ -15,7 +19,11 @@ export default {
   routes: [
     {
       path: frontendURL('accounts/:accountId/settings/inboxes'),
+<<<<<<< HEAD
       component: SettingWrapper,
+=======
+      component: SettingsWrapper,
+>>>>>>> upstream/develop
       children: [
         {
           path: '',
@@ -42,9 +50,13 @@ export default {
         const fullWidth = params.name === 'settings_inbox_show';
         return {
           headerTitle: 'INBOX_MGMT.HEADER',
+<<<<<<< HEAD
           headerButtonText: 'SETTINGS.INBOXES.NEW_INBOX',
           icon: 'mail-inbox-all',
           newButtonRoutes: ['settings_inbox_list'],
+=======
+          icon: 'mail-inbox-all',
+>>>>>>> upstream/develop
           showBackButton,
           fullWidth,
         };
@@ -96,7 +108,11 @@ export default {
           ],
         },
         {
+<<<<<<< HEAD
           path: ':inboxId',
+=======
+          path: ':inboxId/:tab?',
+>>>>>>> upstream/develop
           name: 'settings_inbox_show',
           component: Settings,
           meta: {

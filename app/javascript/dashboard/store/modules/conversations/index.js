@@ -6,6 +6,10 @@ import { MESSAGE_STATUS } from 'shared/constants/messages';
 import wootConstants from 'dashboard/constants/globals';
 import { BUS_EVENTS } from '../../../../shared/constants/busEvents';
 import { emitter } from 'shared/helpers/mitt';
+<<<<<<< HEAD
+=======
+import { CONTENT_TYPES } from 'dashboard/components-next/message/constants.js';
+>>>>>>> upstream/develop
 
 const state = {
   allConversations: [],
@@ -24,6 +28,13 @@ const state = {
   copilotAssistant: {},
 };
 
+<<<<<<< HEAD
+=======
+const getConversationById = _state => conversationId => {
+  return _state.allConversations.find(c => c.id === conversationId);
+};
+
+>>>>>>> upstream/develop
 // mutations
 export const mutations = {
   [types.SET_ALL_CONVERSATION](_state, conversationList) {
@@ -58,6 +69,7 @@ export const mutations = {
     _state.allConversations = [];
     _state.selectedChatId = null;
   },
+<<<<<<< HEAD
   [types.SET_ALL_MESSAGES_LOADED](_state) {
     const [chat] = getSelectedChatConversation(_state);
     chat.allMessagesLoaded = true;
@@ -66,6 +78,20 @@ export const mutations = {
   [types.CLEAR_ALL_MESSAGES_LOADED](_state) {
     const [chat] = getSelectedChatConversation(_state);
     chat.allMessagesLoaded = false;
+=======
+  [types.SET_ALL_MESSAGES_LOADED](_state, conversationId) {
+    const chat = getConversationById(_state)(conversationId);
+    if (chat) {
+      chat.allMessagesLoaded = true;
+    }
+  },
+
+  [types.CLEAR_ALL_MESSAGES_LOADED](_state, conversationId) {
+    const chat = getConversationById(_state)(conversationId);
+    if (chat) {
+      chat.allMessagesLoaded = false;
+    }
+>>>>>>> upstream/develop
   },
   [types.CLEAR_CURRENT_CHAT_WINDOW](_state) {
     _state.selectedChatId = null;
@@ -78,10 +104,14 @@ export const mutations = {
     }
   },
   [types.SET_ALL_ATTACHMENTS](_state, { id, data }) {
+<<<<<<< HEAD
     const attachments = _state.attachments[id] || [];
 
     attachments.push(...data);
     _state.attachments[id] = [...attachments];
+=======
+    _state.attachments[id] = [...data];
+>>>>>>> upstream/develop
   },
   [types.SET_MISSING_MESSAGES](_state, { id, data }) {
     const [chat] = _state.allConversations.filter(c => c.id === id);
@@ -89,15 +119,33 @@ export const mutations = {
     chat.messages = data;
   },
 
+<<<<<<< HEAD
+=======
+  [types.SET_CHAT_DATA_FETCHED](_state, conversationId) {
+    const chat = getConversationById(_state)(conversationId);
+    if (chat) {
+      chat.dataFetched = true;
+    }
+  },
+
+>>>>>>> upstream/develop
   [types.SET_CURRENT_CHAT_WINDOW](_state, activeChat) {
     if (activeChat) {
       _state.selectedChatId = activeChat.id;
     }
   },
 
+<<<<<<< HEAD
   [types.ASSIGN_AGENT](_state, assignee) {
     const [chat] = getSelectedChatConversation(_state);
     chat.meta.assignee = assignee;
+=======
+  [types.ASSIGN_AGENT](_state, { conversationId, assignee }) {
+    const chat = getConversationById(_state)(conversationId);
+    if (chat) {
+      chat.meta.assignee = assignee;
+    }
+>>>>>>> upstream/develop
   },
 
   [types.ASSIGN_TEAM](_state, { team, conversationId }) {
@@ -119,9 +167,25 @@ export const mutations = {
     chat.priority = priority;
   },
 
+<<<<<<< HEAD
   [types.UPDATE_CONVERSATION_CUSTOM_ATTRIBUTES](_state, custom_attributes) {
     const [chat] = getSelectedChatConversation(_state);
     chat.custom_attributes = custom_attributes;
+=======
+  [types.UPDATE_CONVERSATION_CUSTOM_ATTRIBUTES](
+    _state,
+    { conversationId, customAttributes }
+  ) {
+    const conversation = _state.allConversations.find(
+      c => c.id === conversationId
+    );
+    if (conversation) {
+      conversation.custom_attributes = {
+        ...conversation.custom_attributes,
+        ...customAttributes,
+      };
+    }
+>>>>>>> upstream/develop
   },
 
   [types.CHANGE_CONVERSATION_STATUS](
@@ -197,14 +261,30 @@ export const mutations = {
       const { conversation: { unread_count: unreadCount = 0 } = {} } = message;
       chat.unread_count = unreadCount;
       if (selectedChatId === conversationId) {
+<<<<<<< HEAD
         emitter.emit(BUS_EVENTS.FETCH_LABEL_SUGGESTIONS);
+=======
+>>>>>>> upstream/develop
         emitter.emit(BUS_EVENTS.SCROLL_TO_MESSAGE);
       }
     }
   },
 
   [types.ADD_CONVERSATION](_state, conversation) {
+<<<<<<< HEAD
     _state.allConversations.push(conversation);
+=======
+    const exists = _state.allConversations.some(c => c.id === conversation.id);
+    if (!exists) {
+      _state.allConversations.push(conversation);
+    }
+  },
+
+  [types.DELETE_CONVERSATION](_state, conversationId) {
+    _state.allConversations = _state.allConversations.filter(
+      c => c.id !== conversationId
+    );
+>>>>>>> upstream/develop
   },
 
   [types.UPDATE_CONVERSATION](_state, conversation) {
@@ -222,11 +302,22 @@ export const mutations = {
       const { messages, ...updates } = conversation;
       allConversations[index] = { ...selectedConversation, ...updates };
       if (_state.selectedChatId === conversation.id) {
+<<<<<<< HEAD
         emitter.emit(BUS_EVENTS.FETCH_LABEL_SUGGESTIONS);
         emitter.emit(BUS_EVENTS.SCROLL_TO_MESSAGE);
       }
     } else {
       _state.allConversations.push(conversation);
+=======
+        emitter.emit(BUS_EVENTS.SCROLL_TO_MESSAGE);
+      }
+    } else {
+      const { conversationType } = _state.conversationFilters || {};
+      const { MENTION, PARTICIPATING } = wootConstants.CONVERSATION_TYPE;
+      if (![MENTION, PARTICIPATING].includes(conversationType)) {
+        _state.allConversations.push(conversation);
+      }
+>>>>>>> upstream/develop
     }
   },
 
@@ -258,8 +349,15 @@ export const mutations = {
 
   // Update assignee on action cable message
   [types.UPDATE_ASSIGNEE](_state, payload) {
+<<<<<<< HEAD
     const [chat] = _state.allConversations.filter(c => c.id === payload.id);
     chat.meta.assignee = payload.assignee;
+=======
+    const chat = getConversationById(_state)(payload.id);
+    if (chat) {
+      chat.meta.assignee = payload.assignee;
+    }
+>>>>>>> upstream/develop
   },
 
   [types.UPDATE_CONVERSATION_CONTACT](_state, { conversationId, ...payload }) {
@@ -269,6 +367,26 @@ export const mutations = {
     }
   },
 
+<<<<<<< HEAD
+=======
+  [types.UPDATE_MESSAGE_CALL_STATUS](
+    _state,
+    { conversationId, callStatus, callSid }
+  ) {
+    const chat = getConversationById(_state)(conversationId);
+    if (!chat) return;
+
+    const message = (chat.messages || []).find(
+      m =>
+        m.content_type === CONTENT_TYPES.VOICE_CALL &&
+        m.call?.provider_call_id === callSid
+    );
+    if (!message?.call) return;
+
+    message.call = { ...message.call, status: callStatus };
+  },
+
+>>>>>>> upstream/develop
   [types.SET_ACTIVE_INBOX](_state, inboxId) {
     _state.currentInbox = inboxId ? parseInt(inboxId, 10) : null;
   },

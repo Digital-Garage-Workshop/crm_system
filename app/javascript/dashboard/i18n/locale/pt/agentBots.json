@@ -2,6 +2,7 @@
   "AGENT_BOTS": {
     "HEADER": "Bots",
     "LOADING_EDITOR": "A carregar editor...",
+<<<<<<< HEAD
     "DESCRIPTION": "Agent Bots are like the most fabulous members of your team. They can handle the small stuff, so you can focus on the stuff that matters. Give them a try. You can manage your bots from this page or create new ones using the 'Add Bot' button.",
     "LEARN_MORE": "Learn about agent bots",
     "GLOBAL_BOT": "System bot",
@@ -9,6 +10,18 @@
     "AVATAR": {
       "SUCCESS_DELETE": "Bot avatar deleted successfully",
       "ERROR_DELETE": "Error deleting bot avatar, please try again"
+=======
+    "DESCRIPTION": "Os Agentes Bots são como os membros mais fabulosos da sua equipa. Tratam das pequenas coisas, para que se possa concentrar no que realmente importa. Experimente. Pode gerir os seus bots nesta página ou criar novos, utilizando o botão \"Adicionar Bot\".",
+    "LEARN_MORE": "Learn about agent bots",
+    "COUNT": "{n} bot | {n} bots",
+    "SEARCH_PLACEHOLDER": "Search bots...",
+    "NO_RESULTS": "No bots found matching your search",
+    "GLOBAL_BOT": "Bot do sistema",
+    "GLOBAL_BOT_BADGE": "Sistema",
+    "AVATAR": {
+      "SUCCESS_DELETE": "Avatar do bot apagado",
+      "ERROR_DELETE": "Erro ao apagar avatar do bot, por favor tente novamente"
+>>>>>>> upstream/develop
     },
     "BOT_CONFIGURATION": {
       "TITLE": "Selecione um agente bot",
@@ -22,7 +35,11 @@
       "SELECT_PLACEHOLDER": "Selecionar bot"
     },
     "ADD": {
+<<<<<<< HEAD
       "TITLE": "Add Bot",
+=======
+      "TITLE": "Adicionar Bot",
+>>>>>>> upstream/develop
       "CANCEL_BUTTON_TEXT": "Cancelar",
       "API": {
         "SUCCESS_MESSAGE": "Bot adicionado com sucesso.",
@@ -30,11 +47,20 @@
       }
     },
     "LIST": {
+<<<<<<< HEAD
       "404": "No bots found. You can create a bot by clicking the 'Add Bot' button.",
       "LOADING": "A carregar bots...",
       "TABLE_HEADER": {
         "DETAILS": "Bot Details",
         "URL": "URL do Webhook"
+=======
+      "404": "Nenhum bot encontrado. Pode criar um bot clicando no botão \"Adicionar Bot\".",
+      "LOADING": "A carregar bots...",
+      "TABLE_HEADER": {
+        "DETAILS": "Detalhes do bot",
+        "URL": "URL do Webhook",
+        "ACTIONS": "Ações"
+>>>>>>> upstream/develop
       }
     },
     "DELETE": {
@@ -42,7 +68,11 @@
       "TITLE": "Apagar bot",
       "CONFIRM": {
         "TITLE": "Confirmar exclusão",
+<<<<<<< HEAD
         "MESSAGE": "Are you sure you want to delete {name}?",
+=======
+        "MESSAGE": "Tem a certeza que pretende apagar o {name}?",
+>>>>>>> upstream/develop
         "YES": "Sim, excluir",
         "NO": "Não, manter"
       },
@@ -59,13 +89,37 @@
         "ERROR_MESSAGE": "Não foi possível atualizar o bot. Por favor, tente novamente."
       }
     },
+<<<<<<< HEAD
+=======
+    "SECRET": {
+      "LABEL": "Webhook Secret",
+      "COPY": "Copy secret to clipboard",
+      "COPY_SUCCESS": "Secret copied to clipboard",
+      "TOGGLE": "Toggle secret visibility",
+      "CREATED_DESC": "Use the secret below to verify webhook signatures. Please copy it now, you can also find it later in the bot settings.",
+      "DONE": "Done",
+      "RESET_SUCCESS": "Webhook secret regenerated successfully",
+      "RESET_ERROR": "Unable to regenerate webhook secret. Please try again"
+    },
+    "ACCESS_TOKEN": {
+      "TITLE": "Token de acesso",
+      "DESCRIPTION": "Copie o token de acesso e guarde-o de forma segura",
+      "COPY_SUCCESSFUL": "Token de acesso copiado para área de transferência",
+      "RESET_SUCCESS": "O token de acesso voltou a ser gerado",
+      "RESET_ERROR": "Não foi possível voltar a gerar o token de acesso, por favor tente novamente"
+    },
+>>>>>>> upstream/develop
     "FORM": {
       "AVATAR": {
         "LABEL": "Bot avatar"
       },
       "NAME": {
         "LABEL": "Nome do bot",
+<<<<<<< HEAD
         "PLACEHOLDER": "Enter bot name",
+=======
+        "PLACEHOLDER": "Insira o nome do bot",
+>>>>>>> upstream/develop
         "REQUIRED": "O nome do bot é obrigatório"
       },
       "DESCRIPTION": {
@@ -74,6 +128,7 @@
       },
       "WEBHOOK_URL": {
         "LABEL": "URL do Webhook",
+<<<<<<< HEAD
         "PLACEHOLDER": "https://example.com/webhook",
         "REQUIRED": "Webhook URL is required"
       },
@@ -88,6 +143,22 @@
     },
     "WEBHOOK": {
       "DESCRIPTION": "Configure a webhook bot to integrate with your custom services. The bot will receive and process events from conversations and can respond to them."
+=======
+        "PLACEHOLDER": "https://exemplo.com/webhook",
+        "REQUIRED": "O URL do Webhook é obrigatório"
+      },
+      "ERRORS": {
+        "NAME": "O nome do bot é obrigatório",
+        "URL": "O URL do Webhook é obrigatório",
+        "VALID_URL": "Por favor, insira um URL válido que comece por http:// ou https://"
+      },
+      "CANCEL": "Cancelar",
+      "CREATE": "Criar Bot",
+      "UPDATE": "Atualizar Bot"
+    },
+    "WEBHOOK": {
+      "DESCRIPTION": "Configure um webhook para o bot integrar com os seus serviços personalizados. O bot receberá e processará eventos de conversas e pode respondê-los."
+>>>>>>> upstream/develop
     },
     "TYPES": {
       "WEBHOOK": "Webhook bot"

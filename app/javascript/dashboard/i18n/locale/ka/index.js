@@ -8,6 +8,10 @@ import bulkActions from './bulkActions.json';
 import campaign from './campaign.json';
 import cannedMgmt from './cannedMgmt.json';
 import chatlist from './chatlist.json';
+<<<<<<< HEAD
+=======
+import companies from './companies.json';
+>>>>>>> upstream/develop
 import components from './components.json';
 import contact from './contact.json';
 import contactFilters from './contactFilters.json';
@@ -26,6 +30,11 @@ import integrations from './integrations.json';
 import labelsMgmt from './labelsMgmt.json';
 import login from './login.json';
 import macros from './macros.json';
+<<<<<<< HEAD
+=======
+import mfa from './mfa.json';
+import onboarding from './onboarding.json';
+>>>>>>> upstream/develop
 import report from './report.json';
 import resetPassword from './resetPassword.json';
 import search from './search.json';
@@ -47,6 +56,10 @@ export default {
   ...campaign,
   ...cannedMgmt,
   ...chatlist,
+<<<<<<< HEAD
+=======
+  ...companies,
+>>>>>>> upstream/develop
   ...components,
   ...contact,
   ...contactFilters,
@@ -65,6 +78,11 @@ export default {
   ...labelsMgmt,
   ...login,
   ...macros,
+<<<<<<< HEAD
+=======
+  ...mfa,
+  ...onboarding,
+>>>>>>> upstream/develop
   ...report,
   ...resetPassword,
   ...search,

@@ -1,5 +1,6 @@
 {
   "DATE_PICKER": {
+<<<<<<< HEAD
     "APPLY_BUTTON": "套用",
     "CLEAR_BUTTON": "Clear",
     "DATE_RANGE_INPUT": {
@@ -14,6 +15,27 @@
       "LAST_6_MONTHS": "六個月內",
       "LAST_YEAR": "去年",
       "CUSTOM_RANGE": "自定日期範圍"
+=======
+    "PREVIOUS_PERIOD": "上一個期間",
+    "NEXT_PERIOD": "下一個期間",
+    "WEEK_NUMBER": "第 {weekNumber} 週",
+    "APPLY_BUTTON": "套用",
+    "CLEAR_BUTTON": "清除",
+    "DATE_RANGE_INPUT": {
+      "START": "開始日期",
+      "END": "結束日期"
+    },
+    "DATE_RANGE_OPTIONS": {
+      "TITLE": "日期範圍",
+      "LAST_7_DAYS": "最近 7 天",
+      "LAST_30_DAYS": "最近 30 天",
+      "LAST_3_MONTHS": "最近 3 個月",
+      "LAST_6_MONTHS": "最近 6 個月",
+      "LAST_YEAR": "最近一年",
+      "THIS_WEEK": "本週",
+      "MONTH_TO_DATE": "本月",
+      "CUSTOM_RANGE": "自訂日期範圍"
+>>>>>>> upstream/develop
     }
   }
 }

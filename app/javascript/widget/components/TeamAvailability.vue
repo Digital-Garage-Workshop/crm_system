@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
 import { mapGetters } from 'vuex';
 import { getContrastingTextColor } from '@chatwoot/utils';
@@ -62,6 +63,32 @@ export default {
       }
     },
   },
+=======
+<script setup>
+import { IFrameHelper } from 'widget/helpers/utils';
+import { CHATWOOT_ON_START_CONVERSATION } from '../constants/sdkEvents';
+import AvailabilityContainer from 'widget/components/Availability/AvailabilityContainer.vue';
+import { useMapGetter } from 'dashboard/composables/store.js';
+
+const props = defineProps({
+  availableAgents: { type: Array, default: () => [] },
+  hasConversation: { type: Boolean, default: false },
+});
+
+const emit = defineEmits(['startConversation']);
+
+const widgetColor = useMapGetter('appConfig/getWidgetColor');
+
+const startConversation = () => {
+  emit('startConversation');
+  if (!props.hasConversation) {
+    IFrameHelper.sendMessage({
+      event: 'onEvent',
+      eventIdentifier: CHATWOOT_ON_START_CONVERSATION,
+      data: { hasConversation: false },
+    });
+  }
+>>>>>>> upstream/develop
 };
 </script>
 
@@ -69,6 +96,7 @@ export default {
   <div
     class="flex flex-col gap-3 w-full shadow outline-1 outline outline-n-container rounded-xl bg-n-background dark:bg-n-solid-2 px-5 py-4"
   >
+<<<<<<< HEAD
     <div class="flex items-center justify-between gap-2">
       <div class="flex flex-col gap-1">
         <div class="font-medium text-n-slate-12">
@@ -84,6 +112,10 @@ export default {
       </div>
       <GroupedAvatars v-if="isOnline" :users="availableAgents" />
     </div>
+=======
+    <AvailabilityContainer :agents="availableAgents" show-header show-avatars />
+
+>>>>>>> upstream/develop
     <button
       class="inline-flex items-center gap-1 font-medium text-n-slate-12"
       :style="{ color: widgetColor }"

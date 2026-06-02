@@ -67,7 +67,11 @@ describe AutomationRuleListener do
   describe '#conversation_updated with contacts attributes' do
     before do
       conversation.contact.update!(custom_attributes: { customer_type: 'platinum', signed_in_at: '2022-01-19' },
+<<<<<<< HEAD
                                    additional_attributes: { 'company': 'Marvel' })
+=======
+                                   additional_attributes: { 'company_name' => 'Marvel' })
+>>>>>>> upstream/develop
 
       automation_rule.update!(
         event_name: 'conversation_updated',
@@ -75,7 +79,11 @@ describe AutomationRuleListener do
         description: 'Add labels, assign team after conversation updated',
         conditions: [
           {
+<<<<<<< HEAD
             attribute_key: 'company',
+=======
+            attribute_key: 'company_name',
+>>>>>>> upstream/develop
             filter_operator: 'equal_to',
             values: ['Marvel'],
             query_operator: 'AND'
@@ -314,11 +322,19 @@ describe AutomationRuleListener do
       before do
         automation_rule.update!(
           event_name: 'conversation_updated',
+<<<<<<< HEAD
           name: 'Call actions conversation updated when company changed from DC to Marvel',
           description: 'Add labels, assign team after conversation updated',
           conditions: [
             {
               attribute_key: 'company',
+=======
+          name: 'Call actions conversation updated when company name changed from DC to Marvel',
+          description: 'Add labels, assign team after conversation updated',
+          conditions: [
+            {
+              attribute_key: 'company_name',
+>>>>>>> upstream/develop
               filter_operator: 'attribute_changed',
               values: { from: ['DC'], to: ['Marvel'] },
               query_operator: 'AND'
@@ -336,7 +352,11 @@ describe AutomationRuleListener do
 
       let!(:event) do
         Events::Base.new('conversation_updated', Time.zone.now, { conversation: conversation, changed_attributes: {
+<<<<<<< HEAD
                            company: %w[DC Marvel]
+=======
+                           company_name: %w[DC Marvel]
+>>>>>>> upstream/develop
                          } })
       end
 
@@ -355,7 +375,11 @@ describe AutomationRuleListener do
           automation_rule.update!(
             conditions: [
               {
+<<<<<<< HEAD
                 attribute_key: 'company',
+=======
+                attribute_key: 'company_name',
+>>>>>>> upstream/develop
                 filter_operator: 'attribute_changed',
                 values: { from: ['DC'], to: ['Marvel'] },
                 query_operator: 'OR'
@@ -393,7 +417,11 @@ describe AutomationRuleListener do
         it 'when automation rule is triggers, it will not assign team on attribute_changed values' do
           conversation.update(status: :snoozed)
           event = Events::Base.new('conversation_updated', Time.zone.now, { conversation: conversation,
+<<<<<<< HEAD
                                                                             changed_attributes: { company: %w[Marvel DC] } })
+=======
+                                                                            changed_attributes: { company_name: %w[Marvel DC] } })
+>>>>>>> upstream/develop
 
           expect(conversation.team_id).not_to eq(team.id)
 
@@ -517,7 +545,11 @@ describe AutomationRuleListener do
           { attribute_key: 'team_id', filter_operator: 'equal_to', values: [team.id], query_operator: 'AND' }.with_indifferent_access,
           { attribute_key: 'message_type', filter_operator: 'equal_to', values: ['incoming'], query_operator: 'AND' }.with_indifferent_access,
           { attribute_key: 'email', filter_operator: 'contains', values: ['example.com'], query_operator: 'AND' }.with_indifferent_access,
+<<<<<<< HEAD
           { attribute_key: 'company', filter_operator: 'equal_to', values: ['Marvel'], query_operator: nil }.with_indifferent_access
+=======
+          { attribute_key: 'company_name', filter_operator: 'equal_to', values: ['Marvel'], query_operator: nil }.with_indifferent_access
+>>>>>>> upstream/develop
         ],
         actions: [
           { 'action_name' => 'send_message', 'action_params' => ['Send this message.'] },
@@ -525,7 +557,11 @@ describe AutomationRuleListener do
         ]
       )
       conversation.update!(team_id: team.id)
+<<<<<<< HEAD
       conversation.contact.update!(email: 'tj@example.com', additional_attributes: { 'company': 'Marvel' })
+=======
+      conversation.contact.update!(email: 'tj@example.com', additional_attributes: { 'company_name' => 'Marvel' })
+>>>>>>> upstream/develop
     end
 
     let!(:message) { create(:message, account: account, conversation: conversation, message_type: 'incoming') }
@@ -572,7 +608,11 @@ describe AutomationRuleListener do
     context 'when rule does not match' do
       before do
         conversation.update!(team_id: team.id)
+<<<<<<< HEAD
         conversation.contact.update!(email: 'tj@ex.com', additional_attributes: { 'company': 'DC' })
+=======
+        conversation.contact.update!(email: 'tj@ex.com', additional_attributes: { 'company_name' => 'DC' })
+>>>>>>> upstream/develop
       end
 
       let!(:message) { create(:message, account: account, conversation: conversation, message_type: 'outgoing') }
@@ -600,7 +640,11 @@ describe AutomationRuleListener do
         conditions: [
           { attribute_key: 'team_id', filter_operator: 'equal_to', values: [team.id], query_operator: 'AND' }.with_indifferent_access,
           { attribute_key: 'email', filter_operator: 'contains', values: ['example.com'], query_operator: 'AND' }.with_indifferent_access,
+<<<<<<< HEAD
           { attribute_key: 'company', filter_operator: 'equal_to', values: ['Marvel'], query_operator: nil }.with_indifferent_access
+=======
+          { attribute_key: 'company_name', filter_operator: 'equal_to', values: ['Marvel'], query_operator: nil }.with_indifferent_access
+>>>>>>> upstream/develop
         ],
         actions: [
           { 'action_name' => 'send_message', 'action_params' => ['Send this message.'] },
@@ -608,7 +652,11 @@ describe AutomationRuleListener do
         ]
       )
       conversation.update!(team_id: team.id)
+<<<<<<< HEAD
       conversation.contact.update!(email: 'tj@example.com', additional_attributes: { 'company': 'Marvel' })
+=======
+      conversation.contact.update!(email: 'tj@example.com', additional_attributes: { 'company_name' => 'Marvel' })
+>>>>>>> upstream/develop
     end
 
     let!(:message) { create(:message, account: account, conversation: conversation, message_type: 'incoming') }
@@ -633,7 +681,11 @@ describe AutomationRuleListener do
     context 'when rule does not match' do
       before do
         conversation.update!(team_id: team.id)
+<<<<<<< HEAD
         conversation.contact.update!(email: 'tj@ex.com', additional_attributes: { 'company': 'DC' })
+=======
+        conversation.contact.update!(email: 'tj@ex.com', additional_attributes: { 'company_name' => 'DC' })
+>>>>>>> upstream/develop
       end
 
       let!(:message) { create(:message, account: account, conversation: conversation, message_type: 'outgoing') }

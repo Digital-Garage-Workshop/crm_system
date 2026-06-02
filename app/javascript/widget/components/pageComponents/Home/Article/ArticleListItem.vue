@@ -1,5 +1,8 @@
 <script setup>
+<<<<<<< HEAD
 import { defineProps, defineEmits } from 'vue';
+=======
+>>>>>>> upstream/develop
 const props = defineProps({
   link: {
     type: String,

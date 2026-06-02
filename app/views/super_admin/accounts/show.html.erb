@@ -91,6 +91,7 @@ as well as a link to its edit page.
     </div>
   </section>
 
+<<<<<<< HEAD
   <section class="main-content__body">
     <% account_user_page =
       Administrate::Page::Form.new(AccountUserDashboard.new, AccountUser.new) %>
@@ -140,6 +141,9 @@ as well as a link to its edit page.
     <% end %>
 
   </section>
+=======
+  <%= render 'super_admin/shared/account_user_form', page: page, namespace: namespace, resource_type: 'account' %>
+>>>>>>> upstream/develop
 
   <%= render partial: "seed_data", locals: { page: page } %>
 

@@ -68,7 +68,11 @@ export default {
         :on-mark-all-done-click="onMarkAllDoneClick"
       />
       <TableFooter
+<<<<<<< HEAD
         class="border-t border-slate-75 dark:border-slate-700/50"
+=======
+        class="border-t border-n-weak"
+>>>>>>> upstream/develop
         :current-page="Number(meta.currentPage)"
         :total-count="meta.count"
         :page-size="15"
@@ -77,6 +81,7 @@ export default {
     </div>
   </div>
 </template>
+<<<<<<< HEAD
 
 <style lang="scss" scoped>
 .notification--page {
@@ -91,3 +96,5 @@ export default {
   height: 100%;
 }
 </style>
+=======
+>>>>>>> upstream/develop

@@ -3,6 +3,7 @@ tags:
 operationId: update-an-integrations-hook
 summary: Update an Integration Hook
 description: Update an Integration Hook
+<<<<<<< HEAD
 parameters:
   - $ref: '#/parameters/account_id'
   - $ref: '#/parameters/hook_id'
@@ -18,3 +19,29 @@ responses:
       $ref: '#/definitions/integrations_hook'
   401:
     description: Unauthorized
+=======
+security:
+  - userApiKey: []
+parameters:
+  - $ref: '#/components/parameters/account_id'
+  - $ref: '#/components/parameters/hook_id'
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/integrations_hook_update_payload'
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/integrations_hook'
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

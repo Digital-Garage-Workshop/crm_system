@@ -71,9 +71,12 @@ test/cypress/videos/*
 /config/master.key
 /config/*.enc
 
+<<<<<<< HEAD
 #ignore files under .vscode directory
 .vscode
 .cursor
+=======
+>>>>>>> upstream/develop
 
 # yalc for local testing
 .yalc
@@ -92,5 +95,23 @@ yarn-debug.log*
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
 
+<<<<<<< HEAD
 # Claude.ai config file
 CLAUDE.md
+=======
+
+# TextEditors & AI Agents config files
+.vscode
+.claude/settings.local.json
+.cursor
+.codex/
+.claude/
+CLAUDE.local.md
+
+# Histoire deployment
+.netlify
+.histoire
+.pnpm-store/*
+local/
+Procfile.worktree
+>>>>>>> upstream/develop

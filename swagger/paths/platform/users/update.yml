@@ -5,6 +5,7 @@ summary: Update a user
 description: Update a user's attributes
 security:
   - platformAppApiKey: []
+<<<<<<< HEAD
 parameters:
   - name: data
     in: body
@@ -18,3 +19,24 @@ responses:
       $ref: '#/definitions/user'
   401:
     description: Unauthorized
+=======
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/user_create_update_payload'
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/user'
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

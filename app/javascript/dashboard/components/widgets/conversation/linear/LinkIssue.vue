@@ -63,7 +63,11 @@ const onSearch = async value => {
     isFetching.value = true;
     const response = await LinearAPI.searchIssues(value);
     issues.value = response.data.map(issue => ({
+<<<<<<< HEAD
       id: issue.id,
+=======
+      id: issue.identifier,
+>>>>>>> upstream/develop
       name: `${issue.identifier} ${issue.title}`,
       icon: 'status',
       iconColor: issue.state.color,

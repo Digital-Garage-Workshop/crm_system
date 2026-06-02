@@ -7,8 +7,13 @@ import { useStore, useStoreGetters } from 'dashboard/composables/store';
 import { uploadFile } from 'dashboard/helper/uploadHelper';
 import { checkFileSizeLimit } from 'shared/helpers/FileHelper';
 import { useVuelidate } from '@vuelidate/core';
+<<<<<<< HEAD
 import { required, minLength, helpers } from '@vuelidate/validators';
 import { shouldBeUrl, isValidSlug } from 'shared/helpers/Validators';
+=======
+import { required, minLength, helpers, url } from '@vuelidate/validators';
+import { isValidSlug } from 'shared/helpers/Validators';
+>>>>>>> upstream/develop
 
 import Button from 'dashboard/components-next/button/Button.vue';
 import Input from 'dashboard/components-next/input/Input.vue';
@@ -51,12 +56,27 @@ const originalState = reactive({ ...state });
 
 const liveChatWidgets = computed(() => {
   const inboxes = store.getters['inboxes/getInboxes'];
+<<<<<<< HEAD
   return inboxes
+=======
+  const widgetOptions = inboxes
+>>>>>>> upstream/develop
     .filter(inbox => inbox.channel_type === 'Channel::WebWidget')
     .map(inbox => ({
       value: inbox.id,
       label: inbox.name,
     }));
+<<<<<<< HEAD
+=======
+
+  return [
+    {
+      value: '',
+      label: t('HELP_CENTER.PORTAL_SETTINGS.FORM.LIVE_CHAT_WIDGET.NONE_OPTION'),
+    },
+    ...widgetOptions,
+  ];
+>>>>>>> upstream/develop
 });
 
 const rules = {
@@ -71,7 +91,11 @@ const rules = {
       isValidSlug
     ),
   },
+<<<<<<< HEAD
   homePageLink: { shouldBeUrl },
+=======
+  homePageLink: { url },
+>>>>>>> upstream/develop
 };
 
 const v$ = useVuelidate(rules, state);
@@ -108,7 +132,11 @@ watch(
         widgetColor: newVal.color,
         homePageLink: newVal.homepage_link,
         slug: newVal.slug,
+<<<<<<< HEAD
         liveChatWidgetInboxId: newVal.inbox?.id,
+=======
+        liveChatWidgetInboxId: newVal.inbox?.id || '',
+>>>>>>> upstream/develop
       });
       if (newVal.logo) {
         const {
@@ -211,7 +239,11 @@ const handleAvatarDelete = () => {
         class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
       >
         <label
+<<<<<<< HEAD
           class="text-sm font-medium whitespace-nowrap py-2.5 text-slate-900 dark:text-slate-50"
+=======
+          class="text-sm font-medium whitespace-nowrap py-2.5 text-n-slate-12"
+>>>>>>> upstream/develop
         >
           {{ t('HELP_CENTER.PORTAL_SETTINGS.FORM.NAME.LABEL') }}
         </label>
@@ -229,7 +261,11 @@ const handleAvatarDelete = () => {
         class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
       >
         <label
+<<<<<<< HEAD
           class="text-sm font-medium whitespace-nowrap py-2.5 text-slate-900 dark:text-slate-50"
+=======
+          class="text-sm font-medium whitespace-nowrap py-2.5 text-n-slate-12"
+>>>>>>> upstream/develop
         >
           {{ t('HELP_CENTER.PORTAL_SETTINGS.FORM.HEADER_TEXT.LABEL') }}
         </label>
@@ -245,7 +281,11 @@ const handleAvatarDelete = () => {
         class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
       >
         <label
+<<<<<<< HEAD
           class="text-sm font-medium whitespace-nowrap text-slate-900 py-2.5 dark:text-slate-50"
+=======
+          class="text-sm font-medium whitespace-nowrap text-n-slate-12 py-2.5"
+>>>>>>> upstream/develop
         >
           {{ t('HELP_CENTER.PORTAL_SETTINGS.FORM.PAGE_TITLE.LABEL') }}
         </label>
@@ -261,7 +301,11 @@ const handleAvatarDelete = () => {
         class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
       >
         <label
+<<<<<<< HEAD
           class="text-sm font-medium whitespace-nowrap text-slate-900 py-2.5 dark:text-slate-50"
+=======
+          class="text-sm font-medium whitespace-nowrap text-n-slate-12 py-2.5"
+>>>>>>> upstream/develop
         >
           {{ t('HELP_CENTER.PORTAL_SETTINGS.FORM.HOME_PAGE_LINK.LABEL') }}
         </label>
@@ -281,7 +325,11 @@ const handleAvatarDelete = () => {
         class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
       >
         <label
+<<<<<<< HEAD
           class="text-sm font-medium whitespace-nowrap py-2.5 text-slate-900 dark:text-slate-50"
+=======
+          class="text-sm font-medium whitespace-nowrap py-2.5 text-n-slate-12"
+>>>>>>> upstream/develop
         >
           {{ t('HELP_CENTER.PORTAL_SETTINGS.FORM.SLUG.LABEL') }}
         </label>
@@ -299,7 +347,11 @@ const handleAvatarDelete = () => {
         class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
       >
         <label
+<<<<<<< HEAD
           class="text-sm font-medium whitespace-nowrap py-2.5 text-slate-900 dark:text-slate-50"
+=======
+          class="text-sm font-medium whitespace-nowrap py-2.5 text-n-slate-12"
+>>>>>>> upstream/develop
         >
           {{ t('HELP_CENTER.PORTAL_SETTINGS.FORM.LIVE_CHAT_WIDGET.LABEL') }}
         </label>
@@ -315,9 +367,17 @@ const handleAvatarDelete = () => {
           class="[&>div>button:not(.focused)]:!outline-n-weak"
         />
       </div>
+<<<<<<< HEAD
       <div class="flex items-start justify-between w-full gap-2">
         <label
           class="text-sm font-medium whitespace-nowrap py-2.5 text-slate-900 dark:text-slate-50"
+=======
+      <div
+        class="grid items-start justify-between w-full gap-2 grid-cols-[200px,1fr]"
+      >
+        <label
+          class="text-sm font-medium whitespace-nowrap py-2.5 text-n-slate-12"
+>>>>>>> upstream/develop
         >
           {{ t('HELP_CENTER.PORTAL_SETTINGS.FORM.BRAND_COLOR.LABEL') }}
         </label>

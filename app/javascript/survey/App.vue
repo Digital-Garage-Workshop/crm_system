@@ -10,7 +10,11 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div id="app" class="woot-survey-wrap min-h-screen">
+=======
+  <div id="app" dir="ltr" class="woot-survey-wrap min-h-screen">
+>>>>>>> upstream/develop
     <Response />
   </div>
 </template>

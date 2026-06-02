@@ -1,8 +1,15 @@
 # pre-build stage
+<<<<<<< HEAD
 FROM node:23-alpine as node
 FROM ruby:3.3.3-alpine3.19 AS pre-builder
 
 ARG NODE_VERSION="23.7.0"
+=======
+FROM node:24-alpine as node
+FROM ruby:3.4.4-alpine3.21 AS pre-builder
+
+ARG NODE_VERSION="24.13.0"
+>>>>>>> upstream/develop
 ARG PNPM_VERSION="10.2.0"
 ENV NODE_VERSION=${NODE_VERSION}
 ENV PNPM_VERSION=${PNPM_VERSION}
@@ -11,7 +18,11 @@ ENV PNPM_VERSION=${PNPM_VERSION}
 # For development docker-compose file overrides ARGS
 ARG BUNDLE_WITHOUT="development:test"
 ENV BUNDLE_WITHOUT ${BUNDLE_WITHOUT}
+<<<<<<< HEAD
 ENV BUNDLER_VERSION=2.5.11
+=======
+ENV BUNDLER_VERSION=2.5.16
+>>>>>>> upstream/develop
 
 ARG RAILS_SERVE_STATIC_FILES=true
 ENV RAILS_SERVE_STATIC_FILES ${RAILS_SERVE_STATIC_FILES}
@@ -35,7 +46,11 @@ RUN apk update && apk add --no-cache \
   curl \
   xz \
   && mkdir -p /var/app \
+<<<<<<< HEAD
   && gem install bundler
+=======
+  && gem install bundler -v "$BUNDLER_VERSION"
+>>>>>>> upstream/develop
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
@@ -90,22 +105,37 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
 RUN git rev-parse HEAD > /app/.git_sha
 
 # Remove unnecessary files
+<<<<<<< HEAD
 RUN rm -rf /gems/ruby/3.3.0/cache/*.gem \
   && find /gems/ruby/3.3.0/gems/ \( -name "*.c" -o -name "*.o" \) -delete \
+=======
+RUN rm -rf /gems/ruby/3.4.0/cache/*.gem \
+  && find /gems/ruby/3.4.0/gems/ \( -name "*.c" -o -name "*.o" \) -delete \
+>>>>>>> upstream/develop
   && rm -rf .git \
   && rm .gitignore
 
 # final build stage
+<<<<<<< HEAD
 FROM ruby:3.3.3-alpine3.19
 
 ARG NODE_VERSION="23.7.0"
+=======
+FROM ruby:3.4.4-alpine3.21
+
+ARG NODE_VERSION="24.13.0"
+>>>>>>> upstream/develop
 ARG PNPM_VERSION="10.2.0"
 ENV NODE_VERSION=${NODE_VERSION}
 ENV PNPM_VERSION=${PNPM_VERSION}
 
 ARG BUNDLE_WITHOUT="development:test"
 ENV BUNDLE_WITHOUT ${BUNDLE_WITHOUT}
+<<<<<<< HEAD
 ENV BUNDLER_VERSION=2.5.11
+=======
+ENV BUNDLER_VERSION=2.5.16
+>>>>>>> upstream/develop
 
 ARG EXECJS_RUNTIME="Disabled"
 ENV EXECJS_RUNTIME ${EXECJS_RUNTIME}
@@ -128,7 +158,11 @@ RUN apk update && apk add --no-cache \
   imagemagick \
   git \
   vips \
+<<<<<<< HEAD
   && gem install bundler
+=======
+  && gem install bundler -v "$BUNDLER_VERSION"
+>>>>>>> upstream/develop
 
 COPY --from=node /usr/local/bin/node /usr/local/bin/
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules

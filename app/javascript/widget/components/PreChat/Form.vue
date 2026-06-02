@@ -6,7 +6,10 @@ import { getContrastingTextColor } from '@chatwoot/utils';
 import { isEmptyObject } from 'widget/helpers/utils';
 import { getRegexp } from 'shared/helpers/Validators';
 import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
+<<<<<<< HEAD
 import routerMixin from 'widget/mixins/routerMixin';
+=======
+>>>>>>> upstream/develop
 import configMixin from 'widget/mixins/configMixin';
 import { FormKit, createInput } from '@formkit/vue';
 import PhoneInput from 'widget/components/Form/PhoneInput.vue';
@@ -17,7 +20,11 @@ export default {
     Spinner,
     FormKit,
   },
+<<<<<<< HEAD
   mixins: [routerMixin, configMixin],
+=======
+  mixins: [configMixin],
+>>>>>>> upstream/develop
   props: {
     options: {
       type: Object,
@@ -141,6 +148,7 @@ export default {
     },
   },
   methods: {
+<<<<<<< HEAD
     labelClass(input) {
       const { state } = input.context;
       const hasErrors = state.invalid;
@@ -149,16 +157,26 @@ export default {
     inputClass(input) {
       const { state, family: classification, type } = input.context;
       const hasErrors = state.invalid;
+=======
+    inputClass(input) {
+      const { state, family: classification, type } = input.context;
+>>>>>>> upstream/develop
       if (classification === 'box' && type === 'checkbox') {
         return '';
       }
       if (type === 'phoneInput') {
+<<<<<<< HEAD
         this.hasErrorInPhoneInput = hasErrors;
       }
       if (!hasErrors) {
         return `mt-1 rounded w-full py-2 px-3`;
       }
       return `mt-1 rounded w-full py-2 px-3 error`;
+=======
+        this.hasErrorInPhoneInput = state.invalid;
+      }
+      return 'mt-1 rounded w-full py-2 px-3';
+>>>>>>> upstream/develop
     },
     isContactFieldRequired(field) {
       return this.preChatFields.find(option => option.name === field).required;
@@ -177,7 +195,16 @@ export default {
       return this.formValues[name] || null;
     },
     getValidation({ type, name, field_type, regex_pattern }) {
+<<<<<<< HEAD
       let regex = regex_pattern ? getRegexp(regex_pattern) : null;
+=======
+      const regex = regex_pattern ? getRegexp(regex_pattern) : null;
+      // FormKit caches the RegExp and calls .test() across keystrokes, so
+      // drop stateful g/y flags to stop lastIndex mutation flipping validity.
+      const matchRegex = regex
+        ? new RegExp(regex.source, regex.flags.replace(/[gy]/g, ''))
+        : null;
+>>>>>>> upstream/develop
       const validations = {
         emailAddress: 'email',
         phoneNumber: ['startsWithPlus', 'isValidPhoneNumber'],
@@ -187,6 +214,7 @@ export default {
         select: null,
         number: null,
         checkbox: false,
+<<<<<<< HEAD
         contact_attribute: regex ? [['matches', regex]] : null,
         conversation_attribute: regex ? [['matches', regex]] : null,
       };
@@ -208,6 +236,34 @@ export default {
       }
 
       return '';
+=======
+        contact_attribute: matchRegex ? [['matches', matchRegex]] : null,
+        conversation_attribute: matchRegex ? [['matches', matchRegex]] : null,
+      };
+      const validationKeys = Object.keys(validations);
+      const isRequired = this.isContactFieldRequired(name);
+      const baseRules = isRequired ? [['required']] : [['optional']];
+
+      if (
+        !validationKeys.includes(name) &&
+        !validationKeys.includes(type) &&
+        !validationKeys.includes(field_type)
+      ) {
+        return '';
+      }
+
+      const validationType =
+        validations[type] || validations[name] || validations[field_type];
+      if (!validationType) return baseRules;
+
+      // Normalise into array-of-arrays so RegExp objects in `['matches', regex]`
+      // survive without being stringified by FormKit.
+      const extraRules = Array.isArray(validationType)
+        ? validationType.map(rule => (Array.isArray(rule) ? rule : [rule]))
+        : [[validationType]];
+
+      return baseRules.concat(extraRules);
+>>>>>>> upstream/develop
     },
     findFieldType(type) {
       if (type === 'link') {
@@ -264,7 +320,11 @@ export default {
     <div
       v-if="shouldShowHeaderMessage"
       v-dompurify-html="formatMessage(headerMessage, false)"
+<<<<<<< HEAD
       class="mb-4 text-base leading-5 text-n-slate-12 [&>p>.link]:text-n-blue-text [&>p>.link]:hover:underline"
+=======
+      class="mb-4 text-base leading-5 text-n-slate-12 [&>p>.link]:text-n-blue-11 [&>p>.link]:hover:underline"
+>>>>>>> upstream/develop
     />
     <!-- Why do the v-bind shenanigan? Because Formkit API is really bad.
     If we just pass the options as is even with null or undefined or false,
@@ -284,7 +344,11 @@ export default {
             }
           : undefined
       "
+<<<<<<< HEAD
       :label-class="context => `text-sm font-medium ${labelClass(context)}`"
+=======
+      label-class="text-sm font-medium text-n-slate-12"
+>>>>>>> upstream/develop
       :input-class="context => inputClass(context)"
       :validation-messages="{
         startsWithPlus: $t(
@@ -303,7 +367,11 @@ export default {
       v-if="!hasActiveCampaign"
       name="message"
       type="textarea"
+<<<<<<< HEAD
       :label-class="context => `text-sm font-medium ${labelClass(context)}`"
+=======
+      label-class="text-sm font-medium text-n-slate-12"
+>>>>>>> upstream/develop
       :input-class="context => inputClass(context)"
       :label="$t('PRE_CHAT_FORM.FIELDS.MESSAGE.LABEL')"
       :placeholder="$t('PRE_CHAT_FORM.FIELDS.MESSAGE.PLACEHOLDER')"
@@ -331,16 +399,33 @@ export default {
   @apply mt-2;
 
   .formkit-inner {
+<<<<<<< HEAD
     input.error,
     textarea.error,
     select.error {
       @apply outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 focus:outline-n-ruby-9 dark:focus:outline-n-ruby-9;
     }
 
+=======
+>>>>>>> upstream/develop
     input[type='checkbox'] {
       @apply size-4 outline-none;
     }
   }
+<<<<<<< HEAD
+=======
+
+  &[data-invalid] {
+    .formkit-label {
+      @apply text-n-ruby-10;
+    }
+    .formkit-inner input,
+    .formkit-inner textarea,
+    .formkit-inner select {
+      @apply outline-n-ruby-8 dark:outline-n-ruby-8 hover:outline-n-ruby-9 dark:hover:outline-n-ruby-9 focus:outline-n-ruby-9 dark:focus:outline-n-ruby-9;
+    }
+  }
+>>>>>>> upstream/develop
 }
 
 [data-invalid] .formkit-message {

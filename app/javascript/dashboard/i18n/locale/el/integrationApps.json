@@ -3,6 +3,12 @@
     "FETCHING": "Λήψη Indegrations",
     "NO_HOOK_CONFIGURED": "Δεν υπάρχουν {integrationId} integrations ρυθμισμένες σε αυτόν το λογαριασμό.",
     "HEADER": "Εφαρμογές",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Ενεργό",
       "DISABLED": "Ανενεργό"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Λήψη Integrations",
       "INBOX": "Εισερχόμενα",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Ενέργειες",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Διαγραφή"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Επιλογή Εισερχομένων"
         },
         "SUBMIT": "Δημιουργία",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Άκυρο"
       },
       "API": {

@@ -1,5 +1,9 @@
 shared: &shared
+<<<<<<< HEAD
   version: '4.1.0'
+=======
+  version: '4.14.1'
+>>>>>>> upstream/develop
 
 development:
   <<: *shared

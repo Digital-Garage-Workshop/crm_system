@@ -6,4 +6,8 @@ properties:
   errors:
     type: array
     items:
+<<<<<<< HEAD
       $ref: '#/definitions/request_error'
+=======
+      $ref: '#/components/schemas/request_error'
+>>>>>>> upstream/develop

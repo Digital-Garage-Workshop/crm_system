@@ -3,7 +3,11 @@ json.payload do
     json.applied_sla applied_sla.push_event_data
     json.conversation do
       conversation = applied_sla.conversation
+<<<<<<< HEAD
       json.id conversation.id
+=======
+      json.id conversation.display_id
+>>>>>>> upstream/develop
       json.contact do
         json.name conversation.contact.name if conversation.contact
       end

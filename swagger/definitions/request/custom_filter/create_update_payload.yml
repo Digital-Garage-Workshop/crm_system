@@ -3,6 +3,7 @@ properties:
   name:
     type: string
     description: The name of the custom filter
+<<<<<<< HEAD
   type:
     type: string
     enum: ["conversation", "contact", "report"]
@@ -10,3 +11,15 @@ properties:
   query:
     type: object
     description: A query that needs to be saved as a custom filter
+=======
+    example: 'My Custom Filter'
+  type:
+    type: string
+    enum: ['conversation', 'contact', 'report']
+    description: The description about the custom filter
+    example: 'conversation'
+  query:
+    type: object
+    description: A query that needs to be saved as a custom filter
+    example: {}
+>>>>>>> upstream/develop

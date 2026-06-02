@@ -1,6 +1,10 @@
 <script setup>
 // [TODO] Use Teleport to move the modal to the end of the body
+<<<<<<< HEAD
 import { ref, computed, defineEmits, onMounted } from 'vue';
+=======
+import { ref, computed, onMounted } from 'vue';
+>>>>>>> upstream/develop
 import { useEventListener } from '@vueuse/core';
 import Button from 'dashboard/components-next/button/Button.vue';
 

@@ -3,6 +3,12 @@
     "FETCHING": "Notiek Integrāciju Iegūšana",
     "NO_HOOK_CONFIGURED": "Šajā kontā nav nokonfigurēta neviena {integrationId} integrācija.",
     "HEADER": "Lietojumprogrammas",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Meklēt...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Iespējots",
       "DISABLED": "Atspējots"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Notiek integrāciju hook iegūšana",
       "INBOX": "Iesūtne",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Darbības",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Dzēst"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Izvēlieties Iesūtni"
         },
         "SUBMIT": "Izveidot",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Atcelt"
       },
       "API": {

@@ -2,12 +2,20 @@
 import { computed } from 'vue';
 import Icon from 'next/icon/Icon.vue';
 import ChannelIcon from 'next/icon/ChannelIcon.vue';
+<<<<<<< HEAD
+=======
+import SidebarUnreadBadge from './SidebarUnreadBadge.vue';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   label: {
     type: String,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  // eslint-disable-next-line vue/no-unused-properties
+>>>>>>> upstream/develop
   active: {
     type: Boolean,
     default: false,
@@ -16,6 +24,13 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  badgeCount: {
+    type: [Number, String],
+    default: 0,
+  },
+>>>>>>> upstream/develop
 });
 
 const reauthorizationRequired = computed(() => {
@@ -24,6 +39,7 @@ const reauthorizationRequired = computed(() => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <span
     class="size-4 grid place-content-center rounded-full bg-n-alpha-2"
     :class="{ 'bg-n-solid-blue': active }"
@@ -31,6 +47,13 @@ const reauthorizationRequired = computed(() => {
     <ChannelIcon :inbox="inbox" class="size-3" />
   </span>
   <div class="flex-1 truncate min-w-0">{{ label }}</div>
+=======
+  <span class="size-4 grid place-content-center rounded-full">
+    <ChannelIcon :inbox="inbox" class="size-4" />
+  </span>
+  <div class="flex-1 truncate min-w-0">{{ label }}</div>
+  <SidebarUnreadBadge :count="badgeCount" />
+>>>>>>> upstream/develop
   <div
     v-if="reauthorizationRequired"
     v-tooltip.top-end="$t('SIDEBAR.REAUTHORIZE')"

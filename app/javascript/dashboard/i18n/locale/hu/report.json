@@ -3,7 +3,11 @@
     "HEADER": "Beszélgetések",
     "LOADING_CHART": "Táblázat adatok betöltése...",
     "NO_ENOUGH_DATA": "Nem érkezett elég adat hogy jelentést generáljunk, kérjük próbáld később.",
+<<<<<<< HEAD
     "DOWNLOAD_AGENT_REPORTS": "Ügynök jelentések letöltése",
+=======
+    "DOWNLOAD_CONVERSATION_REPORTS": "Download conversation reports",
+>>>>>>> upstream/develop
     "DATA_FETCHING_FAILED": "Sikertelen adatlekérés, kérlek próbáld újra később.",
     "SUMMARY_FETCHING_FAILED": "Sikertelen összefoglaló lekérés, kérlek próbáld újra később.",
     "METRICS": {
@@ -51,7 +55,14 @@
     },
     "DATE_RANGE_OPTIONS": {
       "LAST_7_DAYS": "Utolsó 7 nap",
+<<<<<<< HEAD
       "LAST_30_DAYS": "Utolsó 30 nap",
+=======
+      "LAST_14_DAYS": "Utolsó 14 nap",
+      "LAST_30_DAYS": "Utolsó 30 nap",
+      "THIS_MONTH": "This month",
+      "LAST_MONTH": "Last month",
+>>>>>>> upstream/develop
       "LAST_3_MONTHS": "Elmúlt 3 hónapban",
       "LAST_6_MONTHS": "Elmúlt 6 hónapban",
       "LAST_YEAR": "Elmúlt 1 évben",
@@ -125,11 +136,23 @@
   },
   "AGENT_REPORTS": {
     "HEADER": "Ügynök áttekintés",
+<<<<<<< HEAD
     "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent’s name to learn more.",
+=======
+    "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent's name to learn more.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Táblázat adatok betöltése...",
     "NO_ENOUGH_DATA": "Nem érkezett elég adat hogy jelentést generáljunk, kérjük próbáld később.",
     "DOWNLOAD_AGENT_REPORTS": "Ügynök jelentések letöltése",
     "FILTER_DROPDOWN_LABEL": "Ügynök kiválasztása",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Ügynökök keresése"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Beszélgetések",
@@ -193,10 +216,22 @@
   },
   "LABEL_REPORTS": {
     "HEADER": "Címkék áttekintése",
+<<<<<<< HEAD
+=======
+    "DESCRIPTION": "Track label performance with key metrics including conversations, response times, resolution times, and resolved cases. Click a label name for detailed insights.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Táblázat adatok betöltése...",
     "NO_ENOUGH_DATA": "Nem érkezett elég adat hogy jelentést generáljunk, kérjük próbáld később.",
     "DOWNLOAD_LABEL_REPORTS": "Címkejelentések letöltése",
     "FILTER_DROPDOWN_LABEL": "Cimke választása",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "LABELS": "Címkék keresése"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Beszélgetések",
@@ -265,6 +300,16 @@
     "NO_ENOUGH_DATA": "Nem érkezett elég adat hogy jelentést generáljunk, kérjük próbáld később.",
     "DOWNLOAD_INBOX_REPORTS": "Beérkezett üzenetek letöltése",
     "FILTER_DROPDOWN_LABEL": "Válassz egy fiókot",
+<<<<<<< HEAD
+=======
+    "ALL_INBOXES": "All Inboxes",
+    "SEARCH_INBOX": "Search Inbox",
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "INBOXES": "Search inboxes"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Beszélgetések",
@@ -328,11 +373,26 @@
   },
   "TEAM_REPORTS": {
     "HEADER": "Csapat áttekintés",
+<<<<<<< HEAD
     "DESCRIPTION": "Get a snapshot of your team’s performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+=======
+    "DESCRIPTION": "Get a snapshot of your team's performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Táblázat adatok betöltése...",
     "NO_ENOUGH_DATA": "Nem érkezett elég adat hogy jelentést generáljunk, kérjük próbáld később.",
     "DOWNLOAD_TEAM_REPORTS": "Csapat riport letöltése",
     "FILTER_DROPDOWN_LABEL": "Csapat kiválasztása",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "ADD_FILTER": "Szűrő hozzáadása",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "TEAMS": "Csapatok keresése"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Beszélgetések",
@@ -396,22 +456,65 @@
   },
   "CSAT_REPORTS": {
     "HEADER": "CSAT riportok",
+<<<<<<< HEAD
     "NO_RECORDS": "Nem állnak rendelkezésre CSAT-felmérés válaszai.",
     "DOWNLOAD": "CSAT jelentés letöltése",
     "DOWNLOAD_FAILED": "Sikertelen a CSAT jelentés letöltése",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Ügynökök választása"
+=======
+    "NO_RECORDS": "No responses yet",
+    "NO_RECORDS_DESCRIPTION": "CSAT survey responses will appear here once customers start providing feedback.",
+    "DOWNLOAD": "CSAT jelentés letöltése",
+    "DOWNLOAD_FAILED": "Sikertelen a CSAT jelentés letöltése",
+    "FILTERS": {
+      "ADD_FILTER": "Szűrő hozzáadása",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Ügynökök keresése",
+        "INBOXES": "Search inboxes",
+        "TEAMS": "Csapatok keresése",
+        "RATINGS": "Search ratings"
+      },
+      "AGENTS": {
+        "LABEL": "Ügynök"
+      },
+      "INBOXES": {
+        "LABEL": "Fiók"
+      },
+      "TEAMS": {
+        "LABEL": "Csapat"
+      },
+      "RATINGS": {
+        "LABEL": "Értékelés"
+>>>>>>> upstream/develop
       }
     },
     "TABLE": {
       "HEADER": {
         "CONTACT_NAME": "Kontakt",
+<<<<<<< HEAD
         "AGENT_NAME": "Hozzárendelt ügynök",
         "RATING": "Értékelés",
         "FEEDBACK_TEXT": "Visszajelző komment"
       }
     },
+=======
+        "AGENT_NAME": "Ügynök",
+        "RATING": "Értékelés",
+        "FEEDBACK_TEXT": "Visszajelző komment",
+        "CONVERSATION": "Beszélgetés",
+        "CUSTOMER": "Customer",
+        "RESPONSE": "Response",
+        "HANDLED_BY": "Handled by"
+      },
+      "UNKNOWN_CUSTOMER": "Unknown customer"
+    },
+    "NO_AGENT": "No assigned agent",
+    "NO_FEEDBACK": "No feedback provided",
+>>>>>>> upstream/develop
     "METRIC": {
       "TOTAL_RESPONSES": {
         "LABEL": "Összes válasz",
@@ -424,6 +527,28 @@
       "RESPONSE_RATE": {
         "LABEL": "Válaszarány",
         "TOOLTIP": "Válaszok teljes száma / Az elküldött CSAT felmérési üzenetek teljes száma * 100"
+<<<<<<< HEAD
+=======
+      },
+      "RATING_DISTRIBUTION": "Rating distribution"
+    },
+    "REVIEW_NOTES": {
+      "TITLE": "Review notes",
+      "PLACEHOLDER": "Add review notes about this rating...",
+      "SAVE": "Mentés",
+      "CANCEL": "Mégse",
+      "SAVING": "Mentés...",
+      "SAVED": "Notes saved successfully",
+      "SAVE_ERROR": "Failed to save notes",
+      "UPDATED_BY": "Updated by {name} {time}",
+      "UPDATED_BY_LABEL": "Updated by",
+      "PAYWALL": {
+        "TITLE": "Upgrade to add review notes",
+        "AVAILABLE_ON": "The review notes feature is only available in the Business and Enterprise plans.",
+        "UPGRADE_PROMPT": "Add internal context to every CSAT response with review notes. Capture what really happened, spot patterns faster, and make better decisions from your feedback.",
+        "UPGRADE_NOW": "Upgrade now",
+        "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -466,6 +591,16 @@
       "CONVERSATIONS": "{count} conversations",
       "DOWNLOAD_REPORT": "Download report"
     },
+<<<<<<< HEAD
+=======
+    "RESOLUTION_HEATMAP": {
+      "HEADER": "Resolutions",
+      "NO_CONVERSATIONS": "Nincsennek beszélgetések",
+      "CONVERSATION": "{count} conversation",
+      "CONVERSATIONS": "{count} conversations",
+      "DOWNLOAD_REPORT": "Download report"
+    },
+>>>>>>> upstream/develop
     "AGENT_CONVERSATIONS": {
       "HEADER": "Ügynökök által kezelt beszélgetések",
       "LOADING_MESSAGE": "Ügynökök betöltése...",
@@ -559,6 +694,10 @@
     "INBOX": "Fiók",
     "AGENT": "Ügynök",
     "TEAM": "Csapat",
+<<<<<<< HEAD
+=======
+    "LABEL": "Cimke",
+>>>>>>> upstream/develop
     "AVG_RESOLUTION_TIME": "Avg. Resolution Time",
     "AVG_FIRST_RESPONSE_TIME": "Avg. First Response Time",
     "AVG_REPLY_TIME": "Avg. Customer Waiting Time",

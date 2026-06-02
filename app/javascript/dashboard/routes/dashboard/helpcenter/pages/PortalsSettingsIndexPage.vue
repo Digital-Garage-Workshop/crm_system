@@ -4,12 +4,24 @@ import { useRoute, useRouter } from 'vue-router';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useAlert } from 'dashboard/composables';
 import { useMapGetter, useStore } from 'dashboard/composables/store.js';
+<<<<<<< HEAD
 import PortalSettings from 'dashboard/components-next/HelpCenter/Pages/PortalSettingsPage/PortalSettings.vue';
 
+=======
+import { useAccount } from 'dashboard/composables/useAccount';
+import PortalSettings from 'dashboard/components-next/HelpCenter/Pages/PortalSettingsPage/PortalSettings.vue';
+
+const SSL_STATUS_FETCH_INTERVAL = 5000;
+
+>>>>>>> upstream/develop
 const { t } = useI18n();
 const store = useStore();
 const route = useRoute();
 const router = useRouter();
+<<<<<<< HEAD
+=======
+const { isOnChatwootCloud } = useAccount();
+>>>>>>> upstream/develop
 
 const { updateUISettings } = useUISettings();
 
@@ -24,6 +36,18 @@ const getDefaultLocale = slug => {
   return getPortalBySlug.value(slug)?.meta?.default_locale;
 };
 
+<<<<<<< HEAD
+=======
+const fetchSSLStatus = () => {
+  if (!isOnChatwootCloud.value) return;
+
+  const { portalSlug } = route.params;
+  store.dispatch('portals/sslStatus', {
+    portalSlug,
+  });
+};
+
+>>>>>>> upstream/develop
 const fetchPortalAndItsCategories = async (slug, locale) => {
   const selectedPortalParam = { portalSlug: slug, locale };
   await Promise.all([
@@ -106,8 +130,40 @@ const deletePortal = async selectedPortalForDelete => {
   }
 };
 
+<<<<<<< HEAD
 const handleUpdatePortal = updatePortalSettings;
 const handleUpdatePortalConfiguration = updatePortalSettings;
+=======
+const handleSendCnameInstructions = async payload => {
+  try {
+    await store.dispatch('portals/sendCnameInstructions', payload);
+    useAlert(
+      t(
+        'HELP_CENTER.PORTAL.PORTAL_SETTINGS.SEND_CNAME_INSTRUCTIONS.API.SUCCESS_MESSAGE'
+      )
+    );
+  } catch (error) {
+    useAlert(
+      error?.message ||
+        t(
+          'HELP_CENTER.PORTAL.PORTAL_SETTINGS.SEND_CNAME_INSTRUCTIONS.API.ERROR_MESSAGE'
+        )
+    );
+  }
+};
+
+const handleUpdatePortal = updatePortalSettings;
+const handleUpdatePortalConfiguration = portalObj => {
+  updatePortalSettings(portalObj);
+
+  // If custom domain is added or updated, fetch SSL status after a delay of 5 seconds (only on Chatwoot cloud)
+  if (portalObj?.custom_domain && isOnChatwootCloud.value) {
+    setTimeout(() => {
+      fetchSSLStatus();
+    }, SSL_STATUS_FETCH_INTERVAL);
+  }
+};
+>>>>>>> upstream/develop
 const handleDeletePortal = deletePortal;
 </script>
 
@@ -118,5 +174,10 @@ const handleDeletePortal = deletePortal;
     @update-portal="handleUpdatePortal"
     @update-portal-configuration="handleUpdatePortalConfiguration"
     @delete-portal="handleDeletePortal"
+<<<<<<< HEAD
+=======
+    @refresh-status="fetchSSLStatus"
+    @send-cname-instructions="handleSendCnameInstructions"
+>>>>>>> upstream/develop
   />
 </template>

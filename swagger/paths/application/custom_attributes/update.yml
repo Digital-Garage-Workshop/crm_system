@@ -8,6 +8,7 @@ security:
 parameters:
   - in: path
     name: id
+<<<<<<< HEAD
     type: integer
     required: true
     description: The ID of the custom attribute to be updated.
@@ -26,3 +27,35 @@ responses:
     description: Agent not found
   403:
     description: Access denied
+=======
+    schema:
+      type: integer
+    required: true
+    description: The ID of the custom attribute to be updated.
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/custom_attribute_create_update_payload'
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          description: 'The updated custom attribute'
+          $ref: '#/components/schemas/custom_attribute'
+  '404':
+    description: Agent not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '403':
+    description: Access denied
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

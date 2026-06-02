@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 json.id message.id
 json.content message.content
 json.message_type message.message_type_before_type_cast
@@ -10,3 +11,6 @@ json.sender message.sender.push_event_data if message.sender
 json.inbox do
   json.partial! 'inbox', formats: [:json], inbox: message.inbox if message.inbox.present? && message.try(:inbox).present?
 end
+=======
+json.partial! 'api/v1/models/message', message: message
+>>>>>>> upstream/develop

@@ -7,7 +7,10 @@ import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useConfig } from 'dashboard/composables/useConfig';
 import { useAccount } from 'dashboard/composables/useAccount';
 import { FEATURE_FLAGS } from '../../../../featureFlags';
+<<<<<<< HEAD
 import { getLanguageDirection } from 'dashboard/components/widgets/conversation/advancedFilterItems/languages';
+=======
+>>>>>>> upstream/develop
 import WithLabel from 'v3/components/Form/WithLabel.vue';
 import NextInput from 'next/input/Input.vue';
 import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
@@ -15,7 +18,11 @@ import NextButton from 'dashboard/components-next/button/Button.vue';
 import AccountId from './components/AccountId.vue';
 import BuildInfo from './components/BuildInfo.vue';
 import AccountDelete from './components/AccountDelete.vue';
+<<<<<<< HEAD
 import AutoResolve from './components/AutoResolve.vue';
+=======
+import AudioTranscription from './components/AudioTranscription.vue';
+>>>>>>> upstream/develop
 import SectionLayout from './components/SectionLayout.vue';
 
 export default {
@@ -25,18 +32,30 @@ export default {
     AccountId,
     BuildInfo,
     AccountDelete,
+<<<<<<< HEAD
     AutoResolve,
+=======
+    AudioTranscription,
+>>>>>>> upstream/develop
     SectionLayout,
     WithLabel,
     NextInput,
   },
   setup() {
+<<<<<<< HEAD
     const { updateUISettings } = useUISettings();
+=======
+    const { updateUISettings, uiSettings } = useUISettings();
+>>>>>>> upstream/develop
     const { enabledLanguages } = useConfig();
     const { accountId } = useAccount();
     const v$ = useVuelidate();
 
+<<<<<<< HEAD
     return { updateUISettings, v$, enabledLanguages, accountId };
+=======
+    return { updateUISettings, uiSettings, v$, enabledLanguages, accountId };
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -63,10 +82,17 @@ export default {
       isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
       isOnChatwootCloud: 'globalConfig/isOnChatwootCloud',
     }),
+<<<<<<< HEAD
     showAutoResolutionConfig() {
       return this.isFeatureEnabledonAccount(
         this.accountId,
         FEATURE_FLAGS.AUTO_RESOLVE_CONVERSATIONS
+=======
+    showAudioTranscriptionConfig() {
+      return this.isFeatureEnabledonAccount(
+        this.accountId,
+        FEATURE_FLAGS.CAPTAIN
+>>>>>>> upstream/develop
       );
     },
     languagesSortedByCode() {
@@ -104,7 +130,14 @@ export default {
         const { name, locale, id, domain, support_email, features } =
           this.getAccount(this.accountId);
 
+<<<<<<< HEAD
         this.$root.$i18n.locale = locale;
+=======
+        const effectiveLocale = this.uiSettings?.locale || locale;
+        if (effectiveLocale) {
+          this.$root.$i18n.locale = effectiveLocale;
+        }
+>>>>>>> upstream/develop
         this.name = name;
         this.locale = locale;
         this.id = id;
@@ -129,14 +162,24 @@ export default {
           domain: this.domain,
           support_email: this.supportEmail,
         });
+<<<<<<< HEAD
         this.$root.$i18n.locale = this.locale;
         this.getAccount(this.id).locale = this.locale;
         this.updateDirectionView(this.locale);
+=======
+        // If user locale is set, update the locale with user locale
+        const updatedLocale = this.uiSettings?.locale || this.locale;
+        if (updatedLocale) {
+          this.$root.$i18n.locale = updatedLocale;
+        }
+        this.getAccount(this.id).locale = this.locale;
+>>>>>>> upstream/develop
         useAlert(this.$t('GENERAL_SETTINGS.UPDATE.SUCCESS'));
       } catch (error) {
         useAlert(this.$t('GENERAL_SETTINGS.UPDATE.ERROR'));
       }
     },
+<<<<<<< HEAD
 
     updateDirectionView(locale) {
       const isRTLSupported = getLanguageDirection(locale);
@@ -144,17 +187,29 @@ export default {
         rtl_view: isRTLSupported,
       });
     },
+=======
+>>>>>>> upstream/develop
   },
 };
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex flex-col max-w-2xl mx-auto w-full">
     <BaseSettingsHeader :title="$t('GENERAL_SETTINGS.TITLE')" />
     <div class="flex-grow flex-shrink min-w-0 mt-3 overflow-auto">
       <SectionLayout
         :title="$t('GENERAL_SETTINGS.FORM.GENERAL_SECTION.TITLE')"
         :description="$t('GENERAL_SETTINGS.FORM.GENERAL_SECTION.NOTE')"
+=======
+  <div class="flex flex-col w-full max-w-2xl ltr:mr-auto rtl:ml-auto">
+    <BaseSettingsHeader :title="$t('GENERAL_SETTINGS.TITLE')" />
+    <div class="flex-grow flex-shrink min-w-0 mt-3">
+      <SectionLayout
+        :title="$t('GENERAL_SETTINGS.FORM.GENERAL_SECTION.TITLE')"
+        :description="$t('GENERAL_SETTINGS.FORM.GENERAL_SECTION.NOTE')"
+        class="!pt-0"
+>>>>>>> upstream/develop
       >
         <form
           v-if="!uiFlags.isFetchingItem"
@@ -162,6 +217,10 @@ export default {
           @submit.prevent="updateAccount"
         >
           <WithLabel
+<<<<<<< HEAD
+=======
+            name="account-name"
+>>>>>>> upstream/develop
             :has-error="v$.name.$error"
             :label="$t('GENERAL_SETTINGS.FORM.NAME.LABEL')"
             :error-message="$t('GENERAL_SETTINGS.FORM.NAME.ERROR')"
@@ -175,6 +234,10 @@ export default {
             />
           </WithLabel>
           <WithLabel
+<<<<<<< HEAD
+=======
+            name="site-language"
+>>>>>>> upstream/develop
             :has-error="v$.locale.$error"
             :label="$t('GENERAL_SETTINGS.FORM.LANGUAGE.LABEL')"
             :error-message="$t('GENERAL_SETTINGS.FORM.LANGUAGE.ERROR')"
@@ -191,6 +254,10 @@ export default {
           </WithLabel>
           <WithLabel
             v-if="featureCustomReplyDomainEnabled"
+<<<<<<< HEAD
+=======
+            name="custom-domain"
+>>>>>>> upstream/develop
             :label="$t('GENERAL_SETTINGS.FORM.DOMAIN.LABEL')"
           >
             <NextInput
@@ -213,6 +280,10 @@ export default {
           </WithLabel>
           <WithLabel
             v-if="featureCustomReplyEmailEnabled"
+<<<<<<< HEAD
+=======
+            name="support-email"
+>>>>>>> upstream/develop
             :label="$t('GENERAL_SETTINGS.FORM.SUPPORT_EMAIL.LABEL')"
           >
             <NextInput
@@ -234,7 +305,11 @@ export default {
 
       <woot-loading-state v-if="uiFlags.isFetchingItem" />
     </div>
+<<<<<<< HEAD
     <AutoResolve v-if="showAutoResolutionConfig" />
+=======
+    <AudioTranscription v-if="showAudioTranscriptionConfig" />
+>>>>>>> upstream/develop
     <AccountId />
     <div v-if="!uiFlags.isFetchingItem && isOnChatwootCloud">
       <AccountDelete />

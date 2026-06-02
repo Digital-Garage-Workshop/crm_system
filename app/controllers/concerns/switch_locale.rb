@@ -4,17 +4,41 @@ module SwitchLocale
   private
 
   def switch_locale(&)
+<<<<<<< HEAD
     # priority is for locale set in query string (mostly for widget/from js sdk)
     locale ||= params[:locale]
 
     locale ||= locale_from_custom_domain
     # if locale is not set in account, let's use DEFAULT_LOCALE env variable
     locale ||= ENV.fetch('DEFAULT_LOCALE', nil)
+=======
+    # Priority is for locale set in query string (mostly for widget/from js sdk)
+    locale ||= params[:locale]
+
+    # Use the user's locale if available
+    locale ||= locale_from_user
+
+    # Use the locale from a custom domain if applicable
+    locale ||= locale_from_custom_domain
+
+    # if locale is not set in account, let's use DEFAULT_LOCALE env variable
+    locale ||= ENV.fetch('DEFAULT_LOCALE', nil)
+
+>>>>>>> upstream/develop
     set_locale(locale, &)
   end
 
   def switch_locale_using_account_locale(&)
+<<<<<<< HEAD
     locale = locale_from_account(@current_account)
+=======
+    # Get the locale from the user first
+    locale = locale_from_user
+
+    # Fallback to the account's locale if the user's locale is not set
+    locale ||= locale_from_account(@current_account)
+
+>>>>>>> upstream/develop
     set_locale(locale, &)
   end
 
@@ -32,6 +56,15 @@ module SwitchLocale
     @portal.default_locale
   end
 
+<<<<<<< HEAD
+=======
+  def locale_from_user
+    return unless @user
+
+    @user.ui_settings&.dig('locale')
+  end
+
+>>>>>>> upstream/develop
   def set_locale(locale, &)
     safe_locale = validate_and_get_locale(locale)
     # Ensure locale won't bleed into other requests

@@ -8,6 +8,17 @@ const props = defineProps({
     type: String,
     default: REPLY_EDITOR_MODES.REPLY,
   },
+<<<<<<< HEAD
+=======
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  isReplyRestricted: {
+    type: Boolean,
+    default: false,
+  },
+>>>>>>> upstream/develop
 });
 
 defineEmits(['toggleMode']);
@@ -20,9 +31,24 @@ const privateModeSize = useElementSize(wootEditorPrivateMode);
 
 /**
  * Computed boolean indicating if the editor is in private note mode
+<<<<<<< HEAD
  * @type {ComputedRef<boolean>}
  */
 const isPrivate = computed(() => props.mode === REPLY_EDITOR_MODES.NOTE);
+=======
+ * When isReplyRestricted is true, force switch to private note
+ * Otherwise, respect the current mode prop
+ * @type {ComputedRef<boolean>}
+ */
+const isPrivate = computed(() => {
+  if (props.isReplyRestricted) {
+    // Force switch to private note when replies are restricted
+    return true;
+  }
+  // Otherwise respect the current mode
+  return props.mode === REPLY_EDITOR_MODES.NOTE;
+});
+>>>>>>> upstream/develop
 
 /**
  * Computes the width of the sliding background chip in pixels
@@ -52,7 +78,15 @@ const translateValue = computed(() => {
 
 <template>
   <button
+<<<<<<< HEAD
     class="flex items-center w-auto h-8 p-1 transition-all border rounded-full bg-n-alpha-2 group relative duration-300 ease-in-out z-0"
+=======
+    class="flex items-center w-auto h-8 p-1 transition-all border rounded-full bg-n-alpha-2 group relative duration-300 ease-in-out z-0 active:scale-[0.995] active:duration-75"
+    :disabled="disabled || isReplyRestricted"
+    :class="{
+      'cursor-not-allowed': disabled || isReplyRestricted,
+    }"
+>>>>>>> upstream/develop
     @click="$emit('toggleMode')"
   >
     <div ref="wootEditorReplyMode" class="flex items-center gap-1 px-2 z-20">
@@ -62,7 +96,14 @@ const translateValue = computed(() => {
       {{ $t('CONVERSATION.REPLYBOX.PRIVATE_NOTE') }}
     </div>
     <div
+<<<<<<< HEAD
       class="absolute shadow-sm rounded-full h-6 w-[var(--chip-width)] transition-all duration-300 ease-in-out translate-x-[var(--translate-x)] rtl:translate-x-[var(--rtl-translate-x)] bg-n-solid-1"
+=======
+      class="absolute shadow-sm rounded-full h-6 w-[var(--chip-width)] ease-in-out translate-x-[var(--translate-x)] rtl:translate-x-[var(--rtl-translate-x)] bg-n-solid-1"
+      :class="{
+        'transition-all duration-300': !disabled && !isReplyRestricted,
+      }"
+>>>>>>> upstream/develop
       :style="{
         '--chip-width': width,
         '--translate-x': translateValue,

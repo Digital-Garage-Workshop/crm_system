@@ -10,6 +10,10 @@ module PushDataHelper
   end
 
   def webhook_data
+<<<<<<< HEAD
     Conversations::EventDataPresenter.new(self).push_data
+=======
+    Conversations::EventDataPresenter.new(self).webhook_data
+>>>>>>> upstream/develop
   end
 end

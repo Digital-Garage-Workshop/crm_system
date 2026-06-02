@@ -3,9 +3,18 @@
     "HEADER": "ماكروس",
     "DESCRIPTION": "الماكرو هو مجموعة من الإجراءات المحفوظة التي تساعد وكلاء خدمة العملاء على إكمال المهام بسهولة. يمكن للوكلاء تحديد مجموعة من الإجراءات مثل وضع علامة على محادثة مع تسمية، وإرسال نص بريد إلكتروني، وتحديث سمة مخصصة، إلخ. ويمكنهم تنفيذ هذه الإجراءات بنقرة واحدة.",
     "LEARN_MORE": "تعلم المزيد حول الماكرو",
+<<<<<<< HEAD
     "HEADER_BTN_TXT": "إضافة ماكرو جديد",
     "HEADER_BTN_TXT_SAVE": "حفظ الماكرو",
     "LOADING": "جاري جلب الماكروس",
+=======
+    "COUNT": "{n} macro | {n} macros",
+    "HEADER_BTN_TXT": "إضافة ماكرو جديد",
+    "HEADER_BTN_TXT_SAVE": "حفظ الماكرو",
+    "LOADING": "جاري جلب الماكروس",
+    "SEARCH_PLACEHOLDER": "Search macros...",
+    "NO_RESULTS": "No macros found matching your search",
+>>>>>>> upstream/develop
     "ERROR": "حدث خطأ ما. الرجاء المحاولة مرة أخرى",
     "ORDER_INFO": "سيتم تشغيل الماكرو بالترتيب الذي تضيفه إجراءاتك. يمكنك إعادة ترتيبهم بسحبهم بواسطة المعالج بجانب كل عقدة.",
     "ADD": {
@@ -29,7 +38,12 @@
         "NAME": "الاسم",
         "CREATED BY": "تم إنشاؤها بواسطة",
         "LAST_UPDATED_BY": "آخر تحديث بواسطة",
+<<<<<<< HEAD
         "VISIBILITY": "الظهور"
+=======
+        "VISIBILITY": "الظهور",
+        "ACTIONS": "الإجراءات"
+>>>>>>> upstream/develop
       },
       "404": "لم يتم العثور على الماكروس"
     },
@@ -45,6 +59,12 @@
         "ERROR_MESSAGE": "حدث خطأ أثناء حذف الماكرو. الرجاء المحاولة مرة أخرى في وقت لاحق"
       }
     },
+<<<<<<< HEAD
+=======
+    "VIEW": {
+      "TOOLTIP": "View macro"
+    },
+>>>>>>> upstream/develop
     "EDIT": {
       "TOOLTIP": "تعديل الماكرو",
       "API": {
@@ -62,7 +82,13 @@
         "LABEL": "الرؤية الخاصة بالماكرو",
         "GLOBAL": {
           "LABEL": "عامة",
+<<<<<<< HEAD
           "DESCRIPTION": "هذا الماكرو متاح بشكل عام لجميع الوكلاء في هذا الحساب."
+=======
+          "DESCRIPTION": "هذا الماكرو متاح بشكل عام لجميع الوكلاء في هذا الحساب.",
+          "CREATE_DISABLED_DESCRIPTION": "Only administrators can create public macros.",
+          "EDIT_DISABLED_DESCRIPTION": "Only administrators can edit public macros."
+>>>>>>> upstream/develop
         },
         "PERSONAL": {
           "LABEL": "خاص",
@@ -89,6 +115,10 @@
       "ASSIGN_AGENT": "Assign an Agent",
       "ADD_LABEL": "Add a Label",
       "REMOVE_LABEL": "Remove a Label",
+<<<<<<< HEAD
+=======
+      "REMOVE_ASSIGNED_AGENT": "Remove Assigned Agent",
+>>>>>>> upstream/develop
       "REMOVE_ASSIGNED_TEAM": "Remove Assigned Team",
       "SEND_EMAIL_TRANSCRIPT": "Send an Email Transcript",
       "MUTE_CONVERSATION": "كتم المحادثة",
@@ -99,6 +129,16 @@
       "CHANGE_PRIORITY": "تغيير الأولوية",
       "ADD_PRIVATE_NOTE": "Add a Private Note",
       "SEND_WEBHOOK_EVENT": "Send Webhook Event"
+<<<<<<< HEAD
+=======
+    },
+    "PRIORITY_TYPES": {
+      "NONE": "لا شيء",
+      "LOW": "منخفضة",
+      "MEDIUM": "متوسطة",
+      "HIGH": "عالية",
+      "URGENT": "عاجل"
+>>>>>>> upstream/develop
     }
   }
 }

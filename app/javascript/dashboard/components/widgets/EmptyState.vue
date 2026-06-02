@@ -17,7 +17,11 @@ export default {
     </h3>
     <p
       v-if="message"
+<<<<<<< HEAD
       class="block text-center text-n-slate-11 dark:text-slate-400 my-4 mx-auto w-[90%]"
+=======
+      class="block text-center text-n-slate-11 my-4 mx-auto w-[90%]"
+>>>>>>> upstream/develop
     >
       {{ message }}
     </p>

@@ -69,6 +69,12 @@
     },
     "ACCOUNT": {
       "EDIT": "{agentName} がアカウント設定 (#{id}) を更新しました"
+<<<<<<< HEAD
+=======
+    },
+    "CONVERSATION": {
+      "DELETE": "{agentName} deleted conversation #{id}"
+>>>>>>> upstream/develop
     }
   }
 }

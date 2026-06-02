@@ -113,7 +113,11 @@ export default {
 
 <style scoped lang="scss">
 .label {
+<<<<<<< HEAD
   @apply items-center font-medium text-xs rounded-[4px] gap-1 p-1 bg-slate-50 dark:bg-slate-700 text-slate-800 dark:text-slate-100 border border-solid border-n-strong h-6;
+=======
+  @apply items-center font-medium text-xs rounded-[4px] gap-1 p-1 bg-n-slate-3 text-n-slate-12 border border-solid border-n-strong h-6;
+>>>>>>> upstream/develop
 
   &.small {
     @apply text-xs py-0.5 px-1 leading-tight h-5;
@@ -133,6 +137,7 @@ export default {
 
   /* Color Schemes */
   &.primary {
+<<<<<<< HEAD
     @apply bg-woot-100 dark:bg-woot-100 text-woot-900 dark:text-woot-900 border border-solid border-woot-200;
 
     a {
@@ -180,20 +185,85 @@ export default {
     }
     .label-color-dot {
       @apply bg-yellow-900 dark:bg-yellow-900;
+=======
+    @apply bg-n-blue-5 text-n-blue-12 border border-solid border-n-blue-7;
+
+    a {
+      @apply text-n-blue-12;
+    }
+    .label-color-dot {
+      @apply bg-n-blue-9;
+    }
+  }
+  &.secondary {
+    @apply bg-n-slate-5 text-n-slate-12 border border-solid border-n-slate-7;
+
+    a {
+      @apply text-n-slate-12;
+    }
+    .label-color-dot {
+      @apply bg-n-slate-9;
+    }
+  }
+  &.success {
+    @apply bg-n-teal-5 text-n-teal-12 border border-solid border-n-teal-7;
+
+    a {
+      @apply text-n-teal-12;
+    }
+    .label-color-dot {
+      @apply bg-n-teal-9;
+    }
+  }
+  &.alert {
+    @apply bg-n-ruby-5 text-n-ruby-12 border border-solid border-n-ruby-7;
+
+    a {
+      @apply text-n-ruby-12;
+    }
+    .label-color-dot {
+      @apply bg-n-ruby-9;
+    }
+  }
+  &.warning {
+    @apply bg-n-amber-5 text-n-amber-12 border border-solid border-n-amber-7;
+
+    a {
+      @apply text-n-amber-12;
+    }
+    .label-color-dot {
+      @apply bg-n-amber-9;
+>>>>>>> upstream/develop
     }
   }
 
   &.smooth {
+<<<<<<< HEAD
     @apply bg-transparent text-slate-700 dark:text-slate-100 border border-solid border-n-strong;
   }
 
   &.dashed {
     @apply bg-transparent text-slate-700 dark:text-slate-100 border border-dashed border-n-strong;
+=======
+    @apply bg-transparent text-n-slate-11 dark:text-n-slate-12 border border-solid border-n-strong;
+  }
+
+  &.dashed {
+    @apply bg-transparent text-n-slate-11 dark:text-n-slate-12 border border-dashed border-n-strong;
+>>>>>>> upstream/develop
   }
 }
 
 .label-close--button {
+<<<<<<< HEAD
   @apply text-slate-800 dark:text-slate-100 -mb-0.5 rounded-sm cursor-pointer flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-700;
+=======
+  @apply text-n-slate-11 -mb-0.5 rounded-sm cursor-pointer flex items-center justify-center hover:bg-n-slate-3;
+
+  svg {
+    @apply text-n-slate-11;
+  }
+>>>>>>> upstream/develop
 }
 
 .label-action--button {

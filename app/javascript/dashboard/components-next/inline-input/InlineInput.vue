@@ -30,13 +30,30 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+<<<<<<< HEAD
+=======
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
+>>>>>>> upstream/develop
   focusOnMount: {
     type: Boolean,
     default: false,
   },
 });
 
+<<<<<<< HEAD
 const emit = defineEmits(['enterPress', 'input', 'blur', 'focus']);
+=======
+const emit = defineEmits([
+  'enterPress',
+  'escapePress',
+  'input',
+  'blur',
+  'focus',
+]);
+>>>>>>> upstream/develop
 
 const modelValue = defineModel({
   type: [String, Number],
@@ -49,6 +66,13 @@ const onEnterPress = () => {
   emit('enterPress');
 };
 
+<<<<<<< HEAD
+=======
+const onEscapePress = () => {
+  emit('escapePress');
+};
+
+>>>>>>> upstream/develop
 const handleInput = event => {
   emit('input', event.target.value);
   modelValue.value = event.target.value;
@@ -72,6 +96,10 @@ onMounted(() => {
 
 defineExpose({
   focus: () => inlineInputRef.value?.focus(),
+<<<<<<< HEAD
+=======
+  blur: () => inlineInputRef.value?.blur(),
+>>>>>>> upstream/develop
 });
 </script>
 
@@ -96,12 +124,20 @@ defineExpose({
       :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
+<<<<<<< HEAD
+=======
+      :readonly="readonly"
+>>>>>>> upstream/develop
       :class="customInputClass"
       class="flex w-full reset-base text-sm h-6 !mb-0 border-0 rounded-none outline-none outline-0 bg-transparent dark:bg-transparent placeholder:text-n-slate-10 dark:placeholder:text-n-slate-10 disabled:cursor-not-allowed disabled:opacity-50 text-n-slate-12 dark:text-n-slate-12 transition-all duration-500 ease-in-out"
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
       @keydown.enter.prevent="onEnterPress"
+<<<<<<< HEAD
+=======
+      @keydown.escape.prevent="onEscapePress"
+>>>>>>> upstream/develop
     />
   </div>
 </template>

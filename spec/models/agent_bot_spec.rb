@@ -6,6 +6,10 @@ RSpec.describe AgentBot do
   describe 'associations' do
     it { is_expected.to have_many(:agent_bot_inboxes) }
     it { is_expected.to have_many(:inboxes) }
+<<<<<<< HEAD
+=======
+    it { is_expected.to have_many(:platform_app_permissibles) }
+>>>>>>> upstream/develop
   end
 
   describe 'concerns' do
@@ -38,6 +42,16 @@ RSpec.describe AgentBot do
 
       expect(message.reload.sender).to be_nil
     end
+<<<<<<< HEAD
+=======
+
+    it 'destroys associated platform_app_permissibles' do
+      platform_app = create(:platform_app)
+      create(:platform_app_permissible, platform_app: platform_app, permissible: agent_bot)
+
+      expect { agent_bot.destroy! }.to change(PlatformAppPermissible, :count).by(-1)
+    end
+>>>>>>> upstream/develop
   end
 
   describe '#system_bot?' do

@@ -5,6 +5,10 @@
 #  id                :bigint           not null, primary key
 #  answer            :text             not null
 #  documentable_type :string
+<<<<<<< HEAD
+=======
+#  edited            :boolean          default(FALSE), not null
+>>>>>>> upstream/develop
 #  embedding         :vector(1536)
 #  question          :string           not null
 #  status            :integer          default("approved"), not null
@@ -35,6 +39,10 @@ class Captain::AssistantResponse < ApplicationRecord
 
   before_validation :ensure_account
   before_validation :ensure_status
+<<<<<<< HEAD
+=======
+  before_validation :mark_as_edited, on: :update
+>>>>>>> upstream/develop
   after_commit :update_response_embedding
 
   scope :ordered, -> { order(created_at: :desc) }
@@ -44,8 +52,13 @@ class Captain::AssistantResponse < ApplicationRecord
 
   enum status: { pending: 0, approved: 1 }
 
+<<<<<<< HEAD
   def self.search(query)
     embedding = Captain::Llm::EmbeddingService.new.get_embedding(query)
+=======
+  def self.search(query, account_id: nil)
+    embedding = Captain::Llm::EmbeddingService.new(account_id: account_id).get_embedding(query)
+>>>>>>> upstream/develop
     nearest_neighbors(:embedding, embedding, distance: 'cosine').limit(5)
   end
 
@@ -55,6 +68,13 @@ class Captain::AssistantResponse < ApplicationRecord
     self.status ||= :approved
   end
 
+<<<<<<< HEAD
+=======
+  def mark_as_edited
+    self.edited = true if question_changed? || answer_changed?
+  end
+
+>>>>>>> upstream/develop
   def ensure_account
     self.account = assistant&.account
   end

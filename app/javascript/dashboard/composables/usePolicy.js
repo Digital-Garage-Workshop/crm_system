@@ -129,6 +129,10 @@ export function usePolicy() {
   return {
     checkPermissions,
     shouldShowPaywall,
+<<<<<<< HEAD
+=======
+    isFeatureFlagEnabled,
+>>>>>>> upstream/develop
     shouldShow,
   };
 }

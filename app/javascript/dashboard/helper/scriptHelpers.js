@@ -21,7 +21,11 @@ export const initializeAudioAlerts = user => {
     enable_audio_alerts: audioAlertType,
     alert_if_unread_assigned_conversation_exist: alertIfUnreadConversationExist,
     notification_tone: audioAlertTone,
+<<<<<<< HEAD
     // UI Settings can be undefined initally as we don't send the
+=======
+    // UI Settings can be undefined initially as we don't send the
+>>>>>>> upstream/develop
     // entire payload for the user during the signup process.
   } = uiSettings || {};
 

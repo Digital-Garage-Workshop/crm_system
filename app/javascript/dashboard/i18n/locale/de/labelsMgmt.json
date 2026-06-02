@@ -5,6 +5,12 @@
     "LOADING": "Label werden abgerufen",
     "DESCRIPTION": "Labels helfen Ihnen, Konversationen und Leads zu kategorisieren und zu priorisieren. Sie können einer Konversation oder einem Kontakt über das Seitenpanel ein Label zuweisen.",
     "LEARN_MORE": "Mehr über Labels erfahren",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} label | {n} labels",
+    "SEARCH_PLACEHOLDER": "Labels suchen...",
+    "NO_RESULTS": "No labels found matching your search",
+>>>>>>> upstream/develop
     "SEARCH_404": "Es existieren keine Elemente, die dieser Abfrage entsprechen",
     "LIST": {
       "404": "In diesem Konto sind keine Labels verfügbar.",
@@ -13,7 +19,12 @@
       "TABLE_HEADER": {
         "NAME": "Name",
         "DESCRIPTION": "Beschreibung",
+<<<<<<< HEAD
         "COLOR": "Farbe"
+=======
+        "COLOR": "Farbe",
+        "ACTION": "Aktionen"
+>>>>>>> upstream/develop
       }
     },
     "FORM": {

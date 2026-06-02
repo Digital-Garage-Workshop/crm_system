@@ -1,6 +1,10 @@
 json.meta do
   json.count @contacts_count
   json.current_page @current_page
+<<<<<<< HEAD
+=======
+  json.has_more @has_more
+>>>>>>> upstream/develop
 end
 
 json.payload do

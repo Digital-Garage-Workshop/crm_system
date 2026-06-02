@@ -65,9 +65,13 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div
     class="border border-n-weak bg-n-solid-1 rounded-t-lg border-b-0 h-full w-full p-6 col-span-6 overflow-auto"
   >
+=======
+  <div class="h-full w-full p-6 col-span-6">
+>>>>>>> upstream/develop
     <PageHeader
       :header-title="$t('INBOX_MGMT.ADD.TELEGRAM_CHANNEL.TITLE')"
       :header-content="$t('INBOX_MGMT.ADD.TELEGRAM_CHANNEL.DESC')"

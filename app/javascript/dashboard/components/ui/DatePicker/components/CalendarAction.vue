@@ -46,13 +46,21 @@ const onClickSetView = (type, mode) => {
       xs
       icon="i-lucide-chevron-left"
       class="rtl:rotate-180"
+<<<<<<< HEAD
       @click="onClickPrev(calendarType)"
+=======
+      @click.stop="onClickPrev(calendarType)"
+>>>>>>> upstream/develop
     />
     <div class="flex items-center gap-1">
       <button
         v-if="firstButtonLabel"
         class="p-0 text-sm font-medium text-center text-n-slate-12 hover:text-n-brand"
+<<<<<<< HEAD
         @click="onClickSetView(calendarType, viewMode)"
+=======
+        @click.stop="onClickSetView(calendarType, viewMode)"
+>>>>>>> upstream/develop
       >
         {{ firstButtonLabel }}
       </button>
@@ -60,7 +68,11 @@ const onClickSetView = (type, mode) => {
         v-if="buttonLabel"
         class="p-0 text-sm font-medium text-center text-n-slate-12"
         :class="{ 'hover:text-n-brand': viewMode }"
+<<<<<<< HEAD
         @click="onClickSetView(calendarType, YEAR)"
+=======
+        @click.stop="onClickSetView(calendarType, YEAR)"
+>>>>>>> upstream/develop
       >
         {{ buttonLabel }}
       </button>
@@ -71,7 +83,11 @@ const onClickSetView = (type, mode) => {
       xs
       icon="i-lucide-chevron-right"
       class="rtl:rotate-180"
+<<<<<<< HEAD
       @click="onClickNext(calendarType)"
+=======
+      @click.stop="onClickNext(calendarType)"
+>>>>>>> upstream/develop
     />
   </div>
 </template>

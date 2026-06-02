@@ -20,6 +20,10 @@ const {
   isAWhatsAppChannel,
   isAnEmailChannel,
   isAnInstagramChannel,
+<<<<<<< HEAD
+=======
+  isATiktokChannel,
+>>>>>>> upstream/develop
 } = useInbox();
 
 const {
@@ -60,11 +64,22 @@ const isSent = computed(() => {
     isAFacebookInbox.value ||
     isASmsInbox.value ||
     isATelegramChannel.value ||
+<<<<<<< HEAD
     isAnInstagramChannel.value
+=======
+    isAnInstagramChannel.value ||
+    isATiktokChannel.value
+>>>>>>> upstream/develop
   ) {
     return sourceId.value && status.value === MESSAGE_STATUS.SENT;
   }
 
+<<<<<<< HEAD
+=======
+  // API inbox messages use real sent/delivered/read status values from the external system.
+  if (isAPIInbox.value) return status.value === MESSAGE_STATUS.SENT;
+
+>>>>>>> upstream/develop
   // All messages will be mark as sent for the Line channel, as there is no source ID.
   if (isALineChannel.value) return true;
 
@@ -78,12 +93,25 @@ const isDelivered = computed(() => {
     isAWhatsAppChannel.value ||
     isATwilioChannel.value ||
     isASmsInbox.value ||
+<<<<<<< HEAD
     isAFacebookInbox.value
   ) {
     return sourceId.value && status.value === MESSAGE_STATUS.DELIVERED;
   }
   // All messages marked as delivered for the web widget inbox and API inbox once they are sent.
   if (isAWebWidgetInbox.value || isAPIInbox.value) {
+=======
+    isAFacebookInbox.value ||
+    isAnInstagramChannel.value ||
+    isATiktokChannel.value
+  ) {
+    return sourceId.value && status.value === MESSAGE_STATUS.DELIVERED;
+  }
+  // API inbox messages use real delivered status from the external system.
+  if (isAPIInbox.value) return status.value === MESSAGE_STATUS.DELIVERED;
+  // All messages marked as delivered for the web widget inbox once they are sent.
+  if (isAWebWidgetInbox.value) {
+>>>>>>> upstream/develop
     return status.value === MESSAGE_STATUS.SENT;
   }
   if (isALineChannel.value) {
@@ -100,7 +128,12 @@ const isRead = computed(() => {
     isAWhatsAppChannel.value ||
     isATwilioChannel.value ||
     isAFacebookInbox.value ||
+<<<<<<< HEAD
     isAnInstagramChannel.value
+=======
+    isAnInstagramChannel.value ||
+    isATiktokChannel.value
+>>>>>>> upstream/develop
   ) {
     return sourceId.value && status.value === MESSAGE_STATUS.READ;
   }

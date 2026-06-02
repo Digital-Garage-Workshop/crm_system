@@ -69,6 +69,7 @@ export const actions = {
     }
   },
 
+<<<<<<< HEAD
   updateAsync: async ({ commit }, { portalSlug, articleId, ...articleObj }) => {
     commit(types.UPDATE_ARTICLE_FLAG, {
       uiFlags: { isUpdating: true },
@@ -93,6 +94,11 @@ export const actions = {
       uiFlags: {
         isUpdating: true,
       },
+=======
+  update: async ({ commit }, { portalSlug, articleId, ...articleObj }) => {
+    commit(types.UPDATE_ARTICLE_FLAG, {
+      uiFlags: { isUpdating: true },
+>>>>>>> upstream/develop
       articleId,
     });
 
@@ -110,9 +116,13 @@ export const actions = {
       return throwErrorMessage(error);
     } finally {
       commit(types.UPDATE_ARTICLE_FLAG, {
+<<<<<<< HEAD
         uiFlags: {
           isUpdating: false,
         },
+=======
+        uiFlags: { isUpdating: false },
+>>>>>>> upstream/develop
         articleId,
       });
     }
@@ -167,7 +177,21 @@ export const actions = {
     return fileUrl;
   },
 
+<<<<<<< HEAD
   reorder: async (_, { portalSlug, categorySlug, reorderedGroup }) => {
+=======
+  reorder: async (
+    { commit, state },
+    { portalSlug, categorySlug, reorderedGroup }
+  ) => {
+    // Save old positions so we can rollback on failure
+    const oldPositions = Object.keys(reorderedGroup).reduce((map, id) => {
+      map[id] = state.articles.byId[id]?.position;
+      return map;
+    }, {});
+    // Update positions in the store immediately so subsequent mutations preserve correct positions
+    commit(types.SET_ARTICLE_POSITIONS, reorderedGroup);
+>>>>>>> upstream/develop
     try {
       await articlesAPI.reorderArticles({
         portalSlug,
@@ -175,9 +199,29 @@ export const actions = {
         categorySlug,
       });
     } catch (error) {
+<<<<<<< HEAD
       throwErrorMessage(error);
     }
 
     return '';
+=======
+      commit(types.SET_ARTICLE_POSITIONS, oldPositions);
+      throw error;
+    }
+  },
+
+  bulkTranslate: async (
+    _,
+    { portalSlug, articleIds, locale, categoryId, force = false }
+  ) => {
+    const { data } = await articlesAPI.bulkTranslate({
+      portalSlug,
+      articleIds,
+      locale,
+      categoryId,
+      force,
+    });
+    return data;
+>>>>>>> upstream/develop
   },
 };

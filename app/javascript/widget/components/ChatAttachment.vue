@@ -1,16 +1,28 @@
 <script>
 import FileUpload from 'vue-upload-component';
 import Spinner from 'shared/components/Spinner.vue';
+<<<<<<< HEAD
 import { checkFileSizeLimit } from 'shared/helpers/FileHelper';
 import {
   MAXIMUM_FILE_UPLOAD_SIZE,
   ALLOWED_FILE_TYPES,
 } from 'shared/constants/messages';
+=======
+import {
+  checkFileSizeLimit,
+  resolveMaximumFileUploadSize,
+} from 'shared/helpers/FileHelper';
+import { ALLOWED_FILE_TYPES } from 'shared/constants/messages';
+>>>>>>> upstream/develop
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import FluentIcon from 'shared/components/FluentIcon/Index.vue';
 import { DirectUpload } from 'activestorage';
 import { mapGetters } from 'vuex';
 import { emitter } from 'shared/helpers/mitt';
+<<<<<<< HEAD
+=======
+import { useAttachments } from '../composables/useAttachments';
+>>>>>>> upstream/develop
 
 export default {
   components: { FluentIcon, FileUpload, Spinner },
@@ -20,13 +32,30 @@ export default {
       default: () => {},
     },
   },
+<<<<<<< HEAD
+=======
+  setup() {
+    const { canHandleAttachments } = useAttachments();
+    return { canHandleAttachments };
+  },
+>>>>>>> upstream/develop
   data() {
     return { isUploading: false };
   },
   computed: {
+<<<<<<< HEAD
     ...mapGetters({ globalConfig: 'globalConfig/get' }),
     fileUploadSizeLimit() {
       return MAXIMUM_FILE_UPLOAD_SIZE;
+=======
+    ...mapGetters({
+      globalConfig: 'globalConfig/get',
+    }),
+    fileUploadSizeLimit() {
+      return resolveMaximumFileUploadSize(
+        this.globalConfig.maximumFileUploadSize
+      );
+>>>>>>> upstream/develop
     },
     allowedFileTypes() {
       return ALLOWED_FILE_TYPES;
@@ -40,6 +69,12 @@ export default {
   },
   methods: {
     handleClipboardPaste(e) {
+<<<<<<< HEAD
+=======
+      // If file picker is not enabled, do not allow paste
+      if (!this.canHandleAttachments) return;
+
+>>>>>>> upstream/develop
       const items = (e.clipboardData || e.originalEvent.clipboardData).items;
       // items is a DataTransferItemList object which does not have forEach method
       const itemsArray = Array.from(items);
@@ -67,7 +102,11 @@ export default {
       }
       this.isUploading = true;
       try {
+<<<<<<< HEAD
         if (checkFileSizeLimit(file, MAXIMUM_FILE_UPLOAD_SIZE)) {
+=======
+        if (checkFileSizeLimit(file, this.fileUploadSizeLimit)) {
+>>>>>>> upstream/develop
           const { websiteToken } = window.chatwootWebChannel;
           const upload = new DirectUpload(
             file.file,
@@ -109,7 +148,11 @@ export default {
       }
       this.isUploading = true;
       try {
+<<<<<<< HEAD
         if (checkFileSizeLimit(file, MAXIMUM_FILE_UPLOAD_SIZE)) {
+=======
+        if (checkFileSizeLimit(file, this.fileUploadSizeLimit)) {
+>>>>>>> upstream/develop
           await this.onAttach({
             file: file.file,
             ...this.getLocalFileAttributes(file),

@@ -5,12 +5,20 @@ import router from '../../../../index';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import PageHeader from '../../SettingsSubPageHeader.vue';
 import GreetingsEditor from 'shared/components/GreetingsEditor.vue';
+<<<<<<< HEAD
+=======
+import Editor from 'dashboard/components-next/Editor/Editor.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     PageHeader,
     GreetingsEditor,
     NextButton,
+<<<<<<< HEAD
+=======
+    Editor,
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -43,7 +51,11 @@ export default {
         const website = await this.$store.dispatch(
           'inboxes/createWebsiteChannel',
           {
+<<<<<<< HEAD
             name: this.inboxName,
+=======
+            name: this.inboxName?.trim(),
+>>>>>>> upstream/develop
             greeting_enabled: this.greetingEnabled,
             greeting_message: this.greetingMessage,
             channel: {
@@ -74,9 +86,13 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div
     class="border border-n-weak bg-n-solid-1 rounded-t-lg border-b-0 h-full w-full p-6 col-span-6 overflow-auto"
   >
+=======
+  <div class="h-full w-full p-6 col-span-6">
+>>>>>>> upstream/develop
     <PageHeader
       :header-title="$t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.TITLE')"
       :header-content="$t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.DESC')"
@@ -134,6 +150,7 @@ export default {
           />
         </label>
       </div>
+<<<<<<< HEAD
       <div class="w-full">
         <label>
           {{
@@ -150,6 +167,23 @@ export default {
           />
         </label>
       </div>
+=======
+      <Editor
+        v-model="channelWelcomeTagline"
+        :label="
+          $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_WELCOME_TAGLINE.LABEL')
+        "
+        :placeholder="
+          $t(
+            'INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_WELCOME_TAGLINE.PLACEHOLDER'
+          )
+        "
+        :max-length="255"
+        channel-type="Context::InboxSettings"
+        class="mb-4"
+      />
+
+>>>>>>> upstream/develop
       <label class="w-full">
         {{ $t('INBOX_MGMT.ADD.WEBSITE_CHANNEL.CHANNEL_GREETING_TOGGLE.LABEL') }}
         <select v-model="greetingEnabled">

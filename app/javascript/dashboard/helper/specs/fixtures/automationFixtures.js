@@ -2,6 +2,14 @@ import allLanguages from 'dashboard/components/widgets/conversation/advancedFilt
 
 import allCountries from 'shared/constants/countries.js';
 
+<<<<<<< HEAD
+=======
+import {
+  MESSAGE_CONDITION_VALUES,
+  PRIORITY_CONDITION_VALUES,
+} from 'dashboard/constants/automation';
+
+>>>>>>> upstream/develop
 export const customAttributes = [
   {
     id: 1,
@@ -468,7 +476,11 @@ export const inboxes = [
     welcome_title: '',
     welcome_tagline: '',
     web_widget_script:
+<<<<<<< HEAD
       '\n    <script>\n      (function(d,t) {\n        var BASE_URL="http://localhost:3000";\n        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\n        g.src=BASE_URL+"/packs/js/sdk.js";\n        g.defer = true;\n        g.async = true;\n        s.parentNode.insertBefore(g,s);\n        g.onload=function(){\n          window.chatwootSDK.run({\n            websiteToken: \'yZ7USzaEs7hrwUAHLGwjbxJ1\',\n            baseUrl: BASE_URL\n          })\n        }\n      })(document,"script");\n    </script>\n    ',
+=======
+      '\n    <script>\n      (function(d,t) {\n        var BASE_URL="http://localhost:3000";\n        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\n        g.src=BASE_URL+"/packs/js/sdk.js";\n        g.async = true;\n        s.parentNode.insertBefore(g,s);\n        g.onload=function(){\n          window.chatwootSDK.run({\n            websiteToken: \'yZ7USzaEs7hrwUAHLGwjbxJ1\',\n            baseUrl: BASE_URL\n          })\n        }\n      })(document,"script");\n    </script>\n    ',
+>>>>>>> upstream/develop
     website_token: 'yZ7USzaEs7hrwUAHLGwjbxJ1',
     selected_feature_flags: ['attachments', 'emoji_picker', 'end_conversation'],
     reply_time: 'in_a_few_minutes',
@@ -636,6 +648,7 @@ export const statusFilterOptions = [
 ];
 export const languages = allLanguages;
 export const countries = allCountries;
+<<<<<<< HEAD
 export const MESSAGE_CONDITION_VALUES = [
   {
     id: 'incoming',
@@ -646,6 +659,18 @@ export const MESSAGE_CONDITION_VALUES = [
     name: 'Outgoing Message',
   },
 ];
+=======
+
+export const messageTypeOptions = MESSAGE_CONDITION_VALUES.map(item => ({
+  id: item.id,
+  name: `AUTOMATION.MESSAGE_TYPES.${item.i18nKey}`,
+}));
+
+export const priorityOptions = PRIORITY_CONDITION_VALUES.map(item => ({
+  id: item.id,
+  name: `AUTOMATION.PRIORITY_TYPES.${item.i18nKey}`,
+}));
+>>>>>>> upstream/develop
 
 export const automationToSubmit = {
   name: 'Fayaz',

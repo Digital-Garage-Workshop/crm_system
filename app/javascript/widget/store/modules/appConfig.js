@@ -21,6 +21,16 @@ const state = {
   widgetStyle: 'standard',
   darkMode: 'light',
   isUpdatingRoute: false,
+<<<<<<< HEAD
+=======
+  welcomeTitle: '',
+  welcomeDescription: '',
+  availableMessage: '',
+  unavailableMessage: '',
+  enableFileUpload: undefined,
+  enableEmojiPicker: true,
+  enableEndConversation: true,
+>>>>>>> upstream/develop
 };
 
 export const getters = {
@@ -34,6 +44,16 @@ export const getters = {
   darkMode: $state => $state.darkMode,
   getShowUnreadMessagesDialog: $state => $state.showUnreadMessagesDialog,
   getIsUpdatingRoute: _state => _state.isUpdatingRoute,
+<<<<<<< HEAD
+=======
+  getWelcomeHeading: $state => $state.welcomeTitle,
+  getWelcomeTagline: $state => $state.welcomeDescription,
+  getAvailableMessage: $state => $state.availableMessage,
+  getUnavailableMessage: $state => $state.unavailableMessage,
+  getShouldShowFilePicker: $state => $state.enableFileUpload,
+  getShouldShowEmojiPicker: $state => $state.enableEmojiPicker,
+  getCanUserEndConversation: $state => $state.enableEndConversation,
+>>>>>>> upstream/develop
 };
 
 export const actions = {
@@ -46,6 +66,16 @@ export const actions = {
       showUnreadMessagesDialog,
       widgetStyle = 'rounded',
       darkMode = 'light',
+<<<<<<< HEAD
+=======
+      welcomeTitle = '',
+      welcomeDescription = '',
+      availableMessage = '',
+      unavailableMessage = '',
+      enableFileUpload = undefined,
+      enableEmojiPicker = true,
+      enableEndConversation = true,
+>>>>>>> upstream/develop
     }
   ) {
     commit(SET_WIDGET_APP_CONFIG, {
@@ -55,6 +85,16 @@ export const actions = {
       showUnreadMessagesDialog: !!showUnreadMessagesDialog,
       widgetStyle,
       darkMode,
+<<<<<<< HEAD
+=======
+      welcomeTitle,
+      welcomeDescription,
+      availableMessage,
+      unavailableMessage,
+      enableFileUpload,
+      enableEmojiPicker,
+      enableEndConversation,
+>>>>>>> upstream/develop
     });
   },
   toggleWidgetOpen({ commit }, isWidgetOpen) {
@@ -90,6 +130,16 @@ export const mutations = {
     $state.darkMode = data.darkMode;
     $state.locale = data.locale || $state.locale;
     $state.showUnreadMessagesDialog = data.showUnreadMessagesDialog;
+<<<<<<< HEAD
+=======
+    $state.welcomeTitle = data.welcomeTitle;
+    $state.welcomeDescription = data.welcomeDescription;
+    $state.availableMessage = data.availableMessage;
+    $state.unavailableMessage = data.unavailableMessage;
+    $state.enableFileUpload = data.enableFileUpload;
+    $state.enableEmojiPicker = data.enableEmojiPicker;
+    $state.enableEndConversation = data.enableEndConversation;
+>>>>>>> upstream/develop
   },
   [TOGGLE_WIDGET_OPEN]($state, isWidgetOpen) {
     $state.isWidgetOpen = isWidgetOpen;

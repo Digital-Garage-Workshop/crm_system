@@ -1,6 +1,7 @@
 {
   "AGENT_BOTS": {
     "HEADER": "בוטים",
+<<<<<<< HEAD
     "LOADING_EDITOR": "Loading editor...",
     "DESCRIPTION": "Agent Bots are like the most fabulous members of your team. They can handle the small stuff, so you can focus on the stuff that matters. Give them a try. You can manage your bots from this page or create new ones using the 'Add Bot' button.",
     "LEARN_MORE": "Learn about agent bots",
@@ -35,24 +36,76 @@
       "TABLE_HEADER": {
         "DETAILS": "Bot Details",
         "URL": "כתובת אתר של Webhook"
+=======
+    "LOADING_EDITOR": "טוען עורך...",
+    "DESCRIPTION": "בוטים של סוכנים הם כמו החברים הכי נפלאים בצוות שלכם. הם יכולים להתמודד עם הדברים הקטנים, כך שאתם יכולים להתמקד בדברים החשובים. נסו אותם. אתם יכולים לנהל את הבוטים שלכם מדף זה או ליצור חדשים באמצעות כפתור 'הוסף בוט'.",
+    "LEARN_MORE": "למד על בוטי סוכנים",
+    "COUNT": "{n} bot | {n} bots",
+    "SEARCH_PLACEHOLDER": "Search bots...",
+    "NO_RESULTS": "No bots found matching your search",
+    "GLOBAL_BOT": "בוט מערכת",
+    "GLOBAL_BOT_BADGE": "מערכת",
+    "AVATAR": {
+      "SUCCESS_DELETE": "אווטר הבוט נמחק בהצלחה",
+      "ERROR_DELETE": "שגיאה במחיקת אווטר הבוט, אנא נסה שוב"
+    },
+    "BOT_CONFIGURATION": {
+      "TITLE": "בחר בוט סוכן",
+      "DESC": "הקצה בוט סוכן לתיבת הדואר הנכנס שלך. הם יכולים לטפל בשיחות ראשוניות ולהעביר אותן לסוכן חי כאשר נדרש.",
+      "SUBMIT": "עדכן",
+      "DISCONNECT": "נתק בוט",
+      "SUCCESS_MESSAGE": "בוט הסוכן עודכן בהצלחה.",
+      "DISCONNECTED_SUCCESS_MESSAGE": "בוט הסוכן נותק בהצלחה.",
+      "ERROR_MESSAGE": "לא ניתן לעדכן את בוט הסוכן. אנא נסה שוב.",
+      "DISCONNECTED_ERROR_MESSAGE": "לא ניתן לנתק את בוט הסוכן. אנא נסה שוב.",
+      "SELECT_PLACEHOLDER": "בחר בוט"
+    },
+    "ADD": {
+      "TITLE": "הוסף בוט",
+      "CANCEL_BUTTON_TEXT": "ביטול",
+      "API": {
+        "SUCCESS_MESSAGE": "הבוט התווסף בהצלחה.",
+        "ERROR_MESSAGE": "לא ניתן להוסיף בוט. אנא נסה שוב מאוחר יותר."
+      }
+    },
+    "LIST": {
+      "404": "לא נמצאו בוטים. אתה יכול ליצור בוט על ידי לחיצה על כפתור 'הוסף בוט'.",
+      "LOADING": "טוען בוטים...",
+      "TABLE_HEADER": {
+        "DETAILS": "פרטי בוט",
+        "URL": "כתובת URL של ווב הוק",
+        "ACTIONS": "פעולות"
+>>>>>>> upstream/develop
       }
     },
     "DELETE": {
       "BUTTON_TEXT": "מחק",
+<<<<<<< HEAD
       "TITLE": "Delete bot",
       "CONFIRM": {
         "TITLE": "אשר מחיקה",
         "MESSAGE": "Are you sure you want to delete {name}?",
+=======
+      "TITLE": "מחק בוט",
+      "CONFIRM": {
+        "TITLE": "אשר מחיקה",
+        "MESSAGE": "האם אתה בטוח שברצונך למחוק את {name}?",
+>>>>>>> upstream/develop
         "YES": "כן, מחק",
         "NO": "לא, השאר"
       },
       "API": {
         "SUCCESS_MESSAGE": "הבוט נמחק בהצלחה.",
+<<<<<<< HEAD
         "ERROR_MESSAGE": "Could not delete bot. Please try again."
+=======
+        "ERROR_MESSAGE": "לא ניתן למחוק בוט. אנא נסה שוב."
+>>>>>>> upstream/develop
       }
     },
     "EDIT": {
       "BUTTON_TEXT": "ערוך",
+<<<<<<< HEAD
       "TITLE": "Edit bot",
       "API": {
         "SUCCESS_MESSAGE": "הבוט עודכן בהצלחה.",
@@ -67,12 +120,46 @@
         "LABEL": "Bot name",
         "PLACEHOLDER": "Enter bot name",
         "REQUIRED": "חובה לתת שם לבוט"
+=======
+      "TITLE": "ערוך בוט",
+      "API": {
+        "SUCCESS_MESSAGE": "הבוט עודכן בהצלחה.",
+        "ERROR_MESSAGE": "לא ניתן לעדכן בוט. אנא נסה שוב."
+      }
+    },
+    "SECRET": {
+      "LABEL": "Webhook Secret",
+      "COPY": "Copy secret to clipboard",
+      "COPY_SUCCESS": "Secret copied to clipboard",
+      "TOGGLE": "Toggle secret visibility",
+      "CREATED_DESC": "Use the secret below to verify webhook signatures. Please copy it now, you can also find it later in the bot settings.",
+      "DONE": "Done",
+      "RESET_SUCCESS": "Webhook secret regenerated successfully",
+      "RESET_ERROR": "Unable to regenerate webhook secret. Please try again"
+    },
+    "ACCESS_TOKEN": {
+      "TITLE": "אסימון גישה",
+      "DESCRIPTION": "העתק את אסימון הגישה ושמור אותו בבטחה",
+      "COPY_SUCCESSFUL": "אסימון הגישה הועתק ללוח",
+      "RESET_SUCCESS": "אסימון הגישה חודש בהצלחה",
+      "RESET_ERROR": "לא ניתן לחדש את אסימון הגישה. אנא נסה שוב"
+    },
+    "FORM": {
+      "AVATAR": {
+        "LABEL": "אווטר בוט"
+      },
+      "NAME": {
+        "LABEL": "שם בוט",
+        "PLACEHOLDER": "הכנס שם בוט",
+        "REQUIRED": "שם בוט נדרש"
+>>>>>>> upstream/develop
       },
       "DESCRIPTION": {
         "LABEL": "תיאור",
         "PLACEHOLDER": "מה הבוט הזה עושה?"
       },
       "WEBHOOK_URL": {
+<<<<<<< HEAD
         "LABEL": "כתובת אתר של Webhook",
         "PLACEHOLDER": "https://example.com/webhook",
         "REQUIRED": "Webhook URL is required"
@@ -91,6 +178,26 @@
     },
     "TYPES": {
       "WEBHOOK": "Webhook bot"
+=======
+        "LABEL": "כתובת URL של ווב הוק",
+        "PLACEHOLDER": "https://example.com/webhook",
+        "REQUIRED": "כתובת URL של ווב הוק נדרשת"
+      },
+      "ERRORS": {
+        "NAME": "שם בוט נדרש",
+        "URL": "כתובת URL של ווב הוק נדרשת",
+        "VALID_URL": "אנא הכנס כתובת URL תקינה המתחילה ב-http:// או https://"
+      },
+      "CANCEL": "ביטול",
+      "CREATE": "צור בוט",
+      "UPDATE": "עדכן בוט"
+    },
+    "WEBHOOK": {
+      "DESCRIPTION": "הגדר בוט ווב הוק כדי לשלב עם השירותים המותאמים אישית שלך. הבוט יקבל ויעבד אירועים משיחות ויכול להגיב עליהם."
+    },
+    "TYPES": {
+      "WEBHOOK": "בוט ווב הוק"
+>>>>>>> upstream/develop
     }
   }
 }

@@ -8,7 +8,12 @@ security:
 parameters:
   - in: path
     name: id
+<<<<<<< HEAD
     type: integer
+=======
+    schema:
+      type: integer
+>>>>>>> upstream/develop
     required: true
     description: The ID of the automation rule to be deleted
 responses:
@@ -16,5 +21,18 @@ responses:
     description: Success
   '403':
     description: Access denied
+<<<<<<< HEAD
   '404':
     description: automation rule not found
+=======
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '404':
+    description: automation rule not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

@@ -22,6 +22,11 @@ class Conversations::MessageWindowService
       messenger_messaging_window
     when 'Channel::Instagram'
       instagram_messaging_window
+<<<<<<< HEAD
+=======
+    when 'Channel::Tiktok'
+      tiktok_messaging_window
+>>>>>>> upstream/develop
     when 'Channel::Whatsapp'
       MESSAGING_WINDOW_24_HOURS
     when 'Channel::TwilioSms'
@@ -54,11 +59,22 @@ class Conversations::MessageWindowService
     meta_messaging_window('ENABLE_INSTAGRAM_CHANNEL_HUMAN_AGENT')
   end
 
+<<<<<<< HEAD
+=======
+  def tiktok_messaging_window
+    48.hours
+  end
+
+>>>>>>> upstream/develop
   def meta_messaging_window(config_key)
     GlobalConfigService.load(config_key, nil) ? MESSAGING_WINDOW_7_DAYS : MESSAGING_WINDOW_24_HOURS
   end
 
   def last_incoming_message
+<<<<<<< HEAD
     @last_incoming_message ||= @conversation.messages&.incoming&.last
+=======
+    @last_incoming_message ||= @conversation.messages.where(account_id: @conversation.account_id).incoming&.last
+>>>>>>> upstream/develop
   end
 end

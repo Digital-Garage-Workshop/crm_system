@@ -12,11 +12,22 @@ import { useKeyboardEvents } from './useKeyboardEvents';
 
 /**
  * Wrap the action in a function that calls the action and prevents the default event behavior.
+<<<<<<< HEAD
  * @param {Function} action - The action to be called.
  * @returns {{action: Function, allowOnFocusedInput: boolean}} An object containing the action and a flag to allow the event on focused input.
  */
 const createAction = action => ({
   action: e => {
+=======
+ * Only prevents default when items are available to navigate.
+ * @param {Function} action - The action to be called.
+ * @param {import('vue').Ref<Array>} items - A ref to the array of selectable items.
+ * @returns {{action: Function, allowOnFocusedInput: boolean}} An object containing the action and a flag to allow the event on focused input.
+ */
+const createAction = (action, items) => ({
+  action: e => {
+    if (!items.value?.length) return;
+>>>>>>> upstream/develop
     action();
     e.preventDefault();
   },
@@ -38,6 +49,7 @@ const createKeyboardEvents = (
   items
 ) => {
   const events = {
+<<<<<<< HEAD
     ArrowUp: createAction(moveSelectionUp),
     'Control+KeyP': createAction(moveSelectionUp),
     ArrowDown: createAction(moveSelectionDown),
@@ -47,6 +59,16 @@ const createKeyboardEvents = (
   // Adds an event handler for the Enter key if the onSelect function is provided.
   if (typeof onSelect === 'function') {
     events.Enter = createAction(() => items.value?.length > 0 && onSelect());
+=======
+    ArrowUp: createAction(moveSelectionUp, items),
+    'Control+KeyP': createAction(moveSelectionUp, items),
+    ArrowDown: createAction(moveSelectionDown, items),
+    'Control+KeyN': createAction(moveSelectionDown, items),
+  };
+
+  if (typeof onSelect === 'function') {
+    events.Enter = createAction(onSelect, items);
+>>>>>>> upstream/develop
   }
 
   return events;

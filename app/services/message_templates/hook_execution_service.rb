@@ -2,8 +2,13 @@ class MessageTemplates::HookExecutionService
   pattr_initialize [:message!]
 
   def perform
+<<<<<<< HEAD
     return if conversation.campaign.present?
     return if conversation.last_incoming_message.blank?
+=======
+    return if conversation.last_incoming_message.blank?
+    return if message.auto_reply_email?
+>>>>>>> upstream/develop
 
     trigger_templates
   end
@@ -17,17 +22,28 @@ class MessageTemplates::HookExecutionService
     ::MessageTemplates::Template::OutOfOffice.new(conversation: conversation).perform if should_send_out_of_office_message?
     ::MessageTemplates::Template::Greeting.new(conversation: conversation).perform if should_send_greeting?
     ::MessageTemplates::Template::EmailCollect.new(conversation: conversation).perform if inbox.enable_email_collect && should_send_email_collect?
+<<<<<<< HEAD
     ::MessageTemplates::Template::CsatSurvey.new(conversation: conversation).perform if should_send_csat_survey?
   end
 
   def should_send_out_of_office_message?
+=======
+  end
+
+  def should_send_out_of_office_message?
+    return false if conversation.campaign.present?
+>>>>>>> upstream/develop
     # should not send if its a tweet message
     return false if conversation.tweet?
     # should not send for outbound messages
     return false unless message.incoming?
     # prevents sending out-of-office message if an agent has sent a message in last 5 minutes
     # ensures better UX by not interrupting active conversations at the end of business hours
+<<<<<<< HEAD
     return false if conversation.messages.outgoing.exists?(['created_at > ?', 5.minutes.ago])
+=======
+    return false if conversation.messages.outgoing.where(private: false).exists?(['created_at > ?', 5.minutes.ago])
+>>>>>>> upstream/develop
 
     inbox.out_of_office? && conversation.messages.today.template.empty? && inbox.out_of_office_message.present?
   end
@@ -37,6 +53,10 @@ class MessageTemplates::HookExecutionService
   end
 
   def should_send_greeting?
+<<<<<<< HEAD
+=======
+    return false if conversation.campaign.present?
+>>>>>>> upstream/develop
     # should not send if its a tweet message
     return false if conversation.tweet?
 
@@ -49,12 +69,18 @@ class MessageTemplates::HookExecutionService
 
   # TODO: we should be able to reduce this logic once we have a toggle for email collect messages
   def should_send_email_collect?
+<<<<<<< HEAD
+=======
+    return false if conversation.campaign.present?
+
+>>>>>>> upstream/develop
     !contact_has_email? && inbox.web_widget? && !email_collect_was_sent?
   end
 
   def contact_has_email?
     contact.email
   end
+<<<<<<< HEAD
 
   def csat_enabled_conversation?
     return false unless conversation.resolved?
@@ -73,5 +99,7 @@ class MessageTemplates::HookExecutionService
 
     true
   end
+=======
+>>>>>>> upstream/develop
 end
 MessageTemplates::HookExecutionService.prepend_mod_with('MessageTemplates::HookExecutionService')

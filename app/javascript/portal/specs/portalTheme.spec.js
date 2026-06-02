@@ -3,8 +3,12 @@ import {
   removeQueryParamsFromUrl,
   updateThemeInHeader,
   switchTheme,
+<<<<<<< HEAD
   initializeThemeSwitchButtons,
   initializeToggleButton,
+=======
+  initializeThemeHandlers,
+>>>>>>> upstream/develop
   initializeMediaQueryListener,
   initializeTheme,
 } from '../portalThemeHelper.js';
@@ -21,6 +25,10 @@ describe('portalThemeHelper', () => {
 
     appearanceDropdown = document.createElement('div');
     appearanceDropdown.id = 'appearance-dropdown';
+<<<<<<< HEAD
+=======
+    appearanceDropdown.classList.add('appearance-menu');
+>>>>>>> upstream/develop
     document.body.appendChild(appearanceDropdown);
 
     window.matchMedia = vi.fn().mockImplementation(query => ({
@@ -142,7 +150,11 @@ describe('portalThemeHelper', () => {
     });
   });
 
+<<<<<<< HEAD
   describe('#initializeThemeSwitchButtons', () => {
+=======
+  describe('#initializeThemeHandlers', () => {
+>>>>>>> upstream/develop
     beforeEach(() => {
       appearanceDropdown.innerHTML = `
         <button data-theme="light"><span class="check-mark-icon light-theme"></span></button>
@@ -153,6 +165,7 @@ describe('portalThemeHelper', () => {
 
     it('does nothing if the appearance dropdown is not found', () => {
       appearanceDropdown.remove();
+<<<<<<< HEAD
       expect(appearanceDropdown.dataset.currentTheme).toBeUndefined();
     });
     it('should set current theme to system if no theme in localStorage', () => {
@@ -190,6 +203,60 @@ describe('portalThemeHelper', () => {
       themeToggleButton.click();
       appearanceDropdown.style.display = 'none';
       expect(appearanceDropdown.style.display).toBe('none');
+=======
+      expect(() => initializeThemeHandlers()).not.toThrow();
+    });
+
+    it('should handle theme button clicks', () => {
+      initializeThemeHandlers();
+
+      // Simulate clicking a theme button
+      const lightButton = appearanceDropdown.querySelector(
+        'button[data-theme="light"]'
+      );
+      const clickEvent = new Event('click', { bubbles: true });
+      Object.defineProperty(clickEvent, 'target', {
+        value: lightButton,
+        enumerable: true,
+      });
+
+      document.dispatchEvent(clickEvent);
+
+      expect(localStorage.theme).toBe('light');
+      expect(appearanceDropdown.dataset.currentTheme).toBe('light');
+    });
+
+    it('should toggle dropdown visibility on toggle button click', () => {
+      initializeThemeHandlers();
+
+      // Initially closed
+      expect(appearanceDropdown.dataset.dropdownOpen).toBeUndefined();
+
+      // Click to open
+      themeToggleButton.click();
+      expect(appearanceDropdown.dataset.dropdownOpen).toBe('true');
+
+      // Click to close
+      themeToggleButton.click();
+      expect(appearanceDropdown.dataset.dropdownOpen).toBe('false');
+    });
+
+    it('should close dropdown when clicking outside', () => {
+      initializeThemeHandlers();
+
+      // Open dropdown
+      appearanceDropdown.dataset.dropdownOpen = 'true';
+
+      // Click outside
+      const outsideClick = new Event('click', { bubbles: true });
+      Object.defineProperty(outsideClick, 'target', {
+        value: document.body,
+        enumerable: true,
+      });
+      document.dispatchEvent(outsideClick);
+
+      expect(appearanceDropdown.dataset.dropdownOpen).toBe('false');
+>>>>>>> upstream/develop
     });
   });
 

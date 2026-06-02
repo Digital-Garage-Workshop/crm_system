@@ -4,6 +4,10 @@ import { useMapGetter, useStore } from 'dashboard/composables/store';
 import wootConstants from 'dashboard/constants/globals';
 import { useAlert } from 'dashboard/composables';
 import { useI18n } from 'vue-i18n';
+<<<<<<< HEAD
+=======
+import { useImpersonation } from 'dashboard/composables/useImpersonation';
+>>>>>>> upstream/develop
 
 import {
   DropdownContainer,
@@ -13,6 +17,10 @@ import {
 } from 'next/dropdown-menu/base';
 import Icon from 'next/icon/Icon.vue';
 import Button from 'next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import ToggleSwitch from 'dashboard/components-next/switch/Switch.vue';
+>>>>>>> upstream/develop
 
 const { t } = useI18n();
 const store = useStore();
@@ -20,6 +28,11 @@ const currentUserAvailability = useMapGetter('getCurrentUserAvailability');
 const currentAccountId = useMapGetter('getCurrentAccountId');
 const currentUserAutoOffline = useMapGetter('getCurrentUserAutoOffline');
 
+<<<<<<< HEAD
+=======
+const { isImpersonating } = useImpersonation();
+
+>>>>>>> upstream/develop
 const { AVAILABILITY_STATUS_KEYS } = wootConstants;
 const statusList = computed(() => {
   return [
@@ -45,7 +58,25 @@ const activeStatus = computed(() => {
   return availabilityStatuses.value.find(status => status.active);
 });
 
+<<<<<<< HEAD
 function changeAvailabilityStatus(availability) {
+=======
+const autoOfflineToggle = computed({
+  get: () => currentUserAutoOffline.value,
+  set: autoOffline => {
+    store.dispatch('updateAutoOffline', {
+      accountId: currentAccountId.value,
+      autoOffline,
+    });
+  },
+});
+
+function changeAvailabilityStatus(availability) {
+  if (isImpersonating.value) {
+    useAlert(t('PROFILE_SETTINGS.FORM.AVAILABILITY.IMPERSONATING_ERROR'));
+    return;
+  }
+>>>>>>> upstream/develop
   try {
     store.dispatch('updateAvailability', {
       availability,
@@ -55,6 +86,7 @@ function changeAvailabilityStatus(availability) {
     useAlert(t('PROFILE_SETTINGS.FORM.AVAILABILITY.SET_AVAILABILITY_ERROR'));
   }
 }
+<<<<<<< HEAD
 
 function updateAutoOffline(autoOffline) {
   store.dispatch('updateAutoOffline', {
@@ -72,21 +104,46 @@ function updateAutoOffline(autoOffline) {
           {{ $t('SIDEBAR.SET_YOUR_AVAILABILITY') }}
         </div>
         <DropdownContainer>
+=======
+</script>
+
+<template>
+  <DropdownSection class="[&>ul]:overflow-visible">
+    <div class="grid gap-0">
+      <DropdownItem preserve-open class="gap-1">
+        <div class="flex-grow flex items-center gap-1 min-w-0">
+          {{ $t('SIDEBAR.SET_YOUR_AVAILABILITY') }}
+        </div>
+        <DropdownContainer class="shrink-0">
+>>>>>>> upstream/develop
           <template #trigger="{ toggle }">
             <Button
               size="sm"
               color="slate"
               variant="faded"
+<<<<<<< HEAD
               class="min-w-[96px]"
+=======
+>>>>>>> upstream/develop
               icon="i-lucide-chevron-down"
               trailing-icon
               @click="toggle"
             >
+<<<<<<< HEAD
               <div class="flex gap-1 items-center flex-grow text-sm">
                 <div class="p-1 flex-shrink-0">
                   <div class="size-2 rounded-sm" :class="activeStatus.color" />
                 </div>
                 <span>{{ activeStatus.label }}</span>
+=======
+              <div class="flex gap-1 items-center min-w-0 text-sm">
+                <div class="p-1 flex-shrink-0">
+                  <div class="size-2 rounded-sm" :class="activeStatus.color" />
+                </div>
+                <span class="truncate max-w-[7rem]">
+                  {{ activeStatus.label }}
+                </span>
+>>>>>>> upstream/develop
               </div>
             </Button>
           </template>
@@ -103,11 +160,16 @@ function updateAutoOffline(autoOffline) {
         </DropdownContainer>
       </DropdownItem>
       <DropdownItem>
+<<<<<<< HEAD
         <div class="flex-grow flex items-center gap-1">
+=======
+        <div class="flex-grow min-w-0">
+>>>>>>> upstream/develop
           {{ $t('SIDEBAR.SET_AUTO_OFFLINE.TEXT') }}
           <Icon
             v-tooltip.top="$t('SIDEBAR.SET_AUTO_OFFLINE.INFO_SHORT')"
             icon="i-lucide-info"
+<<<<<<< HEAD
             class="size-4 text-n-slate-10"
           />
         </div>
@@ -116,6 +178,12 @@ function updateAutoOffline(autoOffline) {
           :model-value="currentUserAutoOffline"
           @input="updateAutoOffline"
         />
+=======
+            class="inline-block align-middle ms-1 size-4 text-n-slate-10"
+          />
+        </div>
+        <ToggleSwitch v-model="autoOfflineToggle" />
+>>>>>>> upstream/develop
       </DropdownItem>
     </div>
   </DropdownSection>

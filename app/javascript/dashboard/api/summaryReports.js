@@ -35,6 +35,19 @@ class SummaryReportsAPI extends ApiClient {
       },
     });
   }
+<<<<<<< HEAD
+=======
+
+  getLabelReports({ since, until, businessHours } = {}) {
+    return axios.get(`${this.url}/label`, {
+      params: {
+        since,
+        until,
+        business_hours: businessHours,
+      },
+    });
+  }
+>>>>>>> upstream/develop
 }
 
 export default new SummaryReportsAPI();

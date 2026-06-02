@@ -17,6 +17,16 @@
     "IP_ADDRESS": "Endereço IP",
     "CREATED_AT_LABEL": "Criado",
     "NEW_MESSAGE": "Nova Mensagem",
+<<<<<<< HEAD
+=======
+    "CALL": "Chamada",
+    "CALL_INITIATED": "Efetuando chamada…",
+    "CALL_FAILED": "Não foi possível iniciar a chamada. Tente novamente.",
+    "CLICK_TO_EDIT": "Click to edit",
+    "VOICE_INBOX_PICKER": {
+      "TITLE": "Escolha uma caixa de entrada de voz"
+    },
+>>>>>>> upstream/develop
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Não há conversas anteriores associadas a este contato.",
       "TITLE": "Conversas anteriores"
@@ -186,7 +196,11 @@
   "CONTACTS_PAGE": {
     "LIST": {
       "TABLE_HEADER": {
+<<<<<<< HEAD
         "SOCIAL_PROFILES": "Social Profiles"
+=======
+        "SOCIAL_PROFILES": "Perfis Sociais"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -283,15 +297,25 @@
   },
   "CONTACTS_LAYOUT": {
     "HEADER": {
+<<<<<<< HEAD
       "TITLE": "Contato",
       "SEARCH_TITLE": "Pesquisar contatos",
+=======
+      "TITLE": "Contatos",
+      "SEARCH_TITLE": "Pesquisar contatos",
+      "ACTIVE_TITLE": "Contatos ativos",
+>>>>>>> upstream/develop
       "SEARCH_PLACEHOLDER": "Pesquisar...",
       "MESSAGE_BUTTON": "Enviar Mensagem",
       "SEND_MESSAGE": "Enviar mensagem",
       "BLOCK_CONTACT": "Bloquear contato",
       "UNBLOCK_CONTACT": "Desbloquear contato",
       "BREADCRUMB": {
+<<<<<<< HEAD
         "CONTACTS": "Contato"
+=======
+        "CONTACTS": "Contatos"
+>>>>>>> upstream/develop
       },
       "ACTIONS": {
         "CONTACT_CREATION": {
@@ -331,7 +355,11 @@
           "LABEL": "Classificar por",
           "OPTIONS": {
             "NAME": "Nome",
+<<<<<<< HEAD
             "EMAIL": "e-mail",
+=======
+            "EMAIL": "E-mail",
+>>>>>>> upstream/develop
             "PHONE_NUMBER": "Número de telefone",
             "COMPANY": "Empresa",
             "COUNTRY": "País/região",
@@ -373,11 +401,19 @@
     },
     "FILTER": {
       "NAME": "Nome",
+<<<<<<< HEAD
       "EMAIL": "e-mail",
+=======
+      "EMAIL": "E-mail",
+>>>>>>> upstream/develop
       "PHONE_NUMBER": "Número de telefone",
       "IDENTIFIER": "Identificador",
       "COUNTRY": "País/região",
       "CITY": "Cidade",
+<<<<<<< HEAD
+=======
+      "COMPANY": "Empresa",
+>>>>>>> upstream/develop
       "CREATED_AT": "Criado em",
       "LAST_ACTIVITY": "Última atividade",
       "REFERER_LINK": "Link de origem",
@@ -450,6 +486,15 @@
           "INSTAGRAM": {
             "PLACEHOLDER": "Adicionar Instagram"
           },
+<<<<<<< HEAD
+=======
+          "TELEGRAM": {
+            "PLACEHOLDER": "Adicionar Telegram"
+          },
+          "TIKTOK": {
+            "PLACEHOLDER": "Adicionar TikTok"
+          },
+>>>>>>> upstream/develop
           "LINKEDIN": {
             "PLACEHOLDER": "Adicionar LinkedIn"
           },
@@ -457,6 +502,13 @@
             "PLACEHOLDER": "Adicionar Twitter"
           }
         }
+<<<<<<< HEAD
+=======
+      },
+      "DELETE_CONTACT": {
+        "MESSAGE": "Esta ação é permanente e irreversível.",
+        "BUTTON": "Excluir agora"
+>>>>>>> upstream/develop
       }
     },
     "DETAILS": {
@@ -466,7 +518,11 @@
       "DELETE_CONTACT": "Excluir contato",
       "DELETE_DIALOG": {
         "TITLE": "Confirmar exclusão",
+<<<<<<< HEAD
         "DESCRIPTION": "Tem certeza de que deseja excluir este contato {contactName}?",
+=======
+        "DESCRIPTION": "Tem certeza de que deseja excluir este contato?",
+>>>>>>> upstream/develop
         "CONFIRM": "Sim, excluir",
         "API": {
           "SUCCESS_MESSAGE": "Contato excluído com sucesso",
@@ -544,10 +600,19 @@
         "WROTE": "escreveu",
         "YOU": "Você",
         "SAVE": "Salvar nota",
+<<<<<<< HEAD
         "EXPAND": "Expandir",
         "COLLAPSE": "Recolher",
         "NO_NOTES": "Sem notas, você pode adicionar notas a partir da página de detalhes do contato.",
         "EMPTY_STATE": "Não existem notas associadas a este contato. Você pode adicionar uma nota digitando na caixa acima."
+=======
+        "ADD_NOTE": "Adicionar nota de contato",
+        "EXPAND": "Expandir",
+        "COLLAPSE": "Recolher",
+        "NO_NOTES": "Sem notas, você pode adicionar notas a partir da página de detalhes do contato.",
+        "EMPTY_STATE": "Não existem notas associadas a este contato. Você pode adicionar uma nota digitando na caixa acima.",
+        "CONVERSATION_EMPTY_STATE": "Ainda não há notas. Use o botão Adicionar nota para criar uma."
+>>>>>>> upstream/develop
       }
     },
     "EMPTY_STATE": {
@@ -555,7 +620,34 @@
       "SUBTITLE": "Comece a adicionar novos contatos clicando no botão abaixo",
       "BUTTON_LABEL": "Adicionar contato",
       "SEARCH_EMPTY_STATE_TITLE": "Nenhum contato corresponde à sua pesquisa 🔍",
+<<<<<<< HEAD
       "LIST_EMPTY_STATE_TITLE": "Não há contatos disponíveis nesta visualização 📋"
+=======
+      "LIST_EMPTY_STATE_TITLE": "Não há contatos disponíveis nesta visualização 📋",
+      "ACTIVE_EMPTY_STATE_TITLE": "Nenhum contato está ativo no momento 🌙"
+    },
+    "LOAD_MORE": "Carregar mais"
+  },
+  "CONTACTS_BULK_ACTIONS": {
+    "ASSIGN_LABELS": "Atribuir rótulo",
+    "ASSIGN_LABELS_SUCCESS": "Rótulos atribuídos com sucesso.",
+    "ASSIGN_LABELS_FAILED": "Falha ao atribuir etiquetas",
+    "DESCRIPTION": "Selecione as etiquetas que deseja adicionar aos contatos selecionados.",
+    "NO_LABELS_FOUND": "Nenhuma etiqueta disponível ainda.",
+    "SELECTED_COUNT": "{count} selecionado",
+    "CLEAR_SELECTION": "Limpar seleção",
+    "SELECT_ALL": "Selecionar todos ({count})",
+    "DELETE_CONTACTS": "Excluir",
+    "DELETE_SUCCESS": "Contatos excluídos com sucesso.",
+    "DELETE_FAILED": "Falha ao excluir os contatos.",
+    "DELETE_DIALOG": {
+      "TITLE": "Excluir os contatos selecionados",
+      "SINGULAR_TITLE": "Excluir o contato selecionado",
+      "DESCRIPTION": "Isso excluirá permanentemente {count} contatos selecionados. Esta ação não pode ser desfeita.",
+      "SINGULAR_DESCRIPTION": "Isso excluirá permanentemente o contato selecionado. Esta ação não pode ser desfeita.",
+      "CONFIRM_MULTIPLE": "Excluir contatos",
+      "CONFIRM_SINGLE": "Excluir contato"
+>>>>>>> upstream/develop
     }
   },
   "COMPOSE_NEW_CONVERSATION": {
@@ -569,7 +661,11 @@
       "NO_INBOX_ALERT": "Não há caixas de entrada disponíveis para iniciar uma conversa com este contato.",
       "CONTACT_SELECTOR": {
         "LABEL": "Para:",
+<<<<<<< HEAD
         "TAG_INPUT_PLACEHOLDER": "Pesquisar um contato com o nome, e-mail ou número de telefone",
+=======
+        "TAG_INPUT_PLACEHOLDER": "Digite pelo menos 2 caracteres para pesquisar por nome, e-mail ou número de telefone",
+>>>>>>> upstream/develop
         "CONTACT_CREATING": "Criando contato..."
       },
       "INBOX_SELECTOR": {
@@ -580,9 +676,15 @@
         "SUBJECT_LABEL": "Assunto:",
         "SUBJECT_PLACEHOLDER": "Digite o assunto do seu e-mail aqui",
         "CC_LABEL": "Cc:",
+<<<<<<< HEAD
         "CC_PLACEHOLDER": "Pesquisar por um contato com seu endereço de e-mail",
         "BCC_LABEL": "CCO:",
         "BCC_PLACEHOLDER": "Pesquisar por um contato com seu endereço de e-mail",
+=======
+        "CC_PLACEHOLDER": "Digite pelo menos 2 caracteres para pesquisar por e-mail",
+        "BCC_LABEL": "CCO:",
+        "BCC_PLACEHOLDER": "Digite pelo menos 2 caracteres para pesquisar por e-mail",
+>>>>>>> upstream/develop
         "BCC_BUTTON": "CCO"
       },
       "MESSAGE_EDITOR": {
@@ -599,6 +701,18 @@
           "SEND_MESSAGE": "Enviar mensagem"
         }
       },
+<<<<<<< HEAD
+=======
+      "TWILIO_OPTIONS": {
+        "LABEL": "Selecione o modelo",
+        "SEARCH_PLACEHOLDER": "Pesquisar modelos",
+        "EMPTY_STATE": "Nenhum modelo encontrado",
+        "TEMPLATE_PARSER": {
+          "BACK": "Voltar",
+          "SEND_MESSAGE": "Enviar mensagem"
+        }
+      },
+>>>>>>> upstream/develop
       "ACTION_BUTTONS": {
         "DISCARD": "Descartar",
         "SEND": "Enviar ({keyCode})"

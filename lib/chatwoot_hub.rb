@@ -1,5 +1,6 @@
 # TODO: lets use HTTParty instead of RestClient
 class ChatwootHub
+<<<<<<< HEAD
   BASE_URL = ENV.fetch('CHATWOOT_HUB_URL', 'https://hub.2.chatwoot.com')
   PING_URL = "#{BASE_URL}/ping".freeze
   REGISTRATION_URL = "#{BASE_URL}/instances".freeze
@@ -7,6 +8,33 @@ class ChatwootHub
   EVENTS_URL = "#{BASE_URL}/events".freeze
   BILLING_URL = "#{BASE_URL}/billing".freeze
   CAPTAIN_ACCOUNTS_URL = "#{BASE_URL}/instance_captain_accounts".freeze
+=======
+  DEFAULT_BASE_URL = 'https://hub.2.chatwoot.com'.freeze
+
+  def self.base_url
+    DEFAULT_BASE_URL
+  end
+
+  def self.ping_url
+    "#{base_url}/ping"
+  end
+
+  def self.registration_url
+    "#{base_url}/instances"
+  end
+
+  def self.push_notification_url
+    "#{base_url}/send_push"
+  end
+
+  def self.events_url
+    "#{base_url}/events"
+  end
+
+  def self.billing_base_url
+    "#{base_url}/billing"
+  end
+>>>>>>> upstream/develop
 
   def self.installation_identifier
     identifier = InstallationConfig.find_by(name: 'INSTALLATION_IDENTIFIER')&.value
@@ -15,14 +43,28 @@ class ChatwootHub
   end
 
   def self.billing_url
+<<<<<<< HEAD
     "#{BILLING_URL}?installation_identifier=#{installation_identifier}"
   end
 
   def self.pricing_plan
+=======
+    "#{billing_base_url}?installation_identifier=#{installation_identifier}"
+  end
+
+  def self.pricing_plan
+    return 'community' unless ChatwootApp.enterprise?
+
+>>>>>>> upstream/develop
     InstallationConfig.find_by(name: 'INSTALLATION_PRICING_PLAN')&.value || 'community'
   end
 
   def self.pricing_plan_quantity
+<<<<<<< HEAD
+=======
+    return 0 unless ChatwootApp.enterprise?
+
+>>>>>>> upstream/develop
     InstallationConfig.find_by(name: 'INSTALLATION_PRICING_PLAN_QUANTITY')&.value || 0
   end
 
@@ -64,7 +106,11 @@ class ChatwootHub
     begin
       info = instance_config
       info = info.merge(instance_metrics) unless ENV['DISABLE_TELEMETRY']
+<<<<<<< HEAD
       response = RestClient.post(PING_URL, info.to_json, { content_type: :json, accept: :json })
+=======
+      response = RestClient.post(ping_url, info.to_json, { content_type: :json, accept: :json })
+>>>>>>> upstream/develop
       parsed_response = JSON.parse(response)
     rescue *ExceptionList::REST_CLIENT_EXCEPTIONS => e
       Rails.logger.error "Exception: #{e.message}"
@@ -76,7 +122,11 @@ class ChatwootHub
 
   def self.register_instance(company_name, owner_name, owner_email)
     info = { company_name: company_name, owner_name: owner_name, owner_email: owner_email, subscribed_to_mailers: true }
+<<<<<<< HEAD
     RestClient.post(REGISTRATION_URL, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+=======
+    RestClient.post(registration_url, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+>>>>>>> upstream/develop
   rescue *ExceptionList::REST_CLIENT_EXCEPTIONS => e
     Rails.logger.error "Exception: #{e.message}"
   rescue StandardError => e
@@ -84,14 +134,19 @@ class ChatwootHub
   end
 
   def self.send_push(fcm_options)
+<<<<<<< HEAD
     info = { fcm_options: fcm_options }
     RestClient.post(PUSH_NOTIFICATION_URL, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+=======
+    send_push_with_response(fcm_options)
+>>>>>>> upstream/develop
   rescue *ExceptionList::REST_CLIENT_EXCEPTIONS => e
     Rails.logger.error "Exception: #{e.message}"
   rescue StandardError => e
     ChatwootExceptionTracker.new(e).capture_exception
   end
 
+<<<<<<< HEAD
   def self.get_captain_settings(account)
     info = {
       installation_identifier: installation_identifier,
@@ -101,16 +156,30 @@ class ChatwootHub
     HTTParty.post(CAPTAIN_ACCOUNTS_URL,
                   body: info.to_json,
                   headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' })
+=======
+  def self.send_push_with_response(fcm_options)
+    info = { fcm_options: fcm_options }
+    RestClient.post(push_notification_url, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+>>>>>>> upstream/develop
   end
 
   def self.emit_event(event_name, event_data)
     return if ENV['DISABLE_TELEMETRY']
 
     info = { event_name: event_name, event_data: event_data }
+<<<<<<< HEAD
     RestClient.post(EVENTS_URL, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+=======
+    RestClient.post(events_url, info.merge(instance_config).to_json, { content_type: :json, accept: :json })
+>>>>>>> upstream/develop
   rescue *ExceptionList::REST_CLIENT_EXCEPTIONS => e
     Rails.logger.error "Exception: #{e.message}"
   rescue StandardError => e
     ChatwootExceptionTracker.new(e).capture_exception
   end
 end
+<<<<<<< HEAD
+=======
+
+ChatwootHub.singleton_class.prepend_mod_with('ChatwootHub')
+>>>>>>> upstream/develop

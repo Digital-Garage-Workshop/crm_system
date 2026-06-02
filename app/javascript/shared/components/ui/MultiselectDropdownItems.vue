@@ -1,14 +1,24 @@
 <script>
 import WootDropdownItem from 'shared/components/ui/dropdown/DropdownItem.vue';
 import WootDropdownMenu from 'shared/components/ui/dropdown/DropdownMenu.vue';
+<<<<<<< HEAD
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
+=======
+import Avatar from 'next/avatar/Avatar.vue';
+import Icon from 'dashboard/components-next/icon/Icon.vue';
+>>>>>>> upstream/develop
 import NextButton from 'dashboard/components-next/button/Button.vue';
 
 export default {
   components: {
     WootDropdownItem,
     WootDropdownMenu,
+<<<<<<< HEAD
     Thumbnail,
+=======
+    Avatar,
+    Icon,
+>>>>>>> upstream/develop
     NextButton,
   },
 
@@ -105,6 +115,7 @@ export default {
                   {{ option.name }}
                 </span>
               </div>
+<<<<<<< HEAD
               <Thumbnail
                 v-if="hasThumbnail"
                 :src="option.thumbnail"
@@ -112,6 +123,21 @@ export default {
                 :username="option.name"
                 :status="option.availability_status"
                 has-border
+=======
+              <Avatar
+                v-if="hasThumbnail && !option.icon"
+                :src="option.thumbnail"
+                :name="option.name"
+                :status="option.availability_status"
+                :size="24"
+                hide-offline-status
+                rounded-full
+              />
+              <Icon
+                v-if="option.icon"
+                :icon="option.icon"
+                class="size-5 text-n-slate-11"
+>>>>>>> upstream/develop
               />
             </NextButton>
           </WootDropdownItem>
@@ -133,7 +159,11 @@ export default {
 }
 
 .search-input {
+<<<<<<< HEAD
   @apply m-0 w-full border border-solid border-transparent h-8 text-sm text-slate-700 dark:text-slate-100 rounded-md focus:border-woot-500 bg-slate-50 dark:bg-slate-900;
+=======
+  @apply m-0 w-full border border-solid border-transparent h-8 text-sm text-n-slate-12 rounded-md focus:border-n-brand bg-n-background dark:bg-n-background;
+>>>>>>> upstream/develop
 }
 
 .multiselect-dropdown--item {
@@ -144,7 +174,11 @@ export default {
   }
 
   &:hover {
+<<<<<<< HEAD
     @apply bg-n-slate-2 dark:bg-n-solid-3 text-slate-800 dark:text-slate-100;
+=======
+    @apply bg-n-slate-2 dark:bg-n-solid-3 text-n-slate-12;
+>>>>>>> upstream/develop
   }
 }
 </style>

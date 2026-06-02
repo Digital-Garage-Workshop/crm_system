@@ -25,13 +25,21 @@ const handleTabChanged = tab => {
 <template>
   <Story title="Components/TabBar" :layout="{ type: 'grid', width: '920px' }">
     <Variant title="Default">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <TabBar :tabs="defaultTabs" @tab-changed="handleTabChanged" />
       </div>
     </Variant>
 
     <Variant title="Custom Tabs with Initial Tab">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <TabBar
           :tabs="customTabs"
           :initial-active-tab="1"
@@ -41,7 +49,11 @@ const handleTabChanged = tab => {
     </Variant>
 
     <Variant title="No Counts">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <TabBar
           :tabs="[{ label: 'Tab 1' }, { label: 'Tab 2' }, { label: 'Tab 3' }]"
           @tab-changed="handleTabChanged"
@@ -50,7 +62,11 @@ const handleTabChanged = tab => {
     </Variant>
 
     <Variant title="Single Tab">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <TabBar
           :tabs="[{ label: 'Single Tab', count: 42 }]"
           @tab-changed="handleTabChanged"

@@ -1,7 +1,11 @@
 {
   "COMPONENTS": {
     "FILE_BUBBLE": {
+<<<<<<< HEAD
       "DOWNLOAD": "Звантажити",
+=======
+      "DOWNLOAD": "Завантажити",
+>>>>>>> upstream/develop
       "UPLOADING": "Завантажується..."
     },
     "FORM_BUBBLE": {
@@ -12,14 +16,27 @@
       "ERROR_MESSAGE": "Не вдалося надіслати, спробуйте ще раз"
     }
   },
+<<<<<<< HEAD
   "TEAM_AVAILABILITY": {
     "ONLINE": "Ми онлайн",
     "OFFLINE": "Нас наразі немає"
+=======
+  "THUMBNAIL": {
+    "AUTHOR": {
+      "NOT_AVAILABLE": "Недоступно"
+    }
+  },
+  "TEAM_AVAILABILITY": {
+    "ONLINE": "Ми онлайн",
+    "OFFLINE": "Нас наразі немає",
+    "BACK_AS_SOON_AS_POSSIBLE": "Ми повернемося якнайшвидше"
+>>>>>>> upstream/develop
   },
   "REPLY_TIME": {
     "IN_A_FEW_MINUTES": "Зазвичай, відповідаємо за декілька хвилин",
     "IN_A_FEW_HOURS": "Зазвичай, відповідаємо за декілька годин",
     "IN_A_DAY": "Зазвичай, відповідаємо протягом доби",
+<<<<<<< HEAD
     "BACK_IN": "Ми повернемось в мережу"
   },
   "DAY_NAMES": {
@@ -30,6 +47,23 @@
     "THURSDAY": "Четвер",
     "FRIDAY": "П'ятниця",
     "SATURDAY": "Субота"
+=======
+    "BACK_IN_HOURS": "Ми будемо онлайн через {n} годину | Ми будемо онлайн через {n} год.",
+    "BACK_IN_MINUTES": "Ми будемо онлайн через {time} хвилин",
+    "BACK_AT_TIME": "Ми будемо онлайн о {time}",
+    "BACK_ON_DAY": "Ми будемо онлайн у {day}",
+    "BACK_TOMORROW": "Ми будемо онлайн завтра",
+    "BACK_IN_SOME_TIME": "Ми будемо онлайн трохи пізніше"
+  },
+  "DAY_NAMES": {
+    "SUNDAY": "неділю",
+    "MONDAY": "понеділок",
+    "TUESDAY": "вівторок",
+    "WEDNESDAY": "середу",
+    "THURSDAY": "четвер",
+    "FRIDAY": "п'ятницю",
+    "SATURDAY": "суботу"
+>>>>>>> upstream/develop
   },
   "START_CONVERSATION": "Розпочати розмову",
   "END_CONVERSATION": "Закінчити спілкування",
@@ -44,7 +78,11 @@
     "BOT": "Бот"
   },
   "BUBBLE": {
+<<<<<<< HEAD
     "LABEL": "Почніть розмову з нами"
+=======
+    "LABEL": "Напишіть нам"
+>>>>>>> upstream/develop
   },
   "POWERED_BY": "Працює на Chatwoot",
   "EMAIL_PLACEHOLDER": "Введіть адресу електронної пошти",
@@ -71,7 +109,11 @@
         "DIAL_CODE_VALID_ERROR": "Будь ласка, оберіть код країни",
         "VALID_ERROR": "Будь ласка, введіть правильний номер телефону",
         "DROPDOWN_EMPTY": "Результатів не знайдено",
+<<<<<<< HEAD
         "DROPDOWN_SEARCH": "Search country"
+=======
+        "DROPDOWN_SEARCH": "Пошук країни"
+>>>>>>> upstream/develop
       },
       "MESSAGE": {
         "LABEL": "Текст повідомлення",
@@ -93,7 +135,11 @@
   "EMOJI": {
     "PLACEHOLDER": "Пошук емодзі",
     "NOT_FOUND": "Немає емодзі, що відповідають пошуковому запиту",
+<<<<<<< HEAD
     "ARIA_LABEL": "Emoji picker"
+=======
+    "ARIA_LABEL": "Вибір емодзі"
+>>>>>>> upstream/develop
   },
   "CSAT": {
     "TITLE": "Оцініть вашу бесіду",

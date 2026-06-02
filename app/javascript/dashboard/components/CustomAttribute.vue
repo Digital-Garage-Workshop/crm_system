@@ -49,12 +49,20 @@ export default {
       if (this.isAttributeTypeDate) {
         return this.value
           ? new Date(this.value || new Date()).toLocaleDateString()
+<<<<<<< HEAD
           : '';
+=======
+          : '---';
+>>>>>>> upstream/develop
       }
       if (this.isAttributeTypeCheckbox) {
         return this.value === 'false' ? false : this.value;
       }
+<<<<<<< HEAD
       return this.value;
+=======
+      return this.hasValue ? this.value : '---';
+>>>>>>> upstream/develop
     },
     formattedValue() {
       return this.isAttributeTypeDate
@@ -83,6 +91,12 @@ export default {
     isAttributeTypeDate() {
       return this.attributeType === 'date';
     },
+<<<<<<< HEAD
+=======
+    hasValue() {
+      return this.value !== null && this.value !== '';
+    },
+>>>>>>> upstream/develop
     urlValue() {
       return isValidURL(this.value) ? this.value : '---';
     },
@@ -99,6 +113,7 @@ export default {
       return this.v$.editedValue.$error;
     },
     errorMessage() {
+<<<<<<< HEAD
       if (this.v$.editedValue.url) {
         return this.$t('CUSTOM_ATTRIBUTES.VALIDATIONS.INVALID_URL');
       }
@@ -106,6 +121,16 @@ export default {
         return this.regexCue
           ? this.regexCue
           : this.$t('CUSTOM_ATTRIBUTES.VALIDATIONS.INVALID_INPUT');
+=======
+      if (this.v$.editedValue.url?.$invalid) {
+        return this.$t('CUSTOM_ATTRIBUTES.VALIDATIONS.INVALID_URL');
+      }
+      if (this.v$.editedValue.regexValidation?.$invalid) {
+        return (
+          this.regexCue ||
+          this.$t('CUSTOM_ATTRIBUTES.VALIDATIONS.INVALID_INPUT')
+        );
+>>>>>>> upstream/develop
       }
       return this.$t('CUSTOM_ATTRIBUTES.VALIDATIONS.REQUIRED');
     },
@@ -131,9 +156,18 @@ export default {
       editedValue: {
         required,
         regexValidation: value => {
+<<<<<<< HEAD
           return !(
             this.attributeRegex && !getRegexp(this.attributeRegex).test(value)
           );
+=======
+          if (!this.attributeRegex || !value) return true;
+          try {
+            return getRegexp(this.attributeRegex).test(value);
+          } catch {
+            return false;
+          }
+>>>>>>> upstream/develop
         },
       },
     };
@@ -223,7 +257,11 @@ export default {
             />
           </span>
           <NextButton
+<<<<<<< HEAD
             v-if="showActions && value"
+=======
+            v-if="showActions && hasValue"
+>>>>>>> upstream/develop
             v-tooltip.left="$t('CUSTOM_ATTRIBUTES.ACTIONS.DELETE')"
             slate
             sm
@@ -281,13 +319,21 @@ export default {
           v-else
           class="group-hover:bg-n-slate-3 group-hover:dark:bg-n-solid-3 inline-block rounded-sm mb-0 break-all py-0.5 px-1"
         >
+<<<<<<< HEAD
           {{ displayValue || '---' }}
+=======
+          {{ displayValue }}
+>>>>>>> upstream/develop
         </p>
         <div
           class="flex items-center max-w-[2rem] gap-1 ml-1 rtl:mr-1 rtl:ml-0"
         >
           <NextButton
+<<<<<<< HEAD
             v-if="showActions && value"
+=======
+            v-if="showActions && hasValue"
+>>>>>>> upstream/develop
             v-tooltip="$t('CUSTOM_ATTRIBUTES.ACTIONS.COPY')"
             xs
             slate
@@ -332,6 +378,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+<<<<<<< HEAD
 ::v-deep {
   .selector-wrap {
     @apply m-0 top-1;
@@ -345,4 +392,17 @@ export default {
     @apply ml-0;
   }
 }
+=======
+:deep(.selector-wrap) {
+  @apply m-0 top-1;
+
+  .selector-name {
+    @apply ml-0;
+  }
+}
+
+:deep(.name) {
+  @apply ml-0;
+}
+>>>>>>> upstream/develop
 </style>

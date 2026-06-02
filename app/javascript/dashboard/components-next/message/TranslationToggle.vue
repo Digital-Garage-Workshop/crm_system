@@ -1,6 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { defineProps, defineEmits } from 'vue';
 
+=======
+>>>>>>> upstream/develop
 defineProps({
   showingOriginal: Boolean,
 });

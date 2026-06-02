@@ -5,6 +5,7 @@ summary: Add a new automation rule
 description: Add a new automation rule to account
 security:
   - userApiKey: []
+<<<<<<< HEAD
 parameters:
   - name: data
     in: body
@@ -18,3 +19,24 @@ responses:
       $ref: '#/definitions/automation_rule'
   '403':
     description: Access denied
+=======
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/automation_rule_create_update_payload'
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/automation_rule'
+  '403':
+    description: Access denied
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

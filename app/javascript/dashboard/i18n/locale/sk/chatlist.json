@@ -69,13 +69,23 @@
         "TEXT": "Priority: Highest first"
       },
       "priority_asc": {
+<<<<<<< HEAD
         "TEXT": ""
+=======
+        "TEXT": "Priorita: od najnižšej"
+>>>>>>> upstream/develop
       },
       "waiting_since_asc": {
         "TEXT": "Pending Response: Longest first"
       },
       "waiting_since_desc": {
         "TEXT": "Pending Response: Shortest first"
+<<<<<<< HEAD
+=======
+      },
+      "priority_desc_created_at_asc": {
+        "TEXT": "Priority: Highest first, Created: Oldest first"
+>>>>>>> upstream/develop
       }
     },
     "ATTACHMENTS": {
@@ -102,6 +112,12 @@
       },
       "contact": {
         "CONTENT": "Shared contact"
+<<<<<<< HEAD
+=======
+      },
+      "embed": {
+        "CONTENT": "Embedded content"
+>>>>>>> upstream/develop
       }
     },
     "CHAT_SORT_BY_FILTER": {
@@ -134,6 +150,11 @@
     "HIDE_QUOTED_TEXT": "Skryť citovaný text",
     "SHOW_QUOTED_TEXT": "Ukázať citovaný text",
     "MESSAGE_READ": "Read",
+<<<<<<< HEAD
     "SENDING": "Sending"
+=======
+    "SENDING": "Sending",
+    "UNREAD_COUNT_OVERFLOW": "9+"
+>>>>>>> upstream/develop
   }
 }

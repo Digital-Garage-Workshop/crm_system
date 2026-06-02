@@ -1,5 +1,6 @@
 {
   "LABEL_MGMT": {
+<<<<<<< HEAD
     "HEADER": "Labels",
     "HEADER_BTN_TXT": "Add label",
     "LOADING": "Fetching labels",
@@ -14,10 +15,31 @@
         "NAME": "Nama",
         "DESCRIPTION": "Description",
         "COLOR": "Color"
+=======
+    "HEADER": "Label",
+    "HEADER_BTN_TXT": "Tambah label",
+    "LOADING": "Memuatkan label",
+    "DESCRIPTION": "Label membantu anda mengkategorikan dan mengutamakan perbualan dan prospek. Anda boleh menetapkan label kepada perbualan atau kenalan menggunakan panel sisi.",
+    "LEARN_MORE": "Ketahui lebih lanjut tentang label",
+    "COUNT": "{n} label | {n} labels",
+    "SEARCH_PLACEHOLDER": "Cari label...",
+    "NO_RESULTS": "Tiada label ditemui yang sepadan dengan carian anda",
+    "SEARCH_404": "Tiada item yang sepadan dengan pertanyaan ini",
+    "LIST": {
+      "404": "Tiada label tersedia dalam akaun ini.",
+      "TITLE": "Urus label",
+      "DESC": "Label membolehkan anda mengumpulkan perbualan bersama-sama.",
+      "TABLE_HEADER": {
+        "NAME": "Nama",
+        "DESCRIPTION": "Penerangan",
+        "COLOR": "Warna",
+        "ACTION": "Tindakan-tindakan"
+>>>>>>> upstream/develop
       }
     },
     "FORM": {
       "NAME": {
+<<<<<<< HEAD
         "LABEL": "Label Name",
         "PLACEHOLDER": "Label name",
         "REQUIRED_ERROR": "Label name is required",
@@ -36,11 +58,32 @@
       },
       "EDIT": "Edit",
       "CREATE": "Create",
+=======
+        "LABEL": "Nama Label",
+        "PLACEHOLDER": "Nama label",
+        "REQUIRED_ERROR": "Nama label diperlukan",
+        "MINIMUM_LENGTH_ERROR": "Panjang minimum 2 diperlukan",
+        "VALID_ERROR": "Hanya Alfabet, Nombor, Tanda Hubung dan Garis Bawah dibenarkan"
+      },
+      "DESCRIPTION": {
+        "LABEL": "Penerangan",
+        "PLACEHOLDER": "Penerangan Label"
+      },
+      "COLOR": {
+        "LABEL": "Warna"
+      },
+      "SHOW_ON_SIDEBAR": {
+        "LABEL": "Tunjukkan label pada bar sisi"
+      },
+      "EDIT": "Sunting",
+      "CREATE": "Cipta",
+>>>>>>> upstream/develop
       "DELETE": "Padamkan",
       "CANCEL": "Batalkan"
     },
     "SUGGESTIONS": {
       "TOOLTIP": {
+<<<<<<< HEAD
         "SINGLE_SUGGESTION": "Add label to conversation",
         "MULTIPLE_SUGGESTION": "Select this label",
         "DESELECT": "Deselect label",
@@ -66,13 +109,45 @@
       "API": {
         "SUCCESS_MESSAGE": "Label updated successfully",
         "ERROR_MESSAGE": "There was an error, please try again"
+=======
+        "SINGLE_SUGGESTION": "Tambah label ke perbualan",
+        "MULTIPLE_SUGGESTION": "Pilih label ini",
+        "DESELECT": "Nyahpilih label",
+        "DISMISS": "Tolak cadangan"
+      },
+      "POWERED_BY": "Chatwoot AI",
+      "DISMISS": "Tolak",
+      "ADD_SELECTED_LABELS": "Tambah label yang dipilih",
+      "ADD_SELECTED_LABEL": "Tambah label yang dipilih",
+      "ADD_ALL_LABELS": "Tambah semua label",
+      "SUGGESTED_LABELS": "Label yang dicadangkan"
+    },
+    "ADD": {
+      "TITLE": "Tambah label",
+      "DESC": "Label membolehkan anda mengelompokkan perbualan bersama-sama.",
+      "API": {
+        "SUCCESS_MESSAGE": "Label berjaya ditambah",
+        "ERROR_MESSAGE": "Terdapat ralat, sila cuba lagi"
+      }
+    },
+    "EDIT": {
+      "TITLE": "Sunting label",
+      "API": {
+        "SUCCESS_MESSAGE": "Label berjaya dikemas kini",
+        "ERROR_MESSAGE": "Terdapat ralat, sila cuba lagi"
+>>>>>>> upstream/develop
       }
     },
     "DELETE": {
       "BUTTON_TEXT": "Padamkan",
       "API": {
+<<<<<<< HEAD
         "SUCCESS_MESSAGE": "Label deleted successfully",
         "ERROR_MESSAGE": "There was an error, please try again"
+=======
+        "SUCCESS_MESSAGE": "Label berjaya dipadam",
+        "ERROR_MESSAGE": "Terdapat ralat, sila cuba lagi"
+>>>>>>> upstream/develop
       },
       "CONFIRM": {
         "TITLE": "Pasti Padamkan",

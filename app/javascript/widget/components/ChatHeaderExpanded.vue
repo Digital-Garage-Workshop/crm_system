@@ -1,6 +1,10 @@
 <script setup>
 import HeaderActions from './HeaderActions.vue';
 import { computed } from 'vue';
+<<<<<<< HEAD
+=======
+import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   avatarUrl: {
@@ -21,6 +25,11 @@ const props = defineProps({
   },
 });
 
+<<<<<<< HEAD
+=======
+const { formatMessage } = useMessageFormatter();
+
+>>>>>>> upstream/develop
 const containerClasses = computed(() => [
   props.avatarUrl ? 'justify-between' : 'justify-end',
 ]);
@@ -44,11 +53,19 @@ const containerClasses = computed(() => [
     </div>
     <h2
       v-dompurify-html="introHeading"
+<<<<<<< HEAD
       class="mt-4 text-2xl mb-1.5 font-medium text-n-slate-12"
     />
     <p
       v-dompurify-html="introBody"
       class="text-lg leading-normal text-n-slate-11"
+=======
+      class="mt-4 text-2xl mb-1.5 font-medium text-n-slate-12 line-clamp-4"
+    />
+    <p
+      v-dompurify-html="formatMessage(introBody)"
+      class="text-lg leading-normal text-n-slate-11 [&_a]:underline line-clamp-6"
+>>>>>>> upstream/develop
     />
   </header>
 </template>

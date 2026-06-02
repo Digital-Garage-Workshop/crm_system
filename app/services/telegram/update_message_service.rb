@@ -5,6 +5,10 @@ class Telegram::UpdateMessageService
   pattr_initialize [:inbox!, :params!]
 
   def perform
+<<<<<<< HEAD
+=======
+    transform_business_message!
+>>>>>>> upstream/develop
     find_contact_inbox
     find_conversation
     find_message
@@ -36,4 +40,11 @@ class Telegram::UpdateMessageService
       @message.update!(content: edited_message[:caption])
     end
   end
+<<<<<<< HEAD
+=======
+
+  def transform_business_message!
+    params[:edited_message] = params[:edited_business_message] if params[:edited_business_message].present?
+  end
+>>>>>>> upstream/develop
 end

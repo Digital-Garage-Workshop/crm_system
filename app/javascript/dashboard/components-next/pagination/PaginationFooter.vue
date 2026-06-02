@@ -1,6 +1,10 @@
 <script setup>
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+<<<<<<< HEAD
+=======
+import { useNumberFormatter } from 'shared/composables/useNumberFormatter';
+>>>>>>> upstream/develop
 
 import Button from 'dashboard/components-next/button/Button.vue';
 
@@ -24,6 +28,10 @@ const props = defineProps({
 });
 const emit = defineEmits(['update:currentPage']);
 const { t } = useI18n();
+<<<<<<< HEAD
+=======
+const { formatCompactNumber, formatFullNumber } = useNumberFormatter();
+>>>>>>> upstream/develop
 
 const totalPages = computed(() =>
   Math.ceil(props.totalItems / props.itemsPerPage)
@@ -43,6 +51,7 @@ const changePage = newPage => {
 };
 
 const currentPageInformation = computed(() => {
+<<<<<<< HEAD
   return t(
     props.currentPageInfo ? props.currentPageInfo : 'PAGINATION_FOOTER.SHOWING',
     {
@@ -50,23 +59,52 @@ const currentPageInformation = computed(() => {
       endItem: endItem.value,
       totalItems: props.totalItems,
     }
+=======
+  const translationKey = props.currentPageInfo || 'PAGINATION_FOOTER.SHOWING';
+  return t(
+    translationKey,
+    {
+      startItem: formatFullNumber(startItem.value),
+      endItem: formatFullNumber(endItem.value),
+      totalItems: formatCompactNumber(props.totalItems),
+    },
+    Number(props.totalItems)
+>>>>>>> upstream/develop
   );
 });
 
 const pageInfo = computed(() => {
+<<<<<<< HEAD
   return t('PAGINATION_FOOTER.CURRENT_PAGE_INFO', {
     currentPage: '',
     totalPages: totalPages.value,
   });
+=======
+  return t(
+    'PAGINATION_FOOTER.CURRENT_PAGE_INFO',
+    {
+      currentPage: '',
+      totalPages: formatCompactNumber(totalPages.value),
+    },
+    Number(totalPages.value)
+  );
+>>>>>>> upstream/develop
 });
 </script>
 
 <template>
   <div
+<<<<<<< HEAD
     class="flex justify-between h-12 w-full max-w-[calc(60rem-3px)] outline outline-n-container outline-1 -outline-offset-1 mx-auto bg-n-solid-2 rounded-xl py-2 ltr:pl-4 rtl:pr-4 ltr:pr-3 rtl:pl-3 items-center before:absolute before:inset-x-0 before:-top-4 before:bg-gradient-to-t before:from-n-background before:from-10% before:dark:from-0% before:to-transparent before:h-4 before:pointer-events-none"
   >
     <div class="flex items-center gap-3">
       <span class="min-w-0 text-sm font-normal line-clamp-1 text-n-slate-11">
+=======
+    class="flex justify-between h-[3.375rem] w-full border-t border-n-weak mx-auto bg-n-surface-1 py-3 px-6 items-center before:absolute before:inset-x-0 before:-top-4 before:bg-gradient-to-t before:from-n-surface-1 before:from-0% before:to-transparent before:h-4 before:pointer-events-none"
+  >
+    <div class="flex items-center gap-3">
+      <span class="min-w-0 text-body-main line-clamp-1 text-n-slate-11">
+>>>>>>> upstream/develop
         {{ currentPageInformation }}
       </span>
     </div>
@@ -89,11 +127,23 @@ const pageInfo = computed(() => {
         :disabled="isFirstPage"
         @click="changePage(currentPage - 1)"
       />
+<<<<<<< HEAD
       <div class="inline-flex items-center gap-2 text-sm text-n-slate-11">
         <span class="px-3 tabular-nums py-0.5 bg-n-alpha-black2 rounded-md">
           {{ currentPage }}
         </span>
         <span class="truncate">{{ pageInfo }}</span>
+=======
+      <div class="inline-flex items-center gap-2 text-sm">
+        <span
+          class="px-3 tabular-nums py-0.5 font-420 bg-n-input-background text-body-main text-n-slate-12 rounded-md"
+        >
+          {{ formatFullNumber(currentPage) }}
+        </span>
+        <span class="truncate text-body-main text-n-slate-11">
+          {{ pageInfo }}
+        </span>
+>>>>>>> upstream/develop
       </div>
       <Button
         icon="i-lucide-chevron-right"

@@ -15,6 +15,13 @@ class Api::V1::Accounts::SearchController < Api::V1::Accounts::BaseController
     @result = search('Message')
   end
 
+<<<<<<< HEAD
+=======
+  def articles
+    @result = search('Article')
+  end
+
+>>>>>>> upstream/develop
   private
 
   def search(search_type)
@@ -24,5 +31,10 @@ class Api::V1::Accounts::SearchController < Api::V1::Accounts::BaseController
       search_type: search_type,
       params: params
     ).perform
+<<<<<<< HEAD
+=======
+  rescue ArgumentError => e
+    render json: { error: e.message }, status: :unprocessable_entity
+>>>>>>> upstream/develop
   end
 end

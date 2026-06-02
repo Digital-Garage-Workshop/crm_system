@@ -48,7 +48,12 @@
       "CREATED_AT": "Dibuat pada",
       "LAST_ACTIVITY": "Aktivitas Terakhir",
       "REFERER_LINK": "Tautan Referrer",
+<<<<<<< HEAD
       "BLOCKED": "Blocked"
+=======
+      "BLOCKED": "Blocked",
+      "LABELS": "Label"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Filter Standar",

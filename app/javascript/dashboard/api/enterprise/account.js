@@ -23,6 +23,13 @@ class EnterpriseAccountAPI extends ApiClient {
       action_type: action,
     });
   }
+<<<<<<< HEAD
+=======
+
+  createTopupCheckout(credits) {
+    return axios.post(`${this.url}topup_checkout`, { credits });
+  }
+>>>>>>> upstream/develop
 }
 
 export default new EnterpriseAccountAPI();

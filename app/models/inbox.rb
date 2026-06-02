@@ -9,6 +9,10 @@
 #  auto_assignment_config        :jsonb
 #  business_name                 :string
 #  channel_type                  :string
+<<<<<<< HEAD
+=======
+#  csat_config                   :jsonb            not null
+>>>>>>> upstream/develop
 #  csat_survey_enabled           :boolean          default(FALSE)
 #  email_address                 :string
 #  enable_auto_assignment        :boolean          default(TRUE)
@@ -43,11 +47,18 @@ class Inbox < ApplicationRecord
   include Avatarable
   include OutOfOffisable
   include AccountCacheRevalidator
+<<<<<<< HEAD
 
   # Not allowing characters:
   validates :name, presence: true
   validates :name, if: :check_channel_type?, format: { with: %r{^^\b[^/\\<>@]*\b$}, multiline: true,
                                                        message: I18n.t('errors.inboxes.validations.name') }
+=======
+  include InboxAgentAvailability
+
+  # Not allowing characters:
+  validates :name, presence: true
+>>>>>>> upstream/develop
   validates :account_id, presence: true
   validates :timezone, inclusion: { in: TZInfo::Timezone.all_identifiers }
   validates :out_of_office_message, length: { maximum: Limits::OUT_OF_OFFICE_MESSAGE_MAX_LENGTH }
@@ -68,6 +79,11 @@ class Inbox < ApplicationRecord
   has_many :conversations, dependent: :destroy_async
   has_many :messages, dependent: :destroy_async
 
+<<<<<<< HEAD
+=======
+  has_one :inbox_assignment_policy, dependent: :destroy
+  has_one :assignment_policy, through: :inbox_assignment_policy
+>>>>>>> upstream/develop
   has_one :agent_bot_inbox, dependent: :destroy_async
   has_one :agent_bot, through: :agent_bot_inbox
   has_many :webhooks, dependent: :destroy_async
@@ -98,6 +114,23 @@ class Inbox < ApplicationRecord
     update_account_cache
   end
 
+<<<<<<< HEAD
+=======
+  # Sanitizes inbox name for balanced email provider compatibility
+  # ALLOWS: /'._- and Unicode letters/numbers/emojis
+  # REMOVES: Forbidden chars (\<>@"()) + spam-trigger symbols (!#$%&*+=?^`{|}~)
+  def sanitized_name
+    return default_name_for_blank_name if name.blank?
+
+    sanitized = apply_sanitization_rules(name)
+    sanitized.blank? && email? ? display_name_from_email : sanitized
+  end
+
+  def sanitized_business_name
+    sanitize_raw_name(business_name) || sanitized_name
+  end
+
+>>>>>>> upstream/develop
   def sms?
     channel_type == 'Channel::Sms'
   end
@@ -114,6 +147,13 @@ class Inbox < ApplicationRecord
     channel_type == 'Channel::Instagram'
   end
 
+<<<<<<< HEAD
+=======
+  def tiktok?
+    channel_type == 'Channel::Tiktok'
+  end
+
+>>>>>>> upstream/develop
   def web_widget?
     channel_type == 'Channel::WebWidget'
   end
@@ -134,10 +174,24 @@ class Inbox < ApplicationRecord
     channel_type == 'Channel::TwitterProfile'
   end
 
+<<<<<<< HEAD
+=======
+  def telegram?
+    channel_type == 'Channel::Telegram'
+  end
+
+>>>>>>> upstream/develop
   def whatsapp?
     channel_type == 'Channel::Whatsapp'
   end
 
+<<<<<<< HEAD
+=======
+  def twilio_whatsapp?
+    channel_type == 'Channel::TwilioSms' && channel.medium == 'whatsapp'
+  end
+
+>>>>>>> upstream/develop
   def assignable_agents
     (account.users.where(id: members.select(:user_id)) + account.administrators).uniq
   end
@@ -173,10 +227,52 @@ class Inbox < ApplicationRecord
 
   def member_ids_with_assignment_capacity
     members.ids
+<<<<<<< HEAD
+=======
+  end
+
+  def auto_assignment_v2_enabled?
+    account.feature_enabled?('assignment_v2')
+  end
+
+  # Callers (Reauthorizable) only invoke this on a real transition, so the previous
+  # value is always the inverse of the new boolean value.
+  def dispatch_reauthorization_event(reauthorization_required)
+    return if ENV['ENABLE_INBOX_EVENTS'].blank?
+
+    changed_attributes = { reauthorization_required: [!reauthorization_required, reauthorization_required] }
+    Rails.configuration.dispatcher.dispatch(INBOX_UPDATED, Time.zone.now, inbox: self, changed_attributes: changed_attributes)
+>>>>>>> upstream/develop
   end
 
   private
 
+<<<<<<< HEAD
+=======
+  def default_name_for_blank_name
+    email? ? display_name_from_email : ''
+  end
+
+  def sanitize_raw_name(raw)
+    return nil if raw.blank?
+
+    result = apply_sanitization_rules(raw)
+    result.presence
+  end
+
+  def apply_sanitization_rules(name)
+    name.gsub(/[\\<>@"!#$%&*+=?^`{|}~:;()]/, '')        # Remove forbidden chars
+        .gsub(/[\x00-\x1F\x7F]/, ' ')                   # Replace control chars with spaces
+        .gsub(/\A[[:punct:]]+|[[:punct:]]+\z/, '')      # Remove leading/trailing punctuation
+        .gsub(/\s+/, ' ')                               # Normalize spaces
+        .strip
+  end
+
+  def display_name_from_email
+    channel.email.split('@').first.parameterize.titleize
+  end
+
+>>>>>>> upstream/develop
   def dispatch_create_event
     return if ENV['ENABLE_INBOX_EVENTS'].blank?
 

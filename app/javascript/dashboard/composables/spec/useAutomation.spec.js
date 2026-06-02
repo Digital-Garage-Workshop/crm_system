@@ -8,7 +8,14 @@ import {
   agents,
   teams,
   labels,
+<<<<<<< HEAD
   statusFilterOptions,
+=======
+  booleanFilterOptions,
+  statusFilterOptions,
+  messageTypeOptions,
+  priorityOptions,
+>>>>>>> upstream/develop
   campaigns,
   contacts,
   inboxes,
@@ -16,7 +23,10 @@ import {
   countries,
   slaPolicies,
 } from 'dashboard/helper/specs/fixtures/automationFixtures.js';
+<<<<<<< HEAD
 import { MESSAGE_CONDITION_VALUES } from 'dashboard/constants/automation';
+=======
+>>>>>>> upstream/develop
 
 vi.mock('dashboard/composables/store');
 vi.mock('dashboard/composables');
@@ -37,7 +47,11 @@ describe('useAutomation', () => {
     });
     useMapGetter.mockImplementation(getter => {
       const getterMap = {
+<<<<<<< HEAD
         'agents/getAgents': agents,
+=======
+        'agents/getVerifiedAgents': agents,
+>>>>>>> upstream/develop
         'campaigns/getAllCampaigns': campaigns,
         'contacts/getContacts': contacts,
         'inboxes/getInboxes': inboxes,
@@ -71,7 +85,15 @@ describe('useAutomation', () => {
         case 'country_code':
           return countries;
         case 'message_type':
+<<<<<<< HEAD
           return MESSAGE_CONDITION_VALUES;
+=======
+          return messageTypeOptions;
+        case 'private_note':
+          return booleanFilterOptions;
+        case 'priority':
+          return priorityOptions;
+>>>>>>> upstream/develop
         default:
           return [];
       }
@@ -86,13 +108,24 @@ describe('useAutomation', () => {
         case 'assign_team':
           return teams;
         case 'assign_agent':
+<<<<<<< HEAD
           return agents;
+=======
+          return options.addNoneToListFn
+            ? options.addNoneToListFn(options.agents)
+            : options.agents;
+>>>>>>> upstream/develop
         case 'send_email_to_team':
           return teams;
         case 'send_message':
           return [];
         case 'add_sla':
           return slaPolicies;
+<<<<<<< HEAD
+=======
+        case 'change_priority':
+          return priorityOptions;
+>>>>>>> upstream/develop
         default:
           return [];
       }
@@ -191,6 +224,10 @@ describe('useAutomation', () => {
     automationTypes.conversation_created = { conditions: [] };
     automationTypes.conversation_updated = { conditions: [] };
     automationTypes.conversation_opened = { conditions: [] };
+<<<<<<< HEAD
+=======
+    automationTypes.conversation_resolved = { conditions: [] };
+>>>>>>> upstream/develop
 
     automationHelper.generateCustomAttributeTypes.mockReturnValue([]);
     automationHelper.generateCustomAttributes.mockReturnValue([]);
@@ -218,8 +255,17 @@ describe('useAutomation', () => {
     expect(getConditionDropdownValues('browser_language')).toEqual(languages);
     expect(getConditionDropdownValues('country_code')).toEqual(countries);
     expect(getConditionDropdownValues('message_type')).toEqual(
+<<<<<<< HEAD
       MESSAGE_CONDITION_VALUES
     );
+=======
+      messageTypeOptions
+    );
+    expect(getConditionDropdownValues('private_note')).toEqual(
+      booleanFilterOptions
+    );
+    expect(getConditionDropdownValues('priority')).toEqual(priorityOptions);
+>>>>>>> upstream/develop
   });
 
   it('gets action dropdown values correctly', () => {
@@ -227,10 +273,22 @@ describe('useAutomation', () => {
 
     expect(getActionDropdownValues('add_label')).toEqual(labels);
     expect(getActionDropdownValues('assign_team')).toEqual(teams);
+<<<<<<< HEAD
     expect(getActionDropdownValues('assign_agent')).toEqual(agents);
     expect(getActionDropdownValues('send_email_to_team')).toEqual(teams);
     expect(getActionDropdownValues('send_message')).toEqual([]);
     expect(getActionDropdownValues('add_sla')).toEqual(slaPolicies);
+=======
+    expect(getActionDropdownValues('assign_agent')).toEqual([
+      { id: 'nil', name: 'AUTOMATION.NONE_OPTION' },
+      { id: 'last_responding_agent', name: 'AUTOMATION.LAST_RESPONDING_AGENT' },
+      ...agents,
+    ]);
+    expect(getActionDropdownValues('send_email_to_team')).toEqual(teams);
+    expect(getActionDropdownValues('send_message')).toEqual([]);
+    expect(getActionDropdownValues('add_sla')).toEqual(slaPolicies);
+    expect(getActionDropdownValues('change_priority')).toEqual(priorityOptions);
+>>>>>>> upstream/develop
   });
 
   it('handles event change correctly', () => {

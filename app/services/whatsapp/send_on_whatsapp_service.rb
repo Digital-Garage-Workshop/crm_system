@@ -15,15 +15,31 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
   end
 
   def send_template_message
+<<<<<<< HEAD
     name, namespace, lang_code, processed_parameters = processable_channel_message_template
 
     return if name.blank?
+=======
+    processor = Whatsapp::TemplateProcessorService.new(
+      channel: channel,
+      template_params: template_params,
+      message: message
+    )
+
+    name, namespace, lang_code, processed_parameters = processor.call
+
+    if name.blank?
+      message.update!(status: :failed, external_error: 'Template not found or invalid template name')
+      return
+    end
+>>>>>>> upstream/develop
 
     message_id = channel.send_template(message.conversation.contact_inbox.source_id, {
                                          name: name,
                                          namespace: namespace,
                                          lang_code: lang_code,
                                          parameters: processed_parameters
+<<<<<<< HEAD
                                        })
     message.update!(source_id: message_id) if message_id.present?
   end
@@ -108,6 +124,12 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
     template['components'].find { |obj| obj['type'] == 'BODY' && obj.key?('text') }
   end
 
+=======
+                                       }, message)
+    message.update!(source_id: message_id) if message_id.present?
+  end
+
+>>>>>>> upstream/develop
   def send_session_message
     message_id = channel.send_message(message.conversation.contact_inbox.source_id, message)
     message.update!(source_id: message_id) if message_id.present?

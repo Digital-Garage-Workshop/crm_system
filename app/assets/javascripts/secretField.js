@@ -10,7 +10,12 @@ function toggleSecretField(e) {
   if (!textElement) return;
 
   if (textElement.dataset.secretMasked === 'false') {
+<<<<<<< HEAD
     textElement.textContent = '•'.repeat(10);
+=======
+    const maskedLength = secretField.dataset.secretText?.length || 10;
+    textElement.textContent = '•'.repeat(maskedLength);
+>>>>>>> upstream/develop
     textElement.dataset.secretMasked = 'true';
     toggler.querySelector('svg use').setAttribute('xlink:href', '#eye-show');
 
@@ -32,3 +37,16 @@ function copySecretField(e) {
 
   navigator.clipboard.writeText(secretField.dataset.secretText);
 }
+<<<<<<< HEAD
+=======
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.cell-data__secret-field').forEach(field => {
+    const span = field.querySelector('[data-secret-masked]');
+    if (span && span.dataset.secretMasked === 'true') {
+      const len = field.dataset.secretText?.length || 10;
+      span.textContent = '•'.repeat(len);
+    }
+  });
+});
+>>>>>>> upstream/develop

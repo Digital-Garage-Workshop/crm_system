@@ -21,7 +21,11 @@ module Whatsapp::IncomingMessageServiceHelpers
   end
 
   def message_type
+<<<<<<< HEAD
     @processed_params[:messages].first[:type]
+=======
+    messages_data.first[:type]
+>>>>>>> upstream/develop
   end
 
   def message_content(message)
@@ -44,6 +48,7 @@ module Whatsapp::IncomingMessageServiceHelpers
   end
 
   def unprocessable_message_type?(message_type)
+<<<<<<< HEAD
     %w[reaction ephemeral unsupported request_welcome].include?(message_type)
   end
 
@@ -77,6 +82,21 @@ module Whatsapp::IncomingMessageServiceHelpers
       waid = contact_inbox.source_id if contact_inbox.present?
     end
     waid
+=======
+    %w[reaction ephemeral request_welcome].include?(message_type)
+  end
+
+  def processed_waid(waid)
+    Whatsapp::PhoneNumberNormalizationService.new(inbox).normalize_and_find_contact_by_provider(waid, :cloud)
+  end
+
+  def whatsapp_phone_number(identifier)
+    identifier = identifier.to_s
+    return if identifier.blank?
+    return unless identifier.match?(/\A\d{1,15}\z/)
+
+    identifier
+>>>>>>> upstream/develop
   end
 
   def error_webhook_event?(message)
@@ -97,6 +117,7 @@ module Whatsapp::IncomingMessageServiceHelpers
     @message = Message.find_by(source_id: source_id)
   end
 
+<<<<<<< HEAD
   def message_under_process?
     key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: @processed_params[:messages].first[:id])
     Redis::Alfred.get(key)
@@ -112,5 +133,11 @@ module Whatsapp::IncomingMessageServiceHelpers
   def clear_message_source_id_from_redis
     key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: @processed_params[:messages].first[:id])
     ::Redis::Alfred.delete(key)
+=======
+  def lock_message_source_id!
+    return false if messages_data.blank?
+
+    Whatsapp::MessageDedupLock.new(messages_data.first[:id]).acquire!
+>>>>>>> upstream/develop
   end
 end

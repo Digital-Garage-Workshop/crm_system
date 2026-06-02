@@ -32,7 +32,11 @@ const props = defineProps({
   allowSignature: { type: Boolean, default: false }, // allowSignature is a kill switch, ensuring no signature methods are triggered except when this flag is true
 });
 
+<<<<<<< HEAD
 const emit = defineEmits(['update:modelValue']);
+=======
+const emit = defineEmits(['update:modelValue', 'blur', 'focus']);
+>>>>>>> upstream/develop
 
 const textareaRef = ref(null);
 const isFocused = ref(false);
@@ -47,7 +51,11 @@ const messageClass = computed(() => {
     case 'error':
       return 'text-n-ruby-9 dark:text-n-ruby-9';
     case 'success':
+<<<<<<< HEAD
       return 'text-green-500 dark:text-green-400';
+=======
+      return 'text-n-teal-10 dark:text-n-teal-10';
+>>>>>>> upstream/develop
     default:
       return 'text-n-slate-11 dark:text-n-slate-11';
   }
@@ -96,6 +104,7 @@ const handleInput = event => {
   }
 };
 
+<<<<<<< HEAD
 const handleFocus = () => {
   if (!props.disabled) {
     isFocused.value = true;
@@ -105,6 +114,19 @@ const handleFocus = () => {
 const handleBlur = () => {
   if (!props.disabled) {
     isFocused.value = false;
+=======
+const handleFocus = event => {
+  if (!props.disabled) {
+    isFocused.value = true;
+    emit('focus', event);
+  }
+};
+
+const handleBlur = event => {
+  if (!props.disabled) {
+    isFocused.value = false;
+    emit('blur', event);
+>>>>>>> upstream/develop
   }
 };
 
@@ -179,7 +201,11 @@ onMounted(() => {
         }"
         :disabled="disabled"
         rows="1"
+<<<<<<< HEAD
         class="flex w-full reset-base text-sm p-0 !rounded-none !bg-transparent dark:!bg-transparent !border-0 !outline-0 !mb-0 placeholder:text-n-slate-10 dark:placeholder:text-n-slate-10 text-n-slate-12 dark:text-n-slate-12 disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-slate-25 dark:disabled:bg-slate-900"
+=======
+        class="flex w-full reset-base text-sm p-0 !rounded-none !bg-transparent dark:!bg-transparent !border-0 !outline-0 !mb-0 placeholder:text-n-slate-10 dark:placeholder:text-n-slate-10 text-n-slate-12 dark:text-n-slate-12 disabled:cursor-not-allowed disabled:opacity-50"
+>>>>>>> upstream/develop
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"

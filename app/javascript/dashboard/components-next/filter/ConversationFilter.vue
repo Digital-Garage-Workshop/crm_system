@@ -9,6 +9,10 @@ import { useConversationFilterContext } from './provider.js';
 import { useSnakeCase } from 'dashboard/composables/useTransformKeys';
 
 import Button from 'next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import Input from 'dashboard/components-next/input/Input.vue';
+>>>>>>> upstream/develop
 import ConditionRow from './ConditionRow.vue';
 
 const props = defineProps({
@@ -110,6 +114,7 @@ const outsideClickHandler = [
       {{ filterModalHeaderTitle }}
     </h3>
     <div v-if="props.isFolderView">
+<<<<<<< HEAD
       <label class="border-b border-n-weak pb-6">
         <div class="text-n-slate-11 text-sm mb-2">
           {{ t('FILTER.FOLDER_LABEL') }}
@@ -120,6 +125,15 @@ const outsideClickHandler = [
           :placeholder="t('FILTER.INPUT_PLACEHOLDER')"
         />
       </label>
+=======
+      <div class="border-b border-n-weak pb-6">
+        <Input
+          v-model="folderNameLocal"
+          :label="t('FILTER.FOLDER_LABEL')"
+          :placeholder="t('FILTER.INPUT_PLACEHOLDER')"
+        />
+      </div>
+>>>>>>> upstream/develop
     </div>
     <ul class="grid gap-4 list-none">
       <template v-for="(filter, index) in filters" :key="filter.id">

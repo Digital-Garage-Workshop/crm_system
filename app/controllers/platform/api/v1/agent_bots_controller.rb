@@ -3,7 +3,11 @@ class Platform::Api::V1::AgentBotsController < PlatformController
   before_action :validate_platform_app_permissible, except: [:index, :create]
 
   def index
+<<<<<<< HEAD
     @resources = @platform_app.platform_app_permissibles.where(permissible_type: 'AgentBot').all
+=======
+    @resources = @platform_app.platform_app_permissibles.where(permissible_type: 'AgentBot').includes(:permissible)
+>>>>>>> upstream/develop
   end
 
   def show; end

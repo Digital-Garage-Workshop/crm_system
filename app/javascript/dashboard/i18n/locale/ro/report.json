@@ -3,7 +3,11 @@
     "HEADER": "Conversații",
     "LOADING_CHART": "Încărcare date grafic...",
     "NO_ENOUGH_DATA": "Nu am primit suficiente date pentru a genera raportul. Vă rugăm să încercați din nou mai târziu.",
+<<<<<<< HEAD
     "DOWNLOAD_AGENT_REPORTS": "Descărcați rapoartele agenților",
+=======
+    "DOWNLOAD_CONVERSATION_REPORTS": "Download conversation reports",
+>>>>>>> upstream/develop
     "DATA_FETCHING_FAILED": "Preluarea datelor a eșuat, te rugăm să încerci din nou mai târziu.",
     "SUMMARY_FETCHING_FAILED": "Preluarea rezumatului a eșuat, te rugăm să încerci mai târziu.",
     "METRICS": {
@@ -51,7 +55,14 @@
     },
     "DATE_RANGE_OPTIONS": {
       "LAST_7_DAYS": "Ultimele 7 zile",
+<<<<<<< HEAD
       "LAST_30_DAYS": "Ultimele 30 zile",
+=======
+      "LAST_14_DAYS": "Ultimele 14 zile",
+      "LAST_30_DAYS": "Ultimele 30 zile",
+      "THIS_MONTH": "This month",
+      "LAST_MONTH": "Last month",
+>>>>>>> upstream/develop
       "LAST_3_MONTHS": "Ultimele 3 luni",
       "LAST_6_MONTHS": "Ultimele 6 luni",
       "LAST_YEAR": "Anul trecut",
@@ -125,11 +136,23 @@
   },
   "AGENT_REPORTS": {
     "HEADER": "Prezentare generală a agenților",
+<<<<<<< HEAD
     "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent’s name to learn more.",
+=======
+    "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent's name to learn more.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Încărcare date grafic...",
     "NO_ENOUGH_DATA": "Nu am primit suficiente date pentru a genera raportul. Vă rugăm să încercați din nou mai târziu.",
     "DOWNLOAD_AGENT_REPORTS": "Descărcați rapoartele agenților",
     "FILTER_DROPDOWN_LABEL": "Selectează agent",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Agenți de căutare"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Conversații",
@@ -193,10 +216,22 @@
   },
   "LABEL_REPORTS": {
     "HEADER": "Prezentare generală a etichetelor",
+<<<<<<< HEAD
+=======
+    "DESCRIPTION": "Track label performance with key metrics including conversations, response times, resolution times, and resolved cases. Click a label name for detailed insights.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Încărcare date grafic...",
     "NO_ENOUGH_DATA": "Nu am primit suficiente date pentru a genera raportul. Vă rugăm să încercați din nou mai târziu.",
     "DOWNLOAD_LABEL_REPORTS": "Descărcarea rapoartelor de etichete",
     "FILTER_DROPDOWN_LABEL": "Selectați etichetă",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "LABELS": "Căutare etichete"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Conversații",
@@ -265,6 +300,16 @@
     "NO_ENOUGH_DATA": "Nu am primit suficiente date pentru a genera raportul. Vă rugăm să încercați din nou mai târziu.",
     "DOWNLOAD_INBOX_REPORTS": "Descărcarea rapoartelor inbox",
     "FILTER_DROPDOWN_LABEL": "Selectați Inbox",
+<<<<<<< HEAD
+=======
+    "ALL_INBOXES": "All Inboxes",
+    "SEARCH_INBOX": "Search Inbox",
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "INBOXES": "Search inboxes"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Conversații",
@@ -328,11 +373,26 @@
   },
   "TEAM_REPORTS": {
     "HEADER": "Prezentare generală a echipei",
+<<<<<<< HEAD
     "DESCRIPTION": "Get a snapshot of your team’s performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+=======
+    "DESCRIPTION": "Get a snapshot of your team's performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Încărcare date grafic...",
     "NO_ENOUGH_DATA": "Nu am primit suficiente date pentru a genera raportul. Vă rugăm să încercați din nou mai târziu.",
     "DOWNLOAD_TEAM_REPORTS": "Descărcați rapoartele echipei",
     "FILTER_DROPDOWN_LABEL": "Selectați echipa",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "ADD_FILTER": "Add filter",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "TEAMS": "Echipele de căutare"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Conversații",
@@ -396,22 +456,65 @@
   },
   "CSAT_REPORTS": {
     "HEADER": "Rapoarte CSAT",
+<<<<<<< HEAD
     "NO_RECORDS": "Nu există răspunsuri predefinite disponibile în acest cont.",
     "DOWNLOAD": "Descărcați rapoartele CSAT",
     "DOWNLOAD_FAILED": "Descărcarea rapoartelor CSAT a eșuat",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Alege agenți"
+=======
+    "NO_RECORDS": "No responses yet",
+    "NO_RECORDS_DESCRIPTION": "CSAT survey responses will appear here once customers start providing feedback.",
+    "DOWNLOAD": "Descărcați rapoartele CSAT",
+    "DOWNLOAD_FAILED": "Descărcarea rapoartelor CSAT a eșuat",
+    "FILTERS": {
+      "ADD_FILTER": "Add filter",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Agenți de căutare",
+        "INBOXES": "Search inboxes",
+        "TEAMS": "Echipele de căutare",
+        "RATINGS": "Search ratings"
+      },
+      "AGENTS": {
+        "LABEL": "Agent"
+      },
+      "INBOXES": {
+        "LABEL": "Inbox"
+      },
+      "TEAMS": {
+        "LABEL": "Echipa"
+      },
+      "RATINGS": {
+        "LABEL": "Evaluare"
+>>>>>>> upstream/develop
       }
     },
     "TABLE": {
       "HEADER": {
         "CONTACT_NAME": "Contact",
+<<<<<<< HEAD
         "AGENT_NAME": "Agent atribuit",
         "RATING": "Evaluare",
         "FEEDBACK_TEXT": "Comentariu feedback"
       }
     },
+=======
+        "AGENT_NAME": "Agent",
+        "RATING": "Evaluare",
+        "FEEDBACK_TEXT": "Comentariu feedback",
+        "CONVERSATION": "Conversație",
+        "CUSTOMER": "Customer",
+        "RESPONSE": "Response",
+        "HANDLED_BY": "Handled by"
+      },
+      "UNKNOWN_CUSTOMER": "Unknown customer"
+    },
+    "NO_AGENT": "No assigned agent",
+    "NO_FEEDBACK": "No feedback provided",
+>>>>>>> upstream/develop
     "METRIC": {
       "TOTAL_RESPONSES": {
         "LABEL": "Răspunsuri totale",
@@ -424,6 +527,28 @@
       "RESPONSE_RATE": {
         "LABEL": "Rata de răspuns",
         "TOOLTIP": "Numărul total de răspunsuri / Numărul total de mesaje de sondaj CSAT trimise * 100"
+<<<<<<< HEAD
+=======
+      },
+      "RATING_DISTRIBUTION": "Rating distribution"
+    },
+    "REVIEW_NOTES": {
+      "TITLE": "Review notes",
+      "PLACEHOLDER": "Add review notes about this rating...",
+      "SAVE": "Salvează",
+      "CANCEL": "Renunță",
+      "SAVING": "Se salvează...",
+      "SAVED": "Notes saved successfully",
+      "SAVE_ERROR": "Failed to save notes",
+      "UPDATED_BY": "Updated by {name} {time}",
+      "UPDATED_BY_LABEL": "Updated by",
+      "PAYWALL": {
+        "TITLE": "Upgrade to add review notes",
+        "AVAILABLE_ON": "The review notes feature is only available in the Business and Enterprise plans.",
+        "UPGRADE_PROMPT": "Add internal context to every CSAT response with review notes. Capture what really happened, spot patterns faster, and make better decisions from your feedback.",
+        "UPGRADE_NOW": "Upgrade now",
+        "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -466,6 +591,16 @@
       "CONVERSATIONS": "conversații {count}",
       "DOWNLOAD_REPORT": "Download report"
     },
+<<<<<<< HEAD
+=======
+    "RESOLUTION_HEATMAP": {
+      "HEADER": "Resolutions",
+      "NO_CONVERSATIONS": "Fără conversații",
+      "CONVERSATION": "{count} conversație",
+      "CONVERSATIONS": "conversații {count}",
+      "DOWNLOAD_REPORT": "Download report"
+    },
+>>>>>>> upstream/develop
     "AGENT_CONVERSATIONS": {
       "HEADER": "Conversațiile agenților",
       "LOADING_MESSAGE": "Măsurătorile agentului de încărcare...",
@@ -559,6 +694,10 @@
     "INBOX": "Inbox",
     "AGENT": "Agent",
     "TEAM": "Echipa",
+<<<<<<< HEAD
+=======
+    "LABEL": "Etichetă",
+>>>>>>> upstream/develop
     "AVG_RESOLUTION_TIME": "Avg. Resolution Time",
     "AVG_FIRST_RESPONSE_TIME": "Avg. First Response Time",
     "AVG_REPLY_TIME": "Avg. Customer Waiting Time",

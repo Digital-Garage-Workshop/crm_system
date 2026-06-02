@@ -6,8 +6,13 @@ import Index from './Index.vue';
 import Webhook from './Webhooks/Index.vue';
 import DashboardApps from './DashboardApps/Index.vue';
 import Slack from './Slack.vue';
+<<<<<<< HEAD
 import SettingsContent from '../Wrapper.vue';
 import Linear from './Linear.vue';
+=======
+import Linear from './Linear.vue';
+import Notion from './Notion.vue';
+>>>>>>> upstream/develop
 import Shopify from './Shopify.vue';
 
 export default {
@@ -48,6 +53,7 @@ export default {
     },
     {
       path: frontendURL('accounts/:accountId/settings/integrations'),
+<<<<<<< HEAD
       component: SettingsContent,
       props: params => {
         const integrationId = params.params?.integration_id;
@@ -70,6 +76,9 @@ export default {
           backUrl,
         };
       },
+=======
+      component: SettingsWrapper,
+>>>>>>> upstream/develop
       children: [
         {
           path: 'slack',
@@ -91,6 +100,18 @@ export default {
           props: route => ({ code: route.query.code }),
         },
         {
+<<<<<<< HEAD
+=======
+          path: 'notion',
+          name: 'settings_integrations_notion',
+          component: Notion,
+          meta: {
+            permissions: ['administrator'],
+          },
+          props: route => ({ code: route.query.code }),
+        },
+        {
+>>>>>>> upstream/develop
           path: 'shopify',
           name: 'settings_integrations_shopify',
           component: Shopify,

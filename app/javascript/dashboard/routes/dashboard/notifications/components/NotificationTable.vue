@@ -1,5 +1,9 @@
 <script>
+<<<<<<< HEAD
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
+=======
+import Avatar from 'next/avatar/Avatar.vue';
+>>>>>>> upstream/develop
 import Spinner from 'shared/components/Spinner.vue';
 import EmptyState from 'dashboard/components/widgets/EmptyState.vue';
 import { dynamicTime } from 'shared/helpers/timeHelper';
@@ -8,7 +12,11 @@ import NextButton from 'dashboard/components-next/button/Button.vue';
 
 export default {
   components: {
+<<<<<<< HEAD
     Thumbnail,
+=======
+    Avatar,
+>>>>>>> upstream/develop
     Spinner,
     EmptyState,
     NextButton,
@@ -66,7 +74,11 @@ export default {
         @click="onMarkAllDoneClick"
       />
     </div>
+<<<<<<< HEAD
     <table class="woot-table notifications-table overflow-auto">
+=======
+    <table class="notifications-table overflow-auto">
+>>>>>>> upstream/develop
       <tbody v-show="!isLoading">
         <tr
           v-for="notificationItem in notifications"
@@ -74,9 +86,16 @@ export default {
           :class="{
             'is-unread': notificationItem.read_at === null,
           }"
+<<<<<<< HEAD
           @click="() => onClickNotification(notificationItem)"
         >
           <td>
+=======
+          class="border-b border-n-weak"
+          @click="() => onClickNotification(notificationItem)"
+        >
+          <td class="p-2.5 text-n-slate-12">
+>>>>>>> upstream/develop
             <div
               class="overflow-hidden flex-view notification-contant--wrap whitespace-nowrap text-ellipsis"
             >
@@ -106,6 +125,7 @@ export default {
             </span>
           </td>
           <td class="thumbnail--column">
+<<<<<<< HEAD
             <Thumbnail
               v-if="notificationItem.primary_actor.meta.assignee"
               :src="notificationItem.primary_actor.meta.assignee.thumbnail"
@@ -115,6 +135,18 @@ export default {
           </td>
           <td>
             <div class="text-right timestamp--column">
+=======
+            <Avatar
+              v-if="notificationItem.primary_actor.meta.assignee"
+              :src="notificationItem.primary_actor.meta.assignee.thumbnail"
+              :size="28"
+              :name="notificationItem.primary_actor.meta.assignee.name"
+              rounded-full
+            />
+          </td>
+          <td>
+            <div class="text-right timestamp--column ltr:mr-2 rtl:ml-2">
+>>>>>>> upstream/develop
               <span class="notification--created-at">
                 {{ dynamicTime(notificationItem.last_activity_at) }}
               </span>
@@ -141,10 +173,15 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+<<<<<<< HEAD
 @import 'dashboard/assets/scss/mixins';
 
 .notification--title {
   @apply text-sm m-0 text-slate-800 dark:text-slate-100;
+=======
+.notification--title {
+  @apply text-sm m-0 text-n-slate-12;
+>>>>>>> upstream/develop
 }
 
 .notifications-table {
@@ -153,11 +190,19 @@ export default {
       @apply cursor-pointer;
 
       &:hover {
+<<<<<<< HEAD
         @apply bg-slate-50 dark:bg-slate-800;
       }
 
       &.is-active {
         @apply bg-slate-100 dark:bg-slate-700;
+=======
+        @apply bg-n-slate-3;
+      }
+
+      &.is-active {
+        @apply bg-n-slate-4 dark:bg-n-slate-6;
+>>>>>>> upstream/develop
       }
 
       > td {
@@ -182,11 +227,19 @@ export default {
 }
 
 .notification--unread-indicator {
+<<<<<<< HEAD
   @apply w-2.5 h-2.5 rounded-full bg-woot-500 dark:bg-woot-500;
 }
 
 .notification--created-at {
   @apply text-slate-700 dark:text-slate-200 text-xs;
+=======
+  @apply w-2.5 h-2.5 rounded-full bg-n-brand;
+}
+
+.notification--created-at {
+  @apply text-n-slate-11 text-xs;
+>>>>>>> upstream/develop
 }
 
 .notification--type {
@@ -206,6 +259,10 @@ export default {
 }
 
 .notification--message-title {
+<<<<<<< HEAD
   @apply text-slate-700 dark:text-slate-100;
+=======
+  @apply text-n-slate-12;
+>>>>>>> upstream/develop
 }
 </style>

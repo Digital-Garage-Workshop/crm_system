@@ -3,7 +3,11 @@ import { mapGetters } from 'vuex';
 
 import ChatAttachmentButton from 'widget/components/ChatAttachment.vue';
 import ChatSendButton from 'widget/components/ChatSendButton.vue';
+<<<<<<< HEAD
 import configMixin from '../mixins/configMixin';
+=======
+import { useAttachments } from '../composables/useAttachments';
+>>>>>>> upstream/develop
 import FluentIcon from 'shared/components/FluentIcon/Index.vue';
 import ResizableTextArea from 'shared/components/ResizableTextArea.vue';
 
@@ -18,7 +22,10 @@ export default {
     FluentIcon,
     ResizableTextArea,
   },
+<<<<<<< HEAD
   mixins: [configMixin],
+=======
+>>>>>>> upstream/develop
   props: {
     onSendMessage: {
       type: Function,
@@ -29,6 +36,21 @@ export default {
       default: () => {},
     },
   },
+<<<<<<< HEAD
+=======
+  setup() {
+    const {
+      canHandleAttachments,
+      shouldShowEmojiPicker,
+      hasEmojiPickerEnabled,
+    } = useAttachments();
+    return {
+      canHandleAttachments,
+      shouldShowEmojiPicker,
+      hasEmojiPickerEnabled,
+    };
+  },
+>>>>>>> upstream/develop
   data() {
     return {
       userInput: '',
@@ -41,9 +63,16 @@ export default {
     ...mapGetters({
       widgetColor: 'appConfig/getWidgetColor',
       isWidgetOpen: 'appConfig/getIsWidgetOpen',
+<<<<<<< HEAD
     }),
     showAttachment() {
       return this.hasAttachmentsEnabled && this.userInput.length === 0;
+=======
+      shouldShowEmojiPicker: 'appConfig/getShouldShowEmojiPicker',
+    }),
+    showAttachment() {
+      return this.canHandleAttachments && this.userInput.length === 0;
+>>>>>>> upstream/develop
     },
     showSendButton() {
       return this.userInput.length > 0;
@@ -118,7 +147,11 @@ export default {
   <div
     class="items-center flex ltr:pl-3 rtl:pr-3 ltr:pr-2 rtl:pl-2 rounded-[7px] transition-all duration-200 bg-n-background !shadow-[0_0_0_1px,0_0_2px_3px]"
     :class="{
+<<<<<<< HEAD
       '!shadow-n-brand dark:!shadow-n-brand': isFocused,
+=======
+      '!shadow-[var(--widget-color,#2781f6)]': isFocused,
+>>>>>>> upstream/develop
       '!shadow-n-strong dark:!shadow-n-strong': !isFocused,
     }"
     @keydown.esc="hideEmojiPicker"
@@ -143,7 +176,11 @@ export default {
         :on-attach="onSendAttachment"
       />
       <button
+<<<<<<< HEAD
         v-if="hasEmojiPickerEnabled"
+=======
+        v-if="shouldShowEmojiPicker && hasEmojiPickerEnabled"
+>>>>>>> upstream/develop
         class="flex items-center justify-center min-h-8 min-w-8"
         :aria-label="$t('EMOJI.ARIA_LABEL')"
         @click="toggleEmojiPicker"
@@ -158,7 +195,11 @@ export default {
         />
       </button>
       <EmojiInput
+<<<<<<< HEAD
         v-if="showEmojiPicker"
+=======
+        v-if="shouldShowEmojiPicker && showEmojiPicker"
+>>>>>>> upstream/develop
         v-on-clickaway="hideEmojiPicker"
         :on-click="emojiOnClick"
         @keydown.esc="hideEmojiPicker"

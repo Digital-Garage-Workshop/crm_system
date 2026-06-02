@@ -7,7 +7,11 @@
     $ref: ./platform/accounts/create.yml
 /platform/api/v1/accounts/{account_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: './platform/accounts/show.yml'
   patch:
@@ -15,12 +19,19 @@
   delete:
     $ref: ./platform/accounts/delete.yml
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/develop
 # Account Users
 
 /platform/api/v1/accounts/{account_id}/account_users:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: './platform/account_users/index.yml'
   post:
@@ -37,7 +48,11 @@
     $ref: ./platform/agent_bots/create.yml
 /platform/api/v1/agent_bots/{id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/agent_bot_id'
+=======
+    - $ref: '#/components/parameters/agent_bot_id'
+>>>>>>> upstream/develop
   get:
     $ref: './platform/agent_bots/show.yml'
   patch:
@@ -52,7 +67,11 @@
     $ref: ./platform/users/create.yml
 /platform/api/v1/users/{id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/platform_user_id'
+=======
+    - $ref: '#/components/parameters/platform_user_id'
+>>>>>>> upstream/develop
   get:
     $ref: './platform/users/show.yml'
   patch:
@@ -61,11 +80,18 @@
     $ref: ./platform/users/delete.yml
 /platform/api/v1/users/{id}/login:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/platform_user_id'
   get:
     $ref: './platform/users/login.yml'
 
 
+=======
+    - $ref: '#/components/parameters/platform_user_id'
+  get:
+    $ref: './platform/users/login.yml'
+
+>>>>>>> upstream/develop
 # ---------------- end of platform path -----------#
 
 # ------------  Public API routes  ------------#
@@ -74,7 +100,11 @@
 
 /public/api/v1/inboxes/{inbox_identifier}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+>>>>>>> upstream/develop
   get:
     $ref: './public/inboxes/show.yml'
 
@@ -82,13 +112,22 @@
 
 /public/api/v1/inboxes/{inbox_identifier}/contacts:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+>>>>>>> upstream/develop
   post:
     $ref: ./public/inboxes/contacts/create.yml
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
     - $ref: '#/parameters/public_contact_identifier'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+>>>>>>> upstream/develop
   get:
     $ref: './public/inboxes/contacts/show.yml'
   patch:
@@ -96,8 +135,13 @@
 
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
     - $ref: '#/parameters/public_contact_identifier'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+>>>>>>> upstream/develop
   post:
     $ref: ./public/inboxes/conversations/create.yml
   get:
@@ -105,45 +149,76 @@
 
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
     - $ref: '#/parameters/public_contact_identifier'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./public/inboxes/conversations/show.yml
 
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_status:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
     - $ref: '#/parameters/public_contact_identifier'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./public/inboxes/conversations/toggle_status.yml
 
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/toggle_typing:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
     - $ref: '#/parameters/public_contact_identifier'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./public/inboxes/conversations/toggle_typing.yml
 
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/update_last_seen:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
     - $ref: '#/parameters/public_contact_identifier'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./public/inboxes/conversations/update_last_seen.yml
 
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/messages:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/public_inbox_identifier'
     - $ref: '#/parameters/public_contact_identifier'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./public/inboxes/messages/create.yml
   get:
     $ref: ./public/inboxes/messages/index.yml
+<<<<<<< HEAD
 /public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/messages/{message_id}:
   parameters:
     - $ref: '#/parameters/public_inbox_identifier'
@@ -160,6 +235,17 @@
     $ref: ./application/contacts/labels/index.yml
   post:
     $ref: ./application/contacts/labels/create.yml
+=======
+
+/public/api/v1/inboxes/{inbox_identifier}/contacts/{contact_identifier}/conversations/{conversation_id}/messages/{message_id}:
+  parameters:
+    - $ref: '#/components/parameters/public_inbox_identifier'
+    - $ref: '#/components/parameters/public_contact_identifier'
+    - $ref: '#/components/parameters/conversation_id'
+    - $ref: '#/components/parameters/message_id'
+  patch:
+    $ref: ./public/inboxes/messages/update.yml
+>>>>>>> upstream/develop
 
 # ---------------- end of public api routes-----------#
 
@@ -167,7 +253,11 @@
 
 /survey/responses/{conversation_uuid}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/conversation_uuid'
+=======
+    - $ref: '#/components/parameters/conversation_uuid'
+>>>>>>> upstream/develop
   get:
     $ref: ./survey/show.yml
 
@@ -175,19 +265,46 @@
 
 # ------------  Application API routes  ------------#
 
+<<<<<<< HEAD
+=======
+# Accounts
+/api/v1/accounts/{account_id}:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+  get:
+    $ref: ./application/accounts/show.yml
+  patch:
+    $ref: ./application/accounts/update.yml
+
+# Audit Logs
+/api/v1/accounts/{account_id}/audit_logs:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+  get:
+    $ref: ./application/audit_logs/index.yml
+>>>>>>> upstream/develop
 
 # AgentBots
 /api/v1/accounts/{account_id}/agent_bots:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/agent_bots/index.yml
   post:
     $ref: ./application/agent_bots/create.yml
 /api/v1/accounts/{account_id}/agent_bots/{id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/agent_bot_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/agent_bot_id'
+>>>>>>> upstream/develop
   get:
     $ref: './application/agent_bots/show.yml'
   patch:
@@ -198,14 +315,22 @@
 # Agents
 /api/v1/accounts/{account_id}/agents:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/agents/index.yml
   post:
     $ref: ./application/agents/create.yml
 /api/v1/accounts/{account_id}/agents/{id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   patch:
     $ref: ./application/agents/update.yml
   delete:
@@ -214,14 +339,22 @@
 # Canned Responses
 /api/v1/accounts/{account_id}/canned_responses:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/canned_responses/index.yml
   post:
     $ref: ./application/canned_responses/create.yml
 /api/v1/accounts/{account_id}/canned_responses/{id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   patch:
     $ref: ./application/canned_responses/update.yml
   delete:
@@ -230,17 +363,29 @@
 # Custom Attributes
 /api/v1/accounts/{account_id}/custom_attribute_definitions:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/custom_attributes/index.yml
   post:
     $ref: ./application/custom_attributes/create.yml
 /api/v1/accounts/{account_id}/custom_attribute_definitions/{id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - name: id
       in: path
       type: number
+=======
+    - $ref: '#/components/parameters/account_id'
+    - name: id
+      in: path
+      schema:
+        type: number
+>>>>>>> upstream/develop
       description: ID of the custom attribute
       required: true
   get:
@@ -257,6 +402,7 @@
   $ref: ./application/contacts/crud.yml
 /api/v1/accounts/{account_id}/contacts/{id}/conversations:
   $ref: ./application/contacts/conversations.yml
+<<<<<<< HEAD
 /api/v1/accounts/{account_id}/contacts/search:
   $ref: ./application/contacts/search.yml
 /api/v1/accounts/{account_id}/contacts/filter:
@@ -264,26 +410,55 @@
     - $ref: '#/parameters/account_id'
   post:
     $ref: ./application/contacts/filter.yml
+=======
+/api/v1/accounts/{account_id}/contacts/{id}/labels:
+  $ref: ./application/contacts/labels.yml
+/api/v1/accounts/{account_id}/contacts/search:
+  $ref: ./application/contacts/search.yml
+/api/v1/accounts/{account_id}/contacts/filter:
+  $ref: ./application/contacts/filter.yml
+>>>>>>> upstream/develop
 /api/v1/accounts/{account_id}/contacts/{id}/contact_inboxes:
   $ref: ./application/contact_inboxes/create.yml
 /api/v1/accounts/{account_id}/contacts/{id}/contactable_inboxes:
   $ref: ./application/contactable_inboxes/get.yml
 
+<<<<<<< HEAD
+=======
+# Contact Merge
+/api/v1/accounts/{account_id}/actions/contact_merge:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+  post:
+    $ref: ./application/contacts/merge.yml
+>>>>>>> upstream/develop
 
 # Automation Rule
 /api/v1/accounts/{account_id}/automation_rules:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/automation_rule/index.yml
   post:
     $ref: ./application/automation_rule/create.yml
 /api/v1/accounts/{account_id}/automation_rules/{id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - name: id
       in: path
       type: number
+=======
+    - $ref: '#/components/parameters/account_id'
+    - name: id
+      in: path
+      schema:
+        type: number
+>>>>>>> upstream/develop
       description: ID of the Automation Rule
       required: true
   get:
@@ -293,15 +468,23 @@
   delete:
     $ref: ./application/automation_rule/delete.yml
 
+<<<<<<< HEAD
 
 # Help Center
 /api/v1/accounts/{account_id}/portals:
   parameters:
     - $ref: '#/parameters/account_id'
+=======
+# Help Center
+/api/v1/accounts/{account_id}/portals:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./application/portal/create.yml
   get:
     $ref: ./application/portal/index.yml
+<<<<<<< HEAD
   patch:
     $ref: ./application/portal/update.yml
 
@@ -311,10 +494,25 @@
   parameters:
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/portal_id'
+=======
+/api/v1/accounts/{account_id}/portals/{id}:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/portal_id'
+  patch:
+    $ref: ./application/portal/update.yml
+
+# Help Center category
+/api/v1/accounts/{account_id}/portals/{id}/categories:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/portal_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./application/category/create.yml
 
 # Help Center article
+<<<<<<< HEAD
 /api/v1/accounts/{account_id}/portals/{portal_id}/articles:
   parameters:
     - $ref: '#/parameters/account_id'
@@ -323,6 +521,15 @@
     $ref: ./application/article/create.yml
 
 
+=======
+/api/v1/accounts/{account_id}/portals/{id}/articles:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/portal_id'
+  post:
+    $ref: ./application/article/create.yml
+
+>>>>>>> upstream/develop
 # Conversations
 /api/v1/accounts/{account_id}/conversations/meta:
   $ref: ./application/conversation/meta.yml
@@ -330,25 +537,40 @@
   $ref: ./application/conversation/index.yml
 /api/v1/accounts/{account_id}/conversations/filter:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./application/conversation/filter.yml
 /api/v1/accounts/{account_id}/conversations/{conversation_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/conversation/show.yml
   patch:
     $ref: ./application/conversation/update.yml
 /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_status:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./application/conversation/toggle_status.yml
 /api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_priority:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
   post:
@@ -358,6 +580,23 @@
   parameters:
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+  post:
+    $ref: ./application/conversation/toggle_priority.yml
+/api/v1/accounts/{account_id}/conversations/{conversation_id}/toggle_typing_status:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+  post:
+    $ref: ./application/conversation/toggle_typing_status.yml
+
+/api/v1/accounts/{account_id}/conversations/{conversation_id}/custom_attributes:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./application/conversation/custom_attributes.yml
 
@@ -365,8 +604,13 @@
 
 /api/v1/accounts/{account_id}/conversations/{conversation_id}/assignments:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./application/conversation/assignments.yml
 
@@ -374,21 +618,40 @@
 
 /api/v1/accounts/{account_id}/conversations/{conversation_id}/labels:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/conversation/labels/index.yml
   post:
     $ref: ./application/conversation/labels/create.yml
 
+<<<<<<< HEAD
+=======
+# Conversation Reporting Events
+
+/api/v1/accounts/{account_id}/conversations/{conversation_id}/reporting_events:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+  get:
+    $ref: ./application/conversation/reporting_events.yml
+>>>>>>> upstream/develop
 
 # Inboxes
 /api/v1/accounts/{account_id}/inboxes:
   $ref: ./application/inboxes/index.yml
+<<<<<<< HEAD
 /api/v1/accounts/{account_id}/inboxes/{id}/:
   $ref: ./application/inboxes/show.yml
 /api/v1/accounts/{account_id}/inboxes/:
   $ref: ./application/inboxes/create.yml
+=======
+>>>>>>> upstream/develop
 /api/v1/accounts/{account_id}/inboxes/{id}:
   $ref: ./application/inboxes/update.yml
 /api/v1/accounts/{account_id}/inboxes/{id}/agent_bot:
@@ -399,14 +662,23 @@
 # Inbox Members
 /api/v1/accounts/{account_id}/inbox_members/{inbox_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/inbox_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/inbox_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/inboxes/inbox_members/show.yml
 
 /api/v1/accounts/{account_id}/inbox_members:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   post:
     $ref: ./application/inboxes/inbox_members/create.yml
   patch:
@@ -414,19 +686,51 @@
   delete:
     $ref: ./application/inboxes/inbox_members/delete.yml
 
+<<<<<<< HEAD
 
+=======
+# Labels
+/api/v1/accounts/{account_id}/labels:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+  get:
+    $ref: ./application/labels/index.yml
+  post:
+    $ref: ./application/labels/create.yml
+/api/v1/accounts/{account_id}/labels/{id}:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: number
+      description: ID of the label
+  get:
+    $ref: ./application/labels/show.yml
+  patch:
+    $ref: ./application/labels/update.yml
+  delete:
+    $ref: ./application/labels/delete.yml
+>>>>>>> upstream/develop
 
 # Messages
 /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/conversation/messages/index.yml
   post:
     $ref: ./application/conversation/messages/create.yml
 /api/v1/accounts/{account_id}/conversations/{conversation_id}/messages/{message_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/conversation_id'
     - $ref: '#/parameters/message_id'
@@ -439,6 +743,18 @@
 /api/v1/accounts/{account_id}/integrations/apps:
   parameters:
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/conversation_id'
+    - $ref: '#/components/parameters/message_id'
+  delete:
+    $ref: ./application/conversation/messages/delete.yml
+
+# Integrations
+/api/v1/accounts/{account_id}/integrations/apps:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: './application/integrations/apps/show.yml'
 /api/v1/accounts/{account_id}/integrations/hooks:
@@ -450,25 +766,40 @@
   delete:
     $ref: ./application/integrations/hooks/delete.yml
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> upstream/develop
 # Profile
 /api/v1/profile:
   $ref: ./profile/index.yml
 
+<<<<<<< HEAD
 
 # Teams
 /api/v1/accounts/{account_id}/teams:
   parameters:
     - $ref: '#/parameters/account_id'
+=======
+# Teams
+/api/v1/accounts/{account_id}/teams:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/teams/index.yml
   post:
     $ref: ./application/teams/create.yml
 /api/v1/accounts/{account_id}/teams/{team_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/team_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/team_id'
+>>>>>>> upstream/develop
   get:
     $ref: './application/teams/show.yml'
   patch:
@@ -477,8 +808,13 @@
     $ref: ./application/teams/delete.yml
 /api/v1/accounts/{account_id}/teams/{team_id}/team_members:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/team_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/team_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/team_members/index.yml
   post:
@@ -493,11 +829,20 @@
 # Custom Filters
 /api/v1/accounts/{account_id}/custom_filters:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - in: query
       name: filter_type
       type: string
       enum: ['conversation', 'contact', 'report']
+=======
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: filter_type
+      schema:
+        type: string
+        enum: ['conversation', 'contact', 'report']
+>>>>>>> upstream/develop
       required: false
       description: The type of custom filter
   get:
@@ -506,8 +851,13 @@
     $ref: ./application/custom_filters/create.yml
 /api/v1/accounts/{account_id}/custom_filters/{custom_filter_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/custom_filter_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/custom_filter_id'
+>>>>>>> upstream/develop
   get:
     $ref: './application/custom_filters/show.yml'
   patch:
@@ -518,15 +868,24 @@
 # webhooks
 /api/v1/accounts/{account_id}/webhooks:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+>>>>>>> upstream/develop
   get:
     $ref: ./application/webhooks/index.yml
   post:
     $ref: ./application/webhooks/create.yml
 /api/v1/accounts/{account_id}/webhooks/{webhook_id}:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/webhook_id'
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/webhook_id'
+>>>>>>> upstream/develop
   patch:
     $ref: ./application/webhooks/update.yml
   delete:
@@ -534,6 +893,7 @@
 
 ### Reports
 
+<<<<<<< HEAD
 # List
 /api/v2/accounts/{account_id}/reports:
   parameters:
@@ -551,6 +911,35 @@
     - in: query
       name: until
       type: string
+=======
+# Account Reporting Events
+/api/v1/accounts/{account_id}/reporting_events:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+  get:
+    $ref: ./application/reporting_events/index.yml
+
+# List
+/api/v2/accounts/{account_id}/reports:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/report_metric'
+    - $ref: '#/components/parameters/report_type'
+    - in: query
+      name: id
+      schema:
+        type: string
+      description: The Id of specific object in case of agent/inbox/label
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start.
+    - in: query
+      name: until
+      schema:
+        type: string
+>>>>>>> upstream/develop
       description: The timestamp from where report should stop.
   get:
     $ref: './application/reports/index.yml'
@@ -558,6 +947,7 @@
 # Summary
 /api/v2/accounts/{account_id}/reports/summary:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - $ref: '#/parameters/report_type'
     - in: query
@@ -571,6 +961,24 @@
     - in: query
       name: until
       type: string
+=======
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/report_type'
+    - in: query
+      name: id
+      schema:
+        type: string
+      description: The Id of specific object in case of agent/inbox/label
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start.
+    - in: query
+      name: until
+      schema:
+        type: string
+>>>>>>> upstream/develop
       description: The timestamp from where report should stop.
   get:
     $ref: './application/reports/summary.yml'
@@ -578,12 +986,22 @@
 # Conversation metrics for account
 /api/v2/accounts/{account_id}/reports/conversations:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - in: query
       name: type
       type: string
       enum:
         - account
+=======
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: type
+      schema:
+        type: string
+        enum:
+          - account
+>>>>>>> upstream/develop
       required: true
       description: Type of report
   get:
@@ -592,17 +1010,207 @@
 # Conversation metrics for agent
 /api/v2/accounts/{account_id}/reports/conversations/:
   parameters:
+<<<<<<< HEAD
     - $ref: '#/parameters/account_id'
     - in: query
       name: type
       type: string
       enum:
         - agent
+=======
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: type
+      schema:
+        type: string
+        enum:
+          - agent
+>>>>>>> upstream/develop
       required: true
       description: Type of report
     - in: query
       name: user_id
+<<<<<<< HEAD
       type: string
       description: The numeric ID of the user
   get:
     $ref: './application/reports/conversation/agent.yml'
+=======
+      schema:
+        type: string
+      description: The numeric ID of the user
+  get:
+    $ref: './application/reports/conversation/agent.yml'
+
+# Channel summary report (Available in 4.10.0+)
+/api/v2/accounts/{account_id}/summary_reports/channel:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start (Unix timestamp).
+    - in: query
+      name: until
+      schema:
+        type: string
+      description: The timestamp from where report should stop (Unix timestamp).
+  get:
+    $ref: './application/reports/channel_summary.yml'
+
+# Inbox summary report
+/api/v2/accounts/{account_id}/summary_reports/inbox:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start (Unix timestamp).
+    - in: query
+      name: until
+      schema:
+        type: string
+      description: The timestamp from where report should stop (Unix timestamp).
+    - in: query
+      name: business_hours
+      schema:
+        type: boolean
+      description: Whether to calculate metrics using business hours only.
+  get:
+    $ref: './application/reports/inbox_summary.yml'
+
+# Agent summary report
+/api/v2/accounts/{account_id}/summary_reports/agent:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start (Unix timestamp).
+    - in: query
+      name: until
+      schema:
+        type: string
+      description: The timestamp from where report should stop (Unix timestamp).
+    - in: query
+      name: business_hours
+      schema:
+        type: boolean
+      description: Whether to calculate metrics using business hours only.
+  get:
+    $ref: './application/reports/agent_summary.yml'
+
+# Team summary report
+/api/v2/accounts/{account_id}/summary_reports/team:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start (Unix timestamp).
+    - in: query
+      name: until
+      schema:
+        type: string
+      description: The timestamp from where report should stop (Unix timestamp).
+    - in: query
+      name: business_hours
+      schema:
+        type: boolean
+      description: Whether to calculate metrics using business hours only.
+  get:
+    $ref: './application/reports/team_summary.yml'
+
+# First response time distribution report
+/api/v2/accounts/{account_id}/reports/first_response_time_distribution:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start (Unix timestamp).
+    - in: query
+      name: until
+      schema:
+        type: string
+      description: The timestamp from where report should stop (Unix timestamp).
+  get:
+    $ref: './application/reports/first_response_time_distribution.yml'
+
+# Inbox-label matrix report
+/api/v2/accounts/{account_id}/reports/inbox_label_matrix:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start (Unix timestamp).
+    - in: query
+      name: until
+      schema:
+        type: string
+      description: The timestamp from where report should stop (Unix timestamp).
+    - in: query
+      name: inbox_ids
+      schema:
+        type: array
+        items:
+          type: integer
+      description: Filter by specific inbox IDs.
+    - in: query
+      name: label_ids
+      schema:
+        type: array
+        items:
+          type: integer
+      description: Filter by specific label IDs.
+  get:
+    $ref: './application/reports/inbox_label_matrix.yml'
+
+# Outgoing messages count report
+/api/v2/accounts/{account_id}/reports/outgoing_messages_count:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - in: query
+      name: since
+      schema:
+        type: string
+      description: The timestamp from where report should start (Unix timestamp).
+    - in: query
+      name: until
+      schema:
+        type: string
+      description: The timestamp from where report should stop (Unix timestamp).
+  get:
+    $ref: './application/reports/outgoing_messages_count.yml'
+
+# Conversations Messages
+/accounts/{account_id}/conversations/{conversation_id}/messages:
+  parameters:
+    - $ref: '#/components/parameters/account_id'
+    - name: conversation_id
+      in: path
+      description: ID of the conversation
+      required: true
+      schema:
+        type: number
+  get:
+    tags:
+      - Conversation
+    summary: Get messages from a conversation
+    description: Returns all messages from a specific conversation
+    operationId: getConversationMessages
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/conversation_messages'
+>>>>>>> upstream/develop

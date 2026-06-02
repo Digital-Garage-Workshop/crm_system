@@ -6,9 +6,26 @@ description: Delete an AgentBot
 security:
   - platformAppApiKey: []
 responses:
+<<<<<<< HEAD
   200:
     description: Success
   401:
     description: Unauthorized
   404:
     description: The agent bot does not exist
+=======
+  '200':
+    description: Success
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '404':
+    description: The agent bot does not exist
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

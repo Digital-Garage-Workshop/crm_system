@@ -1,10 +1,19 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, defineEmits } from 'vue';
+=======
+import { computed } from 'vue';
+>>>>>>> upstream/develop
 import { OnClickOutside } from '@vueuse/components';
 import { useToggle } from '@vueuse/core';
 
 import Button from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
+=======
+import Avatar from 'next/avatar/Avatar.vue';
+import Icon from 'dashboard/components-next/icon/Icon.vue';
+>>>>>>> upstream/develop
 import MultiselectDropdownItems from 'shared/components/ui/MultiselectDropdownItems.vue';
 
 const props = defineProps({
@@ -53,6 +62,13 @@ const hasValue = computed(() => {
   }
   return false;
 });
+<<<<<<< HEAD
+=======
+
+const hasIcon = computed(() => {
+  return props.selectedItem?.icon || false;
+});
+>>>>>>> upstream/develop
 </script>
 
 <template>
@@ -82,6 +98,7 @@ const hasValue = computed(() => {
             {{ selectedItem.name }}
           </h4>
         </div>
+<<<<<<< HEAD
         <Thumbnail
           v-if="hasValue && hasThumbnail"
           :src="selectedItem.thumbnail"
@@ -93,6 +110,29 @@ const hasValue = computed(() => {
       <div
         :class="{ 'dropdown-pane--open': showSearchDropdown }"
         class="dropdown-pane"
+=======
+        <Avatar
+          v-if="hasValue && hasThumbnail && !hasIcon"
+          :src="selectedItem.thumbnail"
+          :status="selectedItem.availability_status"
+          :name="selectedItem.name"
+          :size="24"
+          hide-offline-status
+          rounded-full
+        />
+        <Icon
+          v-if="hasValue && hasIcon"
+          :icon="selectedItem.icon"
+          class="size-5 text-n-slate-11"
+        />
+      </Button>
+      <div
+        :class="{
+          'block visible': showSearchDropdown,
+          'hidden invisible': !showSearchDropdown,
+        }"
+        class="box-border top-[2.625rem] w-full border rounded-lg bg-n-alpha-3 backdrop-blur-[100px] absolute shadow-lg border-n-strong dark:border-n-strong p-2 z-[9999]"
+>>>>>>> upstream/develop
       >
         <div class="flex items-center justify-between mb-1">
           <h4
@@ -115,9 +155,12 @@ const hasValue = computed(() => {
     </div>
   </OnClickOutside>
 </template>
+<<<<<<< HEAD
 
 <style lang="scss" scoped>
 .dropdown-pane {
   @apply box-border top-[2.625rem] w-full;
 }
 </style>
+=======
+>>>>>>> upstream/develop

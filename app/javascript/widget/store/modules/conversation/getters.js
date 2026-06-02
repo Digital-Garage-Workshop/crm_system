@@ -33,6 +33,11 @@ export const getters = {
       messages: groupConversationBySender(conversationGroupedByDate[date]),
     }));
   },
+<<<<<<< HEAD
+=======
+  getPendingCustomAttributes: _state => _state.pendingCustomAttributes,
+  getPendingLabels: _state => _state.pendingLabels,
+>>>>>>> upstream/develop
   getIsFetchingList: _state => _state.uiFlags.isFetchingList,
   getMessageCount: _state => {
     return Object.values(_state.conversations).length;

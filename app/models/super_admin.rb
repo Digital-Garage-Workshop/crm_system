@@ -7,6 +7,10 @@
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
+<<<<<<< HEAD
+=======
+#  consumed_timestep      :integer
+>>>>>>> upstream/develop
 #  current_sign_in_at     :datetime
 #  current_sign_in_ip     :string
 #  custom_attributes      :jsonb
@@ -17,6 +21,12 @@
 #  last_sign_in_ip        :string
 #  message_signature      :text
 #  name                   :string           not null
+<<<<<<< HEAD
+=======
+#  otp_backup_codes       :text
+#  otp_required_for_login :boolean          default(FALSE)
+#  otp_secret             :string
+>>>>>>> upstream/develop
 #  provider               :string           default("email"), not null
 #  pubsub_token           :string
 #  remember_created_at    :datetime
@@ -33,10 +43,19 @@
 #
 # Indexes
 #
+<<<<<<< HEAD
 #  index_users_on_email                 (email)
 #  index_users_on_pubsub_token          (pubsub_token) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
+=======
+#  index_users_on_email                   (email)
+#  index_users_on_otp_required_for_login  (otp_required_for_login)
+#  index_users_on_otp_secret              (otp_secret) UNIQUE
+#  index_users_on_pubsub_token            (pubsub_token) UNIQUE
+#  index_users_on_reset_password_token    (reset_password_token) UNIQUE
+#  index_users_on_uid_and_provider        (uid,provider) UNIQUE
+>>>>>>> upstream/develop
 #
 class SuperAdmin < User
 end

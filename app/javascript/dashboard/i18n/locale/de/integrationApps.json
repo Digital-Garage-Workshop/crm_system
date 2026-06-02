@@ -3,6 +3,12 @@
     "FETCHING": "Integrationen werden abgerufen",
     "NO_HOOK_CONFIGURED": "Es wurden keine {integrationId} Integrationen in diesem Konto konfiguriert.",
     "HEADER": "Anwendungen",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Aktiviert",
       "DISABLED": "Deaktiviert"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Hooks werden abgerufen",
       "INBOX": "Posteingang",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Aktionen",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Löschen"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Posteingang auswählen"
         },
         "SUBMIT": "Erstellen",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Abbrechen"
       },
       "API": {

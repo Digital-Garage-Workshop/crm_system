@@ -48,7 +48,12 @@
       "CREATED_AT": "Oprettet Den",
       "LAST_ACTIVITY": "Sidste Aktivitet",
       "REFERER_LINK": "Link til reference",
+<<<<<<< HEAD
       "BLOCKED": "Blocked"
+=======
+      "BLOCKED": "Blocked",
+      "LABELS": "Etiketter"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Standard Filtre",

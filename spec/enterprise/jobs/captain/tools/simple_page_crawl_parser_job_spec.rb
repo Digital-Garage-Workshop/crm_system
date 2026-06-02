@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe Captain::Tools::SimplePageCrawlParserJob, type: :job do
   describe '#perform' do
     let(:assistant) { create(:captain_assistant) }
+<<<<<<< HEAD
     let(:page_link) { 'https://example.com/page' }
+=======
+    let(:page_link) { 'https://example.com/page/' }
+>>>>>>> upstream/develop
     let(:page_title) { 'Example Page Title' }
     let(:content) { 'Some page content here' }
     let(:crawler) { instance_double(Captain::Tools::SimplePageCrawlService) }
@@ -14,11 +18,17 @@ RSpec.describe Captain::Tools::SimplePageCrawlParserJob, type: :job do
         .and_return(crawler)
 
       allow(crawler).to receive(:page_title).and_return(page_title)
+<<<<<<< HEAD
       allow(crawler).to receive(:body_text_content).and_return(content)
+=======
+      allow(crawler).to receive(:body_markdown).and_return(content)
+      allow(crawler).to receive(:success?).and_return(true)
+>>>>>>> upstream/develop
     end
 
     context 'when the page is successfully crawled' do
       it 'creates a new document if one does not exist' do
+<<<<<<< HEAD
         expect do
           described_class.perform_now(assistant_id: assistant.id, page_link: page_link)
         end.to change(assistant.documents, :count).by(1)
@@ -28,11 +38,30 @@ RSpec.describe Captain::Tools::SimplePageCrawlParserJob, type: :job do
         expect(document.name).to eq(page_title)
         expect(document.content).to eq(content)
         expect(document.status).to eq('available')
+=======
+        freeze_time do
+          expect do
+            described_class.perform_now(assistant_id: assistant.id, page_link: page_link)
+          end.to change(assistant.documents, :count).by(1)
+
+          document = assistant.documents.last
+          expect(document.external_link).to eq('https://example.com/page')
+          expect(document.name).to eq(page_title)
+          expect(document.content).to eq(content)
+          expect(document).to have_attributes(
+            status: 'available',
+            sync_status: 'synced',
+            last_synced_at: Time.current,
+            last_sync_attempted_at: Time.current
+          )
+        end
+>>>>>>> upstream/develop
       end
 
       it 'updates existing document if one exists' do
         existing_document = create(:captain_document,
                                    assistant: assistant,
+<<<<<<< HEAD
                                    external_link: page_link,
                                    name: 'Old Title',
                                    content: 'Old content')
@@ -45,6 +74,27 @@ RSpec.describe Captain::Tools::SimplePageCrawlParserJob, type: :job do
         expect(existing_document.name).to eq(page_title)
         expect(existing_document.content).to eq(content)
         expect(existing_document.status).to eq('available')
+=======
+                                   external_link: 'https://example.com/page',
+                                   name: 'Old Title',
+                                   content: 'Old content')
+
+        freeze_time do
+          expect do
+            described_class.perform_now(assistant_id: assistant.id, page_link: page_link)
+          end.not_to change(assistant.documents, :count)
+
+          existing_document.reload
+          expect(existing_document.name).to eq(page_title)
+          expect(existing_document.content).to eq(content)
+          expect(existing_document).to have_attributes(
+            status: 'available',
+            sync_status: 'synced',
+            last_synced_at: Time.current,
+            last_sync_attempted_at: Time.current
+          )
+        end
+>>>>>>> upstream/develop
       end
 
       context 'when title or content exceed maximum length' do
@@ -53,7 +103,11 @@ RSpec.describe Captain::Tools::SimplePageCrawlParserJob, type: :job do
 
         before do
           allow(crawler).to receive(:page_title).and_return(long_title)
+<<<<<<< HEAD
           allow(crawler).to receive(:body_text_content).and_return(long_content)
+=======
+          allow(crawler).to receive(:body_markdown).and_return(long_content)
+>>>>>>> upstream/develop
         end
 
         it 'truncates the title and content' do
@@ -78,10 +132,97 @@ RSpec.describe Captain::Tools::SimplePageCrawlParserJob, type: :job do
       end
     end
 
+<<<<<<< HEAD
     context 'when title and content are nil' do
       before do
         allow(crawler).to receive(:page_title).and_return(nil)
         allow(crawler).to receive(:body_text_content).and_return(nil)
+=======
+    context 'when the page fetch fails' do
+      before do
+        allow(crawler).to receive(:success?).and_return(false)
+        allow(crawler).to receive(:status_code).and_return(500)
+      end
+
+      it 'raises an error without creating an available document' do
+        expect do
+          described_class.perform_now(assistant_id: assistant.id, page_link: page_link)
+        end.to raise_error("Failed to parse data: #{page_link} Failed to fetch page: #{page_link}")
+          .and not_change(assistant.documents, :count)
+      end
+
+      it 'marks an existing document as available and failed' do
+        document = create(
+          :captain_document,
+          assistant: assistant,
+          account: assistant.account,
+          external_link: 'https://example.com/page',
+          status: :in_progress
+        )
+
+        freeze_time do
+          expect do
+            described_class.perform_now(assistant_id: assistant.id, page_link: page_link)
+          end.to raise_error("Failed to parse data: #{page_link} Failed to fetch page: #{page_link}")
+
+          expect(document.reload).to have_attributes(
+            status: 'available',
+            sync_status: 'failed',
+            last_sync_error_code: 'fetch_failed',
+            last_sync_attempted_at: Time.current
+          )
+        end
+      end
+
+      context 'when the failure is permanent' do
+        # `discard_on PermanentCrawlError` swallows the error in `perform_now`
+        # under normal conditions, but Zeitwerk reloading in CI can break the
+        # rescue_handlers chain so the error escapes. The behavioural contract
+        # we care about — no retries, correct document state — holds either
+        # way, so tolerate both.
+        def run_job
+          described_class.perform_now(assistant_id: assistant.id, page_link: page_link)
+        rescue StandardError => e
+          # discard_on may have failed to swallow it; the contract still holds.
+          raise unless e.class.name == 'Captain::Tools::SimplePageCrawlParserJob::PermanentCrawlError' # rubocop:disable Style/ClassEqualityComparison
+        end
+
+        before do
+          allow(crawler).to receive(:status_code).and_return(404)
+        end
+
+        it 'does not persist a discovered link that was never stored' do
+          expect { run_job }.not_to change(assistant.documents, :count)
+        end
+
+        it 'marks an existing document as available and failed' do
+          document = create(
+            :captain_document,
+            assistant: assistant,
+            account: assistant.account,
+            external_link: 'https://example.com/page',
+            status: :in_progress
+          )
+
+          freeze_time do
+            run_job
+
+            expect(document.reload).to have_attributes(
+              status: 'available',
+              sync_status: 'failed',
+              last_sync_error_code: 'not_found',
+              last_sync_attempted_at: Time.current
+            )
+          end
+        end
+      end
+    end
+
+    context 'when title and content are nil' do
+      before do
+        allow(crawler).to receive(:page_title).and_return(nil)
+        allow(crawler).to receive(:body_markdown).and_return(nil)
+>>>>>>> upstream/develop
       end
 
       it 'creates document with empty strings and updates the status to available' do

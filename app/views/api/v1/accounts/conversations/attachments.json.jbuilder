@@ -3,6 +3,7 @@ json.meta do
 end
 
 json.payload @attachments do |attachment|
+<<<<<<< HEAD
   json.message_id attachment.push_event_data[:message_id]
   json.thumb_url attachment.push_event_data[:thumb_url]
   json.data_url attachment.push_event_data[:data_url]
@@ -13,4 +14,7 @@ json.payload @attachments do |attachment|
   json.height attachment.push_event_data[:height]
   json.created_at attachment.message.created_at.to_i
   json.sender attachment.message.sender.push_event_data if attachment.message.sender
+=======
+  json.partial! 'api/v1/models/attachment', formats: [:json], attachment: attachment
+>>>>>>> upstream/develop
 end

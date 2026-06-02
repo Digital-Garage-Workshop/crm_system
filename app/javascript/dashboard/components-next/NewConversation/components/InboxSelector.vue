@@ -6,6 +6,10 @@ import { generateLabelForContactableInboxesList } from 'dashboard/components-nex
 
 import Button from 'dashboard/components-next/button/Button.vue';
 import DropdownMenu from 'dashboard/components-next/dropdown-menu/DropdownMenu.vue';
+<<<<<<< HEAD
+=======
+import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   targetInbox: {
@@ -28,6 +32,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+<<<<<<< HEAD
+=======
+  isFetchingInboxes: {
+    type: Boolean,
+    default: false,
+  },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits([
@@ -71,7 +82,13 @@ const targetInboxLabel = computed(() => {
       v-on-click-outside="() => emit('toggleDropdown', false)"
       class="relative flex items-center h-7"
     >
+<<<<<<< HEAD
       <Button
+=======
+      <Spinner v-if="isFetchingInboxes" :size="16" />
+      <Button
+        v-else
+>>>>>>> upstream/develop
         :label="t('COMPOSE_NEW_CONVERSATION.FORM.INBOX_SELECTOR.BUTTON')"
         variant="link"
         size="sm"
@@ -83,7 +100,11 @@ const targetInboxLabel = computed(() => {
       <DropdownMenu
         v-if="contactableInboxesList?.length > 0 && showInboxesDropdown"
         :menu-items="contactableInboxesList"
+<<<<<<< HEAD
         class="left-0 z-[100] top-8 overflow-y-auto max-h-60 w-fit max-w-sm dark:!outline-n-slate-5"
+=======
+        class="ltr:left-0 rtl:right-0 z-[100] top-8 max-h-56 w-fit max-w-sm dark:!outline-n-slate-5"
+>>>>>>> upstream/develop
         @action="emit('handleInboxAction', $event)"
       />
     </div>

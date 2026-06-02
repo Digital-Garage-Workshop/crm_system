@@ -7,6 +7,7 @@ import ContactMoreActions from './components/ContactMoreActions.vue';
 import ComposeConversation from 'dashboard/components-next/NewConversation/ComposeConversation.vue';
 
 defineProps({
+<<<<<<< HEAD
   showSearch: {
     type: Boolean,
     default: true,
@@ -43,6 +44,18 @@ defineProps({
     type: Boolean,
     default: false,
   },
+=======
+  showSearch: { type: Boolean, default: true },
+  searchValue: { type: String, default: '' },
+  headerTitle: { type: String, required: true },
+  buttonLabel: { type: String, default: '' },
+  activeSort: { type: String, default: 'last_activity_at' },
+  activeOrdering: { type: String, default: '' },
+  isSegmentsView: { type: Boolean, default: false },
+  hasActiveFilters: { type: Boolean, default: false },
+  isLabelView: { type: Boolean, default: false },
+  isActiveView: { type: Boolean, default: false },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits([
@@ -58,15 +71,26 @@ const emit = defineEmits([
 </script>
 
 <template>
+<<<<<<< HEAD
   <header class="sticky top-0 z-10">
     <div
       class="flex items-center justify-between w-full h-20 px-6 gap-2 mx-auto max-w-[60rem]"
+=======
+  <header class="sticky top-0 z-20 px-6">
+    <div
+      class="flex items-start sm:items-center justify-between w-full py-6 gap-2 mx-auto max-w-5xl"
+>>>>>>> upstream/develop
     >
       <span class="text-xl font-medium truncate text-n-slate-12">
         {{ headerTitle }}
       </span>
+<<<<<<< HEAD
       <div class="flex items-center flex-shrink-0 gap-4">
         <div v-if="showSearch" class="flex items-center gap-2">
+=======
+      <div class="flex items-center flex-col sm:flex-row flex-shrink-0 gap-4">
+        <div v-if="showSearch" class="flex items-center gap-2 w-full">
+>>>>>>> upstream/develop
           <Input
             :model-value="searchValue"
             type="search"
@@ -74,6 +98,10 @@ const emit = defineEmits([
             :custom-input-class="[
               'h-8 [&:not(.focus)]:!border-transparent bg-n-alpha-2 dark:bg-n-solid-1 ltr:!pl-8 !py-1 rtl:!pr-8',
             ]"
+<<<<<<< HEAD
+=======
+            class="w-full"
+>>>>>>> upstream/develop
             @input="emit('search', $event.target.value)"
           >
             <template #prefix>
@@ -84,6 +112,7 @@ const emit = defineEmits([
             </template>
           </Input>
         </div>
+<<<<<<< HEAD
         <div class="flex items-center gap-2">
           <div v-if="!isLabelView" class="relative">
             <Button
@@ -137,6 +166,68 @@ const emit = defineEmits([
             <Button :label="buttonLabel" size="sm" @click="toggle" />
           </template>
         </ComposeConversation>
+=======
+        <div class="flex items-center flex-shrink-0 gap-4">
+          <div class="flex items-center gap-2">
+            <div v-if="!isLabelView && !isActiveView" class="relative">
+              <Button
+                id="toggleContactsFilterButton"
+                :icon="
+                  isSegmentsView ? 'i-lucide-pen-line' : 'i-lucide-list-filter'
+                "
+                color="slate"
+                size="sm"
+                class="relative w-8"
+                variant="ghost"
+                @click="emit('filter')"
+              >
+                <div
+                  v-if="hasActiveFilters && !isSegmentsView"
+                  class="absolute top-0 right-0 w-2 h-2 rounded-full bg-n-brand"
+                />
+              </Button>
+              <slot name="filter" />
+            </div>
+            <Button
+              v-if="
+                hasActiveFilters &&
+                !isSegmentsView &&
+                !isLabelView &&
+                !isActiveView
+              "
+              icon="i-lucide-save"
+              color="slate"
+              size="sm"
+              variant="ghost"
+              @click="emit('createSegment')"
+            />
+            <Button
+              v-if="isSegmentsView && !isLabelView && !isActiveView"
+              icon="i-lucide-trash"
+              color="slate"
+              size="sm"
+              variant="ghost"
+              @click="emit('deleteSegment')"
+            />
+            <ContactSortMenu
+              :active-sort="activeSort"
+              :active-ordering="activeOrdering"
+              @update:sort="emit('update:sort', $event)"
+            />
+            <ContactMoreActions
+              @add="emit('add')"
+              @import="emit('import')"
+              @export="emit('export')"
+            />
+          </div>
+          <div class="w-px h-4 bg-n-strong" />
+          <ComposeConversation>
+            <template #trigger>
+              <Button :label="buttonLabel" size="sm" />
+            </template>
+          </ComposeConversation>
+        </div>
+>>>>>>> upstream/develop
       </div>
     </div>
   </header>

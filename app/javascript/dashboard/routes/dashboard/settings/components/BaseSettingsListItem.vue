@@ -21,7 +21,11 @@ defineProps({
           class="flex items-center justify-between w-full gap-3 sm:justify-normal whitespace-nowrap"
         >
           <h3
+<<<<<<< HEAD
             class="justify-between tracking-tight font-medium truncate w-fit sm:justify-normal text-slate-900 dark:text-slate-25"
+=======
+            class="justify-between tracking-tight font-medium truncate w-fit sm:justify-normal text-n-slate-12"
+>>>>>>> upstream/develop
           >
             <slot name="title">
               {{ title }}
@@ -29,9 +33,13 @@ defineProps({
           </h3>
           <slot name="label" />
         </div>
+<<<<<<< HEAD
         <p
           class="text-base text-slate-600 dark:text-slate-300 max-w-[25rem] w-full line-clamp-2"
         >
+=======
+        <p class="text-base text-n-slate-11 max-w-[25rem] w-full line-clamp-2">
+>>>>>>> upstream/develop
           <slot name="description">
             {{ description }}
           </slot>

@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "管理者",
       "AGENT": "担当者"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "このアカウントに関連付けられている担当者はありません。",
       "TITLE": "チームの担当者を管理する",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Woot Serverに接続できませんでした。後でもう一度お試しください。"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "担当者を検索...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "該当する結果が見つかりませんでした。"
     },

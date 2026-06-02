@@ -1,9 +1,23 @@
+<<<<<<< HEAD
 require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
   - ./rubocop/use_from_email.rb
   - ./rubocop/custom_cop_location.rb
+=======
+plugins:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-factory_bot
+
+require:
+  - ./rubocop/use_from_email.rb
+  - ./rubocop/custom_cop_location.rb
+  - ./rubocop/attachment_download.rb
+  - ./rubocop/one_class_per_file.rb
+>>>>>>> upstream/develop
 
 Layout/LineLength:
   Max: 150
@@ -13,6 +27,7 @@ Metrics/ClassLength:
   Exclude:
     - 'app/models/message.rb'
     - 'app/models/conversation.rb'
+<<<<<<< HEAD
 Metrics/MethodLength:
   Max: 19
 RSpec/ExampleLength:
@@ -27,16 +42,53 @@ Style/SymbolArray:
   Enabled: false
 Style/OpenStructUse:
   Enabled: false
+=======
+
+Metrics/MethodLength:
+  Max: 19
+  Exclude:
+    - 'enterprise/lib/captain/agent.rb'
+
+RSpec/ExampleLength:
+  Max: 50
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/OpenStructUse:
+  Enabled: false
+
+Chatwoot/AttachmentDownload:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+
+>>>>>>> upstream/develop
 Style/OptionalBooleanParameter:
   Exclude:
     - 'app/services/email_templates/db_resolver_service.rb'
     - 'app/dispatchers/dispatcher.rb'
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
 Style/GlobalVars:
   Exclude:
     - 'config/initializers/01_redis.rb'
     - 'config/initializers/rack_attack.rb'
     - 'lib/redis/alfred.rb'
     - 'lib/global_config.rb'
+<<<<<<< HEAD
 Style/ClassVars:
   Exclude:
     - 'app/services/email_templates/db_resolver_service.rb'
@@ -51,6 +103,28 @@ Lint/EmptyBlock:
 Lint/OrAssignmentToConstant:
   Exclude:
     - 'lib/redis/config.rb'
+=======
+
+Style/ClassVars:
+  Exclude:
+    - 'app/services/email_templates/db_resolver_service.rb'
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/drops/base_drop.rb'
+
+Lint/SymbolConversion:
+  Enabled: false
+
+Lint/EmptyBlock:
+  Exclude:
+    - 'app/views/api/v1/accounts/conversations/toggle_status.json.jbuilder'
+
+Lint/OrAssignmentToConstant:
+  Exclude:
+    - 'lib/redis/config.rb'
+
+>>>>>>> upstream/develop
 Metrics/BlockLength:
   Max: 30
   Exclude:
@@ -58,10 +132,22 @@ Metrics/BlockLength:
     - '**/routes.rb'
     - 'config/environments/*'
     - db/schema.rb
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
 Metrics/ModuleLength:
   Exclude:
     - lib/seeders/message_seeder.rb
     - spec/support/slack_stubs.rb
+<<<<<<< HEAD
+=======
+
+Rails/HelperInstanceVariable:
+  Exclude:
+    - enterprise/app/helpers/captain/chat_helper.rb
+    - enterprise/app/helpers/captain/chat_response_helper.rb
+>>>>>>> upstream/develop
 Rails/ApplicationController:
   Exclude:
     - 'app/controllers/api/v1/widget/messages_controller.rb'
@@ -71,10 +157,15 @@ Rails/ApplicationController:
     - 'app/controllers/platform_controller.rb'
     - 'app/controllers/public_controller.rb'
     - 'app/controllers/survey/responses_controller.rb'
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
 Rails/FindEach:
   Enabled: true
   Include:
     - 'app/**/*.rb'
+<<<<<<< HEAD
 Rails/CompactBlank:
   Enabled: false
 Rails/EnvironmentVariableAccess:
@@ -83,17 +174,53 @@ Rails/TimeZoneAssignment:
   Enabled: false
 Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
+=======
+
+Rails/CompactBlank:
+  Enabled: false
+
+Rails/EnvironmentVariableAccess:
+  Enabled: false
+
+Rails/TimeZoneAssignment:
+  Enabled: false
+
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false
+
+Rails/InverseOf:
+  Exclude:
+    - enterprise/app/models/captain/assistant.rb
+
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - app/models/canned_response.rb
+    - app/models/telegram_bot.rb
+    - enterprise/app/models/captain_inbox.rb
+    - 'app/models/channel/twitter_profile.rb'
+    - 'app/models/webhook.rb'
+    - 'app/models/contact.rb'
+
+>>>>>>> upstream/develop
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
   Exclude:
     - 'config/application.rb'
     - 'config/initializers/monkey_patches/*'
+<<<<<<< HEAD
 Style/MapToHash:
   Enabled: false
+=======
+
+Style/MapToHash:
+  Enabled: false
+
+>>>>>>> upstream/develop
 Style/HashSyntax:
   Enabled: true
   EnforcedStyle: no_mixed_keys
   EnforcedShorthandSyntax: never
+<<<<<<< HEAD
 RSpec/NestedGroups:
   Enabled: true
   Max: 4
@@ -108,15 +235,40 @@ Naming/VariableNumber:
 Naming/MemoizedInstanceVariableName:
   Exclude:
     - 'app/models/message.rb'
+=======
+
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 4
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/StubbedMock:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - 'app/models/message.rb'
+
+>>>>>>> upstream/develop
 Style/GuardClause:
   Exclude:
     - 'app/builders/account_builder.rb'
     - 'app/models/attachment.rb'
     - 'app/models/message.rb'
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
 Metrics/AbcSize:
   Max: 26
   Exclude:
     - 'app/controllers/concerns/auth_helper.rb'
+<<<<<<< HEAD
 Rails/UniqueValidationWithoutIndex:
   Exclude:
     - 'app/models/channel/twitter_profile.rb'
@@ -133,12 +285,34 @@ Rails/ThreeStateBooleanColumn:
     - 'db/migrate/20230503101201_create_sla_policies.rb'
 RSpec/IndexedLet:
   Enabled: false
+=======
+
+    - 'app/models/integrations/hook.rb'
+    - 'app/models/canned_response.rb'
+    - 'app/models/telegram_bot.rb'
+
+Rails/RenderInline:
+  Exclude:
+    - 'app/controllers/swagger_controller.rb'
+
+Rails/ThreeStateBooleanColumn:
+  Exclude:
+    - 'db/migrate/20230503101201_create_sla_policies.rb'
+
+RSpec/IndexedLet:
+  Enabled: false
+
+>>>>>>> upstream/develop
 RSpec/NamedSubject:
   Enabled: false
 
 # we should bring this down
 RSpec/MultipleExpectations:
   Max: 7
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
 RSpec/MultipleMemoizedHelpers:
   Max: 14
 
@@ -152,6 +326,12 @@ UseFromEmail:
 CustomCopLocation:
   Enabled: true
 
+<<<<<<< HEAD
+=======
+Style/OneClassPerFile:
+  Enabled: true
+
+>>>>>>> upstream/develop
 AllCops:
   NewCops: enable
   Exclude:
@@ -166,3 +346,124 @@ AllCops:
     - 'tmp/**/*'
     - 'storage/**/*'
     - 'db/migrate/20230426130150_init_schema.rb'
+<<<<<<< HEAD
+=======
+
+FactoryBot/SyntaxMethods:
+  Enabled: false
+
+# Disable new rules causing errors
+Layout/LeadingCommentSpace:
+  Enabled: false
+
+Style/ReturnNilInPredicateMethodDefinition:
+  Enabled: false
+
+Style/RedundantParentheses:
+  Enabled: false
+
+Performance/StringIdentifierArgument:
+  Enabled: false
+
+Layout/EmptyLinesAroundExceptionHandlingKeywords:
+  Enabled: false
+
+Lint/LiteralAsCondition:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Layout/SpaceAroundOperators:
+  Enabled: false
+
+Rails/EnvLocal:
+  Enabled: false
+
+Rails/WhereRange:
+  Enabled: false
+
+Lint/UselessConstantScoping:
+  Enabled: false
+
+Style/MultipleComparison:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
+
+RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/ReceiveMessages:
+  Enabled: false
+
+FactoryBot/AssociationStyle:
+  Enabled: false
+
+Rails/EnumSyntax:
+  Enabled: false
+
+Lint/RedundantTypeConversion:
+  Enabled: false
+
+# Additional rules to disable
+Rails/RedundantActiveRecordAllMethod:
+  Enabled: false
+
+Layout/TrailingEmptyLines:
+  Enabled: true
+
+Style/SafeNavigationChainLength:
+  Enabled: false
+
+Lint/SafeNavigationConsistency:
+  Enabled: false
+
+Lint/CopDirectiveSyntax:
+  Enabled: false
+
+# Final set of rules to disable
+FactoryBot/ExcessiveCreateList:
+  Enabled: false
+
+RSpec/MissingExpectationTargetMethod:
+  Enabled: false
+
+Performance/InefficientHashSearch:
+  Enabled: false
+
+Style/RedundantSelfAssignmentBranch:
+  Enabled: false
+
+Style/YAMLFileRead:
+  Enabled: false
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Style/RedundantFilterChain:
+  Enabled: false
+
+Performance/MapMethodChain:
+  Enabled: false
+
+Rails/RootPathnameMethods:
+  Enabled: false
+
+Style/SuperArguments:
+  Enabled: false
+
+# Final remaining rules to disable
+Rails/Delegate:
+  Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
+
+FactoryBot/RedundantFactoryOption:
+  Enabled: false
+
+FactoryBot/FactoryAssociationWithStrategy:
+  Enabled: false
+>>>>>>> upstream/develop

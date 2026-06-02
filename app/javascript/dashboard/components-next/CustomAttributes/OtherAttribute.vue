@@ -49,7 +49,15 @@ const rules = computed(() => ({
       props.attribute.regexPattern && {
         regexValidation: value => {
           if (!value) return true;
+<<<<<<< HEAD
           return getRegexp(props.attribute.regexPattern).test(value);
+=======
+          try {
+            return getRegexp(props.attribute.regexPattern).test(value);
+          } catch {
+            return false;
+          }
+>>>>>>> upstream/develop
         },
       }),
   },
@@ -128,7 +136,11 @@ const handleInputUpdate = async () => {
         'cursor-pointer text-n-slate-11 hover:text-n-slate-12 py-2 select-none font-medium':
           !isEditingView,
         'text-n-slate-12 truncate': isEditingView && !isAttributeTypeLink,
+<<<<<<< HEAD
         'truncate hover:text-n-brand text-n-blue-text':
+=======
+        'truncate hover:text-n-brand text-n-blue-11':
+>>>>>>> upstream/develop
           isEditingView && isAttributeTypeLink,
       }"
       @click="toggleEditValue(!isEditingView)"
@@ -187,7 +199,11 @@ const handleInputUpdate = async () => {
         :message="attributeErrorMessage"
         :message-type="hasError ? 'error' : 'info'"
         custom-input-class="h-8 ltr:rounded-r-none rtl:rounded-l-none"
+<<<<<<< HEAD
         @keyup.enter="handleInputUpdate"
+=======
+        @enter="handleInputUpdate"
+>>>>>>> upstream/develop
       />
       <Button
         icon="i-lucide-check"

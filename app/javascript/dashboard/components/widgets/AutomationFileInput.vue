@@ -79,6 +79,7 @@ input[type='file'] {
   @apply hidden;
 }
 .input-wrapper {
+<<<<<<< HEAD
   @apply flex h-9 bg-white dark:bg-slate-900 py-1 px-2 items-center text-xs cursor-pointer rounded-sm border border-dashed border-woot-100 dark:border-woot-500;
 }
 .success-icon {
@@ -86,6 +87,15 @@ input[type='file'] {
 }
 .error-icon {
   @apply text-red-500 dark:text-red-600 mr-2;
+=======
+  @apply flex h-8 bg-n-background py-1 px-2 items-center text-xs cursor-pointer rounded-lg border border-dashed border-n-strong;
+}
+.success-icon {
+  @apply text-n-teal-9 mr-2;
+}
+.error-icon {
+  @apply text-n-ruby-9 mr-2;
+>>>>>>> upstream/develop
 }
 
 .processing {

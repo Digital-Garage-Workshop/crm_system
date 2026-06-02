@@ -3,7 +3,11 @@
     "HEADER": "Raporty rozmów",
     "LOADING_CHART": "Ładowanie danych wykresów...",
     "NO_ENOUGH_DATA": "Nie ma wystarczającej ilości danych do wygenerowania raportu. Spróbuj ponownie później.",
+<<<<<<< HEAD
     "DOWNLOAD_AGENT_REPORTS": "Pobierz raporty agenta",
+=======
+    "DOWNLOAD_CONVERSATION_REPORTS": "Download conversation reports",
+>>>>>>> upstream/develop
     "DATA_FETCHING_FAILED": "Nie udało się pobrać danych, spróbuj ponownie później.",
     "SUMMARY_FETCHING_FAILED": "Nie udało się pobrać podsumowania, spróbuj ponownie później.",
     "METRICS": {
@@ -51,7 +55,14 @@
     },
     "DATE_RANGE_OPTIONS": {
       "LAST_7_DAYS": "Ostatnie 7 dni",
+<<<<<<< HEAD
       "LAST_30_DAYS": "Ostatnie 30 dni",
+=======
+      "LAST_14_DAYS": "Ostatnie 14 dni",
+      "LAST_30_DAYS": "Ostatnie 30 dni",
+      "THIS_MONTH": "This month",
+      "LAST_MONTH": "Last month",
+>>>>>>> upstream/develop
       "LAST_3_MONTHS": "Ostatnie 3 miesiące",
       "LAST_6_MONTHS": "Ostatnie 6 miesięcy",
       "LAST_YEAR": "Ostatni rok",
@@ -125,11 +136,23 @@
   },
   "AGENT_REPORTS": {
     "HEADER": "Przegląd agentów",
+<<<<<<< HEAD
     "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent’s name to learn more.",
+=======
+    "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent's name to learn more.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Ładowanie danych wykresów...",
     "NO_ENOUGH_DATA": "Nie ma wystarczającej ilości danych do wygenerowania raportu. Spróbuj ponownie później.",
     "DOWNLOAD_AGENT_REPORTS": "Pobierz raporty agenta",
     "FILTER_DROPDOWN_LABEL": "Wybierz agenta",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Szukaj agentów"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Rozmowy",
@@ -193,10 +216,22 @@
   },
   "LABEL_REPORTS": {
     "HEADER": "Przegląd etykiet",
+<<<<<<< HEAD
+=======
+    "DESCRIPTION": "Track label performance with key metrics including conversations, response times, resolution times, and resolved cases. Click a label name for detailed insights.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Ładowanie danych wykresów...",
     "NO_ENOUGH_DATA": "Nie ma wystarczającej ilości danych do wygenerowania raportu. Spróbuj ponownie później.",
     "DOWNLOAD_LABEL_REPORTS": "Pobierz raporty etykiety",
     "FILTER_DROPDOWN_LABEL": "Wybierz etykietę",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "LABELS": "Szukaj etykiet"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Rozmowy",
@@ -265,6 +300,16 @@
     "NO_ENOUGH_DATA": "Nie ma wystarczającej ilości danych do wygenerowania raportu. Spróbuj ponownie później.",
     "DOWNLOAD_INBOX_REPORTS": "Pobierz raporty skrzynki odbiorczej",
     "FILTER_DROPDOWN_LABEL": "Wybierz skrzynkę odbiorczą",
+<<<<<<< HEAD
+=======
+    "ALL_INBOXES": "All Inboxes",
+    "SEARCH_INBOX": "Search Inbox",
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "INBOXES": "Search inboxes"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Rozmowy",
@@ -328,11 +373,26 @@
   },
   "TEAM_REPORTS": {
     "HEADER": "Przegląd zespołu",
+<<<<<<< HEAD
     "DESCRIPTION": "Get a snapshot of your team’s performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+=======
+    "DESCRIPTION": "Get a snapshot of your team's performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Ładowanie danych wykresów...",
     "NO_ENOUGH_DATA": "Nie ma wystarczającej ilości danych do wygenerowania raportu. Spróbuj ponownie później.",
     "DOWNLOAD_TEAM_REPORTS": "Pobierz raporty zespołu",
     "FILTER_DROPDOWN_LABEL": "Wybierz zespół",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "ADD_FILTER": "Dodaj filtr",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "TEAMS": "Szukaj zespołów"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Rozmowy",
@@ -396,22 +456,65 @@
   },
   "CSAT_REPORTS": {
     "HEADER": "Raporty CSAT",
+<<<<<<< HEAD
     "NO_RECORDS": "Brak dostępnych odpowiedzi w ankiecie CSAT.",
     "DOWNLOAD": "Pobierz raporty CSAT",
     "DOWNLOAD_FAILED": "Nie udało się pobrać raportów CSAT",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Wybierz agentów"
+=======
+    "NO_RECORDS": "No responses yet",
+    "NO_RECORDS_DESCRIPTION": "CSAT survey responses will appear here once customers start providing feedback.",
+    "DOWNLOAD": "Pobierz raporty CSAT",
+    "DOWNLOAD_FAILED": "Nie udało się pobrać raportów CSAT",
+    "FILTERS": {
+      "ADD_FILTER": "Dodaj filtr",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Szukaj agentów",
+        "INBOXES": "Search inboxes",
+        "TEAMS": "Szukaj zespołów",
+        "RATINGS": "Search ratings"
+      },
+      "AGENTS": {
+        "LABEL": "Agent"
+      },
+      "INBOXES": {
+        "LABEL": "Skrzynka odbiorcza"
+      },
+      "TEAMS": {
+        "LABEL": "Zespół"
+      },
+      "RATINGS": {
+        "LABEL": "Ocena"
+>>>>>>> upstream/develop
       }
     },
     "TABLE": {
       "HEADER": {
         "CONTACT_NAME": "Kontakt",
+<<<<<<< HEAD
         "AGENT_NAME": "Przypisany agent",
         "RATING": "Ocena",
         "FEEDBACK_TEXT": "Tekst opinii"
       }
     },
+=======
+        "AGENT_NAME": "Agent",
+        "RATING": "Ocena",
+        "FEEDBACK_TEXT": "Tekst opinii",
+        "CONVERSATION": "Rozmowa",
+        "CUSTOMER": "Customer",
+        "RESPONSE": "Response",
+        "HANDLED_BY": "Handled by"
+      },
+      "UNKNOWN_CUSTOMER": "Unknown customer"
+    },
+    "NO_AGENT": "No assigned agent",
+    "NO_FEEDBACK": "No feedback provided",
+>>>>>>> upstream/develop
     "METRIC": {
       "TOTAL_RESPONSES": {
         "LABEL": "Łącznie odpowiedzi",
@@ -424,6 +527,28 @@
       "RESPONSE_RATE": {
         "LABEL": "Wskaźnik odpowiedzi",
         "TOOLTIP": "Wskaźnik odpowiedzi: (Całkowita liczba odpowiedzi / Całkowita liczba wysłanych ankiet CSAT) * 100"
+<<<<<<< HEAD
+=======
+      },
+      "RATING_DISTRIBUTION": "Rating distribution"
+    },
+    "REVIEW_NOTES": {
+      "TITLE": "Review notes",
+      "PLACEHOLDER": "Add review notes about this rating...",
+      "SAVE": "Zapisz",
+      "CANCEL": "Anuluj",
+      "SAVING": "Zapisywanie...",
+      "SAVED": "Notes saved successfully",
+      "SAVE_ERROR": "Failed to save notes",
+      "UPDATED_BY": "Updated by {name} {time}",
+      "UPDATED_BY_LABEL": "Updated by",
+      "PAYWALL": {
+        "TITLE": "Upgrade to add review notes",
+        "AVAILABLE_ON": "The review notes feature is only available in the Business and Enterprise plans.",
+        "UPGRADE_PROMPT": "Add internal context to every CSAT response with review notes. Capture what really happened, spot patterns faster, and make better decisions from your feedback.",
+        "UPGRADE_NOW": "Upgrade now",
+        "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -466,6 +591,16 @@
       "CONVERSATIONS": "{count} rozmowy",
       "DOWNLOAD_REPORT": "Download report"
     },
+<<<<<<< HEAD
+=======
+    "RESOLUTION_HEATMAP": {
+      "HEADER": "Resolutions",
+      "NO_CONVERSATIONS": "Brak rozmów",
+      "CONVERSATION": "{count} rozmowa",
+      "CONVERSATIONS": "{count} rozmowy",
+      "DOWNLOAD_REPORT": "Download report"
+    },
+>>>>>>> upstream/develop
     "AGENT_CONVERSATIONS": {
       "HEADER": "Rozmowy według agentów",
       "LOADING_MESSAGE": "Ładowanie metryk agentów...",
@@ -559,6 +694,10 @@
     "INBOX": "Skrzynka odbiorcza",
     "AGENT": "Agent",
     "TEAM": "Zespół",
+<<<<<<< HEAD
+=======
+    "LABEL": "Etykieta",
+>>>>>>> upstream/develop
     "AVG_RESOLUTION_TIME": "Avg. Resolution Time",
     "AVG_FIRST_RESPONSE_TIME": "Avg. First Response Time",
     "AVG_REPLY_TIME": "Avg. Customer Waiting Time",

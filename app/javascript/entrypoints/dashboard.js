@@ -5,9 +5,13 @@ import axios from 'axios';
 // Global Components
 import hljsVuePlugin from '@highlightjs/vue-plugin';
 
+<<<<<<< HEAD
 import Multiselect from 'vue-multiselect';
 import { plugin, defaultConfig } from '@formkit/vue';
 import WootSwitch from 'components/ui/Switch.vue';
+=======
+import { plugin, defaultConfig } from '@formkit/vue';
+>>>>>>> upstream/develop
 import WootWizard from 'components/ui/Wizard.vue';
 import FloatingVue from 'floating-vue';
 import WootUiKit from 'dashboard/components';
@@ -17,6 +21,10 @@ import createAxios from 'dashboard/helper/APIHelper';
 
 import commonHelpers, { isJSONValid } from 'dashboard/helper/commons';
 import { sync } from 'vuex-router-sync';
+<<<<<<< HEAD
+=======
+import { createPinia } from 'pinia';
+>>>>>>> upstream/develop
 import router, { initalizeRouter } from 'dashboard/routes';
 import store from 'dashboard/store';
 import constants from 'dashboard/constants/globals';
@@ -42,9 +50,18 @@ const i18n = createI18n({
 
 sync(store, router);
 
+<<<<<<< HEAD
 const app = createApp(App);
 app.use(i18n);
 app.use(store);
+=======
+const pinia = createPinia();
+
+const app = createApp(App);
+app.use(i18n);
+app.use(store);
+app.use(pinia);
+>>>>>>> upstream/develop
 app.use(router);
 
 // [VITE] Disabled this, need to renable later
@@ -89,8 +106,11 @@ app.use(FloatingVue, {
 });
 app.use(hljsVuePlugin);
 
+<<<<<<< HEAD
 app.component('multiselect', Multiselect);
 app.component('woot-switch', WootSwitch);
+=======
+>>>>>>> upstream/develop
 app.component('woot-wizard', WootWizard);
 app.component('fluent-icon', FluentIcon);
 

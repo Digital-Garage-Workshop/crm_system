@@ -1,6 +1,10 @@
 {
   "REGISTER": {
     "TRY_WOOT": "Создать новый аккаунт",
+<<<<<<< HEAD
+=======
+    "GET_STARTED": "Get started with Chatwoot",
+>>>>>>> upstream/develop
     "TITLE": "Регистрация",
     "TESTIMONIAL_HEADER": "Все, что нужно сделать, это один шаг для продвижения вперед",
     "TESTIMONIAL_CONTENT": "Вы находитесь на расстоянии всего одного шага от привлечения своих клиентов, удержав их и находя новые.",
@@ -27,7 +31,16 @@
       "LABEL": "Пароль",
       "PLACEHOLDER": "Пароль",
       "ERROR": "Пароль слишком короткий.",
+<<<<<<< HEAD
       "IS_INVALID_PASSWORD": "Пароль должен содержать хотя бы одну заглавную букву, одну строчную букву, 1 цифру и 1 специальный символ."
+=======
+      "IS_INVALID_PASSWORD": "Пароль должен содержать хотя бы одну заглавную букву, одну строчную букву, 1 цифру и 1 специальный символ.",
+      "REQUIREMENTS_LENGTH": "Длина не менее 6 символов",
+      "REQUIREMENTS_UPPERCASE": "Минимум одна заглавная буква",
+      "REQUIREMENTS_LOWERCASE": "Минимум одна строчная буква",
+      "REQUIREMENTS_NUMBER": "Минимум одно число",
+      "REQUIREMENTS_SPECIAL": "Минимум один специальный символ"
+>>>>>>> upstream/develop
     },
     "CONFIRM_PASSWORD": {
       "LABEL": "Подтвердите пароль",
@@ -35,10 +48,25 @@
       "ERROR": "Пароли не совпадают."
     },
     "API": {
+<<<<<<< HEAD
       "SUCCESS_MESSAGE": "Успешная регистрация",
       "ERROR_MESSAGE": "Не удалось подключиться к Woot серверу. Пожалуйста, попробуйте еще раз."
     },
     "SUBMIT": "Создать новый аккаунт",
     "HAVE_AN_ACCOUNT": "Уже есть аккаунт?"
+=======
+      "SUCCESS_MESSAGE": "Регистрация прошла успешно",
+      "ERROR_MESSAGE": "Не удалось подключиться к Woot серверу. Пожалуйста, попробуйте еще раз."
+    },
+    "SUBMIT": "Создать новый аккаунт",
+    "HAVE_AN_ACCOUNT": "Уже есть аккаунт?",
+    "VERIFY_EMAIL": {
+      "TITLE": "Check your inbox",
+      "DESCRIPTION": "We sent a verification link to {email}. Click the link to verify your email and get started.",
+      "RESEND": "Повторно отправить письмо с подтверждением",
+      "RESEND_SUCCESS": "Verification email sent. Please check your inbox.",
+      "RESEND_ERROR": "Could not send verification email. Please try again."
+    }
+>>>>>>> upstream/develop
   }
 }

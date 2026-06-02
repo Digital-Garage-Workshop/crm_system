@@ -32,7 +32,14 @@ export default {
     value: {
       required,
       isEqual(value) {
+<<<<<<< HEAD
         return value === this.confirmValue;
+=======
+        // Trim whitespace from both input and target values
+        const normalizedInput = (value || '').trim();
+        const normalizedTarget = (this.confirmValue || '').trim();
+        return normalizedInput === normalizedTarget;
+>>>>>>> upstream/develop
       },
     },
   },

@@ -1,4 +1,8 @@
 <script setup>
+<<<<<<< HEAD
+=======
+import { useAdmin } from 'dashboard/composables/useAdmin';
+>>>>>>> upstream/develop
 import Icon from 'next/icon/Icon.vue';
 import ButtonV4 from 'next/button/Button.vue';
 
@@ -22,6 +26,14 @@ defineProps({
 });
 
 const emit = defineEmits(['upgrade']);
+<<<<<<< HEAD
+=======
+
+// Cloud agents land on this modal too, but billing is admin-only — they need
+// the escalation message instead of a button they cannot use. Mirrors the
+// pattern in UpgradePage.vue.
+const { isAdmin } = useAdmin();
+>>>>>>> upstream/develop
 </script>
 
 <template>
@@ -47,11 +59,22 @@ const emit = defineEmits(['upgrade']);
     />
     <p class="text-sm font-normal text-n-slate-11">
       {{ $t(`${featurePrefix}.${i18nKey}.UPGRADE_PROMPT`) }}
+<<<<<<< HEAD
       <span v-if="!isOnChatwootCloud && !isSuperAdmin">
         {{ $t(`${featurePrefix}.ENTERPRISE_PAYWALL.ASK_ADMIN`) }}
       </span>
     </p>
     <template v-if="isOnChatwootCloud">
+=======
+      <span v-if="isOnChatwootCloud && !isAdmin">
+        {{ $t('GENERAL_SETTINGS.LIMIT_MESSAGES.NON_ADMIN') }}
+      </span>
+      <span v-else-if="!isOnChatwootCloud && !isSuperAdmin">
+        {{ $t(`${featurePrefix}.ENTERPRISE_PAYWALL.ASK_ADMIN`) }}
+      </span>
+    </p>
+    <template v-if="isOnChatwootCloud && isAdmin">
+>>>>>>> upstream/develop
       <ButtonV4 blue solid md @click="emit('upgrade')">
         {{ $t(`${featurePrefix}.PAYWALL.UPGRADE_NOW`) }}
       </ButtonV4>
@@ -59,7 +82,11 @@ const emit = defineEmits(['upgrade']);
         {{ $t(`${featurePrefix}.PAYWALL.CANCEL_ANYTIME`) }}
       </span>
     </template>
+<<<<<<< HEAD
     <template v-else-if="isSuperAdmin">
+=======
+    <template v-else-if="!isOnChatwootCloud && isSuperAdmin">
+>>>>>>> upstream/develop
       <a href="/super_admin" class="block w-full">
         <ButtonV4 solid blue md class="w-full">
           {{ $t(`${featurePrefix}.PAYWALL.UPGRADE_NOW`) }}

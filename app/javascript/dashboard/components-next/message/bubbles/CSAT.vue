@@ -1,11 +1,20 @@
 <script setup>
 import { computed } from 'vue';
 import BaseBubble from './Base.vue';
+<<<<<<< HEAD
 import { useI18n } from 'vue-i18n';
 import { CSAT_RATINGS } from 'shared/constants/messages';
 import { useMessageContext } from '../provider.js';
 
 const { contentAttributes } = useMessageContext();
+=======
+import FormattedContent from './Text/FormattedContent.vue';
+import { useI18n } from 'vue-i18n';
+import { CSAT_RATINGS, CSAT_DISPLAY_TYPES } from 'shared/constants/messages';
+import { useMessageContext } from '../provider.js';
+
+const { contentAttributes, content } = useMessageContext();
+>>>>>>> upstream/develop
 const { t } = useI18n();
 
 const response = computed(() => {
@@ -16,6 +25,17 @@ const isRatingSubmitted = computed(() => {
   return !!response.value.rating;
 });
 
+<<<<<<< HEAD
+=======
+const displayType = computed(() => {
+  return contentAttributes.value?.displayType || CSAT_DISPLAY_TYPES.EMOJI;
+});
+
+const isStarRating = computed(() => {
+  return displayType.value === CSAT_DISPLAY_TYPES.STAR;
+});
+
+>>>>>>> upstream/develop
 const rating = computed(() => {
   if (isRatingSubmitted.value) {
     return CSAT_RATINGS.find(
@@ -25,16 +45,45 @@ const rating = computed(() => {
 
   return null;
 });
+<<<<<<< HEAD
+=======
+
+const starRatingValue = computed(() => {
+  return response.value.rating || 0;
+});
+>>>>>>> upstream/develop
 </script>
 
 <template>
   <BaseBubble class="px-4 py-3" data-bubble-name="csat">
+<<<<<<< HEAD
     <h4>{{ t('CONVERSATION.CSAT_REPLY_MESSAGE') }}</h4>
+=======
+    <FormattedContent v-if="content" :content="content" />
+    <h4 v-else>{{ t('CONVERSATION.CSAT_REPLY_MESSAGE') }}</h4>
+>>>>>>> upstream/develop
     <dl v-if="isRatingSubmitted" class="mt-4">
       <dt class="text-n-slate-11 italic">
         {{ t('CONVERSATION.RATING_TITLE') }}
       </dt>
+<<<<<<< HEAD
       <dd>{{ t(rating.translationKey) }}</dd>
+=======
+      <dd v-if="!isStarRating">
+        {{ t(rating.translationKey) }}
+      </dd>
+      <dd v-else class="flex mt-1">
+        <span v-for="n in 5" :key="n" class="text-2xl mr-1">
+          <i
+            :class="[
+              n <= starRatingValue
+                ? 'i-ri-star-fill text-n-amber-9'
+                : 'i-ri-star-line text-n-slate-10',
+            ]"
+          />
+        </span>
+      </dd>
+>>>>>>> upstream/develop
 
       <dt v-if="response.feedbackMessage" class="text-n-slate-11 italic mt-2">
         {{ t('CONVERSATION.FEEDBACK_TITLE') }}

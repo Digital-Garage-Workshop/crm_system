@@ -1,6 +1,11 @@
 <script setup>
+<<<<<<< HEAD
 import { defineProps, defineEmits } from 'vue';
 import { useIntegrationHook } from 'dashboard/composables/useIntegrationHook';
+=======
+import { useIntegrationHook } from 'dashboard/composables/useIntegrationHook';
+import { useBranding } from 'shared/composables/useBranding';
+>>>>>>> upstream/develop
 import Button from 'dashboard/components-next/button/Button.vue';
 
 const props = defineProps({
@@ -15,11 +20,20 @@ defineEmits(['add', 'delete']);
 const { integration, hasConnectedHooks } = useIntegrationHook(
   props.integrationId
 );
+<<<<<<< HEAD
+=======
+
+const { replaceInstallationName } = useBranding();
+>>>>>>> upstream/develop
 </script>
 
 <template>
   <div
+<<<<<<< HEAD
     class="outline outline-n-container outline-1 bg-n-alpha-3 rounded-md shadow flex-grow overflow-auto p-4"
+=======
+    class="outline outline-n-container outline-1 bg-n-card rounded-xl flex-grow overflow-auto p-4"
+>>>>>>> upstream/develop
   >
     <div class="flex items-center justify-center">
       <div class="flex h-16 w-16 items-center justify-center">
@@ -33,11 +47,19 @@ const { integration, hasConnectedHooks } = useIntegrationHook(
         />
       </div>
       <div class="flex flex-col justify-center m-0 mx-4 flex-1">
+<<<<<<< HEAD
         <h3 class="mb-1 text-xl font-medium text-n-slate-12">
           {{ integration.name }}
         </h3>
         <p class="text-n-slate-11 text-sm leading-6">
           {{ integration.description }}
+=======
+        <h3 class="mb-1 text-heading-1 text-n-slate-12">
+          {{ integration.name }}
+        </h3>
+        <p class="text-n-slate-11 text-body-main">
+          {{ replaceInstallationName(integration.description) }}
+>>>>>>> upstream/develop
         </p>
       </div>
       <div class="flex justify-center items-center mb-0 w-[15%]">

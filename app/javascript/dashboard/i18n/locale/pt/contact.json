@@ -17,6 +17,16 @@
     "IP_ADDRESS": "Endereço IP",
     "CREATED_AT_LABEL": "Criado",
     "NEW_MESSAGE": "Nova mensagem",
+<<<<<<< HEAD
+=======
+    "CALL": "Chamada",
+    "CALL_INITIATED": "Calling the contact…",
+    "CALL_FAILED": "Unable to start the call. Please try again.",
+    "CLICK_TO_EDIT": "Click to edit",
+    "VOICE_INBOX_PICKER": {
+      "TITLE": "Choose a voice inbox"
+    },
+>>>>>>> upstream/develop
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Não há conversas anteriores associadas a este contacto.",
       "TITLE": "Conversas anteriores"
@@ -285,6 +295,10 @@
     "HEADER": {
       "TITLE": "Contactos",
       "SEARCH_TITLE": "Search contacts",
+<<<<<<< HEAD
+=======
+      "ACTIVE_TITLE": "Contactos ativos",
+>>>>>>> upstream/develop
       "SEARCH_PLACEHOLDER": "Search...",
       "MESSAGE_BUTTON": "Messagem",
       "SEND_MESSAGE": "Enviar mensagem",
@@ -378,6 +392,10 @@
       "IDENTIFIER": "Identificador",
       "COUNTRY": "País",
       "CITY": "Cidade",
+<<<<<<< HEAD
+=======
+      "COMPANY": "Empresa",
+>>>>>>> upstream/develop
       "CREATED_AT": "Criada em",
       "LAST_ACTIVITY": "Última atividade",
       "REFERER_LINK": "Link de referência",
@@ -450,6 +468,15 @@
           "INSTAGRAM": {
             "PLACEHOLDER": "Add Instagram"
           },
+<<<<<<< HEAD
+=======
+          "TELEGRAM": {
+            "PLACEHOLDER": "Add Telegram"
+          },
+          "TIKTOK": {
+            "PLACEHOLDER": "Add TikTok"
+          },
+>>>>>>> upstream/develop
           "LINKEDIN": {
             "PLACEHOLDER": "Add LinkedIn"
           },
@@ -457,6 +484,13 @@
             "PLACEHOLDER": "Add Twitter"
           }
         }
+<<<<<<< HEAD
+=======
+      },
+      "DELETE_CONTACT": {
+        "MESSAGE": "Esta ação é permanente e irreversível.",
+        "BUTTON": "Apagar agora"
+>>>>>>> upstream/develop
       }
     },
     "DETAILS": {
@@ -466,7 +500,11 @@
       "DELETE_CONTACT": "Excluir contacto",
       "DELETE_DIALOG": {
         "TITLE": "Confirmar exclusão",
+<<<<<<< HEAD
         "DESCRIPTION": "Are you sure you want to delete this {contactName} contact?",
+=======
+        "DESCRIPTION": "Tem a certeza de que quer apagar este contacto?",
+>>>>>>> upstream/develop
         "CONFIRM": "Sim, excluir",
         "API": {
           "SUCCESS_MESSAGE": "Contacto excluído com sucesso",
@@ -543,6 +581,7 @@
         "PLACEHOLDER": "Adicionar nota",
         "WROTE": "escreveu",
         "YOU": "Você",
+<<<<<<< HEAD
         "SAVE": "Save note",
         "EXPAND": "Expandir",
         "COLLAPSE": "Collapse",
@@ -556,6 +595,46 @@
       "BUTTON_LABEL": "Add contact",
       "SEARCH_EMPTY_STATE_TITLE": "Nenhum contacto corresponde à sua pesquisa 🔍",
       "LIST_EMPTY_STATE_TITLE": "No contacts available in this view 📋"
+=======
+        "SAVE": "Salvar nota",
+        "ADD_NOTE": "Add contact note",
+        "EXPAND": "Expandir",
+        "COLLAPSE": "Recolher",
+        "NO_NOTES": "Sem notas, pode adicionar notas na página de detalhes do contacto.",
+        "EMPTY_STATE": "Não existem notas associadas a este contacto. Pode adicionar uma nota escrevendo na caixa acima.",
+        "CONVERSATION_EMPTY_STATE": "There are no notes yet. Use the Add note button to create one."
+      }
+    },
+    "EMPTY_STATE": {
+      "TITLE": "Nenhum contacto encontrado nesta conta",
+      "SUBTITLE": "Para adicionar novos contatos, clique no botão abaixo",
+      "BUTTON_LABEL": "Adicionar contacto",
+      "SEARCH_EMPTY_STATE_TITLE": "Nenhum contacto corresponde à sua pesquisa 🔍",
+      "LIST_EMPTY_STATE_TITLE": "No contacts available in this view 📋",
+      "ACTIVE_EMPTY_STATE_TITLE": "Neste momento não há contactos ativos 🌙"
+    },
+    "LOAD_MORE": "Load more"
+  },
+  "CONTACTS_BULK_ACTIONS": {
+    "ASSIGN_LABELS": "Atribuir etiquetas",
+    "ASSIGN_LABELS_SUCCESS": "Etiquetas atribuídas com sucesso.",
+    "ASSIGN_LABELS_FAILED": "Failed to assign labels",
+    "DESCRIPTION": "Select the labels you want to add to the selected contacts.",
+    "NO_LABELS_FOUND": "No labels available yet.",
+    "SELECTED_COUNT": "{count} selected",
+    "CLEAR_SELECTION": "Clear selection",
+    "SELECT_ALL": "Selecionar todas ({count})",
+    "DELETE_CONTACTS": "Excluir",
+    "DELETE_SUCCESS": "Contacts deleted successfully.",
+    "DELETE_FAILED": "Failed to delete contacts.",
+    "DELETE_DIALOG": {
+      "TITLE": "Delete selected contacts",
+      "SINGULAR_TITLE": "Delete selected contact",
+      "DESCRIPTION": "This will permanently delete {count} selected contacts. This action cannot be undone.",
+      "SINGULAR_DESCRIPTION": "This will permanently delete the selected contact. This action cannot be undone.",
+      "CONFIRM_MULTIPLE": "Delete contacts",
+      "CONFIRM_SINGLE": "Excluir contacto"
+>>>>>>> upstream/develop
     }
   },
   "COMPOSE_NEW_CONVERSATION": {
@@ -569,7 +648,11 @@
       "NO_INBOX_ALERT": "There are no available inboxes to start a conversation with this contact.",
       "CONTACT_SELECTOR": {
         "LABEL": "Para:",
+<<<<<<< HEAD
         "TAG_INPUT_PLACEHOLDER": "Search for a contact with name, email or phone number",
+=======
+        "TAG_INPUT_PLACEHOLDER": "Enter at least 2 characters to search by name, email, or phone number",
+>>>>>>> upstream/develop
         "CONTACT_CREATING": "Creating contact..."
       },
       "INBOX_SELECTOR": {
@@ -580,9 +663,15 @@
         "SUBJECT_LABEL": "Assunto :",
         "SUBJECT_PLACEHOLDER": "Enter your email subject here",
         "CC_LABEL": "Cc:",
+<<<<<<< HEAD
         "CC_PLACEHOLDER": "Search for a contact with their email address",
         "BCC_LABEL": "Bcc:",
         "BCC_PLACEHOLDER": "Search for a contact with their email address",
+=======
+        "CC_PLACEHOLDER": "Enter at least 2 characters to search by email",
+        "BCC_LABEL": "Bcc:",
+        "BCC_PLACEHOLDER": "Enter at least 2 characters to search by email",
+>>>>>>> upstream/develop
         "BCC_BUTTON": "Bcc"
       },
       "MESSAGE_EDITOR": {
@@ -599,6 +688,18 @@
           "SEND_MESSAGE": "Enviar mensagem"
         }
       },
+<<<<<<< HEAD
+=======
+      "TWILIO_OPTIONS": {
+        "LABEL": "Select template",
+        "SEARCH_PLACEHOLDER": "Search templates",
+        "EMPTY_STATE": "No templates found",
+        "TEMPLATE_PARSER": {
+          "BACK": "Voltar",
+          "SEND_MESSAGE": "Enviar mensagem"
+        }
+      },
+>>>>>>> upstream/develop
       "ACTION_BUTTONS": {
         "DISCARD": "Discard",
         "SEND": "Send ({keyCode})"

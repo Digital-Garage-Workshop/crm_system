@@ -5,4 +5,8 @@ properties:
     description: Contact Inbox Source Id
   inbox:
     type: object
+<<<<<<< HEAD
     $ref: '#/definitions/inbox'
+=======
+    $ref: '#/components/schemas/inbox'
+>>>>>>> upstream/develop

@@ -21,16 +21,33 @@ const emit = defineEmits(['deleteSuccess']);
 const { t } = useI18n();
 const store = useStore();
 const bulkDeleteDialogRef = ref(null);
+<<<<<<< HEAD
 const i18nKey = computed(() => props.type.toUpperCase());
+=======
+const i18nKey = computed(() => {
+  const i18nTypeMap = {
+    AssistantResponse: 'RESPONSES',
+    AssistantDocument: 'DOCUMENTS',
+  };
+  return i18nTypeMap[props.type];
+});
+>>>>>>> upstream/develop
 
 const handleBulkDelete = async ids => {
   if (!ids) return;
 
   try {
+<<<<<<< HEAD
     await store.dispatch(
       'captainBulkActions/handleBulkDelete',
       Array.from(props.bulkIds)
     );
+=======
+    await store.dispatch('captainBulkActions/handleBulkDelete', {
+      ids: Array.from(props.bulkIds),
+      type: props.type,
+    });
+>>>>>>> upstream/develop
 
     emit('deleteSuccess');
     useAlert(t(`CAPTAIN.${i18nKey.value}.BULK_DELETE.SUCCESS_MESSAGE`));

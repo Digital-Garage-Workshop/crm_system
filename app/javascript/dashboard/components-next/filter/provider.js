@@ -7,7 +7,10 @@ import {
   buildAttributesFilterTypes,
   CONVERSATION_ATTRIBUTES,
 } from './helper/filterHelper';
+<<<<<<< HEAD
 import countries from 'shared/constants/countries.js';
+=======
+>>>>>>> upstream/develop
 import languages from 'dashboard/components/widgets/conversation/advancedFilterItems/languages.js';
 
 /**
@@ -164,8 +167,13 @@ export function useConversationFilterContext() {
       value: CONVERSATION_ATTRIBUTES.DISPLAY_ID,
       attributeName: t('FILTER.ATTRIBUTES.CONVERSATION_IDENTIFIER'),
       label: t('FILTER.ATTRIBUTES.CONVERSATION_IDENTIFIER'),
+<<<<<<< HEAD
       inputType: 'plainText',
       datatype: 'number',
+=======
+      inputType: 'number',
+      dataType: 'number',
+>>>>>>> upstream/develop
       filterOperators: containmentOperators.value,
       attributeModel: 'standard',
     },
@@ -179,7 +187,11 @@ export function useConversationFilterContext() {
         id: campaign.id,
         name: campaign.title,
       })),
+<<<<<<< HEAD
       datatype: 'number',
+=======
+      dataType: 'number',
+>>>>>>> upstream/develop
       filterOperators: presenceOperators.value,
       attributeModel: 'standard',
     },
@@ -219,6 +231,7 @@ export function useConversationFilterContext() {
       attributeModel: 'additional',
     },
     {
+<<<<<<< HEAD
       attributeKey: CONVERSATION_ATTRIBUTES.COUNTRY_CODE,
       value: CONVERSATION_ATTRIBUTES.COUNTRY_CODE,
       attributeName: t('FILTER.ATTRIBUTES.COUNTRY_NAME'),
@@ -230,6 +243,8 @@ export function useConversationFilterContext() {
       attributeModel: 'additional',
     },
     {
+=======
+>>>>>>> upstream/develop
       attributeKey: CONVERSATION_ATTRIBUTES.REFERER,
       value: CONVERSATION_ATTRIBUTES.REFERER,
       attributeName: t('FILTER.ATTRIBUTES.REFERER_LINK'),

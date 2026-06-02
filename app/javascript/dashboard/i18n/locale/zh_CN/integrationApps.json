@@ -3,6 +3,12 @@
     "FETCHING": "正在获取集成",
     "NO_HOOK_CONFIGURED": "此账户中未配置任何 {integrationId} 集成。",
     "HEADER": "应用程序",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "搜索……",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "已启用",
       "DISABLED": "已禁用"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "正在获取集成",
       "INBOX": "收件箱",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "操作",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "删除"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "选择收件箱"
         },
         "SUBMIT": "创建",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "取消"
       },
       "API": {

@@ -5,6 +5,12 @@
     "LOADING": "Labels ophalen",
     "DESCRIPTION": "Labels help you categorize and prioritize conversations and leads. You can assign a label to a conversation or contact using the side panel.",
     "LEARN_MORE": "Learn more about labels",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} label | {n} labels",
+    "SEARCH_PLACEHOLDER": "Zoek op labels...",
+    "NO_RESULTS": "No labels found matching your search",
+>>>>>>> upstream/develop
     "SEARCH_404": "Er zijn geen items die overeenkomen met deze zoekopdracht",
     "LIST": {
       "404": "Er zijn geen labels beschikbaar in dit account.",
@@ -13,7 +19,12 @@
       "TABLE_HEADER": {
         "NAME": "Naam",
         "DESCRIPTION": "Beschrijving",
+<<<<<<< HEAD
         "COLOR": "Kleur"
+=======
+        "COLOR": "Kleur",
+        "ACTION": "Acties"
+>>>>>>> upstream/develop
       }
     },
     "FORM": {

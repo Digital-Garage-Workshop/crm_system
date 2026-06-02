@@ -9,9 +9,18 @@ import { COPILOT_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
 import MessageFormatter from 'shared/helpers/MessageFormatter.js';
 
 import Button from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
 import Avatar from '../avatar/Avatar.vue';
 
 const props = defineProps({
+=======
+
+const props = defineProps({
+  isLastMessage: {
+    type: Boolean,
+    default: false,
+  },
+>>>>>>> upstream/develop
   message: {
     type: Object,
     required: true,
@@ -21,6 +30,18 @@ const props = defineProps({
     required: true,
   },
 });
+<<<<<<< HEAD
+=======
+const hasEmptyMessageContent = computed(() => !props.message?.content);
+
+const showUseButton = computed(() => {
+  return (
+    !hasEmptyMessageContent.value &&
+    props.message.reply_suggestion &&
+    props.isLastMessage
+  );
+});
+>>>>>>> upstream/develop
 
 const messageContent = computed(() => {
   const formatter = new MessageFormatter(props.message.content);
@@ -33,8 +54,11 @@ const insertIntoRichEditor = computed(() => {
   );
 });
 
+<<<<<<< HEAD
 const hasEmptyMessageContent = computed(() => !props.message?.content);
 
+=======
+>>>>>>> upstream/develop
 const useCopilotResponse = () => {
   if (insertIntoRichEditor.value) {
     emitter.emit(BUS_EVENTS.INSERT_INTO_RICH_EDITOR, props.message?.content);
@@ -46,6 +70,7 @@ const useCopilotResponse = () => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex flex-row gap-2">
     <Avatar
       name="Captain Copilot"
@@ -73,6 +98,27 @@ const useCopilotResponse = () => {
           @click="useCopilotResponse"
         />
       </div>
+=======
+  <div class="flex flex-col gap-1 text-n-slate-12">
+    <div class="font-medium">{{ $t('CAPTAIN.NAME') }}</div>
+    <span v-if="hasEmptyMessageContent" class="text-n-ruby-11">
+      {{ $t('CAPTAIN.COPILOT.EMPTY_MESSAGE') }}
+    </span>
+    <div
+      v-else
+      v-dompurify-html="messageContent"
+      class="prose-sm break-words"
+    />
+    <div class="flex flex-row mt-1">
+      <Button
+        v-if="showUseButton"
+        :label="$t('CAPTAIN.COPILOT.USE')"
+        faded
+        sm
+        slate
+        @click="useCopilotResponse"
+      />
+>>>>>>> upstream/develop
     </div>
   </div>
 </template>

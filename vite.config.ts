@@ -22,6 +22,10 @@ import { defineConfig } from 'vite';
 import ruby from 'vite-plugin-ruby';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
+<<<<<<< HEAD
+=======
+import yaml from '@rollup/plugin-yaml';
+>>>>>>> upstream/develop
 
 const isLibraryMode = process.env.BUILD_MODE === 'library';
 const isTestMode = process.env.TEST === 'true';
@@ -34,16 +38,34 @@ const vueOptions = {
   },
 };
 
+<<<<<<< HEAD
 let plugins = [ruby(), vue(vueOptions)];
+=======
+let plugins = [ruby(), vue(vueOptions), yaml()];
+>>>>>>> upstream/develop
 
 if (isLibraryMode) {
   plugins = [];
 } else if (isTestMode) {
+<<<<<<< HEAD
   plugins = [vue(vueOptions)];
+=======
+  plugins = [vue(vueOptions), yaml()];
+>>>>>>> upstream/develop
 }
 
 export default defineConfig({
   plugins: plugins,
+<<<<<<< HEAD
+=======
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
+>>>>>>> upstream/develop
   build: {
     rollupOptions: {
       output: {
@@ -99,6 +121,15 @@ export default defineConfig({
     },
     globals: true,
     outputFile: 'coverage/sonar-report.xml',
+<<<<<<< HEAD
+=======
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        singleThread: false,
+      },
+    },
+>>>>>>> upstream/develop
     server: {
       deps: {
         inline: ['tinykeys', '@material/mwc-icon'],

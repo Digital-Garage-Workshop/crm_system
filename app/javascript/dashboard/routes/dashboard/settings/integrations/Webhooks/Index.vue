@@ -1,7 +1,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
+<<<<<<< HEAD
 import NextButton from 'dashboard/components-next/button/Button.vue';
+=======
+import { useBranding } from 'shared/composables/useBranding';
+import { picoSearch } from '@scmmishra/pico-search';
+import NextButton from 'dashboard/components-next/button/Button.vue';
+import { BaseTable } from 'dashboard/components-next/table';
+>>>>>>> upstream/develop
 import NewWebhook from './NewWebHook.vue';
 import EditWebhook from './EditWebHook.vue';
 import WebhookRow from './WebhookRow.vue';
@@ -13,10 +20,21 @@ export default {
     SettingsLayout,
     NextButton,
     BaseSettingsHeader,
+<<<<<<< HEAD
+=======
+    BaseTable,
+>>>>>>> upstream/develop
     NewWebhook,
     EditWebhook,
     WebhookRow,
   },
+<<<<<<< HEAD
+=======
+  setup() {
+    const { replaceInstallationName } = useBranding();
+    return { replaceInstallationName };
+  },
+>>>>>>> upstream/develop
   data() {
     return {
       loading: {},
@@ -24,6 +42,10 @@ export default {
       showEditPopup: false,
       showDeleteConfirmationPopup: false,
       selectedWebHook: {},
+<<<<<<< HEAD
+=======
+      searchQuery: '',
+>>>>>>> upstream/develop
     };
   },
   computed: {
@@ -34,6 +56,14 @@ export default {
     integration() {
       return this.$store.getters['integrations/getIntegration']('webhook');
     },
+<<<<<<< HEAD
+=======
+    filteredRecords() {
+      const query = this.searchQuery.trim();
+      if (!query) return this.records;
+      return picoSearch(this.records, query, ['name', 'url']);
+    },
+>>>>>>> upstream/develop
     tableHeaders() {
       return [
         this.$t(
@@ -44,6 +74,10 @@ export default {
     },
   },
   mounted() {
+<<<<<<< HEAD
+=======
+    this.$store.dispatch('integrations/get', 'webhook');
+>>>>>>> upstream/develop
     this.$store.dispatch('webhooks/get');
   },
   methods: {
@@ -98,6 +132,7 @@ export default {
     <template #header>
       <BaseSettingsHeader
         v-if="integration.name"
+<<<<<<< HEAD
         :title="integration.name"
         :description="integration.description"
         :link-text="$t('INTEGRATION_SETTINGS.WEBHOOK.LEARN_MORE')"
@@ -109,12 +144,37 @@ export default {
             blue
             icon="i-lucide-circle-plus"
             :label="$t('INTEGRATION_SETTINGS.WEBHOOK.HEADER_BTN_TXT')"
+=======
+        v-model:search-query="searchQuery"
+        :title="integration.name"
+        :description="replaceInstallationName(integration.description)"
+        :link-text="$t('INTEGRATION_SETTINGS.WEBHOOK.LEARN_MORE')"
+        :search-placeholder="
+          $t('INTEGRATION_SETTINGS.WEBHOOK.SEARCH_PLACEHOLDER')
+        "
+        feature-name="webhook"
+        :back-button-label="$t('INTEGRATION_SETTINGS.HEADER')"
+      >
+        <template v-if="records?.length" #count>
+          <span class="text-body-main text-n-slate-11">
+            {{
+              $t('INTEGRATION_SETTINGS.WEBHOOK.COUNT', { n: records.length })
+            }}
+          </span>
+        </template>
+        <template #actions>
+          <NextButton
+            blue
+            :label="$t('INTEGRATION_SETTINGS.WEBHOOK.HEADER_BTN_TXT')"
+            size="sm"
+>>>>>>> upstream/develop
             @click="openAddPopup"
           />
         </template>
       </BaseSettingsHeader>
     </template>
     <template #body>
+<<<<<<< HEAD
       <table class="min-w-full divide-y divide-slate-75 dark:divide-slate-700">
         <thead>
           <th
@@ -130,14 +190,31 @@ export default {
         >
           <WebhookRow
             v-for="(webHookItem, index) in records"
+=======
+      <BaseTable
+        :headers="tableHeaders"
+        :items="filteredRecords"
+        :no-data-message="
+          searchQuery ? $t('INTEGRATION_SETTINGS.WEBHOOK.NO_RESULTS') : ''
+        "
+      >
+        <template #row="{ items }">
+          <WebhookRow
+            v-for="(webHookItem, index) in items"
+>>>>>>> upstream/develop
             :key="webHookItem.id"
             :index="index"
             :webhook="webHookItem"
             @edit="openEditPopup"
             @delete="openDeletePopup"
           />
+<<<<<<< HEAD
         </tbody>
       </table>
+=======
+        </template>
+      </BaseTable>
+>>>>>>> upstream/develop
     </template>
     <woot-modal v-model:show="showAddPopup" :on-close="hideAddPopup">
       <NewWebhook v-if="showAddPopup" :on-close="hideAddPopup" />

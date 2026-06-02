@@ -7,6 +7,11 @@ class Public::Api::V1::Portals::BaseController < PublicController
   around_action :set_locale
   after_action :allow_iframe_requests
 
+<<<<<<< HEAD
+=======
+  PORTAL_LAYOUTS = %w[classic documentation].freeze
+
+>>>>>>> upstream/develop
   private
 
   def show_plain_layout
@@ -17,6 +22,17 @@ class Public::Api::V1::Portals::BaseController < PublicController
     @theme_from_params = params[:theme] if %w[dark light].include?(params[:theme])
   end
 
+<<<<<<< HEAD
+=======
+  def set_portal_layout
+    @portal_layout = PORTAL_LAYOUTS.include?(@portal&.layout) ? @portal.layout : 'classic'
+  end
+
+  def set_view_variant
+    request.variant = :documentation if @portal_layout == 'documentation' && !@is_plain_layout_enabled
+  end
+
+>>>>>>> upstream/develop
   def portal
     @portal ||= Portal.find_by!(slug: params[:slug], archived: false)
   end
@@ -42,7 +58,11 @@ class Public::Api::V1::Portals::BaseController < PublicController
     article_locale = if article.category.present?
                        article.category.locale
                      else
+<<<<<<< HEAD
                        article.portal.default_locale
+=======
+                       article.locale
+>>>>>>> upstream/develop
                      end
     @locale = validate_and_get_locale(article_locale)
     I18n.with_locale(@locale, &)
@@ -58,6 +78,10 @@ class Public::Api::V1::Portals::BaseController < PublicController
   end
 
   def set_global_config
+<<<<<<< HEAD
     @global_config = GlobalConfig.get('LOGO_THUMBNAIL', 'BRAND_NAME', 'BRAND_URL')
+=======
+    @global_config = GlobalConfig.get('LOGO_THUMBNAIL', 'BRAND_NAME', 'BRAND_URL', 'INSTALLATION_NAME')
+>>>>>>> upstream/develop
   end
 end

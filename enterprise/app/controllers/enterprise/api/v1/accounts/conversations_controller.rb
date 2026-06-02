@@ -1,5 +1,6 @@
 module Enterprise::Api::V1::Accounts::ConversationsController
   extend ActiveSupport::Concern
+<<<<<<< HEAD
   included do
     before_action :set_assistant, only: [:copilot]
   end
@@ -26,6 +27,8 @@ module Enterprise::Api::V1::Accounts::ConversationsController
 
     render json: { message: response['response'] }
   end
+=======
+>>>>>>> upstream/develop
 
   def inbox_assistant
     assistant = @conversation.inbox.captain_assistant
@@ -37,6 +40,13 @@ module Enterprise::Api::V1::Accounts::ConversationsController
     end
   end
 
+<<<<<<< HEAD
+=======
+  def reporting_events
+    @reporting_events = @conversation.reporting_events.order(created_at: :asc)
+  end
+
+>>>>>>> upstream/develop
   def permitted_update_params
     super.merge(params.permit(:sla_policy_id))
   end
@@ -44,6 +54,10 @@ module Enterprise::Api::V1::Accounts::ConversationsController
   private
 
   def copilot_params
+<<<<<<< HEAD
     params.permit(:previous_messages, :message, :assistant_id)
+=======
+    params.permit(:previous_history, :message, :assistant_id)
+>>>>>>> upstream/develop
   end
 end

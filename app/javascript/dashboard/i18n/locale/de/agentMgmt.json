@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Administrator",
       "AGENT": "Agent"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Diesem Konto sind keine Agenten zugeordnet",
       "TITLE": "Verwalten Sie Agenten in Ihrem Team",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Es konnte keine Verbindung zum Woot Server hergestellt werden. Bitte versuchen Sie es später erneut"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Agenten suchen...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Keine Ergebnisse gefunden."
     },

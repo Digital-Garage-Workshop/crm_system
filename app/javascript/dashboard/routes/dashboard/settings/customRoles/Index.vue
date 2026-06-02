@@ -9,6 +9,11 @@ import Button from 'dashboard/components-next/button/Button.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStore, useMapGetter } from 'dashboard/composables/store';
+<<<<<<< HEAD
+=======
+import { picoSearch } from '@scmmishra/pico-search';
+import { BaseTable } from 'dashboard/components-next/table';
+>>>>>>> upstream/develop
 
 const store = useStore();
 const { t } = useI18n();
@@ -19,8 +24,20 @@ const selectedRole = ref(null);
 const loading = ref({});
 const showDeleteConfirmationPopup = ref(false);
 const activeResponse = ref({});
+<<<<<<< HEAD
 
 const records = useMapGetter('customRole/getCustomRoles');
+=======
+const searchQuery = ref('');
+
+const records = useMapGetter('customRole/getCustomRoles');
+
+const filteredRecords = computed(() => {
+  const query = searchQuery.value.trim();
+  if (!query) return records.value;
+  return picoSearch(records.value, query, ['name', 'description']);
+});
+>>>>>>> upstream/develop
 const uiFlags = useMapGetter('customRole/getUIFlags');
 
 const deleteConfirmText = computed(
@@ -129,6 +146,7 @@ const confirmDeletion = () => {
   >
     <template #header>
       <BaseSettingsHeader
+<<<<<<< HEAD
         :title="$t('CUSTOM_ROLE.HEADER')"
         :description="$t('CUSTOM_ROLE.DESCRIPTION')"
         :link-text="$t('CUSTOM_ROLE.LEARN_MORE')"
@@ -138,6 +156,24 @@ const confirmDeletion = () => {
           <Button
             icon="i-lucide-circle-plus"
             :label="$t('CUSTOM_ROLE.HEADER_BTN_TXT')"
+=======
+        v-model:search-query="searchQuery"
+        :title="$t('CUSTOM_ROLE.HEADER')"
+        :description="$t('CUSTOM_ROLE.DESCRIPTION')"
+        :link-text="$t('CUSTOM_ROLE.LEARN_MORE')"
+        :search-placeholder="$t('CUSTOM_ROLE.SEARCH_PLACEHOLDER')"
+        feature-name="canned_responses"
+      >
+        <template v-if="records?.length" #count>
+          <span class="text-body-main text-n-slate-11">
+            {{ $t('CUSTOM_ROLE.COUNT', { n: records.length }) }}
+          </span>
+        </template>
+        <template #actions>
+          <Button
+            :label="$t('CUSTOM_ROLE.HEADER_BTN_TXT')"
+            size="sm"
+>>>>>>> upstream/develop
             :disabled="isBehindAPaywall"
             @click="openAddModal"
           />
@@ -147,6 +183,7 @@ const confirmDeletion = () => {
 
     <template #body>
       <CustomRolePaywall v-if="isBehindAPaywall" />
+<<<<<<< HEAD
       <table
         v-else
         class="min-w-full overflow-x-auto divide-y divide-slate-75 dark:divide-slate-700"
@@ -170,6 +207,27 @@ const confirmDeletion = () => {
           @delete="openDeletePopup"
         />
       </table>
+=======
+      <BaseTable
+        v-else
+        :headers="tableHeaders"
+        :items="filteredRecords"
+        :no-data-message="
+          searchQuery
+            ? $t('CUSTOM_ROLE.NO_RESULTS')
+            : $t('CUSTOM_ROLE.LIST.404')
+        "
+      >
+        <template #row="{ items }">
+          <CustomRoleTableBody
+            :roles="items"
+            :loading="loading"
+            @edit="openEditModal"
+            @delete="openDeletePopup"
+          />
+        </template>
+      </BaseTable>
+>>>>>>> upstream/develop
     </template>
 
     <woot-modal

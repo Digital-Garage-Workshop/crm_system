@@ -1,16 +1,40 @@
 <script setup>
+<<<<<<< HEAD
 import Icon from 'next/icon/Icon.vue';
 import { useI18n } from 'vue-i18n';
 import { useMessageContext } from './provider.js';
 import { ORIENTATION } from './constants';
+=======
+import { computed } from 'vue';
+import Icon from 'next/icon/Icon.vue';
+import { useI18n } from 'vue-i18n';
+import { useMessageContext } from './provider.js';
+import { hasOneDayPassed } from 'shared/helpers/timeHelper';
+import { ORIENTATION, MESSAGE_STATUS } from './constants';
+>>>>>>> upstream/develop
 
 defineProps({
   error: { type: String, required: true },
 });
 
+<<<<<<< HEAD
 const { orientation } = useMessageContext();
 
 const { t } = useI18n();
+=======
+const emit = defineEmits(['retry']);
+
+const { orientation, status, createdAt, content, attachments } =
+  useMessageContext();
+
+const { t } = useI18n();
+
+const canRetry = computed(() => {
+  const hasContent = content.value !== null;
+  const hasAttachments = attachments.value && attachments.value.length > 0;
+  return !hasOneDayPassed(createdAt.value) && (hasContent || hasAttachments);
+});
+>>>>>>> upstream/develop
 </script>
 
 <template>
@@ -35,5 +59,17 @@ const { t } = useI18n();
         {{ error }}
       </div>
     </div>
+<<<<<<< HEAD
+=======
+    <button
+      v-if="canRetry"
+      type="button"
+      :disabled="status !== MESSAGE_STATUS.FAILED"
+      class="bg-n-alpha-2 rounded-md size-5 grid place-content-center cursor-pointer"
+      @click="emit('retry')"
+    >
+      <Icon icon="i-lucide-refresh-ccw" class="text-n-ruby-11 size-[14px]" />
+    </button>
+>>>>>>> upstream/develop
   </div>
 </template>

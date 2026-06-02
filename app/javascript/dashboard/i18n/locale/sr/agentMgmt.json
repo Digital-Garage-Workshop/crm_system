@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Administrator",
       "AGENT": "Agent"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Nema agenata povezanih sa ovim nalogom",
       "TITLE": "Upravljajte agentima u Vašem timu",
@@ -79,7 +83,11 @@
         "AGENT_AVAILABILITY": {
           "LABEL": "Dostupnost",
           "PLACEHOLDER": "Подведем итог",
+<<<<<<< HEAD
           "ERROR": ""
+=======
+          "ERROR": "Dostupnost je obavezna"
+>>>>>>> upstream/develop
         },
         "SUBMIT": "Uredi agenta"
       },
@@ -96,6 +104,11 @@
         "ERROR_MESSAGE": "Nije moguće se povezati sa Woot serverom, pokušajte ponovo kasnije"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Traži agente...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Nema rezultata."
     },

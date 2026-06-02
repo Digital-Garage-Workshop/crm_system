@@ -1,6 +1,10 @@
 <script setup>
 import IframeLoader from 'shared/components/IframeLoader.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import { useMapGetter } from 'dashboard/composables/store';
+>>>>>>> upstream/develop
 
 defineProps({
   url: {
@@ -11,6 +15,11 @@ defineProps({
 
 const emit = defineEmits(['back', 'insert']);
 
+<<<<<<< HEAD
+=======
+const isRTL = useMapGetter('accounts/isRTL');
+
+>>>>>>> upstream/develop
 const onBack = e => {
   e.stopPropagation();
   emit('back');
@@ -35,7 +44,11 @@ const onInsert = e => {
     </div>
     <div class="-ml-4 h-full overflow-y-auto">
       <div class="w-full h-full min-h-0">
+<<<<<<< HEAD
         <IframeLoader :url="url" />
+=======
+        <IframeLoader :url="url" :is-rtl="isRTL" is-dir-applied />
+>>>>>>> upstream/develop
       </div>
     </div>
 

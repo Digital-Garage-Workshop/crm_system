@@ -1,4 +1,5 @@
 <script>
+<<<<<<< HEAD
 import { ref } from 'vue';
 // composable
 import { useConfig } from 'dashboard/composables/useConfig';
@@ -12,6 +13,21 @@ import Message from './Message.vue';
 import NextMessageList from 'next/message/MessageList.vue';
 import ConversationLabelSuggestion from './conversation/LabelSuggestion.vue';
 import Banner from 'dashboard/components/ui/Banner.vue';
+=======
+import { ref, provide, useTemplateRef } from 'vue';
+import { useElementSize } from '@vueuse/core';
+// composable
+import { useLabelSuggestions } from 'dashboard/composables/useLabelSuggestions';
+import { useSnakeCase } from 'dashboard/composables/useTransformKeys';
+
+// components
+import ReplyBox from './ReplyBox.vue';
+import MessageList from 'next/message/MessageList.vue';
+import ConversationLabelSuggestion from './conversation/LabelSuggestion.vue';
+import Banner from 'dashboard/components/ui/Banner.vue';
+import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
+import ResizableEditorWrapper from './ResizableEditorWrapper.vue';
+>>>>>>> upstream/develop
 
 // stores and apis
 import { mapGetters } from 'vuex';
@@ -35,6 +51,7 @@ import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { REPLY_POLICY } from 'shared/constants/links';
 import wootConstants from 'dashboard/constants/globals';
 import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
+<<<<<<< HEAD
 import { FEATURE_FLAGS } from '../../../featureFlags';
 import { INBOX_TYPES } from 'dashboard/helper/inbox';
 
@@ -108,6 +125,46 @@ export default {
       fetchIntegrationsIfRequired,
       fetchLabelSuggestions,
       showNextBubbles,
+=======
+import { INBOX_TYPES } from 'dashboard/helper/inbox';
+
+export default {
+  components: {
+    MessageList,
+    ReplyBox,
+    Banner,
+    ConversationLabelSuggestion,
+    Spinner,
+    ResizableEditorWrapper,
+  },
+  mixins: [inboxMixin],
+  setup() {
+    const conversationPanelRef = ref(null);
+    const resizableEditorWrapperRef = ref(null);
+    const messagesViewRef = useTemplateRef('messagesViewRef');
+    const topBannerRef = useTemplateRef('topBannerRef');
+    const { height: containerHeight } = useElementSize(messagesViewRef);
+    const { height: topBannerHeight } = useElementSize(topBannerRef);
+
+    const {
+      captainTasksEnabled,
+      isLabelSuggestionFeatureEnabled,
+      getLabelSuggestions,
+    } = useLabelSuggestions();
+
+    provide('contextMenuElementTarget', conversationPanelRef);
+
+    return {
+      captainTasksEnabled,
+      getLabelSuggestions,
+      isLabelSuggestionFeatureEnabled,
+      conversationPanelRef,
+      resizableEditorWrapperRef,
+      messagesViewRef,
+      topBannerRef,
+      containerHeight,
+      topBannerHeight,
+>>>>>>> upstream/develop
     };
   },
   data() {
@@ -135,8 +192,13 @@ export default {
     shouldShowLabelSuggestions() {
       return (
         this.isOpen &&
+<<<<<<< HEAD
         this.isEnterprise &&
         this.isAIIntegrationEnabled &&
+=======
+        this.captainTasksEnabled &&
+        this.isLabelSuggestionFeatureEnabled &&
+>>>>>>> upstream/develop
         !this.messageSentSinceOpened
       );
     },
@@ -190,6 +252,7 @@ export default {
         (!this.listLoadingStatus && this.isLoadingPrevious)
       );
     },
+<<<<<<< HEAD
     conversationType() {
       const { additional_attributes: additionalAttributes } = this.currentChat;
       const type = additionalAttributes ? additionalAttributes.type : '';
@@ -210,6 +273,8 @@ export default {
       return contactLastSeenAt;
     },
 
+=======
+>>>>>>> upstream/develop
     // Check there is a instagram inbox exists with the same instagram_id
     hasDuplicateInstagramInbox() {
       const instagramId = this.inbox.instagram_id;
@@ -255,6 +320,12 @@ export default {
       if (this.isAWhatsAppCloudChannel) {
         return REPLY_POLICY.WHATSAPP_CLOUD;
       }
+<<<<<<< HEAD
+=======
+      if (this.isATiktokChannel) {
+        return REPLY_POLICY.TIKTOK;
+      }
+>>>>>>> upstream/develop
       if (!this.isAPIInbox) {
         return REPLY_POLICY.TWILIO_WHATSAPP;
       }
@@ -268,6 +339,12 @@ export default {
       ) {
         return this.$t('CONVERSATION.24_HOURS_WINDOW');
       }
+<<<<<<< HEAD
+=======
+      if (this.isATiktokChannel) {
+        return this.$t('CONVERSATION.48_HOURS_WINDOW');
+      }
+>>>>>>> upstream/develop
       if (!this.isAPIInbox) {
         return this.$t('CONVERSATION.TWILIO_WHATSAPP_24_HOURS_WINDOW');
       }
@@ -285,9 +362,12 @@ export default {
           : 'CONVERSATION.UNREAD_MESSAGE';
       return `${count} ${this.$t(label)}`;
     },
+<<<<<<< HEAD
     isInstagramDM() {
       return this.conversationType === 'instagram_direct_message';
     },
+=======
+>>>>>>> upstream/develop
     inboxSupportsReplyTo() {
       const incoming = this.inboxHasFeature(INBOX_FEATURES.REPLY_TO);
       const outgoing =
@@ -306,13 +386,20 @@ export default {
       this.fetchAllAttachmentsFromCurrentChat();
       this.fetchSuggestions();
       this.messageSentSinceOpened = false;
+<<<<<<< HEAD
+=======
+      this.resetReplyEditorHeight();
+>>>>>>> upstream/develop
     },
   },
 
   created() {
     emitter.on(BUS_EVENTS.SCROLL_TO_MESSAGE, this.onScrollToMessage);
+<<<<<<< HEAD
     // when a new message comes in, we refetch the label suggestions
     emitter.on(BUS_EVENTS.FETCH_LABEL_SUGGESTIONS, this.fetchSuggestions);
+=======
+>>>>>>> upstream/develop
     // when a message is sent we set the flag to true this hides the label suggestions,
     // until the chat is changed and the flag is reset in the watch for currentChat
     emitter.on(BUS_EVENTS.MESSAGE_SENT, () => {
@@ -340,6 +427,7 @@ export default {
         return;
       }
 
+<<<<<<< HEAD
       if (!this.isEnterprise) {
         return;
       }
@@ -354,6 +442,17 @@ export default {
       this.labelSuggestions = await this.fetchLabelSuggestions({
         conversationId: this.currentChat.id,
       });
+=======
+      // Early exit if conversation already has labels - no need to suggest more
+      const existingLabels = this.currentChat?.labels || [];
+      if (existingLabels.length > 0) return;
+
+      if (!this.captainTasksEnabled || !this.isLabelSuggestionFeatureEnabled) {
+        return;
+      }
+
+      this.labelSuggestions = await this.getLabelSuggestions();
+>>>>>>> upstream/develop
 
       // once the labels are fetched, we need to scroll to bottom
       // but we need to wait for the DOM to be updated
@@ -440,9 +539,12 @@ export default {
         relevantMessages
       );
     },
+<<<<<<< HEAD
     onToggleContactPanel() {
       this.$emit('contactPanelToggle');
     },
+=======
+>>>>>>> upstream/develop
     setScrollParams() {
       this.heightBeforeLoad = this.conversationPanel.scrollHeight;
       this.scrollTopBeforeLoad = this.conversationPanel.scrollTop;
@@ -494,6 +596,7 @@ export default {
     makeMessagesRead() {
       this.$store.dispatch('markMessagesRead', { id: this.currentChat.id });
     },
+<<<<<<< HEAD
     getInReplyToMessage(parentMessage) {
       if (!parentMessage) return {};
       const inReplyToMessageId = parentMessage.content_attributes?.in_reply_to;
@@ -505,12 +608,25 @@ export default {
         }
         return false;
       });
+=======
+    async handleMessageRetry(message) {
+      if (!message) return;
+      const payload = useSnakeCase(message);
+      await this.$store.dispatch('sendMessageWithData', payload);
+    },
+    toggleReplyEditorSize() {
+      this.resizableEditorWrapperRef?.toggleEditorExpand?.();
+    },
+    resetReplyEditorHeight() {
+      this.resizableEditorWrapperRef?.resetEditorHeight?.();
+>>>>>>> upstream/develop
     },
   },
 };
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex flex-col justify-between flex-grow h-full min-w-0 m-0">
     <Banner
       v-if="!currentChat.can_reply"
@@ -542,23 +658,69 @@ export default {
     <NextMessageList
       v-if="showNextBubbles"
       class="conversation-panel"
+=======
+  <div
+    ref="messagesViewRef"
+    class="flex flex-col justify-between flex-grow h-full min-w-0 m-0"
+  >
+    <div ref="topBannerRef">
+      <Banner
+        v-if="!currentChat.can_reply"
+        color-scheme="alert"
+        class="mx-2 mt-2 overflow-hidden rounded-lg"
+        :banner-message="replyWindowBannerMessage"
+        :href-link="replyWindowLink"
+        :href-link-text="replyWindowLinkText"
+      />
+      <Banner
+        v-else-if="hasDuplicateInstagramInbox"
+        color-scheme="alert"
+        class="mx-2 mt-2 overflow-hidden rounded-lg"
+        :banner-message="$t('CONVERSATION.OLD_INSTAGRAM_INBOX_REPLY_BANNER')"
+      />
+    </div>
+    <MessageList
+      ref="conversationPanelRef"
+      class="conversation-panel flex-shrink flex-grow basis-px flex flex-col overflow-y-auto relative h-full m-0 pb-4"
+>>>>>>> upstream/develop
       :current-user-id="currentUserId"
       :first-unread-id="unReadMessages[0]?.id"
       :is-an-email-channel="isAnEmailChannel"
       :inbox-supports-reply-to="inboxSupportsReplyTo"
       :messages="getMessages"
+<<<<<<< HEAD
+=======
+      @retry="handleMessageRetry"
+>>>>>>> upstream/develop
     >
       <template #beforeAll>
         <transition name="slide-up">
           <!-- eslint-disable-next-line vue/require-toggle-inside-transition -->
+<<<<<<< HEAD
           <li class="min-h-[4rem]">
             <span v-if="shouldShowSpinner" class="spinner message" />
+=======
+          <li
+            class="min-h-[4rem] flex flex-shrink-0 flex-grow-0 items-center flex-auto justify-center max-w-full mt-0 mr-0 mb-1 ml-0 relative first:mt-auto last:mb-0"
+          >
+            <Spinner v-if="shouldShowSpinner" class="text-n-brand" />
+>>>>>>> upstream/develop
           </li>
         </transition>
       </template>
       <template #unreadBadge>
+<<<<<<< HEAD
         <li v-show="unreadMessageCount != 0" class="unread--toast">
           <span>
+=======
+        <li
+          v-show="unreadMessageCount != 0"
+          class="list-none flex justify-center items-center"
+        >
+          <span
+            class="shadow-lg rounded-full bg-n-brand text-white text-xs font-medium my-2.5 mx-auto px-2.5 py-1.5"
+          >
+>>>>>>> upstream/develop
             {{ unreadMessageLabel }}
           </span>
         </li>
@@ -571,6 +733,7 @@ export default {
           :conversation-id="currentChat.id"
         />
       </template>
+<<<<<<< HEAD
     </NextMessageList>
     <ul v-else class="conversation-panel">
       <transition name="slide-up">
@@ -632,12 +795,20 @@ export default {
         'bg-n-background': showNextBubbles && !isPopOutReplyBox,
       }"
     >
+=======
+    </MessageList>
+    <div class="flex relative flex-col bg-n-surface-1">
+>>>>>>> upstream/develop
       <div
         v-if="isAnyoneTyping"
         class="absolute flex items-center w-full h-0 -top-7"
       >
         <div
+<<<<<<< HEAD
           class="flex py-2 pr-4 pl-5 shadow-md rounded-full bg-white dark:bg-slate-700 text-n-slate-11 text-xs font-semibold my-2.5 mx-auto"
+=======
+          class="flex py-2 pr-4 pl-5 shadow-md rounded-full bg-white dark:bg-n-solid-3 text-n-slate-11 text-xs font-semibold my-2.5 mx-auto"
+>>>>>>> upstream/develop
         >
           {{ typingUserNames }}
           <img
@@ -647,6 +818,7 @@ export default {
           />
         </div>
       </div>
+<<<<<<< HEAD
       <ReplyBox
         v-model:popout-reply-box="isPopOutReplyBox"
         @toggle-popout="showPopOutReplyBox"
@@ -686,3 +858,14 @@ export default {
   }
 }
 </style>
+=======
+      <ResizableEditorWrapper
+        ref="resizableEditorWrapperRef"
+        :container-height="Math.max(0, containerHeight - topBannerHeight)"
+      >
+        <ReplyBox @toggle-editor-size="toggleReplyEditorSize" />
+      </ResizableEditorWrapper>
+    </div>
+  </div>
+</template>
+>>>>>>> upstream/develop

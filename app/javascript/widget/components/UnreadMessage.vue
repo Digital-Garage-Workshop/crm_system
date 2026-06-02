@@ -1,6 +1,10 @@
 <script>
 import { useMessageFormatter } from 'shared/composables/useMessageFormatter';
+<<<<<<< HEAD
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
+=======
+import Avatar from 'dashboard/components-next/avatar/Avatar.vue';
+>>>>>>> upstream/develop
 import configMixin from '../mixins/configMixin';
 import { isEmptyObject } from 'widget/helpers/utils';
 import {
@@ -11,7 +15,11 @@ import { emitter } from 'shared/helpers/mitt';
 
 export default {
   name: 'UnreadMessage',
+<<<<<<< HEAD
   components: { Thumbnail },
+=======
+  components: { Avatar },
+>>>>>>> upstream/develop
   mixins: [configMixin],
   props: {
     message: {
@@ -60,8 +68,13 @@ export default {
     },
     agentName() {
       if (this.isSenderExist(this.sender)) {
+<<<<<<< HEAD
         const { available_name: availableName } = this.sender;
         return availableName;
+=======
+        const { available_name: availableName, name } = this.sender;
+        return availableName || name || '';
+>>>>>>> upstream/develop
       }
       if (this.useInboxAvatarForBot) {
         return this.channelConfig.websiteName;
@@ -95,11 +108,20 @@ export default {
   <div class="chat-bubble-wrap">
     <button class="chat-bubble agent bg-white" @click="onClickMessage">
       <div v-if="showSender" class="row--agent-block">
+<<<<<<< HEAD
         <Thumbnail
           :src="avatarUrl"
           size="20px"
           :username="agentName"
           :status="availabilityStatus"
+=======
+        <Avatar
+          :src="avatarUrl"
+          :size="20"
+          :name="agentName"
+          :status="availabilityStatus"
+          rounded-full
+>>>>>>> upstream/develop
         />
         <span v-dompurify-html="agentName" class="agent--name" />
         <span v-dompurify-html="companyName" class="company--name" />

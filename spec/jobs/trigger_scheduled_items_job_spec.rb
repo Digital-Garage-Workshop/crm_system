@@ -30,11 +30,14 @@ RSpec.describe TriggerScheduledItemsJob do
     described_class.perform_now
   end
 
+<<<<<<< HEAD
   it 'triggers Notification::RemoveOldNotificationJob' do
     expect(Notification::RemoveOldNotificationJob).to receive(:perform_later).once
     described_class.perform_now
   end
 
+=======
+>>>>>>> upstream/develop
   context 'when unexecuted Scheduled campaign jobs' do
     let!(:twilio_sms) { create(:channel_twilio_sms, account: account) }
     let!(:twilio_inbox) { create(:inbox, channel: twilio_sms, account: account) }
@@ -45,5 +48,16 @@ RSpec.describe TriggerScheduledItemsJob do
       expect(Campaigns::TriggerOneoffCampaignJob).to receive(:perform_later).with(campaign).once
       described_class.perform_now
     end
+<<<<<<< HEAD
+=======
+
+    it 'does not trigger campaigns that are already processing' do
+      create(:campaign, inbox: twilio_inbox, account: account, campaign_status: :processing)
+
+      expect(Campaigns::TriggerOneoffCampaignJob).not_to receive(:perform_later)
+
+      described_class.perform_now
+    end
+>>>>>>> upstream/develop
   end
 end

@@ -5,6 +5,12 @@ import { PRIORITY_CONDITION_VALUES } from 'dashboard/constants/automation';
 
 vi.mock('dashboard/composables/store');
 vi.mock('dashboard/helper/automationHelper.js');
+<<<<<<< HEAD
+=======
+vi.mock('vue-i18n', () => ({
+  useI18n: () => ({ t: key => key }),
+}));
+>>>>>>> upstream/develop
 
 describe('useMacros', () => {
   const mockLabels = [
@@ -108,7 +114,11 @@ describe('useMacros', () => {
     useStoreGetters.mockReturnValue({
       'labels/getLabels': { value: mockLabels },
       'teams/getTeams': { value: mockTeams },
+<<<<<<< HEAD
       'agents/getAgents': { value: mockAgents },
+=======
+      'agents/getVerifiedAgents': { value: mockAgents },
+>>>>>>> upstream/develop
     });
   });
 
@@ -116,6 +126,7 @@ describe('useMacros', () => {
     const { getMacroDropdownValues } = useMacros();
     expect(getMacroDropdownValues('add_label')).toHaveLength(mockLabels.length);
     expect(getMacroDropdownValues('assign_team')).toHaveLength(
+<<<<<<< HEAD
       mockTeams.length
     );
     expect(getMacroDropdownValues('assign_agent')).toHaveLength(
@@ -134,6 +145,32 @@ describe('useMacros', () => {
     const result = getMacroDropdownValues('assign_agent');
     expect(result[0]).toEqual({ id: 'self', name: 'Self' });
     expect(result.slice(1)).toEqual(mockAgents);
+=======
+      mockTeams.length + 1
+    ); // +1 for "None"
+    expect(getMacroDropdownValues('assign_agent')).toHaveLength(
+      mockAgents.length + 2
+    ); // +2 for "None" and "Self"
+  });
+
+  it('returns teams with "None" option for assign_team and teams only for send_email_to_team', () => {
+    const { getMacroDropdownValues } = useMacros();
+    const assignTeamResult = getMacroDropdownValues('assign_team');
+    expect(assignTeamResult[0]).toEqual({
+      id: 'nil',
+      name: 'AUTOMATION.NONE_OPTION',
+    });
+    expect(assignTeamResult.slice(1)).toEqual(mockTeams);
+    expect(getMacroDropdownValues('send_email_to_team')).toEqual(mockTeams);
+  });
+
+  it('returns agents with "None" and "Self" options for assign_agent type', () => {
+    const { getMacroDropdownValues } = useMacros();
+    const result = getMacroDropdownValues('assign_agent');
+    expect(result[0]).toEqual({ id: 'nil', name: 'AUTOMATION.NONE_OPTION' });
+    expect(result[1]).toEqual({ id: 'self', name: 'Self' });
+    expect(result.slice(2)).toEqual(mockAgents);
+>>>>>>> upstream/develop
   });
 
   it('returns formatted labels for add_label and remove_label types', () => {
@@ -148,9 +185,17 @@ describe('useMacros', () => {
 
   it('returns PRIORITY_CONDITION_VALUES for change_priority type', () => {
     const { getMacroDropdownValues } = useMacros();
+<<<<<<< HEAD
     expect(getMacroDropdownValues('change_priority')).toEqual(
       PRIORITY_CONDITION_VALUES
     );
+=======
+    const expectedPriority = PRIORITY_CONDITION_VALUES.map(item => ({
+      id: item.id,
+      name: `MACROS.PRIORITY_TYPES.${item.i18nKey}`,
+    }));
+    expect(getMacroDropdownValues('change_priority')).toEqual(expectedPriority);
+>>>>>>> upstream/develop
   });
 
   it('returns an empty array for unknown types', () => {
@@ -162,13 +207,25 @@ describe('useMacros', () => {
     useStoreGetters.mockReturnValue({
       'labels/getLabels': { value: [] },
       'teams/getTeams': { value: [] },
+<<<<<<< HEAD
       'agents/getAgents': { value: [] },
+=======
+      'agents/getVerifiedAgents': { value: [] },
+>>>>>>> upstream/develop
     });
 
     const { getMacroDropdownValues } = useMacros();
     expect(getMacroDropdownValues('add_label')).toEqual([]);
+<<<<<<< HEAD
     expect(getMacroDropdownValues('assign_team')).toEqual([]);
     expect(getMacroDropdownValues('assign_agent')).toEqual([
+=======
+    expect(getMacroDropdownValues('assign_team')).toEqual([
+      { id: 'nil', name: 'AUTOMATION.NONE_OPTION' },
+    ]);
+    expect(getMacroDropdownValues('assign_agent')).toEqual([
+      { id: 'nil', name: 'AUTOMATION.NONE_OPTION' },
+>>>>>>> upstream/develop
       { id: 'self', name: 'Self' },
     ]);
   });

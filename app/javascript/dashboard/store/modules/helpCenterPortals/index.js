@@ -6,6 +6,10 @@ export const defaultPortalFlags = {
   isFetching: false,
   isUpdating: false,
   isDeleting: false,
+<<<<<<< HEAD
+=======
+  isFetchingSSLStatus: false,
+>>>>>>> upstream/develop
 };
 
 const state = {

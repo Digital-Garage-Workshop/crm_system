@@ -7,7 +7,11 @@
     },
     "FEEDBACK": {
       "LABEL": "有什麼想法想分享嗎？",
+<<<<<<< HEAD
       "PLACEHOLDER": "Your feedback (optional)",
+=======
+      "PLACEHOLDER": "您的反饋(可選)",
+>>>>>>> upstream/develop
       "BUTTON_TEXT": "提交反饋"
     },
     "API": {
@@ -15,5 +19,9 @@
       "ERROR_MESSAGE": "無法連接伺服器，請稍後再試"
     }
   },
+<<<<<<< HEAD
   "POWERED_BY": "Powered by Chatwoot"
+=======
+  "POWERED_BY": "由 Chatwoot 支援"
+>>>>>>> upstream/develop
 }

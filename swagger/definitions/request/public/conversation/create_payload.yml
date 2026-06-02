@@ -3,3 +3,7 @@ properties:
   custom_attributes:
     type: object
     description: Custom attributes of the conversation
+<<<<<<< HEAD
+=======
+    example: {}
+>>>>>>> upstream/develop

@@ -17,6 +17,16 @@
     "IP_ADDRESS": "IP adrese",
     "CREATED_AT_LABEL": "Izveidots",
     "NEW_MESSAGE": "Jauns ziņojums",
+<<<<<<< HEAD
+=======
+    "CALL": "Call",
+    "CALL_INITIATED": "Calling the contact…",
+    "CALL_FAILED": "Unable to start the call. Please try again.",
+    "CLICK_TO_EDIT": "Click to edit",
+    "VOICE_INBOX_PICKER": {
+      "TITLE": "Choose a voice inbox"
+    },
+>>>>>>> upstream/develop
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Ar šo kontaktpersonu nav saistītas iepriekšējās sarunas.",
       "TITLE": "Iepriekšējās Sarunas"
@@ -285,6 +295,10 @@
     "HEADER": {
       "TITLE": "Kontaktpersonas",
       "SEARCH_TITLE": "Meklēt kontaktpersonas",
+<<<<<<< HEAD
+=======
+      "ACTIVE_TITLE": "Active contacts",
+>>>>>>> upstream/develop
       "SEARCH_PLACEHOLDER": "Meklēt...",
       "MESSAGE_BUTTON": "Ziņojums",
       "SEND_MESSAGE": "Sūtīt ziņojumu",
@@ -378,6 +392,10 @@
       "IDENTIFIER": "Identifikators",
       "COUNTRY": "Valsts",
       "CITY": "Pilsēta",
+<<<<<<< HEAD
+=======
+      "COMPANY": "Uzņēmums",
+>>>>>>> upstream/develop
       "CREATED_AT": "Izveidots plkst",
       "LAST_ACTIVITY": "Pēdējā darbība",
       "REFERER_LINK": "Atsauces saite",
@@ -450,6 +468,15 @@
           "INSTAGRAM": {
             "PLACEHOLDER": "Pievienot Instagram"
           },
+<<<<<<< HEAD
+=======
+          "TELEGRAM": {
+            "PLACEHOLDER": "Add Telegram"
+          },
+          "TIKTOK": {
+            "PLACEHOLDER": "Add TikTok"
+          },
+>>>>>>> upstream/develop
           "LINKEDIN": {
             "PLACEHOLDER": "Pievienot LinkedIn"
           },
@@ -457,6 +484,13 @@
             "PLACEHOLDER": "Pievienot Twitter"
           }
         }
+<<<<<<< HEAD
+=======
+      },
+      "DELETE_CONTACT": {
+        "MESSAGE": "This action is permanent and irreversible.",
+        "BUTTON": "Delete now"
+>>>>>>> upstream/develop
       }
     },
     "DETAILS": {
@@ -466,7 +500,11 @@
       "DELETE_CONTACT": "Dzēst kontaktpersonu",
       "DELETE_DIALOG": {
         "TITLE": "Apstiprināt Dzēšanu",
+<<<<<<< HEAD
         "DESCRIPTION": "Vai tiešām vēlaties dzēst šo {contactName} kontaktpersonu?",
+=======
+        "DESCRIPTION": "Are you sure you want to delete this contact?",
+>>>>>>> upstream/develop
         "CONFIRM": "Jā, Dzēst",
         "API": {
           "SUCCESS_MESSAGE": "Kontaktpersona ir veiksmīgi izdzēsta",
@@ -544,10 +582,19 @@
         "WROTE": "rakstīja",
         "YOU": "Jūs",
         "SAVE": "Saglabāt piezīmi",
+<<<<<<< HEAD
         "EXPAND": "Izvērst",
         "COLLAPSE": "Collapse",
         "NO_NOTES": "No notes, you can add notes from the contact details page.",
         "EMPTY_STATE": "Ar šo kontaktpersonu nav saistītu piezīmju. Varat pievienot piezīmi, ierakstot iepriekšējā lodziņā."
+=======
+        "ADD_NOTE": "Add contact note",
+        "EXPAND": "Izvērst",
+        "COLLAPSE": "Collapse",
+        "NO_NOTES": "No notes, you can add notes from the contact details page.",
+        "EMPTY_STATE": "Ar šo kontaktpersonu nav saistītu piezīmju. Varat pievienot piezīmi, ierakstot iepriekšējā lodziņā.",
+        "CONVERSATION_EMPTY_STATE": "There are no notes yet. Use the Add note button to create one."
+>>>>>>> upstream/develop
       }
     },
     "EMPTY_STATE": {
@@ -555,7 +602,34 @@
       "SUBTITLE": "Sāciet pievienot jaunas kontaktpersonas, noklikšķinot uz tālāk esošās pogas",
       "BUTTON_LABEL": "Pievienot kontaktpersonu",
       "SEARCH_EMPTY_STATE_TITLE": "Neviena kontaktpersona neatbilst jūsu meklēšanas vaicājumam 🔍",
+<<<<<<< HEAD
       "LIST_EMPTY_STATE_TITLE": "Šajā skatā nav pieejama neviena kontaktpersona 📋"
+=======
+      "LIST_EMPTY_STATE_TITLE": "Šajā skatā nav pieejama neviena kontaktpersona 📋",
+      "ACTIVE_EMPTY_STATE_TITLE": "No contacts are active at the moment 🌙"
+    },
+    "LOAD_MORE": "Ielādēt vairāk"
+  },
+  "CONTACTS_BULK_ACTIONS": {
+    "ASSIGN_LABELS": "Piešķirt Etiķetes",
+    "ASSIGN_LABELS_SUCCESS": "Etiķetes ir veiksmīgi piešķirtas.",
+    "ASSIGN_LABELS_FAILED": "Failed to assign labels",
+    "DESCRIPTION": "Select the labels you want to add to the selected contacts.",
+    "NO_LABELS_FOUND": "No labels available yet.",
+    "SELECTED_COUNT": "Atlasīti {count}",
+    "CLEAR_SELECTION": "Clear selection",
+    "SELECT_ALL": "Select all ({count})",
+    "DELETE_CONTACTS": "Dzēst",
+    "DELETE_SUCCESS": "Contacts deleted successfully.",
+    "DELETE_FAILED": "Failed to delete contacts.",
+    "DELETE_DIALOG": {
+      "TITLE": "Delete selected contacts",
+      "SINGULAR_TITLE": "Delete selected contact",
+      "DESCRIPTION": "This will permanently delete {count} selected contacts. This action cannot be undone.",
+      "SINGULAR_DESCRIPTION": "This will permanently delete the selected contact. This action cannot be undone.",
+      "CONFIRM_MULTIPLE": "Delete contacts",
+      "CONFIRM_SINGLE": "Dzēst kontaktpersonu"
+>>>>>>> upstream/develop
     }
   },
   "COMPOSE_NEW_CONVERSATION": {
@@ -569,7 +643,11 @@
       "NO_INBOX_ALERT": "Nav pieejamas iesūtnes, lai sāktu sarunu ar šo kontaktpersonu.",
       "CONTACT_SELECTOR": {
         "LABEL": "Kam:",
+<<<<<<< HEAD
         "TAG_INPUT_PLACEHOLDER": "Meklēt kontaktpersonu pēc vārda, e-pasta vai tālruņa numura",
+=======
+        "TAG_INPUT_PLACEHOLDER": "Enter at least 2 characters to search by name, email, or phone number",
+>>>>>>> upstream/develop
         "CONTACT_CREATING": "Notiek kontaktpersonas izveide..."
       },
       "INBOX_SELECTOR": {
@@ -580,9 +658,15 @@
         "SUBJECT_LABEL": "Tēma :",
         "SUBJECT_PLACEHOLDER": "Ievadiet šeit sava e-pasta tēmu",
         "CC_LABEL": "Cc:",
+<<<<<<< HEAD
         "CC_PLACEHOLDER": "Meklēt kontaktpersonu pēc e-pasta adreses",
         "BCC_LABEL": "Bcc:",
         "BCC_PLACEHOLDER": "Meklēt kontaktpersonu pēc e-pasta adreses",
+=======
+        "CC_PLACEHOLDER": "Enter at least 2 characters to search by email",
+        "BCC_LABEL": "Bcc:",
+        "BCC_PLACEHOLDER": "Enter at least 2 characters to search by email",
+>>>>>>> upstream/develop
         "BCC_BUTTON": "Bcc"
       },
       "MESSAGE_EDITOR": {
@@ -599,6 +683,18 @@
           "SEND_MESSAGE": "Sūtīt ziņojumu"
         }
       },
+<<<<<<< HEAD
+=======
+      "TWILIO_OPTIONS": {
+        "LABEL": "Izvēlieties veidni",
+        "SEARCH_PLACEHOLDER": "Meklēt veidnes",
+        "EMPTY_STATE": "Nav atrasta neviena veidne",
+        "TEMPLATE_PARSER": {
+          "BACK": "Atgriezties",
+          "SEND_MESSAGE": "Sūtīt ziņojumu"
+        }
+      },
+>>>>>>> upstream/develop
       "ACTION_BUTTONS": {
         "DISCARD": "Izmest",
         "SEND": "Sūtīt ({keyCode})"

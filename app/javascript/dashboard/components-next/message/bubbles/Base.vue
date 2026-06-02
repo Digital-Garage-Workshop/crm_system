@@ -7,9 +7,20 @@ import { emitter } from 'shared/helpers/mitt';
 import { useMessageContext } from '../provider.js';
 import { useI18n } from 'vue-i18n';
 
+<<<<<<< HEAD
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { MESSAGE_VARIANTS, ORIENTATION } from '../constants';
 
+=======
+import MessageFormatter from 'shared/helpers/MessageFormatter.js';
+import { BUS_EVENTS } from 'shared/constants/busEvents';
+import { MESSAGE_VARIANTS, ORIENTATION } from '../constants';
+
+const props = defineProps({
+  hideMeta: { type: Boolean, default: false },
+});
+
+>>>>>>> upstream/develop
 const { variant, orientation, inReplyTo, shouldGroupWithNext } =
   useMessageContext();
 const { t } = useI18n();
@@ -64,12 +75,26 @@ const scrollToMessage = () => {
   });
 };
 
+<<<<<<< HEAD
+=======
+const shouldShowMeta = computed(
+  () =>
+    !props.hideMeta &&
+    !shouldGroupWithNext.value &&
+    variant.value !== MESSAGE_VARIANTS.ACTIVITY
+);
+
+>>>>>>> upstream/develop
 const replyToPreview = computed(() => {
   if (!inReplyTo) return '';
 
   const { content, attachments } = inReplyTo.value;
 
+<<<<<<< HEAD
   if (content) return content;
+=======
+  if (content) return new MessageFormatter(content).formattedMessage;
+>>>>>>> upstream/develop
   if (attachments?.length) {
     const firstAttachment = attachments[0];
     const fileType = firstAttachment.fileType ?? firstAttachment.file_type;
@@ -83,7 +108,11 @@ const replyToPreview = computed(() => {
 
 <template>
   <div
+<<<<<<< HEAD
     class="text-sm"
+=======
+    class="text-sm min-w-0"
+>>>>>>> upstream/develop
     :class="[
       messageClass,
       {
@@ -93,6 +122,7 @@ const replyToPreview = computed(() => {
   >
     <div
       v-if="inReplyTo"
+<<<<<<< HEAD
       class="bg-n-alpha-black1 rounded-lg p-2 -mx-1 mb-2 cursor-pointer"
       @click="scrollToMessage"
     >
@@ -103,6 +133,19 @@ const replyToPreview = computed(() => {
     <slot />
     <MessageMeta
       v-if="!shouldGroupWithNext && variant !== MESSAGE_VARIANTS.ACTIVITY"
+=======
+      class="p-2 -mx-1 mb-2 rounded-lg cursor-pointer bg-n-alpha-black1"
+      @click="scrollToMessage"
+    >
+      <div
+        v-dompurify-html="replyToPreview"
+        class="prose prose-bubble line-clamp-2"
+      />
+    </div>
+    <slot />
+    <MessageMeta
+      v-if="shouldShowMeta"
+>>>>>>> upstream/develop
       :class="[
         flexOrientationClass,
         variant === MESSAGE_VARIANTS.EMAIL ? 'px-3 pb-3' : '',

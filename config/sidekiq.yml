@@ -23,8 +23,16 @@
   - action_mailbox_routing
   - low
   - scheduled_jobs
+<<<<<<< HEAD
   - housekeeping
   - async_database_migration
+=======
+  - deferred
+  - purgable
+  - housekeeping
+  - async_database_migration
+  - bulk_reindex_low
+>>>>>>> upstream/develop
   - active_storage_analysis
   - active_storage_purge
   - action_mailbox_incineration

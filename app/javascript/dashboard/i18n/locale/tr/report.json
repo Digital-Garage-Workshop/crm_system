@@ -3,7 +3,11 @@
     "HEADER": "Konuşmalar",
     "LOADING_CHART": "Grafik verileri yükleniyor...",
     "NO_ENOUGH_DATA": "Rapor oluşturmak için yeterli veri yok, Lütfen daha sonra tekrar deneyin.",
+<<<<<<< HEAD
     "DOWNLOAD_AGENT_REPORTS": "Etken raporları indir",
+=======
+    "DOWNLOAD_CONVERSATION_REPORTS": "Download conversation reports",
+>>>>>>> upstream/develop
     "DATA_FETCHING_FAILED": "Veri çekme başarısız oldu, lütfen daha sonra tekrar deneyin.",
     "SUMMARY_FETCHING_FAILED": "Özet çekme başarısız oldu, lütfen daha sonra tekrar deneyin.",
     "METRICS": {
@@ -40,7 +44,11 @@
         "DESC": "( Toplam )"
       },
       "BOT_HANDOFF_COUNT": {
+<<<<<<< HEAD
         "NAME": "Handoff Count",
+=======
+        "NAME": "Aktarım Sayısı",
+>>>>>>> upstream/develop
         "DESC": "( Toplam )"
       },
       "REPLY_TIME": {
@@ -51,7 +59,14 @@
     },
     "DATE_RANGE_OPTIONS": {
       "LAST_7_DAYS": "Son 7 gün",
+<<<<<<< HEAD
       "LAST_30_DAYS": "Son 30 gün",
+=======
+      "LAST_14_DAYS": "Son 14 gün",
+      "LAST_30_DAYS": "Son 30 gün",
+      "THIS_MONTH": "This month",
+      "LAST_MONTH": "Last month",
+>>>>>>> upstream/develop
       "LAST_3_MONTHS": "Son 3 ay",
       "LAST_6_MONTHS": "Son 6 ay",
       "LAST_YEAR": "Geçen yıl",
@@ -125,11 +140,23 @@
   },
   "AGENT_REPORTS": {
     "HEADER": "Temsilci Genel Bakış",
+<<<<<<< HEAD
     "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent’s name to learn more.",
+=======
+    "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent's name to learn more.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Grafik verileri yükleniyor...",
     "NO_ENOUGH_DATA": "Rapor oluşturmak için yeterli veri yok, Lütfen daha sonra tekrar deneyin.",
     "DOWNLOAD_AGENT_REPORTS": "Etken raporları indir",
     "FILTER_DROPDOWN_LABEL": "Temsilci Seçin",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Temsilci ara"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Konuşmalar",
@@ -193,10 +220,22 @@
   },
   "LABEL_REPORTS": {
     "HEADER": "Etiketler Genel Bakış",
+<<<<<<< HEAD
+=======
+    "DESCRIPTION": "Etiket performansını; konuşmalar, yanıt süreleri, çözüm süreleri ve çözümlenen vakalar dahil olmak üzere temel metriklerle takip edin. Ayrıntılı analizler için bir etiket adına tıklayın.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Grafik verileri yükleniyor...",
     "NO_ENOUGH_DATA": "Rapor oluşturmak için yeterli veri yok, Lütfen daha sonra tekrar deneyin.",
     "DOWNLOAD_LABEL_REPORTS": "Etiket raporlarını indir",
     "FILTER_DROPDOWN_LABEL": "Etiket Seçin",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "LABELS": "Etiketleri ara"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Konuşmalar",
@@ -260,11 +299,25 @@
   },
   "INBOX_REPORTS": {
     "HEADER": "Gelen Kutusu Genel Bakış",
+<<<<<<< HEAD
     "DESCRIPTION": "Quickly view your inbox performance with key metrics like conversations, response times, resolution times, and resolved cases—all in one place. Click an inbox name for more details.",
+=======
+    "DESCRIPTION": "Konuşmalar, yanıt süreleri, çözüm süreleri ve çözülen vakalar gibi temel metriklerle gelen kutunuzun performansını hızlıca tek bir yerden görüntüleyin. Daha fazla detay için bir gelen kutusunun adına tıklayın.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Grafik verileri yükleniyor...",
     "NO_ENOUGH_DATA": "Rapor oluşturmak için yeterli veri yok, Lütfen daha sonra tekrar deneyin.",
     "DOWNLOAD_INBOX_REPORTS": "Gelen Kutu Raporlarını İndir",
     "FILTER_DROPDOWN_LABEL": "Gelen kutusu seç",
+<<<<<<< HEAD
+=======
+    "ALL_INBOXES": "Tüm Gelen Kutuları",
+    "SEARCH_INBOX": "Search Inbox",
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "INBOXES": "Gelen kutularını ara"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Konuşmalar",
@@ -328,11 +381,26 @@
   },
   "TEAM_REPORTS": {
     "HEADER": "Ekip Genel Bakışı",
+<<<<<<< HEAD
     "DESCRIPTION": "Get a snapshot of your team’s performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+=======
+    "DESCRIPTION": "Get a snapshot of your team's performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Grafik verileri yükleniyor...",
     "NO_ENOUGH_DATA": "Rapor oluşturmak için yeterli veri yok, Lütfen daha sonra tekrar deneyin.",
     "DOWNLOAD_TEAM_REPORTS": "Ekip raporlarını indir",
     "FILTER_DROPDOWN_LABEL": "Ekip Seç",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "ADD_FILTER": "Filtre Ekle",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "TEAMS": "Takım ara"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Konuşmalar",
@@ -396,22 +464,65 @@
   },
   "CSAT_REPORTS": {
     "HEADER": "CSAT Raporları",
+<<<<<<< HEAD
     "NO_RECORDS": "Mevcut CSAT anket yanıtları yok.",
     "DOWNLOAD": "CSAT Raporlarını İndir",
     "DOWNLOAD_FAILED": "CSAT Raporlarını İndirme Başarısız Oldu",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Temsilcileri Seç"
+=======
+    "NO_RECORDS": "Henüz yanıt yok",
+    "NO_RECORDS_DESCRIPTION": "Müşteriler geri bildirim vermeye başladığında CSAT anket yanıtları burada görünecektir.",
+    "DOWNLOAD": "CSAT Raporlarını İndir",
+    "DOWNLOAD_FAILED": "CSAT Raporlarını İndirme Başarısız Oldu",
+    "FILTERS": {
+      "ADD_FILTER": "Filtre Ekle",
+      "CLEAR_ALL": "Clear all",
+      "NO_FILTER": "No filters available",
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Temsilci ara",
+        "INBOXES": "Gelen kutularını ara",
+        "TEAMS": "Takım ara",
+        "RATINGS": "Değerlendirmelerde ara"
+      },
+      "AGENTS": {
+        "LABEL": "Kullanıcı"
+      },
+      "INBOXES": {
+        "LABEL": "Gelen Kutusu"
+      },
+      "TEAMS": {
+        "LABEL": "Ekip"
+      },
+      "RATINGS": {
+        "LABEL": "Değerlendirme"
+>>>>>>> upstream/develop
       }
     },
     "TABLE": {
       "HEADER": {
         "CONTACT_NAME": "İletişim",
+<<<<<<< HEAD
         "AGENT_NAME": "Atanan temsilci",
         "RATING": "Değerlendirme",
         "FEEDBACK_TEXT": "Geri bildirim yorumu"
       }
     },
+=======
+        "AGENT_NAME": "Kullanıcı",
+        "RATING": "Değerlendirme",
+        "FEEDBACK_TEXT": "Geri bildirim yorumu",
+        "CONVERSATION": "Sohbet",
+        "CUSTOMER": "Müşteri",
+        "RESPONSE": "Response",
+        "HANDLED_BY": "İlgilenen"
+      },
+      "UNKNOWN_CUSTOMER": "Bilinmeyen müşteri"
+    },
+    "NO_AGENT": "Atanmış temsilci yok",
+    "NO_FEEDBACK": "Geri bildirim sağlanmadı",
+>>>>>>> upstream/develop
     "METRIC": {
       "TOTAL_RESPONSES": {
         "LABEL": "Toplam yanıtlar",
@@ -424,15 +535,45 @@
       "RESPONSE_RATE": {
         "LABEL": "Yanıt oranı",
         "TOOLTIP": "Toplam yanıtların toplamı / Gönderilen CSAT anketi mesajlarının toplamı * 100"
+<<<<<<< HEAD
+=======
+      },
+      "RATING_DISTRIBUTION": "Derecelendirme dağılımı"
+    },
+    "REVIEW_NOTES": {
+      "TITLE": "İnceleme notları",
+      "PLACEHOLDER": "Bu derecelendirmeyle ilgili yorum notları ekleyin...",
+      "SAVE": "Kaydet",
+      "CANCEL": "İptal Et",
+      "SAVING": "Kaydediliyor...",
+      "SAVED": "Notlar başarıyla kaydedildi",
+      "SAVE_ERROR": "Notlar kaydedilemedi",
+      "UPDATED_BY": "{name} tarafından {time} tarihinde güncellendi",
+      "UPDATED_BY_LABEL": "Güncelleyen",
+      "PAYWALL": {
+        "TITLE": "İnceleme notları eklemek için yükseltin",
+        "AVAILABLE_ON": "İnceleme notları özelliği yalnızca Business ve Enterprise planlarında mevcuttur.",
+        "UPGRADE_PROMPT": "İnceleme notları ile her CSAT yanıtına dahili bağlam ekleyin. Gerçekte ne yaşandığını kayıt altına alın, kalıpları daha hızlı tespit edin ve geri bildirimlerinizden yola çıkarak daha iyi kararlar alın.",
+        "UPGRADE_NOW": "Şimdi yükselt",
+        "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+>>>>>>> upstream/develop
       }
     }
   },
   "BOT_REPORTS": {
+<<<<<<< HEAD
     "HEADER": "Bot Reports",
     "METRIC": {
       "TOTAL_CONVERSATIONS": {
         "LABEL": "Konuşma sayısı",
         "TOOLTIP": "Total number of conversations handled by the bot"
+=======
+    "HEADER": "Bot Raporları",
+    "METRIC": {
+      "TOTAL_CONVERSATIONS": {
+        "LABEL": "Konuşma sayısı",
+        "TOOLTIP": "Bot tarafından gerçekleştirilen toplam konuşma sayısı"
+>>>>>>> upstream/develop
       },
       "TOTAL_RESPONSES": {
         "LABEL": "Toplam yanıt",
@@ -440,11 +581,19 @@
       },
       "RESOLUTION_RATE": {
         "LABEL": "Çözüm Oranı",
+<<<<<<< HEAD
         "TOOLTIP": "Total number of conversations resolved by the bot / Total number of conversations handled by the bot * 100"
       },
       "HANDOFF_RATE": {
         "LABEL": "Handoff Rate",
         "TOOLTIP": "Total number of conversations handed off to agents / Total number of conversations handled by the bot * 100"
+=======
+        "TOOLTIP": "Bot tarafından çözülen toplam konuşma sayısı / Bot tarafından işlenen toplam konuşma sayısı * 100"
+      },
+      "HANDOFF_RATE": {
+        "LABEL": "Temsilci Devir Oranı",
+        "TOOLTIP": "Temsilcilere devredilen toplam konuşma sayısı / Bot tarafından yönetilen toplam konuşma sayısı * 100"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -466,6 +615,16 @@
       "CONVERSATIONS": "{count} konuşmalar",
       "DOWNLOAD_REPORT": "Download report"
     },
+<<<<<<< HEAD
+=======
+    "RESOLUTION_HEATMAP": {
+      "HEADER": "Çözümler",
+      "NO_CONVERSATIONS": "Hiç konuşma yok",
+      "CONVERSATION": "{count} konuşma",
+      "CONVERSATIONS": "{count} konuşmalar",
+      "DOWNLOAD_REPORT": "Download report"
+    },
+>>>>>>> upstream/develop
     "AGENT_CONVERSATIONS": {
       "HEADER": "Temsilciler Tarafından Yapılan Konuşmalar",
       "LOADING_MESSAGE": "Temsilci metrikleri yükleniyor...",
@@ -478,8 +637,13 @@
       }
     },
     "TEAM_CONVERSATIONS": {
+<<<<<<< HEAD
       "ALL_TEAMS": "All Teams",
       "HEADER": "Conversations by teams",
+=======
+      "ALL_TEAMS": "Tüm Ekipler",
+      "HEADER": "Ekipler tarafından yapılan konuşmalar",
+>>>>>>> upstream/develop
       "LOADING_MESSAGE": "Loading team metrics...",
       "NO_TEAMS": "There is no data available",
       "TABLE_HEADER": {
@@ -507,7 +671,11 @@
   },
   "SLA_REPORTS": {
     "HEADER": "SLA Reports",
+<<<<<<< HEAD
     "NO_RECORDS": "SLA applied conversations are not available.",
+=======
+    "NO_RECORDS": "SLA uygulanan konuşmalar mevcut değil.",
+>>>>>>> upstream/develop
     "LOADING": "Loading SLA data...",
     "DOWNLOAD_SLA_REPORTS": "Download SLA reports",
     "DOWNLOAD_FAILED": "Failed to download SLA Reports",
@@ -559,9 +727,16 @@
     "INBOX": "Gelen Kutusu",
     "AGENT": "Kullanıcı",
     "TEAM": "Ekip",
+<<<<<<< HEAD
     "AVG_RESOLUTION_TIME": "Avg. Resolution Time",
     "AVG_FIRST_RESPONSE_TIME": "Avg. First Response Time",
     "AVG_REPLY_TIME": "Avg. Customer Waiting Time",
+=======
+    "LABEL": "Etiket",
+    "AVG_RESOLUTION_TIME": "Ort. Çözüm Süresi",
+    "AVG_FIRST_RESPONSE_TIME": "Ort. İlk Yanıt Süresi",
+    "AVG_REPLY_TIME": "Ort. Müşteri Bekleme Süresi",
+>>>>>>> upstream/develop
     "RESOLUTION_COUNT": "Çözünürlük Sayısı",
     "CONVERSATIONS": "Konuşmaların sayısı"
   }

@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "管理员",
       "AGENT": "客服"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "此账号没有关联客服",
       "TITLE": "管理您团队中的客服",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "无法连接Woot服务器，请稍后再试"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "搜索客服代表...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "未找到任何结果。"
     },

@@ -3,8 +3,13 @@ import { computed, watch, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useMapGetter, useStore } from 'dashboard/composables/store';
 
+<<<<<<< HEAD
 import LabelItem from 'dashboard/components-next/Label/LabelItem.vue';
 import AddLabel from 'dashboard/components-next/Label/AddLabel.vue';
+=======
+import LabelItem from 'dashboard/components-next/label/LabelItem.vue';
+import AddLabel from 'dashboard/components-next/label/AddLabel.vue';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   contactId: {
@@ -86,8 +91,13 @@ const handleLabelAction = async ({ value }) => {
   }
 };
 
+<<<<<<< HEAD
 const handleRemoveLabel = labelId => {
   return handleLabelAction({ value: labelId });
+=======
+const handleRemoveLabel = label => {
+  return handleLabelAction({ value: label.id });
+>>>>>>> upstream/develop
 };
 
 watch(

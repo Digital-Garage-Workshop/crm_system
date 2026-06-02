@@ -1,5 +1,11 @@
 <script>
 import { mapGetters } from 'vuex';
+<<<<<<< HEAD
+=======
+import { useAdmin } from 'dashboard/composables/useAdmin';
+import { useAlert } from 'dashboard/composables';
+import { copyTextToClipboard } from 'shared/helpers/clipboard';
+>>>>>>> upstream/develop
 import {
   getSortedAgentsByAvailability,
   getAgentsByUpdatedPresence,
@@ -9,6 +15,23 @@ import MenuItemWithSubmenu from './menuItemWithSubmenu.vue';
 import wootConstants from 'dashboard/constants/globals';
 import AgentLoadingPlaceholder from './agentLoadingPlaceholder.vue';
 
+<<<<<<< HEAD
+=======
+const MENU = {
+  MARK_AS_READ: 'mark-as-read',
+  MARK_AS_UNREAD: 'mark-as-unread',
+  PRIORITY: 'priority',
+  STATUS: 'status',
+  SNOOZE: 'snooze',
+  AGENT: 'agent',
+  TEAM: 'team',
+  LABEL: 'label',
+  DELETE: 'delete',
+  OPEN_NEW_TAB: 'open-new-tab',
+  COPY_LINK: 'copy-link',
+};
+
+>>>>>>> upstream/develop
 export default {
   components: {
     MenuItem,
@@ -36,6 +59,21 @@ export default {
       type: String,
       default: null,
     },
+<<<<<<< HEAD
+=======
+    conversationLabels: {
+      type: Array,
+      default: () => [],
+    },
+    conversationUrl: {
+      type: String,
+      default: '',
+    },
+    allowedOptions: {
+      type: Array,
+      default: () => [],
+    },
+>>>>>>> upstream/develop
   },
   emits: [
     'updateConversation',
@@ -45,9 +83,25 @@ export default {
     'assignAgent',
     'assignTeam',
     'assignLabel',
+<<<<<<< HEAD
   ],
   data() {
     return {
+=======
+    'removeLabel',
+    'deleteConversation',
+    'close',
+  ],
+  setup() {
+    const { isAdmin } = useAdmin();
+    return {
+      isAdmin,
+    };
+  },
+  data() {
+    return {
+      MENU,
+>>>>>>> upstream/develop
       STATUS_TYPE: wootConstants.STATUS_TYPE,
       readOption: {
         label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.MARK_AS_READ'),
@@ -55,7 +109,11 @@ export default {
       },
       unreadOption: {
         label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.MARK_AS_UNREAD'),
+<<<<<<< HEAD
         icon: 'mail',
+=======
+        icon: 'mail-unread',
+>>>>>>> upstream/develop
       },
       statusMenuConfig: [
         {
@@ -80,7 +138,11 @@ export default {
         icon: 'snooze',
       },
       priorityConfig: {
+<<<<<<< HEAD
         key: 'priority',
+=======
+        key: MENU.PRIORITY,
+>>>>>>> upstream/develop
         label: this.$t('CONVERSATION.PRIORITY.TITLE'),
         icon: 'warning',
         options: [
@@ -107,20 +169,50 @@ export default {
         ].filter(item => item.key !== this.priority),
       },
       labelMenuConfig: {
+<<<<<<< HEAD
         key: 'label',
+=======
+        key: MENU.LABEL,
+>>>>>>> upstream/develop
         icon: 'tag',
         label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.ASSIGN_LABEL'),
       },
       agentMenuConfig: {
+<<<<<<< HEAD
         key: 'agent',
+=======
+        key: MENU.AGENT,
+>>>>>>> upstream/develop
         icon: 'person-add',
         label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.ASSIGN_AGENT'),
       },
       teamMenuConfig: {
+<<<<<<< HEAD
         key: 'team',
         icon: 'people-team-add',
         label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.ASSIGN_TEAM'),
       },
+=======
+        key: MENU.TEAM,
+        icon: 'people-team-add',
+        label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.ASSIGN_TEAM'),
+      },
+      deleteOption: {
+        key: MENU.DELETE,
+        icon: 'delete',
+        label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.DELETE'),
+      },
+      openInNewTabOption: {
+        key: MENU.OPEN_NEW_TAB,
+        icon: 'open',
+        label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.OPEN_IN_NEW_TAB'),
+      },
+      copyLinkOption: {
+        key: MENU.COPY_LINK,
+        icon: 'copy',
+        label: this.$t('CONVERSATION.CARD_CONTEXT_MENU.COPY_LINK'),
+      },
+>>>>>>> upstream/develop
     };
   },
   computed: {
@@ -167,6 +259,13 @@ export default {
     this.$store.dispatch('inboxAssignableAgents/fetch', [this.inboxId]);
   },
   methods: {
+<<<<<<< HEAD
+=======
+    isAllowed(keys) {
+      if (!this.allowedOptions.length) return true;
+      return keys.some(key => this.allowedOptions.includes(key));
+    },
+>>>>>>> upstream/develop
     toggleStatus(status, snoozedUntil) {
       this.$emit('updateConversation', status, snoozedUntil);
     },
@@ -178,6 +277,30 @@ export default {
     assignPriority(priority) {
       this.$emit('assignPriority', priority);
     },
+<<<<<<< HEAD
+=======
+    deleteConversation() {
+      this.$emit('deleteConversation', this.chatId);
+    },
+    openInNewTab() {
+      if (!this.conversationUrl) return;
+
+      const url = `${window.chatwootConfig.hostURL}${this.conversationUrl}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+      this.$emit('close');
+    },
+    async copyConversationLink() {
+      if (!this.conversationUrl) return;
+      try {
+        const url = `${window.chatwootConfig.hostURL}${this.conversationUrl}`;
+        await copyTextToClipboard(url);
+        useAlert(this.$t('CONVERSATION.CARD_CONTEXT_MENU.COPY_LINK_SUCCESS'));
+        this.$emit('close');
+      } catch (error) {
+        // error
+      }
+    },
+>>>>>>> upstream/develop
     show(key) {
       // If the conversation status is same as the action, then don't display the option
       // i.e.: Don't show an option to resolve if the conversation is already resolved.
@@ -201,6 +324,7 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="p-1 rounded-md shadow-xl bg-n-alpha-3/50 backdrop-blur-[100px]">
     <MenuItem
       v-if="!hasUnreadMessages"
@@ -277,5 +401,130 @@ export default {
         @click.stop="$emit('assignTeam', team)"
       />
     </MenuItemWithSubmenu>
+=======
+  <div
+    class="p-1 rounded-md shadow-xl bg-n-alpha-3/50 backdrop-blur-[100px] outline-1 outline outline-n-weak/50"
+  >
+    <template v-if="isAllowed([MENU.MARK_AS_READ, MENU.MARK_AS_UNREAD])">
+      <MenuItem
+        v-if="!hasUnreadMessages"
+        :option="unreadOption"
+        variant="icon"
+        @click.stop="$emit('markAsUnread')"
+      />
+      <MenuItem
+        v-else
+        :option="readOption"
+        variant="icon"
+        @click.stop="$emit('markAsRead')"
+      />
+      <hr class="m-1 rounded border-b border-n-weak dark:border-n-weak" />
+    </template>
+    <template v-if="isAllowed([MENU.STATUS, MENU.SNOOZE])">
+      <template v-for="option in statusMenuConfig">
+        <MenuItem
+          v-if="show(option.key) && isAllowed([MENU.STATUS])"
+          :key="option.key"
+          :option="option"
+          variant="icon"
+          @click.stop="toggleStatus(option.key, null)"
+        />
+      </template>
+      <MenuItem
+        v-if="showSnooze && isAllowed([MENU.SNOOZE])"
+        :option="snoozeOption"
+        variant="icon"
+        @click.stop="snoozeConversation()"
+      />
+      <hr class="m-1 rounded border-b border-n-weak dark:border-n-weak" />
+    </template>
+    <template
+      v-if="isAllowed([MENU.PRIORITY, MENU.LABEL, MENU.AGENT, MENU.TEAM])"
+    >
+      <MenuItemWithSubmenu
+        v-if="isAllowed([MENU.PRIORITY])"
+        :option="priorityConfig"
+      >
+        <MenuItem
+          v-for="(option, i) in priorityConfig.options"
+          :key="i"
+          :option="option"
+          @click.stop="assignPriority(option.key)"
+        />
+      </MenuItemWithSubmenu>
+      <MenuItemWithSubmenu
+        v-if="isAllowed([MENU.LABEL])"
+        :option="labelMenuConfig"
+        :sub-menu-available="!!labels.length"
+      >
+        <MenuItem
+          v-for="label in labels"
+          :key="label.id"
+          :option="generateMenuLabelConfig(label, 'label')"
+          :variant="
+            conversationLabels.includes(label.title)
+              ? 'label-assigned'
+              : 'label'
+          "
+          @click.stop="
+            conversationLabels.includes(label.title)
+              ? $emit('removeLabel', label)
+              : $emit('assignLabel', label)
+          "
+        />
+      </MenuItemWithSubmenu>
+      <MenuItemWithSubmenu
+        v-if="isAllowed([MENU.AGENT])"
+        :option="agentMenuConfig"
+        :sub-menu-available="!!assignableAgents.length"
+      >
+        <AgentLoadingPlaceholder v-if="assignableAgentsUiFlags.isFetching" />
+        <template v-else>
+          <MenuItem
+            v-for="agent in assignableAgents"
+            :key="agent.id"
+            :option="generateMenuLabelConfig(agent, 'agent')"
+            variant="agent"
+            @click.stop="$emit('assignAgent', agent)"
+          />
+        </template>
+      </MenuItemWithSubmenu>
+      <MenuItemWithSubmenu
+        v-if="isAllowed([MENU.TEAM])"
+        :option="teamMenuConfig"
+        :sub-menu-available="!!teams.length"
+      >
+        <MenuItem
+          v-for="team in teams"
+          :key="team.id"
+          :option="generateMenuLabelConfig(team, 'team')"
+          @click.stop="$emit('assignTeam', team)"
+        />
+      </MenuItemWithSubmenu>
+      <hr class="m-1 rounded border-b border-n-weak dark:border-n-weak" />
+    </template>
+    <template v-if="isAllowed([MENU.OPEN_NEW_TAB, MENU.COPY_LINK])">
+      <MenuItem
+        v-if="isAllowed([MENU.OPEN_NEW_TAB])"
+        :option="openInNewTabOption"
+        variant="icon"
+        @click.stop="openInNewTab"
+      />
+      <MenuItem
+        v-if="isAllowed([MENU.COPY_LINK])"
+        :option="copyLinkOption"
+        variant="icon"
+        @click.stop="copyConversationLink"
+      />
+    </template>
+    <template v-if="isAdmin && isAllowed([MENU.DELETE])">
+      <hr class="m-1 rounded border-b border-n-weak dark:border-n-weak" />
+      <MenuItem
+        :option="deleteOption"
+        variant="icon"
+        @click.stop="deleteConversation"
+      />
+    </template>
+>>>>>>> upstream/develop
   </div>
 </template>

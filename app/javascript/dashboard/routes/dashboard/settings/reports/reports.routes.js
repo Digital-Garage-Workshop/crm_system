@@ -7,10 +7,18 @@ import Index from './Index.vue';
 import AgentReportsIndex from './AgentReportsIndex.vue';
 import InboxReportsIndex from './InboxReportsIndex.vue';
 import TeamReportsIndex from './TeamReportsIndex.vue';
+<<<<<<< HEAD
+=======
+import LabelReportsIndex from './LabelReportsIndex.vue';
+>>>>>>> upstream/develop
 
 import AgentReportsShow from './AgentReportsShow.vue';
 import InboxReportsShow from './InboxReportsShow.vue';
 import TeamReportsShow from './TeamReportsShow.vue';
+<<<<<<< HEAD
+=======
+import LabelReportsShow from './LabelReportsShow.vue';
+>>>>>>> upstream/develop
 
 import AgentReports from './AgentReports.vue';
 import InboxReports from './InboxReports.vue';
@@ -104,6 +112,25 @@ const revisedReportRoutes = [
     },
     component: TeamReportsShow,
   },
+<<<<<<< HEAD
+=======
+  {
+    path: 'labels_overview',
+    name: 'label_reports_index',
+    meta: {
+      permissions: ['administrator', 'report_manage'],
+    },
+    component: LabelReportsIndex,
+  },
+  {
+    path: 'labels/:id',
+    name: 'label_reports_show',
+    meta: {
+      permissions: ['administrator', 'report_manage'],
+    },
+    component: LabelReportsShow,
+  },
+>>>>>>> upstream/develop
 ];
 
 export default {

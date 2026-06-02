@@ -121,7 +121,11 @@ export const actions = {
       commit(types.default.SET_INTEGRATIONS_UI_FLAG, { isCreatingHook: false });
     } catch (error) {
       commit(types.default.SET_INTEGRATIONS_UI_FLAG, { isCreatingHook: false });
+<<<<<<< HEAD
       throw new Error(error);
+=======
+      throw error;
+>>>>>>> upstream/develop
     }
   },
   deleteHook: async ({ commit }, { appId, hookId }) => {

@@ -1,6 +1,10 @@
 {
   "REGISTER": {
     "TRY_WOOT": "Konto erstellen",
+<<<<<<< HEAD
+=======
+    "GET_STARTED": "Mit Chatwoot loslegen",
+>>>>>>> upstream/develop
     "TITLE": "Registrieren",
     "TESTIMONIAL_HEADER": "Alles, was er braucht, ist ein Schritt, um vorwärtszugehen",
     "TESTIMONIAL_CONTENT": "Sie sind nur noch einen Schritt davon entfernt, Ihre Kunden zu gewinnen, zu binden und neue zu finden.",
@@ -27,11 +31,21 @@
       "LABEL": "Passwort",
       "PLACEHOLDER": "Passwort",
       "ERROR": "Das Passwort ist zu kurz",
+<<<<<<< HEAD
       "IS_INVALID_PASSWORD": "Das Passwort sollte mindestens 1 Großbuchstaben, 1 Kleinbuchstaben, 1 Ziffer und 1 Sonderzeichen enthalten"
+=======
+      "IS_INVALID_PASSWORD": "Das Passwort sollte mindestens 1 Großbuchstaben, 1 Kleinbuchstaben, 1 Ziffer und 1 Sonderzeichen enthalten",
+      "REQUIREMENTS_LENGTH": "At least 6 characters long",
+      "REQUIREMENTS_UPPERCASE": "At least one uppercase letter",
+      "REQUIREMENTS_LOWERCASE": "At least one lowercase letter",
+      "REQUIREMENTS_NUMBER": "At least one number",
+      "REQUIREMENTS_SPECIAL": "At least one special character"
+>>>>>>> upstream/develop
     },
     "CONFIRM_PASSWORD": {
       "LABEL": "Bestätige das Passwort",
       "PLACEHOLDER": "Bestätige das Passwort",
+<<<<<<< HEAD
       "ERROR": "Passwort stimmt nicht überein"
     },
     "API": {
@@ -40,5 +54,22 @@
     },
     "SUBMIT": "Konto erstellen",
     "HAVE_AN_ACCOUNT": "Haben Sie bereits ein Konto?"
+=======
+      "ERROR": "Passwörter stimmen nicht überein."
+    },
+    "API": {
+      "SUCCESS_MESSAGE": "Registration Successful",
+      "ERROR_MESSAGE": "Es konnte keine Verbindung zum Woot Server hergestellt werden. Bitte versuchen Sie es später erneut"
+    },
+    "SUBMIT": "Konto erstellen",
+    "HAVE_AN_ACCOUNT": "Haben Sie bereits ein Konto?",
+    "VERIFY_EMAIL": {
+      "TITLE": "Check your inbox",
+      "DESCRIPTION": "We sent a verification link to {email}. Click the link to verify your email and get started.",
+      "RESEND": "Verifizierungs-E-Mail erneut senden",
+      "RESEND_SUCCESS": "Verification email sent. Please check your inbox.",
+      "RESEND_ERROR": "Could not send verification email. Please try again."
+    }
+>>>>>>> upstream/develop
   }
 }

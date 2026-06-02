@@ -1,16 +1,27 @@
 parameters:
+<<<<<<< HEAD
   - $ref: '#/parameters/account_id'
   - name: id
     in: path
     type: number
     description: ID of the contact
     required: true
+=======
+  - $ref: '#/components/parameters/account_id'
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: number
+    description: ID of the contact
+>>>>>>> upstream/develop
 
 get:
   tags:
     - Contacts
   operationId: contactDetails
   summary: Show Contact
+<<<<<<< HEAD
   description: Get a contact belonging to the account using ID
   responses:
     200:
@@ -21,12 +32,37 @@ get:
       description: Contact not found
     403:
       description: Access denied
+=======
+  security:
+    - userApiKey: []
+  description: Get a contact belonging to the account using ID
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/contact_show_response'
+    '404':
+      description: Contact not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+    '403':
+      description: Access denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop
 
 put:
   tags:
     - Contacts
   operationId: contactUpdate
   summary: Update Contact
+<<<<<<< HEAD
   description: Update a contact belonging to the account using ID
   parameters:
     - name: data
@@ -43,12 +79,43 @@ put:
       description: Contact not found
     403:
       description: Access denied
+=======
+  security:
+    - userApiKey: []
+  description: Update a contact belonging to the account using ID
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/contact_update_payload'
+  responses:
+    '204':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/contact_base'
+    '404':
+      description: Contact not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+    '403':
+      description: Access denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop
 
 delete:
   tags:
     - Contacts
   operationId: contactDelete
   summary: Delete Contact
+<<<<<<< HEAD
   responses:
     200:
       description: Success
@@ -56,3 +123,23 @@ delete:
       description: Unauthorized
     404:
       description: Contact not found
+=======
+  security:
+    - userApiKey: []
+  description: Delete a contact belonging to the account using ID
+  responses:
+    '200':
+      description: Success
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+    '404':
+      description: Contact not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

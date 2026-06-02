@@ -4,7 +4,11 @@ import router from '../../../../index';
 import { useAlert } from 'dashboard/composables';
 import { useVuelidate } from '@vuelidate/core';
 
+<<<<<<< HEAD
 import Spinner from 'shared/components/Spinner.vue';
+=======
+import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
+>>>>>>> upstream/develop
 import PageHeader from '../../SettingsSubPageHeader.vue';
 import AgentSelector from '../AgentSelector.vue';
 
@@ -103,6 +107,7 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div
     class="border border-n-weak bg-n-solid-1 rounded-t-lg border-b-0 h-full w-full p-6 col-span-6 overflow-auto"
   >
@@ -120,6 +125,18 @@ export default {
       <div class="w-full">
         <div v-if="v$.selectedAgents.$error">
           <p class="error-message">
+=======
+  <div class="h-full w-full px-8 pt-8 col-span-6 overflow-auto">
+    <form class="flex flex-col gap-4 mx-0" @submit.prevent="addAgents">
+      <PageHeader
+        :header-title="headerTitle"
+        :header-content="$t('TEAMS_SETTINGS.EDIT_FLOW.AGENTS.DESC')"
+      />
+
+      <div class="w-full h-full">
+        <div v-if="v$.selectedAgents.$error">
+          <p class="error-message pb-2">
+>>>>>>> upstream/develop
             {{ $t('TEAMS_SETTINGS.ADD.AGENT_VALIDATION_ERROR') }}
           </p>
         </div>
@@ -133,7 +150,13 @@ export default {
             $t('TEAMS_SETTINGS.EDIT_FLOW.AGENTS.BUTTON_TEXT')
           "
         />
+<<<<<<< HEAD
         <Spinner v-else />
+=======
+        <div v-else class="flex items-center justify-center py-6">
+          <Spinner class="text-n-blue-11" />
+        </div>
+>>>>>>> upstream/develop
       </div>
     </form>
   </div>

@@ -9,13 +9,21 @@ import {
   verifyServiceWorkerExistence,
 } from 'dashboard/helper/pushHelper.js';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
+<<<<<<< HEAD
 import FormSwitch from 'v3/components/Form/Switch.vue';
+=======
+import ToggleSwitch from 'dashboard/components-next/switch/Switch.vue';
+>>>>>>> upstream/develop
 import { NOTIFICATION_TYPES } from './constants';
 
 export default {
   components: {
     TableHeaderCell,
+<<<<<<< HEAD
     FormSwitch,
+=======
+    ToggleSwitch,
+>>>>>>> upstream/develop
     CheckBox,
   },
   data() {
@@ -75,10 +83,41 @@ export default {
     onRegistrationSuccess() {
       this.hasEnabledPushPermissions = true;
     },
+<<<<<<< HEAD
     onRequestPermissions() {
       requestPushPermissions({
         onSuccess: this.onRegistrationSuccess,
       });
+=======
+    onRequestPermissions(value) {
+      if (value) {
+        // Enable / re-enable push notifications
+        requestPushPermissions({
+          onSuccess: this.onRegistrationSuccess,
+        });
+      } else {
+        // Disable push notifications
+        this.disablePushPermissions();
+      }
+    },
+    disablePushPermissions() {
+      verifyServiceWorkerExistence(registration =>
+        registration.pushManager
+          .getSubscription()
+          .then(subscription => {
+            if (subscription) {
+              return subscription.unsubscribe();
+            }
+            return null;
+          })
+          .finally(() => {
+            this.hasEnabledPushPermissions = false;
+          })
+          .catch(() => {
+            // error
+          })
+      );
+>>>>>>> upstream/develop
     },
     getPushSubscription() {
       verifyServiceWorkerExistence(registration =>
@@ -143,7 +182,11 @@ export default {
           :span="7"
           label="`${$t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.TYPE_TITLE')}`"
         >
+<<<<<<< HEAD
           <span class="text-sm font-normal normal-case text-ash-800">
+=======
+          <span class="text-heading-3 normal-case text-n-slate-12">
+>>>>>>> upstream/develop
             {{ $t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.TYPE_TITLE') }}
           </span>
         </TableHeaderCell>
@@ -151,7 +194,11 @@ export default {
           :span="2"
           label="`${$t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.EMAIL')}`"
         >
+<<<<<<< HEAD
           <span class="text-sm font-medium normal-case text-ash-900">
+=======
+          <span class="text-heading-3 normal-case text-n-slate-12">
+>>>>>>> upstream/develop
             {{ $t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.EMAIL') }}
           </span>
         </TableHeaderCell>
@@ -161,7 +208,11 @@ export default {
         >
           <div class="flex items-center justify-between gap-1">
             <span
+<<<<<<< HEAD
               class="text-sm font-medium normal-case text-ash-900 whitespace-nowrap"
+=======
+              class="text-heading-3 normal-case text-n-slate-12 whitespace-nowrap"
+>>>>>>> upstream/develop
             >
               {{ $t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.PUSH') }}
             </span>
@@ -178,7 +229,11 @@ export default {
           <div
             class="flex flex-row items-start gap-2 col-span-7 px-0 py-2 text-sm tracking-[0.5] rtl:text-right"
           >
+<<<<<<< HEAD
             <span class="text-sm text-ash-900">
+=======
+            <span class="text-body-main text-n-slate-12">
+>>>>>>> upstream/develop
               {{ $t(notification.label) }}
             </span>
           </div>
@@ -201,7 +256,11 @@ export default {
     </div>
     <!--  Layout for mobile devices -->
     <div class="flex flex-col gap-6 sm:hidden">
+<<<<<<< HEAD
       <span class="text-sm font-medium normal-case text-ash-900">
+=======
+      <span class="text-heading-3 text-n-slate-12">
+>>>>>>> upstream/develop
         {{ $t('PROFILE_SETTINGS.FORM.EMAIL_NOTIFICATIONS_SECTION.TITLE') }}
       </span>
       <div class="flex flex-col gap-4">
@@ -216,12 +275,22 @@ export default {
             :is-checked="checkFlagStatus('email', notification.value)"
             @update="handleEmailInput"
           />
+<<<<<<< HEAD
           <span class="text-sm text-ash-900">{{ $t(notification.label) }}</span>
+=======
+          <span class="text-body-main text-n-slate-12">{{
+            $t(notification.label)
+          }}</span>
+>>>>>>> upstream/develop
         </div>
       </div>
 
       <div class="flex items-center justify-start gap-2">
+<<<<<<< HEAD
         <span class="text-sm font-medium normal-case text-ash-900">
+=======
+        <span class="text-heading-3 text-n-slate-12">
+>>>>>>> upstream/develop
           {{ $t('PROFILE_SETTINGS.FORM.PUSH_NOTIFICATIONS_SECTION.TITLE') }}
         </span>
       </div>
@@ -238,17 +307,28 @@ export default {
             :is-checked="checkFlagStatus('push', notification.value)"
             @update="handlePushInput"
           />
+<<<<<<< HEAD
           <span class="text-sm text-ash-900">{{ $t(notification.label) }}</span>
+=======
+          <span class="text-body-main text-n-slate-12">{{
+            $t(notification.label)
+          }}</span>
+>>>>>>> upstream/develop
         </div>
       </div>
     </div>
 
     <div
+<<<<<<< HEAD
       class="flex items-center justify-between w-full gap-2 p-4 border border-solid border-ash-200 rounded-xl"
+=======
+      class="flex items-center justify-between w-full gap-2 p-4 border border-solid border-n-weak rounded-xl"
+>>>>>>> upstream/develop
     >
       <div class="flex flex-row items-center gap-2">
         <fluent-icon
           icon="alert"
+<<<<<<< HEAD
           class="flex-shrink-0 text-ash-900"
           size="18"
         />
@@ -259,6 +339,18 @@ export default {
       <FormSwitch
         :model-value="hasEnabledPushPermissions"
         @update:model-value="onRequestPermissions"
+=======
+          class="flex-shrink-0 text-n-slate-12"
+          size="18"
+        />
+        <span class="text-body-main text-n-slate-12">
+          {{ $t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.BROWSER_PERMISSION') }}
+        </span>
+      </div>
+      <ToggleSwitch
+        v-model="hasEnabledPushPermissions"
+        @change="onRequestPermissions"
+>>>>>>> upstream/develop
       />
     </div>
   </div>

@@ -4,6 +4,20 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Ara",
       "EMPTY_STATE": "Kayıt bulunamadı"
+<<<<<<< HEAD
     }
+=======
+    },
+    "CLOSE": "Kapat",
+    "BETA": "Beta",
+    "BETA_DESCRIPTION": "Bu özellik beta aşamasındadır ve geliştirdikçe değişiklik gösterebilir.",
+    "ACCEPT": "Kabul et",
+    "DISCARD": "Yoksay",
+    "PREFERRED": "Preferred"
+  },
+  "CHOICE_TOGGLE": {
+    "YES": "Evet",
+    "NO": "Hayır"
+>>>>>>> upstream/develop
   }
 }

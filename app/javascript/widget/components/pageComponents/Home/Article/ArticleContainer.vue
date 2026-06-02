@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, onMounted } from 'vue';
+=======
+import { computed, onMounted, watch } from 'vue';
+>>>>>>> upstream/develop
 import ArticleBlock from 'widget/components/pageComponents/Home/Article/ArticleBlock.vue';
 import ArticleCardSkeletonLoader from 'widget/components/pageComponents/Home/Article/SkeletonLoader.vue';
 import { useI18n } from 'vue-i18n';
@@ -7,6 +11,10 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'dashboard/composables/store';
 import { useMapGetter } from 'dashboard/composables/store.js';
 import { useDarkMode } from 'widget/composables/useDarkMode';
+<<<<<<< HEAD
+=======
+import { getMatchingLocale } from 'shared/helpers/portalHelper';
+>>>>>>> upstream/develop
 
 const store = useStore();
 const router = useRouter();
@@ -20,6 +28,7 @@ const articleUiFlags = useMapGetter('article/uiFlags');
 
 const locale = computed(() => {
   const { locale: selectedLocale } = i18n;
+<<<<<<< HEAD
   const {
     allowed_locales: allowedLocales,
     default_locale: defaultLocale = 'en',
@@ -35,6 +44,17 @@ const locale = computed(() => {
 
 const fetchArticles = () => {
   if (portal.value && !popularArticles.value.length) {
+=======
+
+  if (!portal.value || !portal.value.config) return null;
+
+  const { allowed_locales: allowedLocales } = portal.value.config;
+  return getMatchingLocale(selectedLocale.value, allowedLocales);
+});
+
+const fetchArticles = () => {
+  if (portal.value && locale.value) {
+>>>>>>> upstream/develop
     store.dispatch('article/fetch', {
       slug: portal.value.slug,
       locale: locale.value,
@@ -46,6 +66,10 @@ const openArticleInArticleViewer = link => {
   const params = new URLSearchParams({
     show_plain_layout: 'true',
     theme: prefersDarkMode.value ? 'dark' : 'light',
+<<<<<<< HEAD
+=======
+    ...(locale.value && { locale: locale.value }),
+>>>>>>> upstream/develop
   });
 
   // Combine link with query parameters
@@ -64,8 +88,22 @@ const hasArticles = computed(
   () =>
     !articleUiFlags.value.isFetching &&
     !articleUiFlags.value.isError &&
+<<<<<<< HEAD
     !!popularArticles.value.length
 );
+=======
+    !!popularArticles.value.length &&
+    !!locale.value
+);
+
+// Watch for locale changes and refetch articles
+watch(locale, (newLocale, oldLocale) => {
+  if (newLocale && newLocale !== oldLocale) {
+    fetchArticles();
+  }
+});
+
+>>>>>>> upstream/develop
 onMounted(() => fetchArticles());
 </script>
 

@@ -12,7 +12,13 @@ vi.mock('../store', () => ({
         id: null,
         accounts: [],
       },
+<<<<<<< HEAD
     },
+=======
+      'accounts/getAccount': () => ({}),
+    },
+    dispatch: vi.fn(() => Promise.resolve()),
+>>>>>>> upstream/develop
   },
 }));
 
@@ -60,14 +66,22 @@ describe('#validateAuthenticateRoutePermission', () => {
     });
 
     describe('when route is not accessible to current user', () => {
+<<<<<<< HEAD
       it('should redirect to dashboard', () => {
+=======
+      it('should redirect to dashboard', async () => {
+>>>>>>> upstream/develop
         const to = {
           name: 'general_settings_index',
           params: { accountId: 1 },
           meta: { permissions: ['administrator'] },
         };
 
+<<<<<<< HEAD
         validateAuthenticateRoutePermission(to, next);
+=======
+        await validateAuthenticateRoutePermission(to, next);
+>>>>>>> upstream/develop
 
         expect(next).toHaveBeenCalledWith('/app/accounts/1/dashboard');
       });
@@ -90,14 +104,22 @@ describe('#validateAuthenticateRoutePermission', () => {
         };
       });
 
+<<<<<<< HEAD
       it('should go to the intended route', () => {
+=======
+      it('should go to the intended route', async () => {
+>>>>>>> upstream/develop
         const to = {
           name: 'general_settings_index',
           params: { accountId: 1 },
           meta: { permissions: ['administrator'] },
         };
 
+<<<<<<< HEAD
         validateAuthenticateRoutePermission(to, next);
+=======
+        await validateAuthenticateRoutePermission(to, next);
+>>>>>>> upstream/develop
 
         expect(next).toHaveBeenCalledWith();
       });

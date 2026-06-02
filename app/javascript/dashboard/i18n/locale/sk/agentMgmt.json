@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Administrátor",
       "AGENT": "Agent"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "K tomuto účtu nie sú priradení žiadni agenti",
       "TITLE": "Spravujte agentov vo svojom tíme",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Nepodarilo sa pripojiť k serveru Woot, skúste to prosím neskôr"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Hľadať agentov...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Žiadne výsledky neboli nájdené."
     },

@@ -3,14 +3,23 @@ import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useFontSize } from 'dashboard/composables/useFontSize';
+<<<<<<< HEAD
 import { clearCookiesOnLogout } from 'dashboard/store/utils/api.js';
 import { copyTextToClipboard } from 'shared/helpers/clipboard';
 import { parseAPIErrorResponse } from 'dashboard/store/utils/api';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
+=======
+import { useBranding } from 'shared/composables/useBranding';
+import { clearCookiesOnLogout } from 'dashboard/store/utils/api.js';
+import { copyTextToClipboard } from 'shared/helpers/clipboard';
+import { parseAPIErrorResponse } from 'dashboard/store/utils/api';
+import { parseBoolean } from '@chatwoot/utils';
+>>>>>>> upstream/develop
 import UserProfilePicture from './UserProfilePicture.vue';
 import UserBasicDetails from './UserBasicDetails.vue';
 import MessageSignature from './MessageSignature.vue';
 import FontSize from './FontSize.vue';
+<<<<<<< HEAD
 import HotKeyCard from './HotKeyCard.vue';
 import ChangePassword from './ChangePassword.vue';
 import NotificationPreferences from './NotificationPreferences.vue';
@@ -18,6 +27,18 @@ import AudioNotifications from './AudioNotifications.vue';
 import FormSection from 'dashboard/components/FormSection.vue';
 import AccessToken from './AccessToken.vue';
 import Policy from 'dashboard/components/policy.vue';
+=======
+import UserLanguageSelect from './UserLanguageSelect.vue';
+import ChangePassword from './ChangePassword.vue';
+import NotificationPreferences from './NotificationPreferences.vue';
+import AudioNotifications from './AudioNotifications.vue';
+import SectionLayout from '../account/components/SectionLayout.vue';
+import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
+import AccessToken from './AccessToken.vue';
+import MfaSettingsCard from './MfaSettingsCard.vue';
+import Policy from 'dashboard/components/policy.vue';
+import RadioCard from 'dashboard/components-next/radioCard/RadioCard.vue';
+>>>>>>> upstream/develop
 import {
   ROLES,
   CONVERSATION_PERMISSIONS,
@@ -26,27 +47,51 @@ import {
 export default {
   components: {
     MessageSignature,
+<<<<<<< HEAD
     FormSection,
     FontSize,
     UserProfilePicture,
     Policy,
     UserBasicDetails,
     HotKeyCard,
+=======
+    SectionLayout,
+    FontSize,
+    UserLanguageSelect,
+    UserProfilePicture,
+    Policy,
+    UserBasicDetails,
+    RadioCard,
+>>>>>>> upstream/develop
     ChangePassword,
     NotificationPreferences,
     AudioNotifications,
     AccessToken,
+<<<<<<< HEAD
   },
   mixins: [globalConfigMixin],
   setup() {
     const { isEditorHotKeyEnabled, updateUISettings } = useUISettings();
     const { currentFontSize, updateFontSize } = useFontSize();
+=======
+    MfaSettingsCard,
+    BaseSettingsHeader,
+  },
+  setup() {
+    const { isEditorHotKeyEnabled, updateUISettings } = useUISettings();
+    const { currentFontSize, updateFontSize } = useFontSize();
+    const { replaceInstallationName } = useBranding();
+>>>>>>> upstream/develop
 
     return {
       currentFontSize,
       updateFontSize,
       isEditorHotKeyEnabled,
       updateUISettings,
+<<<<<<< HEAD
+=======
+      replaceInstallationName,
+>>>>>>> upstream/develop
     };
   },
   data() {
@@ -92,6 +137,12 @@ export default {
       currentUserId: 'getCurrentUserID',
       globalConfig: 'globalConfig/get',
     }),
+<<<<<<< HEAD
+=======
+    isMfaEnabled() {
+      return parseBoolean(window.chatwootConfig?.isMfaEnabled);
+    },
+>>>>>>> upstream/develop
   },
   mounted() {
     if (this.currentUserId) {
@@ -181,11 +232,23 @@ export default {
       await copyTextToClipboard(value);
       useAlert(this.$t('COMPONENTS.CODE.COPY_SUCCESSFUL'));
     },
+<<<<<<< HEAD
+=======
+    async resetAccessToken() {
+      const success = await this.$store.dispatch('resetAccessToken');
+      if (success) {
+        useAlert(this.$t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.RESET_SUCCESS'));
+      } else {
+        useAlert(this.$t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.RESET_ERROR'));
+      }
+    },
+>>>>>>> upstream/develop
   },
 };
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="grid py-16 px-5 font-inter mx-auto gap-16 sm:max-w-screen-md">
     <div class="flex flex-col gap-6">
       <h2 class="text-2xl font-medium text-ash-900">
@@ -219,6 +282,55 @@ export default {
       />
     </FormSection>
     <FormSection
+=======
+  <div class="grid max-w-2xl ltr:mr-auto rtl:ml-auto">
+    <BaseSettingsHeader :title="$t('PROFILE_SETTINGS.TITLE')" description="" />
+    <SectionLayout title="" description="" class="!pt-0">
+      <div class="flex flex-col gap-6">
+        <UserProfilePicture
+          :src="avatarUrl"
+          :name="name"
+          @change="updateProfilePicture"
+          @delete="deleteProfilePicture"
+        />
+        <UserBasicDetails
+          :name="name"
+          :display-name="displayName"
+          :email="email"
+          :email-enabled="!globalConfig.disableUserProfileUpdate"
+          @update-user="updateProfile"
+        />
+      </div>
+    </SectionLayout>
+    <SectionLayout
+      with-border
+      :title="$t('PROFILE_SETTINGS.FORM.INTERFACE_SECTION.TITLE')"
+      :description="
+        replaceInstallationName(
+          $t('PROFILE_SETTINGS.FORM.INTERFACE_SECTION.NOTE')
+        )
+      "
+    >
+      <div class="flex flex-col gap-6 items-start">
+        <FontSize
+          :value="currentFontSize"
+          :label="$t('PROFILE_SETTINGS.FORM.INTERFACE_SECTION.FONT_SIZE.TITLE')"
+          :description="
+            $t('PROFILE_SETTINGS.FORM.INTERFACE_SECTION.FONT_SIZE.NOTE')
+          "
+          @change="updateFontSize"
+        />
+        <UserLanguageSelect
+          :label="$t('PROFILE_SETTINGS.FORM.INTERFACE_SECTION.LANGUAGE.TITLE')"
+          :description="
+            $t('PROFILE_SETTINGS.FORM.INTERFACE_SECTION.LANGUAGE.NOTE')
+          "
+        />
+      </div>
+    </SectionLayout>
+    <SectionLayout
+      with-border
+>>>>>>> upstream/develop
       :title="$t('PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.TITLE')"
       :description="$t('PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.NOTE')"
     >
@@ -226,14 +338,21 @@ export default {
         :message-signature="messageSignature"
         @update-signature="updateSignature"
       />
+<<<<<<< HEAD
     </FormSection>
     <FormSection
+=======
+    </SectionLayout>
+    <SectionLayout
+      with-border
+>>>>>>> upstream/develop
       :title="$t('PROFILE_SETTINGS.FORM.SEND_MESSAGE.TITLE')"
       :description="$t('PROFILE_SETTINGS.FORM.SEND_MESSAGE.NOTE')"
     >
       <div
         class="flex flex-col justify-between w-full gap-5 sm:gap-4 sm:flex-row"
       >
+<<<<<<< HEAD
         <button
           v-for="hotKey in hotKeys"
           :key="hotKey.key"
@@ -259,12 +378,57 @@ export default {
     </FormSection>
     <Policy :permissions="audioNotificationPermissions">
       <FormSection
+=======
+        <RadioCard
+          v-for="hotKey in hotKeys"
+          :id="hotKey.key"
+          :key="hotKey.key"
+          :label="hotKey.title"
+          :description="hotKey.description"
+          :is-active="isEditorHotKeyEnabled(hotKey.key)"
+          class="sm:flex-1"
+          @select="toggleHotKey"
+        >
+          <img
+            :src="hotKey.lightImage"
+            :alt="`Light themed image for ${hotKey.title}`"
+            class="block object-cover w-full dark:hidden"
+          />
+          <img
+            :src="hotKey.darkImage"
+            :alt="`Dark themed image for ${hotKey.title}`"
+            class="hidden object-cover w-full dark:block"
+          />
+        </RadioCard>
+      </div>
+    </SectionLayout>
+    <SectionLayout
+      v-if="!globalConfig.disableUserProfileUpdate"
+      with-border
+      :title="$t('PROFILE_SETTINGS.FORM.PASSWORD_SECTION.TITLE')"
+      description=""
+    >
+      <ChangePassword />
+    </SectionLayout>
+    <SectionLayout
+      v-if="isMfaEnabled"
+      with-border
+      :title="$t('PROFILE_SETTINGS.FORM.SECURITY_SECTION.TITLE')"
+      :description="$t('PROFILE_SETTINGS.FORM.SECURITY_SECTION.NOTE')"
+    >
+      <MfaSettingsCard />
+    </SectionLayout>
+    <Policy :permissions="audioNotificationPermissions">
+      <SectionLayout
+        with-border
+>>>>>>> upstream/develop
         :title="$t('PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.TITLE')"
         :description="
           $t('PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.NOTE')
         "
       >
         <AudioNotifications />
+<<<<<<< HEAD
       </FormSection>
     </Policy>
     <Policy :permissions="notificationPermissions">
@@ -283,5 +447,31 @@ export default {
     >
       <AccessToken :value="currentUser.access_token" @on-copy="onCopyToken" />
     </FormSection>
+=======
+      </SectionLayout>
+    </Policy>
+    <Policy :permissions="notificationPermissions">
+      <SectionLayout
+        with-border
+        :title="$t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.TITLE')"
+        description=""
+      >
+        <NotificationPreferences />
+      </SectionLayout>
+    </Policy>
+    <SectionLayout
+      with-border
+      :title="$t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.TITLE')"
+      :description="
+        replaceInstallationName($t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.NOTE'))
+      "
+    >
+      <AccessToken
+        :value="currentUser.access_token"
+        @on-copy="onCopyToken"
+        @on-reset="resetAccessToken"
+      />
+    </SectionLayout>
+>>>>>>> upstream/develop
   </div>
 </template>

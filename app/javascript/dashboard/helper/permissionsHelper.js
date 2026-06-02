@@ -25,6 +25,7 @@ export const getUserRole = (user, accountId) => {
   return currentAccount.role || 'agent';
 };
 
+<<<<<<< HEAD
 const isPermissionsPresentInRoute = route =>
   route.meta && route.meta.permissions;
 
@@ -51,6 +52,8 @@ export const buildPermissionsFromRouter = (routes = []) =>
     return acc;
   }, {});
 
+=======
+>>>>>>> upstream/develop
 /**
  * Filters and transforms items based on user permissions.
  *

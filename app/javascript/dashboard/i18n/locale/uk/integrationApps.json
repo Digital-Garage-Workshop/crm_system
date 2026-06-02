@@ -3,6 +3,12 @@
     "FETCHING": "Отримання інтеграцій",
     "NO_HOOK_CONFIGURED": "Немає сконфігурованих інтеграцій {integrationId} в цьому обліковому записі.",
     "HEADER": "Додатки",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Увімкнено",
       "DISABLED": "Вимкнено"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Отримання інтеграційних хуків",
       "INBOX": "Вхідні",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Дії",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Видалити"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Виділити \"Вхідні\""
         },
         "SUBMIT": "Створити",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Скасувати"
       },
       "API": {

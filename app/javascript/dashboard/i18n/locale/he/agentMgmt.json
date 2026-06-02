@@ -3,17 +3,28 @@
     "HEADER": "סוכנים",
     "HEADER_BTN_TXT": "הוסף סוכן",
     "LOADING": "טוען רשימת סוכנים",
+<<<<<<< HEAD
     "DESCRIPTION": "נציג הוא חלק מצוות התמיכה שלך שיכול לראות ולהגיב להודעות של משתמשים. הרשימה למטה מציגה את כל הנציגים בחשבון שלך.",
     "LEARN_MORE": "למד עוד על תפקידי משתמשים",
     "AGENT_TYPES": {
       "ADMINISTRATOR": "אדמין",
       "AGENT": "סוכן"
     },
+=======
+    "DESCRIPTION": "סוכן הוא חבר בצוות התמיכה שלך שיכול לראות ולהגיב להודעות משתמשים. הרשימה למטה מציגה את כל הסוכנים בחשבון שלך.",
+    "LEARN_MORE": "למד על תפקידי משתמשים",
+    "AGENT_TYPES": {
+      "ADMINISTRATOR": "מנהל",
+      "AGENT": "סוכן"
+    },
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "אין סוכנים המקושרים לחשבון זה",
       "TITLE": "נהל סוכנים בצוות שלך",
       "DESC": "אתה יכול להוסיף/להסיר סוכנים לצוות שלך.",
       "NAME": "שם",
+<<<<<<< HEAD
       "EMAIL": "מייל",
       "STATUS": "מצב",
       "ACTIONS": "פעולות",
@@ -24,6 +35,18 @@
     "ADD": {
       "TITLE": "הוסף סוכן לצוות שלך",
       "DESC": "אתה יכול להוסיף אנשים אשר יוכלו לטפל בתמיכה בתיבות שלך.",
+=======
+      "EMAIL": "דוא״ל",
+      "STATUS": "מצב",
+      "ACTIONS": "פעולות",
+      "VERIFIED": "מאומת",
+      "VERIFICATION_PENDING": "ממתין לאימות",
+      "AVAILABLE_CUSTOM_ROLE": "הרשאות תפקיד מותאמות אישית זמינות"
+    },
+    "ADD": {
+      "TITLE": "הוסף סוכן לצוות שלך",
+      "DESC": "אתה יכול להוסיף אנשים שיוכלו לטפל בתמיכה בתיבות הדואר הנכנס שלך.",
+>>>>>>> upstream/develop
       "CANCEL_BUTTON_TEXT": "ביטול",
       "FORM": {
         "NAME": {
@@ -33,25 +56,42 @@
         "AGENT_TYPE": {
           "LABEL": "תפקיד",
           "PLACEHOLDER": "אנא בחר תפקיד",
+<<<<<<< HEAD
           "ERROR": "תפקיד שדה חובה"
         },
         "EMAIL": {
           "LABEL": "כתובת מייל",
           "PLACEHOLDER": "אנא הכנס כתובת מייל של הסוכן"
+=======
+          "ERROR": "תפקיד נדרש"
+        },
+        "EMAIL": {
+          "LABEL": "כתובת דוא״ל",
+          "PLACEHOLDER": "אנא הכנס כתובת דוא״ל של הסוכן"
+>>>>>>> upstream/develop
         },
         "SUBMIT": "הוסף סוכן"
       },
       "API": {
         "SUCCESS_MESSAGE": "סוכן הוסף בהצלחה",
+<<<<<<< HEAD
         "EXIST_MESSAGE": "המייל בשימוש, אנא נסה כתובת מייל אחרת",
         "ERROR_MESSAGE": "לא ניתן להתחבר לשרת Woot, נסה שוב מאוחר יותר"
+=======
+        "EXIST_MESSAGE": "כתובת הדוא״ל כבר בשימוש, אנא נסה כתובת אחרת",
+        "ERROR_MESSAGE": "לא ניתן להתחבר לשרת ווט, נסה שוב מאוחר יותר"
+>>>>>>> upstream/develop
       }
     },
     "DELETE": {
       "BUTTON_TEXT": "מחק",
       "API": {
         "SUCCESS_MESSAGE": "סוכן נמחק בהצלחה",
+<<<<<<< HEAD
         "ERROR_MESSAGE": "לא ניתן להתחבר לשרת Woot, נסה שוב מאוחר יותר"
+=======
+        "ERROR_MESSAGE": "לא ניתן להתחבר לשרת ווט, נסה שוב מאוחר יותר"
+>>>>>>> upstream/develop
       },
       "CONFIRM": {
         "TITLE": "אשר מחיקה",
@@ -70,6 +110,7 @@
         "AGENT_TYPE": {
           "LABEL": "תפקיד",
           "PLACEHOLDER": "אנא בחר תפקיד",
+<<<<<<< HEAD
           "ERROR": "תפקיד שדה חובה"
         },
         "EMAIL": {
@@ -80,6 +121,18 @@
           "LABEL": "זמינות",
           "PLACEHOLDER": "אנא בחר סטטוס זמינות",
           "ERROR": "נדרשת זמינות"
+=======
+          "ERROR": "תפקיד נדרש"
+        },
+        "EMAIL": {
+          "LABEL": "כתובת דוא״ל",
+          "PLACEHOLDER": "אנא הכנס כתובת דוא״ל של הסוכן"
+        },
+        "AGENT_AVAILABILITY": {
+          "LABEL": "זמינות",
+          "PLACEHOLDER": "אנא בחר מצב זמינות",
+          "ERROR": "זמינות נדרשת"
+>>>>>>> upstream/develop
         },
         "SUBMIT": "ערוך סוכן"
       },
@@ -87,6 +140,7 @@
       "CANCEL_BUTTON_TEXT": "ביטול",
       "API": {
         "SUCCESS_MESSAGE": "סוכן עודכן בהצלחה",
+<<<<<<< HEAD
         "ERROR_MESSAGE": "לא ניתן להתחבר לשרת Woot, נסה שוב מאוחר יותר"
       },
       "PASSWORD_RESET": {
@@ -96,12 +150,26 @@
         "ERROR_MESSAGE": "לא ניתן להתחבר לשרת Woot, נסה שוב מאוחר יותר"
       }
     },
+=======
+        "ERROR_MESSAGE": "לא ניתן להתחבר לשרת ווט, נסה שוב מאוחר יותר"
+      },
+      "PASSWORD_RESET": {
+        "ADMIN_RESET_BUTTON": "איפוס סיסמה",
+        "ADMIN_SUCCESS_MESSAGE": "דוא״ל עם הוראות איפוס סיסמה נשלח לסוכן",
+        "SUCCESS_MESSAGE": "סיסמת הסוכן אופסה בהצלחה",
+        "ERROR_MESSAGE": "לא ניתן להתחבר לשרת ווט, נסה שוב מאוחר יותר"
+      }
+    },
+    "SEARCH_PLACEHOLDER": "חפש סוכנים...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "לא נמצאו תוצאות."
     },
     "MULTI_SELECTOR": {
       "PLACEHOLDER": "אין",
       "TITLE": {
+<<<<<<< HEAD
         "AGENT": "בחר נציג",
         "TEAM": "בחר קבוצה"
       },
@@ -117,6 +185,23 @@
           "AGENT": "חפש נציגים",
           "TEAM": "חפש קבוצות",
           "INPUT": "חפש נציגים"
+=======
+        "AGENT": "בחר סוכן",
+        "TEAM": "בחר צוות"
+      },
+      "LIST": {
+        "NONE": "אין"
+      },
+      "SEARCH": {
+        "NO_RESULTS": {
+          "AGENT": "לא נמצאו סוכנים",
+          "TEAM": "לא נמצאו צוותים"
+        },
+        "PLACEHOLDER": {
+          "AGENT": "חפש סוכנים",
+          "TEAM": "חפש צוותים",
+          "INPUT": "חפש סוכנים"
+>>>>>>> upstream/develop
         }
       }
     }

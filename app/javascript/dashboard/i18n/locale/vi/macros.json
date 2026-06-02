@@ -3,9 +3,18 @@
     "HEADER": "Macros",
     "DESCRIPTION": "A macro is a set of saved actions that help customer service agents easily complete tasks. The agents can define a set of actions like tagging a conversation with a label, sending an email transcript, updating a custom attribute, etc., and they can run these actions in a single click.",
     "LEARN_MORE": "Learn more about macros",
+<<<<<<< HEAD
     "HEADER_BTN_TXT": "Add a new macro",
     "HEADER_BTN_TXT_SAVE": "Save macro",
     "LOADING": "Fetching macros",
+=======
+    "COUNT": "{n} macro | {n} macros",
+    "HEADER_BTN_TXT": "Add a new macro",
+    "HEADER_BTN_TXT_SAVE": "Save macro",
+    "LOADING": "Fetching macros",
+    "SEARCH_PLACEHOLDER": "Search macros...",
+    "NO_RESULTS": "No macros found matching your search",
+>>>>>>> upstream/develop
     "ERROR": "Something went wrong. Please try again",
     "ORDER_INFO": "Macro sẽ chạy theo thứ tự hành động của bạn. Bạn có thể sắp xếp lại chúng bằng cách kéo chúng bằng tay cầm bên cạnh mỗi nút.",
     "ADD": {
@@ -29,7 +38,12 @@
         "NAME": "Tên",
         "CREATED BY": "Tạo bởi",
         "LAST_UPDATED_BY": "Cập nhật lần cuối bởi",
+<<<<<<< HEAD
         "VISIBILITY": "Hiển thị"
+=======
+        "VISIBILITY": "Hiển thị",
+        "ACTIONS": "Hành động"
+>>>>>>> upstream/develop
       },
       "404": "Không tìm thấy macro"
     },
@@ -45,6 +59,12 @@
         "ERROR_MESSAGE": "Đã xảy ra lỗi khi xóa macro. Vui lòng thử lại sau"
       }
     },
+<<<<<<< HEAD
+=======
+    "VIEW": {
+      "TOOLTIP": "View macro"
+    },
+>>>>>>> upstream/develop
     "EDIT": {
       "TOOLTIP": "Sửa Macro",
       "API": {
@@ -62,7 +82,13 @@
         "LABEL": "Hiển thị Macro",
         "GLOBAL": {
           "LABEL": "Công khai",
+<<<<<<< HEAD
           "DESCRIPTION": "Macro này có sẵn công khai cho tất cả các tác nhân trong tài khoản này."
+=======
+          "DESCRIPTION": "Macro này có sẵn công khai cho tất cả các tác nhân trong tài khoản này.",
+          "CREATE_DISABLED_DESCRIPTION": "Only administrators can create public macros.",
+          "EDIT_DISABLED_DESCRIPTION": "Only administrators can edit public macros."
+>>>>>>> upstream/develop
         },
         "PERSONAL": {
           "LABEL": "Riêng tư",
@@ -89,6 +115,10 @@
       "ASSIGN_AGENT": "Assign an Agent",
       "ADD_LABEL": "Add a Label",
       "REMOVE_LABEL": "Remove a Label",
+<<<<<<< HEAD
+=======
+      "REMOVE_ASSIGNED_AGENT": "Remove Assigned Agent",
+>>>>>>> upstream/develop
       "REMOVE_ASSIGNED_TEAM": "Remove Assigned Team",
       "SEND_EMAIL_TRANSCRIPT": "Send an Email Transcript",
       "MUTE_CONVERSATION": "Tắt tiếng cuộc trò chuyện",
@@ -99,6 +129,16 @@
       "CHANGE_PRIORITY": "Change Priority",
       "ADD_PRIVATE_NOTE": "Add a Private Note",
       "SEND_WEBHOOK_EVENT": "Send Webhook Event"
+<<<<<<< HEAD
+=======
+    },
+    "PRIORITY_TYPES": {
+      "NONE": "Không có",
+      "LOW": "Thấp",
+      "MEDIUM": "Trung bình",
+      "HIGH": "Cao",
+      "URGENT": "Cấp bách"
+>>>>>>> upstream/develop
     }
   }
 }

@@ -76,6 +76,12 @@
       },
       "waiting_since_desc": {
         "TEXT": "Gaida atbildi: Īsākā vispirms"
+<<<<<<< HEAD
+=======
+      },
+      "priority_desc_created_at_asc": {
+        "TEXT": "Priority: Highest first, Created: Oldest first"
+>>>>>>> upstream/develop
       }
     },
     "ATTACHMENTS": {
@@ -102,6 +108,12 @@
       },
       "contact": {
         "CONTENT": "Koplietota kontaktpersona"
+<<<<<<< HEAD
+=======
+      },
+      "embed": {
+        "CONTENT": "Embedded content"
+>>>>>>> upstream/develop
       }
     },
     "CHAT_SORT_BY_FILTER": {
@@ -134,6 +146,11 @@
     "HIDE_QUOTED_TEXT": "Paslēpt Citēto Tekstu",
     "SHOW_QUOTED_TEXT": "Rādīt Citēto Tekstu",
     "MESSAGE_READ": "Lasīt",
+<<<<<<< HEAD
     "SENDING": "Sūtīšana"
+=======
+    "SENDING": "Sūtīšana",
+    "UNREAD_COUNT_OVERFLOW": "9+"
+>>>>>>> upstream/develop
   }
 }

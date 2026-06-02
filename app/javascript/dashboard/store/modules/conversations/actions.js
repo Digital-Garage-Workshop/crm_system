@@ -6,12 +6,24 @@ import { createPendingMessage } from 'dashboard/helper/commons';
 import {
   buildConversationList,
   isOnMentionsView,
+<<<<<<< HEAD
+=======
+  isOnParticipatingView,
+>>>>>>> upstream/develop
   isOnUnattendedView,
   isOnFoldersView,
 } from './helpers/actionHelpers';
 import messageReadActions from './actions/messageReadActions';
 import messageTranslateActions from './actions/messageTranslateActions';
 import * as Sentry from '@sentry/vue';
+<<<<<<< HEAD
+=======
+import {
+  handleVoiceCallCreated,
+  handleVoiceCallUpdated,
+  syncConversationCallVisibility,
+} from 'dashboard/helper/voice';
+>>>>>>> upstream/develop
 
 export const hasMessageFailedWithExternalError = pendingMessage => {
   // This helper is used to check if the message has failed with an external error.
@@ -92,7 +104,11 @@ const actions = {
         data: payload,
       });
       if (!payload.length) {
+<<<<<<< HEAD
         commit(types.SET_ALL_MESSAGES_LOADED);
+=======
+        commit(types.SET_ALL_MESSAGES_LOADED, data.conversationId);
+>>>>>>> upstream/develop
       }
     } catch (error) {
       // Handle error
@@ -187,7 +203,11 @@ const actions = {
 
   async setActiveChat({ commit, dispatch }, { data, after }) {
     commit(types.SET_CURRENT_CHAT_WINDOW, data);
+<<<<<<< HEAD
     commit(types.CLEAR_ALL_MESSAGES_LOADED);
+=======
+    commit(types.CLEAR_ALL_MESSAGES_LOADED, data.id);
+>>>>>>> upstream/develop
     if (data.dataFetched === undefined) {
       try {
         await dispatch('fetchPreviousMessages', {
@@ -195,7 +215,11 @@ const actions = {
           before: data.messages[0].id,
           conversationId: data.id,
         });
+<<<<<<< HEAD
         data.dataFetched = true;
+=======
+        commit(types.SET_CHAT_DATA_FETCHED, data.id);
+>>>>>>> upstream/develop
       } catch (error) {
         // Ignore error
       }
@@ -208,14 +232,26 @@ const actions = {
         conversationId,
         agentId,
       });
+<<<<<<< HEAD
       dispatch('setCurrentChatAssignee', response.data);
+=======
+      dispatch('setCurrentChatAssignee', {
+        conversationId,
+        assignee: response.data,
+      });
+>>>>>>> upstream/develop
     } catch (error) {
       // Handle error
     }
   },
 
+<<<<<<< HEAD
   setCurrentChatAssignee({ commit }, assignee) {
     commit(types.ASSIGN_AGENT, assignee);
+=======
+  setCurrentChatAssignee({ commit }, { conversationId, assignee }) {
+    commit(types.ASSIGN_AGENT, { conversationId, assignee });
+>>>>>>> upstream/develop
   },
 
   assignTeam: async ({ dispatch }, { conversationId, teamId }) => {
@@ -236,9 +272,27 @@ const actions = {
 
   toggleStatus: async (
     { commit },
+<<<<<<< HEAD
     { conversationId, status, snoozedUntil = null }
   ) => {
     try {
+=======
+    { conversationId, status, snoozedUntil = null, customAttributes = null }
+  ) => {
+    try {
+      // Update custom attributes first if provided
+      if (customAttributes) {
+        await ConversationApi.updateCustomAttributes({
+          conversationId,
+          customAttributes,
+        });
+        commit(types.UPDATE_CONVERSATION_CUSTOM_ATTRIBUTES, {
+          conversationId,
+          customAttributes,
+        });
+      }
+
+>>>>>>> upstream/develop
       const {
         data: {
           payload: {
@@ -299,7 +353,11 @@ const actions = {
     }
   },
 
+<<<<<<< HEAD
   addMessage({ commit }, message) {
+=======
+  addMessage({ commit, rootGetters }, message) {
+>>>>>>> upstream/develop
     commit(types.ADD_MESSAGE, message);
     if (message.message_type === MESSAGE_TYPE.INCOMING) {
       commit(types.SET_CONVERSATION_CAN_REPLY, {
@@ -308,10 +366,28 @@ const actions = {
       });
       commit(types.ADD_CONVERSATION_ATTACHMENTS, message);
     }
+<<<<<<< HEAD
   },
 
   updateMessage({ commit }, message) {
     commit(types.ADD_MESSAGE, message);
+=======
+    handleVoiceCallCreated(
+      message,
+      rootGetters?.getCurrentUserID,
+      rootGetters?.getCurrentUserAvailability
+    );
+  },
+
+  updateMessage({ commit, rootGetters }, message) {
+    commit(types.ADD_MESSAGE, message);
+    handleVoiceCallUpdated(
+      commit,
+      message,
+      rootGetters?.getCurrentUserID,
+      rootGetters?.getCurrentUserAvailability
+    );
+>>>>>>> upstream/develop
   },
 
   deleteMessage: async function deleteLabels(
@@ -327,6 +403,19 @@ const actions = {
     }
   },
 
+<<<<<<< HEAD
+=======
+  deleteConversation: async ({ commit, dispatch }, conversationId) => {
+    try {
+      await ConversationApi.delete(conversationId);
+      commit(types.DELETE_CONVERSATION, conversationId);
+      dispatch('conversationStats/get', {}, { root: true });
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+
+>>>>>>> upstream/develop
   addConversation({ commit, state, dispatch, rootState }, conversation) {
     const { currentInbox, appliedFilters } = state;
     const {
@@ -340,6 +429,10 @@ const actions = {
       !hasAppliedFilters &&
       !isOnFoldersView(rootState) &&
       !isOnMentionsView(rootState) &&
+<<<<<<< HEAD
+=======
+      !isOnParticipatingView(rootState) &&
+>>>>>>> upstream/develop
       !isOnUnattendedView(rootState) &&
       isMatchingInboxFilter
     ) {
@@ -360,18 +453,30 @@ const actions = {
     }
   },
 
+<<<<<<< HEAD
   updateConversation({ commit, dispatch }, conversation) {
     const {
       meta: { sender },
     } = conversation;
     commit(types.UPDATE_CONVERSATION, conversation);
+=======
+  updateConversation({ commit, dispatch, rootGetters }, conversation) {
+    const sender = conversation.meta?.sender;
+
+    commit(types.UPDATE_CONVERSATION, conversation);
+    syncConversationCallVisibility(conversation, rootGetters?.getCurrentUserID);
+>>>>>>> upstream/develop
 
     dispatch('conversationLabels/setConversationLabel', {
       id: conversation.id,
       data: conversation.labels,
     });
 
+<<<<<<< HEAD
     dispatch('contacts/setContact', sender);
+=======
+    if (sender) dispatch('contacts/setContact', sender);
+>>>>>>> upstream/develop
   },
 
   updateConversationLastActivity(
@@ -426,11 +531,15 @@ const actions = {
   },
 
   sendEmailTranscript: async (_, { conversationId, email }) => {
+<<<<<<< HEAD
     try {
       await ConversationApi.sendEmailTranscript({ conversationId, email });
     } catch (error) {
       throw new Error(error);
     }
+=======
+    await ConversationApi.sendEmailTranscript({ conversationId, email });
+>>>>>>> upstream/develop
   },
 
   updateCustomAttributes: async (
@@ -443,7 +552,14 @@ const actions = {
         customAttributes,
       });
       const { custom_attributes } = response.data;
+<<<<<<< HEAD
       commit(types.UPDATE_CONVERSATION_CUSTOM_ATTRIBUTES, custom_attributes);
+=======
+      commit(types.UPDATE_CONVERSATION_CUSTOM_ATTRIBUTES, {
+        conversationId,
+        customAttributes: custom_attributes,
+      });
+>>>>>>> upstream/develop
     } catch (error) {
       // Handle error
     }

@@ -71,3 +71,8 @@ class Contacts::ContactableInboxesService
     end
   end
 end
+<<<<<<< HEAD
+=======
+
+Contacts::ContactableInboxesService.prepend_mod_with('Contacts::ContactableInboxesService')
+>>>>>>> upstream/develop

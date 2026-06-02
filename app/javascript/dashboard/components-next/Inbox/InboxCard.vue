@@ -49,8 +49,13 @@ const isUnread = computed(() => !props.inboxItem?.readAt);
 const inbox = computed(() => props.stateInbox);
 
 const inboxIcon = computed(() => {
+<<<<<<< HEAD
   const { phoneNumber, channelType } = inbox.value;
   return getInboxIconByType(channelType, phoneNumber);
+=======
+  const { channelType, medium } = inbox.value;
+  return getInboxIconByType(channelType, medium);
+>>>>>>> upstream/develop
 });
 
 const hasSlaThreshold = computed(() => {
@@ -63,11 +68,20 @@ const lastActivityAt = computed(() => {
 });
 
 const menuItems = computed(() => [
+<<<<<<< HEAD
   { key: 'delete', label: t('INBOX.MENU_ITEM.DELETE') },
   {
     key: isUnread.value ? 'mark_as_read' : 'mark_as_unread',
     label: t(`INBOX.MENU_ITEM.MARK_AS_${isUnread.value ? 'READ' : 'UNREAD'}`),
   },
+=======
+  {
+    key: isUnread.value ? 'mark_as_read' : 'mark_as_unread',
+    icon: isUnread.value ? 'mail' : 'mail-unread',
+    label: t(`INBOX.MENU_ITEM.MARK_AS_${isUnread.value ? 'READ' : 'UNREAD'}`),
+  },
+  { key: 'delete', icon: 'delete', label: t('INBOX.MENU_ITEM.DELETE') },
+>>>>>>> upstream/develop
 ]);
 
 const messageClasses = computed(() => ({
@@ -99,7 +113,11 @@ const formattedMessage = computed(() => {
 
 const notificationDetails = computed(() => {
   const type = props.inboxItem?.notificationType?.toUpperCase() || '';
+<<<<<<< HEAD
   const [icon = '', color = 'text-n-blue-text'] =
+=======
+  const [icon = '', color = 'text-n-blue-11'] =
+>>>>>>> upstream/develop
     NOTIFICATION_TYPES_MAPPING[type] || [];
   return { text: type ? t(`INBOX.TYPES_NEXT.${type}`) : '', icon, color };
 });
@@ -153,7 +171,11 @@ onBeforeMount(contextMenuActions.close);
 <template>
   <div
     role="button"
+<<<<<<< HEAD
     class="flex flex-col w-full gap-2 p-3 transition-all duration-300 ease-in-out cursor-pointer"
+=======
+    class="flex flex-col w-full gap-1 p-3 transition-all duration-300 ease-in-out cursor-pointer"
+>>>>>>> upstream/develop
     @contextmenu="contextMenuActions.open($event)"
     @click="emit('click')"
   >
@@ -180,11 +202,19 @@ onBeforeMount(contextMenuActions.close);
                 : 'i-lucide-alarm-clock-off'
             "
             class="flex-shrink-0 size-4"
+<<<<<<< HEAD
             :class="!isUnread ? 'text-n-slate-11' : 'text-n-blue-text'"
           />
           <span
             class="text-xs font-medium truncate"
             :class="!isUnread ? 'text-n-slate-11' : 'text-n-blue-text'"
+=======
+            :class="!isUnread ? 'text-n-slate-11' : 'text-n-blue-11'"
+          />
+          <span
+            class="text-xs font-medium truncate"
+            :class="!isUnread ? 'text-n-slate-11' : 'text-n-blue-11'"
+>>>>>>> upstream/develop
           >
             {{ snoozedText }}
           </span>
@@ -232,7 +262,11 @@ onBeforeMount(contextMenuActions.close);
             class="flex-shrink-0 text-n-slate-11 size-2.5"
           />
         </div>
+<<<<<<< HEAD
         <span class="text-sm text-n-slate-10">
+=======
+        <span class="text-xs text-n-slate-10">
+>>>>>>> upstream/develop
           {{ lastActivityAt }}
         </span>
       </div>

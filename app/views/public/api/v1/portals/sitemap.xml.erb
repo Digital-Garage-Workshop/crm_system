@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <sitemapindex>
   <% @portal.articles.where(status: :published).each do |article| %>
     <sitemap>
@@ -7,3 +8,13 @@
     </sitemap>
   <% end %>
 </sitemapindex>
+=======
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <% @portal.articles.where(status: :published).each do |article| %>
+    <url>
+      <loc><%= @help_center_url %><%= generate_article_link(@portal.slug, article.slug, false, false) %></loc>
+      <lastmod><%= article.updated_at.to_date.iso8601 %></lastmod>
+    </url>
+  <% end %>
+</urlset>
+>>>>>>> upstream/develop

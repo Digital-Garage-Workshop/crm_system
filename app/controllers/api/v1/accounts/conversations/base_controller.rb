@@ -5,6 +5,10 @@ class Api::V1::Accounts::Conversations::BaseController < Api::V1::Accounts::Base
 
   def conversation
     @conversation ||= Current.account.conversations.find_by!(display_id: params[:conversation_id])
+<<<<<<< HEAD
     authorize @conversation.inbox, :show?
+=======
+    authorize @conversation, :show?
+>>>>>>> upstream/develop
   end
 end

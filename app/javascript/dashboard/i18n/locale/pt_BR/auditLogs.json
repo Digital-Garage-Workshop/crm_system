@@ -18,7 +18,11 @@
       }
     },
     "API": {
+<<<<<<< HEAD
       "SUCCESS_MESSAGE": "AuditLogs recuperados com sucesso",
+=======
+      "SUCCESS_MESSAGE": "Logs de auditoria recuperados com sucesso",
+>>>>>>> upstream/develop
       "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
     },
     "DEFAULT_USER": "Sistema",
@@ -41,7 +45,11 @@
       "DELETE": "{agentName} excluiu uma caixa de entrada (#{id})"
     },
     "WEBHOOK": {
+<<<<<<< HEAD
       "ADD": "{agentName} criou um webhook (##{id})",
+=======
+      "ADD": "{agentName} criou um webhook (#{id})",
+>>>>>>> upstream/develop
       "EDIT": "{agentName} atualizou um webhook (#{id})",
       "DELETE": "{agentName} excluiu um webhook (#{id})"
     },
@@ -69,6 +77,12 @@
     },
     "ACCOUNT": {
       "EDIT": "O {agentName} atualizou a configuração da conta (#{id})"
+<<<<<<< HEAD
+=======
+    },
+    "CONVERSATION": {
+      "DELETE": "{agentName} excluiu a conversa #{id}"
+>>>>>>> upstream/develop
     }
   }
 }

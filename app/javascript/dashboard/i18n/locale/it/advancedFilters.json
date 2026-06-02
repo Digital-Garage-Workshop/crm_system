@@ -1,6 +1,7 @@
 {
   "FILTER": {
     "TITLE": "Filtra conversazioni",
+<<<<<<< HEAD
     "SUBTITLE": "Add your filters below and hit 'Apply filters' to cut through the chat clutter.",
     "EDIT_CUSTOM_FILTER": "Edit Folder",
     "CUSTOM_VIEWS_SUBTITLE": "Add or remove filters and update your folder.",
@@ -13,12 +14,30 @@
     "FOLDER_LABEL": "Folder Name",
     "FOLDER_QUERY_LABEL": "Folder Query",
     "EMPTY_VALUE_ERROR": "Il valore è obbligatorio.",
+=======
+    "SUBTITLE": "Aggiungi i filtri qui sotto e clicca su “Applica filtri” per trovare subito le conversazioni che ti interessano.",
+    "EDIT_CUSTOM_FILTER": "Modifica Cartella",
+    "CUSTOM_VIEWS_SUBTITLE": "Aggiungi o rimuovi filtri e aggiorna la cartella.",
+    "ADD_NEW_FILTER": "Aggiungi filtro",
+    "FILTER_DELETE_ERROR": "Impossibile salvare: aggiungi almeno un filtro per continuare.",
+    "SUBMIT_BUTTON_LABEL": "Applica filtri",
+    "UPDATE_BUTTON_LABEL": "Aggiorna cartella",
+    "CANCEL_BUTTON_LABEL": "Annulla",
+    "CLEAR_BUTTON_LABEL": "Rimuovi filtri",
+    "FOLDER_LABEL": "Nome Cartella",
+    "FOLDER_QUERY_LABEL": "Query Cartella",
+    "EMPTY_VALUE_ERROR": "Valore richiesto.",
+>>>>>>> upstream/develop
     "TOOLTIP_LABEL": "Filtra conversazioni",
     "QUERY_DROPDOWN_LABELS": {
       "AND": "E",
       "OR": "O"
     },
+<<<<<<< HEAD
     "INPUT_PLACEHOLDER": "Enter value",
+=======
+    "INPUT_PLACEHOLDER": "Inserisci valore",
+>>>>>>> upstream/develop
     "OPERATOR_LABELS": {
       "equal_to": "Uguale a",
       "not_equal_to": "Non uguale a",
@@ -46,6 +65,7 @@
     },
     "ATTRIBUTES": {
       "STATUS": "Stato",
+<<<<<<< HEAD
       "ASSIGNEE_NAME": "Assignee name",
       "INBOX_NAME": "Nome casella",
       "TEAM_NAME": "Nome del team",
@@ -55,6 +75,17 @@
       "BROWSER_LANGUAGE": "Browser language",
       "PRIORITY": "Priorità",
       "COUNTRY_NAME": "Country name",
+=======
+      "ASSIGNEE_NAME": "Nome assegnatario",
+      "INBOX_NAME": "Nome Inbox",
+      "TEAM_NAME": "Nome team",
+      "CONVERSATION_IDENTIFIER": "Identificativo conversazione",
+      "CAMPAIGN_NAME": "Nome campagna",
+      "LABELS": "Etichette",
+      "BROWSER_LANGUAGE": "Lingua del browser",
+      "PRIORITY": "Priorità",
+      "COUNTRY_NAME": "Nome del Paese",
+>>>>>>> upstream/develop
       "REFERER_LINK": "Link referente",
       "CUSTOM_ATTRIBUTE_LIST": "Elenco",
       "CUSTOM_ATTRIBUTE_TEXT": "Testo",
@@ -62,6 +93,7 @@
       "CUSTOM_ATTRIBUTE_LINK": "Link",
       "CUSTOM_ATTRIBUTE_CHECKBOX": "Checkbox",
       "CREATED_AT": "Creato il",
+<<<<<<< HEAD
       "LAST_ACTIVITY": "Last activity"
     },
     "ERRORS": {
@@ -74,13 +106,32 @@
       "STANDARD_FILTERS": "Standard filters",
       "ADDITIONAL_FILTERS": "Additional filters",
       "CUSTOM_ATTRIBUTES": "Custom attributes"
+=======
+      "LAST_ACTIVITY": "Ultima attività"
+    },
+    "ERRORS": {
+      "VALUE_REQUIRED": "Valore richiesto",
+      "ATTRIBUTE_KEY_REQUIRED": "Chiave attributo richiesta",
+      "FILTER_OPERATOR_REQUIRED": "Operatore di filtro richiesto",
+      "VALUE_MUST_BE_BETWEEN_1_AND_998": "Il valore deve essere compreso tra 1 e 998"
+    },
+    "GROUPS": {
+      "STANDARD_FILTERS": "Filtri standard",
+      "ADDITIONAL_FILTERS": "Filtri aggiuntivi",
+      "CUSTOM_ATTRIBUTES": "Attributi personalizzati"
+>>>>>>> upstream/develop
     },
     "CUSTOM_VIEWS": {
       "ADD": {
         "TITLE": "Vuoi salvare questo filtro?",
         "LABEL": "Dai un nome a questo filtro",
+<<<<<<< HEAD
         "PLACEHOLDER": "Name your filter to refer it later.",
         "ERROR_MESSAGE": "Il nome è obbligatorio.",
+=======
+        "PLACEHOLDER": "Dai un nome al filtro per poterlo richiamare in seguito.",
+        "ERROR_MESSAGE": "Nome richiesto.",
+>>>>>>> upstream/develop
         "SAVE_BUTTON": "Salva filtro",
         "CANCEL_BUTTON": "Annulla",
         "API_FOLDERS": {
@@ -93,7 +144,11 @@
         }
       },
       "EDIT": {
+<<<<<<< HEAD
         "EDIT_BUTTON": "Edit folder"
+=======
+        "EDIT_BUTTON": "Modifica cartella"
+>>>>>>> upstream/develop
       },
       "DELETE": {
         "DELETE_BUTTON": "Elimina filtro",
@@ -101,7 +156,11 @@
           "CONFIRM": {
             "TITLE": "Conferma eliminazione",
             "MESSAGE": "Sei sicuro di voler eliminare il filtro ",
+<<<<<<< HEAD
             "YES": "Yes, delete",
+=======
+            "YES": "Sì, elimina",
+>>>>>>> upstream/develop
             "NO": "No, mantienilo"
           }
         },

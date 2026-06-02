@@ -1,6 +1,10 @@
 {
   "REGISTER": {
     "TRY_WOOT": "アカウントを作成",
+<<<<<<< HEAD
+=======
+    "GET_STARTED": "Get started with Chatwoot",
+>>>>>>> upstream/develop
     "TITLE": "登録",
     "TESTIMONIAL_HEADER": "前進するために必要なのはたった一歩",
     "TESTIMONIAL_CONTENT": "顧客と関わり、維持し、新たな顧客を見つけるまであと一歩です。",
@@ -27,7 +31,16 @@
       "LABEL": "パスワード",
       "PLACEHOLDER": "パスワード",
       "ERROR": "パスワードが短すぎます",
+<<<<<<< HEAD
       "IS_INVALID_PASSWORD": "パスワードは少なくとも1つの大文字、1つの小文字、1つの数字、1つの特殊文字を含む必要があります"
+=======
+      "IS_INVALID_PASSWORD": "パスワードは少なくとも1つの大文字、1つの小文字、1つの数字、1つの特殊文字を含む必要があります",
+      "REQUIREMENTS_LENGTH": "At least 6 characters long",
+      "REQUIREMENTS_UPPERCASE": "At least one uppercase letter",
+      "REQUIREMENTS_LOWERCASE": "At least one lowercase letter",
+      "REQUIREMENTS_NUMBER": "At least one number",
+      "REQUIREMENTS_SPECIAL": "At least one special character"
+>>>>>>> upstream/develop
     },
     "CONFIRM_PASSWORD": {
       "LABEL": "パスワードの確認",
@@ -35,10 +48,25 @@
       "ERROR": "パスワードが一致しません"
     },
     "API": {
+<<<<<<< HEAD
       "SUCCESS_MESSAGE": "登録に成功しました",
       "ERROR_MESSAGE": "Wootサーバーに接続できませんでした。後でもう一度お試しください。"
     },
     "SUBMIT": "アカウントを作成",
     "HAVE_AN_ACCOUNT": "すでにアカウントをお持ちですか？"
+=======
+      "SUCCESS_MESSAGE": "Registration Successful",
+      "ERROR_MESSAGE": "Wootサーバーに接続できませんでした。後でもう一度お試しください。"
+    },
+    "SUBMIT": "アカウントを作成",
+    "HAVE_AN_ACCOUNT": "すでにアカウントをお持ちですか？",
+    "VERIFY_EMAIL": {
+      "TITLE": "Check your inbox",
+      "DESCRIPTION": "We sent a verification link to {email}. Click the link to verify your email and get started.",
+      "RESEND": "認証メールを再送",
+      "RESEND_SUCCESS": "Verification email sent. Please check your inbox.",
+      "RESEND_ERROR": "Could not send verification email. Please try again."
+    }
+>>>>>>> upstream/develop
   }
 }

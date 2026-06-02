@@ -1,6 +1,12 @@
 in: query
 name: page
+<<<<<<< HEAD
 type: integer
 default: 1
+=======
+schema:
+  type: integer
+  default: 1
+>>>>>>> upstream/develop
 required: false
 description: The page parameter

@@ -30,6 +30,7 @@ export default {
   >
     <div class="grid grid-cols-1 lg:grid-cols-8 gap-6">
       <div class="col-span-2">
+<<<<<<< HEAD
         <p
           v-if="title"
           class="text-base text-woot-500 dark:text-woot-500 mb-0 font-medium"
@@ -39,6 +40,12 @@ export default {
         <p
           class="text-sm mb-2 text-slate-700 dark:text-slate-300 leading-5 tracking-normal mt-2"
         >
+=======
+        <p v-if="title" class="text-base text-n-brand mb-0 font-medium">
+          {{ title }}
+        </p>
+        <p class="text-sm mb-2 text-n-slate-11 leading-5 tracking-normal mt-2">
+>>>>>>> upstream/develop
           <slot v-if="subTitle" name="subTitle">
             {{ subTitle }}
           </slot>

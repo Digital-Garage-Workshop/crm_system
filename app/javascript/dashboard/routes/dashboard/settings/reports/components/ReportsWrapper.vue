@@ -1,12 +1,18 @@
 <template>
+<<<<<<< HEAD
   <div
     class="reports--wrapper overflow-auto bg-n-background w-full px-8 xl:px-0"
   >
     <div class="max-w-[60rem] mx-auto pb-12">
+=======
+  <div class="overflow-auto bg-n-surface-1 w-full px-6">
+    <div class="max-w-5xl mx-auto pb-12">
+>>>>>>> upstream/develop
       <router-view />
     </div>
   </div>
 </template>
+<<<<<<< HEAD
 
 <style scoped lang="scss">
 .reports--wrapper {
@@ -83,3 +89,5 @@
   }
 }
 </style>
+=======
+>>>>>>> upstream/develop

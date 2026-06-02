@@ -7,6 +7,13 @@ export default {
       type: Number,
       default: null,
     },
+<<<<<<< HEAD
+=======
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
+>>>>>>> upstream/develop
   },
   emits: ['selectRating'],
   data() {
@@ -19,12 +26,21 @@ export default {
     buttonClass(rating) {
       return [
         { selected: rating.value === this.selectedRating },
+<<<<<<< HEAD
         { disabled: !!this.selectedRating },
         { hover: !!this.selectedRating },
+=======
+        { disabled: this.isDisabled },
+        { hover: this.isDisabled },
+>>>>>>> upstream/develop
         'emoji-button shadow-none text-3xl lg:text-4xl outline-none mr-8',
       ];
     },
     onClick(rating) {
+<<<<<<< HEAD
+=======
+      if (this.isDisabled) return;
+>>>>>>> upstream/develop
       this.$emit('selectRating', rating.value);
     },
   },

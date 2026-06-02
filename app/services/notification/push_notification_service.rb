@@ -68,6 +68,7 @@ class Notification::PushNotificationService
 
     WebPush.payload_send(**browser_push_payload(subscription))
     Rails.logger.info("Browser push sent to #{user.email} with title #{push_message[:title]}")
+<<<<<<< HEAD
   rescue WebPush::ExpiredSubscription, WebPush::InvalidSubscription, WebPush::Unauthorized => e
     Rails.logger.info "WebPush subscription expired: #{e.message}"
     subscription.destroy!
@@ -76,6 +77,25 @@ class Notification::PushNotificationService
   rescue StandardError => e
     ChatwootExceptionTracker.new(e, account: notification.account).capture_exception
     true
+=======
+  rescue StandardError => e
+    handle_browser_push_error(e, subscription)
+  end
+
+  def handle_browser_push_error(error, subscription)
+    case error
+    when WebPush::ExpiredSubscription, WebPush::InvalidSubscription, WebPush::Unauthorized
+      Rails.logger.info "WebPush subscription expired: #{error.message}"
+      subscription.destroy!
+    when WebPush::TooManyRequests
+      Rails.logger.warn "WebPush rate limited for #{user.email} on account #{notification.account.id}: #{error.message}"
+    when Errno::ECONNRESET, Net::OpenTimeout, Net::ReadTimeout, Socket::ResolutionError
+      Rails.logger.error "WebPush operation error: #{error.message}"
+    else
+      ChatwootExceptionTracker.new(error, account: notification.account).capture_exception
+      true
+    end
+>>>>>>> upstream/develop
   end
 
   def send_fcm_push(subscription)

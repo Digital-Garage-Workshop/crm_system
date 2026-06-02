@@ -10,7 +10,11 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
     end
   end
 
+<<<<<<< HEAD
   def send_template(phone_number, template_info)
+=======
+  def send_template(phone_number, template_info, message)
+>>>>>>> upstream/develop
     response = HTTParty.post(
       "#{api_base_path}/messages",
       headers: api_headers,
@@ -21,7 +25,11 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
       }.to_json
     )
 
+<<<<<<< HEAD
     process_response(response)
+=======
+    process_response(response, message)
+>>>>>>> upstream/develop
   end
 
   def sync_templates
@@ -63,12 +71,20 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
       headers: api_headers,
       body: {
         to: phone_number,
+<<<<<<< HEAD
         text: { body: message.content },
+=======
+        text: { body: message.outgoing_content },
+>>>>>>> upstream/develop
         type: 'text'
       }.to_json
     )
 
+<<<<<<< HEAD
     process_response(response)
+=======
+    process_response(response, message)
+>>>>>>> upstream/develop
   end
 
   def send_attachment_message(phone_number, message)
@@ -77,7 +93,11 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
     type_content = {
       'link': attachment.download_url
     }
+<<<<<<< HEAD
     type_content['caption'] = message.content unless %w[audio sticker].include?(type)
+=======
+    type_content['caption'] = message.outgoing_content unless %w[audio sticker].include?(type)
+>>>>>>> upstream/develop
     type_content['filename'] = attachment.file.filename if type == 'document'
 
     response = HTTParty.post(
@@ -90,7 +110,11 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
       }.to_json
     )
 
+<<<<<<< HEAD
     process_response(response)
+=======
+    process_response(response, message)
+>>>>>>> upstream/develop
   end
 
   def error_message(response)
@@ -106,10 +130,14 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
         policy: 'deterministic',
         code: template_info[:lang_code]
       },
+<<<<<<< HEAD
       components: [{
         type: 'body',
         parameters: template_info[:parameters]
       }]
+=======
+      components: template_info[:parameters]
+>>>>>>> upstream/develop
     }
   end
 
@@ -126,6 +154,10 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
       }.to_json
     )
 
+<<<<<<< HEAD
     process_response(response)
+=======
+    process_response(response, message)
+>>>>>>> upstream/develop
   end
 end

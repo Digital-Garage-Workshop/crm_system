@@ -6,6 +6,10 @@ import { useI18n } from 'vue-i18n';
 import { useStore, useStoreGetters } from 'dashboard/composables/store';
 import { useEmitter } from 'dashboard/composables/emitter';
 import { useKeyboardEvents } from 'dashboard/composables/useKeyboardEvents';
+<<<<<<< HEAD
+=======
+import { useConversationRequiredAttributes } from 'dashboard/composables/useConversationRequiredAttributes';
+>>>>>>> upstream/develop
 
 import WootDropdownItem from 'shared/components/ui/dropdown/DropdownItem.vue';
 import WootDropdownMenu from 'shared/components/ui/dropdown/DropdownMenu.vue';
@@ -15,14 +19,28 @@ import {
   CMD_RESOLVE_CONVERSATION,
 } from 'dashboard/helper/commandbar/events';
 
+<<<<<<< HEAD
 import Button from 'dashboard/components-next/button/Button.vue';
+=======
+import ButtonGroup from 'dashboard/components-next/buttonGroup/ButtonGroup.vue';
+import Button from 'dashboard/components-next/button/Button.vue';
+import ConversationResolveAttributesModal from 'dashboard/components-next/ConversationWorkflow/ConversationResolveAttributesModal.vue';
+>>>>>>> upstream/develop
 
 const store = useStore();
 const getters = useStoreGetters();
 const { t } = useI18n();
+<<<<<<< HEAD
 
 const arrowDownButtonRef = ref(null);
 const isLoading = ref(false);
+=======
+const { checkMissingAttributes } = useConversationRequiredAttributes();
+
+const arrowDownButtonRef = ref(null);
+const isLoading = ref(false);
+const resolveAttributesModalRef = ref(null);
+>>>>>>> upstream/develop
 
 const [showActionsDropdown, toggleDropdown] = useToggle();
 const closeDropdown = () => toggleDropdown(false);
@@ -76,6 +94,7 @@ const openSnoozeModal = () => {
   ninja.open({ parent: 'snooze_conversation' });
 };
 
+<<<<<<< HEAD
 const toggleStatus = (status, snoozedUntil) => {
   closeDropdown();
   isLoading.value = true;
@@ -89,6 +108,38 @@ const toggleStatus = (status, snoozedUntil) => {
       useAlert(t('CONVERSATION.CHANGE_STATUS'));
       isLoading.value = false;
     });
+=======
+const toggleStatus = (status, snoozedUntil, customAttributes = null) => {
+  closeDropdown();
+  isLoading.value = true;
+
+  const payload = {
+    conversationId: currentChat.value.id,
+    status,
+    snoozedUntil,
+  };
+
+  if (customAttributes) {
+    payload.customAttributes = customAttributes;
+  }
+
+  store.dispatch('toggleStatus', payload).then(() => {
+    useAlert(t('CONVERSATION.CHANGE_STATUS'));
+    isLoading.value = false;
+  });
+};
+
+const handleResolveWithAttributes = ({ attributes, context }) => {
+  if (context) {
+    const currentCustomAttributes = currentChat.value.custom_attributes || {};
+    const mergedAttributes = { ...currentCustomAttributes, ...attributes };
+    toggleStatus(
+      wootConstants.STATUS_TYPE.RESOLVED,
+      context.snoozedUntil,
+      mergedAttributes
+    );
+  }
+>>>>>>> upstream/develop
 };
 
 const onCmdOpenConversation = () => {
@@ -96,7 +147,28 @@ const onCmdOpenConversation = () => {
 };
 
 const onCmdResolveConversation = () => {
+<<<<<<< HEAD
   toggleStatus(wootConstants.STATUS_TYPE.RESOLVED);
+=======
+  const currentCustomAttributes = currentChat.value.custom_attributes || {};
+  const { hasMissing, missing } = checkMissingAttributes(
+    currentCustomAttributes
+  );
+
+  if (hasMissing) {
+    const conversationContext = {
+      id: currentChat.value.id,
+      snoozedUntil: null,
+    };
+    resolveAttributesModalRef.value?.open(
+      missing,
+      currentCustomAttributes,
+      conversationContext
+    );
+  } else {
+    toggleStatus(wootConstants.STATUS_TYPE.RESOLVED);
+  }
+>>>>>>> upstream/develop
 };
 
 const keyboardEvents = {
@@ -106,13 +178,21 @@ const keyboardEvents = {
   },
   'Alt+KeyE': {
     action: async () => {
+<<<<<<< HEAD
       await toggleStatus(wootConstants.STATUS_TYPE.RESOLVED);
+=======
+      onCmdResolveConversation();
+>>>>>>> upstream/develop
     },
   },
   '$mod+Alt+KeyE': {
     action: async event => {
       const { all, activeIndex, lastIndex } = getConversationParams();
+<<<<<<< HEAD
       await toggleStatus(wootConstants.STATUS_TYPE.RESOLVED);
+=======
+      onCmdResolveConversation();
+>>>>>>> upstream/develop
 
       if (activeIndex < lastIndex) {
         all[activeIndex + 1].click();
@@ -132,9 +212,15 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="relative flex items-center justify-end resolve-actions">
     <div
       class="rounded-lg shadow outline-1 outline"
+=======
+  <div class="flex relative justify-end items-center resolve-actions">
+    <ButtonGroup
+      class="flex-shrink-0 rounded-lg shadow outline-1 outline"
+>>>>>>> upstream/develop
       :class="!showOpenButton ? 'outline-n-container' : 'outline-transparent'"
     >
       <Button
@@ -142,6 +228,10 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
         :label="t('CONVERSATION.HEADER.RESOLVE_ACTION')"
         size="sm"
         color="slate"
+<<<<<<< HEAD
+=======
+        no-animation
+>>>>>>> upstream/develop
         class="ltr:rounded-r-none rtl:rounded-l-none !outline-0"
         :is-loading="isLoading"
         @click="onCmdResolveConversation"
@@ -151,6 +241,10 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
         :label="t('CONVERSATION.HEADER.REOPEN_ACTION')"
         size="sm"
         color="slate"
+<<<<<<< HEAD
+=======
+        no-animation
+>>>>>>> upstream/develop
         class="ltr:rounded-r-none rtl:rounded-l-none !outline-0"
         :is-loading="isLoading"
         @click="onCmdOpenConversation"
@@ -160,6 +254,10 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
         :label="t('CONVERSATION.HEADER.OPEN_ACTION')"
         size="sm"
         color="slate"
+<<<<<<< HEAD
+=======
+        no-animation
+>>>>>>> upstream/develop
         :is-loading="isLoading"
         @click="onCmdOpenConversation"
       />
@@ -169,16 +267,28 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
         icon="i-lucide-chevron-down"
         :disabled="isLoading"
         size="sm"
+<<<<<<< HEAD
+=======
+        no-animation
+>>>>>>> upstream/develop
         class="ltr:rounded-l-none rtl:rounded-r-none !outline-0"
         color="slate"
         trailing-icon
         @click="openDropdown"
       />
+<<<<<<< HEAD
     </div>
     <div
       v-if="showActionsDropdown"
       v-on-clickaway="closeDropdown"
       class="dropdown-pane dropdown-pane--open left-auto top-full mt-0.5 ltr:right-0 rtl:left-0 max-w-[12.5rem] min-w-[9.75rem]"
+=======
+    </ButtonGroup>
+    <div
+      v-if="showActionsDropdown"
+      v-on-clickaway="closeDropdown"
+      class="border rounded-lg shadow-lg border-n-strong dark:border-n-strong box-content p-2 w-fit z-10 bg-n-alpha-3 backdrop-blur-[100px] absolute block left-auto top-full mt-0.5 start-0 xl:start-auto xl:end-0 max-w-[12.5rem] min-w-[9.75rem] [&_ul>li]:mb-0"
+>>>>>>> upstream/develop
     >
       <WootDropdownMenu class="mb-0">
         <WootDropdownItem v-if="!isPending">
@@ -207,6 +317,7 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
         </WootDropdownItem>
       </WootDropdownMenu>
     </div>
+<<<<<<< HEAD
   </div>
 </template>
 
@@ -217,3 +328,11 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
   }
 }
 </style>
+=======
+    <ConversationResolveAttributesModal
+      ref="resolveAttributesModalRef"
+      @submit="handleResolveWithAttributes"
+    />
+  </div>
+</template>
+>>>>>>> upstream/develop

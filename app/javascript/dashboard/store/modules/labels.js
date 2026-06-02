@@ -26,6 +26,12 @@ export const getters = {
       .filter(record => record.show_on_sidebar)
       .sort((a, b) => a.title.localeCompare(b.title));
   },
+<<<<<<< HEAD
+=======
+  getLabelById: _state => id => {
+    return _state.records.find(record => record.id === Number(id)) || {};
+  },
+>>>>>>> upstream/develop
 };
 
 export const actions = {

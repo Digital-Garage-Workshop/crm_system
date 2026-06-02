@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<!-- DEPRECIATED -->
+<!-- TODO: Replace this banner component with NextBanner "app/javascript/dashboard/components-next/banner/Banner.vue" -->
+>>>>>>> upstream/develop
 <script>
 import NextButton from 'dashboard/components-next/button/Button.vue';
 
@@ -118,13 +123,21 @@ export default {
 <style lang="scss" scoped>
 .banner {
   &.primary {
+<<<<<<< HEAD
     @apply bg-woot-500 dark:bg-woot-500;
+=======
+    @apply bg-n-brand;
+>>>>>>> upstream/develop
   }
 
   &.secondary {
     @apply bg-n-slate-3 dark:bg-n-solid-3 text-n-slate-12;
     a {
+<<<<<<< HEAD
       @apply text-slate-800 dark:text-slate-800;
+=======
+      @apply text-n-slate-12;
+>>>>>>> upstream/develop
     }
   }
 
@@ -137,18 +150,32 @@ export default {
   }
 
   &.warning {
+<<<<<<< HEAD
     @apply bg-yellow-500 dark:bg-yellow-500 text-yellow-500 dark:text-yellow-500;
     a {
       @apply text-yellow-500 dark:text-yellow-500;
+=======
+    @apply bg-n-amber-5 text-n-amber-12;
+    a {
+      @apply text-n-amber-12;
+>>>>>>> upstream/develop
     }
   }
 
   &.gray {
+<<<<<<< HEAD
     @apply text-black-500 dark:text-black-500;
   }
 
   a {
     @apply ml-1 underline text-white dark:text-white text-xs;
+=======
+    @apply text-n-gray-10 dark:text-n-gray-10;
+  }
+
+  a {
+    @apply ml-1 underline text-n-amber-12 text-xs;
+>>>>>>> upstream/develop
   }
 
   .banner-message {

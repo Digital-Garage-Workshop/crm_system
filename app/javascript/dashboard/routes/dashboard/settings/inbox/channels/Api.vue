@@ -42,7 +42,11 @@ export default {
 
       try {
         const apiChannel = await this.$store.dispatch('inboxes/createChannel', {
+<<<<<<< HEAD
           name: this.channelName,
+=======
+          name: this.channelName?.trim(),
+>>>>>>> upstream/develop
           channel: {
             type: 'api',
             webhook_url: this.webhookUrl,
@@ -57,7 +61,14 @@ export default {
           },
         });
       } catch (error) {
+<<<<<<< HEAD
         useAlert(this.$t('INBOX_MGMT.ADD.API_CHANNEL.API.ERROR_MESSAGE'));
+=======
+        useAlert(
+          error.message ||
+            this.$t('INBOX_MGMT.ADD.API_CHANNEL.API.ERROR_MESSAGE')
+        );
+>>>>>>> upstream/develop
       }
     },
   },
@@ -65,9 +76,13 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div
     class="border border-n-weak bg-n-solid-1 rounded-t-lg border-b-0 h-full w-full p-6 col-span-6 overflow-auto"
   >
+=======
+  <div class="h-full w-full p-6 col-span-6">
+>>>>>>> upstream/develop
     <PageHeader
       :header-title="$t('INBOX_MGMT.ADD.API_CHANNEL.TITLE')"
       :header-content="$t('INBOX_MGMT.ADD.API_CHANNEL.DESC')"

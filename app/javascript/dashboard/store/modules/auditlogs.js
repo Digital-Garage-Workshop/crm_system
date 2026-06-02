@@ -7,7 +7,11 @@ const state = {
   records: [],
   meta: {
     currentPage: 1,
+<<<<<<< HEAD
     perPage: 15,
+=======
+    perPage: 25,
+>>>>>>> upstream/develop
     totalEntries: 0,
   },
   uiFlags: {

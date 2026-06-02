@@ -3,19 +3,37 @@
 # https://developers.facebook.com/docs/whatsapp/api/media/
 class Whatsapp::IncomingMessageBaseService
   include ::Whatsapp::IncomingMessageServiceHelpers
+<<<<<<< HEAD
 
   pattr_initialize [:inbox!, :params!]
+=======
+  include ::Whatsapp::IncomingMessageIdentifierHelper
+
+  pattr_initialize [:inbox!, :params!, :outgoing_echo]
+>>>>>>> upstream/develop
 
   def perform
     processed_params
 
     if processed_params.try(:[], :statuses).present?
       process_statuses
+<<<<<<< HEAD
     elsif processed_params.try(:[], :messages).present?
+=======
+    elsif messages_data.present?
+>>>>>>> upstream/develop
       process_messages
     end
   end
 
+<<<<<<< HEAD
+=======
+  # Returns messages array for both regular messages and echo events
+  def messages_data
+    @processed_params&.dig(:messages) || @processed_params&.dig(:message_echoes)
+  end
+
+>>>>>>> upstream/develop
   private
 
   def process_messages
@@ -23,6 +41,7 @@ class Whatsapp::IncomingMessageBaseService
     # if the webhook event is a reaction or an ephermal message or an unsupported message.
     return if unprocessable_message_type?(message_type)
 
+<<<<<<< HEAD
     # Multiple webhook event can be received against the same message due to misconfigurations in the Meta
     # business manager account. While we have not found the core reason yet, the following line ensure that
     # there are no duplicate messages created.
@@ -41,6 +60,31 @@ class Whatsapp::IncomingMessageBaseService
     return unless find_message_by_source_id(@processed_params[:statuses].first[:id])
 
     update_message_with_status(@message, @processed_params[:statuses].first)
+=======
+    # Multiple webhook events can be received for the same message due to
+    # misconfigurations in the Meta business manager account.
+    # We use an atomic Redis SET NX to prevent concurrent workers from both
+    # processing the same message simultaneously.
+    return if find_message_by_source_id(messages_data.first[:id])
+    return unless lock_message_source_id!
+
+    set_contact
+    return unless @contact
+    return if @contact.blocked? && !outgoing_echo
+
+    ActiveRecord::Base.transaction do
+      set_conversation
+      create_messages
+    end
+  end
+
+  def process_statuses
+    status = @processed_params[:statuses].first
+    return unless find_message_by_source_id(status[:id])
+
+    update_whatsapp_identifiers_from_status(status)
+    update_message_with_status(@message, status)
+>>>>>>> upstream/develop
   rescue ArgumentError => e
     Rails.logger.error "Error while processing whatsapp status update #{e.message}"
   end
@@ -55,7 +99,13 @@ class Whatsapp::IncomingMessageBaseService
   end
 
   def create_messages
+<<<<<<< HEAD
     message = @processed_params[:messages].first
+=======
+    message = messages_data.first
+    return create_unsupported_message(message) if message_type == 'unsupported'
+
+>>>>>>> upstream/develop
     log_error(message) && return if error_webhook_event?(message)
 
     process_in_reply_to(message)
@@ -63,22 +113,46 @@ class Whatsapp::IncomingMessageBaseService
     message_type == 'contacts' ? create_contact_messages(message) : create_regular_message(message)
   end
 
+<<<<<<< HEAD
   def create_contact_messages(message)
     message['contacts'].each do |contact|
       create_message(contact)
+=======
+  # WhatsApp delivers messages it cannot render (e.g. coexistence companion-device syncs that
+  # fail with error 131060) as type: unsupported with no content. We still persist a placeholder
+  # so the contact/conversation isn't created "headless" and agents know to check the WhatsApp app.
+  def create_unsupported_message(message)
+    log_error(message) if error_webhook_event?(message)
+    process_in_reply_to(message)
+    create_message(message, source_id: message[:id])
+    @message.content = I18n.t('conversations.messages.whatsapp.unsupported_message')
+    @message.content_attributes = @message.content_attributes.merge(is_unsupported: true)
+    @message.save!
+  end
+
+  def create_contact_messages(message)
+    message['contacts'].each do |contact|
+      # Pass source_id from parent message since contact objects don't have :id
+      create_message(contact, source_id: message[:id])
+>>>>>>> upstream/develop
       attach_contact(contact)
       @message.save!
     end
   end
 
   def create_regular_message(message)
+<<<<<<< HEAD
     create_message(message)
+=======
+    create_message(message, source_id: message[:id])
+>>>>>>> upstream/develop
     attach_files
     attach_location if message_type == 'location'
     @message.save!
   end
 
   def set_contact
+<<<<<<< HEAD
     contact_params = @processed_params[:contacts]&.first
     return if contact_params.blank?
 
@@ -92,6 +166,13 @@ class Whatsapp::IncomingMessageBaseService
 
     @contact_inbox = contact_inbox
     @contact = contact_inbox.contact
+=======
+    if outgoing_echo
+      set_contact_from_echo
+    else
+      set_contact_from_message
+    end
+>>>>>>> upstream/develop
   end
 
   def set_conversation
@@ -110,7 +191,11 @@ class Whatsapp::IncomingMessageBaseService
   def attach_files
     return if %w[text button interactive location contacts].include?(message_type)
 
+<<<<<<< HEAD
     attachment_payload = @processed_params[:messages].first[message_type.to_sym]
+=======
+    attachment_payload = messages_data.first[message_type.to_sym]
+>>>>>>> upstream/develop
     @message.content ||= attachment_payload[:caption]
 
     attachment_file = download_attachment_file(attachment_payload)
@@ -128,7 +213,11 @@ class Whatsapp::IncomingMessageBaseService
   end
 
   def attach_location
+<<<<<<< HEAD
     location = @processed_params[:messages].first['location']
+=======
+    location = messages_data.first['location']
+>>>>>>> upstream/develop
     location_name = location['name'] ? "#{location['name']}, #{location['address']}" : ''
     @message.attachments.new(
       account_id: @message.account_id,
@@ -140,15 +229,31 @@ class Whatsapp::IncomingMessageBaseService
     )
   end
 
+<<<<<<< HEAD
   def create_message(message)
+=======
+  def create_message(message, source_id: nil)
+    content_attrs = outgoing_echo ? { external_echo: true } : {}
+    content_attrs[:in_reply_to_external_id] = @in_reply_to_external_id if @in_reply_to_external_id.present?
+
+>>>>>>> upstream/develop
     @message = @conversation.messages.build(
       content: message_content(message),
       account_id: @inbox.account_id,
       inbox_id: @inbox.id,
+<<<<<<< HEAD
       message_type: :incoming,
       sender: @contact,
       source_id: message[:id].to_s,
       in_reply_to_external_id: @in_reply_to_external_id
+=======
+      message_type: outgoing_echo ? :outgoing : :incoming,
+      # Set status to :delivered for echo messages to prevent SendReplyJob from trying to send them
+      status: outgoing_echo ? :delivered : :sent,
+      sender: outgoing_echo ? nil : @contact,
+      source_id: (source_id || message[:id]).to_s,
+      content_attributes: content_attrs
+>>>>>>> upstream/develop
     )
   end
 
@@ -156,12 +261,49 @@ class Whatsapp::IncomingMessageBaseService
     phones = contact[:phones]
     phones = [{ phone: 'Phone number is not available' }] if phones.blank?
 
+<<<<<<< HEAD
+=======
+    name_info = contact['name'] || {}
+    contact_meta = {
+      firstName: name_info['first_name'],
+      lastName: name_info['last_name']
+    }.compact
+
+>>>>>>> upstream/develop
     phones.each do |phone|
       @message.attachments.new(
         account_id: @message.account_id,
         file_type: file_content_type(message_type),
+<<<<<<< HEAD
         fallback_title: phone[:phone].to_s
       )
     end
   end
+=======
+        fallback_title: phone[:phone].to_s,
+        meta: contact_meta
+      )
+    end
+  end
+
+  def update_contact_with_profile_name(contact_params)
+    profile_name = contact_params.dig(:profile, :name)
+    return if profile_name.blank?
+    return if @contact.name == profile_name
+
+    # Only update if current name exactly matches the phone number or formatted phone number
+    return unless contact_name_matches_phone_number?
+
+    @contact.update!(name: profile_name)
+  end
+
+  def contact_name_matches_phone_number?
+    message_phone_number = whatsapp_phone_number(messages_data.first[:from])
+    return false if message_phone_number.blank?
+
+    phone_number = "+#{message_phone_number}"
+    formatted_phone_number = TelephoneNumber.parse(phone_number).international_number
+    @contact.name == phone_number || @contact.name == formatted_phone_number
+  end
+>>>>>>> upstream/develop
 end

@@ -21,7 +21,11 @@ class Contacts::FilterService < FilterService
   def filter_values(query_hash)
     current_val = query_hash['values'][0]
     if query_hash['attribute_key'] == 'phone_number'
+<<<<<<< HEAD
       "+#{current_val}"
+=======
+      "+#{current_val&.delete('+')}"
+>>>>>>> upstream/develop
     elsif query_hash['attribute_key'] == 'country_code'
       current_val.downcase
     else
@@ -29,9 +33,14 @@ class Contacts::FilterService < FilterService
     end
   end
 
+<<<<<<< HEAD
   # TODO: @account.contacts.resolved_contacts ? to stay consistant with the behavior in ui
   def base_relation
     @account.contacts
+=======
+  def base_relation
+    @account.contacts.resolved_contacts(use_crm_v2: @account.feature_enabled?('crm_v2'))
+>>>>>>> upstream/develop
   end
 
   def filter_config

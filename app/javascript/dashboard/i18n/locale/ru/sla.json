@@ -5,7 +5,16 @@
     "ADD_ACTION_LONG": "Создать новую политику SLA",
     "DESCRIPTION": "Соглашения об уровне обслуживания (SLA) — это контракты, которые определяют четкие ожидания между вашей командой и клиентами. Они устанавливают стандарты времени ответа и разрешения проблем, создавая основу для подотчетности и обеспечивая последовательный, высококачественный опыт.",
     "LEARN_MORE": "Узнать больше о SLA",
+<<<<<<< HEAD
     "LOADING": "Загрузка SLA",
+=======
+    "COUNT": "{n} SLA | {n} SLAs",
+    "LOADING": "Загрузка SLA",
+    "SEARCH_PLACEHOLDER": "Search SLA...",
+    "SEARCH": {
+      "NO_RESULTS": "No SLA found matching your search"
+    },
+>>>>>>> upstream/develop
     "PAYWALL": {
       "TITLE": "Обновите тарифный план для создания SLA",
       "AVAILABLE_ON": "Функция SLA доступна только в тарифных планах Business и Enterprise.",
@@ -20,14 +29,26 @@
     },
     "LIST": {
       "404": "В этой учетной записи нет доступных SLA.",
+<<<<<<< HEAD
+=======
+      "TABLE_HEADER": {
+        "SLA": "SLA",
+        "BUSINESS_HOURS": "Business hours"
+      },
+>>>>>>> upstream/develop
       "EMPTY": {
         "TITLE_1": "Enterprise P0",
         "DESC_1": "Проблемы, поднятые корпоративными клиентами, требующие немедленного внимания.",
         "TITLE_2": "Enterprise P1",
         "DESC_2": "Проблемы, поднятые корпоративными клиентами, требующие быстрого подтверждения."
       },
+<<<<<<< HEAD
       "BUSINESS_HOURS_ON": "Рабочие часы включены",
       "BUSINESS_HOURS_OFF": "Рабочие часы отключены",
+=======
+      "BUSINESS_HOURS_ON": "Turned on",
+      "BUSINESS_HOURS_OFF": "Turned off",
+>>>>>>> upstream/develop
       "RESPONSE_TYPES": {
         "FRT": "Порог времени первого ответа",
         "NRT": "Порог времени следующего ответа",

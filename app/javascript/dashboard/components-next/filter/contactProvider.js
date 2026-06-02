@@ -50,6 +50,10 @@ export function useContactFilterContext() {
   const { t } = useI18n();
 
   const contactAttributes = useMapGetter('attributes/getContactAttributes');
+<<<<<<< HEAD
+=======
+  const labels = useMapGetter('labels/getLabels');
+>>>>>>> upstream/develop
 
   const {
     equalityOperators,
@@ -135,6 +139,19 @@ export function useContactFilterContext() {
       attributeModel: 'standard',
     },
     {
+<<<<<<< HEAD
+=======
+      attributeKey: CONTACT_ATTRIBUTES.COMPANY_NAME,
+      value: CONTACT_ATTRIBUTES.COMPANY_NAME,
+      attributeName: t('CONTACTS_LAYOUT.FILTER.COMPANY'),
+      label: t('CONTACTS_LAYOUT.FILTER.COMPANY'),
+      inputType: 'plainText',
+      dataType: 'text',
+      filterOperators: containmentOperators.value,
+      attributeModel: 'standard',
+    },
+    {
+>>>>>>> upstream/develop
       attributeKey: CONTACT_ATTRIBUTES.CREATED_AT,
       value: CONTACT_ATTRIBUTES.CREATED_AT,
       attributeName: t('CONTACTS_LAYOUT.FILTER.CREATED_AT'),
@@ -184,6 +201,23 @@ export function useContactFilterContext() {
       filterOperators: equalityOperators.value,
       attributeModel: 'standard',
     },
+<<<<<<< HEAD
+=======
+    {
+      attributeKey: CONTACT_ATTRIBUTES.LABELS,
+      value: CONTACT_ATTRIBUTES.LABELS,
+      attributeName: t('CONTACTS_FILTER.ATTRIBUTES.LABELS'),
+      label: t('CONTACTS_FILTER.ATTRIBUTES.LABELS'),
+      inputType: 'multiSelect',
+      options: labels.value?.map(label => ({
+        id: label.title,
+        name: label.title,
+      })),
+      dataType: 'text',
+      filterOperators: equalityOperators.value,
+      attributeModel: 'standard',
+    },
+>>>>>>> upstream/develop
     ...customFilterTypes.value,
   ]);
 

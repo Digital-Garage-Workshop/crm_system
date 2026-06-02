@@ -93,9 +93,15 @@ RSpec.describe 'Custom Filters API', type: :request do
         expect(json_response['name']).to eq 'vip-customers'
       end
 
+<<<<<<< HEAD
       it 'gives the error for 51st record' do
         CustomFilter.delete_all
         CustomFilter::MAX_FILTER_PER_USER.times do
+=======
+      it 'gives the error for 1001st record' do
+        CustomFilter.delete_all
+        Limits::MAX_CUSTOM_FILTERS_PER_USER.times do
+>>>>>>> upstream/develop
           create(:custom_filter, user: user, account: account)
         end
 
@@ -107,7 +113,11 @@ RSpec.describe 'Custom Filters API', type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
         json_response = response.parsed_body
         expect(json_response['message']).to include(
+<<<<<<< HEAD
           'Account Limit reached. The maximum number of allowed custom filters for a user per account is 50.'
+=======
+          'Account Limit reached. The maximum number of allowed custom filters for a user per account is 1000.'
+>>>>>>> upstream/develop
         )
       end
     end

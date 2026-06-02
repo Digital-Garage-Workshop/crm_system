@@ -3,7 +3,11 @@
     "HEADER": "Sarunas",
     "LOADING_CHART": "Notiek diagrammas datu ielāde...",
     "NO_ENOUGH_DATA": "Mēs neesam saņēmuši pietiekami daudz datu punktu, lai izveidotu pārskatu. Lūdzu, vēlāk mēģiniet vēlreiz.",
+<<<<<<< HEAD
     "DOWNLOAD_AGENT_REPORTS": "Lejupielādēt aģentu pārskatus",
+=======
+    "DOWNLOAD_CONVERSATION_REPORTS": "Download conversation reports",
+>>>>>>> upstream/develop
     "DATA_FETCHING_FAILED": "Neizdevās izgūt datus. Lūdzu, vēlāk mēģiniet vēlreiz.",
     "SUMMARY_FETCHING_FAILED": "Neizdevās izgūt kopsavilkumu. Lūdzu, vēlāk mēģiniet vēlreiz.",
     "METRICS": {
@@ -51,7 +55,14 @@
     },
     "DATE_RANGE_OPTIONS": {
       "LAST_7_DAYS": "Pēdējās 7 dienas",
+<<<<<<< HEAD
       "LAST_30_DAYS": "Pēdējās 30 dienas",
+=======
+      "LAST_14_DAYS": "Pēdējās 14 dienas",
+      "LAST_30_DAYS": "Pēdējās 30 dienas",
+      "THIS_MONTH": "This month",
+      "LAST_MONTH": "Last month",
+>>>>>>> upstream/develop
       "LAST_3_MONTHS": "Pēdējie 3 mēneši",
       "LAST_6_MONTHS": "Pēdējie 6 mēneši",
       "LAST_YEAR": "Pagājušais gads",
@@ -125,11 +136,23 @@
   },
   "AGENT_REPORTS": {
     "HEADER": "Aģentu Pārskats",
+<<<<<<< HEAD
     "DESCRIPTION": "Ērti izsekojiet aģenta darbībai, izmantojot galvenos rādītājus, piemēram, sarunas, atbildes laikus, atrisināšanas laikus un atrisinātos gadījumus. Noklikšķiniet uz aģenta vārda, lai uzzinātu vairāk.",
+=======
+    "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent's name to learn more.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Notiek diagrammas datu ielāde...",
     "NO_ENOUGH_DATA": "Mēs neesam saņēmuši pietiekami daudz datu punktu, lai izveidotu pārskatu. Lūdzu, vēlāk mēģiniet vēlreiz.",
     "DOWNLOAD_AGENT_REPORTS": "Lejupielādēt aģentu pārskatus",
     "FILTER_DROPDOWN_LABEL": "Izvēlieties Aģentu",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Meklēt aģentus"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Sarunas",
@@ -193,10 +216,22 @@
   },
   "LABEL_REPORTS": {
     "HEADER": "Etiķešu Pārskats",
+<<<<<<< HEAD
+=======
+    "DESCRIPTION": "Track label performance with key metrics including conversations, response times, resolution times, and resolved cases. Click a label name for detailed insights.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Notiek diagrammas datu ielāde...",
     "NO_ENOUGH_DATA": "Mēs neesam saņēmuši pietiekami daudz datu punktu, lai izveidotu pārskatu. Lūdzu, vēlāk mēģiniet vēlreiz.",
     "DOWNLOAD_LABEL_REPORTS": "Lejupielādēt etiķešu pārskatus",
     "FILTER_DROPDOWN_LABEL": "Izvēlieties Etiķeti",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "LABELS": "Meklēt etiķetes"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Sarunas",
@@ -265,6 +300,16 @@
     "NO_ENOUGH_DATA": "Mēs neesam saņēmuši pietiekami daudz datu punktu, lai izveidotu pārskatu. Lūdzu, vēlāk mēģiniet vēlreiz.",
     "DOWNLOAD_INBOX_REPORTS": "Lejupielādēt iesūtnes pārskatus",
     "FILTER_DROPDOWN_LABEL": "Izvēlieties Iesūtni",
+<<<<<<< HEAD
+=======
+    "ALL_INBOXES": "All Inboxes",
+    "SEARCH_INBOX": "Search Inbox",
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "INBOXES": "Search inboxes"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Sarunas",
@@ -328,11 +373,26 @@
   },
   "TEAM_REPORTS": {
     "HEADER": "Komandas Pārskats",
+<<<<<<< HEAD
     "DESCRIPTION": "Iegūstiet pārskatu par savas komandas veiktspēju, izmantojot būtiskus rādītājus, tostarp sarunas, atbildes laikus, atrisināšanas laikus un atrisinātos gadījumus. Lai iegūtu sīkāku informāciju, noklikšķiniet uz komandas nosaukuma.",
+=======
+    "DESCRIPTION": "Get a snapshot of your team's performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Notiek diagrammas datu ielāde...",
     "NO_ENOUGH_DATA": "Mēs neesam saņēmuši pietiekami daudz datu punktu, lai izveidotu pārskatu. Lūdzu, vēlāk mēģiniet vēlreiz.",
     "DOWNLOAD_TEAM_REPORTS": "Lejupielādēt komandas pārskatus",
     "FILTER_DROPDOWN_LABEL": "Izvēlieties Komandu",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "ADD_FILTER": "Pievienot filtru",
+      "CLEAR_ALL": "Notīrīt visu",
+      "NO_FILTER": "Nav pieejami filtri",
+      "INPUT_PLACEHOLDER": {
+        "TEAMS": "Meklēt komandas"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Sarunas",
@@ -396,22 +456,65 @@
   },
   "CSAT_REPORTS": {
     "HEADER": "CSAT Pārskati",
+<<<<<<< HEAD
     "NO_RECORDS": "CSAT aptaujas atbildes nav pieejamas.",
     "DOWNLOAD": "Lejupielādēt CSAT Pārskatus",
     "DOWNLOAD_FAILED": "Neizdevās lejupielādēt CSAT Pārskatus",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Izvēlieties Aģentus"
+=======
+    "NO_RECORDS": "No responses yet",
+    "NO_RECORDS_DESCRIPTION": "CSAT survey responses will appear here once customers start providing feedback.",
+    "DOWNLOAD": "Lejupielādēt CSAT Pārskatus",
+    "DOWNLOAD_FAILED": "Neizdevās lejupielādēt CSAT Pārskatus",
+    "FILTERS": {
+      "ADD_FILTER": "Pievienot filtru",
+      "CLEAR_ALL": "Notīrīt visu",
+      "NO_FILTER": "Nav pieejami filtri",
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Meklēt aģentus",
+        "INBOXES": "Search inboxes",
+        "TEAMS": "Meklēt komandas",
+        "RATINGS": "Search ratings"
+      },
+      "AGENTS": {
+        "LABEL": "Aģents"
+      },
+      "INBOXES": {
+        "LABEL": "Iesūtne"
+      },
+      "TEAMS": {
+        "LABEL": "Komanda"
+      },
+      "RATINGS": {
+        "LABEL": "Vērtējums"
+>>>>>>> upstream/develop
       }
     },
     "TABLE": {
       "HEADER": {
         "CONTACT_NAME": "Kontaktpersona",
+<<<<<<< HEAD
         "AGENT_NAME": "Piešķirtais aģents",
         "RATING": "Vērtējums",
         "FEEDBACK_TEXT": "Atsauksmes komentārs"
       }
     },
+=======
+        "AGENT_NAME": "Aģents",
+        "RATING": "Vērtējums",
+        "FEEDBACK_TEXT": "Atsauksmes komentārs",
+        "CONVERSATION": "Saruna",
+        "CUSTOMER": "Customer",
+        "RESPONSE": "Atbilde",
+        "HANDLED_BY": "Handled by"
+      },
+      "UNKNOWN_CUSTOMER": "Unknown customer"
+    },
+    "NO_AGENT": "No assigned agent",
+    "NO_FEEDBACK": "No feedback provided",
+>>>>>>> upstream/develop
     "METRIC": {
       "TOTAL_RESPONSES": {
         "LABEL": "Kopējais atbilžu skaits",
@@ -424,6 +527,28 @@
       "RESPONSE_RATE": {
         "LABEL": "Atbildes ātrums",
         "TOOLTIP": "Kopējais atbilžu skaits / Kopējais nosūtīto CSAT aptaujas ziņojumu skaits * 100"
+<<<<<<< HEAD
+=======
+      },
+      "RATING_DISTRIBUTION": "Rating distribution"
+    },
+    "REVIEW_NOTES": {
+      "TITLE": "Review notes",
+      "PLACEHOLDER": "Add review notes about this rating...",
+      "SAVE": "Saglabāt",
+      "CANCEL": "Atcelt",
+      "SAVING": "Notiek saglabāšana...",
+      "SAVED": "Notes saved successfully",
+      "SAVE_ERROR": "Failed to save notes",
+      "UPDATED_BY": "Updated by {name} {time}",
+      "UPDATED_BY_LABEL": "Updated by",
+      "PAYWALL": {
+        "TITLE": "Upgrade to add review notes",
+        "AVAILABLE_ON": "The review notes feature is only available in the Business and Enterprise plans.",
+        "UPGRADE_PROMPT": "Add internal context to every CSAT response with review notes. Capture what really happened, spot patterns faster, and make better decisions from your feedback.",
+        "UPGRADE_NOW": "Pāriet uz maksas versiju tagad",
+        "CANCEL_ANYTIME": "Jūs varat jebkurā laikā mainīt vai atcelt savu versiju"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -466,6 +591,16 @@
       "CONVERSATIONS": "{count} sarunas",
       "DOWNLOAD_REPORT": "Lejupielādēt atskaiti"
     },
+<<<<<<< HEAD
+=======
+    "RESOLUTION_HEATMAP": {
+      "HEADER": "Resolutions",
+      "NO_CONVERSATIONS": "Nav sarunu",
+      "CONVERSATION": "{count} saruna",
+      "CONVERSATIONS": "{count} sarunas",
+      "DOWNLOAD_REPORT": "Lejupielādēt atskaiti"
+    },
+>>>>>>> upstream/develop
     "AGENT_CONVERSATIONS": {
       "HEADER": "Aģentu sarunas",
       "LOADING_MESSAGE": "Notiek aģentu metrikas ielāde...",
@@ -559,6 +694,10 @@
     "INBOX": "Iesūtne",
     "AGENT": "Aģents",
     "TEAM": "Komanda",
+<<<<<<< HEAD
+=======
+    "LABEL": "Etiķete",
+>>>>>>> upstream/develop
     "AVG_RESOLUTION_TIME": "Vid. Atrisināšanas Laiks",
     "AVG_FIRST_RESPONSE_TIME": "Vid. Pirmās Atbildes Laiks",
     "AVG_REPLY_TIME": "Vid. Klientu Gaidīšanas Laiks",

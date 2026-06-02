@@ -46,9 +46,13 @@ export default {
     filteredActiveLabels() {
       if (!this.search) return this.accountLabels;
 
+<<<<<<< HEAD
       return picoSearch(this.accountLabels, this.search, ['title'], {
         threshold: 0.9,
       });
+=======
+      return picoSearch(this.accountLabels, this.search, ['title']);
+>>>>>>> upstream/develop
     },
 
     noResult() {
@@ -114,12 +118,20 @@ export default {
   <div class="flex flex-col w-full max-h-[12.5rem]">
     <div class="flex items-center justify-center mb-1">
       <h4
+<<<<<<< HEAD
         class="flex-grow m-0 overflow-hidden text-sm text-slate-800 dark:text-slate-100 whitespace-nowrap text-ellipsis"
+=======
+        class="flex-grow m-0 overflow-hidden text-sm text-n-slate-12 whitespace-nowrap text-ellipsis"
+>>>>>>> upstream/develop
       >
         {{ $t('CONTACT_PANEL.LABELS.LABEL_SELECT.TITLE') }}
       </h4>
       <Hotkey
+<<<<<<< HEAD
         custom-class="border border-solid text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-600 text-xxs border-slate-75 dark:border-slate-600 flex-shrink-0"
+=======
+        custom-class="border border-solid text-n-slate-12 bg-n-slate-2 text-xxs border-n-strong flex-shrink-0"
+>>>>>>> upstream/develop
       >
         {{ 'L' }}
       </Hotkey>
@@ -150,13 +162,21 @@ export default {
         </woot-dropdown-menu>
         <div
           v-if="noResult"
+<<<<<<< HEAD
           class="flex justify-center py-4 px-2.5 font-medium text-xs text-slate-700 dark:text-slate-200"
+=======
+          class="flex justify-center py-4 px-2.5 font-medium text-xs text-n-slate-11"
+>>>>>>> upstream/develop
         >
           {{ $t('CONTACT_PANEL.LABELS.LABEL_SELECT.NO_RESULT') }}
         </div>
         <div
           v-if="allowCreation && shouldShowCreate"
+<<<<<<< HEAD
           class="flex pt-1 border-t border-solid border-slate-100 dark:border-slate-900"
+=======
+          class="flex pt-1 border-t border-solid border-n-weak"
+>>>>>>> upstream/develop
         >
           <NextButton
             icon="i-lucide-plus"

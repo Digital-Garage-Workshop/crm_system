@@ -19,6 +19,11 @@ class ArticleEmbedding < ApplicationRecord
 
   after_commit :update_response_embedding
 
+<<<<<<< HEAD
+=======
+  delegate :account_id, to: :article
+
+>>>>>>> upstream/develop
   private
 
   def update_response_embedding

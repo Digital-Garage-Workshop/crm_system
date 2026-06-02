@@ -516,6 +516,13 @@ const languages = [
     id: 'pt',
   },
   {
+<<<<<<< HEAD
+=======
+    name: 'Portuguese (Brazil)',
+    id: 'pt_BR',
+  },
+  {
+>>>>>>> upstream/develop
     name: 'Punjabi',
     id: 'pa',
   },

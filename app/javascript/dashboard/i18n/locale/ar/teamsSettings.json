@@ -5,6 +5,12 @@
     "LOADING": "Fetching teams",
     "DESCRIPTION": "الفرق تتيح لك تنظيم الوكلاء في مجموعات بناءً على مسؤولياتهم. يمكن للوكيل أن يكون عضوًا في أكثر من فريق. لتحقيق التعاون في العمل, يمكنك إسناد المحادثات لفرق محددة.",
     "LEARN_MORE": "لمعرفة المزيد حول الفرق",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} team | {n} teams",
+    "SEARCH_PLACEHOLDER": "البحث عن فريق...",
+    "NO_RESULTS": "No teams found matching your search",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "لا يوجد موظفي دعم مرتبطين بهذا الحساب.",
       "EDIT_TEAM": "تعديل الفريق",
@@ -64,7 +70,11 @@
       "ERROR_MESSAGE": "تعذر حفظ تفاصيل الفريق. حاول مرة أخرى."
     },
     "AGENTS": {
+<<<<<<< HEAD
       "AGENT": "وكيل",
+=======
+      "AGENT": "وكيل الدعم",
+>>>>>>> upstream/develop
       "EMAIL": "البريد الإلكتروني",
       "BUTTON_TEXT": "إضافة وكلاء",
       "ADD_AGENTS": "إضافة وكلاء إلى فريقك...",

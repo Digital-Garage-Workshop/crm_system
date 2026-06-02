@@ -1,5 +1,6 @@
 type: object
 properties:
+<<<<<<< HEAD
   id:
     type: integer
   archived:
@@ -32,3 +33,9 @@ properties:
     type: array
     items:
       $ref: '#/definitions/article'
+=======
+  payload:
+    type: array
+    items:
+      $ref: '#/components/schemas/portal_item'
+>>>>>>> upstream/develop

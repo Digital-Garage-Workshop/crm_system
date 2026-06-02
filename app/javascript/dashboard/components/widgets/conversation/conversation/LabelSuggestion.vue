@@ -1,10 +1,18 @@
 <script>
 // components
 import NextButton from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
 import Avatar from '../../Avatar.vue';
 
 // composables
 import { useAI } from 'dashboard/composables/useAI';
+=======
+import Avatar from 'dashboard/components-next/avatar/Avatar.vue';
+import { useBranding } from 'shared/composables/useBranding';
+
+// composables
+import { useCaptain } from 'dashboard/composables/useCaptain';
+>>>>>>> upstream/develop
 import { useTrack } from 'dashboard/composables';
 
 // store & api
@@ -13,7 +21,11 @@ import { mapGetters } from 'vuex';
 // utils & constants
 import { LocalStorage } from 'shared/helpers/localStorage';
 import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
+<<<<<<< HEAD
 import { OPEN_AI_EVENTS } from '../../../../helper/AnalyticsHelper/events';
+=======
+import { CAPTAIN_EVENTS } from '../../../../helper/AnalyticsHelper/events';
+>>>>>>> upstream/develop
 
 export default {
   name: 'LabelSuggestion',
@@ -33,9 +45,16 @@ export default {
     },
   },
   setup() {
+<<<<<<< HEAD
     const { isAIIntegrationEnabled } = useAI();
 
     return { isAIIntegrationEnabled };
+=======
+    const { captainTasksEnabled } = useCaptain();
+    const { replaceInstallationName } = useBranding();
+
+    return { captainTasksEnabled, replaceInstallationName };
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -78,7 +97,11 @@ export default {
     },
     shouldShowSuggestions() {
       if (this.isDismissed) return false;
+<<<<<<< HEAD
       if (!this.isAIIntegrationEnabled) return false;
+=======
+      if (!this.captainTasksEnabled) return false;
+>>>>>>> upstream/develop
 
       return this.preparedLabels.length && this.chatLabels.length === 0;
     },
@@ -114,7 +137,11 @@ export default {
 
       // dismiss this once the values are set
       this.isDismissed = true;
+<<<<<<< HEAD
       this.trackLabelEvent(OPEN_AI_EVENTS.DISMISS_LABEL_SUGGESTION);
+=======
+      this.trackLabelEvent(CAPTAIN_EVENTS.LABEL_SUGGESTION_DISMISSED);
+>>>>>>> upstream/develop
     },
     isConversationDismissed() {
       return LocalStorage.getFlag(
@@ -132,7 +159,11 @@ export default {
         conversationId: this.conversationId,
         labels: labelsToAdd,
       });
+<<<<<<< HEAD
       this.trackLabelEvent(OPEN_AI_EVENTS.APPLY_LABEL_SUGGESTION);
+=======
+      this.trackLabelEvent(CAPTAIN_EVENTS.LABEL_SUGGESTION_APPLIED);
+>>>>>>> upstream/develop
     },
     trackLabelEvent(event) {
       const payload = {
@@ -154,7 +185,11 @@ export default {
 <template>
   <li
     v-if="shouldShowSuggestions"
+<<<<<<< HEAD
     class="label-suggestion right"
+=======
+    class="label-suggestion right list-none"
+>>>>>>> upstream/develop
     @mouseover="isHovered = true"
     @mouseleave="isHovered = false"
   >
@@ -180,9 +215,13 @@ export default {
             <woot-label
               variant="dashed"
               v-bind="label"
+<<<<<<< HEAD
               :bg-color="
                 selectedLabels.includes(label.title) ? 'var(--w-100)' : ''
               "
+=======
+              :bg-color="selectedLabels.includes(label.title) ? '#2781F6' : ''"
+>>>>>>> upstream/develop
             />
           </button>
           <NextButton
@@ -228,6 +267,7 @@ export default {
         </div>
       </div>
       <div class="sender--info has-tooltip" data-original-title="null">
+<<<<<<< HEAD
         <woot-thumbnail
           v-tooltip.top="{
             content: $t('LABEL_MGMT.SUGGESTIONS.POWERED_BY'),
@@ -240,6 +280,20 @@ export default {
             <fluent-icon class="chatwoot-ai-icon" icon="chatwoot-ai" />
           </Avatar>
         </woot-thumbnail>
+=======
+        <Avatar
+          v-tooltip.top="{
+            content: replaceInstallationName(
+              $t('LABEL_MGMT.SUGGESTIONS.POWERED_BY')
+            ),
+            delay: { show: 600, hide: 0 },
+            hideOnClick: true,
+          }"
+          :size="16"
+          name="chatwoot-ai"
+          icon-name="i-lucide-sparkles"
+        />
+>>>>>>> upstream/develop
       </div>
     </div>
   </li>
@@ -253,17 +307,25 @@ export default {
 .label-suggestion {
   flex-direction: row;
   justify-content: flex-end;
+<<<<<<< HEAD
   margin-top: var(--space-normal);
+=======
+  margin-top: 1rem;
+>>>>>>> upstream/develop
 
   .label-suggestion--container {
     max-width: 300px;
   }
 
   .label-suggestion--options {
+<<<<<<< HEAD
     text-align: right;
     display: flex;
     align-items: center;
     gap: var(--space-micro);
+=======
+    @apply gap-0.5 text-end flex items-center;
+>>>>>>> upstream/develop
 
     button.label-suggestion--option {
       .label {
@@ -273,6 +335,7 @@ export default {
     }
   }
 
+<<<<<<< HEAD
   .chatwoot-ai-icon {
     height: var(--font-size-mini);
     width: var(--font-size-mini);
@@ -282,6 +345,10 @@ export default {
     color: var(--b-600);
     margin-top: var(--space-micro);
     font-size: var(--font-size-micro);
+=======
+  .label-suggestion--title {
+    @apply text-n-slate-11 mt-0.5 text-xxs;
+>>>>>>> upstream/develop
   }
 }
 </style>

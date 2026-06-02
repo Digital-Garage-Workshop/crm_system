@@ -58,9 +58,15 @@ const onClickTabChange = index => {
     />
 
     <div class="flex flex-col h-auto overflow-auto">
+<<<<<<< HEAD
       <div class="flex flex-col px-8 pb-4">
         <woot-tabs
           class="ltr:[&>ul]:pl-0 rtl:[&>ul]:pr-0"
+=======
+      <div class="flex flex-col px-8 pb-4 mt-1">
+        <woot-tabs
+          class="ltr:[&>ul]:pl-0 rtl:[&>ul]:pr-0 h-10"
+>>>>>>> upstream/develop
           :index="selectedTabIndex"
           @change="onClickTabChange"
         >
@@ -70,6 +76,10 @@ const onClickTabChange = index => {
             :index="index"
             :name="tab.name"
             :show-badge="false"
+<<<<<<< HEAD
+=======
+            is-compact
+>>>>>>> upstream/develop
           />
         </woot-tabs>
       </div>

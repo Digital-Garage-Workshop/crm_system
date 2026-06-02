@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Адміністратор",
       "AGENT": "Агент"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Немає агентів, пов'язаних з цим обліковим записом",
       "TITLE": "Керування агентами у вашій команді",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Не вдалося підключитися до Woot Server, спробуйте ще раз пізніше"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Пошук агентів...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Результатів не знайдено."
     },

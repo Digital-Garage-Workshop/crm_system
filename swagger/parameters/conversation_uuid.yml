@@ -1,5 +1,10 @@
 in: path
 name: conversation_uuid
+<<<<<<< HEAD
 type: integer
+=======
+schema:
+  type: integer
+>>>>>>> upstream/develop
 required: true
 description: The uuid of the conversation

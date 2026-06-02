@@ -6,12 +6,17 @@ class DeviseOverrides::PasswordsController < Devise::PasswordsController
 
   def create
     @user = User.from_email(params[:email])
+<<<<<<< HEAD
     if @user
       @user.send_reset_password_instructions
       build_response(I18n.t('messages.reset_password_success'), 200)
     else
       build_response(I18n.t('messages.reset_password_failure'), 404)
     end
+=======
+    @user&.send_reset_password_instructions
+    build_response(I18n.t('messages.reset_password'), 200)
+>>>>>>> upstream/develop
   end
 
   def update
@@ -44,3 +49,8 @@ class DeviseOverrides::PasswordsController < Devise::PasswordsController
     }, status: status
   end
 end
+<<<<<<< HEAD
+=======
+
+DeviseOverrides::PasswordsController.prepend_mod_with('DeviseOverrides::PasswordsController')
+>>>>>>> upstream/develop

@@ -3,6 +3,12 @@
     "FETCHING": "Preuzimanje integracija",
     "NO_HOOK_CONFIGURED": "Nema {integrationId} integracija podešenih na ovom nalogu.",
     "HEADER": "Aplikacije",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Omogućeno",
       "DISABLED": "Onemogućeno"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Preuzimanje zakački integracija",
       "INBOX": "Prijemno sanduče",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Akcije",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Izbriši"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Izaberi prijemno sanduče"
         },
         "SUBMIT": "Napravi",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Otkaži"
       },
       "API": {

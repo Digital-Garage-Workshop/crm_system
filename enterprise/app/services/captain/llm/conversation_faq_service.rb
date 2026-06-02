@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 class Captain::Llm::ConversationFaqService < Llm::BaseOpenAiService
+=======
+class Captain::Llm::ConversationFaqService < Llm::BaseAiService
+  include Integrations::LlmInstrumentation
+
+>>>>>>> upstream/develop
   DISTANCE_THRESHOLD = 0.3
 
   def initialize(assistant, conversation)
@@ -35,7 +41,11 @@ class Captain::Llm::ConversationFaqService < Llm::BaseOpenAiService
 
     faqs.each do |faq|
       combined_text = "#{faq['question']}: #{faq['answer']}"
+<<<<<<< HEAD
       embedding = Captain::Llm::EmbeddingService.new.get_embedding(combined_text)
+=======
+      embedding = Captain::Llm::EmbeddingService.new(account_id: @conversation.account_id).get_embedding(combined_text)
+>>>>>>> upstream/develop
       similar_faqs = find_similar_faqs(embedding)
 
       if similar_faqs.any?
@@ -81,6 +91,7 @@ class Captain::Llm::ConversationFaqService < Llm::BaseOpenAiService
   end
 
   def generate
+<<<<<<< HEAD
     response = @client.chat(parameters: chat_parameters)
     parse_response(response)
   rescue OpenAI::Error => e
@@ -113,6 +124,45 @@ class Captain::Llm::ConversationFaqService < Llm::BaseOpenAiService
     return [] if content.nil?
 
     JSON.parse(content.strip).fetch('faqs', [])
+=======
+    response = instrument_llm_call(instrumentation_params) do
+      chat
+        .with_params(response_format: { type: 'json_object' })
+        .with_instructions(system_prompt)
+        .ask(@content)
+    end
+    parse_response(response.content)
+  rescue RubyLLM::Error => e
+    Rails.logger.error "LLM API Error: #{e.message}"
+    []
+  end
+
+  def instrumentation_params
+    {
+      span_name: 'llm.captain.conversation_faq',
+      model: @model,
+      temperature: @temperature,
+      account_id: @conversation.account_id,
+      conversation_id: @conversation.display_id,
+      feature_name: 'conversation_faq',
+      messages: [
+        { role: 'system', content: system_prompt },
+        { role: 'user', content: @content }
+      ],
+      metadata: { assistant_id: @assistant.id }
+    }
+  end
+
+  def system_prompt
+    account_language = @conversation.account.locale_english_name
+    Captain::Llm::SystemPromptsService.conversation_faq_generator(account_language)
+  end
+
+  def parse_response(response)
+    return [] if response.nil?
+
+    JSON.parse(sanitize_json_response(response)).fetch('faqs', [])
+>>>>>>> upstream/develop
   rescue JSON::ParserError => e
     Rails.logger.error "Error in parsing GPT processed response: #{e.message}"
     []

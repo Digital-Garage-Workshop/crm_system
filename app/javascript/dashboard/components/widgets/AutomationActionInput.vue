@@ -3,6 +3,12 @@ import AutomationActionTeamMessageInput from './AutomationActionTeamMessageInput
 import AutomationActionFileInput from './AutomationFileInput.vue';
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import SingleSelect from 'dashboard/components-next/filter/inputs/SingleSelect.vue';
+import MultiSelect from 'dashboard/components-next/filter/inputs/MultiSelect.vue';
+import NextInput from 'dashboard/components-next/input/Input.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
@@ -10,6 +16,12 @@ export default {
     AutomationActionFileInput,
     WootMessageEditor,
     NextButton,
+<<<<<<< HEAD
+=======
+    SingleSelect,
+    MultiSelect,
+    NextInput,
+>>>>>>> upstream/develop
   },
   props: {
     modelValue: {
@@ -40,6 +52,13 @@ export default {
       type: Boolean,
       default: false,
     },
+<<<<<<< HEAD
+=======
+    dropdownMaxHeight: {
+      type: String,
+      default: 'max-h-80',
+    },
+>>>>>>> upstream/develop
   },
   emits: ['update:modelValue', 'input', 'removeAction', 'resetAction'],
   computed: {
@@ -69,11 +88,29 @@ export default {
       return this.actionTypes.find(action => action.key === this.action_name)
         .inputType;
     },
+<<<<<<< HEAD
     actionInputStyles() {
       return {
         'has-error': this.errorMessage,
         'is-a-macro': this.isMacro,
       };
+=======
+    actionNameAsSelectModel: {
+      get() {
+        if (!this.action_name) return null;
+        const found = this.actionTypes.find(a => a.key === this.action_name);
+        return found ? { id: found.key, name: found.label } : null;
+      },
+      set(value) {
+        this.action_name = value?.id || value;
+      },
+    },
+    actionTypesAsOptions() {
+      return this.actionTypes.map(a => ({ id: a.key, name: a.label }));
+    },
+    isVerticalLayout() {
+      return ['team_message', 'textarea'].includes(this.inputType);
+>>>>>>> upstream/develop
     },
     castMessageVmodel: {
       get() {
@@ -94,11 +131,19 @@ export default {
     resetAction() {
       this.$emit('resetAction');
     },
+<<<<<<< HEAD
+=======
+    onActionNameChange(value) {
+      this.actionNameAsSelectModel = value;
+      this.resetAction();
+    },
+>>>>>>> upstream/develop
   },
 };
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="filter" :class="actionInputStyles">
     <div class="filter-inputs">
       <select
@@ -286,3 +331,82 @@ export default {
   @apply hidden;
 }
 </style>
+=======
+  <li class="list-none py-2 first:pt-0 last:pb-0">
+    <div
+      class="flex flex-col gap-2"
+      :class="{ 'animate-wiggle': errorMessage }"
+    >
+      <div class="flex items-center gap-2">
+        <SingleSelect
+          :model-value="actionNameAsSelectModel"
+          :options="actionTypesAsOptions"
+          :dropdown-max-height="dropdownMaxHeight"
+          disable-deselect
+          class="flex-shrink-0"
+          @update:model-value="onActionNameChange"
+        />
+        <template v-if="showActionInput && !isVerticalLayout">
+          <SingleSelect
+            v-if="inputType === 'search_select'"
+            v-model="action_params"
+            :options="dropdownValues"
+            :dropdown-max-height="dropdownMaxHeight"
+          />
+          <MultiSelect
+            v-else-if="inputType === 'multi_select'"
+            v-model="action_params"
+            :options="dropdownValues"
+            :dropdown-max-height="dropdownMaxHeight"
+          />
+          <NextInput
+            v-else-if="inputType === 'email'"
+            v-model="action_params"
+            type="email"
+            size="sm"
+            :placeholder="$t('AUTOMATION.ACTION.EMAIL_INPUT_PLACEHOLDER')"
+          />
+          <NextInput
+            v-else-if="inputType === 'url'"
+            v-model="action_params"
+            type="url"
+            size="sm"
+            :placeholder="$t('AUTOMATION.ACTION.URL_INPUT_PLACEHOLDER')"
+          />
+          <AutomationActionFileInput
+            v-else-if="inputType === 'attachment'"
+            v-model="action_params"
+            :initial-file-name="initialFileName"
+          />
+        </template>
+        <NextButton
+          v-if="!isMacro"
+          sm
+          solid
+          slate
+          icon="i-lucide-trash"
+          class="flex-shrink-0"
+          @click="removeAction"
+        />
+      </div>
+      <AutomationActionTeamMessageInput
+        v-if="inputType === 'team_message'"
+        v-model="action_params"
+        :teams="dropdownValues"
+        :dropdown-max-height="dropdownMaxHeight"
+      />
+      <WootMessageEditor
+        v-if="inputType === 'textarea'"
+        v-model="castMessageVmodel"
+        rows="4"
+        enable-variables
+        :placeholder="$t('AUTOMATION.ACTION.TEAM_MESSAGE_INPUT_PLACEHOLDER')"
+        class="[&_.ProseMirror-menubar]:hidden px-3 py-1 bg-n-alpha-1 rounded-lg outline outline-1 outline-n-weak dark:outline-n-strong"
+      />
+    </div>
+    <span v-if="errorMessage" class="text-sm text-n-ruby-11">
+      {{ errorMessage }}
+    </span>
+  </li>
+</template>
+>>>>>>> upstream/develop

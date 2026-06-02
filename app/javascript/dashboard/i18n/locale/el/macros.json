@@ -3,9 +3,18 @@
     "HEADER": "Μακροεντολές",
     "DESCRIPTION": "A macro is a set of saved actions that help customer service agents easily complete tasks. The agents can define a set of actions like tagging a conversation with a label, sending an email transcript, updating a custom attribute, etc., and they can run these actions in a single click.",
     "LEARN_MORE": "Learn more about macros",
+<<<<<<< HEAD
     "HEADER_BTN_TXT": "Προσθήκη νέας μακροεντολής",
     "HEADER_BTN_TXT_SAVE": "Αποθήκευση μακροεντολής",
     "LOADING": "Λήψη μακροεντολών",
+=======
+    "COUNT": "{n} macro | {n} macros",
+    "HEADER_BTN_TXT": "Προσθήκη νέας μακροεντολής",
+    "HEADER_BTN_TXT_SAVE": "Αποθήκευση μακροεντολής",
+    "LOADING": "Λήψη μακροεντολών",
+    "SEARCH_PLACEHOLDER": "Search macros...",
+    "NO_RESULTS": "No macros found matching your search",
+>>>>>>> upstream/develop
     "ERROR": "Κάτι πήγε στραβά. Παρακαλώ προσπαθήστε ξανά",
     "ORDER_INFO": "Μακροεντολές θα εκτελεστούν με τη σειρά που θα προσθέσετε τις ενέργειές σας. Μπορείτε να τις αναδιατάξετε σύροντάς τις από τη λαβή δίπλα σε κάθε κόμβο.",
     "ADD": {
@@ -29,7 +38,12 @@
         "NAME": "Όνομα",
         "CREATED BY": "Δημιουργήθηκε από",
         "LAST_UPDATED_BY": "Τελευταία ενημέρωση από",
+<<<<<<< HEAD
         "VISIBILITY": "Ορατότητα"
+=======
+        "VISIBILITY": "Ορατότητα",
+        "ACTIONS": "Ενέργειες"
+>>>>>>> upstream/develop
       },
       "404": "Δεν βρέθηκαν μακροεντολές"
     },
@@ -45,6 +59,12 @@
         "ERROR_MESSAGE": "Παρουσιάστηκε σφάλμα κατά τη διαγραφή της μακροεντολής. Παρακαλώ δοκιμάστε ξανά αργότερα"
       }
     },
+<<<<<<< HEAD
+=======
+    "VIEW": {
+      "TOOLTIP": "View macro"
+    },
+>>>>>>> upstream/develop
     "EDIT": {
       "TOOLTIP": "Επεξεργασία μακροεντολής",
       "API": {
@@ -62,7 +82,13 @@
         "LABEL": "Ορατότητα Μακροεντολής",
         "GLOBAL": {
           "LABEL": "Δημόσια",
+<<<<<<< HEAD
           "DESCRIPTION": "Αυτή η μακροεντολή είναι διαθέσιμη δημοσίως για όλους τους πράκτορες σε αυτόν τον λογαριασμό."
+=======
+          "DESCRIPTION": "Αυτή η μακροεντολή είναι διαθέσιμη δημοσίως για όλους τους πράκτορες σε αυτόν τον λογαριασμό.",
+          "CREATE_DISABLED_DESCRIPTION": "Only administrators can create public macros.",
+          "EDIT_DISABLED_DESCRIPTION": "Only administrators can edit public macros."
+>>>>>>> upstream/develop
         },
         "PERSONAL": {
           "LABEL": "Ιδιωτική",
@@ -89,6 +115,10 @@
       "ASSIGN_AGENT": "Assign an Agent",
       "ADD_LABEL": "Add a Label",
       "REMOVE_LABEL": "Remove a Label",
+<<<<<<< HEAD
+=======
+      "REMOVE_ASSIGNED_AGENT": "Remove Assigned Agent",
+>>>>>>> upstream/develop
       "REMOVE_ASSIGNED_TEAM": "Remove Assigned Team",
       "SEND_EMAIL_TRANSCRIPT": "Send an Email Transcript",
       "MUTE_CONVERSATION": "Σίγαση Συνομιλίας",
@@ -99,6 +129,16 @@
       "CHANGE_PRIORITY": "Change Priority",
       "ADD_PRIVATE_NOTE": "Add a Private Note",
       "SEND_WEBHOOK_EVENT": "Send Webhook Event"
+<<<<<<< HEAD
+=======
+    },
+    "PRIORITY_TYPES": {
+      "NONE": "Κανένα",
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High",
+      "URGENT": "Urgent"
+>>>>>>> upstream/develop
     }
   }
 }

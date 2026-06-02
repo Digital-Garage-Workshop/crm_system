@@ -1,5 +1,9 @@
 import CaptainInboxes from 'dashboard/api/captain/inboxes';
+<<<<<<< HEAD
 import { createStore } from './storeFactory';
+=======
+import { createStore } from '../storeFactory';
+>>>>>>> upstream/develop
 import { throwErrorMessage } from 'dashboard/store/utils/api';
 
 export default createStore({

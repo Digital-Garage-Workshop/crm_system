@@ -9,4 +9,13 @@ class AdministratorNotifications::IntegrationsNotificationMailer < Administrator
     subject = 'Your Dialogflow integration was disconnected'
     send_notification(subject)
   end
+<<<<<<< HEAD
+=======
+
+  def openai_disconnect
+    subject = 'Your OpenAI integration was disconnected'
+    action_url = settings_url('integrations/openai')
+    send_notification(subject, action_url: action_url)
+  end
+>>>>>>> upstream/develop
 end

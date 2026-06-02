@@ -9,6 +9,14 @@ class AdministratorNotifications::ChannelNotificationsMailer < AdministratorNoti
     send_notification(subject, action_url: inbox_url(inbox))
   end
 
+<<<<<<< HEAD
+=======
+  def tiktok_disconnect(inbox)
+    subject = 'Your TikTok connection has expired'
+    send_notification(subject, action_url: inbox_url(inbox))
+  end
+
+>>>>>>> upstream/develop
   def whatsapp_disconnect(inbox)
     subject = 'Your Whatsapp connection has expired'
     send_notification(subject, action_url: inbox_url(inbox))

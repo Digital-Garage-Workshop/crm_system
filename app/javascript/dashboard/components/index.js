@@ -1,6 +1,9 @@
 // [NOTE][DEPRECATED] This method is to be deprecated, please do not add new components to this file.
 /* eslint no-plusplus: 0 */
+<<<<<<< HEAD
 import AvatarUploader from './widgets/forms/AvatarUploader.vue';
+=======
+>>>>>>> upstream/develop
 import Code from './Code.vue';
 import ColorPicker from './widgets/ColorPicker.vue';
 import ConfirmDeleteModal from './widgets/modal/ConfirmDeleteModal.vue';
@@ -15,6 +18,7 @@ import Label from './ui/Label.vue';
 import LoadingState from './widgets/LoadingState.vue';
 import ModalHeader from './ModalHeader.vue';
 import Modal from './Modal.vue';
+<<<<<<< HEAD
 import SidemenuIcon from './SidemenuIcon.vue';
 import Spinner from 'shared/components/Spinner.vue';
 import Tabs from './ui/Tabs/Tabs.vue';
@@ -24,6 +28,14 @@ import DatePicker from './ui/DatePicker/DatePicker.vue';
 
 const WootUIKit = {
   AvatarUploader,
+=======
+import Spinner from 'shared/components/Spinner.vue';
+import Tabs from './ui/Tabs/Tabs.vue';
+import TabsItem from './ui/Tabs/TabsItem.vue';
+import DatePicker from './ui/DatePicker/DatePicker.vue';
+
+const WootUIKit = {
+>>>>>>> upstream/develop
   Code,
   ColorPicker,
   ConfirmDeleteModal,
@@ -38,11 +50,17 @@ const WootUIKit = {
   LoadingState,
   Modal,
   ModalHeader,
+<<<<<<< HEAD
   SidemenuIcon,
   Spinner,
   Tabs,
   TabsItem,
   Thumbnail,
+=======
+  Spinner,
+  Tabs,
+  TabsItem,
+>>>>>>> upstream/develop
   DatePicker,
   install(Vue) {
     const keys = Object.keys(this);

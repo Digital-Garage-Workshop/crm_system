@@ -41,9 +41,13 @@ export default {
       props: () => {
         return {
           headerTitle: 'TEAMS_SETTINGS.HEADER',
+<<<<<<< HEAD
           headerButtonText: 'TEAMS_SETTINGS.NEW_TEAM',
           icon: 'people-team',
           newButtonRoutes: ['settings_teams_new'],
+=======
+          icon: 'people-team',
+>>>>>>> upstream/develop
           showBackButton: true,
         };
       },

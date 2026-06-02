@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { ref, defineEmits } from 'vue';
+=======
+import { ref } from 'vue';
+>>>>>>> upstream/develop
 import { useIntersectionObserver } from '@vueuse/core';
 
 const { options } = defineProps({

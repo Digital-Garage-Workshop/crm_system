@@ -1,4 +1,28 @@
 import { computed } from 'vue';
+<<<<<<< HEAD
+=======
+import { useUISettings } from './useUISettings';
+import { useAccount } from './useAccount';
+
+/**
+ * Select translation based on locale priority.
+ * @param {Object} translations - Translations object with locale keys
+ * @param {string} agentLocale - Agent's preferred locale
+ * @param {string} accountLocale - Account's default locale
+ * @returns {string|null} Selected translation or null
+ */
+export function selectTranslation(translations, agentLocale, accountLocale) {
+  if (!translations || Object.keys(translations).length === 0) return null;
+
+  if (agentLocale && translations[agentLocale]) {
+    return translations[agentLocale];
+  }
+  if (accountLocale && translations[accountLocale]) {
+    return translations[accountLocale];
+  }
+  return translations[Object.keys(translations)[0]];
+}
+>>>>>>> upstream/develop
 
 /**
  * Composable to extract translation state/content from contentAttributes.
@@ -6,6 +30,12 @@ import { computed } from 'vue';
  * @returns {Object} { hasTranslations, translationContent }
  */
 export function useTranslations(contentAttributes) {
+<<<<<<< HEAD
+=======
+  const { uiSettings } = useUISettings();
+  const { currentAccount } = useAccount();
+
+>>>>>>> upstream/develop
   const hasTranslations = computed(() => {
     if (!contentAttributes.value) return false;
     const { translations = {} } = contentAttributes.value;
@@ -14,8 +44,16 @@ export function useTranslations(contentAttributes) {
 
   const translationContent = computed(() => {
     if (!hasTranslations.value) return null;
+<<<<<<< HEAD
     const translations = contentAttributes.value.translations;
     return translations[Object.keys(translations)[0]];
+=======
+    return selectTranslation(
+      contentAttributes.value.translations,
+      uiSettings.value?.locale,
+      currentAccount.value?.locale
+    );
+>>>>>>> upstream/develop
   });
 
   return { hasTranslations, translationContent };

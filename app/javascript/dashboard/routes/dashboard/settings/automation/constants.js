@@ -15,6 +15,15 @@ export const AUTOMATIONS = {
         filterOperators: OPERATOR_TYPES_1,
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'private_note',
+        name: 'PRIVATE_NOTE',
+        inputType: 'search_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+>>>>>>> upstream/develop
         key: 'content',
         name: 'MESSAGE_CONTAINS',
         inputType: 'comma_separated_plain_text',
@@ -33,6 +42,33 @@ export const AUTOMATIONS = {
         filterOperators: OPERATOR_TYPES_1,
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'status',
+        name: 'STATUS',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+        key: 'assignee_id',
+        name: 'ASSIGNEE_NAME',
+        inputType: 'search_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+      {
+        key: 'team_id',
+        name: 'TEAM_NAME',
+        inputType: 'search_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+      {
+        key: 'priority',
+        name: 'PRIORITY',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+>>>>>>> upstream/develop
         key: 'conversation_language',
         name: 'CONVERSATION_LANGUAGE',
         inputType: 'multi_select',
@@ -44,6 +80,21 @@ export const AUTOMATIONS = {
         inputType: 'plain_text',
         filterOperators: OPERATOR_TYPES_6,
       },
+<<<<<<< HEAD
+=======
+      {
+        key: 'company_name',
+        name: 'COMPANY_NAME',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+        key: 'labels',
+        name: 'LABELS',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+>>>>>>> upstream/develop
     ],
     actions: [
       {
@@ -55,6 +106,17 @@ export const AUTOMATIONS = {
         name: 'ASSIGN_TEAM',
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'remove_assigned_agent',
+        name: 'REMOVE_ASSIGNED_AGENT',
+      },
+      {
+        key: 'remove_assigned_team',
+        name: 'REMOVE_ASSIGNED_TEAM',
+      },
+      {
+>>>>>>> upstream/develop
         key: 'add_label',
         name: 'ADD_LABEL',
       },
@@ -82,7 +144,18 @@ export const AUTOMATIONS = {
         key: 'snooze_conversation',
         name: 'SNOOZE_CONVERSATION',
       },
+<<<<<<< HEAD
 
+=======
+      {
+        key: 'open_conversation',
+        name: 'OPEN_CONVERSATION',
+      },
+      {
+        key: 'pending_conversation',
+        name: 'PENDING_CONVERSATION',
+      },
+>>>>>>> upstream/develop
       {
         key: 'resolve_conversation',
         name: 'RESOLVE_CONVERSATION',
@@ -130,6 +203,15 @@ export const AUTOMATIONS = {
         filterOperators: OPERATOR_TYPES_6,
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'company_name',
+        name: 'COMPANY_NAME',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+>>>>>>> upstream/develop
         key: 'referer',
         name: 'REFERER_LINK',
         inputType: 'plain_text',
@@ -159,6 +241,15 @@ export const AUTOMATIONS = {
         inputType: 'multi_select',
         filterOperators: OPERATOR_TYPES_1,
       },
+<<<<<<< HEAD
+=======
+      {
+        key: 'labels',
+        name: 'LABELS',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+>>>>>>> upstream/develop
     ],
     actions: [
       {
@@ -170,6 +261,17 @@ export const AUTOMATIONS = {
         name: 'ASSIGN_TEAM',
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'remove_assigned_agent',
+        name: 'REMOVE_ASSIGNED_AGENT',
+      },
+      {
+        key: 'remove_assigned_team',
+        name: 'REMOVE_ASSIGNED_TEAM',
+      },
+      {
+>>>>>>> upstream/develop
         key: 'assign_agent',
         name: 'ASSIGN_AGENT',
       },
@@ -194,6 +296,13 @@ export const AUTOMATIONS = {
         name: 'SNOOZE_CONVERSATION',
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'pending_conversation',
+        name: 'PENDING_CONVERSATION',
+      },
+      {
+>>>>>>> upstream/develop
         key: 'resolve_conversation',
         name: 'RESOLVE_CONVERSATION',
       },
@@ -246,6 +355,15 @@ export const AUTOMATIONS = {
         filterOperators: OPERATOR_TYPES_6,
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'company_name',
+        name: 'COMPANY_NAME',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+>>>>>>> upstream/develop
         key: 'assignee_id',
         name: 'ASSIGNEE_NAME',
         inputType: 'search_select',
@@ -281,6 +399,15 @@ export const AUTOMATIONS = {
         inputType: 'multi_select',
         filterOperators: OPERATOR_TYPES_1,
       },
+<<<<<<< HEAD
+=======
+      {
+        key: 'labels',
+        name: 'LABELS',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+>>>>>>> upstream/develop
     ],
     actions: [
       {
@@ -292,6 +419,17 @@ export const AUTOMATIONS = {
         name: 'ASSIGN_TEAM',
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'remove_assigned_agent',
+        name: 'REMOVE_ASSIGNED_AGENT',
+      },
+      {
+        key: 'remove_assigned_team',
+        name: 'REMOVE_ASSIGNED_TEAM',
+      },
+      {
+>>>>>>> upstream/develop
         key: 'assign_agent',
         name: 'ASSIGN_AGENT',
       },
@@ -316,6 +454,13 @@ export const AUTOMATIONS = {
         name: 'SNOOZE_CONVERSATION',
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'pending_conversation',
+        name: 'PENDING_CONVERSATION',
+      },
+      {
+>>>>>>> upstream/develop
         key: 'resolve_conversation',
         name: 'RESOLVE_CONVERSATION',
       },
@@ -374,6 +519,151 @@ export const AUTOMATIONS = {
         filterOperators: OPERATOR_TYPES_6,
       },
       {
+<<<<<<< HEAD
+=======
+        key: 'company_name',
+        name: 'COMPANY_NAME',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+        key: 'team_id',
+        name: 'TEAM_NAME',
+        inputType: 'search_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+      {
+        key: 'inbox_id',
+        name: 'INBOX',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+        key: 'conversation_language',
+        name: 'CONVERSATION_LANGUAGE',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+        key: 'priority',
+        name: 'PRIORITY',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+        key: 'labels',
+        name: 'LABELS',
+        inputType: 'multi_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+    ],
+    actions: [
+      {
+        key: 'assign_agent',
+        name: 'ASSIGN_AGENT',
+      },
+      {
+        key: 'assign_team',
+        name: 'ASSIGN_TEAM',
+      },
+      {
+        key: 'remove_assigned_agent',
+        name: 'REMOVE_ASSIGNED_AGENT',
+      },
+      {
+        key: 'remove_assigned_team',
+        name: 'REMOVE_ASSIGNED_TEAM',
+      },
+      {
+        key: 'assign_agent',
+        name: 'ASSIGN_AGENT',
+      },
+      {
+        key: 'send_email_to_team',
+        name: 'SEND_EMAIL_TO_TEAM',
+      },
+      {
+        key: 'send_message',
+        name: 'SEND_MESSAGE',
+      },
+      {
+        key: 'send_email_transcript',
+        name: 'SEND_EMAIL_TRANSCRIPT',
+      },
+      {
+        key: 'mute_conversation',
+        name: 'MUTE_CONVERSATION',
+      },
+      {
+        key: 'snooze_conversation',
+        name: 'SNOOZE_CONVERSATION',
+      },
+      {
+        key: 'pending_conversation',
+        name: 'PENDING_CONVERSATION',
+      },
+      {
+        key: 'send_webhook_event',
+        name: 'SEND_WEBHOOK_EVENT',
+      },
+      {
+        key: 'send_attachment',
+        name: 'SEND_ATTACHMENT',
+      },
+    ],
+  },
+  conversation_resolved: {
+    conditions: [
+      {
+        key: 'browser_language',
+        name: 'BROWSER_LANGUAGE',
+        inputType: 'search_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+        key: 'email',
+        name: 'EMAIL',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+        key: 'mail_subject',
+        name: 'MAIL_SUBJECT',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+        key: 'country_code',
+        name: 'COUNTRY_NAME',
+        inputType: 'search_select',
+        filterOperators: OPERATOR_TYPES_1,
+      },
+      {
+        key: 'referer',
+        name: 'REFERER_LINK',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+        key: 'assignee_id',
+        name: 'ASSIGNEE_NAME',
+        inputType: 'search_select',
+        filterOperators: OPERATOR_TYPES_3,
+      },
+      {
+        key: 'phone_number',
+        name: 'PHONE_NUMBER',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_6,
+      },
+      {
+        key: 'company_name',
+        name: 'COMPANY_NAME',
+        inputType: 'plain_text',
+        filterOperators: OPERATOR_TYPES_2,
+      },
+      {
+>>>>>>> upstream/develop
         key: 'team_id',
         name: 'TEAM_NAME',
         inputType: 'search_select',
@@ -408,8 +698,17 @@ export const AUTOMATIONS = {
         name: 'ASSIGN_TEAM',
       },
       {
+<<<<<<< HEAD
         key: 'assign_agent',
         name: 'ASSIGN_AGENT',
+=======
+        key: 'remove_assigned_agent',
+        name: 'REMOVE_ASSIGNED_AGENT',
+      },
+      {
+        key: 'remove_assigned_team',
+        name: 'REMOVE_ASSIGNED_TEAM',
+>>>>>>> upstream/develop
       },
       {
         key: 'send_email_to_team',
@@ -424,6 +723,7 @@ export const AUTOMATIONS = {
         name: 'SEND_EMAIL_TRANSCRIPT',
       },
       {
+<<<<<<< HEAD
         key: 'mute_conversation',
         name: 'MUTE_CONVERSATION',
       },
@@ -432,6 +732,8 @@ export const AUTOMATIONS = {
         name: 'SNOOZE_CONVERSATION',
       },
       {
+=======
+>>>>>>> upstream/develop
         key: 'send_webhook_event',
         name: 'SEND_WEBHOOK_EVENT',
       },
@@ -453,6 +755,13 @@ export const AUTOMATION_RULE_EVENTS = [
     value: 'CONVERSATION_UPDATED',
   },
   {
+<<<<<<< HEAD
+=======
+    key: 'conversation_resolved',
+    value: 'CONVERSATION_RESOLVED',
+  },
+  {
+>>>>>>> upstream/develop
     key: 'message_created',
     value: 'MESSAGE_CREATED',
   },
@@ -474,6 +783,19 @@ export const AUTOMATION_ACTION_TYPES = [
     inputType: 'search_select',
   },
   {
+<<<<<<< HEAD
+=======
+    key: 'remove_assigned_agent',
+    label: 'REMOVE_ASSIGNED_AGENT',
+    inputType: null,
+  },
+  {
+    key: 'remove_assigned_team',
+    label: 'REMOVE_ASSIGNED_TEAM',
+    inputType: null,
+  },
+  {
+>>>>>>> upstream/develop
     key: 'add_label',
     label: 'ADD_LABEL',
     inputType: 'multi_select',
@@ -509,6 +831,19 @@ export const AUTOMATION_ACTION_TYPES = [
     inputType: null,
   },
   {
+<<<<<<< HEAD
+=======
+    key: 'open_conversation',
+    label: 'OPEN_CONVERSATION',
+    inputType: null,
+  },
+  {
+    key: 'pending_conversation',
+    label: 'PENDING_CONVERSATION',
+    inputType: null,
+  },
+  {
+>>>>>>> upstream/develop
     key: 'send_webhook_event',
     label: 'SEND_WEBHOOK_EVENT',
     inputType: 'url',
@@ -524,6 +859,14 @@ export const AUTOMATION_ACTION_TYPES = [
     inputType: 'textarea',
   },
   {
+<<<<<<< HEAD
+=======
+    key: 'add_private_note',
+    label: 'ADD_PRIVATE_NOTE',
+    inputType: 'textarea',
+  },
+  {
+>>>>>>> upstream/develop
     key: 'change_priority',
     label: 'CHANGE_PRIORITY',
     inputType: 'search_select',

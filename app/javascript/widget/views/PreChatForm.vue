@@ -1,7 +1,14 @@
 <script>
+<<<<<<< HEAD
 import PreChatForm from '../components/PreChat/Form.vue';
 import configMixin from '../mixins/configMixin';
 import routerMixin from '../mixins/routerMixin';
+=======
+import { mapActions } from 'vuex';
+import { useRouter } from 'vue-router';
+import PreChatForm from '../components/PreChat/Form.vue';
+import configMixin from '../mixins/configMixin';
+>>>>>>> upstream/develop
 import { isEmptyObject } from 'widget/helpers/utils';
 import { ON_CONVERSATION_CREATED } from '../constants/widgetBusEvents';
 import { emitter } from 'shared/helpers/mitt';
@@ -10,7 +17,15 @@ export default {
   components: {
     PreChatForm,
   },
+<<<<<<< HEAD
   mixins: [configMixin, routerMixin],
+=======
+  mixins: [configMixin],
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+>>>>>>> upstream/develop
   mounted() {
     // Register event listener for conversation creation
     emitter.on(ON_CONVERSATION_CREATED, this.handleConversationCreated);
@@ -19,9 +34,17 @@ export default {
     emitter.off(ON_CONVERSATION_CREATED, this.handleConversationCreated);
   },
   methods: {
+<<<<<<< HEAD
     handleConversationCreated() {
       // Redirect to messages page after conversation is created
       this.replaceRoute('messages');
+=======
+    ...mapActions('conversation', ['clearConversations']),
+    ...mapActions('conversationAttributes', ['clearConversationAttributes']),
+    handleConversationCreated() {
+      // Redirect to messages page after conversation is created
+      this.router.replace({ name: 'messages' });
+>>>>>>> upstream/develop
       // Only after successful navigation, reset the isUpdatingRoute UIflag in app/javascript/widget/router.js
       // See issue: https://github.com/chatwoot/chatwoot/issues/10736
     },
@@ -48,6 +71,11 @@ export default {
           },
         });
       } else {
+<<<<<<< HEAD
+=======
+        this.clearConversations();
+        this.clearConversationAttributes();
+>>>>>>> upstream/develop
         this.$store.dispatch('conversation/createConversation', {
           fullName: fullName,
           emailAddress: emailAddress,

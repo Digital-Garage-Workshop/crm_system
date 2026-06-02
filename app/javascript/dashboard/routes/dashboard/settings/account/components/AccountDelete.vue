@@ -106,9 +106,13 @@ async function clearDeletionMark() {
     with-border
   >
     <div v-if="isMarkedForDeletion">
+<<<<<<< HEAD
       <div
         class="p-4 flex-grow-0 flex-shrink-0 flex-[50%] bg-red-50 dark:bg-red-900 rounded"
       >
+=======
+      <div class="p-4 flex-grow-0 flex-shrink-0 flex-[50%] bg-n-ruby-4 rounded">
+>>>>>>> upstream/develop
         <p class="mb-4">
           {{ markedForDeletionMessage }}
         </p>

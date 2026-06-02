@@ -5,6 +5,12 @@
     "LOADING": "درحال گرفتن برچسب‌ها",
     "DESCRIPTION": "Labels help you categorize and prioritize conversations and leads. You can assign a label to a conversation or contact using the side panel.",
     "LEARN_MORE": "Learn more about labels",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} label | {n} labels",
+    "SEARCH_PLACEHOLDER": "جستجو برچسب‌ها...",
+    "NO_RESULTS": "No labels found matching your search",
+>>>>>>> upstream/develop
     "SEARCH_404": "هیچ آیتمی با این مشخصات یافت نشد",
     "LIST": {
       "404": "هیچ برچسبی در این حساب‌کاربری وجود ندارد.",
@@ -13,7 +19,12 @@
       "TABLE_HEADER": {
         "NAME": "نام",
         "DESCRIPTION": "توضیحات",
+<<<<<<< HEAD
         "COLOR": "رنگ"
+=======
+        "COLOR": "رنگ",
+        "ACTION": "عملیات"
+>>>>>>> upstream/develop
       }
     },
     "FORM": {

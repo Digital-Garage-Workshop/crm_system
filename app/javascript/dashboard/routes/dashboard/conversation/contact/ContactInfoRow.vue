@@ -3,11 +3,19 @@ import { useAlert } from 'dashboard/composables';
 import EmojiOrIcon from 'shared/components/EmojiOrIcon.vue';
 import { copyTextToClipboard } from 'shared/helpers/clipboard';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import InlineInput from 'dashboard/components-next/inline-input/InlineInput.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     EmojiOrIcon,
     NextButton,
+<<<<<<< HEAD
+=======
+    InlineInput,
+>>>>>>> upstream/develop
   },
   props: {
     href: {
@@ -30,6 +38,24 @@ export default {
       type: Boolean,
       default: false,
     },
+<<<<<<< HEAD
+=======
+    editable: {
+      type: Boolean,
+      default: false,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+  },
+  emits: ['update'],
+  data() {
+    return {
+      isEditing: false,
+      editValue: '',
+    };
+>>>>>>> upstream/develop
   },
   methods: {
     async onCopy(e) {
@@ -37,14 +63,62 @@ export default {
       await copyTextToClipboard(this.value);
       useAlert(this.$t('CONTACT_PANEL.COPY_SUCCESSFUL'));
     },
+<<<<<<< HEAD
+=======
+    startEditing() {
+      if (!this.editable) return;
+      this.editValue = this.value || '';
+      this.isEditing = true;
+      this.$nextTick(() => {
+        this.$refs.editInput?.focus();
+      });
+    },
+    saveEdit() {
+      if (!this.isEditing) return;
+      this.isEditing = false;
+      const trimmed = this.editValue.trim();
+      if (trimmed !== (this.value || '')) {
+        this.$emit('update', trimmed);
+      }
+    },
+    cancelEdit() {
+      this.isEditing = false;
+    },
+>>>>>>> upstream/develop
   },
 };
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="w-full h-5 ltr:-ml-1 rtl:-mr-1">
     <a
       v-if="href"
+=======
+  <div class="group/row w-full h-5 ltr:-ml-1 rtl:-mr-1">
+    <!-- Inline edit mode -->
+    <div v-if="isEditing" class="flex items-center gap-2">
+      <EmojiOrIcon
+        :icon="icon"
+        :emoji="emoji"
+        icon-size="14"
+        class="flex-shrink-0 ltr:ml-1 rtl:mr-1"
+      />
+      <InlineInput
+        ref="editInput"
+        v-model="editValue"
+        :placeholder="title"
+        class="!w-fit"
+        @enter-press="saveEdit"
+        @escape-press="cancelEdit"
+        @blur="saveEdit"
+      />
+    </div>
+
+    <!-- Read mode with link -->
+    <a
+      v-else-if="href"
+>>>>>>> upstream/develop
       :href="href"
       class="flex items-center gap-2 text-n-slate-11 hover:underline"
     >
@@ -73,8 +147,23 @@ export default {
         icon="i-lucide-clipboard"
         @click="onCopy"
       />
+<<<<<<< HEAD
     </a>
 
+=======
+      <NextButton
+        v-if="editable"
+        ghost
+        xs
+        slate
+        class="ltr:-ml-1 rtl:-mr-1 opacity-0 group-hover/row:opacity-100 transition-opacity"
+        icon="i-lucide-pencil"
+        @click.prevent="startEditing"
+      />
+    </a>
+
+    <!-- Read mode without link -->
+>>>>>>> upstream/develop
     <div v-else class="flex items-center gap-2 text-n-slate-11">
       <EmojiOrIcon
         :icon="icon"
@@ -90,6 +179,18 @@ export default {
       <span v-else class="text-sm text-n-slate-11">
         {{ $t('CONTACT_PANEL.NOT_AVAILABLE') }}
       </span>
+<<<<<<< HEAD
+=======
+      <NextButton
+        v-if="editable"
+        ghost
+        xs
+        slate
+        class="ltr:-ml-1 rtl:-mr-1 opacity-0 group-hover/row:opacity-100 transition-opacity"
+        icon="i-lucide-pencil"
+        @click="startEditing"
+      />
+>>>>>>> upstream/develop
     </div>
   </div>
 </template>

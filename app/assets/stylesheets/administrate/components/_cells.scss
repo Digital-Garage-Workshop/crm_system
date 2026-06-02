@@ -46,6 +46,7 @@
 
 .cell-data__secret-field {
   align-items: center;
+<<<<<<< HEAD
   display: flex;
 
   span {
@@ -57,6 +58,27 @@
 
     svg {
       fill: currentColor;
+=======
+  color: $hint-grey;
+  display: flex;
+
+  span {
+    flex: 0 0 auto;
+  }
+
+  [data-secret-toggler],
+  [data-secret-copier] {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    margin-left: 0.5rem;
+    padding: 0;
+
+    svg {
+      fill: currentColor;
+      height: 1.25rem;
+      width: 1.25rem;
+>>>>>>> upstream/develop
     }
   }
 }

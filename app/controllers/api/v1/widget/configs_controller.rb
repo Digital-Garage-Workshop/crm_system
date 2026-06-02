@@ -9,7 +9,17 @@ class Api::V1::Widget::ConfigsController < Api::V1::Widget::BaseController
   private
 
   def set_global_config
+<<<<<<< HEAD
     @global_config = GlobalConfig.get('LOGO_THUMBNAIL', 'BRAND_NAME', 'WIDGET_BRAND_URL')
+=======
+    @global_config = GlobalConfig.get(
+      'LOGO_THUMBNAIL',
+      'BRAND_NAME',
+      'WIDGET_BRAND_URL',
+      'MAXIMUM_FILE_UPLOAD_SIZE',
+      'INSTALLATION_NAME'
+    )
+>>>>>>> upstream/develop
   end
 
   def set_contact

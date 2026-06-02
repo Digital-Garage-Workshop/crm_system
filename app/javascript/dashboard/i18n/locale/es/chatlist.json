@@ -76,6 +76,12 @@
       },
       "waiting_since_desc": {
         "TEXT": "Respuesta pendiente: la más corta primero"
+<<<<<<< HEAD
+=======
+      },
+      "priority_desc_created_at_asc": {
+        "TEXT": "Priority: Highest first, Created: Oldest first"
+>>>>>>> upstream/develop
       }
     },
     "ATTACHMENTS": {
@@ -102,6 +108,12 @@
       },
       "contact": {
         "CONTENT": "Contacto compartido"
+<<<<<<< HEAD
+=======
+      },
+      "embed": {
+        "CONTENT": "Contenido incrustado"
+>>>>>>> upstream/develop
       }
     },
     "CHAT_SORT_BY_FILTER": {
@@ -134,6 +146,11 @@
     "HIDE_QUOTED_TEXT": "Ocultar texto citado",
     "SHOW_QUOTED_TEXT": "Mostrar texto citado",
     "MESSAGE_READ": "Leído",
+<<<<<<< HEAD
     "SENDING": "Enviando"
+=======
+    "SENDING": "Enviando",
+    "UNREAD_COUNT_OVERFLOW": "9+"
+>>>>>>> upstream/develop
   }
 }

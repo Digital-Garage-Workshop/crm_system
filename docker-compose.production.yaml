@@ -5,7 +5,11 @@ services:
     image: chatwoot/chatwoot:latest
     env_file: .env ## Change this file for customized env variables
     volumes:
+<<<<<<< HEAD
       - /data/storage:/app/storage
+=======
+      - storage_data:/app/storage
+>>>>>>> upstream/develop
 
   rails:
     <<: *base
@@ -40,7 +44,11 @@ services:
     ports:
       - '127.0.0.1:5432:5432'
     volumes:
+<<<<<<< HEAD
       - /data/postgres:/var/lib/postgresql/data
+=======
+      - postgres_data:/var/lib/postgresql/data
+>>>>>>> upstream/develop
     environment:
       - POSTGRES_DB=chatwoot
       - POSTGRES_USER=postgres
@@ -53,6 +61,17 @@ services:
     command: ["sh", "-c", "redis-server --requirepass \"$REDIS_PASSWORD\""]
     env_file: .env
     volumes:
+<<<<<<< HEAD
       - /data/redis:/data
     ports:
       - '127.0.0.1:6379:6379'
+=======
+      - redis_data:/data
+    ports:
+      - '127.0.0.1:6379:6379'
+
+volumes:
+  storage_data:
+  postgres_data:
+  redis_data:
+>>>>>>> upstream/develop

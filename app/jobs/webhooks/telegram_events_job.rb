@@ -35,7 +35,11 @@ class Webhooks::TelegramEventsJob < ApplicationJob
   def process_event_params(channel, params)
     return unless params[:telegram]
 
+<<<<<<< HEAD
     if params.dig(:telegram, :edited_message).present?
+=======
+    if params.dig(:telegram, :edited_message).present? || params.dig(:telegram, :edited_business_message).present?
+>>>>>>> upstream/develop
       Telegram::UpdateMessageService.new(inbox: channel.inbox, params: params['telegram'].with_indifferent_access).perform
     else
       Telegram::IncomingMessageService.new(inbox: channel.inbox, params: params['telegram'].with_indifferent_access).perform

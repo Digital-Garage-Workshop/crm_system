@@ -18,6 +18,12 @@ on:
 env:
   DOCKER_REPO: chatwoot/chatwoot
 
+<<<<<<< HEAD
+=======
+permissions:
+  contents: read
+
+>>>>>>> upstream/develop
 jobs:
   build:
     strategy:

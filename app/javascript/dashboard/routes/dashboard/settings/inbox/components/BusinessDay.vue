@@ -2,11 +2,34 @@
 import parse from 'date-fns/parse';
 import differenceInMinutes from 'date-fns/differenceInMinutes';
 import { generateTimeSlots } from '../helpers/businessHour';
+<<<<<<< HEAD
 
 const timeSlots = generateTimeSlots(30);
 
 export default {
   components: {},
+=======
+import Icon from 'dashboard/components-next/icon/Icon.vue';
+import NextSelect from 'dashboard/components-next/select/Select.vue';
+
+const timeSlots = generateTimeSlots(30);
+
+const groupByPeriod = slots =>
+  ['AM', 'PM']
+    .map(period => ({
+      label: period,
+      options: slots
+        .filter(s => s.endsWith(period))
+        .map(s => ({ value: s, label: s })),
+    }))
+    .filter(g => g.options.length);
+
+export default {
+  components: {
+    Icon,
+    NextSelect,
+  },
+>>>>>>> upstream/develop
   props: {
     dayName: {
       type: String,
@@ -23,12 +46,19 @@ export default {
   emits: ['update'],
   computed: {
     fromTimeSlots() {
+<<<<<<< HEAD
       return timeSlots;
     },
     toTimeSlots() {
       return timeSlots.filter(slot => {
         return slot !== '12:00 AM';
       });
+=======
+      return groupByPeriod(timeSlots);
+    },
+    toTimeSlots() {
+      return groupByPeriod(timeSlots.filter(slot => slot !== '12:00 AM'));
+>>>>>>> upstream/develop
     },
     isDayEnabled: {
       get() {
@@ -96,11 +126,20 @@ export default {
       return parse(this.toTime, 'hh:mm a', new Date());
     },
     totalHours() {
+<<<<<<< HEAD
       if (this.timeSlot.openAllDay) {
         return 24;
       }
       const totalHours = differenceInMinutes(this.toDate, this.fromDate) / 60;
       return totalHours;
+=======
+      if (this.timeSlot.openAllDay) return '24h';
+
+      const totalMinutes = differenceInMinutes(this.toDate, this.fromDate);
+      const [h, m] = [Math.floor(totalMinutes / 60), totalMinutes % 60];
+
+      return [h && `${h}h`, m && `${m}m`].filter(Boolean).join(' ') || '0m';
+>>>>>>> upstream/develop
     },
     hasError() {
       return !this.timeSlot.valid;
@@ -134,6 +173,7 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div
     class="day-wrap flex py-2 gap-1 items-center px-0 min-h-[3rem] box-content border-b border-solid border-n-weak"
   >
@@ -230,3 +270,69 @@ export default {
   }
 }
 </style>
+=======
+  <tr>
+    <td class="ltr:pl-4 ltr:pr-3 rtl:pl-3 rtl:pr-4">
+      <div class="flex items-center gap-2 min-h-16">
+        <input
+          v-model="isDayEnabled"
+          name="enable-day"
+          class="m-0"
+          type="checkbox"
+          :title="$t('INBOX_MGMT.BUSINESS_HOURS.DAY.ENABLE')"
+        />
+        <span class="text-body-main text-n-slate-12 font-medium">
+          {{ dayName }}
+        </span>
+      </div>
+    </td>
+    <td class="py-3 ltr:pr-3 rtl:pl-3">
+      <div v-if="isDayEnabled" class="flex flex-col gap-1.5">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <input
+              v-model="isOpenAllDay"
+              name="enable-open-all-day"
+              class="m-0"
+              type="checkbox"
+              :title="$t('INBOX_MGMT.BUSINESS_HOURS.ALL_DAY')"
+            />
+            <span class="text-body-main text-n-slate-12">{{
+              $t('INBOX_MGMT.BUSINESS_HOURS.ALL_DAY')
+            }}</span>
+          </div>
+          <NextSelect
+            v-model="fromTime"
+            :groups="fromTimeSlots"
+            :placeholder="$t('INBOX_MGMT.BUSINESS_HOURS.DAY.CHOOSE')"
+            :disabled="isOpenAllDay"
+          />
+          <div class="flex items-center">
+            <Icon icon="i-lucide-minus size-4" />
+          </div>
+          <NextSelect
+            v-model="toTime"
+            :groups="toTimeSlots"
+            :placeholder="$t('INBOX_MGMT.BUSINESS_HOURS.DAY.CHOOSE')"
+            :disabled="isOpenAllDay"
+          />
+        </div>
+        <span v-if="hasError" class="error text-label-small text-n-ruby-9">
+          {{ $t('INBOX_MGMT.BUSINESS_HOURS.DAY.VALIDATION_ERROR') }}
+        </span>
+      </div>
+      <span v-else class="text-body-main text-n-slate-11">
+        {{ $t('INBOX_MGMT.BUSINESS_HOURS.DAY.UNAVAILABLE') }}
+      </span>
+    </td>
+    <td class="py-3 ltr:pr-3 rtl:pl-3">
+      <span
+        v-if="isDayEnabled && !hasError"
+        class="label bg-n-blue-3 text-n-blue-11 text-label-small inline-block px-2 py-1 rounded-lg cursor-default whitespace-nowrap"
+      >
+        {{ totalHours }}
+      </span>
+    </td>
+  </tr>
+</template>
+>>>>>>> upstream/develop

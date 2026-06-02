@@ -20,6 +20,10 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  account_id             :integer          not null
+<<<<<<< HEAD
+=======
+#  assignee_agent_bot_id  :bigint
+>>>>>>> upstream/develop
 #  assignee_id            :integer
 #  campaign_id            :bigint
 #  contact_id             :bigint
@@ -40,6 +44,10 @@
 #  index_conversations_on_contact_inbox_id            (contact_inbox_id)
 #  index_conversations_on_first_reply_created_at      (first_reply_created_at)
 #  index_conversations_on_id_and_account_id           (account_id,id)
+<<<<<<< HEAD
+=======
+#  index_conversations_on_identifier_and_account_id   (identifier,account_id)
+>>>>>>> upstream/develop
 #  index_conversations_on_inbox_id                    (inbox_id)
 #  index_conversations_on_priority                    (priority)
 #  index_conversations_on_status_and_account_id       (status,account_id)
@@ -64,6 +72,10 @@ class Conversation < ApplicationRecord
   validates :inbox_id, presence: true
   validates :contact_id, presence: true
   before_validation :validate_additional_attributes
+<<<<<<< HEAD
+=======
+  before_validation :reset_agent_bot_when_assignee_present
+>>>>>>> upstream/develop
   validates :additional_attributes, jsonb_attributes_length: true
   validates :custom_attributes, jsonb_attributes_length: true
   validates :uuid, uniqueness: true
@@ -76,11 +88,23 @@ class Conversation < ApplicationRecord
   scope :assigned, -> { where.not(assignee_id: nil) }
   scope :assigned_to, ->(agent) { where(assignee_id: agent.id) }
   scope :unattended, -> { where(first_reply_created_at: nil).or(where.not(waiting_since: nil)) }
+<<<<<<< HEAD
   scope :resolvable, lambda { |auto_resolve_after|
+=======
+  scope :resolvable_not_waiting, lambda { |auto_resolve_after|
+>>>>>>> upstream/develop
     return none if auto_resolve_after.to_i.zero?
 
     open.where('last_activity_at < ? AND waiting_since IS NULL', Time.now.utc - auto_resolve_after.minutes)
   }
+<<<<<<< HEAD
+=======
+  scope :resolvable_all, lambda { |auto_resolve_after|
+    return none if auto_resolve_after.to_i.zero?
+
+    open.where('last_activity_at < ?', Time.now.utc - auto_resolve_after.minutes)
+  }
+>>>>>>> upstream/develop
 
   scope :last_user_message_at, lambda {
     joins(
@@ -92,6 +116,10 @@ class Conversation < ApplicationRecord
   belongs_to :account
   belongs_to :inbox
   belongs_to :assignee, class_name: 'User', optional: true, inverse_of: :assigned_conversations
+<<<<<<< HEAD
+=======
+  belongs_to :assignee_agent_bot, class_name: 'AgentBot', optional: true
+>>>>>>> upstream/develop
   belongs_to :contact
   belongs_to :contact_inbox
   belongs_to :team, optional: true
@@ -103,6 +131,10 @@ class Conversation < ApplicationRecord
   has_many :conversation_participants, dependent: :destroy_async
   has_many :notifications, as: :primary_actor, dependent: :destroy_async
   has_many :attachments, through: :messages
+<<<<<<< HEAD
+=======
+  has_many :reporting_events, dependent: :destroy_async
+>>>>>>> upstream/develop
 
   before_save :ensure_snooze_until_reset
   before_create :determine_conversation_status
@@ -111,6 +143,11 @@ class Conversation < ApplicationRecord
   after_update_commit :execute_after_update_commit_callbacks
   after_create_commit :notify_conversation_creation
   after_create_commit :load_attributes_created_by_db_triggers
+<<<<<<< HEAD
+=======
+  before_destroy :set_unread_count_deletion_data
+  after_destroy_commit :notify_conversation_deletion
+>>>>>>> upstream/develop
 
   delegate :auto_resolve_after, to: :account
 
@@ -122,12 +159,25 @@ class Conversation < ApplicationRecord
     additional_attributes&.dig('conversation_language')
   end
 
+<<<<<<< HEAD
+=======
+  # Be aware: The precision of created_at and last_activity_at may differ from Ruby's Time precision.
+  # Our DB column (see schema) stores timestamps with second-level precision (no microseconds), so
+  # if you assign a Ruby Time with microseconds, the DB will truncate it. This may cause subtle differences
+  # if you compare or copy these values in Ruby, also in our specs
+  # So in specs rely on to be_with(1.second) instead of to eq()
+  # TODO: Migrate to use a timestamp with microsecond precision
+>>>>>>> upstream/develop
   def last_activity_at
     self[:last_activity_at] || created_at
   end
 
   def last_incoming_message
+<<<<<<< HEAD
     messages&.incoming&.last
+=======
+    messages.where(account_id: account_id)&.incoming&.last
+>>>>>>> upstream/develop
   end
 
   def toggle_status
@@ -143,12 +193,23 @@ class Conversation < ApplicationRecord
   end
 
   def bot_handoff!
+<<<<<<< HEAD
+=======
+    update(waiting_since: Time.current) if waiting_since.blank?
+>>>>>>> upstream/develop
     open!
     dispatcher_dispatch(CONVERSATION_BOT_HANDOFF)
   end
 
   def unread_messages
     agent_last_seen_at.present? ? messages.created_since(agent_last_seen_at) : messages
+<<<<<<< HEAD
+=======
+  end
+
+  def assignee_unread_messages
+    assignee_last_seen_at.present? ? messages.created_since(assignee_last_seen_at) : messages
+>>>>>>> upstream/develop
   end
 
   def unread_incoming_messages
@@ -167,6 +228,21 @@ class Conversation < ApplicationRecord
     true
   end
 
+<<<<<<< HEAD
+=======
+  # Virtual attribute till we switch completely to polymorphic assignee
+  def assignee_type
+    return 'AgentBot' if assignee_agent_bot_id.present?
+    return 'User' if assignee_id.present?
+
+    nil
+  end
+
+  def assigned_entity
+    assignee_agent_bot || assignee
+  end
+
+>>>>>>> upstream/develop
   def tweet?
     inbox.inbox_type == 'Twitter' && additional_attributes['type'] == 'tweet'
   end
@@ -186,11 +262,16 @@ class Conversation < ApplicationRecord
   private
 
   def execute_after_update_commit_callbacks
+<<<<<<< HEAD
+=======
+    handle_resolved_status_change
+>>>>>>> upstream/develop
     notify_status_change
     create_activity
     notify_conversation_updation
   end
 
+<<<<<<< HEAD
   def ensure_snooze_until_reset
     self.snoozed_until = nil unless snoozed?
   end
@@ -218,6 +299,59 @@ class Conversation < ApplicationRecord
     dispatcher_dispatch(CONVERSATION_CREATED)
   end
 
+=======
+  def handle_resolved_status_change
+    # When conversation is resolved, clear waiting_since using update_column to avoid callbacks
+    return unless saved_change_to_status? && status == 'resolved'
+
+    # rubocop:disable Rails/SkipsModelValidations
+    update_column(:waiting_since, nil)
+    # rubocop:enable Rails/SkipsModelValidations
+  end
+
+  def ensure_snooze_until_reset
+    self.snoozed_until = nil unless snoozed?
+  end
+
+  def ensure_waiting_since
+    self.waiting_since = created_at
+  end
+
+  def validate_additional_attributes
+    self.additional_attributes = {} unless additional_attributes.is_a?(Hash)
+  end
+
+  def reset_agent_bot_when_assignee_present
+    return if assignee_id.blank?
+
+    self.assignee_agent_bot_id = nil
+  end
+
+  def determine_conversation_status
+    self.status = :resolved and return if contact.blocked?
+
+    return handle_campaign_status if campaign.present?
+
+    # TODO: make this an inbox config instead of assuming bot conversations should start as pending
+    self.status = :pending if inbox.active_bot?
+  end
+
+  def handle_campaign_status
+    # If campaign has no sender (bot-initiated) and inbox has active bot, let bot handle it
+    self.status = :pending if campaign.sender_id.nil? && inbox.active_bot?
+  end
+
+  def notify_conversation_creation
+    dispatcher_dispatch(CONVERSATION_CREATED)
+  end
+
+  def notify_conversation_deletion
+    return if @unread_count_deletion_data.blank?
+
+    Rails.configuration.dispatcher.dispatch(CONVERSATION_DELETED, Time.zone.now, conversation_data: @unread_count_deletion_data)
+  end
+
+>>>>>>> upstream/develop
   def notify_conversation_updation
     return unless previous_changes.keys.present? && allowed_keys?
 
@@ -225,8 +359,13 @@ class Conversation < ApplicationRecord
   end
 
   def list_of_keys
+<<<<<<< HEAD
     %w[team_id assignee_id status snoozed_until custom_attributes label_list waiting_since first_reply_created_at
        priority]
+=======
+    %w[team_id assignee_id assignee_agent_bot_id status snoozed_until custom_attributes label_list waiting_since
+       first_reply_created_at priority]
+>>>>>>> upstream/develop
   end
 
   def allowed_keys?
@@ -263,6 +402,20 @@ class Conversation < ApplicationRecord
                                                                        performed_by: Current.executed_by)
   end
 
+<<<<<<< HEAD
+=======
+  def set_unread_count_deletion_data
+    @unread_count_deletion_data = {
+      id: id,
+      account_id: account_id,
+      inbox_id: inbox_id,
+      assignee_id: assignee_id,
+      team_id: team_id,
+      cached_label_list: cached_label_list
+    }
+  end
+
+>>>>>>> upstream/develop
   def conversation_status_changed_to_open?
     return false unless open?
     # saved_change_to_status? method only works in case of update
@@ -275,8 +428,11 @@ class Conversation < ApplicationRecord
     previous_labels, current_labels = previous_changes[:label_list]
     return unless (previous_labels.is_a? Array) && (current_labels.is_a? Array)
 
+<<<<<<< HEAD
     dispatcher_dispatch(CONVERSATION_UPDATED, previous_changes)
 
+=======
+>>>>>>> upstream/develop
     create_label_added(user_name, current_labels - previous_labels)
     create_label_removed(user_name, previous_labels - current_labels)
   end
@@ -293,5 +449,9 @@ class Conversation < ApplicationRecord
   end
 end
 
+<<<<<<< HEAD
+=======
+Conversation.include_mod_with('Audit::Conversation')
+>>>>>>> upstream/develop
 Conversation.include_mod_with('Concerns::Conversation')
 Conversation.prepend_mod_with('Conversation')

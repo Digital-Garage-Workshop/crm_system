@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "مدیرکل",
       "AGENT": "ایجنت"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "در حال حاضر هیچ ایجنتی برای این حساب معرفی نشده است",
       "TITLE": "مدیریت ایجنت ها",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "متاسفانه ارتباط با سرور برقرار نشد، مجددا امتحان کنید"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "جستجوی اپراتور...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "نتیجه‌ای یافت نشد."
     },

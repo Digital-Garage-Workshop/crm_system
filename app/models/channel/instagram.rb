@@ -19,6 +19,12 @@ class Channel::Instagram < ApplicationRecord
   include Reauthorizable
   self.table_name = 'channel_instagram'
 
+<<<<<<< HEAD
+=======
+  # TODO: Remove guard once encryption keys become mandatory (target 3-4 releases out).
+  encrypts :access_token if Chatwoot.encryption_configured?
+
+>>>>>>> upstream/develop
   AUTHORIZATION_ERROR_THRESHOLD = 1
 
   validates :access_token, presence: true

@@ -1,5 +1,6 @@
 <script>
 import { useVuelidate } from '@vuelidate/core';
+<<<<<<< HEAD
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
 import { required, minLength, email } from '@vuelidate/validators';
@@ -13,6 +14,20 @@ export default {
   mixins: [globalConfigMixin],
   setup() {
     return { v$: useVuelidate() };
+=======
+import { useAlert } from 'dashboard/composables';
+import { required, minLength, email } from '@vuelidate/validators';
+import { useBranding } from 'shared/composables/useBranding';
+import FormInput from '../../../../components/Form/Input.vue';
+import { resetPassword } from '../../../../api/auth';
+import NextButton from 'dashboard/components-next/button/Button.vue';
+
+export default {
+  components: { FormInput, NextButton },
+  setup() {
+    const { replaceInstallationName } = useBranding();
+    return { v$: useVuelidate(), replaceInstallationName };
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -24,9 +39,12 @@ export default {
       error: '',
     };
   },
+<<<<<<< HEAD
   computed: {
     ...mapGetters({ globalConfig: 'globalConfig/get' }),
   },
+=======
+>>>>>>> upstream/develop
   validations() {
     return {
       credentials: {
@@ -82,12 +100,16 @@ export default {
       <p
         class="mb-4 text-sm font-normal leading-6 tracking-normal text-n-slate-11"
       >
+<<<<<<< HEAD
         {{
           useInstallationName(
             $t('RESET_PASSWORD.DESCRIPTION'),
             globalConfig.installationName
           )
         }}
+=======
+        {{ replaceInstallationName($t('RESET_PASSWORD.DESCRIPTION')) }}
+>>>>>>> upstream/develop
       </p>
       <div class="space-y-5">
         <FormInput
@@ -98,10 +120,21 @@ export default {
           :placeholder="$t('RESET_PASSWORD.EMAIL.PLACEHOLDER')"
           @input="v$.credentials.email.$touch"
         />
+<<<<<<< HEAD
         <SubmitButton
           :disabled="v$.credentials.email.$invalid || resetPassword.showLoading"
           :button-text="$t('RESET_PASSWORD.SUBMIT')"
           :loading="resetPassword.showLoading"
+=======
+        <NextButton
+          lg
+          type="submit"
+          data-testid="submit_button"
+          class="w-full"
+          :label="$t('RESET_PASSWORD.SUBMIT')"
+          :disabled="v$.credentials.email.$invalid || resetPassword.showLoading"
+          :is-loading="resetPassword.showLoading"
+>>>>>>> upstream/develop
         />
       </div>
       <p class="mt-4 -mb-1 text-sm text-n-slate-11">

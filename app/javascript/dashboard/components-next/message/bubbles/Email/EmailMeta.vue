@@ -14,7 +14,12 @@ const fromEmail = computed(() => {
 });
 
 const toEmail = computed(() => {
+<<<<<<< HEAD
   return contentAttributes.value?.email?.to ?? [];
+=======
+  const { toEmails, email } = contentAttributes.value;
+  return email?.to ?? toEmails ?? [];
+>>>>>>> upstream/develop
 });
 
 const ccEmail = computed(() => {

@@ -28,6 +28,7 @@ class Conversations::FilterService < FilterService
       :taggings, :inbox, { assignee: { avatar_attachment: [:blob] } }, { contact: { avatar_attachment: [:blob] } }, :team, :messages, :contact_inbox
     )
 
+<<<<<<< HEAD
     account_user = @account.account_users.find_by(user_id: @user.id)
     is_administrator = account_user&.role == 'administrator'
 
@@ -38,6 +39,8 @@ class Conversations::FilterService < FilterService
     end
 
     # Apply permission-based filtering
+=======
+>>>>>>> upstream/develop
     Conversations::PermissionFilterService.new(
       conversations,
       @user,

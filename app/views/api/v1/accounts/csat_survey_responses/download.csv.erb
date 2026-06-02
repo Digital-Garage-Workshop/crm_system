@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <%=
   CSV.generate_line([
+=======
+<%
+  headers = [
+>>>>>>> upstream/develop
     I18n.t('reports.csat.headers.agent_name'),
     I18n.t('reports.csat.headers.rating'),
     I18n.t('reports.csat.headers.feedback'),
@@ -8,12 +13,20 @@
     I18n.t('reports.csat.headers.contact_phone_number'),
     I18n.t('reports.csat.headers.link_to_the_conversation'),
     I18n.t('reports.csat.headers.recorded_at')
+<<<<<<< HEAD
   ])
 -%>
+=======
+  ]
+  headers << I18n.t('reports.csat.headers.review_notes') if ChatwootApp.enterprise?
+-%>
+<%= CSV.generate_line(headers) -%>
+>>>>>>> upstream/develop
 <% @csat_survey_responses.each do |csat_response| %>
 <% assigned_agent = csat_response.assigned_agent %>
 <% contact = csat_response.contact %>
 <% conversation = csat_response.conversation %>
+<<<<<<< HEAD
 <%=
   CSV.generate_line([
     assigned_agent ? "#{assigned_agent.name} (#{assigned_agent.email})" : nil,
@@ -26,6 +39,22 @@
     csat_response.created_at,
 ]).html_safe
 -%>
+=======
+<%
+  row = [
+    assigned_agent ? "#{assigned_agent.name} (#{assigned_agent.email})" : nil,
+    csat_response.rating,
+    csat_response.feedback_message.presence,
+    contact&.name.presence,
+    contact&.email.presence,
+    contact&.phone_number.presence,
+    conversation ? app_account_conversation_url(account_id: Current.account.id, id: conversation.display_id) : nil,
+    csat_response.created_at
+  ]
+  row << csat_response.csat_review_notes if ChatwootApp.enterprise?
+-%>
+<%= CSV.generate_line(row).html_safe -%>
+>>>>>>> upstream/develop
 <% end %>
 <%=
   CSV.generate_line([

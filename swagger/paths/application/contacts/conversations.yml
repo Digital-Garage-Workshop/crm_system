@@ -1,8 +1,21 @@
+<<<<<<< HEAD
+=======
+parameters:
+  - $ref: '#/components/parameters/account_id'
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: number
+    description: ID of the contact
+
+>>>>>>> upstream/develop
 get:
   tags:
     - Contacts
   operationId: contactConversations
   summary: Contact Conversations
+<<<<<<< HEAD
   description: Get conversations associated to that contact
   parameters:
     - $ref: '#/parameters/account_id'
@@ -20,3 +33,34 @@ get:
       description: Contact not found
     403:
       description: Access denied
+=======
+  description: Get conversations associated with that contact
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: number
+      description: ID of the contact
+  security:
+    - userApiKey: []
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/contact_conversations_response'
+    '404':
+      description: Contact not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+    '403':
+      description: Access denied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

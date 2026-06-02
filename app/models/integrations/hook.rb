@@ -21,11 +21,21 @@ class Integrations::Hook < ApplicationRecord
   before_validation :ensure_hook_type
   after_create :trigger_setup_if_crm
 
+<<<<<<< HEAD
+=======
+  # TODO: Remove guard once encryption keys become mandatory (target 3-4 releases out).
+  encrypts :access_token, deterministic: true if Chatwoot.encryption_configured?
+
+>>>>>>> upstream/develop
   validates :account_id, presence: true
   validates :app_id, presence: true
   validates :inbox_id, presence: true, if: -> { hook_type == 'inbox' }
   validate :validate_settings_json_schema
   validate :ensure_feature_enabled
+<<<<<<< HEAD
+=======
+  validate :validate_openai_api_key, if: :validate_openai_api_key?
+>>>>>>> upstream/develop
   validates :app_id, uniqueness: { scope: [:account_id], unless: -> { app.present? && app.params[:allow_multiple_hooks].present? } }
 
   # TODO: This seems to be only used for slack at the moment
@@ -53,10 +63,22 @@ class Integrations::Hook < ApplicationRecord
     app_id == 'dialogflow'
   end
 
+<<<<<<< HEAD
+=======
+  def openai?
+    app_id == 'openai'
+  end
+
+  def notion?
+    app_id == 'notion'
+  end
+
+>>>>>>> upstream/develop
   def disable
     update(status: 'disabled')
   end
 
+<<<<<<< HEAD
   def process_event(event)
     case app_id
     when 'openai'
@@ -64,6 +86,12 @@ class Integrations::Hook < ApplicationRecord
     else
       { error: 'No processor found' }
     end
+=======
+  def process_event(_event)
+    # OpenAI integration migrated to Captain::EditorService
+    # Other integrations (slack, dialogflow, etc.) handled via HookJob
+    { error: 'No processor found' }
+>>>>>>> upstream/develop
   end
 
   def feature_allowed?
@@ -91,6 +119,29 @@ class Integrations::Hook < ApplicationRecord
     errors.add(:settings, ': Invalid settings data') unless JSONSchemer.schema(app.params[:settings_json_schema]).valid?(settings)
   end
 
+<<<<<<< HEAD
+=======
+  # TODO: When adding credential validation for other integrations (dialogflow, dyte, etc.),
+  # extract this into an app-level config flag in apps.yml instead of hardcoding app_id checks.
+  def validate_openai_api_key?
+    openai? && enabled? && (new_record? || openai_api_key_changed? || will_save_change_to_status?)
+  end
+
+  def openai_api_key_changed?
+    settings_api_key(settings) != settings_api_key(settings_in_database)
+  end
+
+  def validate_openai_api_key
+    return if Integrations::Openai::KeyValidator.valid?(settings_api_key(settings))
+
+    errors.add(:base, I18n.t('errors.openai.invalid_api_key'))
+  end
+
+  def settings_api_key(value)
+    value&.dig('api_key') || value&.dig(:api_key)
+  end
+
+>>>>>>> upstream/develop
   def trigger_setup_if_crm
     # we need setup services to create data prerequisite to functioning of the integration
     # in case of Leadsquared, we need to create a custom activity type for capturing conversations and transcripts

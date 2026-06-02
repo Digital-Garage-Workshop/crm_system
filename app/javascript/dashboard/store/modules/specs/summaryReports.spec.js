@@ -7,6 +7,10 @@ vi.mock('dashboard/api/summaryReports', () => ({
     getInboxReports: vi.fn(),
     getAgentReports: vi.fn(),
     getTeamReports: vi.fn(),
+<<<<<<< HEAD
+=======
+    getLabelReports: vi.fn(),
+>>>>>>> upstream/develop
   },
 }));
 
@@ -25,10 +29,18 @@ describe('Summary Reports Store', () => {
         inboxSummaryReports: [],
         agentSummaryReports: [],
         teamSummaryReports: [],
+<<<<<<< HEAD
+=======
+        labelSummaryReports: [],
+>>>>>>> upstream/develop
         uiFlags: {
           isFetchingInboxSummaryReports: false,
           isFetchingAgentSummaryReports: false,
           isFetchingTeamSummaryReports: false,
+<<<<<<< HEAD
+=======
+          isFetchingLabelSummaryReports: false,
+>>>>>>> upstream/develop
         },
       });
     });
@@ -39,6 +51,10 @@ describe('Summary Reports Store', () => {
       inboxSummaryReports: [{ id: 1 }],
       agentSummaryReports: [{ id: 2 }],
       teamSummaryReports: [{ id: 3 }],
+<<<<<<< HEAD
+=======
+      labelSummaryReports: [{ id: 4 }],
+>>>>>>> upstream/develop
       uiFlags: { isFetchingInboxSummaryReports: true },
     };
 
@@ -54,6 +70,13 @@ describe('Summary Reports Store', () => {
       expect(store.getters.getTeamSummaryReports(state)).toEqual([{ id: 3 }]);
     });
 
+<<<<<<< HEAD
+=======
+    it('should return label summary reports', () => {
+      expect(store.getters.getLabelSummaryReports(state)).toEqual([{ id: 4 }]);
+    });
+
+>>>>>>> upstream/develop
     it('should return UI flags', () => {
       expect(store.getters.getUIFlags(state)).toEqual({
         isFetchingInboxSummaryReports: true,
@@ -86,6 +109,17 @@ describe('Summary Reports Store', () => {
       expect(state.teamSummaryReports).toEqual(data);
     });
 
+<<<<<<< HEAD
+=======
+    it('should set label summary report', () => {
+      const state = { ...initialState };
+      const data = [{ id: 4 }];
+
+      store.mutations.setLabelSummaryReport(state, data);
+      expect(state.labelSummaryReports).toEqual(data);
+    });
+
+>>>>>>> upstream/develop
     it('should merge UI flags with existing flags', () => {
       const state = {
         uiFlags: { flag1: true, flag2: false },
@@ -125,12 +159,22 @@ describe('Summary Reports Store', () => {
         });
       });
 
+<<<<<<< HEAD
       it('should handle errors gracefully', async () => {
+=======
+      it('should reset uiFlags and rethrow error on failure', async () => {
+>>>>>>> upstream/develop
         SummaryReportsAPI.getInboxReports.mockRejectedValue(
           new Error('API Error')
         );
 
+<<<<<<< HEAD
         await store.actions.fetchInboxSummaryReports({ commit }, {});
+=======
+        await expect(
+          store.actions.fetchInboxSummaryReports({ commit }, {})
+        ).rejects.toThrow('API Error');
+>>>>>>> upstream/develop
 
         expect(commit).toHaveBeenCalledWith('setUIFlags', {
           isFetchingInboxSummaryReports: false,
@@ -185,5 +229,32 @@ describe('Summary Reports Store', () => {
         });
       });
     });
+<<<<<<< HEAD
+=======
+
+    describe('fetchLabelSummaryReports', () => {
+      it('should fetch label reports successfully', async () => {
+        const params = { labelId: 789 };
+        const mockResponse = {
+          data: [{ label_id: 789, label_name: 'Test Label' }],
+        };
+
+        SummaryReportsAPI.getLabelReports.mockResolvedValue(mockResponse);
+
+        await store.actions.fetchLabelSummaryReports({ commit }, params);
+
+        expect(commit).toHaveBeenCalledWith('setUIFlags', {
+          isFetchingLabelSummaryReports: true,
+        });
+        expect(SummaryReportsAPI.getLabelReports).toHaveBeenCalledWith(params);
+        expect(commit).toHaveBeenCalledWith('setLabelSummaryReport', [
+          { labelId: 789, labelName: 'Test Label' },
+        ]);
+        expect(commit).toHaveBeenCalledWith('setUIFlags', {
+          isFetchingLabelSummaryReports: false,
+        });
+      });
+    });
+>>>>>>> upstream/develop
   });
 });

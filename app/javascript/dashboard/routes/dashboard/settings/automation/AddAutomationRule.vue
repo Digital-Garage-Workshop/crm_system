@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
 import { mapGetters } from 'vuex';
 import FilterInputBox from 'dashboard/components/widgets/FilterInput/Index.vue';
@@ -16,6 +17,17 @@ import {
 import { AUTOMATION_RULE_EVENTS, AUTOMATION_ACTION_TYPES } from './constants';
 
 const start_value = {
+=======
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useStore } from 'dashboard/composables/store';
+import { useAutomation } from 'dashboard/composables/useAutomation';
+import AutomationRuleForm from './AutomationRuleForm.vue';
+
+const emit = defineEmits(['saveAutomation']);
+
+const START_VALUE = {
+>>>>>>> upstream/develop
   name: null,
   description: null,
   event_name: 'conversation_created',
@@ -36,6 +48,7 @@ const start_value = {
   ],
 };
 
+<<<<<<< HEAD
 export default {
   components: {
     FilterInputBox,
@@ -350,4 +363,62 @@ export default {
       </div>
     </div>
   </div>
+=======
+const store = useStore();
+const formRef = ref(null);
+
+const {
+  automation,
+  automationTypes,
+  onEventChange,
+  getConditionDropdownValues,
+  appendNewCondition,
+  appendNewAction,
+  removeFilter,
+  removeAction,
+  resetAction,
+  getActionDropdownValues,
+  manifestCustomAttributes,
+} = useAutomation(START_VALUE);
+
+const open = () => {
+  automation.value = structuredClone(START_VALUE);
+  manifestCustomAttributes();
+  formRef.value?.open();
+};
+const close = () => formRef.value?.close();
+
+const onSave = (payload, mode) => {
+  emit('saveAutomation', payload, mode);
+};
+
+onMounted(() => {
+  store.dispatch('inboxes/get');
+  store.dispatch('agents/get');
+  store.dispatch('contacts/get');
+  store.dispatch('teams/get');
+  store.dispatch('labels/get');
+  store.dispatch('campaigns/get');
+});
+
+defineExpose({ open, close });
+</script>
+
+<template>
+  <AutomationRuleForm
+    ref="formRef"
+    v-model:automation="automation"
+    mode="create"
+    :automation-types="automationTypes"
+    :get-condition-dropdown-values="getConditionDropdownValues"
+    :get-action-dropdown-values="getActionDropdownValues"
+    :append-new-condition="appendNewCondition"
+    :append-new-action="appendNewAction"
+    :remove-filter="removeFilter"
+    :remove-action="removeAction"
+    :reset-action="resetAction"
+    :on-event-change="onEventChange"
+    @save="onSave"
+  />
+>>>>>>> upstream/develop
 </template>

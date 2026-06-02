@@ -1,6 +1,7 @@
 json.payload do
   json.conversations do
     json.array! @result[:conversations] do |conversation|
+<<<<<<< HEAD
       json.id conversation.display_id
       json.account_id conversation.account_id
       json.created_at conversation.created_at.to_i
@@ -16,6 +17,9 @@ json.payload do
       json.agent do
         json.partial! 'agent', formats: [:json], agent: conversation.assignee if conversation.try(:assignee).present?
       end
+=======
+      json.partial! 'conversation_search_result', formats: [:json], conversation: conversation
+>>>>>>> upstream/develop
     end
   end
   json.contacts do
@@ -23,10 +27,21 @@ json.payload do
       json.partial! 'contact', formats: [:json], contact: contact
     end
   end
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/develop
   json.messages do
     json.array! @result[:messages] do |message|
       json.partial! 'message', formats: [:json], message: message
     end
   end
+<<<<<<< HEAD
+=======
+  json.articles do
+    json.array! @result[:articles] do |article|
+      json.partial! 'article', formats: [:json], article: article
+    end
+  end
+>>>>>>> upstream/develop
 end

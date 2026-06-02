@@ -70,10 +70,22 @@ RSpec.configure do |config|
   config.include SlackStubs
   config.include FileUploadHelpers
   config.include CsvSpecHelpers
+<<<<<<< HEAD
+=======
+  config.include InstagramSpecHelpers
+  config.include ConversationsUnreadCountsHelpers
+>>>>>>> upstream/develop
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include ActiveSupport::Testing::TimeHelpers
   config.include ActionCable::TestHelper
   config.include ActiveJob::TestHelper
+<<<<<<< HEAD
+=======
+
+  # OpenAPI response validation via Skooma
+  path_to_openapi = Rails.root.join('swagger/swagger.json')
+  config.include Skooma::RSpec[path_to_openapi], type: :request
+>>>>>>> upstream/develop
 end
 
 Shoulda::Matchers.configure do |config|

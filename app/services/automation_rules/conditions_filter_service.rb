@@ -113,6 +113,10 @@ class AutomationRules::ConditionsFilterService < FilterService
     query_operator = query_hash['query_operator']
 
     attribute_key = 'processed_message_content' if attribute_key == 'content'
+<<<<<<< HEAD
+=======
+    attribute_key = 'private' if attribute_key == 'private_note'
+>>>>>>> upstream/develop
 
     filter_operator_value = filter_operation(query_hash, current_index)
 
@@ -151,13 +155,43 @@ class AutomationRules::ConditionsFilterService < FilterService
       " #{table_name}.additional_attributes ->> '#{attribute_key}' #{filter_operator_value} #{query_operator} "
     when 'standard'
       if attribute_key == 'labels'
+<<<<<<< HEAD
         " tags.id #{filter_operator_value} #{query_operator} "
+=======
+        build_label_query_string(query_hash, current_index, query_operator)
+>>>>>>> upstream/develop
       else
         " #{table_name}.#{attribute_key} #{filter_operator_value} #{query_operator} "
       end
     end
   end
 
+<<<<<<< HEAD
+=======
+  def build_label_query_string(query_hash, current_index, query_operator)
+    case query_hash['filter_operator']
+    when 'equal_to'
+      return " 1=0 #{query_operator} " if query_hash['values'].blank?
+
+      value_placeholder = "value_#{current_index}"
+      @filter_values[value_placeholder] = query_hash['values'].first
+      " tags.name = :#{value_placeholder} #{query_operator} "
+    when 'not_equal_to'
+      return " 1=0 #{query_operator} " if query_hash['values'].blank?
+
+      value_placeholder = "value_#{current_index}"
+      @filter_values[value_placeholder] = query_hash['values'].first
+      " tags.name != :#{value_placeholder} #{query_operator} "
+    when 'is_present'
+      " tags.id IS NOT NULL #{query_operator} "
+    when 'is_not_present'
+      " tags.id IS NULL #{query_operator} "
+    else
+      " tags.id #{filter_operation(query_hash, current_index)} #{query_operator} "
+    end
+  end
+
+>>>>>>> upstream/develop
   private
 
   def base_relation
@@ -166,7 +200,27 @@ class AutomationRules::ConditionsFilterService < FilterService
     ).joins(
       'LEFT OUTER JOIN messages on messages.conversation_id = conversations.id'
     )
+<<<<<<< HEAD
     records = records.where(messages: { id: @options[:message].id }) if @options[:message].present?
     records
   end
+=======
+
+    # Only add label joins when label conditions exist
+    if label_conditions?
+      records = records.joins(
+        'LEFT OUTER JOIN taggings ON taggings.taggable_id = conversations.id AND taggings.taggable_type = \'Conversation\''
+      ).joins(
+        'LEFT OUTER JOIN tags ON taggings.tag_id = tags.id'
+      )
+    end
+
+    records = records.where(messages: { id: @options[:message].id }) if @options[:message].present?
+    records
+  end
+
+  def label_conditions?
+    @rule.conditions.any? { |condition| condition['attribute_key'] == 'labels' }
+  end
+>>>>>>> upstream/develop
 end

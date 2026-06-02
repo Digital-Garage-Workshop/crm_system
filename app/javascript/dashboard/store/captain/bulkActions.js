@@ -1,5 +1,9 @@
 import CaptainBulkActionsAPI from 'dashboard/api/captain/bulkActions';
+<<<<<<< HEAD
 import { createStore } from './storeFactory';
+=======
+import { createStore } from '../storeFactory';
+>>>>>>> upstream/develop
 import { throwErrorMessage } from 'dashboard/store/utils/api';
 
 export default createStore({
@@ -25,17 +29,39 @@ export default createStore({
       }
     },
 
+<<<<<<< HEAD
     handleBulkDelete: async function handleBulkDelete({ dispatch }, ids) {
       const response = await dispatch('processBulkAction', {
         type: 'AssistantResponse',
+=======
+    handleBulkDelete: async function handleBulkDelete(
+      { dispatch },
+      { type = 'AssistantResponse', ids }
+    ) {
+      const response = await dispatch('processBulkAction', {
+        type,
+>>>>>>> upstream/develop
         actionType: 'delete',
         ids,
       });
 
+<<<<<<< HEAD
       // Update the response store after successful API call
       await dispatch('captainResponses/removeBulkResponses', ids, {
         root: true,
       });
+=======
+      if (type === 'AssistantResponse') {
+        // Update the response store after successful API call
+        await dispatch('captainResponses/removeBulkResponses', ids, {
+          root: true,
+        });
+      } else if (type === 'AssistantDocument') {
+        await dispatch('captainDocuments/removeBulkRecords', ids, {
+          root: true,
+        });
+      }
+>>>>>>> upstream/develop
       return response;
     },
 
@@ -52,5 +78,21 @@ export default createStore({
       });
       return response;
     },
+<<<<<<< HEAD
+=======
+
+    handleBulkSync: async function handleBulkSync({ dispatch }, { ids }) {
+      const response = await dispatch('processBulkAction', {
+        type: 'AssistantDocument',
+        actionType: 'sync',
+        ids,
+      });
+
+      await dispatch('captainDocuments/markSyncing', response.ids || [], {
+        root: true,
+      });
+      return response;
+    },
+>>>>>>> upstream/develop
   }),
 });

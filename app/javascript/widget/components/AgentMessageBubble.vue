@@ -144,6 +144,11 @@ export default {
     <CustomerSatisfaction
       v-if="isCSAT"
       :message-content-attributes="messageContentAttributes.submitted_values"
+<<<<<<< HEAD
+=======
+      :display-type="messageContentAttributes.display_type"
+      :message="message"
+>>>>>>> upstream/develop
       :message-id="messageId"
     />
   </div>

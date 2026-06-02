@@ -13,6 +13,10 @@ defineProps({
   fallbackThumbnail: { type: String, default: '' },
   fallbackThumbnailDark: { type: String, default: '' },
   learnMoreUrl: { type: String, default: '' },
+<<<<<<< HEAD
+=======
+  hideActions: { type: Boolean, default: false },
+>>>>>>> upstream/develop
 });
 
 const imageError = ref(false);
@@ -49,7 +53,11 @@ const openLink = link => {
       ]"
     >
       <section
+<<<<<<< HEAD
         class="absolute top-full mt-6 ltr:left-0 rtl:right-0 outline outline-1 outline-n-weak bg-n-alpha-3 backdrop-blur-[100px] rounded-xl p-4 w-80"
+=======
+        class="absolute top-full mt-6 ltr:left-0 rtl:right-0 outline outline-1 outline-n-weak bg-n-alpha-3 backdrop-blur-[100px] rounded-xl p-4 w-80 z-20"
+>>>>>>> upstream/develop
       >
         <div
           class="absolute -top-[0.77rem] ltr:left-12 rtl:right-12 w-6 h-6 ltr:rotate-45 rtl:-rotate-45 rtl:rounded-tr ltr:rounded-tl rtl:border-r ltr:border-l border-t border-n-weak bg-n-alpha-3 z-10"
@@ -92,7 +100,11 @@ const openLink = link => {
             {{ note }}
           </p>
 
+<<<<<<< HEAD
           <div class="flex gap-3 justify-between w-full">
+=======
+          <div v-if="!hideActions" class="flex gap-3 justify-between w-full">
+>>>>>>> upstream/develop
             <slot name="actions">
               <Button
                 v-if="videoUrl"

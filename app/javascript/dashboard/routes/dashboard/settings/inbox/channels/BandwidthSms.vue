@@ -48,7 +48,11 @@ export default {
 
       try {
         const smsChannel = await this.$store.dispatch('inboxes/createChannel', {
+<<<<<<< HEAD
           name: this.inboxName,
+=======
+          name: this.inboxName?.trim(),
+>>>>>>> upstream/develop
           channel: {
             type: 'sms',
             phone_number: this.phoneNumber,

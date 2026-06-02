@@ -145,7 +145,11 @@ export default {
 
 <template>
   <div
+<<<<<<< HEAD
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 px-6 py-5 shadow outline-1 outline outline-n-container rounded-xl bg-n-solid-2"
+=======
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 px-6 py-5 shadow outline-1 outline outline-n-container rounded-xl bg-n-solid-2 mt-4"
+>>>>>>> upstream/develop
   >
     <div
       v-for="metric in metrics"
@@ -169,7 +173,11 @@ export default {
             :collection="getCollection(metric)"
             :chart-options="getChartOptions(metric)"
           />
+<<<<<<< HEAD
           <span v-else class="text-sm text-slate-600">
+=======
+          <span v-else class="text-sm text-n-slate-10">
+>>>>>>> upstream/develop
             {{ $t('REPORT.NO_ENOUGH_DATA') }}
           </span>
         </div>

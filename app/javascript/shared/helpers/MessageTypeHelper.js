@@ -8,6 +8,11 @@ export const MESSAGE_MAX_LENGTH = {
   FACEBOOK: 2000,
   // https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/messaging-api#send-a-text-message
   INSTAGRAM: 1000,
+<<<<<<< HEAD
+=======
+  // https://business-api.tiktok.com/portal/docs?id=1832184403754242
+  TIKTOK: 6000,
+>>>>>>> upstream/develop
   // https://www.twilio.com/docs/glossary/what-sms-character-limit
   TWILIO_SMS: 320,
   // https://help.twilio.com/articles/360033806753-Maximum-Message-Length-with-Twilio-Programmable-Messaging

@@ -23,15 +23,22 @@
     },
     "DEFAULT_USER": "النظام",
     "AUTOMATION_RULE": {
+<<<<<<< HEAD
       "ADD": "{agentName} أنشأ قاعدة أتمتة جديدة (##{id})",
       "EDIT": "{agentName} قام بتحديث قاعدة أتمتة (##{id})",
       "DELETE": "{agentName} حذف قاعدة أتمتة (##{id})"
+=======
+      "ADD": "{agentName} أنشأ قاعدة أتمتة جديدة (#{id})",
+      "EDIT": "{agentName} قام بتحديث قاعدة أتمتة (#{id})",
+      "DELETE": "{agentName} حذف قاعدة أتمتة (#{id})"
+>>>>>>> upstream/develop
     },
     "ACCOUNT_USER": {
       "ADD": "{agentName} دعا {invitee} إلى الحساب كـ {role}",
       "EDIT": {
         "SELF": "{agentName} غير {attributes} الخاصة به إلى {values}",
         "OTHER": "{agentName} غير {attributes} لـ {user} إلى {values}",
+<<<<<<< HEAD
         "DELETED": "{agentName} غير {attributes} لـ %{user} إلى {values}"
       }
     },
@@ -44,12 +51,27 @@
       "ADD": "{agentName} أنشأ Webhook جديد (##{id})",
       "EDIT": "{agentName} قام بتحديث Webhook (##{id})",
       "DELETE": "{agentName} حذف Webhook (##{id})"
+=======
+        "DELETED": "{agentName} غير {attributes} للمستخدم المحذوف إلى {values}"
+      }
+    },
+    "INBOX": {
+      "ADD": "{agentName} أنشأ صندوق وارد جديد (#{id})",
+      "EDIT": "{agentName} قام بتحديث صندوق الوارد (#{id})",
+      "DELETE": "{agentName} حذف صندوق الوارد (#{id})"
+    },
+    "WEBHOOK": {
+      "ADD": "{agentName} أنشأ Webhook جديد (#{id})",
+      "EDIT": "{agentName} قام بتحديث Webhook (#{id})",
+      "DELETE": "{agentName} حذف Webhook (#{id})"
+>>>>>>> upstream/develop
     },
     "USER_ACTION": {
       "SIGN_IN": "{agentName} قام بتسجيل الدخول",
       "SIGN_OUT": "{agentName} قام بتسجيل الخروج"
     },
     "TEAM": {
+<<<<<<< HEAD
       "ADD": "{agentName} أنشأ فريق جديد (##{id})",
       "EDIT": "{agentName} قام بتحديث الفريق (##{id})",
       "DELETE": "{agentName} حذف الفريق (##{id})"
@@ -69,6 +91,30 @@
     },
     "ACCOUNT": {
       "EDIT": "{agentName} قام بتحديث إعدادات الحساب (##{id})"
+=======
+      "ADD": "{agentName} أنشأ فريق جديد (#{id})",
+      "EDIT": "{agentName} قام بتحديث الفريق (#{id})",
+      "DELETE": "{agentName} حذف الفريق (#{id})"
+    },
+    "MACRO": {
+      "ADD": "{agentName} أنشأ ماكرو جديد (#{id})",
+      "EDIT": "{agentName} قام بتحديث ماكرو (#{id})",
+      "DELETE": "{agentName} حذف ماكرو (#{id})"
+    },
+    "INBOX_MEMBER": {
+      "ADD": "{agentName} أضاف {user} إلى صندوق الوارد (#{inbox_id})",
+      "REMOVE": "{agentName} أزال {user} من صندوق الوارد (#{inbox_id})"
+    },
+    "TEAM_MEMBER": {
+      "ADD": "{agentName} أضاف {user} إلى الفريق (#{team_id})",
+      "REMOVE": "{agentName} أزال {user} من الفريق (#{team_id})"
+    },
+    "ACCOUNT": {
+      "EDIT": "{agentName} قام بتحديث إعدادات الحساب (#{id})"
+    },
+    "CONVERSATION": {
+      "DELETE": "{agentName} deleted conversation #{id}"
+>>>>>>> upstream/develop
     }
   }
 }

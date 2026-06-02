@@ -3,14 +3,27 @@ import { onMounted, computed, ref, reactive, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useStore, useMapGetter } from 'dashboard/composables/store';
+<<<<<<< HEAD
+=======
+import { useAlert } from 'dashboard/composables';
+>>>>>>> upstream/develop
 import { debounce } from '@chatwoot/utils';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import filterQueryGenerator from 'dashboard/helper/filterQueryGenerator';
 
 import ContactsListLayout from 'dashboard/components-next/Contacts/ContactsListLayout.vue';
+<<<<<<< HEAD
 import ContactsList from 'dashboard/components-next/Contacts/Pages/ContactsList.vue';
 import ContactEmptyState from 'dashboard/components-next/Contacts/EmptyState/ContactEmptyState.vue';
 import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
+=======
+import ContactEmptyState from 'dashboard/components-next/Contacts/EmptyState/ContactEmptyState.vue';
+import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
+import ContactsList from 'dashboard/components-next/Contacts/Pages/ContactsList.vue';
+import ContactsBulkActionBar from '../components/ContactsBulkActionBar.vue';
+import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
+import BulkActionsAPI from 'dashboard/api/bulkActions';
+>>>>>>> upstream/develop
 
 const DEFAULT_SORT_FIELD = 'last_activity_at';
 const DEBOUNCE_DELAY = 300;
@@ -32,6 +45,12 @@ const meta = useMapGetter('contacts/getMeta');
 const searchQuery = computed(() => route.query?.search);
 const searchValue = ref(searchQuery.value || '');
 const pageNumber = computed(() => Number(route.query?.page) || 1);
+<<<<<<< HEAD
+=======
+// For infinite scroll in search, track page internally
+const searchPageNumber = ref(1);
+const isLoadingMore = ref(false);
+>>>>>>> upstream/develop
 
 const parseSortSettings = (sortString = '') => {
   const hasDescending = sortString.startsWith('-');
@@ -58,6 +77,34 @@ const isFetchingList = computed(
 );
 const currentPage = computed(() => Number(meta.value?.currentPage));
 const totalItems = computed(() => meta.value?.count);
+<<<<<<< HEAD
+=======
+const hasMore = computed(() => meta.value?.hasMore ?? false);
+const isSearchView = computed(() => !!searchQuery.value);
+
+const selectedContactIds = ref([]);
+const isBulkActionLoading = ref(false);
+const bulkDeleteDialogRef = ref(null);
+const selectedCount = computed(() => selectedContactIds.value.length);
+const bulkDeleteDialogTitle = computed(() =>
+  selectedCount.value > 1
+    ? t('CONTACTS_BULK_ACTIONS.DELETE_DIALOG.TITLE')
+    : t('CONTACTS_BULK_ACTIONS.DELETE_DIALOG.SINGULAR_TITLE')
+);
+const bulkDeleteDialogDescription = computed(() =>
+  selectedCount.value > 1
+    ? t('CONTACTS_BULK_ACTIONS.DELETE_DIALOG.DESCRIPTION', {
+        count: selectedCount.value,
+      })
+    : t('CONTACTS_BULK_ACTIONS.DELETE_DIALOG.SINGULAR_DESCRIPTION')
+);
+const bulkDeleteDialogConfirmLabel = computed(() =>
+  selectedCount.value > 1
+    ? t('CONTACTS_BULK_ACTIONS.DELETE_DIALOG.CONFIRM_MULTIPLE')
+    : t('CONTACTS_BULK_ACTIONS.DELETE_DIALOG.CONFIRM_SINGLE')
+);
+const hasSelection = computed(() => selectedCount.value > 0);
+>>>>>>> upstream/develop
 const activeSegment = computed(() => {
   if (!activeSegmentId.value) return undefined;
   return segments.value.find(view => view.id === Number(activeSegmentId.value));
@@ -67,9 +114,17 @@ const hasContacts = computed(() => contacts.value.length > 0);
 const isContactIndexView = computed(
   () => route.name === 'contacts_dashboard_index' && pageNumber.value === 1
 );
+<<<<<<< HEAD
 const hasAppliedFilters = computed(() => {
   return appliedFilters.value.length > 0;
 });
+=======
+const isActiveView = computed(() => route.name === 'contacts_dashboard_active');
+const hasAppliedFilters = computed(() => {
+  return appliedFilters.value.length > 0;
+});
+
+>>>>>>> upstream/develop
 const showEmptyStateLayout = computed(() => {
   return (
     !searchQuery.value &&
@@ -89,11 +144,62 @@ const showEmptyText = computed(() => {
 
 const headerTitle = computed(() => {
   if (searchQuery.value) return t('CONTACTS_LAYOUT.HEADER.SEARCH_TITLE');
+<<<<<<< HEAD
+=======
+  if (isActiveView.value) return t('CONTACTS_LAYOUT.HEADER.ACTIVE_TITLE');
+>>>>>>> upstream/develop
   if (activeSegmentId.value) return activeSegment.value?.name;
   if (activeLabel.value) return `#${activeLabel.value}`;
   return t('CONTACTS_LAYOUT.HEADER.TITLE');
 });
 
+<<<<<<< HEAD
+=======
+const emptyStateMessage = computed(() => {
+  if (isActiveView.value)
+    return t('CONTACTS_LAYOUT.EMPTY_STATE.ACTIVE_EMPTY_STATE_TITLE');
+  if (!searchQuery.value || hasAppliedFilters.value)
+    return t('CONTACTS_LAYOUT.EMPTY_STATE.LIST_EMPTY_STATE_TITLE');
+  return t('CONTACTS_LAYOUT.EMPTY_STATE.SEARCH_EMPTY_STATE_TITLE');
+});
+
+const visibleContactIds = computed(() =>
+  contacts.value.map(contact => contact.id)
+);
+
+const clearSelection = () => {
+  selectedContactIds.value = [];
+};
+
+const openBulkDeleteDialog = () => {
+  if (!selectedContactIds.value.length || isBulkActionLoading.value) return;
+  bulkDeleteDialogRef.value?.open?.();
+};
+
+const toggleSelectAll = shouldSelect => {
+  const currentSelection = new Set(selectedContactIds.value);
+  if (shouldSelect) {
+    visibleContactIds.value.forEach(id => currentSelection.add(id));
+  } else {
+    visibleContactIds.value.forEach(id => currentSelection.delete(id));
+  }
+  selectedContactIds.value = Array.from(currentSelection);
+};
+
+const toggleContactSelection = ({ id, value }) => {
+  const isAlreadySelected = selectedContactIds.value.includes(id);
+  const shouldSelect = value ?? !isAlreadySelected;
+
+  if (shouldSelect && !isAlreadySelected) {
+    selectedContactIds.value = [...selectedContactIds.value, id];
+  } else if (!shouldSelect && isAlreadySelected) {
+    selectedContactIds.value = selectedContactIds.value.filter(
+      contactId => contactId !== id
+    );
+  }
+};
+
+>>>>>>> upstream/develop
 const updatePageParam = (page, search = '') => {
   const query = {
     ...route.query,
@@ -117,14 +223,37 @@ const getCommonFetchParams = (page = 1) => ({
   label: activeLabel.value,
 });
 
+<<<<<<< HEAD
 const fetchContacts = async (page = 1) => {
+=======
+const fetchContacts = async (page = 1, options = {}) => {
+  const { clearSelection: shouldClearSelection = true } = options;
+  if (shouldClearSelection) {
+    clearSelection();
+  }
+>>>>>>> upstream/develop
   await store.dispatch('contacts/clearContactFilters');
   await store.dispatch('contacts/get', getCommonFetchParams(page));
   updatePageParam(page);
 };
 
+<<<<<<< HEAD
 const fetchSavedOrAppliedFilteredContact = async (payload, page = 1) => {
   if (!activeSegmentId.value && !hasAppliedFilters.value) return;
+=======
+const fetchSavedOrAppliedFilteredContact = async (
+  payload,
+  page = 1,
+  options = {}
+) => {
+  if (!activeSegmentId.value && !hasAppliedFilters.value) return;
+
+  const { clearSelection: shouldClearSelection = true } = options;
+  if (shouldClearSelection) {
+    clearSelection();
+  }
+
+>>>>>>> upstream/develop
   await store.dispatch('contacts/filter', {
     ...getCommonFetchParams(page),
     queryPayload: payload,
@@ -132,6 +261,7 @@ const fetchSavedOrAppliedFilteredContact = async (payload, page = 1) => {
   updatePageParam(page);
 };
 
+<<<<<<< HEAD
 const searchContacts = debounce(async (value, page = 1) => {
   await store.dispatch('contacts/clearContactFilters');
   searchValue.value = value;
@@ -154,10 +284,94 @@ const fetchContactsBasedOnContext = async page => {
   if (isFetchingList.value) return;
   if (searchQuery.value) {
     await searchContacts(searchQuery.value, page);
+=======
+const fetchActiveContacts = async (page = 1, options = {}) => {
+  const { clearSelection: shouldClearSelection = true } = options;
+  if (shouldClearSelection) {
+    clearSelection();
+  }
+
+  await store.dispatch('contacts/clearContactFilters');
+  await store.dispatch('contacts/active', {
+    page,
+    sortAttr: buildSortAttr(),
+  });
+  updatePageParam(page);
+};
+
+const searchContacts = debounce(
+  async (value, page = 1, append = false, options = {}) => {
+    const { clearSelection: shouldClearSelection = true } = options;
+
+    if (!append) {
+      searchPageNumber.value = 1;
+
+      if (shouldClearSelection) {
+        clearSelection();
+      }
+    }
+    await store.dispatch('contacts/clearContactFilters');
+    searchValue.value = value;
+
+    if (!value) {
+      updatePageParam(page);
+      await fetchContacts(page, { clearSelection: false });
+      return;
+    }
+
+    updatePageParam(page, value);
+    await store.dispatch('contacts/search', {
+      ...getCommonFetchParams(page),
+      search: encodeURIComponent(value),
+      append,
+    });
+    searchPageNumber.value = page;
+  },
+  DEBOUNCE_DELAY
+);
+
+const loadMoreSearchResults = async () => {
+  if (!hasMore.value || isLoadingMore.value) return;
+
+  isLoadingMore.value = true;
+  const nextPage = searchPageNumber.value + 1;
+
+  await store.dispatch('contacts/search', {
+    ...getCommonFetchParams(nextPage),
+    search: encodeURIComponent(searchValue.value),
+    append: true,
+  });
+
+  searchPageNumber.value = nextPage;
+  isLoadingMore.value = false;
+};
+
+const fetchContactsBasedOnContext = async (page, options = {}) => {
+  const { clearSelection: shouldClearSelection = true } = options;
+  if (shouldClearSelection) {
+    clearSelection();
+  }
+  updatePageParam(page, searchValue.value);
+  if (isFetchingList.value) return;
+  if (searchQuery.value) {
+    await searchContacts(searchQuery.value, page, false, {
+      clearSelection: shouldClearSelection,
+    });
+>>>>>>> upstream/develop
     return;
   }
   // Reset the search value when we change the view
   searchValue.value = '';
+<<<<<<< HEAD
+=======
+  // If we're on the active route, fetch active contacts
+  if (isActiveView.value) {
+    await fetchActiveContacts(page, {
+      clearSelection: shouldClearSelection,
+    });
+    return;
+  }
+>>>>>>> upstream/develop
   // If there are applied filters or active segment with query
   if (
     (hasAppliedFilters.value || activeSegment.value?.query) &&
@@ -165,11 +379,93 @@ const fetchContactsBasedOnContext = async page => {
   ) {
     const queryPayload =
       activeSegment.value?.query || filterQueryGenerator(appliedFilters.value);
+<<<<<<< HEAD
     await fetchSavedOrAppliedFilteredContact(queryPayload, page);
     return;
   }
   // Default case: fetch regular contacts + label
   await fetchContacts(page);
+=======
+    await fetchSavedOrAppliedFilteredContact(queryPayload, page, {
+      clearSelection: shouldClearSelection,
+    });
+    return;
+  }
+  // Default case: fetch regular contacts + label
+  await fetchContacts(page, {
+    clearSelection: shouldClearSelection,
+  });
+};
+
+const onPageChange = page =>
+  fetchContactsBasedOnContext(page, { clearSelection: false });
+
+const assignLabels = async labels => {
+  if (!labels.length || !selectedContactIds.value.length) {
+    return;
+  }
+
+  isBulkActionLoading.value = true;
+  try {
+    await BulkActionsAPI.create({
+      type: 'Contact',
+      ids: selectedContactIds.value,
+      labels: { add: labels },
+    });
+    useAlert(t('CONTACTS_BULK_ACTIONS.ASSIGN_LABELS_SUCCESS'));
+    clearSelection();
+    await fetchContactsBasedOnContext(pageNumber.value);
+  } catch (error) {
+    useAlert(t('CONTACTS_BULK_ACTIONS.ASSIGN_LABELS_FAILED'));
+  } finally {
+    isBulkActionLoading.value = false;
+  }
+};
+
+const removeLabels = async labels => {
+  if (!labels.length || !selectedContactIds.value.length) {
+    return;
+  }
+
+  isBulkActionLoading.value = true;
+  try {
+    await BulkActionsAPI.create({
+      type: 'Contact',
+      ids: selectedContactIds.value,
+      labels: { remove: labels },
+    });
+    useAlert(t('CONTACTS_BULK_ACTIONS.REMOVE_LABELS_SUCCESS'));
+    clearSelection();
+    await fetchContactsBasedOnContext(pageNumber.value);
+  } catch (error) {
+    useAlert(t('CONTACTS_BULK_ACTIONS.REMOVE_LABELS_FAILED'));
+  } finally {
+    isBulkActionLoading.value = false;
+  }
+};
+
+const deleteContacts = async () => {
+  if (!selectedContactIds.value.length) {
+    return;
+  }
+
+  isBulkActionLoading.value = true;
+  try {
+    await BulkActionsAPI.create({
+      type: 'Contact',
+      ids: selectedContactIds.value,
+      action_name: 'delete',
+    });
+    useAlert(t('CONTACTS_BULK_ACTIONS.DELETE_SUCCESS'));
+    clearSelection();
+    await fetchContactsBasedOnContext(pageNumber.value);
+    bulkDeleteDialogRef.value?.close?.();
+  } catch (error) {
+    useAlert(t('CONTACTS_BULK_ACTIONS.DELETE_FAILED'));
+  } finally {
+    isBulkActionLoading.value = false;
+  }
+>>>>>>> upstream/develop
 };
 
 const handleSort = async ({ sort, order }) => {
@@ -180,7 +476,18 @@ const handleSort = async ({ sort, order }) => {
   });
 
   if (searchQuery.value) {
+<<<<<<< HEAD
     await searchContacts(searchValue.value);
+=======
+    await searchContacts(searchValue.value, pageNumber.value, false, {
+      clearSelection: false,
+    });
+    return;
+  }
+
+  if (isActiveView.value) {
+    await fetchActiveContacts();
+>>>>>>> upstream/develop
     return;
   }
 
@@ -197,6 +504,15 @@ const createContact = async contact => {
   await store.dispatch('contacts/create', contact);
 };
 
+<<<<<<< HEAD
+=======
+watch(hasSelection, value => {
+  if (!value) {
+    bulkDeleteDialogRef.value?.close?.();
+  }
+});
+
+>>>>>>> upstream/develop
 watch(
   () => uiSettings.value?.contacts_sort_by,
   newSortBy => {
@@ -210,7 +526,11 @@ watch(
 );
 
 watch(
+<<<<<<< HEAD
   [activeLabel, activeSegment],
+=======
+  [activeLabel, activeSegment, isActiveView],
+>>>>>>> upstream/develop
   () => {
     fetchContactsBasedOnContext(pageNumber.value);
   },
@@ -222,6 +542,16 @@ watch(searchQuery, value => {
   searchValue.value = value || '';
   // Reset the view if there is search query when we click on the sidebar group
   if (value === undefined) {
+<<<<<<< HEAD
+=======
+    if (
+      isActiveView.value ||
+      activeLabel.value ||
+      activeSegment.value ||
+      hasAppliedFilters.value
+    )
+      return;
+>>>>>>> upstream/develop
     fetchContacts();
   }
 });
@@ -229,7 +559,17 @@ watch(searchQuery, value => {
 onMounted(async () => {
   if (!activeSegmentId.value) {
     if (searchQuery.value) {
+<<<<<<< HEAD
       await searchContacts(searchQuery.value, pageNumber.value);
+=======
+      await searchContacts(searchQuery.value, pageNumber.value, false, {
+        clearSelection: false,
+      });
+      return;
+    }
+    if (isActiveView.value) {
+      await fetchActiveContacts(pageNumber.value);
+>>>>>>> upstream/develop
       return;
     }
     await fetchContacts(pageNumber.value);
@@ -244,20 +584,29 @@ onMounted(async () => {
 
 <template>
   <div
+<<<<<<< HEAD
     class="flex flex-col justify-between flex-1 h-full m-0 overflow-auto bg-n-background"
+=======
+    class="flex flex-col justify-between flex-1 h-full m-0 overflow-auto bg-n-surface-1"
+>>>>>>> upstream/develop
   >
     <ContactsListLayout
       :search-value="searchValue"
       :header-title="headerTitle"
       :current-page="currentPage"
       :total-items="totalItems"
+<<<<<<< HEAD
       :show-pagination-footer="!isFetchingList && hasContacts"
+=======
+      :show-pagination-footer="!isFetchingList && hasContacts && !isSearchView"
+>>>>>>> upstream/develop
       :active-sort="sortState.activeSort"
       :active-ordering="sortState.activeOrdering"
       :active-segment="activeSegment"
       :segments-id="activeSegmentId"
       :is-fetching-list="isFetchingList"
       :has-applied-filters="hasAppliedFilters"
+<<<<<<< HEAD
       @update:current-page="fetchContactsBasedOnContext"
       @search="searchContacts"
       @update:sort="handleSort"
@@ -266,12 +615,42 @@ onMounted(async () => {
     >
       <div
         v-if="isFetchingList"
+=======
+      :use-infinite-scroll="isSearchView"
+      :has-more="hasMore"
+      :is-loading-more="isLoadingMore"
+      @update:current-page="onPageChange"
+      @search="
+        value => searchContacts(value, 1, false, { clearSelection: false })
+      "
+      @update:sort="handleSort"
+      @apply-filter="fetchSavedOrAppliedFilteredContact"
+      @clear-filters="fetchContacts"
+      @load-more="loadMoreSearchResults"
+    >
+      <div
+        v-if="isFetchingList && !(isSearchView && hasContacts)"
+>>>>>>> upstream/develop
         class="flex items-center justify-center py-10 text-n-slate-11"
       >
         <Spinner />
       </div>
 
       <template v-else>
+<<<<<<< HEAD
+=======
+        <ContactsBulkActionBar
+          v-if="hasSelection"
+          :visible-contact-ids="visibleContactIds"
+          :selected-contact-ids="selectedContactIds"
+          :is-loading="isBulkActionLoading"
+          @toggle-all="toggleSelectAll"
+          @clear-selection="clearSelection"
+          @assign-labels="assignLabels"
+          @remove-labels="removeLabels"
+          @delete-selected="openBulkDeleteDialog"
+        />
+>>>>>>> upstream/develop
         <ContactEmptyState
           v-if="showEmptyStateLayout"
           class="pt-14"
@@ -286,6 +665,7 @@ onMounted(async () => {
           class="flex items-center justify-center py-10"
         >
           <span class="text-base text-n-slate-11">
+<<<<<<< HEAD
             {{
               searchQuery || !hasAppliedFilters
                 ? t('CONTACTS_LAYOUT.EMPTY_STATE.SEARCH_EMPTY_STATE_TITLE')
@@ -295,6 +675,29 @@ onMounted(async () => {
         </div>
 
         <ContactsList v-else :contacts="contacts" />
+=======
+            {{ emptyStateMessage }}
+          </span>
+        </div>
+
+        <div v-else class="flex flex-col gap-4 pt-4 pb-6">
+          <ContactsList
+            :contacts="contacts"
+            :selected-contact-ids="selectedContactIds"
+            @toggle-contact="toggleContactSelection"
+          />
+          <Dialog
+            v-if="selectedCount"
+            ref="bulkDeleteDialogRef"
+            type="alert"
+            :title="bulkDeleteDialogTitle"
+            :description="bulkDeleteDialogDescription"
+            :confirm-button-label="bulkDeleteDialogConfirmLabel"
+            :is-loading="isBulkActionLoading"
+            @confirm="deleteContacts"
+          />
+        </div>
+>>>>>>> upstream/develop
       </template>
     </ContactsListLayout>
   </div>

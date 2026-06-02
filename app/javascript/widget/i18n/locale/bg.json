@@ -8,18 +8,34 @@
       "SUBMIT": "Изпращане"
     },
     "MESSAGE_BUBBLE": {
+<<<<<<< HEAD
       "RETRY": "Send message again",
       "ERROR_MESSAGE": "Couldn't send, try again"
+=======
+      "RETRY": "Изпратете съобщението отново",
+      "ERROR_MESSAGE": "Неуспешно изпращане, опитайте отново"
+    }
+  },
+  "THUMBNAIL": {
+    "AUTHOR": {
+      "NOT_AVAILABLE": "Няма информация"
+>>>>>>> upstream/develop
     }
   },
   "TEAM_AVAILABILITY": {
     "ONLINE": "На линия сме",
+<<<<<<< HEAD
     "OFFLINE": "В момента не сме на линия"
+=======
+    "OFFLINE": "В момента не сме на линия",
+    "BACK_AS_SOON_AS_POSSIBLE": "Ще се върнем възможно най-скоро"
+>>>>>>> upstream/develop
   },
   "REPLY_TIME": {
     "IN_A_FEW_MINUTES": "Обикновено отговаряме до няколко минути",
     "IN_A_FEW_HOURS": "Обикновено отговаряме до няколко часа",
     "IN_A_DAY": "Обикновено отговаряме до един ден",
+<<<<<<< HEAD
     "BACK_IN": "We will be back online"
   },
   "DAY_NAMES": {
@@ -37,6 +53,30 @@
   "YOU": "You",
   "START_NEW_CONVERSATION": "Започнете нов разговор",
   "VIEW_UNREAD_MESSAGES": "You have unread messages",
+=======
+    "BACK_IN_HOURS": "Ще бъдем онлайн след {n} час | Ще бъдем онлайн след {n} часа",
+    "BACK_IN_MINUTES": "Ще бъдем онлайн след {time} минути",
+    "BACK_AT_TIME": "Ще бъдем онлайн в {time}",
+    "BACK_ON_DAY": "Ще бъдем онлайн в {day}",
+    "BACK_TOMORROW": "Ще бъдем онлайн утре",
+    "BACK_IN_SOME_TIME": "Ще бъдем онлайн след известно време"
+  },
+  "DAY_NAMES": {
+    "SUNDAY": "Неделя",
+    "MONDAY": "Понеделник",
+    "TUESDAY": "Вторник",
+    "WEDNESDAY": "Сряда",
+    "THURSDAY": "Четвъртък",
+    "FRIDAY": "Петък",
+    "SATURDAY": "Събота"
+  },
+  "START_CONVERSATION": "Започнете разговор",
+  "END_CONVERSATION": "Приключване на разговора",
+  "CONTINUE_CONVERSATION": "Продължете разговора",
+  "YOU": "Вие",
+  "START_NEW_CONVERSATION": "Започнете нов разговор",
+  "VIEW_UNREAD_MESSAGES": "Имате непрочетени съобщения",
+>>>>>>> upstream/develop
   "UNREAD_VIEW": {
     "VIEW_MESSAGES_BUTTON": "Вижте новите съобщения",
     "CLOSE_MESSAGES_BUTTON": "Затвори",
@@ -47,7 +87,11 @@
     "LABEL": "Чатете с нас"
   },
   "POWERED_BY": "Осъществено от Chatwoot",
+<<<<<<< HEAD
   "EMAIL_PLACEHOLDER": "Моля, въведете имейла адреса си",
+=======
+  "EMAIL_PLACEHOLDER": "Моля, въведете имейл адреса си",
+>>>>>>> upstream/develop
   "CHAT_PLACEHOLDER": "Напишете вашето съобщение",
   "TODAY": "Днес",
   "YESTERDAY": "Вчера",
@@ -61,6 +105,7 @@
       "EMAIL_ADDRESS": {
         "LABEL": "Имейл адрес",
         "PLACEHOLDER": "Моля, въведете имейл адреса си",
+<<<<<<< HEAD
         "REQUIRED_ERROR": "Email Address is required",
         "VALID_ERROR": "Please enter a valid email address"
       },
@@ -72,6 +117,19 @@
         "VALID_ERROR": "Please enter a valid phone number",
         "DROPDOWN_EMPTY": "Няма намерени резултати",
         "DROPDOWN_SEARCH": "Search country"
+=======
+        "REQUIRED_ERROR": "Имейл адресът е задължителен",
+        "VALID_ERROR": "Моля, въведете валиден имейл адрес"
+      },
+      "PHONE_NUMBER": {
+        "LABEL": "Телефон",
+        "PLACEHOLDER": "Моля, въведете вашия телефонен номер",
+        "REQUIRED_ERROR": "Телефонният номер е задължителен",
+        "DIAL_CODE_VALID_ERROR": "Моля, изберете код на държавата",
+        "VALID_ERROR": "Моля, въведете валиден телефонен номер",
+        "DROPDOWN_EMPTY": "Няма намерени резултати",
+        "DROPDOWN_SEARCH": "Търсене на държава"
+>>>>>>> upstream/develop
       },
       "MESSAGE": {
         "LABEL": "Съобщение",
@@ -79,21 +137,36 @@
         "ERROR": "Съобщението е прекалено кратко"
       }
     },
+<<<<<<< HEAD
     "CAMPAIGN_HEADER": "Преди да започенте разговора, моля, посочете вашето име и имейл адрес",
     "IS_REQUIRED": "is required",
     "REQUIRED": "Required",
     "REGEX_ERROR": "Please provide a valid input"
   },
   "FILE_SIZE_LIMIT": "Файлът надхвърля {MAXIMUM_FILE_UPLOAD_SIZE} лимит",
+=======
+    "CAMPAIGN_HEADER": "Преди да започнете разговора, моля, посочете вашето име и имейл адрес",
+    "IS_REQUIRED": "е задължително",
+    "REQUIRED": "Задължително",
+    "REGEX_ERROR": "Моля, въведете валидни данни"
+  },
+  "FILE_SIZE_LIMIT": "Файлът надхвърля лимита от {MAXIMUM_FILE_UPLOAD_SIZE}",
+>>>>>>> upstream/develop
   "CHAT_FORM": {
     "INVALID": {
       "FIELD": "Невалидно поле"
     }
   },
   "EMOJI": {
+<<<<<<< HEAD
     "PLACEHOLDER": "Search emojis",
     "NOT_FOUND": "No emoji match your search",
     "ARIA_LABEL": "Emoji picker"
+=======
+    "PLACEHOLDER": "Търсене на емотикони",
+    "NOT_FOUND": "Няма намерени емотикони",
+    "ARIA_LABEL": "Избор на емотикони"
+>>>>>>> upstream/develop
   },
   "CSAT": {
     "TITLE": "Оценете този разговор",
@@ -107,6 +180,7 @@
   },
   "INTEGRATIONS": {
     "DYTE": {
+<<<<<<< HEAD
       "CLICK_HERE_TO_JOIN": "Click here to join",
       "LEAVE_THE_ROOM": "Leave the call"
     }
@@ -115,6 +189,16 @@
     "POPULAR_ARTICLES": "Popular Articles",
     "VIEW_ALL_ARTICLES": "View all articles",
     "IFRAME_LOAD_ERROR": "There was an error loading the article, please refresh the page and try again."
+=======
+      "CLICK_HERE_TO_JOIN": "Кликнете тук, за да се присъедините",
+      "LEAVE_THE_ROOM": "Напускане на разговора"
+    }
+  },
+  "PORTAL": {
+    "POPULAR_ARTICLES": "Популярни статии",
+    "VIEW_ALL_ARTICLES": "Вижте всички статии",
+    "IFRAME_LOAD_ERROR": "Възникна грешка при зареждането на статията, моля опреснете страницата и опитайте отново."
+>>>>>>> upstream/develop
   },
   "ATTACHMENTS": {
     "image": {
@@ -137,6 +221,10 @@
     }
   },
   "FOOTER_REPLY_TO": {
+<<<<<<< HEAD
     "REPLY_TO": "Replying to:"
+=======
+    "REPLY_TO": "В отговор на:"
+>>>>>>> upstream/develop
   }
 }

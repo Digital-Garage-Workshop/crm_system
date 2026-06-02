@@ -48,7 +48,12 @@
       "CREATED_AT": "تم إنشاؤها في",
       "LAST_ACTIVITY": "آخر نشاط",
       "REFERER_LINK": "رابط المرجع",
+<<<<<<< HEAD
       "BLOCKED": "محظور"
+=======
+      "BLOCKED": "محظور",
+      "LABELS": "الوسوم"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "الفلاتر القياسية",

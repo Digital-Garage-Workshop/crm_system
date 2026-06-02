@@ -4,6 +4,15 @@ require 'rails_helper'
 require Rails.root.join 'spec/models/concerns/liquidable_shared.rb'
 
 RSpec.describe Message do
+<<<<<<< HEAD
+=======
+  before do
+    # rubocop:disable RSpec/AnyInstance
+    allow_any_instance_of(described_class).to receive(:reindex_for_search).and_return(true)
+    # rubocop:enable RSpec/AnyInstance
+  end
+
+>>>>>>> upstream/develop
   context 'with validations' do
     it { is_expected.to validate_presence_of(:inbox_id) }
     it { is_expected.to validate_presence_of(:conversation_id) }
@@ -39,6 +48,51 @@ RSpec.describe Message do
         end
       end
     end
+<<<<<<< HEAD
+=======
+
+    context 'when it validates source_id length' do
+      it 'valid when source_id is within text limit (20000 chars)' do
+        long_source_id = 'a' * 10_000
+        message.source_id = long_source_id
+        expect(message.valid?).to be true
+      end
+
+      it 'valid when source_id is exactly 20000 characters' do
+        long_source_id = 'a' * 20_000
+        message.source_id = long_source_id
+        expect(message.valid?).to be true
+      end
+
+      it 'invalid when source_id exceeds text limit (20000 chars)' do
+        long_source_id = 'a' * 20_001
+        message.source_id = long_source_id
+        message.valid?
+
+        expect(message.errors[:source_id]).to include('is too long (maximum is 20000 characters)')
+      end
+
+      it 'handles long email Message-ID headers correctly' do
+        # Simulate a long Message-ID like some email systems generate
+        long_message_id = "msg-#{SecureRandom.hex(240)}@verylongdomainname.example.com"[0...500]
+        message.source_id = long_message_id
+        message.content_type = 'incoming_email'
+
+        expect(message.valid?).to be true
+        expect(message.source_id.length).to eq(500)
+      end
+
+      it 'allows nil source_id' do
+        message.source_id = nil
+        expect(message.valid?).to be true
+      end
+
+      it 'allows empty string source_id' do
+        message.source_id = ''
+        expect(message.valid?).to be true
+      end
+    end
+>>>>>>> upstream/develop
   end
 
   describe 'concerns' do
@@ -223,6 +277,18 @@ RSpec.describe Message do
     end
   end
 
+<<<<<<< HEAD
+=======
+  describe '#mark_pending_conversation_as_open_for_human_response' do
+    let(:conversation) { create(:conversation, status: :pending) }
+
+    it 'does not mark the conversation open when pending is used without captain' do
+      create(:message, message_type: :outgoing, conversation: conversation)
+      expect(conversation.reload.pending?).to be true
+    end
+  end
+
+>>>>>>> upstream/develop
   describe '#waiting since' do
     let(:conversation) { create(:conversation) }
     let(:agent) { create(:user, account: conversation.account) }
@@ -252,6 +318,85 @@ RSpec.describe Message do
 
       expect(conversation.waiting_since).to eq old_waiting_since
     end
+<<<<<<< HEAD
+=======
+
+    context 'when bot has responded to the conversation' do
+      let(:agent_bot) { create(:agent_bot, account: conversation.account) }
+
+      before do
+        # Create initial customer message
+        create(:message, conversation: conversation, message_type: :incoming,
+                         created_at: 2.hours.ago)
+        conversation.update(waiting_since: 2.hours.ago)
+
+        # Bot responds
+        create(:message, conversation: conversation, message_type: :outgoing,
+                         sender: agent_bot, created_at: 1.hour.ago)
+      end
+
+      it 'resets waiting_since when customer sends a new message after bot response' do
+        new_message = build(:message, conversation: conversation, message_type: :incoming)
+        new_message.save!
+
+        conversation.reload
+        expect(conversation.waiting_since).to be_within(1.second).of(new_message.created_at)
+      end
+
+      it 'does not reset waiting_since if last response was from human agent' do
+        # Human agent responds (clears waiting_since)
+        create(:message, conversation: conversation, message_type: :outgoing,
+                         sender: agent)
+        conversation.reload
+        expect(conversation.waiting_since).to be_nil
+
+        # Customer sends new message
+        new_message = build(:message, conversation: conversation, message_type: :incoming)
+        new_message.save!
+
+        conversation.reload
+        expect(conversation.waiting_since).to be_within(1.second).of(new_message.created_at)
+      end
+
+      it 'clears waiting_since when bot responds' do
+        # After the bot response in before block, waiting_since should already be cleared
+        conversation.reload
+        expect(conversation.waiting_since).to be_nil
+
+        # Customer sends another message
+        create(:message, conversation: conversation, message_type: :incoming,
+                         created_at: 30.minutes.ago)
+        conversation.reload
+        expect(conversation.waiting_since).to be_within(1.second).of(30.minutes.ago)
+
+        # Another bot response should clear it again
+        create(:message, conversation: conversation, message_type: :outgoing,
+                         sender: agent_bot, created_at: 15.minutes.ago)
+
+        conversation.reload
+        expect(conversation.waiting_since).to be_nil
+      end
+    end
+
+    context 'when bot response should preserve waiting_since' do
+      let(:agent_bot) { create(:agent_bot, account: conversation.account) }
+
+      it 'does not clear waiting_since when preserve_waiting_since is set' do
+        original_waiting_since = 45.minutes.ago
+        conversation.update!(waiting_since: original_waiting_since)
+
+        create(
+          :message,
+          conversation: conversation,
+          message_type: :outgoing,
+          sender: agent_bot,
+          preserve_waiting_since: true
+        )
+
+        expect(conversation.reload.waiting_since).to be_within(1.second).of(original_waiting_since)
+      end
+    end
+>>>>>>> upstream/develop
   end
 
   context 'with webhook_data' do
@@ -267,6 +412,24 @@ RSpec.describe Message do
       message = create(:message)
       expect(message.webhook_data.key?(:attachments)).to be false
     end
+<<<<<<< HEAD
+=======
+
+    it 'uses raw content without markdown rendering for webhook content' do
+      message = create(:message, content: 'Test **bold** content')
+
+      webhook_data = message.webhook_data
+      expect(webhook_data[:content]).to eq('Test **bold** content')
+    end
+
+    it 'includes CSAT survey link in webhook content for input_csat messages' do
+      inbox = create(:inbox, channel: create(:channel_api))
+      conversation = create(:conversation, inbox: inbox)
+      message = create(:message, conversation: conversation, content_type: 'input_csat', content: 'Rate your experience')
+
+      expect(message.webhook_data[:content]).to include('survey/responses/')
+    end
+>>>>>>> upstream/develop
   end
 
   context 'when message is created' do
@@ -293,6 +456,7 @@ RSpec.describe Message do
     end
 
     context 'with conversation continuity' do
+<<<<<<< HEAD
       it 'calls notify email method on after save for outgoing messages in website channel' do
         allow(ConversationReplyEmailWorker).to receive(:perform_in).and_return(true)
         message.message_type = 'outgoing'
@@ -330,6 +494,54 @@ RSpec.describe Message do
         allow(ConversationReplyEmailWorker).to receive(:perform_in).and_return(true)
         message.save!
         expect(ConversationReplyEmailWorker).not_to have_received(:perform_in)
+=======
+      let(:inbox_with_continuity) do
+        create(:inbox, account: message.account,
+                       channel: build(:channel_widget, account: message.account, continuity_via_email: true))
+      end
+
+      it 'schedules email notification for outgoing messages in website channel' do
+        message.inbox = inbox_with_continuity
+        message.conversation.update!(inbox: inbox_with_continuity)
+        message.conversation.contact.update!(email: 'test@example.com')
+        message.message_type = 'outgoing'
+
+        ActiveJob::Base.queue_adapter = :test
+        allow(Redis::Alfred).to receive(:set).and_return(true)
+        perform_enqueued_jobs(only: SendReplyJob) do
+          expect { message.save! }.to have_enqueued_job(ConversationReplyEmailJob).with(message.conversation.id, kind_of(Integer)).on_queue('mailers')
+        end
+      end
+
+      it 'does not schedule email for website channel if continuity is disabled' do
+        inbox_without_continuity = create(:inbox, account: message.account,
+                                                  channel: build(:channel_widget, account: message.account, continuity_via_email: false))
+        message.inbox = inbox_without_continuity
+        message.conversation.update!(inbox: inbox_without_continuity)
+        message.conversation.contact.update!(email: 'test@example.com')
+        message.message_type = 'outgoing'
+
+        ActiveJob::Base.queue_adapter = :test
+        expect { message.save! }.not_to have_enqueued_job(ConversationReplyEmailJob)
+      end
+
+      it 'does not schedule email for private notes' do
+        message.inbox = inbox_with_continuity
+        message.conversation.update!(inbox: inbox_with_continuity)
+        message.conversation.contact.update!(email: 'test@example.com')
+        message.private = true
+        message.message_type = 'outgoing'
+
+        ActiveJob::Base.queue_adapter = :test
+        expect { message.save! }.not_to have_enqueued_job(ConversationReplyEmailJob)
+      end
+
+      it 'calls SendReplyJob for all channels' do
+        allow(SendReplyJob).to receive(:perform_later).and_return(true)
+        message.message_type = 'outgoing'
+        message.save!
+        expect(SendReplyJob).to have_received(:perform_later).with(message.id)
+>>>>>>> upstream/develop
       end
     end
   end
@@ -475,4 +687,243 @@ RSpec.describe Message do
       end
     end
   end
+<<<<<<< HEAD
+=======
+
+  describe '#content' do
+    let(:conversation) { create(:conversation) }
+
+    context 'when message is not input_csat' do
+      let(:message) { create(:message, conversation: conversation, content_type: 'text', content: 'Regular message') }
+
+      it 'returns original content' do
+        expect(message.content).to eq('Regular message')
+      end
+    end
+
+    context 'when message is input_csat' do
+      let(:message) { create(:message, conversation: conversation, content_type: 'input_csat', content: 'Rate your experience') }
+
+      context 'when inbox is web widget' do
+        before do
+          allow(message.inbox).to receive(:web_widget?).and_return(true)
+        end
+
+        it 'returns original content without survey URL' do
+          expect(message.content).to eq('Rate your experience')
+        end
+      end
+
+      context 'when inbox is not web widget' do
+        before do
+          allow(message.inbox).to receive(:web_widget?).and_return(false)
+        end
+
+        it 'returns only the stored content (clean for dashboard)' do
+          expect(message.content).to eq('Rate your experience')
+        end
+
+        it 'returns only the base content without URL when survey_url stored separately' do
+          message.content_attributes = { 'survey_url' => 'https://app.chatwoot.com/survey/responses/12345' }
+          expect(message.content).to eq('Rate your experience')
+        end
+      end
+    end
+  end
+
+  describe '#outgoing_content' do
+    let(:conversation) { create(:conversation) }
+    let(:message) { create(:message, conversation: conversation, content_type: 'text', content: 'Regular message') }
+
+    it 'delegates to MessageContentPresenter' do
+      presenter = instance_double(MessageContentPresenter)
+      allow(MessageContentPresenter).to receive(:new).with(message).and_return(presenter)
+      allow(presenter).to receive(:outgoing_content).and_return('Presented content')
+
+      expect(message.outgoing_content).to eq('Presented content')
+      expect(MessageContentPresenter).to have_received(:new).with(message)
+      expect(presenter).to have_received(:outgoing_content)
+    end
+  end
+
+  describe '#auto_reply_email?' do
+    context 'when message is not an incoming email and inbox is not email' do
+      let(:conversation) { create(:conversation) }
+      let(:message) { create(:message, conversation: conversation, message_type: :outgoing) }
+
+      it 'returns false' do
+        expect(message.auto_reply_email?).to be false
+      end
+    end
+
+    context 'when message is an incoming email' do
+      let(:email_channel) { create(:channel_email) }
+      let(:email_inbox) { create(:inbox, channel: email_channel) }
+      let(:conversation) { create(:conversation, inbox: email_inbox) }
+
+      it 'returns false when auto_reply is not set to true' do
+        message = create(
+          :message,
+          conversation: conversation,
+          message_type: :incoming,
+          content_type: 'incoming_email',
+          content_attributes: {}
+        )
+        expect(message.auto_reply_email?).to be false
+      end
+
+      it 'returns true when auto_reply is set to true' do
+        message = create(
+          :message,
+          conversation: conversation,
+          message_type: :incoming,
+          content_type: 'incoming_email',
+          content_attributes: { email: { auto_reply: true } }
+        )
+        expect(message.auto_reply_email?).to be true
+      end
+    end
+
+    context 'when inbox is email' do
+      let(:email_channel) { create(:channel_email) }
+      let(:email_inbox) { create(:inbox, channel: email_channel) }
+      let(:conversation) { create(:conversation, inbox: email_inbox) }
+
+      it 'returns false when auto_reply is not set to true' do
+        message = create(
+          :message,
+          conversation: conversation,
+          message_type: :outgoing,
+          content_attributes: {}
+        )
+        expect(message.auto_reply_email?).to be false
+      end
+
+      it 'returns true when auto_reply is set to true' do
+        message = create(
+          :message,
+          conversation: conversation,
+          message_type: :outgoing,
+          content_attributes: { email: { auto_reply: true } }
+        )
+        expect(message.auto_reply_email?).to be true
+      end
+    end
+  end
+
+  describe '#should_index?' do
+    let(:account) { create(:account) }
+    let(:conversation) { create(:conversation, account: account) }
+    let(:message) { create(:message, conversation: conversation, account: account) }
+
+    before do
+      allow(ChatwootApp).to receive(:advanced_search_allowed?).and_return(true)
+      account.enable_features('advanced_search_indexing')
+    end
+
+    context 'when advanced search is not allowed globally' do
+      before do
+        allow(ChatwootApp).to receive(:advanced_search_allowed?).and_return(false)
+      end
+
+      it 'returns false' do
+        expect(message.should_index?).to be false
+      end
+    end
+
+    context 'when advanced search feature is not enabled for account on chatwoot cloud' do
+      before do
+        allow(ChatwootApp).to receive(:chatwoot_cloud?).and_return(true)
+        account.disable_features('advanced_search_indexing')
+      end
+
+      it 'returns false' do
+        expect(message.should_index?).to be false
+      end
+    end
+
+    context 'when advanced search feature is not enabled for account on self-hosted' do
+      before do
+        allow(ChatwootApp).to receive(:chatwoot_cloud?).and_return(false)
+        account.disable_features('advanced_search_indexing')
+      end
+
+      it 'returns true' do
+        expect(message.should_index?).to be true
+      end
+    end
+
+    context 'when message type is not incoming or outgoing' do
+      before do
+        message.message_type = 'activity'
+      end
+
+      it 'returns false' do
+        expect(message.should_index?).to be false
+      end
+    end
+
+    context 'when all conditions are met' do
+      it 'returns true for incoming message' do
+        message.message_type = 'incoming'
+        expect(message.should_index?).to be true
+      end
+
+      it 'returns true for outgoing message' do
+        message.message_type = 'outgoing'
+        expect(message.should_index?).to be true
+      end
+    end
+  end
+
+  describe '#reindex_for_search callback' do
+    let(:account) { create(:account) }
+    let(:conversation) { create(:conversation, account: account) }
+
+    before do
+      allow(ChatwootApp).to receive(:advanced_search_allowed?).and_return(true)
+      account.enable_features('advanced_search_indexing')
+    end
+
+    context 'when message should be indexed' do
+      it 'calls reindex_for_search for incoming message on create' do
+        message = build(:message, conversation: conversation, account: account, message_type: :incoming)
+        expect(message).to receive(:reindex_for_search)
+        message.save!
+      end
+
+      it 'calls reindex_for_search for outgoing message on update' do
+        # rubocop:disable RSpec/AnyInstance
+        allow_any_instance_of(described_class).to receive(:reindex_for_search).and_return(true)
+        # rubocop:enable RSpec/AnyInstance
+        message = create(:message, conversation: conversation, account: account, message_type: :outgoing)
+        expect(message).to receive(:reindex_for_search).and_return(true)
+        message.update!(content: 'Updated content')
+      end
+    end
+
+    context 'when message should not be indexed' do
+      it 'does not call reindex_for_search for activity message' do
+        message = build(:message, conversation: conversation, account: account, message_type: :activity)
+        expect(message).not_to receive(:reindex_for_search)
+        message.save!
+      end
+
+      it 'does not call reindex_for_search for unpaid account on cloud' do
+        allow(ChatwootApp).to receive(:chatwoot_cloud?).and_return(true)
+        account.disable_features('advanced_search_indexing')
+        message = build(:message, conversation: conversation, account: account, message_type: :incoming)
+        expect(message).not_to receive(:reindex_for_search)
+        message.save!
+      end
+
+      it 'does not call reindex_for_search when advanced search is not allowed' do
+        allow(ChatwootApp).to receive(:advanced_search_allowed?).and_return(false)
+        message = build(:message, conversation: conversation, account: account, message_type: :incoming)
+        expect(message).not_to receive(:reindex_for_search)
+        message.save!
+      end
+    end
+  end
+>>>>>>> upstream/develop
 end

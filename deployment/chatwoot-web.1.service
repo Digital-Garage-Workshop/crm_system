@@ -15,11 +15,22 @@ TimeoutStopSec=30
 KillMode=mixed
 StandardInput=null
 SyslogIdentifier=%p
+<<<<<<< HEAD
 
 Environment="PATH=/home/chatwoot/.rvm/gems/ruby-3.3.3/bin:/home/chatwoot/.rvm/gems/ruby-3.3.3@global/bin:/home/chatwoot/.rvm/rubies/ruby-3.3.3/bin:/home/chatwoot/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/chatwoot/.rvm/bin:/home/chatwoot/.rvm/bin"
+=======
+LimitNOFILE=65536
+
+Environment="PATH=/home/chatwoot/.rvm/gems/ruby-3.4.4/bin:/home/chatwoot/.rvm/gems/ruby-3.4.4@global/bin:/home/chatwoot/.rvm/rubies/ruby-3.4.4/bin:/home/chatwoot/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/chatwoot/.rvm/bin:/home/chatwoot/.rvm/bin"
+>>>>>>> upstream/develop
 Environment="PORT=3000"
 Environment="RAILS_ENV=production"
 Environment="NODE_ENV=production"
 Environment="RAILS_LOG_TO_STDOUT=true"
+<<<<<<< HEAD
 Environment="GEM_HOME=/home/chatwoot/.rvm/gems/ruby-3.3.3"
 Environment="GEM_PATH=/home/chatwoot/.rvm/gems/ruby-3.3.3:/home/chatwoot/.rvm/gems/ruby-3.3.3@global"
+=======
+Environment="GEM_HOME=/home/chatwoot/.rvm/gems/ruby-3.4.4"
+Environment="GEM_PATH=/home/chatwoot/.rvm/gems/ruby-3.4.4:/home/chatwoot/.rvm/gems/ruby-3.4.4@global"
+>>>>>>> upstream/develop

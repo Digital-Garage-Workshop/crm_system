@@ -5,12 +5,21 @@ import { useAlert } from 'dashboard/composables';
 import { useI18n } from 'vue-i18n';
 import { required, helpers, url } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
+<<<<<<< HEAD
+=======
+import { copyTextToClipboard } from 'shared/helpers/clipboard';
+import { useToggle } from '@vueuse/core';
+>>>>>>> upstream/develop
 
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import Input from 'dashboard/components-next/input/Input.vue';
 import TextArea from 'dashboard/components-next/textarea/TextArea.vue';
 import Avatar from 'dashboard/components-next/avatar/Avatar.vue';
+<<<<<<< HEAD
+=======
+import AccessToken from 'dashboard/routes/dashboard/settings/profile/AccessToken.vue';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   type: {
@@ -42,6 +51,13 @@ const formState = reactive({
   botAvatarUrl: '',
 });
 
+<<<<<<< HEAD
+=======
+const [showAccessToken, toggleAccessToken] = useToggle();
+const accessToken = ref('');
+const botSecret = ref('');
+
+>>>>>>> upstream/develop
 const v$ = useVuelidate(
   {
     botName: {
@@ -70,11 +86,30 @@ const isLoading = computed(() =>
     : uiFlags.value.isUpdating
 );
 
+<<<<<<< HEAD
 const dialogTitle = computed(() =>
   props.type === MODAL_TYPES.CREATE
     ? t('AGENT_BOTS.ADD.TITLE')
     : t('AGENT_BOTS.EDIT.TITLE')
 );
+=======
+const dialogTitle = computed(() => {
+  if (showAccessToken.value) {
+    return t('AGENT_BOTS.ACCESS_TOKEN.TITLE');
+  }
+
+  return props.type === MODAL_TYPES.CREATE
+    ? t('AGENT_BOTS.ADD.TITLE')
+    : t('AGENT_BOTS.EDIT.TITLE');
+});
+
+const dialogDescription = computed(() => {
+  if (showAccessToken.value) {
+    return t('AGENT_BOTS.ACCESS_TOKEN.DESCRIPTION');
+  }
+  return '';
+});
+>>>>>>> upstream/develop
 
 const confirmButtonLabel = computed(() =>
   props.type === MODAL_TYPES.CREATE
@@ -90,6 +125,16 @@ const botUrlError = computed(() =>
   v$.value.botUrl.$error ? v$.value.botUrl.$errors[0]?.$message : ''
 );
 
+<<<<<<< HEAD
+=======
+const showAccessTokenInput = computed(
+  () =>
+    showAccessToken.value ||
+    props.type === MODAL_TYPES.EDIT ||
+    accessToken.value
+);
+
+>>>>>>> upstream/develop
 const resetForm = () => {
   Object.assign(formState, {
     botName: '',
@@ -128,6 +173,10 @@ const handleAvatarDelete = async () => {
 const handleSubmit = async () => {
   v$.value.$touch();
   if (v$.value.$invalid) return;
+<<<<<<< HEAD
+=======
+  if (showAccessToken.value) return;
+>>>>>>> upstream/develop
 
   const botData = {
     name: formState.botName,
@@ -144,7 +193,11 @@ const handleSubmit = async () => {
       ? botData
       : { id: props.selectedBot.id, data: botData };
 
+<<<<<<< HEAD
     await store.dispatch(
+=======
+    const response = await store.dispatch(
+>>>>>>> upstream/develop
       `agentBots/${isCreate ? 'create' : 'update'}`,
       actionPayload
     );
@@ -154,7 +207,31 @@ const handleSubmit = async () => {
       : t('AGENT_BOTS.EDIT.API.SUCCESS_MESSAGE');
     useAlert(alertKey);
 
+<<<<<<< HEAD
     dialogRef.value.close();
+=======
+    // Show access token and secret after creation
+    if (isCreate) {
+      const {
+        access_token: responseAccessToken,
+        secret: responseSecret,
+        id,
+      } = response || {};
+
+      if (id && responseAccessToken) {
+        accessToken.value = responseAccessToken;
+        botSecret.value = responseSecret || '';
+        toggleAccessToken(true);
+      } else {
+        accessToken.value = '';
+        botSecret.value = '';
+        dialogRef.value.close();
+      }
+    } else {
+      dialogRef.value.close();
+    }
+
+>>>>>>> upstream/develop
     resetForm();
   } catch (error) {
     const errorKey = isCreate
@@ -166,17 +243,89 @@ const handleSubmit = async () => {
 
 const initializeForm = () => {
   if (props.selectedBot && Object.keys(props.selectedBot).length) {
+<<<<<<< HEAD
     const { name, description, outgoing_url, thumbnail, bot_config } =
       props.selectedBot;
     formState.botName = name || '';
     formState.botDescription = description || '';
     formState.botUrl = outgoing_url || bot_config?.webhook_url || '';
     formState.botAvatarUrl = thumbnail || '';
+=======
+    const {
+      name,
+      description,
+      outgoing_url: botUrl,
+      thumbnail,
+      bot_config: botConfig,
+      access_token: botAccessToken,
+      secret: botSecretValue,
+    } = props.selectedBot;
+    formState.botName = name || '';
+    formState.botDescription = description || '';
+    formState.botUrl = botUrl || botConfig?.webhook_url || '';
+    formState.botAvatarUrl = thumbnail || '';
+
+    if (props.type === MODAL_TYPES.EDIT) {
+      if (botAccessToken) accessToken.value = botAccessToken;
+      if (botSecretValue) botSecret.value = botSecretValue;
+    }
+>>>>>>> upstream/develop
   } else {
     resetForm();
   }
 };
 
+<<<<<<< HEAD
+=======
+const onCopyToken = async value => {
+  await copyTextToClipboard(value);
+  useAlert(t('AGENT_BOTS.ACCESS_TOKEN.COPY_SUCCESSFUL'));
+};
+
+const onCopySecret = async value => {
+  await copyTextToClipboard(value || botSecret.value);
+  useAlert(t('AGENT_BOTS.SECRET.COPY_SUCCESS'));
+};
+
+const onResetSecret = async () => {
+  const response = await store.dispatch(
+    'agentBots/resetSecret',
+    props.selectedBot.id
+  );
+  if (response) {
+    botSecret.value = response.secret;
+    useAlert(t('AGENT_BOTS.SECRET.RESET_SUCCESS'));
+  } else {
+    useAlert(t('AGENT_BOTS.SECRET.RESET_ERROR'));
+  }
+};
+
+const onResetToken = async () => {
+  const response = await store.dispatch(
+    'agentBots/resetAccessToken',
+    props.selectedBot.id
+  );
+  if (response) {
+    accessToken.value = response.access_token;
+    useAlert(t('AGENT_BOTS.ACCESS_TOKEN.RESET_SUCCESS'));
+  } else {
+    useAlert(t('AGENT_BOTS.ACCESS_TOKEN.RESET_ERROR'));
+  }
+};
+
+const closeModal = () => {
+  if (!showAccessToken.value) v$.value?.$reset();
+  accessToken.value = '';
+  botSecret.value = '';
+  toggleAccessToken(false);
+};
+
+const onClickClose = () => {
+  closeModal();
+  dialogRef.value.close();
+};
+
+>>>>>>> upstream/develop
 watch(() => props.selectedBot, initializeForm, { immediate: true, deep: true });
 
 defineExpose({ dialogRef });
@@ -187,6 +336,7 @@ defineExpose({ dialogRef });
     ref="dialogRef"
     type="edit"
     :title="dialogTitle"
+<<<<<<< HEAD
     :show-cancel-button="false"
     :show-confirm-button="false"
     @close="v$.$reset()"
@@ -229,6 +379,112 @@ defineExpose({ dialogRef });
         :message-type="botUrlError ? 'error' : 'info'"
         @blur="v$.botUrl.$touch()"
       />
+=======
+    :description="dialogDescription"
+    :show-cancel-button="false"
+    :show-confirm-button="false"
+    @close="closeModal"
+  >
+    <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
+      <div
+        v-if="!showAccessToken || type === MODAL_TYPES.EDIT"
+        class="flex flex-col gap-4"
+      >
+        <div class="mb-2 flex flex-col items-start">
+          <span class="mb-2 text-sm font-medium text-n-slate-12">
+            {{ $t('AGENT_BOTS.FORM.AVATAR.LABEL') }}
+          </span>
+          <Avatar
+            :src="formState.botAvatarUrl"
+            :name="formState.botName"
+            :size="68"
+            allow-upload
+            icon-name="i-lucide-bot-message-square"
+            @upload="handleImageUpload"
+            @delete="handleAvatarDelete"
+          />
+        </div>
+
+        <Input
+          id="bot-name"
+          v-model="formState.botName"
+          :label="$t('AGENT_BOTS.FORM.NAME.LABEL')"
+          :placeholder="$t('AGENT_BOTS.FORM.NAME.PLACEHOLDER')"
+          :message="botNameError"
+          :message-type="botNameError ? 'error' : 'info'"
+          @blur="v$.botName.$touch()"
+        />
+
+        <TextArea
+          id="bot-description"
+          v-model="formState.botDescription"
+          :label="$t('AGENT_BOTS.FORM.DESCRIPTION.LABEL')"
+          :placeholder="$t('AGENT_BOTS.FORM.DESCRIPTION.PLACEHOLDER')"
+        />
+
+        <Input
+          id="bot-url"
+          v-model="formState.botUrl"
+          :label="$t('AGENT_BOTS.FORM.WEBHOOK_URL.LABEL')"
+          :placeholder="$t('AGENT_BOTS.FORM.WEBHOOK_URL.PLACEHOLDER')"
+          :message="botUrlError"
+          :message-type="botUrlError ? 'error' : 'info'"
+          @blur="v$.botUrl.$touch()"
+        />
+      </div>
+
+      <div
+        v-if="botSecret && type === MODAL_TYPES.EDIT"
+        class="flex flex-col gap-1"
+      >
+        <label class="mb-0.5 text-sm font-medium text-n-slate-12">
+          {{ $t('AGENT_BOTS.SECRET.LABEL') }}
+        </label>
+        <AccessToken
+          :value="botSecret"
+          @on-copy="onCopySecret"
+          @on-reset="onResetSecret"
+        />
+      </div>
+
+      <div v-if="showAccessTokenInput" class="flex flex-col gap-1">
+        <label
+          v-if="type === MODAL_TYPES.EDIT"
+          class="mb-0.5 text-sm font-medium text-n-slate-12"
+        >
+          {{ $t('AGENT_BOTS.ACCESS_TOKEN.TITLE') }}
+        </label>
+        <AccessToken
+          v-if="type === MODAL_TYPES.EDIT"
+          :value="accessToken"
+          @on-copy="onCopyToken"
+          @on-reset="onResetToken"
+        />
+        <AccessToken
+          v-else
+          :value="accessToken"
+          :show-reset-button="false"
+          @on-copy="onCopyToken"
+        />
+      </div>
+
+      <div
+        v-if="botSecret && showAccessToken && type === MODAL_TYPES.CREATE"
+        class="flex flex-col gap-1"
+      >
+        <p class="text-sm text-n-slate-11">
+          {{ $t('AGENT_BOTS.SECRET.CREATED_DESC') }}
+        </p>
+        <label class="mb-0.5 text-sm font-medium text-n-slate-12">
+          {{ $t('AGENT_BOTS.SECRET.LABEL') }}
+        </label>
+        <AccessToken
+          :value="botSecret"
+          :show-reset-button="false"
+          @on-copy="onCopySecret"
+        />
+      </div>
+>>>>>>> upstream/develop
 
       <div class="flex items-center justify-end w-full gap-2 px-0 py-2">
         <NextButton
@@ -236,9 +492,16 @@ defineExpose({ dialogRef });
           slate
           type="reset"
           :label="$t('AGENT_BOTS.FORM.CANCEL')"
+<<<<<<< HEAD
           @click="dialogRef.close()"
         />
         <NextButton
+=======
+          @click="onClickClose()"
+        />
+        <NextButton
+          v-if="!showAccessToken"
+>>>>>>> upstream/develop
           type="submit"
           data-testid="label-submit"
           :label="confirmButtonLabel"

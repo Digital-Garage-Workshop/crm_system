@@ -1,6 +1,34 @@
 class DashboardController < ActionController::Base
   include SwitchLocale
 
+<<<<<<< HEAD
+=======
+  GLOBAL_CONFIG_KEYS = %w[
+    LOGO
+    LOGO_DARK
+    LOGO_THUMBNAIL
+    INSTALLATION_NAME
+    WIDGET_BRAND_URL
+    TERMS_URL
+    BRAND_URL
+    BRAND_NAME
+    PRIVACY_URL
+    DISPLAY_MANIFEST
+    CREATE_NEW_ACCOUNT_FROM_DASHBOARD
+    CHATWOOT_INBOX_TOKEN
+    API_CHANNEL_NAME
+    API_CHANNEL_THUMBNAIL
+    CLOUD_ANALYTICS_TOKEN
+    DIRECT_UPLOADS_ENABLED
+    MAXIMUM_FILE_UPLOAD_SIZE
+    HCAPTCHA_SITE_KEY
+    LOGOUT_REDIRECT_LINK
+    DISABLE_USER_PROFILE_UPDATE
+    DEPLOYMENT_ENV
+    INSTALLATION_PRICING_PLAN
+  ].freeze
+
+>>>>>>> upstream/develop
   before_action :set_application_pack
   before_action :set_global_config
   before_action :set_dashboard_scripts
@@ -15,6 +43,7 @@ class DashboardController < ActionController::Base
   private
 
   def ensure_html_format
+<<<<<<< HEAD
     head :not_acceptable unless request.format.html?
   end
 
@@ -38,6 +67,13 @@ class DashboardController < ActionController::Base
       'DEPLOYMENT_ENV',
       'INSTALLATION_PRICING_PLAN'
     ).merge(app_config)
+=======
+    render json: { error: 'Please use API routes instead of dashboard routes for JSON requests' }, status: :not_acceptable if request.format.json?
+  end
+
+  def set_global_config
+    @global_config = GlobalConfig.get(*GLOBAL_CONFIG_KEYS).merge(app_config)
+>>>>>>> upstream/develop
   end
 
   def set_dashboard_scripts
@@ -66,6 +102,7 @@ class DashboardController < ActionController::Base
       ENABLE_ACCOUNT_SIGNUP: GlobalConfigService.load('ENABLE_ACCOUNT_SIGNUP', 'false'),
       FB_APP_ID: GlobalConfigService.load('FB_APP_ID', ''),
       INSTAGRAM_APP_ID: GlobalConfigService.load('INSTAGRAM_APP_ID', ''),
+<<<<<<< HEAD
       FACEBOOK_API_VERSION: GlobalConfigService.load('FACEBOOK_API_VERSION', 'v17.0'),
       IS_ENTERPRISE: ChatwootApp.enterprise?,
       AZURE_APP_ID: GlobalConfigService.load('AZURE_APP_ID', ''),
@@ -73,6 +110,33 @@ class DashboardController < ActionController::Base
     }
   end
 
+=======
+      TIKTOK_APP_ID: GlobalConfigService.load('TIKTOK_APP_ID', ''),
+      FACEBOOK_API_VERSION: GlobalConfigService.load('FACEBOOK_API_VERSION', 'v18.0'),
+      WHATSAPP_APP_ID: GlobalConfigService.load('WHATSAPP_APP_ID', ''),
+      WHATSAPP_CONFIGURATION_ID: GlobalConfigService.load('WHATSAPP_CONFIGURATION_ID', ''),
+      IS_ENTERPRISE: ChatwootApp.enterprise?,
+      AZURE_APP_ID: GlobalConfigService.load('AZURE_APP_ID', ''),
+      GIT_SHA: GIT_HASH,
+      ALLOWED_LOGIN_METHODS: allowed_login_methods,
+      ACTIVE_PLATFORM_BANNERS: active_platform_banners
+    }
+  end
+
+  def active_platform_banners
+    return [] unless ChatwootApp.chatwoot_cloud?
+
+    PlatformBanner.active.order(created_at: :desc).as_json(only: %i[id banner_message banner_type updated_at])
+  end
+
+  def allowed_login_methods
+    methods = ['email']
+    methods << 'google_oauth' if GlobalConfigService.load('ENABLE_GOOGLE_OAUTH_LOGIN', 'true').to_s != 'false'
+    methods << 'saml' if ChatwootHub.pricing_plan != 'community' && GlobalConfigService.load('ENABLE_SAML_SSO_LOGIN', 'true').to_s != 'false'
+    methods
+  end
+
+>>>>>>> upstream/develop
   def set_application_pack
     @application_pack = if request.path.include?('/auth') || request.path.include?('/login')
                           'v3app'

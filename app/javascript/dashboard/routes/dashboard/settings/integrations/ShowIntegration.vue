@@ -1,5 +1,8 @@
 <script>
+<<<<<<< HEAD
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
+=======
+>>>>>>> upstream/develop
 import Integration from './Integration.vue';
 import IntegrationHelpText from './IntegrationHelpText.vue';
 
@@ -8,8 +11,11 @@ export default {
     Integration,
     IntegrationHelpText,
   },
+<<<<<<< HEAD
   mixins: [globalConfigMixin],
 
+=======
+>>>>>>> upstream/develop
   props: {
     integrationId: {
       type: [String, Number],

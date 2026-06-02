@@ -40,7 +40,11 @@ const senderName = computed(() => {
             <Icon :icon="icon" class="text-white size-4" />
           </slot>
         </div>
+<<<<<<< HEAD
         <div class="space-y-1">
+=======
+        <div class="space-y-1 overflow-hidden">
+>>>>>>> upstream/develop
           <div v-if="senderName" class="text-n-slate-12 text-sm truncate">
             {{
               t(senderTranslationKey, {

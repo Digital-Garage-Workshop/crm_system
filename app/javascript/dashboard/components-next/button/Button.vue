@@ -36,6 +36,10 @@ const props = defineProps({
   icon: { type: [String, Object, Function], default: '' },
   trailingIcon: { type: Boolean, default: false },
   isLoading: { type: Boolean, default: false },
+<<<<<<< HEAD
+=======
+  noAnimation: { type: Boolean, default: false },
+>>>>>>> upstream/develop
 });
 
 const slots = useSlots();
@@ -102,11 +106,19 @@ const STYLE_CONFIG = {
       solid:
         'bg-n-brand text-white hover:enabled:brightness-110 focus-visible:brightness-110 outline-transparent',
       faded:
+<<<<<<< HEAD
         'bg-n-brand/10 text-n-blue-text hover:enabled:bg-n-brand/20 focus-visible:bg-n-brand/20 outline-transparent',
       outline: 'text-n-blue-text outline-n-brand',
       ghost:
         'text-n-blue-text hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 outline-transparent',
       link: 'text-n-blue-text hover:enabled:underline focus-visible:underline outline-transparent',
+=======
+        'bg-n-brand/10 text-n-blue-11 hover:enabled:bg-n-brand/20 focus-visible:bg-n-brand/20 outline-transparent',
+      outline: 'text-n-blue-11 outline-n-brand',
+      ghost:
+        'text-n-blue-11 hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 outline-transparent',
+      link: 'text-n-blue-11 hover:enabled:underline focus-visible:underline outline-transparent',
+>>>>>>> upstream/develop
     },
     ruby: {
       solid:
@@ -117,7 +129,11 @@ const STYLE_CONFIG = {
         'text-n-ruby-11 hover:enabled:bg-n-ruby-9/10 focus-visible:bg-n-ruby-9/10 outline-n-ruby-8',
       ghost:
         'text-n-ruby-11 hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 outline-transparent',
+<<<<<<< HEAD
       link: 'text-n-ruby-9 hover:enabled:underline focus-visible:underline outline-transparent',
+=======
+      link: 'text-n-ruby-9 dark:text-n-ruby-11 hover:enabled:underline focus-visible:underline outline-transparent',
+>>>>>>> upstream/develop
     },
     amber: {
       solid:
@@ -132,7 +148,11 @@ const STYLE_CONFIG = {
     },
     slate: {
       solid:
+<<<<<<< HEAD
         'bg-n-solid-3 dark:hover:enabled:bg-n-solid-2 dark:focus-visible:bg-n-solid-2 hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 text-n-slate-12 outline-n-container',
+=======
+        'bg-n-button-color dark:hover:enabled:bg-n-solid-2 dark:focus-visible:bg-n-solid-2 hover:enabled:bg-n-alpha-2 focus-visible:bg-n-alpha-2 text-n-slate-12 outline-n-container',
+>>>>>>> upstream/develop
       faded:
         'bg-n-slate-9/10 text-n-slate-12 hover:enabled:bg-n-slate-9/20 focus-visible:bg-n-slate-9/20 outline-transparent',
       outline:
@@ -145,7 +165,11 @@ const STYLE_CONFIG = {
       solid:
         'bg-n-teal-9 text-white hover:enabled:bg-n-teal-10 focus-visible:bg-n-teal-10 outline-transparent',
       faded:
+<<<<<<< HEAD
         'bg-n-teal-9/10 text-n-slate-12 hover:enabled:bg-n-teal-9/20 focus-visible:bg-n-teal-9/20 outline-transparent',
+=======
+        'bg-n-teal-9/10 text-n-teal-11 hover:enabled:bg-n-teal-9/20 focus-visible:bg-n-teal-9/20 outline-transparent',
+>>>>>>> upstream/develop
       outline:
         'text-n-teal-11 hover:enabled:bg-n-teal-9/10 focus-visible:bg-n-teal-9/10 outline-n-teal-9',
       link: 'text-n-teal-9 hover:enabled:underline focus-visible:underline outline-transparent',
@@ -179,12 +203,25 @@ const STYLE_CONFIG = {
     md: 'text-sm font-medium',
     lg: 'text-base',
   },
+<<<<<<< HEAD
+=======
+  clickAnimation: {
+    xs: 'active:enabled:scale-[0.97]',
+    sm: 'active:enabled:scale-[0.97]',
+    md: 'active:enabled:scale-[0.98]',
+    lg: 'active:enabled:scale-[0.98]',
+  },
+>>>>>>> upstream/develop
   justify: {
     start: 'justify-start',
     center: 'justify-center',
     end: 'justify-end',
   },
+<<<<<<< HEAD
   base: 'inline-flex items-center min-w-0 gap-2 transition-all duration-200 ease-in-out border-0 rounded-lg outline-1 outline disabled:opacity-50',
+=======
+  base: 'inline-flex items-center min-w-0 gap-2 transition-all duration-100 ease-out border-0 rounded-lg outline-1 outline disabled:opacity-50',
+>>>>>>> upstream/develop
 };
 
 const variantClasses = computed(() => {
@@ -221,6 +258,15 @@ const linkButtonClasses = computed(() => {
 
   return classes.join(' ');
 });
+<<<<<<< HEAD
+=======
+
+const animationClasses = computed(() => {
+  return props.noAnimation
+    ? ''
+    : STYLE_CONFIG.clickAnimation[computedSize.value];
+});
+>>>>>>> upstream/develop
 </script>
 
 <template>
@@ -230,6 +276,10 @@ const linkButtonClasses = computed(() => {
       [STYLE_CONFIG.base]: true,
       [isLink ? linkButtonClasses : buttonClasses]: true,
       [STYLE_CONFIG.fontSize[computedSize]]: true,
+<<<<<<< HEAD
+=======
+      [animationClasses]: true,
+>>>>>>> upstream/develop
       [STYLE_CONFIG.justify[computedJustify]]: true,
       'flex-row-reverse': trailingIcon && !isIconOnly,
     }"

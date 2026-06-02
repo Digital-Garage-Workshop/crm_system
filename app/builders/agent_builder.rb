@@ -29,8 +29,14 @@ class AgentBuilder
     user = User.from_email(email)
     return user if user
 
+<<<<<<< HEAD
     temp_password = "1!aA#{SecureRandom.alphanumeric(12)}"
     User.create!(email: email, name: name, password: temp_password, password_confirmation: temp_password)
+=======
+    @name = email.split('@').first if @name.blank?
+    temp_password = "1!aA#{SecureRandom.alphanumeric(12)}"
+    User.create!(email: email, name: @name, password: temp_password, password_confirmation: temp_password)
+>>>>>>> upstream/develop
   end
 
   # Checks if the user needs confirmation.
@@ -52,3 +58,8 @@ class AgentBuilder
     }.compact))
   end
 end
+<<<<<<< HEAD
+=======
+
+AgentBuilder.prepend_mod_with('AgentBuilder')
+>>>>>>> upstream/develop

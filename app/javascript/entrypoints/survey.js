@@ -1,8 +1,16 @@
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
+<<<<<<< HEAD
 import store from '../survey/store';
 import i18nMessages from '../survey/i18n';
 import App from '../survey/App.vue';
+=======
+import VueDOMPurifyHTML from 'vue-dompurify-html';
+import store from '../survey/store';
+import i18nMessages from '../survey/i18n';
+import App from '../survey/App.vue';
+import { domPurifyConfig } from '../shared/helpers/HTMLSanitizer';
+>>>>>>> upstream/develop
 
 const app = createApp(App);
 const i18n = createI18n({
@@ -12,6 +20,10 @@ const i18n = createI18n({
 
 app.use(i18n);
 app.use(store);
+<<<<<<< HEAD
+=======
+app.use(VueDOMPurifyHTML, domPurifyConfig);
+>>>>>>> upstream/develop
 
 window.onload = () => {
   window.WOOT_SURVEY = app.mount('#app');

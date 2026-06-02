@@ -47,8 +47,15 @@ class Twilio::DeliveryStatusService
     @twilio_channel ||= if params[:MessagingServiceSid].present?
                           ::Channel::TwilioSms.find_by(messaging_service_sid: params[:MessagingServiceSid])
                         elsif params[:AccountSid].present? && params[:From].present?
+<<<<<<< HEAD
                           ::Channel::TwilioSms.find_by!(account_sid: params[:AccountSid], phone_number: params[:From])
                         end
+=======
+                          ::Channel::TwilioSms.find_by(account_sid: params[:AccountSid], phone_number: params[:From])
+                        end
+    log_channel_not_found if @twilio_channel.blank?
+    @twilio_channel
+>>>>>>> upstream/develop
   end
 
   def message
@@ -56,4 +63,17 @@ class Twilio::DeliveryStatusService
 
     @message ||= twilio_channel.inbox.messages.find_by(source_id: params[:MessageSid])
   end
+<<<<<<< HEAD
+=======
+
+  def log_channel_not_found
+    Rails.logger.warn(
+      '[TWILIO] Delivery status channel lookup failed ' \
+      "account_sid=#{params[:AccountSid]} " \
+      "from=#{params[:From]} " \
+      "messaging_service_sid=#{params[:MessagingServiceSid]} " \
+      "message_sid=#{params[:MessageSid]}"
+    )
+  end
+>>>>>>> upstream/develop
 end

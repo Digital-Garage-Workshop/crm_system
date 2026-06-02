@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { INBOX_TYPES } from 'dashboard/helper/inbox';
+=======
+import { INBOX_TYPES, isVoiceCallEnabled } from 'dashboard/helper/inbox';
+>>>>>>> upstream/develop
 
 export const INBOX_FEATURES = {
   REPLY_TO: 'replyTo',
@@ -14,6 +18,10 @@ export const INBOX_FEATURE_MAP = {
     INBOX_TYPES.TWITTER,
     INBOX_TYPES.WHATSAPP,
     INBOX_TYPES.TELEGRAM,
+<<<<<<< HEAD
+=======
+    INBOX_TYPES.TIKTOK,
+>>>>>>> upstream/develop
     INBOX_TYPES.API,
   ],
   [INBOX_FEATURES.REPLY_TO_OUTGOING]: [
@@ -21,6 +29,10 @@ export const INBOX_FEATURE_MAP = {
     INBOX_TYPES.TWITTER,
     INBOX_TYPES.WHATSAPP,
     INBOX_TYPES.TELEGRAM,
+<<<<<<< HEAD
+=======
+    INBOX_TYPES.TIKTOK,
+>>>>>>> upstream/develop
     INBOX_TYPES.API,
   ],
 };
@@ -57,6 +69,12 @@ export default {
     isALineChannel() {
       return this.channelType === INBOX_TYPES.LINE;
     },
+<<<<<<< HEAD
+=======
+    voiceCallEnabled() {
+      return isVoiceCallEnabled(this.inbox);
+    },
+>>>>>>> upstream/develop
     isAnEmailChannel() {
       return this.channelType === INBOX_TYPES.EMAIL;
     },
@@ -112,6 +130,11 @@ export default {
         badgeKey = this.twilioBadge;
       } else if (this.isAWhatsAppChannel) {
         badgeKey = 'whatsapp';
+<<<<<<< HEAD
+=======
+      } else if (this.isATiktokChannel) {
+        badgeKey = 'tiktok';
+>>>>>>> upstream/develop
       }
       return badgeKey || this.channelType;
     },
@@ -124,6 +147,12 @@ export default {
     isAnInstagramChannel() {
       return this.channelType === INBOX_TYPES.INSTAGRAM;
     },
+<<<<<<< HEAD
+=======
+    isATiktokChannel() {
+      return this.channelType === INBOX_TYPES.TIKTOK;
+    },
+>>>>>>> upstream/develop
   },
   methods: {
     inboxHasFeature(feature) {

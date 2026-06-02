@@ -9,7 +9,11 @@
 #  updated_at    :datetime         not null
 #  contact_id    :bigint
 #  inbox_id      :bigint
+<<<<<<< HEAD
 #  source_id     :string           not null
+=======
+#  source_id     :text             not null
+>>>>>>> upstream/develop
 #
 # Indexes
 #

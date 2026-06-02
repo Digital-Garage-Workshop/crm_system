@@ -116,6 +116,10 @@ const SORT_OPTIONS = {
   priority_desc: ['sortOnPriority', 'desc'],
   waiting_since_asc: ['sortOnWaitingSince', 'asc'],
   waiting_since_desc: ['sortOnWaitingSince', 'desc'],
+<<<<<<< HEAD
+=======
+  priority_desc_created_at_asc: ['sortOnPriorityCreatedAt', 'desc'],
+>>>>>>> upstream/develop
 };
 const sortAscending = (valueA, valueB) => valueA - valueB;
 const sortDescending = (valueA, valueB) => valueB - valueA;
@@ -139,6 +143,17 @@ const sortConfig = {
     return getSortOrderFunction(sortDirection)(p1, p2);
   },
 
+<<<<<<< HEAD
+=======
+  sortOnPriorityCreatedAt: (a, b) => {
+    const DEFAULT_FOR_NULL = 0;
+    const p1 = CONVERSATION_PRIORITY_ORDER[a.priority] || DEFAULT_FOR_NULL;
+    const p2 = CONVERSATION_PRIORITY_ORDER[b.priority] || DEFAULT_FOR_NULL;
+    if (p1 !== p2) return p2 - p1;
+    return a.created_at - b.created_at;
+  },
+
+>>>>>>> upstream/develop
   sortOnWaitingSince: (a, b, sortDirection) => {
     const sortFunc = getSortOrderFunction(sortDirection);
     if (!a.waiting_since || !b.waiting_since) {

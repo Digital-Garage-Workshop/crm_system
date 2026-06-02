@@ -13,6 +13,7 @@ export default {
   computed: {
     colorSchemeClasses() {
       if (this.colorScheme === 'primary') {
+<<<<<<< HEAD
         return 'before:!border-t-woot-500';
       }
 
@@ -22,6 +23,17 @@ export default {
 
       if (this.colorScheme === 'success') {
         return 'before:!border-t-success-500';
+=======
+        return 'before:!border-t-n-brand';
+      }
+
+      if (this.colorScheme === 'warning') {
+        return 'before:!border-t-n-amber-6';
+      }
+
+      if (this.colorScheme === 'success') {
+        return 'before:!border-t-n-teal-9';
+>>>>>>> upstream/develop
       }
 
       return this.colorScheme;

@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, defineOptions, useAttrs } from 'vue';
+=======
+import { computed, useAttrs } from 'vue';
+>>>>>>> upstream/develop
 
 import ImageChip from 'next/message/chips/Image.vue';
 import VideoChip from 'next/message/chips/Video.vue';

@@ -3,6 +3,12 @@
     "FETCHING": "Buscando integrações",
     "NO_HOOK_CONFIGURED": "Não há integrações {integrationId} configuradas nesta conta.",
     "HEADER": "Aplicações",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integração | {n} integrações",
+    "SEARCH_PLACEHOLDER": "Pesquisar...",
+    "NO_RESULTS": "Nenhum resultado encontrado correspondente à sua busca",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Ativado",
       "DISABLED": "Desativado"
@@ -12,7 +18,11 @@
     "DELETE": {
       "TITLE": {
         "INBOX": "Confirmar exclusão",
+<<<<<<< HEAD
         "ACCOUNT": "Desconectado"
+=======
+        "ACCOUNT": "Desconectar"
+>>>>>>> upstream/develop
       },
       "MESSAGE": {
         "INBOX": "Você tem certeza que deseja excluir?",
@@ -31,6 +41,10 @@
     "LIST": {
       "FETCHING": "Buscando integrações",
       "INBOX": "Caixa de Entrada",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Ações",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Excluir"
       }
@@ -42,6 +56,10 @@
           "PLACEHOLDER": "Selecionar caixa de entrada"
         },
         "SUBMIT": "Criar",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Cancelar"
       },
       "API": {

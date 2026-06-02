@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Administrator",
       "AGENT": "Agen"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Tidak ada agen yang terkait dengan akun ini",
       "TITLE": "Kelola agen di tim Anda",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Tidak dapat terhubung ke Server Woot, Silahkan coba lagi nanti"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Mencari Agen...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Tidak ada hasil ditemukan."
     },

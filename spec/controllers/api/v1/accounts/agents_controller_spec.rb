@@ -25,6 +25,10 @@ RSpec.describe 'Agents API', type: :request do
             as: :json
 
         expect(response).to have_http_status(:success)
+<<<<<<< HEAD
+=======
+        expect(response).to conform_schema(200)
+>>>>>>> upstream/develop
         expect(response.parsed_body.size).to eq(account.users.count)
       end
 
@@ -122,6 +126,10 @@ RSpec.describe 'Agents API', type: :request do
             as: :json
 
         expect(response).to have_http_status(:success)
+<<<<<<< HEAD
+=======
+        expect(response).to conform_schema(200)
+>>>>>>> upstream/develop
         expect(other_agent.reload.name).to eq(params[:name])
       end
 
@@ -171,6 +179,10 @@ RSpec.describe 'Agents API', type: :request do
              as: :json
 
         expect(response).to have_http_status(:success)
+<<<<<<< HEAD
+=======
+        expect(response).to conform_schema(200)
+>>>>>>> upstream/develop
         expect(response.parsed_body['email']).to eq(params[:email])
         expect(account.users.last.name).to eq('NewUser')
       end

@@ -6,11 +6,17 @@ RSpec.describe ChatwootMarkdownRenderer do
   let(:doc) { instance_double(CommonMarker::Node) }
   let(:renderer) { described_class.new(markdown_content) }
   let(:markdown_renderer) { instance_double(CustomMarkdownRenderer) }
+<<<<<<< HEAD
   let(:base_markdown_renderer) { instance_double(BaseMarkdownRenderer) }
   let(:html_content) { '<p>This is a <em>test</em> content with <sup>markdown</sup></p>' }
 
   before do
     allow(CommonMarker).to receive(:render_doc).with(markdown_content, :DEFAULT).and_return(doc)
+=======
+  let(:html_content) { '<p>This is a <em>test</em> content with <sup>markdown</sup></p>' }
+
+  before do
+>>>>>>> upstream/develop
     allow(CustomMarkdownRenderer).to receive(:new).and_return(markdown_renderer)
     allow(markdown_renderer).to receive(:render).with(doc).and_return(html_content)
   end
@@ -64,6 +70,7 @@ RSpec.describe ChatwootMarkdownRenderer do
   end
 
   describe '#render_message' do
+<<<<<<< HEAD
     let(:message_html_content) { '<p>This is a <em>test</em> content with ^markdown^</p>' }
     let(:rendered_message) { renderer.render_message }
 
@@ -75,17 +82,43 @@ RSpec.describe ChatwootMarkdownRenderer do
 
     it 'renders the markdown message to html' do
       expect(rendered_message.to_s).to eq(message_html_content)
+=======
+    let(:rendered_message) { renderer.render_message }
+
+    before do
+      allow(CommonMarker).to receive(:render_doc).and_call_original
+      allow(BaseMarkdownRenderer).to receive(:new).and_call_original
+    end
+
+    it 'renders the markdown message to html' do
+      expect(rendered_message.to_s).to eq("<p>This is a <em>test</em> content with ^markdown^</p>\n")
+>>>>>>> upstream/develop
     end
 
     it 'returns an html safe string' do
       expect(rendered_message).to be_html_safe
     end
+<<<<<<< HEAD
+=======
+
+    context 'with bare URLs' do
+      let(:markdown_content) { 'Visit https://example.com for details' }
+
+      it 'converts bare URLs to links' do
+        expect(renderer.render_message.to_s).to eq("<p>Visit <a href=\"https://example.com\">https://example.com</a> for details</p>\n")
+      end
+    end
+>>>>>>> upstream/develop
   end
 
   describe '#render_markdown_to_plain_text' do
     let(:rendered_content) { renderer.render_markdown_to_plain_text }
 
     before do
+<<<<<<< HEAD
+=======
+      allow(CommonMarker).to receive(:render_doc).with(markdown_content, :DEFAULT).and_return(doc)
+>>>>>>> upstream/develop
       allow(doc).to receive(:to_plaintext).and_return(plain_text_content)
     end
 

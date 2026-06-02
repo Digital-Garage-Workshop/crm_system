@@ -4,6 +4,10 @@ import { useI18n } from 'vue-i18n';
 import { removeEmoji } from 'shared/helpers/emoji';
 
 import Icon from 'dashboard/components-next/icon/Icon.vue';
+<<<<<<< HEAD
+=======
+import ChannelIcon from 'dashboard/components-next/icon/ChannelIcon.vue';
+>>>>>>> upstream/develop
 import wootConstants from 'dashboard/constants/globals';
 
 const props = defineProps({
@@ -33,10 +37,24 @@ const props = defineProps({
     validator: value =>
       !value || wootConstants.AVAILABILITY_STATUS_KEYS.includes(value),
   },
+<<<<<<< HEAD
+=======
+  inbox: {
+    type: Object,
+    default: null,
+  },
+>>>>>>> upstream/develop
   iconName: {
     type: String,
     default: null,
   },
+<<<<<<< HEAD
+=======
+  hideOfflineStatus: {
+    type: Boolean,
+    default: false,
+  },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits(['upload', 'delete']);
@@ -66,11 +84,19 @@ const AVATAR_COLORS = {
   default: { bg: '#E8E8E8', text: '#60646C' },
 };
 
+<<<<<<< HEAD
 const STATUS_CLASSES = {
   online: 'bg-n-teal-10',
   busy: 'bg-n-amber-10',
   offline: 'bg-n-slate-10',
 };
+=======
+const STATUS_CLASSES = computed(() => ({
+  online: 'bg-n-teal-10',
+  busy: 'bg-n-amber-10',
+  ...(props.hideOfflineStatus ? {} : { offline: 'bg-n-slate-10' }),
+}));
+>>>>>>> upstream/develop
 
 const showDefaultAvatar = computed(() => !props.src && !props.name);
 
@@ -103,6 +129,22 @@ const containerStyles = computed(() => ({
   height: `${props.size}px`,
 }));
 
+<<<<<<< HEAD
+=======
+const borderRadiusClass = computed(() => {
+  if (props.roundedFull) {
+    return 'rounded-full';
+  }
+
+  // Approximates 25% of size
+  if (props.size <= 16) return 'rounded'; // 4px
+  if (props.size <= 24) return 'rounded-md'; // 6px
+  if (props.size <= 32) return 'rounded-lg'; // 8px
+  if (props.size <= 48) return 'rounded-xl'; // 12px
+  return 'rounded-2xl'; // 16px
+});
+
+>>>>>>> upstream/develop
 const avatarStyles = computed(() => ({
   ...containerStyles.value,
   backgroundColor:
@@ -174,21 +216,46 @@ watch(
 </script>
 
 <template>
+<<<<<<< HEAD
   <span class="relative inline-flex group/avatar z-0" :style="containerStyles">
     <!-- Status Badge -->
     <slot name="badge" :size="size">
       <div
         v-if="status"
+=======
+  <span
+    class="relative inline-flex group/avatar z-0 flex-shrink-0 align-middle"
+    :style="containerStyles"
+  >
+    <!-- Status Badge -->
+    <slot name="badge" :size="size">
+      <div
+        v-if="status && STATUS_CLASSES[status]"
+>>>>>>> upstream/develop
         class="absolute z-20 border rounded-full border-n-slate-3"
         :style="badgeStyles"
         :class="STATUS_CLASSES[status]"
       />
+<<<<<<< HEAD
+=======
+      <div
+        v-if="inbox && !(status && STATUS_CLASSES[status])"
+        :style="badgeStyles"
+        class="absolute z-20 flex items-center justify-center rounded-full bg-n-solid-1 border border-transparent flex-shrink-0"
+      >
+        <ChannelIcon :inbox="inbox" class="w-full h-full text-n-slate-11" />
+      </div>
+>>>>>>> upstream/develop
     </slot>
 
     <!-- Delete Avatar Button -->
     <div
       v-if="src && allowUpload"
+<<<<<<< HEAD
       class="absolute z-20 flex items-center justify-center invisible w-6 h-6 transition-all duration-300 ease-in-out opacity-0 cursor-pointer outline outline-1 outline-n-container -top-2 -right-2 rounded-xl bg-n-solid-3 group-hover/avatar:visible group-hover/avatar:opacity-100"
+=======
+      class="absolute z-20 flex items-center justify-center invisible w-6 h-6 transition-all duration-300 ease-in-out opacity-0 cursor-pointer outline outline-1 outline-n-container -top-2 ltr:-right-2 rtl:-left-2 rounded-xl bg-n-solid-3 group-hover/avatar:visible group-hover/avatar:opacity-100"
+>>>>>>> upstream/develop
       @click="handleDismiss"
     >
       <Icon icon="i-lucide-x" class="text-n-slate-11 size-4" />
@@ -197,9 +264,15 @@ watch(
     <!-- Avatar Container -->
     <span
       role="img"
+<<<<<<< HEAD
       class="relative inline-flex items-center justify-center object-cover overflow-hidden font-medium"
       :class="[
         roundedFull ? 'rounded-full' : 'rounded-xl',
+=======
+      class="relative inline-flex items-center justify-center object-cover overflow-hidden font-medium outline outline-1 -outline-offset-1 outline-[rgb(0_0_0_/_0.03)] dark:outline-[rgb(255_255_255_/_0.04)]"
+      :class="[
+        borderRadiusClass,
+>>>>>>> upstream/develop
         {
           'dark:!bg-[var(--dark-bg)] dark:!text-[var(--dark-text)]':
             !showDefaultAvatar && (!src || !isImageValid),
@@ -232,13 +305,18 @@ watch(
         <!-- Fallback Icon if no name or image -->
         <Icon
           v-else
+<<<<<<< HEAD
           v-tooltip.top-start="t('THUMBNAIL.AUTHOR.NOT_AVAILABLE')"
+=======
+          :title="t('THUMBNAIL.AUTHOR.NOT_AVAILABLE')"
+>>>>>>> upstream/develop
           icon="i-lucide-user"
           :style="iconStyles"
         />
       </template>
 
       <!-- Upload Overlay and Input -->
+<<<<<<< HEAD
       <div
         v-if="allowUpload"
         class="absolute inset-0 z-10 flex items-center justify-center invisible w-full h-full transition-all duration-300 ease-in-out opacity-0 rounded-xl bg-n-alpha-black1 group-hover/avatar:visible group-hover/avatar:opacity-100"
@@ -257,6 +335,36 @@ watch(
           @change="handleImageUpload"
         />
       </div>
+=======
+      <slot
+        v-if="allowUpload || $slots.overlay"
+        name="overlay"
+        :size="size"
+        :handle-upload="handleUploadAvatar"
+        :file-input-ref="fileInput"
+        :handle-image-upload="handleImageUpload"
+      >
+        <div
+          class="absolute inset-0 z-10 flex items-center justify-center invisible w-full h-full transition-all duration-300 ease-in-out opacity-0 bg-n-alpha-black1 group-hover/avatar:visible group-hover/avatar:opacity-100"
+          :class="borderRadiusClass"
+          @click="handleUploadAvatar"
+        >
+          <Icon
+            icon="i-lucide-upload"
+            class="text-white"
+            :style="{ width: `${size / 2}px`, height: `${size / 2}px` }"
+          />
+          <input
+            v-if="allowUpload"
+            ref="fileInput"
+            type="file"
+            accept="image/png, image/jpeg, image/jpg, image/gif, image/webp"
+            class="hidden"
+            @change="handleImageUpload"
+          />
+        </div>
+      </slot>
+>>>>>>> upstream/develop
     </span>
   </span>
 </template>

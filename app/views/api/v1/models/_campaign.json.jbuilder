@@ -9,6 +9,10 @@ json.sender do
   json.partial! 'api/v1/models/agent', formats: [:json], resource: resource.sender if resource.sender.present?
 end
 json.message resource.message
+<<<<<<< HEAD
+=======
+json.template_params resource.template_params
+>>>>>>> upstream/develop
 json.campaign_status resource.campaign_status
 json.enabled resource.enabled
 json.campaign_type resource.campaign_type

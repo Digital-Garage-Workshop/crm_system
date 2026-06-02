@@ -4,8 +4,13 @@ export default [
       city: 'Los Angeles',
       country: 'United States',
       description:
+<<<<<<< HEAD
         "I'm Candice, a developer focusing on building web solutions. Currently, I’m working as a Product Developer at Chatwoot.",
       companyName: 'Chatwoot',
+=======
+        "I'm Candice, a developer focusing on building web solutions. Currently, I’m working as a Product Developer at Lumora.",
+      companyName: 'Lumora',
+>>>>>>> upstream/develop
       countryCode: 'US',
       socialProfiles: {
         github: 'candice-dev',
@@ -16,7 +21,11 @@ export default [
       },
     },
     availabilityStatus: 'offline',
+<<<<<<< HEAD
     email: 'candice.matherson@chatwoot.com',
+=======
+    email: 'candice.matherson@lumora.com',
+>>>>>>> upstream/develop
     id: 22,
     name: 'Candice Matherson',
     phoneNumber: '+14155552671',

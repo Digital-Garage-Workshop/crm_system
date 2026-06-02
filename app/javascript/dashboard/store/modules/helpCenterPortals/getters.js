@@ -8,6 +8,10 @@ export const getters = {
   isFetchingPortals: state => state.uiFlags.isFetching,
   isCreatingPortal: state => state.uiFlags.isCreating,
   isSwitchingPortal: state => state.uiFlags.isSwitching,
+<<<<<<< HEAD
+=======
+  isFetchingSSLStatus: state => state.uiFlags.isFetchingSSLStatus,
+>>>>>>> upstream/develop
   portalBySlug:
     (...getterArguments) =>
     portalId => {

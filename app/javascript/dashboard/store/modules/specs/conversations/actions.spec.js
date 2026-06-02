@@ -355,14 +355,26 @@ describe('#actions', () => {
       axios.post.mockResolvedValue({
         data: { id: 1, name: 'User' },
       });
+<<<<<<< HEAD
       await actions.assignAgent({ commit }, { conversationId: 1, agentId: 1 });
       expect(commit).toHaveBeenCalledTimes(0);
       expect(commit.mock.calls).toEqual([]);
+=======
+      await actions.assignAgent(
+        { dispatch },
+        { conversationId: 1, agentId: 1 }
+      );
+      expect(dispatch).toHaveBeenCalledWith('setCurrentChatAssignee', {
+        conversationId: 1,
+        assignee: { id: 1, name: 'User' },
+      });
+>>>>>>> upstream/develop
     });
   });
 
   describe('#setCurrentChatAssignee', () => {
     it('sends correct mutations if assignment is successful', async () => {
+<<<<<<< HEAD
       axios.post.mockResolvedValue({
         data: { id: 1, name: 'User' },
       });
@@ -371,6 +383,15 @@ describe('#actions', () => {
       expect(commit.mock.calls).toEqual([
         ['ASSIGN_AGENT', { id: 1, name: 'User' }],
       ]);
+=======
+      const payload = {
+        conversationId: 1,
+        assignee: { id: 1, name: 'User' },
+      };
+      await actions.setCurrentChatAssignee({ commit }, payload);
+      expect(commit).toHaveBeenCalledTimes(1);
+      expect(commit.mock.calls).toEqual([['ASSIGN_AGENT', payload]]);
+>>>>>>> upstream/develop
     });
   });
 
@@ -513,6 +534,31 @@ describe('#deleteMessage', () => {
     expect(commit.mock.calls).toEqual([]);
   });
 
+<<<<<<< HEAD
+=======
+  describe('#deleteConversation', () => {
+    it('send correct actions if API is success', async () => {
+      axios.delete.mockResolvedValue({
+        data: { id: 1 },
+      });
+      await actions.deleteConversation({ commit, dispatch }, 1);
+      expect(commit.mock.calls).toEqual([[types.DELETE_CONVERSATION, 1]]);
+      expect(dispatch.mock.calls).toEqual([
+        ['conversationStats/get', {}, { root: true }],
+      ]);
+    });
+
+    it('send no actions if API is error', async () => {
+      axios.delete.mockRejectedValue({ message: 'Incorrect header' });
+      await expect(
+        actions.deleteConversation({ commit, dispatch }, 1)
+      ).rejects.toThrow(Error);
+      expect(commit.mock.calls).toEqual([]);
+      expect(dispatch.mock.calls).toEqual([]);
+    });
+  });
+
+>>>>>>> upstream/develop
   describe('#updateCustomAttributes', () => {
     it('update conversation custom attributes', async () => {
       axios.post.mockResolvedValue({
@@ -526,7 +572,17 @@ describe('#deleteMessage', () => {
         }
       );
       expect(commit.mock.calls).toEqual([
+<<<<<<< HEAD
         [types.UPDATE_CONVERSATION_CUSTOM_ATTRIBUTES, { order_d: '1001' }],
+=======
+        [
+          types.UPDATE_CONVERSATION_CUSTOM_ATTRIBUTES,
+          {
+            conversationId: 1,
+            customAttributes: { order_d: '1001' },
+          },
+        ],
+>>>>>>> upstream/develop
       ]);
     });
   });
@@ -688,6 +744,67 @@ describe('#addMentions', () => {
     });
   });
 
+<<<<<<< HEAD
+=======
+  describe('#setActiveChat', () => {
+    it('should commit SET_CHAT_DATA_FETCHED with conversation ID after fetch', async () => {
+      const localCommit = vi.fn();
+      const localDispatch = vi.fn().mockResolvedValue();
+      const data = { id: 42, messages: [{ id: 100 }] };
+
+      await actions.setActiveChat(
+        { commit: localCommit, dispatch: localDispatch },
+        { data, after: 99 }
+      );
+
+      expect(localCommit.mock.calls).toEqual([
+        [types.SET_CURRENT_CHAT_WINDOW, data],
+        [types.CLEAR_ALL_MESSAGES_LOADED, 42],
+        [types.SET_CHAT_DATA_FETCHED, 42],
+      ]);
+      expect(localDispatch).toHaveBeenCalledWith('fetchPreviousMessages', {
+        after: 99,
+        before: 100,
+        conversationId: 42,
+      });
+    });
+
+    it('should not dispatch fetchPreviousMessages if dataFetched is already set', async () => {
+      const localCommit = vi.fn();
+      const localDispatch = vi.fn();
+      const data = { id: 42, messages: [{ id: 100 }], dataFetched: true };
+
+      await actions.setActiveChat(
+        { commit: localCommit, dispatch: localDispatch },
+        { data }
+      );
+
+      expect(localCommit.mock.calls).toEqual([
+        [types.SET_CURRENT_CHAT_WINDOW, data],
+        [types.CLEAR_ALL_MESSAGES_LOADED, 42],
+      ]);
+      expect(localDispatch).not.toHaveBeenCalled();
+    });
+
+    it('should commit SET_CHAT_DATA_FETCHED by ID, not mutate the data object directly (race condition fix)', async () => {
+      const localCommit = vi.fn();
+      const localDispatch = vi.fn().mockResolvedValue();
+      const data = { id: 42, messages: [{ id: 100 }] };
+
+      await actions.setActiveChat(
+        { commit: localCommit, dispatch: localDispatch },
+        { data }
+      );
+
+      // The action must NOT set dataFetched on the data object directly
+      expect(data.dataFetched).toBeUndefined();
+
+      // Instead it commits a mutation that finds the conversation by ID in the store
+      expect(localCommit).toHaveBeenCalledWith(types.SET_CHAT_DATA_FETCHED, 42);
+    });
+  });
+
+>>>>>>> upstream/develop
   describe('#getInboxCaptainAssistantById', () => {
     it('fetches inbox assistant by id', async () => {
       axios.get.mockResolvedValue({

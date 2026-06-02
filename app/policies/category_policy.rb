@@ -22,6 +22,13 @@ class CategoryPolicy < ApplicationPolicy
   def destroy?
     @account_user.administrator?
   end
+<<<<<<< HEAD
+=======
+
+  def reorder?
+    @account_user.administrator?
+  end
+>>>>>>> upstream/develop
 end
 
 CategoryPolicy.prepend_mod_with('CategoryPolicy')

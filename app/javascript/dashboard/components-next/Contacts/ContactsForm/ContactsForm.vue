@@ -44,6 +44,11 @@ const SOCIAL_CONFIG = {
   LINKEDIN: 'i-ri-linkedin-box-fill',
   FACEBOOK: 'i-ri-facebook-circle-fill',
   INSTAGRAM: 'i-ri-instagram-line',
+<<<<<<< HEAD
+=======
+  TELEGRAM: 'i-ri-telegram-fill',
+  TIKTOK: 'i-ri-tiktok-fill',
+>>>>>>> upstream/develop
   TWITTER: 'i-ri-twitter-x-fill',
   GITHUB: 'i-ri-github-fill',
 };
@@ -65,6 +70,11 @@ const defaultState = {
       facebook: '',
       github: '',
       instagram: '',
+<<<<<<< HEAD
+=======
+      telegram: '',
+      tiktok: '',
+>>>>>>> upstream/develop
       linkedin: '',
       twitter: '',
     },
@@ -101,9 +111,19 @@ const prepareStateBasedOnProps = () => {
     countryCode = '',
     country = '',
     city = '',
+<<<<<<< HEAD
     socialProfiles = {},
   } = additionalAttributes || {};
 
+=======
+    socialTelegramUserName = '',
+    socialProfiles = {},
+  } = additionalAttributes || {};
+
+  const telegramUsername =
+    socialProfiles?.telegram || socialTelegramUserName || '';
+
+>>>>>>> upstream/develop
   Object.assign(state, {
     id,
     name,
@@ -117,7 +137,14 @@ const prepareStateBasedOnProps = () => {
       countryCode,
       country,
       city,
+<<<<<<< HEAD
       socialProfiles,
+=======
+      socialProfiles: {
+        ...socialProfiles,
+        telegram: telegramUsername,
+      },
+>>>>>>> upstream/develop
     },
   });
 };
@@ -218,10 +245,20 @@ const resetForm = () => {
   Object.assign(state, defaultState);
 };
 
+<<<<<<< HEAD
 watch(() => props.contactData, prepareStateBasedOnProps, {
   immediate: true,
   deep: true,
 });
+=======
+watch(
+  () => props.contactData?.id,
+  id => {
+    if (id) prepareStateBasedOnProps();
+  },
+  { immediate: true }
+);
+>>>>>>> upstream/develop
 
 // Expose state to parent component for avatar upload
 defineExpose({

@@ -11,10 +11,20 @@ json.account_id portal.account_id
 
 json.config do
   json.allowed_locales do
+<<<<<<< HEAD
     json.array! portal.config['allowed_locales'].each do |locale|
       json.partial! 'api/v1/models/portal_config', formats: [:json], locale: locale, portal: portal
     end
   end
+=======
+    json.array! portal.allowed_locale_codes.each do |locale|
+      json.partial! 'api/v1/models/portal_config', formats: [:json], locale: locale, portal: portal
+    end
+  end
+  json.default_locale portal.default_locale
+  json.layout portal.layout
+  json.social_profiles portal.social_profiles
+>>>>>>> upstream/develop
 end
 
 if portal.channel_web_widget
@@ -34,3 +44,13 @@ json.meta do
   json.categories_count portal.categories.try(:size)
   json.default_locale portal.default_locale
 end
+<<<<<<< HEAD
+=======
+
+if portal.ssl_settings.present?
+  json.ssl_settings do
+    json.status portal.ssl_settings['cf_status']
+    json.verification_errors portal.ssl_settings['cf_verification_errors']
+  end
+end
+>>>>>>> upstream/develop

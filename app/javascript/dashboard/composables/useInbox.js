@@ -1,7 +1,15 @@
 import { computed } from 'vue';
 import { useMapGetter } from 'dashboard/composables/store';
 import { useCamelCase } from 'dashboard/composables/useTransformKeys';
+<<<<<<< HEAD
 import { INBOX_TYPES } from 'dashboard/helper/inbox';
+=======
+import {
+  INBOX_TYPES,
+  isVoiceCallEnabled,
+  getVoiceCallProvider,
+} from 'dashboard/helper/inbox';
+>>>>>>> upstream/develop
 
 export const INBOX_FEATURES = {
   REPLY_TO: 'replyTo',
@@ -17,6 +25,10 @@ export const INBOX_FEATURE_MAP = {
     INBOX_TYPES.TWITTER,
     INBOX_TYPES.WHATSAPP,
     INBOX_TYPES.TELEGRAM,
+<<<<<<< HEAD
+=======
+    INBOX_TYPES.TIKTOK,
+>>>>>>> upstream/develop
     INBOX_TYPES.API,
   ],
   [INBOX_FEATURES.REPLY_TO_OUTGOING]: [
@@ -24,19 +36,32 @@ export const INBOX_FEATURE_MAP = {
     INBOX_TYPES.TWITTER,
     INBOX_TYPES.WHATSAPP,
     INBOX_TYPES.TELEGRAM,
+<<<<<<< HEAD
+=======
+    INBOX_TYPES.TIKTOK,
+>>>>>>> upstream/develop
     INBOX_TYPES.API,
   ],
 };
 
 /**
+<<<<<<< HEAD
  * Composable for handling macro-related functionality
  * @returns {Object} An object containing the getMacroDropdownValues function
  */
 export const useInbox = () => {
+=======
+ * Composable for handling inbox-related functionality
+ * @param {string|null} inboxId - Optional inbox ID. If not provided, uses current chat's inbox
+ * @returns {Object} An object containing inbox type checking functions
+ */
+export const useInbox = (inboxId = null) => {
+>>>>>>> upstream/develop
   const currentChat = useMapGetter('getSelectedChat');
   const inboxGetter = useMapGetter('inboxes/getInboxById');
 
   const inbox = computed(() => {
+<<<<<<< HEAD
     const inboxId = currentChat.value.inbox_id;
 
     return useCamelCase(inboxGetter.value(inboxId), { deep: true });
@@ -44,6 +69,17 @@ export const useInbox = () => {
 
   const channelType = computed(() => {
     return inbox.value.channelType;
+=======
+    const targetInboxId = inboxId || currentChat.value?.inbox_id;
+
+    if (!targetInboxId) return null;
+
+    return useCamelCase(inboxGetter.value(targetInboxId), { deep: true });
+  });
+
+  const channelType = computed(() => {
+    return inbox.value?.channelType;
+>>>>>>> upstream/develop
   });
 
   const isAPIInbox = computed(() => {
@@ -75,6 +111,7 @@ export const useInbox = () => {
   });
 
   const whatsAppAPIProvider = computed(() => {
+<<<<<<< HEAD
     return inbox.value.provider || '';
   });
 
@@ -88,6 +125,21 @@ export const useInbox = () => {
 
   const isATwilioSMSChannel = computed(() => {
     const { medium: medium = '' } = inbox.value;
+=======
+    return inbox.value?.provider || '';
+  });
+
+  const isAMicrosoftInbox = computed(() => {
+    return isAnEmailChannel.value && inbox.value?.provider === 'microsoft';
+  });
+
+  const isAGoogleInbox = computed(() => {
+    return isAnEmailChannel.value && inbox.value?.provider === 'google';
+  });
+
+  const isATwilioSMSChannel = computed(() => {
+    const { medium: medium = '' } = inbox.value || {};
+>>>>>>> upstream/develop
     return isATwilioChannel.value && medium === 'sms';
   });
 
@@ -96,7 +148,11 @@ export const useInbox = () => {
   });
 
   const isATwilioWhatsAppChannel = computed(() => {
+<<<<<<< HEAD
     const { medium: medium = '' } = inbox.value;
+=======
+    const { medium: medium = '' } = inbox.value || {};
+>>>>>>> upstream/develop
     return isATwilioChannel.value && medium === 'whatsapp';
   });
 
@@ -125,6 +181,17 @@ export const useInbox = () => {
     return channelType.value === INBOX_TYPES.INSTAGRAM;
   });
 
+<<<<<<< HEAD
+=======
+  const isATiktokChannel = computed(() => {
+    return channelType.value === INBOX_TYPES.TIKTOK;
+  });
+
+  const voiceCallEnabled = computed(() => isVoiceCallEnabled(inbox.value));
+
+  const voiceCallProvider = computed(() => getVoiceCallProvider(inbox.value));
+
+>>>>>>> upstream/develop
   return {
     inbox,
     isAFacebookInbox,
@@ -142,5 +209,11 @@ export const useInbox = () => {
     is360DialogWhatsAppChannel,
     isAnEmailChannel,
     isAnInstagramChannel,
+<<<<<<< HEAD
+=======
+    isATiktokChannel,
+    voiceCallEnabled,
+    voiceCallProvider,
+>>>>>>> upstream/develop
   };
 };

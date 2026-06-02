@@ -11,6 +11,11 @@ describe('#enterpriseAccountAPI', () => {
     expect(accountAPI).toHaveProperty('delete');
     expect(accountAPI).toHaveProperty('checkout');
     expect(accountAPI).toHaveProperty('toggleDeletion');
+<<<<<<< HEAD
+=======
+    expect(accountAPI).toHaveProperty('createTopupCheckout');
+    expect(accountAPI).toHaveProperty('getLimits');
+>>>>>>> upstream/develop
   });
 
   describe('API calls', () => {
@@ -59,5 +64,32 @@ describe('#enterpriseAccountAPI', () => {
         { action_type: 'undelete' }
       );
     });
+<<<<<<< HEAD
+=======
+
+    it('#createTopupCheckout with credits', () => {
+      accountAPI.createTopupCheckout(1000);
+      expect(axiosMock.post).toHaveBeenCalledWith(
+        '/enterprise/api/v1/topup_checkout',
+        { credits: 1000 }
+      );
+    });
+
+    it('#createTopupCheckout with different credit amounts', () => {
+      const creditAmounts = [1000, 2500, 6000, 12000];
+      creditAmounts.forEach(credits => {
+        accountAPI.createTopupCheckout(credits);
+        expect(axiosMock.post).toHaveBeenCalledWith(
+          '/enterprise/api/v1/topup_checkout',
+          { credits }
+        );
+      });
+    });
+
+    it('#getLimits', () => {
+      accountAPI.getLimits();
+      expect(axiosMock.get).toHaveBeenCalledWith('/enterprise/api/v1/limits');
+    });
+>>>>>>> upstream/develop
   });
 });

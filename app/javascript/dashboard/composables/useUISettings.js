@@ -7,8 +7,15 @@ export const DEFAULT_CONVERSATION_SIDEBAR_ITEMS_ORDER = Object.freeze([
   { name: 'conversation_info' },
   { name: 'contact_attributes' },
   { name: 'contact_notes' },
+<<<<<<< HEAD
   { name: 'previous_conversation' },
   { name: 'conversation_participants' },
+=======
+  { name: 'shared_files' },
+  { name: 'previous_conversation' },
+  { name: 'conversation_participants' },
+  { name: 'linear_issues' },
+>>>>>>> upstream/develop
   { name: 'shopify_orders' },
 ]);
 
@@ -86,6 +93,16 @@ const setSignatureFlagForInbox = (channelType, value, updateUISettings) => {
   updateUISettings({ [`${slugifiedChannel}_signature_enabled`]: value });
 };
 
+<<<<<<< HEAD
+=======
+const setQuotedReplyFlagForInbox = (channelType, value, updateUISettings) => {
+  if (!channelType) return;
+
+  const slugifiedChannel = slugifyChannel(channelType);
+  updateUISettings({ [`${slugifiedChannel}_quoted_reply_enabled`]: value });
+};
+
+>>>>>>> upstream/develop
 /**
  * Fetches the signature flag for a specific channel type from UI settings.
  * @param {string} channelType - The type of the channel.
@@ -99,6 +116,16 @@ const fetchSignatureFlagFromUISettings = (channelType, uiSettings) => {
   return uiSettings.value[`${slugifiedChannel}_signature_enabled`];
 };
 
+<<<<<<< HEAD
+=======
+const fetchQuotedReplyFlagFromUISettings = (channelType, uiSettings) => {
+  if (!channelType) return false;
+
+  const slugifiedChannel = slugifyChannel(channelType);
+  return uiSettings.value[`${slugifiedChannel}_quoted_reply_enabled`];
+};
+
+>>>>>>> upstream/develop
 /**
  * Checks if a specific editor hotkey is enabled.
  * @param {string} key - The key to check.
@@ -146,6 +173,13 @@ export function useUISettings() {
       setSignatureFlagForInbox(channelType, value, updateUISettings),
     fetchSignatureFlagFromUISettings: channelType =>
       fetchSignatureFlagFromUISettings(channelType, uiSettings),
+<<<<<<< HEAD
+=======
+    setQuotedReplyFlagForInbox: (channelType, value) =>
+      setQuotedReplyFlagForInbox(channelType, value, updateUISettings),
+    fetchQuotedReplyFlagFromUISettings: channelType =>
+      fetchQuotedReplyFlagFromUISettings(channelType, uiSettings),
+>>>>>>> upstream/develop
     isEditorHotKeyEnabled: key => isEditorHotKeyEnabled(key, uiSettings),
   };
 }

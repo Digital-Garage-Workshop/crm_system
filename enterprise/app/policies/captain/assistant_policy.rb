@@ -7,6 +7,17 @@ class Captain::AssistantPolicy < ApplicationPolicy
     true
   end
 
+<<<<<<< HEAD
+=======
+  def stats?
+    true
+  end
+
+  def tools?
+    @account_user.administrator?
+  end
+
+>>>>>>> upstream/develop
   def create?
     @account_user.administrator?
   end
@@ -19,6 +30,13 @@ class Captain::AssistantPolicy < ApplicationPolicy
     @account_user.administrator?
   end
 
+<<<<<<< HEAD
+=======
+  def sync?
+    @account_user.administrator?
+  end
+
+>>>>>>> upstream/develop
   def playground?
     true
   end

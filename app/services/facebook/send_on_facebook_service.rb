@@ -47,12 +47,38 @@ class Facebook::SendOnFacebookService < Base::SendOnChannelService
   def fb_text_message_params
     {
       recipient: { id: contact.get_source_id(inbox.id) },
+<<<<<<< HEAD
       message: { text: message.content },
       messaging_type: 'MESSAGE_TAG',
       tag: 'ACCOUNT_UPDATE'
     }
   end
 
+=======
+      message: fb_text_message_payload,
+      messaging_type: 'MESSAGE_TAG',
+      tag: message_tag
+    }
+  end
+
+  def fb_text_message_payload
+    if message.content_type == 'input_select' && message.content_attributes['items'].any?
+      {
+        text: message.content,
+        quick_replies: message.content_attributes['items'].map do |item|
+          {
+            content_type: 'text',
+            payload: item['title'],
+            title: item['title']
+          }
+        end
+      }
+    else
+      { text: message.outgoing_content }
+    end
+  end
+
+>>>>>>> upstream/develop
   def external_error(response)
     # https://developers.facebook.com/docs/graph-api/guides/error-handling/
     error_message = response['error']['message']
@@ -73,10 +99,21 @@ class Facebook::SendOnFacebookService < Base::SendOnChannelService
         }
       },
       messaging_type: 'MESSAGE_TAG',
+<<<<<<< HEAD
       tag: 'ACCOUNT_UPDATE'
     }
   end
 
+=======
+      tag: message_tag
+    }
+  end
+
+  def message_tag
+    @message_tag ||= GlobalConfigService.load('ENABLE_MESSENGER_CHANNEL_HUMAN_AGENT', nil) ? 'HUMAN_AGENT' : 'ACCOUNT_UPDATE'
+  end
+
+>>>>>>> upstream/develop
   def attachment_type(attachment)
     return attachment.file_type if %w[image audio video file].include? attachment.file_type
 

@@ -1,15 +1,28 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
+<<<<<<< HEAD
 import SettingsSection from 'dashboard/components/SettingsSection.vue';
 import LoadingState from 'dashboard/components/widgets/LoadingState.vue';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+=======
+import SettingsFieldSection from 'dashboard/components-next/Settings/SettingsFieldSection.vue';
+import LoadingState from 'dashboard/components/widgets/LoadingState.vue';
+import NextButton from 'dashboard/components-next/button/Button.vue';
+import SelectInput from 'dashboard/components-next/select/Select.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     LoadingState,
+<<<<<<< HEAD
     SettingsSection,
     NextButton,
+=======
+    SettingsFieldSection,
+    NextButton,
+    SelectInput,
+>>>>>>> upstream/develop
   },
   props: {
     inbox: {
@@ -27,8 +40,18 @@ export default {
       agentBots: 'agentBots/getBots',
       uiFlags: 'agentBots/getUIFlags',
     }),
+<<<<<<< HEAD
     activeAgentBot() {
       return this.$store.getters['agentBots/getActiveAgentBot'](this.inbox.id);
+=======
+    currentInboxId() {
+      return this.inbox?.id || this.$route.params.inboxId;
+    },
+    activeAgentBot() {
+      return this.$store.getters['agentBots/getActiveAgentBot'](
+        this.currentInboxId
+      );
+>>>>>>> upstream/develop
     },
   },
   watch: {
@@ -37,11 +60,22 @@ export default {
     },
   },
   mounted() {
+<<<<<<< HEAD
     this.$store.dispatch('agentBots/get');
     this.$store.dispatch('agentBots/fetchAgentBotInbox', this.inbox.id);
   },
 
   methods: {
+=======
+    this.fetchBotData();
+  },
+
+  methods: {
+    fetchBotData() {
+      this.$store.dispatch('agentBots/get');
+      this.$store.dispatch('agentBots/fetchAgentBotInbox', this.currentInboxId);
+    },
+>>>>>>> upstream/develop
     async updateActiveAgentBot() {
       try {
         await this.$store.dispatch('agentBots/setAgentBotInbox', {
@@ -74,6 +108,7 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="mx-8">
     <LoadingState v-if="uiFlags.isFetching || uiFlags.isFetchingAgentBot" />
     <form
@@ -119,6 +154,44 @@ export default {
           </div>
         </div>
       </SettingsSection>
+=======
+  <div class="mx-6 max-w-4xl">
+    <LoadingState v-if="uiFlags.isFetching || uiFlags.isFetchingAgentBot" />
+    <form v-else @submit.prevent="updateActiveAgentBot">
+      <SettingsFieldSection
+        :label="$t('AGENT_BOTS.BOT_CONFIGURATION.TITLE')"
+        :help-text="$t('AGENT_BOTS.BOT_CONFIGURATION.DESC')"
+        class="[&>div]:!items-start"
+      >
+        <SelectInput
+          v-model="selectedAgentBotId"
+          :placeholder="$t('AGENT_BOTS.BOT_CONFIGURATION.SELECT_PLACEHOLDER')"
+          :options="agentBots.map(bot => ({ value: bot.id, label: bot.name }))"
+        />
+        <template #extra>
+          <div class="grid grid-cols-1 lg:grid-cols-8 mt-3">
+            <div class="col-span-1 lg:col-span-2 invisible" />
+            <div class="col-span-1 lg:col-span-6 flex gap-2 mx-1">
+              <NextButton
+                type="submit"
+                :label="$t('AGENT_BOTS.BOT_CONFIGURATION.SUBMIT')"
+                :is-loading="uiFlags.isSettingAgentBot"
+              />
+              <NextButton
+                type="button"
+                :disabled="!selectedAgentBotId"
+                :is-loading="uiFlags.isDisconnecting"
+                faded
+                ruby
+                @click="disconnectBot"
+              >
+                {{ $t('AGENT_BOTS.BOT_CONFIGURATION.DISCONNECT') }}
+              </NextButton>
+            </div>
+          </div>
+        </template>
+      </SettingsFieldSection>
+>>>>>>> upstream/develop
     </form>
   </div>
 </template>

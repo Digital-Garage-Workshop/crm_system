@@ -101,17 +101,48 @@ describe('#mutations', () => {
     });
   });
 
+<<<<<<< HEAD
+=======
+  describe('#ARTICLE_SEARCH_SET', () => {
+    it('should append new article records to existing ones', () => {
+      const state = { articleRecords: [{ id: 1 }] };
+      mutations[types.ARTICLE_SEARCH_SET](state, [{ id: 2 }]);
+      expect(state.articleRecords).toEqual([{ id: 1 }, { id: 2 }]);
+    });
+  });
+
+  describe('#ARTICLE_SEARCH_SET_UI_FLAG', () => {
+    it('set article search UI flags correctly', () => {
+      const state = {
+        uiFlags: {
+          article: { isFetching: true },
+        },
+      };
+      mutations[types.ARTICLE_SEARCH_SET_UI_FLAG](state, { isFetching: false });
+      expect(state.uiFlags.article).toEqual({ isFetching: false });
+    });
+  });
+
+>>>>>>> upstream/develop
   describe('#CLEAR_SEARCH_RESULTS', () => {
     it('should clear all search records', () => {
       const state = {
         contactRecords: [{ id: 1 }],
         conversationRecords: [{ id: 1 }],
         messageRecords: [{ id: 1 }],
+<<<<<<< HEAD
+=======
+        articleRecords: [{ id: 1 }],
+>>>>>>> upstream/develop
       };
       mutations[types.CLEAR_SEARCH_RESULTS](state);
       expect(state.contactRecords).toEqual([]);
       expect(state.conversationRecords).toEqual([]);
       expect(state.messageRecords).toEqual([]);
+<<<<<<< HEAD
+=======
+      expect(state.articleRecords).toEqual([]);
+>>>>>>> upstream/develop
     });
   });
 });

@@ -4,7 +4,11 @@ import { useStore, useMapGetter } from 'dashboard/composables/store';
 import { useRoute } from 'vue-router';
 import { emitter } from 'shared/helpers/mitt';
 import { useConversationLabels } from 'dashboard/composables/useConversationLabels';
+<<<<<<< HEAD
 import { useAI } from 'dashboard/composables/useAI';
+=======
+import { useCaptain } from 'dashboard/composables/useCaptain';
+>>>>>>> upstream/develop
 import { useAgentsList } from 'dashboard/composables/useAgentsList';
 import { CMD_AI_ASSIST } from 'dashboard/helper/commandbar/events';
 import { REPLY_EDITOR_MODES } from 'dashboard/components/widgets/WootWriter/constants';
@@ -102,8 +106,13 @@ const createNonDraftMessageAIAssistActions = (t, replyMode) => {
 const createDraftMessageAIAssistActions = t => {
   return [
     {
+<<<<<<< HEAD
       label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.REPHRASE'),
       key: 'rephrase',
+=======
+      label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.CONFIDENT'),
+      key: 'confident',
+>>>>>>> upstream/develop
       icon: ICON_AI_ASSIST,
     },
     {
@@ -112,6 +121,7 @@ const createDraftMessageAIAssistActions = t => {
       icon: ICON_AI_GRAMMAR,
     },
     {
+<<<<<<< HEAD
       label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.EXPAND'),
       key: 'expand',
       icon: ICON_AI_EXPAND,
@@ -119,10 +129,20 @@ const createDraftMessageAIAssistActions = t => {
     {
       label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.SHORTEN'),
       key: 'shorten',
+=======
+      label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.PROFESSIONAL'),
+      key: 'professional',
+      icon: ICON_AI_EXPAND,
+    },
+    {
+      label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.CASUAL'),
+      key: 'casual',
+>>>>>>> upstream/develop
       icon: ICON_AI_SHORTEN,
     },
     {
       label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.MAKE_FRIENDLY'),
+<<<<<<< HEAD
       key: 'make_friendly',
       icon: ICON_AI_ASSIST,
     },
@@ -134,6 +154,14 @@ const createDraftMessageAIAssistActions = t => {
     {
       label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.SIMPLIFY'),
       key: 'simplify',
+=======
+      key: 'friendly',
+      icon: ICON_AI_ASSIST,
+    },
+    {
+      label: t('INTEGRATION_SETTINGS.OPEN_AI.OPTIONS.STRAIGHTFORWARD'),
+      key: 'straightforward',
+>>>>>>> upstream/develop
       icon: ICON_AI_ASSIST,
     },
   ];
@@ -151,7 +179,11 @@ export function useConversationHotKeys() {
     removeLabelFromConversation,
   } = useConversationLabels();
 
+<<<<<<< HEAD
   const { isAIIntegrationEnabled } = useAI();
+=======
+  const { captainTasksEnabled } = useCaptain();
+>>>>>>> upstream/develop
   const { agentsList } = useAgentsList();
 
   const currentChat = useMapGetter('getSelectedChat');
@@ -386,7 +418,11 @@ export function useConversationHotKeys() {
       ...labelActions.value,
       ...assignPriorityActions.value,
     ];
+<<<<<<< HEAD
     if (isAIIntegrationEnabled.value) {
+=======
+    if (captainTasksEnabled.value) {
+>>>>>>> upstream/develop
       return [...defaultConversationHotKeys, ...AIAssistActions.value];
     }
     return defaultConversationHotKeys;

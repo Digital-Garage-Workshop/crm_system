@@ -7,4 +7,8 @@ end
 json.meta do
   json.total_count @documents_count
   json.page @current_page
+<<<<<<< HEAD
+=======
+  json.sync_interval_hours @sync_interval_hours if @sync_interval_hours.present?
+>>>>>>> upstream/develop
 end

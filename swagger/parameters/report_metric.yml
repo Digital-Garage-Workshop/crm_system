@@ -1,5 +1,6 @@
 in: query
 name: metric
+<<<<<<< HEAD
 type: string
 enum:
   - conversations_count
@@ -8,5 +9,16 @@ enum:
   - avg_first_response_time
   - avg_resolution_time
   - resolutions_count
+=======
+schema:
+  type: string
+  enum:
+    - conversations_count
+    - incoming_messages_count
+    - outgoing_messages_count
+    - avg_first_response_time
+    - avg_resolution_time
+    - resolutions_count
+>>>>>>> upstream/develop
 required: true
 description: The type of metric

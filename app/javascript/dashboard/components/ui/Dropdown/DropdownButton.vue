@@ -23,6 +23,10 @@ defineProps({
     slate
     sm
     class="relative"
+<<<<<<< HEAD
+=======
+    no-animation
+>>>>>>> upstream/develop
     :icon="icon"
     :trailing-icon="trailingIcon"
   >

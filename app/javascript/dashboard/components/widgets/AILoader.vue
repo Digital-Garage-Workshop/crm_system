@@ -22,6 +22,7 @@
     gap: 4px;
 
     .ai-typing--icon {
+<<<<<<< HEAD
       color: var(--v-500);
     }
   }
@@ -39,6 +40,17 @@
     background-color: var(--v-300);
     border-radius: 50%;
     animation: bubble-scale 1.2s infinite;
+=======
+      @apply text-n-iris-11;
+    }
+  }
+  label {
+    @apply text-n-iris-11 ltr:mr-1 rtl:ml-1 inline-block;
+  }
+  .loader {
+    animation: bubble-scale 1.2s infinite;
+    @apply bg-n-iris-11 inline-block size-1.5 ltr:mr-1 rtl:ml-1 mt-3 rounded-full;
+>>>>>>> upstream/develop
   }
 
   .loader:nth-child(2) {

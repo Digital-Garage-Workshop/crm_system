@@ -17,6 +17,12 @@
 class Channel::Telegram < ApplicationRecord
   include Channelable
 
+<<<<<<< HEAD
+=======
+  # TODO: Remove guard once encryption keys become mandatory (target 3-4 releases out).
+  encrypts :bot_token, deterministic: true if Chatwoot.encryption_configured?
+
+>>>>>>> upstream/develop
   self.table_name = 'channel_telegram'
   EDITABLE_ATTRS = [:bot_token].freeze
 
@@ -33,7 +39,11 @@ class Channel::Telegram < ApplicationRecord
   end
 
   def send_message_on_telegram(message)
+<<<<<<< HEAD
     message_id = send_message(message) if message.content.present?
+=======
+    message_id = send_message(message) if message.outgoing_content.present?
+>>>>>>> upstream/develop
     message_id = Telegram::SendAttachmentsService.new(message: message).perform if message.attachments.present?
     message_id
   end
@@ -69,6 +79,13 @@ class Channel::Telegram < ApplicationRecord
     message.conversation[:additional_attributes]['chat_id']
   end
 
+<<<<<<< HEAD
+=======
+  def business_connection_id(message)
+    message.conversation[:additional_attributes]['business_connection_id']
+  end
+
+>>>>>>> upstream/develop
   def reply_to_message_id(message)
     message.content_attributes['in_reply_to_external_id']
   end
@@ -95,7 +112,17 @@ class Channel::Telegram < ApplicationRecord
   end
 
   def send_message(message)
+<<<<<<< HEAD
     response = message_request(chat_id(message), message.content, reply_markup(message), reply_to_message_id(message))
+=======
+    response = message_request(
+      chat_id(message),
+      message.outgoing_content,
+      reply_markup(message),
+      reply_to_message_id(message),
+      business_connection_id: business_connection_id(message)
+    )
+>>>>>>> upstream/develop
     process_error(message, response)
     response.parsed_response['result']['message_id'] if response.success?
   end
@@ -117,6 +144,7 @@ class Channel::Telegram < ApplicationRecord
   def convert_markdown_to_telegram_html(text)
     # ref: https://core.telegram.org/bots/api#html-style
 
+<<<<<<< HEAD
     # escape html tags in text. We are subbing \n to <br> since commonmark will strip exta '\n'
     text = CGI.escapeHTML(text.gsub("\n", '<br>'))
 
@@ -133,14 +161,52 @@ class Channel::Telegram < ApplicationRecord
 
   def message_request(chat_id, text, reply_markup = nil, reply_to_message_id = nil)
     text_payload = convert_markdown_to_telegram_html(text)
+=======
+    # Escape HTML entities first to prevent HTML injection
+    # This ensures only markdown syntax is converted, not raw HTML
+    escaped_text = CGI.escapeHTML(text)
+
+    # Parse markdown with extensions:
+    # - strikethrough: support ~~text~~
+    # - hardbreaks: preserve all newlines as <br>
+    html = CommonMarker.render_html(escaped_text, [:HARDBREAKS], [:strikethrough]).strip
+
+    # Convert paragraph breaks to double newlines to preserve them
+    # CommonMarker creates <p> tags for paragraph breaks, but Telegram doesn't support <p>
+    html_with_breaks = html.gsub(%r{</p>\s*<p>}, "\n\n")
+
+    # Remove opening and closing <p> tags
+    html_with_breaks = html_with_breaks.gsub(%r{</?p>}, '')
+
+    # Sanitize to only allowed tags
+    stripped_html = Rails::HTML5::SafeListSanitizer.new.sanitize(html_with_breaks, tags: %w[b strong i em u ins s strike del a code pre blockquote],
+                                                                                   attributes: %w[href])
+
+    # Convert <br /> tags to newlines for Telegram
+    stripped_html.gsub(%r{<br\s*/?>}, "\n")
+  end
+
+  def message_request(chat_id, text, reply_markup = nil, reply_to_message_id = nil, business_connection_id: nil)
+    # text is already converted to HTML by MessageContentPresenter
+    business_body = {}
+    business_body[:business_connection_id] = business_connection_id if business_connection_id
+>>>>>>> upstream/develop
 
     HTTParty.post("#{telegram_api_url}/sendMessage",
                   body: {
                     chat_id: chat_id,
+<<<<<<< HEAD
                     text: text_payload,
                     reply_markup: reply_markup,
                     parse_mode: 'HTML',
                     reply_to_message_id: reply_to_message_id
                   })
+=======
+                    text: text,
+                    reply_markup: reply_markup,
+                    parse_mode: 'HTML',
+                    reply_to_message_id: reply_to_message_id
+                  }.merge(business_body))
+>>>>>>> upstream/develop
   end
 end

@@ -3,6 +3,12 @@
     "FETCHING": "Preluarea integrărilor",
     "NO_HOOK_CONFIGURED": "Nu există integrări {integrationId} configurate în acest cont.",
     "HEADER": "Aplicatii",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Activat",
       "DISABLED": "Dezactivat"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Preluarea cârligelor de integrare",
       "INBOX": "Inbox",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Actiuni",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Şterge"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Selectați Inbox"
         },
         "SUBMIT": "Creeaza",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Renunță"
       },
       "API": {

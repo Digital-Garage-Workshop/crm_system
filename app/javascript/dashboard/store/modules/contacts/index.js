@@ -6,6 +6,10 @@ const state = {
   meta: {
     count: 0,
     currentPage: 1,
+<<<<<<< HEAD
+=======
+    hasMore: false,
+>>>>>>> upstream/develop
   },
   records: {},
   uiFlags: {
@@ -17,6 +21,10 @@ const state = {
     isDeleting: false,
     isExporting: false,
     isImporting: false,
+<<<<<<< HEAD
+=======
+    isInitiatingCall: false,
+>>>>>>> upstream/develop
   },
   sortOrder: [],
   appliedFilters: [],

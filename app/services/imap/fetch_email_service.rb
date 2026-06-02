@@ -6,7 +6,11 @@ class Imap::FetchEmailService < Imap::BaseFetchEmailService
   private
 
   def authentication_type
+<<<<<<< HEAD
     'PLAIN'
+=======
+    channel.imap_authentication || 'plain'
+>>>>>>> upstream/develop
   end
 
   def imap_password

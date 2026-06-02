@@ -3,6 +3,12 @@
     "FETCHING": "Entegrasyonlar alınıyor",
     "NO_HOOK_CONFIGURED": "Bu hesapta yapılandırılmış {integrationId} entegrasyonu bulunmuyor.",
     "HEADER": "Uygulamalar",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Ara...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Etkin",
       "DISABLED": "Devre dışı"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Entegrasyon kancaları alınıyor",
       "INBOX": "Gelen Kutusu",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Hareketler",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Sil"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Gelen Kutu Seç"
         },
         "SUBMIT": "Oluştur",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "İptal Et"
       },
       "API": {
@@ -56,7 +70,11 @@
       "BUTTON_TEXT": "Bağlantıyı Kes"
     },
     "SIDEBAR_DESCRIPTION": {
+<<<<<<< HEAD
       "DIALOGFLOW": "Dialogflow is a natural language processing platform for building conversational interfaces. Integrating it with {installationName} lets bots handle queries first and transfer them to agents when needed. It helps qualify leads and reduce agent workload by answering FAQs. To add Dialogflow, create a Service Account in Google Console and share the credentials. Refer to the docs for details"
+=======
+      "DIALOGFLOW": "Dialogflow, konuşmaya dayalı arayüzler oluşturmak için kullanılan bir doğal dil işleme platformudur. Bu platformu {installationName} ile entegre etmek, botların önce sorguları ele almasını ve gerektiğinde temsilcilere aktarmasını sağlar. Sıkça sorulan soruları yanıtlayarak potansiyel müşterileri nitelendirmeye ve temsilci iş yükünü azaltmaya yardımcı olur. Dialogflow eklemek için, Google Console'da bir Hizmet Hesabı (Service Account) oluşturun ve kimlik bilgilerini paylaşın. Detaylar için belgelere bakın"
+>>>>>>> upstream/develop
     }
   }
 }

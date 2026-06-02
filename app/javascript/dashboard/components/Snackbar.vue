@@ -20,7 +20,11 @@ export default {
 <template>
   <div>
     <div
+<<<<<<< HEAD
       class="shadow-sm bg-slate-800 dark:bg-slate-700 rounded-[4px] items-center gap-3 inline-flex mb-2 max-w-[25rem] min-h-[1.875rem] min-w-[15rem] px-6 py-3 text-left"
+=======
+      class="shadow-sm bg-n-slate-12 dark:bg-n-slate-7 rounded-lg items-center gap-3 inline-flex mb-2 max-w-[25rem] min-h-[1.875rem] min-w-[15rem] px-6 py-3 text-left"
+>>>>>>> upstream/develop
     >
       <div class="text-sm font-medium text-white dark:text-white">
         {{ message }}
@@ -29,7 +33,11 @@ export default {
         <router-link
           v-if="action.type == 'link'"
           :to="action.to"
+<<<<<<< HEAD
           class="font-medium cursor-pointer select-none text-woot-500 dark:text-woot-500 hover:text-woot-600 dark:hover:text-woot-600"
+=======
+          class="font-medium cursor-pointer select-none text-n-blue-10 hover:text-n-brand"
+>>>>>>> upstream/develop
         >
           {{ action.message }}
         </router-link>

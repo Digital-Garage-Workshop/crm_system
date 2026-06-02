@@ -1,5 +1,6 @@
 in: query
 name: sort
+<<<<<<< HEAD
 type: string
 enum:
   - name
@@ -10,5 +11,18 @@ enum:
   - -email
   - -phone_number
   - -last_activity_at
+=======
+schema:
+  type: string
+  enum:
+    - name
+    - email
+    - phone_number
+    - last_activity_at
+    - -name
+    - -email
+    - -phone_number
+    - -last_activity_at
+>>>>>>> upstream/develop
 required: false
 description: The attribute by which list should be sorted

@@ -32,6 +32,15 @@ export const routes = [
         component: ContactsIndex,
         meta: commonMeta,
       },
+<<<<<<< HEAD
+=======
+      {
+        path: 'active',
+        name: 'contacts_dashboard_active',
+        component: ContactsIndex,
+        meta: commonMeta,
+      },
+>>>>>>> upstream/develop
     ],
   },
   {

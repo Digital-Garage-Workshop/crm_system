@@ -11,7 +11,10 @@ export const CONVERSATION_ATTRIBUTES = {
   CAMPAIGN_ID: 'campaign_id',
   LABELS: 'labels',
   BROWSER_LANGUAGE: 'browser_language',
+<<<<<<< HEAD
   COUNTRY_CODE: 'country_code',
+=======
+>>>>>>> upstream/develop
   REFERER: 'referer',
   CREATED_AT: 'created_at',
   LAST_ACTIVITY_AT: 'last_activity_at',
@@ -24,10 +27,18 @@ export const CONTACT_ATTRIBUTES = {
   IDENTIFIER: 'identifier',
   COUNTRY_CODE: 'country_code',
   CITY: 'city',
+<<<<<<< HEAD
+=======
+  COMPANY_NAME: 'company_name',
+>>>>>>> upstream/develop
   CREATED_AT: 'created_at',
   LAST_ACTIVITY_AT: 'last_activity_at',
   REFERER: 'referer',
   BLOCKED: 'blocked',
+<<<<<<< HEAD
+=======
+  LABELS: 'labels',
+>>>>>>> upstream/develop
 };
 
 /**

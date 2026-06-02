@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { h, defineProps } from 'vue';
+=======
+import { h } from 'vue';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   country: { type: String, required: true },

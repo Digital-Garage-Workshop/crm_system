@@ -101,8 +101,14 @@ class Integrations::Slack::SendOnSlackService < Base::SendOnChannelService
 
   def send_message
     post_message if message_content.present?
+<<<<<<< HEAD
     upload_file if message.attachments.any?
   rescue Slack::Web::Api::Errors::AccountInactive, Slack::Web::Api::Errors::MissingScope, Slack::Web::Api::Errors::InvalidAuth,
+=======
+    upload_files if message.attachments.any?
+  rescue Slack::Web::Api::Errors::IsArchived, Slack::Web::Api::Errors::AccountInactive, Slack::Web::Api::Errors::MissingScope,
+         Slack::Web::Api::Errors::InvalidAuth,
+>>>>>>> upstream/develop
          Slack::Web::Api::Errors::ChannelNotFound, Slack::Web::Api::Errors::NotInChannel => e
     Rails.logger.error e
     hook.prompt_reauthorization!
@@ -120,6 +126,7 @@ class Integrations::Slack::SendOnSlackService < Base::SendOnChannelService
     )
   end
 
+<<<<<<< HEAD
   def upload_file
     return unless message.attachments.first.with_attached_file?
 
@@ -146,6 +153,56 @@ class Integrations::Slack::SendOnSlackService < Base::SendOnChannelService
     }
   end
 
+=======
+  def upload_files
+    files = build_files_array
+    return if files.empty?
+
+    begin
+      result = slack_client.files_upload_v2(
+        files: files,
+        initial_comment: 'Attached File!',
+        thread_ts: conversation.identifier,
+        channel_id: hook.reference_id
+      )
+      Rails.logger.info "slack_upload_result: #{result}"
+    rescue Slack::Web::Api::Errors::SlackError => e
+      Rails.logger.error "Failed to upload files: #{e.message}"
+    ensure
+      files.each { |file| file[:content]&.clear }
+    end
+  end
+
+  def build_files_array
+    message.attachments.filter_map do |attachment|
+      next unless attachment.with_attached_file?
+
+      build_file_payload(attachment)
+    end
+  end
+
+  def build_file_payload(attachment)
+    content = download_attachment_content(attachment)
+    return if content.blank?
+
+    {
+      filename: attachment.file.filename.to_s,
+      content: content,
+      title: attachment.file.filename.to_s
+    }
+  end
+
+  def download_attachment_content(attachment)
+    buffer = +''
+    attachment.file.blob.open do |file|
+      while (chunk = file.read(64.kilobytes))
+        buffer << chunk
+      end
+    end
+    buffer
+  end
+
+>>>>>>> upstream/develop
   def sender_name(sender)
     sender.try(:name) ? "#{sender.try(:name)} (#{sender_type(sender)})" : sender_type(sender)
   end
@@ -153,12 +210,21 @@ class Integrations::Slack::SendOnSlackService < Base::SendOnChannelService
   def sender_type(sender)
     if sender.instance_of?(Contact)
       'Contact'
+<<<<<<< HEAD
     elsif message.message_type == 'template' && sender.nil?
       'Bot'
     elsif message.message_type == 'activity' && sender.nil?
       'System'
     else
       'Agent'
+=======
+    elsif sender.instance_of?(User)
+      'Agent'
+    elsif message.message_type == 'activity' && sender.nil?
+      'System'
+    else
+      'Bot'
+>>>>>>> upstream/develop
     end
   end
 

@@ -8,7 +8,10 @@ import { useMapGetter } from 'dashboard/composables/store';
 import Input from 'dashboard/components-next/input/Input.vue';
 import Editor from 'dashboard/components-next/Editor/Editor.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
 import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
+=======
+>>>>>>> upstream/develop
 
 const props = defineProps({
   mode: {
@@ -21,18 +24,28 @@ const props = defineProps({
     default: () => ({}),
   },
 });
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
 const emit = defineEmits(['submit', 'cancel']);
 const { t } = useI18n();
 
 const formState = {
   uiFlags: useMapGetter('captainResponses/getUIFlags'),
+<<<<<<< HEAD
   assistants: useMapGetter('captainAssistants/getRecords'),
+=======
+>>>>>>> upstream/develop
 };
 
 const initialState = {
   question: '',
   answer: '',
+<<<<<<< HEAD
   assistantId: null,
+=======
+>>>>>>> upstream/develop
 };
 
 const state = reactive({ ...initialState });
@@ -40,6 +53,7 @@ const state = reactive({ ...initialState });
 const validationRules = {
   question: { required, minLength: minLength(1) },
   answer: { required, minLength: minLength(1) },
+<<<<<<< HEAD
   assistantId: { required },
 };
 
@@ -50,6 +64,10 @@ const assistantList = computed(() =>
   }))
 );
 
+=======
+};
+
+>>>>>>> upstream/develop
 const v$ = useVuelidate(validationRules, state);
 
 const isLoading = computed(() => formState.uiFlags.value.creatingItem);
@@ -63,7 +81,10 @@ const getErrorMessage = (field, errorKey) => {
 const formErrors = computed(() => ({
   question: getErrorMessage('question', 'QUESTION'),
   answer: getErrorMessage('answer', 'ANSWER'),
+<<<<<<< HEAD
   assistantId: getErrorMessage('assistantId', 'ASSISTANT'),
+=======
+>>>>>>> upstream/develop
 }));
 
 const handleCancel = () => emit('cancel');
@@ -71,7 +92,10 @@ const handleCancel = () => emit('cancel');
 const prepareDocumentDetails = () => ({
   question: state.question,
   answer: state.answer,
+<<<<<<< HEAD
   assistant_id: state.assistantId,
+=======
+>>>>>>> upstream/develop
 });
 
 const handleSubmit = async () => {
@@ -86,12 +110,19 @@ const handleSubmit = async () => {
 const updateStateFromResponse = response => {
   if (!response) return;
 
+<<<<<<< HEAD
   const { question, answer, assistant } = response;
+=======
+  const { question, answer } = response;
+>>>>>>> upstream/develop
 
   Object.assign(state, {
     question,
     answer,
+<<<<<<< HEAD
     assistantId: assistant.id,
+=======
+>>>>>>> upstream/develop
   });
 };
 
@@ -115,7 +146,10 @@ watch(
       :message="formErrors.question"
       :message-type="formErrors.question ? 'error' : 'info'"
     />
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/develop
     <Editor
       v-model="state.answer"
       :label="t('CAPTAIN.RESPONSES.FORM.ANSWER.LABEL')"
@@ -124,6 +158,7 @@ watch(
       :max-length="10000"
       :message-type="formErrors.answer ? 'error' : 'info'"
     />
+<<<<<<< HEAD
 
     <div class="flex flex-col gap-1">
       <label for="assistant" class="mb-0.5 text-sm font-medium text-n-slate-12">
@@ -140,13 +175,19 @@ watch(
       />
     </div>
 
+=======
+>>>>>>> upstream/develop
     <div class="flex items-center justify-between w-full gap-3">
       <Button
         type="button"
         variant="faded"
         color="slate"
         :label="t('CAPTAIN.FORM.CANCEL')"
+<<<<<<< HEAD
         class="w-full bg-n-alpha-2 n-blue-text hover:bg-n-alpha-3"
+=======
+        class="w-full bg-n-alpha-2 text-n-blue-11 hover:bg-n-alpha-3"
+>>>>>>> upstream/develop
         @click="handleCancel"
       />
       <Button

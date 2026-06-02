@@ -14,6 +14,10 @@ import {
 } from 'dashboard/helper/portalHelper';
 import wootConstants from 'dashboard/constants/globals';
 
+<<<<<<< HEAD
+=======
+import ButtonGroup from 'dashboard/components-next/buttonGroup/ButtonGroup.vue';
+>>>>>>> upstream/develop
 import Button from 'dashboard/components-next/button/Button.vue';
 import DropdownMenu from 'dashboard/components-next/dropdown-menu/DropdownMenu.vue';
 
@@ -128,7 +132,11 @@ const updateArticleStatus = async ({ value }) => {
     <div class="flex items-center gap-4">
       <span
         v-if="isUpdating || isSaved"
+<<<<<<< HEAD
         class="text-xs font-medium transition-all duration-300 text-slate-500 dark:text-slate-400"
+=======
+        class="text-xs font-medium transition-all duration-300 text-n-slate-11"
+>>>>>>> upstream/develop
       >
         {{ statusText }}
       </span>
@@ -140,11 +148,19 @@ const updateArticleStatus = async ({ value }) => {
           :disabled="!articleId"
           @click="previewArticle"
         />
+<<<<<<< HEAD
         <div class="flex items-center">
+=======
+        <ButtonGroup class="flex items-center">
+>>>>>>> upstream/develop
           <Button
             :label="t('HELP_CENTER.EDIT_ARTICLE_PAGE.HEADER.PUBLISH')"
             size="sm"
             class="ltr:rounded-r-none rtl:rounded-l-none"
+<<<<<<< HEAD
+=======
+            no-animation
+>>>>>>> upstream/develop
             :is-loading="isArticlePublishing"
             :disabled="
               status === ARTICLE_STATUSES.PUBLISHED ||
@@ -159,6 +175,10 @@ const updateArticleStatus = async ({ value }) => {
                 icon="i-lucide-chevron-down"
                 size="sm"
                 :disabled="!articleId"
+<<<<<<< HEAD
+=======
+                no-animation
+>>>>>>> upstream/develop
                 class="ltr:rounded-l-none rtl:rounded-r-none"
                 @click.stop="showArticleActionMenu = !showArticleActionMenu"
               />
@@ -170,7 +190,11 @@ const updateArticleStatus = async ({ value }) => {
               />
             </OnClickOutside>
           </div>
+<<<<<<< HEAD
         </div>
+=======
+        </ButtonGroup>
+>>>>>>> upstream/develop
       </div>
     </div>
   </div>

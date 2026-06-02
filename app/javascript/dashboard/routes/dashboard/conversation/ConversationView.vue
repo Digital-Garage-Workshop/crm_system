@@ -4,19 +4,33 @@ import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useAccount } from 'dashboard/composables/useAccount';
 import ChatList from '../../../components/ChatList.vue';
 import ConversationBox from '../../../components/widgets/conversation/ConversationBox.vue';
+<<<<<<< HEAD
 import PopOverSearch from './search/PopOverSearch.vue';
+=======
+>>>>>>> upstream/develop
 import wootConstants from 'dashboard/constants/globals';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import CmdBarConversationSnooze from 'dashboard/routes/dashboard/commands/CmdBarConversationSnooze.vue';
 import { emitter } from 'shared/helpers/mitt';
+<<<<<<< HEAD
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
+=======
+import SidepanelSwitch from 'dashboard/components-next/Conversation/SidepanelSwitch.vue';
+import ConversationSidebar from 'dashboard/components/widgets/conversation/ConversationSidebar.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     ChatList,
     ConversationBox,
+<<<<<<< HEAD
     PopOverSearch,
     CmdBarConversationSnooze,
+=======
+    CmdBarConversationSnooze,
+    SidepanelSwitch,
+    ConversationSidebar,
+>>>>>>> upstream/develop
   },
   beforeRouteLeave(to, from, next) {
     // Clear selected state if navigating away from a conversation to a route without a conversationId to prevent stale data issues
@@ -71,7 +85,10 @@ export default {
     ...mapGetters({
       chatList: 'getAllConversations',
       currentChat: 'getSelectedChat',
+<<<<<<< HEAD
       isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
+=======
+>>>>>>> upstream/develop
     }),
     showConversationList() {
       return this.isOnExpandedLayout ? !this.conversationId : true;
@@ -87,6 +104,7 @@ export default {
         this.uiSettings;
       return conversationDisplayType !== CONDENSED;
     },
+<<<<<<< HEAD
     isContactPanelOpen() {
       if (this.currentChat.id) {
         const { is_contact_sidebar_open: isContactSidebarOpen } =
@@ -100,6 +118,16 @@ export default {
         this.accountId,
         FEATURE_FLAGS.CHATWOOT_V4
       );
+=======
+
+    shouldShowSidebar() {
+      if (!this.currentChat.id) {
+        return false;
+      }
+
+      const { is_contact_sidebar_open: isContactSidebarOpen } = this.uiSettings;
+      return isContactSidebarOpen;
+>>>>>>> upstream/develop
     },
   },
   watch: {
@@ -189,11 +217,14 @@ export default {
         this.$store.dispatch('clearSelectedState');
       }
     },
+<<<<<<< HEAD
     onToggleContactPanel() {
       this.updateUISettings({
         is_contact_sidebar_open: !this.isContactPanelOpen,
       });
     },
+=======
+>>>>>>> upstream/develop
     onSearch() {
       this.showSearchModal = true;
     },
@@ -205,7 +236,11 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <section class="flex w-full h-full">
+=======
+  <section class="flex w-full h-full min-w-0">
+>>>>>>> upstream/develop
     <ChatList
       :show-conversation-list="showConversationList"
       :conversation-inbox="inboxId"
@@ -215,6 +250,7 @@ export default {
       :folders-id="foldersId"
       :is-on-expanded-layout="isOnExpandedLayout"
       @conversation-load="onConversationLoad"
+<<<<<<< HEAD
     >
       <PopOverSearch
         v-if="showPopOverSearch"
@@ -229,6 +265,17 @@ export default {
       :is-on-expanded-layout="isOnExpandedLayout"
       @contact-panel-toggle="onToggleContactPanel"
     />
+=======
+    />
+    <ConversationBox
+      v-if="showMessageView"
+      :inbox-id="inboxId"
+      :is-on-expanded-layout="isOnExpandedLayout"
+    >
+      <SidepanelSwitch v-if="currentChat.id" />
+    </ConversationBox>
+    <ConversationSidebar v-if="shouldShowSidebar" :current-chat="currentChat" />
+>>>>>>> upstream/develop
     <CmdBarConversationSnooze />
   </section>
 </template>

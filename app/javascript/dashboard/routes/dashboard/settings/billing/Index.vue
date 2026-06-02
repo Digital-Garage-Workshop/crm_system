@@ -1,29 +1,61 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, onMounted } from 'vue';
+=======
+import { computed, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+>>>>>>> upstream/develop
 import { useMapGetter, useStore } from 'dashboard/composables/store.js';
 import { useAccount } from 'dashboard/composables/useAccount';
 import { useCaptain } from 'dashboard/composables/useCaptain';
 import { format } from 'date-fns';
+<<<<<<< HEAD
+=======
+import sessionStorage from 'shared/helpers/sessionStorage';
+>>>>>>> upstream/develop
 
 import BillingMeter from './components/BillingMeter.vue';
 import BillingCard from './components/BillingCard.vue';
 import BillingHeader from './components/BillingHeader.vue';
 import DetailItem from './components/DetailItem.vue';
+<<<<<<< HEAD
+=======
+import PurchaseCreditsModal from './components/PurchaseCreditsModal.vue';
+>>>>>>> upstream/develop
 import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
 import SettingsLayout from '../SettingsLayout.vue';
 import ButtonV4 from 'next/button/Button.vue';
 
+<<<<<<< HEAD
 const { currentAccount } = useAccount();
+=======
+const router = useRouter();
+const { currentAccount, isOnChatwootCloud } = useAccount();
+>>>>>>> upstream/develop
 const {
   captainEnabled,
   captainLimits,
   documentLimits,
   responseLimits,
   fetchLimits,
+<<<<<<< HEAD
+=======
+  isFetchingLimits,
+>>>>>>> upstream/develop
 } = useCaptain();
 
 const uiFlags = useMapGetter('accounts/getUIFlags');
 const store = useStore();
+<<<<<<< HEAD
+=======
+
+const BILLING_REFRESH_ATTEMPTED = 'billing_refresh_attempted';
+
+// State for handling refresh attempts and loading
+const isWaitingForBilling = ref(false);
+const purchaseCreditsModalRef = ref(null);
+
+>>>>>>> upstream/develop
 const customAttributes = computed(() => {
   return currentAccount.value.custom_attributes || {};
 });
@@ -36,6 +68,14 @@ const planName = computed(() => {
   return customAttributes.value.plan_name;
 });
 
+<<<<<<< HEAD
+=======
+const canPurchaseCredits = computed(() => {
+  const plan = planName.value?.toLowerCase();
+  return plan && plan !== 'hacker';
+});
+
+>>>>>>> upstream/develop
 /**
  * Computed property for subscribed quantity
  * @returns {number|undefined}
@@ -61,8 +101,48 @@ const hasABillingPlan = computed(() => {
 
 const fetchAccountDetails = async () => {
   if (!hasABillingPlan.value) {
+<<<<<<< HEAD
     store.dispatch('accounts/subscription');
     fetchLimits();
+=======
+    await store.dispatch('accounts/subscription');
+  }
+  // Always fetch limits for billing page to show credit usage
+  fetchLimits();
+};
+
+const handleBillingPageLogic = async () => {
+  // If self-hosted, redirect to dashboard
+  if (!isOnChatwootCloud.value) {
+    router.push({ name: 'home' });
+    return;
+  }
+
+  // Check if we've already attempted a refresh for billing setup
+  const billingRefreshAttempted = sessionStorage.get(BILLING_REFRESH_ATTEMPTED);
+
+  // If cloud user, fetch account details first
+  await fetchAccountDetails();
+
+  // If still no billing plan after fetch
+  if (!hasABillingPlan.value) {
+    // If we haven't attempted refresh yet, do it once
+    if (!billingRefreshAttempted) {
+      isWaitingForBilling.value = true;
+      sessionStorage.set(BILLING_REFRESH_ATTEMPTED, true);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000);
+    } else {
+      // We've already tried refreshing, so just show the no billing message
+      // Clear the flag for future visits
+      sessionStorage.remove(BILLING_REFRESH_ATTEMPTED);
+    }
+  } else {
+    // Billing plan found, clear any existing refresh flag
+    sessionStorage.remove(BILLING_REFRESH_ATTEMPTED);
+>>>>>>> upstream/develop
   }
 };
 
@@ -76,14 +156,37 @@ const onToggleChatWindow = () => {
   }
 };
 
+<<<<<<< HEAD
 onMounted(fetchAccountDetails);
+=======
+const openPurchaseCreditsModal = () => {
+  purchaseCreditsModalRef.value?.open();
+};
+
+const handleTopupSuccess = () => {
+  // Refresh limits to show updated credit balance
+  fetchLimits();
+};
+
+onMounted(handleBillingPageLogic);
+>>>>>>> upstream/develop
 </script>
 
 <template>
   <SettingsLayout
+<<<<<<< HEAD
     :is-loading="uiFlags.isFetchingItem"
     :loading-message="$t('ATTRIBUTES_MGMT.LOADING')"
     :no-records-found="!hasABillingPlan"
+=======
+    :is-loading="uiFlags.isFetchingItem || isWaitingForBilling"
+    :loading-message="
+      isWaitingForBilling
+        ? $t('BILLING_SETTINGS.NO_BILLING_USER')
+        : $t('ATTRIBUTES_MGMT.LOADING')
+    "
+    :no-records-found="!hasABillingPlan && !isWaitingForBilling"
+>>>>>>> upstream/develop
     :no-records-message="$t('BILLING_SETTINGS.NO_BILLING_USER')"
   >
     <template #header>
@@ -131,9 +234,33 @@ onMounted(fetchAccountDetails);
           :description="$t('BILLING_SETTINGS.CAPTAIN.DESCRIPTION')"
         >
           <template #action>
+<<<<<<< HEAD
             <ButtonV4 sm faded slate disabled>
               {{ $t('BILLING_SETTINGS.CAPTAIN.BUTTON_TXT') }}
             </ButtonV4>
+=======
+            <div class="flex gap-2">
+              <ButtonV4
+                sm
+                flushed
+                slate
+                icon="i-lucide-refresh-cw"
+                :is-loading="isFetchingLimits"
+                @click="fetchLimits"
+              >
+                {{ $t('BILLING_SETTINGS.CAPTAIN.REFRESH_CREDITS') }}
+              </ButtonV4>
+              <ButtonV4
+                v-if="canPurchaseCredits"
+                sm
+                solid
+                blue
+                @click="openPurchaseCreditsModal"
+              >
+                {{ $t('BILLING_SETTINGS.TOPUP.BUY_CREDITS') }}
+              </ButtonV4>
+            </div>
+>>>>>>> upstream/develop
           </template>
           <div v-if="captainLimits && responseLimits" class="px-5">
             <BillingMeter
@@ -170,12 +297,23 @@ onMounted(fetchAccountDetails);
             solid
             slate
             icon="i-lucide-life-buoy"
+<<<<<<< HEAD
             @open="onToggleChatWindow"
+=======
+            @click="onToggleChatWindow"
+>>>>>>> upstream/develop
           >
             {{ $t('BILLING_SETTINGS.CHAT_WITH_US.BUTTON_TXT') }}
           </ButtonV4>
         </BillingHeader>
       </section>
+<<<<<<< HEAD
+=======
+      <PurchaseCreditsModal
+        ref="purchaseCreditsModalRef"
+        @success="handleTopupSuccess"
+      />
+>>>>>>> upstream/develop
     </template>
   </SettingsLayout>
 </template>

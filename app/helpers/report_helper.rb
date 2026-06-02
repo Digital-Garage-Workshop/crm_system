@@ -53,6 +53,7 @@ module ReportHelper
   end
 
   def resolutions
+<<<<<<< HEAD
     scope.reporting_events.joins(:conversation).select(:conversation_id).where(account_id: account.id, name: :conversation_resolved,
                                                                                conversations: { status: :resolved }, created_at: range).distinct
   end
@@ -60,6 +61,14 @@ module ReportHelper
   def bot_resolutions
     scope.reporting_events.joins(:conversation).select(:conversation_id).where(account_id: account.id, name: :conversation_bot_resolved,
                                                                                conversations: { status: :resolved }, created_at: range).distinct
+=======
+    scope.reporting_events.where(account_id: account.id, name: :conversation_resolved, created_at: range)
+  end
+
+  def bot_resolutions
+    scope.reporting_events.where(account_id: account.id, name: :conversation_bot_resolved, created_at: range)
+         .where.not(conversation_id: bot_handoff_conversation_ids_subquery)
+>>>>>>> upstream/develop
   end
 
   def bot_handoffs
@@ -67,6 +76,13 @@ module ReportHelper
                                                                                created_at: range).distinct
   end
 
+<<<<<<< HEAD
+=======
+  def bot_handoff_conversation_ids_subquery
+    bot_handoffs
+  end
+
+>>>>>>> upstream/develop
   def avg_first_response_time
     grouped_reporting_events = (get_grouped_values scope.reporting_events.where(name: 'first_response', account_id: account.id))
     return grouped_reporting_events.average(:value_in_business_hours) if params[:business_hours]

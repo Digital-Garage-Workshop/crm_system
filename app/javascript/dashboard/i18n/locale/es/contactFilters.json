@@ -48,7 +48,12 @@
       "CREATED_AT": "Creado el",
       "LAST_ACTIVITY": "Última actividad",
       "REFERER_LINK": "Enlace de referencia",
+<<<<<<< HEAD
       "BLOCKED": "Bloqueado"
+=======
+      "BLOCKED": "Bloqueado",
+      "LABELS": "Etiquetas"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Filtros estándar",

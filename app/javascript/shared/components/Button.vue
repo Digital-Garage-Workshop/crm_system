@@ -27,11 +27,19 @@ export default {
       let className =
         'text-white py-3 px-4 rounded-lg shadow-sm leading-4 cursor-pointer disabled:opacity-50';
       if (this.type === 'clear') {
+<<<<<<< HEAD
         className = 'flex mx-auto mt-4 text-xs leading-3 w-auto text-black-600';
       }
 
       if (this.type === 'blue' && !Object.keys(this.buttonStyles).length) {
         className = `${className} bg-woot-500 hover:bg-woot-700`;
+=======
+        className = 'flex mx-auto mt-4 text-xs leading-3 w-auto text-n-gray-12';
+      }
+
+      if (this.type === 'blue' && !Object.keys(this.buttonStyles).length) {
+        className = `${className} bg-n-brand hover:brightness-110`;
+>>>>>>> upstream/develop
       }
       if (this.block) {
         className = `${className} w-full`;

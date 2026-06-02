@@ -2,7 +2,13 @@ require 'rails_helper'
 
 describe Linear do
   let(:access_token) { 'valid_access_token' }
+<<<<<<< HEAD
   let(:url) { 'https://api.linear.app/graphql' }
+=======
+  let(:refresh_token) { 'valid_refresh_token' }
+  let(:url) { 'https://api.linear.app/graphql' }
+  let(:revoke_url) { 'https://api.linear.app/oauth/revoke' }
+>>>>>>> upstream/develop
   let(:linear_client) { described_class.new(access_token) }
   let(:headers) { { 'Content-Type' => 'application/json', 'Authorization' => "Bearer #{access_token}" } }
 
@@ -91,6 +97,34 @@ describe Linear do
         label_ids: ['bug']
       }
     end
+<<<<<<< HEAD
+=======
+    let(:user) { instance_double(User, name: 'John Doe', avatar_url: 'https://example.com/avatar.jpg') }
+
+    context 'when description contains double quotes' do
+      it 'produces valid GraphQL by escaping the quotes' do
+        allow(linear_client).to receive(:post) do |payload|
+          expect(payload[:query]).to include('description: "the sender is \\"Bot\\"')
+          instance_double(HTTParty::Response, success?: true,
+                                              parsed_response: { 'data' => { 'issueCreate' => { 'id' => 'issue1', 'title' => 'Title' } } })
+        end
+
+        linear_client.create_issue(params.merge(description: 'the sender is "Bot"'))
+      end
+    end
+
+    context 'when description contains backslashes' do
+      it 'produces valid GraphQL by escaping the backslashes' do
+        allow(linear_client).to receive(:post) do |payload|
+          expect(payload[:query]).to include('description: "path\\\\to\\\\file"')
+          instance_double(HTTParty::Response, success?: true,
+                                              parsed_response: { 'data' => { 'issueCreate' => { 'id' => 'issue1', 'title' => 'Title' } } })
+        end
+
+        linear_client.create_issue(params.merge(description: 'path\\to\\file'))
+      end
+    end
+>>>>>>> upstream/develop
 
     context 'when the API response is success' do
       before do
@@ -103,6 +137,37 @@ describe Linear do
         expect(response).to eq({ 'issueCreate' => { 'id' => 'issue1', 'title' => 'Title' } })
       end
 
+<<<<<<< HEAD
+=======
+      context 'when user is provided' do
+        it 'includes user attribution in the request' do
+          allow(linear_client).to receive(:post) do |payload|
+            expect(payload[:query]).to include('createAsUser: "John Doe"')
+            expect(payload[:query]).to include('displayIconUrl: "https://example.com/avatar.jpg"')
+            instance_double(HTTParty::Response, success?: true,
+                                                parsed_response: { 'data' => { 'issueCreate' => { 'id' => 'issue1', 'title' => 'Title' } } })
+          end
+
+          linear_client.create_issue(params, user)
+        end
+      end
+
+      context 'when user has no avatar' do
+        let(:user_no_avatar) { instance_double(User, name: 'Jane Doe', avatar_url: '') }
+
+        it 'includes only user name in the request' do
+          allow(linear_client).to receive(:post) do |payload|
+            expect(payload[:query]).to include('createAsUser: "Jane Doe"')
+            expect(payload[:query]).not_to include('displayIconUrl')
+            instance_double(HTTParty::Response, success?: true,
+                                                parsed_response: { 'data' => { 'issueCreate' => { 'id' => 'issue1', 'title' => 'Title' } } })
+          end
+
+          linear_client.create_issue(params, user_no_avatar)
+        end
+      end
+
+>>>>>>> upstream/develop
       context 'when the priority is invalid' do
         let(:params) { { title: 'Title', team_id: 'team1', priority: 5 } }
 
@@ -182,6 +247,22 @@ describe Linear do
     let(:link) { 'https://example.com' }
     let(:issue_id) { 'issue1' }
     let(:title) { 'Title' }
+<<<<<<< HEAD
+=======
+    let(:user) { instance_double(User, name: 'John Doe', avatar_url: 'https://example.com/avatar.jpg') }
+
+    context 'when title contains double quotes' do
+      it 'produces valid GraphQL by escaping the quotes' do
+        allow(linear_client).to receive(:post) do |payload|
+          expect(payload[:query]).to include('title: "say \\"hello\\"')
+          instance_double(HTTParty::Response, success?: true,
+                                              parsed_response: { 'data' => { 'attachmentLinkURL' => { 'id' => 'attachment1' } } })
+        end
+
+        linear_client.link_issue(link, issue_id, 'say "hello"')
+      end
+    end
+>>>>>>> upstream/develop
 
     context 'when the API response is success' do
       before do
@@ -194,6 +275,48 @@ describe Linear do
         expect(response).to eq({ 'attachmentLinkURL' => { 'id' => 'attachment1' } })
       end
 
+<<<<<<< HEAD
+=======
+      context 'when user is provided' do
+        it 'includes user attribution in the request' do
+          expected_params = {
+            issue_id: issue_id,
+            link: link,
+            title: title,
+            user_name: 'John Doe',
+            user_avatar_url: 'https://example.com/avatar.jpg'
+          }
+
+          expect(Linear::Mutations).to receive(:issue_link).with(expected_params).and_call_original
+          allow(linear_client).to receive(:post).and_return(
+            instance_double(HTTParty::Response, success?: true, parsed_response: { 'data' => { 'attachmentLinkURL' => { 'id' => 'attachment1' } } })
+          )
+
+          linear_client.link_issue(link, issue_id, title, user)
+        end
+      end
+
+      context 'when user has no avatar' do
+        let(:user_no_avatar) { instance_double(User, name: 'Jane Doe', avatar_url: '') }
+
+        it 'includes only user name in the request' do
+          expected_params = {
+            issue_id: issue_id,
+            link: link,
+            title: title,
+            user_name: 'Jane Doe'
+          }
+
+          expect(Linear::Mutations).to receive(:issue_link).with(expected_params).and_call_original
+          allow(linear_client).to receive(:post).and_return(
+            instance_double(HTTParty::Response, success?: true, parsed_response: { 'data' => { 'attachmentLinkURL' => { 'id' => 'attachment1' } } })
+          )
+
+          linear_client.link_issue(link, issue_id, title, user_no_avatar)
+        end
+      end
+
+>>>>>>> upstream/develop
       context 'when the link is missing' do
         let(:link) { '' }
 
@@ -263,6 +386,21 @@ describe Linear do
   context 'when querying issues' do
     let(:term) { 'term' }
 
+<<<<<<< HEAD
+=======
+    context 'when search term contains double quotes' do
+      it 'produces valid GraphQL by escaping the quotes' do
+        allow(linear_client).to receive(:post) do |payload|
+          expect(payload[:query]).to include('term: "find \\"Bot\\"')
+          instance_double(HTTParty::Response, success?: true,
+                                              parsed_response: { 'data' => { 'searchIssues' => { 'nodes' => [] } } })
+        end
+
+        linear_client.search_issue('find "Bot"')
+      end
+    end
+
+>>>>>>> upstream/develop
     context 'when the API response is success' do
       before do
         stub_request(:post, url)
@@ -316,4 +454,33 @@ describe Linear do
       end
     end
   end
+<<<<<<< HEAD
+=======
+
+  context 'when revoking a token' do
+    it 'uses the refresh token when present' do
+      client = described_class.new(access_token, refresh_token: refresh_token)
+
+      stub_request(:post, revoke_url)
+        .with(
+          headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+          body: { token: refresh_token, token_type_hint: 'refresh_token' }
+        )
+        .to_return(status: 200, body: '', headers: {})
+
+      expect(client.revoke_token).to be(true)
+    end
+
+    it 'falls back to the access token when refresh token is absent' do
+      stub_request(:post, revoke_url)
+        .with(
+          headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+          body: { token: access_token, token_type_hint: 'access_token' }
+        )
+        .to_return(status: 200, body: '', headers: {})
+
+      expect(linear_client.revoke_token).to be(true)
+    end
+  end
+>>>>>>> upstream/develop
 end

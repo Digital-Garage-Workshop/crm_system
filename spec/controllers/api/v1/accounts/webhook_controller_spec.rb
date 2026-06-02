@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Webhooks API', type: :request do
   let(:account) { create(:account) }
   let(:inbox) { create(:inbox, account: account) }
+<<<<<<< HEAD
   let(:webhook) { create(:webhook, account: account, inbox: inbox, url: 'https://hello.com') }
+=======
+  let(:webhook) { create(:webhook, account: account, inbox: inbox, url: 'https://hello.com', name: 'My Webhook') }
+>>>>>>> upstream/develop
   let(:administrator) { create(:user, account: account, role: :administrator) }
   let(:agent) { create(:user, account: account, role: :agent) }
 
@@ -49,6 +53,19 @@ RSpec.describe 'Webhooks API', type: :request do
         expect(response.parsed_body['payload']['webhook']['url']).to eql 'https://hello.com'
       end
 
+<<<<<<< HEAD
+=======
+      it 'creates webhook with name' do
+        post "/api/v1/accounts/#{account.id}/webhooks",
+             params: { account_id: account.id, inbox_id: inbox.id, url: 'https://hello.com', name: 'My Webhook' },
+             headers: administrator.create_new_auth_token,
+             as: :json
+        expect(response).to have_http_status(:success)
+
+        expect(response.parsed_body['payload']['webhook']['name']).to eql 'My Webhook'
+      end
+
+>>>>>>> upstream/develop
       it 'throws error when invalid url provided' do
         post "/api/v1/accounts/#{account.id}/webhooks",
              params: { account_id: account.id, inbox_id: inbox.id, url: 'javascript:alert(1)' },
@@ -103,11 +120,19 @@ RSpec.describe 'Webhooks API', type: :request do
     context 'when it is an authenticated admin user' do
       it 'updates webhook' do
         put "/api/v1/accounts/#{account.id}/webhooks/#{webhook.id}",
+<<<<<<< HEAD
             params: { url: 'https://hello.com' },
+=======
+            params: { url: 'https://hello.com', name: 'Another Webhook' },
+>>>>>>> upstream/develop
             headers: administrator.create_new_auth_token,
             as: :json
         expect(response).to have_http_status(:success)
         expect(response.parsed_body['payload']['webhook']['url']).to eql 'https://hello.com'
+<<<<<<< HEAD
+=======
+        expect(response.parsed_body['payload']['webhook']['name']).to eql 'Another Webhook'
+>>>>>>> upstream/develop
       end
     end
   end

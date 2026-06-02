@@ -45,7 +45,11 @@ export default {
         const whatsappChannel = await this.$store.dispatch(
           'inboxes/createChannel',
           {
+<<<<<<< HEAD
             name: this.inboxName,
+=======
+            name: this.inboxName?.trim(),
+>>>>>>> upstream/develop
             channel: {
               type: 'whatsapp',
               phone_number: this.phoneNumber,

@@ -1,10 +1,15 @@
 import {
   formatDate,
   formatUnixDate,
+<<<<<<< HEAD
   formatDigitToString,
   isTimeAfter,
   generateRelativeTime,
   getDayDifferenceFromNow,
+=======
+  isTimeAfter,
+  generateRelativeTime,
+>>>>>>> upstream/develop
 } from '../DateHelper';
 
 describe('#DateHelper', () => {
@@ -47,6 +52,7 @@ describe('#DateHelper', () => {
     ).toEqual('Yesterday');
   });
 });
+<<<<<<< HEAD
 describe('#formatDigitToString', () => {
   it('returns date compatabile string from number is less than 9', () => {
     expect(formatDigitToString(8)).toEqual('08');
@@ -55,6 +61,8 @@ describe('#formatDigitToString', () => {
     expect(formatDigitToString(11)).toEqual('11');
   });
 });
+=======
+>>>>>>> upstream/develop
 
 describe('#isTimeAfter', () => {
   it('return correct values', () => {
@@ -121,6 +129,7 @@ describe('generateRelativeTime', () => {
     expect(actualResult).toBe(expectedResult);
   });
 });
+<<<<<<< HEAD
 
 describe('#getDayDifferenceFromNow', () => {
   it('should return the difference if in same day', () => {
@@ -143,3 +152,5 @@ describe('#getDayDifferenceFromNow', () => {
     expect(actualResult).toBe(expectedResult);
   });
 });
+=======
+>>>>>>> upstream/develop

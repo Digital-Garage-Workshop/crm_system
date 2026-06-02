@@ -3,10 +3,18 @@ properties:
   url:
     type: string
     description: The url where the events should be sent
+<<<<<<< HEAD
+=======
+    example: https://example.com/webhook
+  name:
+    type: string
+    description: The name of the webhook
+>>>>>>> upstream/develop
   subscriptions:
     type: array
     items:
       type: string
+<<<<<<< HEAD
       enum: [
         "conversation_created",
         "conversation_status_changed",
@@ -16,3 +24,22 @@ properties:
         "webwidget_triggered"
       ]
     description: The events you want to subscribe to.
+=======
+      enum:
+        [
+          'conversation_created',
+          'conversation_status_changed',
+          'conversation_updated',
+          'message_created',
+          'message_updated',
+          'contact_created',
+          'contact_updated',
+          'webwidget_triggered',
+          'conversation_typing_on',
+          'conversation_typing_off',
+        ]
+    description: The events you want to subscribe to.
+    example:
+      - conversation_created
+      - conversation_status_changed
+>>>>>>> upstream/develop

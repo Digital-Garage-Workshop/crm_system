@@ -22,6 +22,10 @@ const allowedLocales = computed(() => {
       id: locale?.code,
       name: allLocales[locale?.code],
       code: locale?.code,
+<<<<<<< HEAD
+=======
+      isDraft: locale?.draft || false,
+>>>>>>> upstream/develop
       articlesCount: locale?.articles_count || 0,
       categoriesCount: locale?.categories_count || 0,
     };

@@ -69,6 +69,12 @@
     },
     "ACCOUNT": {
       "EDIT": "{agentName} updated the account configuration (#{id})"
+<<<<<<< HEAD
+=======
+    },
+    "CONVERSATION": {
+      "DELETE": "{agentName} deleted conversation #{id}"
+>>>>>>> upstream/develop
     }
   }
 }

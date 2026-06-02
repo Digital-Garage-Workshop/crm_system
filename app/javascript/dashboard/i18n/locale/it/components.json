@@ -1,5 +1,6 @@
 {
   "PAGINATION_FOOTER": {
+<<<<<<< HEAD
     "SHOWING": "Showing {startItem} - {endItem} of {totalItems} items",
     "CURRENT_PAGE_INFO": "{currentPage} of {totalPages} pages"
   },
@@ -18,10 +19,31 @@
   "DIALOG": {
     "BUTTONS": {
       "CANCEL": "annulla",
+=======
+    "SHOWING": "Mostrando {startItem} - {endItem} di {totalItems} elementi",
+    "CURRENT_PAGE_INFO": "{currentPage} di {totalPages} pagine"
+  },
+  "COMBOBOX": {
+    "PLACEHOLDER": "Seleziona un'opzione...",
+    "EMPTY_SEARCH_RESULTS": "Nessun elemento trovato per il termine di ricerca `{searchTerm}`",
+    "EMPTY_STATE": "Nessun risultato trovato.",
+    "SEARCH_PLACEHOLDER": "Cerca...",
+    "MORE": "+{count} altre"
+  },
+  "DROPDOWN_MENU": {
+    "SEARCH_PLACEHOLDER": "Cerca...",
+    "EMPTY_STATE": "Nessun risultato trovato.",
+    "SEARCHING": "Ricerca..."
+  },
+  "DIALOG": {
+    "BUTTONS": {
+      "CANCEL": "Annulla",
+>>>>>>> upstream/develop
       "CONFIRM": "Conferma"
     }
   },
   "PHONE_INPUT": {
+<<<<<<< HEAD
     "SEARCH_PLACEHOLDER": "Search country",
     "ERROR": "Phone number should be empty or in E.164 format",
     "DIAL_CODE_ERROR": "Please select a dial code from the list"
@@ -29,6 +51,15 @@
   "THUMBNAIL": {
     "AUTHOR": {
       "NOT_AVAILABLE": "Author is not available"
+=======
+    "SEARCH_PLACEHOLDER": "Cerca Paese",
+    "ERROR": "Il numero di telefono deve essere vuoto o in formato E.164",
+    "DIAL_CODE_ERROR": "Seleziona un codice di chiamata dalla lista"
+  },
+  "THUMBNAIL": {
+    "AUTHOR": {
+      "NOT_AVAILABLE": "Autore non disponibile"
+>>>>>>> upstream/develop
     }
   },
   "BREADCRUMB": {
@@ -42,6 +73,31 @@
   },
   "FEATURE_SPOTLIGHT": {
     "LEARN_MORE": "Scopri di più",
+<<<<<<< HEAD
     "WATCH_VIDEO": "Watch video"
+=======
+    "WATCH_VIDEO": "Guarda video"
+  },
+  "DURATION_INPUT": {
+    "MINUTES": "Minuti",
+    "HOURS": "Ore",
+    "DAYS": "Giorni",
+    "PLACEHOLDER": "Inserisci durata"
+  },
+  "CHANNEL_SELECTOR": {
+    "COMING_SOON": "Coming Soon!"
+  },
+  "SLASH_COMMANDS": {
+    "HEADING_1": "Heading 1",
+    "HEADING_2": "Heading 2",
+    "HEADING_3": "Heading 3",
+    "BOLD": "Bold",
+    "ITALIC": "Italic",
+    "STRIKETHROUGH": "Strikethrough",
+    "CODE": "Code",
+    "BULLET_LIST": "Bullet List",
+    "ORDERED_LIST": "Ordered List",
+    "TABLE": "Table"
+>>>>>>> upstream/develop
   }
 }

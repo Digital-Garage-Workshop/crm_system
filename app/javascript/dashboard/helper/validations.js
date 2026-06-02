@@ -125,7 +125,14 @@ const validateSingleAction = action => {
     'mute_conversation',
     'snooze_conversation',
     'resolve_conversation',
+<<<<<<< HEAD
     'remove_assigned_team',
+=======
+    'remove_assigned_agent',
+    'remove_assigned_team',
+    'open_conversation',
+    'pending_conversation',
+>>>>>>> upstream/develop
   ];
 
   if (

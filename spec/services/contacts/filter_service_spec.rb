@@ -7,9 +7,31 @@ describe Contacts::FilterService do
   let!(:first_user) { create(:user, account: account) }
   let!(:second_user) { create(:user, account: account) }
   let!(:inbox) { create(:inbox, account: account, enable_auto_assignment: false) }
+<<<<<<< HEAD
   let!(:en_contact) { create(:contact, account: account, additional_attributes: { 'country_code': 'uk' }) }
   let!(:el_contact) { create(:contact, account: account, additional_attributes: { 'country_code': 'gr' }) }
   let!(:cs_contact) { create(:contact, account: account, additional_attributes: { 'country_code': 'cz' }) }
+=======
+  let!(:en_contact) do
+    create(:contact,
+           account: account,
+           email: Faker::Internet.unique.email,
+           additional_attributes: { 'country_code': 'uk' })
+  end
+  let!(:el_contact) do
+    create(:contact,
+           account: account,
+           email: Faker::Internet.unique.email,
+           additional_attributes: { 'country_code': 'gr' })
+  end
+  let!(:cs_contact) do
+    create(:contact,
+           :with_phone_number,
+           account: account,
+           email: Faker::Internet.unique.email,
+           additional_attributes: { 'country_code': 'cz' })
+  end
+>>>>>>> upstream/develop
 
   before do
     create(:inbox_member, user: first_user, inbox: inbox)
@@ -33,6 +55,14 @@ describe Contacts::FilterService do
            account: account,
            attribute_model: 'contact_attribute',
            attribute_display_type: 'date')
+<<<<<<< HEAD
+=======
+    create(:custom_attribute_definition,
+           attribute_key: 'lifetime_value',
+           account: account,
+           attribute_model: 'contact_attribute',
+           attribute_display_type: 'number')
+>>>>>>> upstream/develop
   end
 
   describe '#perform' do
@@ -44,7 +74,11 @@ describe Contacts::FilterService do
 
       en_contact.update!(custom_attributes: { contact_additional_information: 'test custom data' })
       el_contact.update!(custom_attributes: { contact_additional_information: 'test custom data', customer_type: 'platinum' })
+<<<<<<< HEAD
       cs_contact.update!(custom_attributes: { customer_type: 'platinum', signed_in_at: '2022-01-19' })
+=======
+      cs_contact.update!(custom_attributes: { customer_type: 'platinum', signed_in_at: '2022-01-19', lifetime_value: '120.50' })
+>>>>>>> upstream/develop
     end
 
     context 'with standard attributes - name' do
@@ -65,9 +99,56 @@ describe Contacts::FilterService do
       end
     end
 
+<<<<<<< HEAD
     context 'with standard attributes - blocked' do
       it 'filter contacts by blocked' do
         blocked_contact = create(:contact, account: account, blocked: true)
+=======
+    context 'with standard attributes - phone' do
+      it 'filter contacts by name' do
+        params[:payload] = [
+          {
+            attribute_key: 'phone_number',
+            filter_operator: 'equal_to',
+            values: [cs_contact.phone_number],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        result = filter_service.new(account, first_user, params).perform
+        expect(result[:count]).to be 1
+        expect(result[:contacts].length).to be 1
+        expect(result[:contacts].first.name).to eq(cs_contact.name)
+      end
+    end
+
+    context 'with standard attributes - phone (without +)' do
+      it 'filter contacts by name' do
+        params[:payload] = [
+          {
+            attribute_key: 'phone_number',
+            filter_operator: 'equal_to',
+            values: [cs_contact.phone_number[1..]],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        result = filter_service.new(account, first_user, params).perform
+        expect(result[:count]).to be 1
+        expect(result[:contacts].length).to be 1
+        expect(result[:contacts].first.name).to eq(cs_contact.name)
+      end
+    end
+
+    context 'with standard attributes - blocked' do
+      it 'filter contacts by blocked' do
+        blocked_contact = create(
+          :contact,
+          account: account,
+          blocked: true,
+          email: Faker::Internet.unique.email
+        )
+>>>>>>> upstream/develop
         params = { payload: [{ attribute_key: 'blocked', filter_operator: 'equal_to', values: ['true'],
                                query_operator: nil }.with_indifferent_access] }
         result = filter_service.new(account, first_user, params).perform
@@ -215,6 +296,42 @@ describe Contacts::FilterService do
         expect(result[:contacts].pluck(:id)).to include(cs_contact.id)
         expect(result[:contacts].pluck(:id)).not_to include(en_contact.id)
       end
+<<<<<<< HEAD
+=======
+
+      it 'binds last_activity_at comparison values as dates' do
+        date_value = '2024-01-01'
+        params[:payload] = [
+          {
+            attribute_key: 'last_activity_at',
+            filter_operator: 'is_greater_than',
+            values: [date_value],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        service = filter_service.new(account, first_user, params)
+        filters = service.instance_variable_get(:@filters)['contacts']
+        condition_query = service.send(:build_condition_query, filters, params[:payload].first, 0)
+
+        expect(condition_query).to include('(contacts.last_activity_at)::date > :value_0')
+        expect(service.instance_variable_get(:@filter_values)['value_0']).to eq(Date.iso8601(date_value))
+      end
+
+      it 'rejects invalid last_activity_at comparison values' do
+        malicious_value = "2024-01-01'::date OR (SELECT pg_sleep(5)) IS NOT NULL --"
+        params[:payload] = [
+          {
+            attribute_key: 'last_activity_at',
+            filter_operator: 'is_greater_than',
+            values: [malicious_value],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        expect { filter_service.new(account, first_user, params).perform }.to raise_error(CustomExceptions::CustomFilter::InvalidValue)
+      end
+>>>>>>> upstream/develop
     end
 
     context 'with additional attributes' do
@@ -312,6 +429,75 @@ describe Contacts::FilterService do
         expect(result[:contacts].length).to be expected_count
         expect(result[:contacts].pluck(:id)).to include(el_contact.id)
       end
+<<<<<<< HEAD
+=======
+
+      it 'binds custom date comparison values as dates' do
+        date_value = '2024-01-01'
+        params[:payload] = [
+          {
+            attribute_key: 'signed_in_at',
+            filter_operator: 'is_less_than',
+            values: [date_value],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        service = filter_service.new(account, first_user, params)
+        filters = service.instance_variable_get(:@filters)['contacts']
+        condition_query = service.send(:build_condition_query, filters, params[:payload].first, 0)
+
+        expect(condition_query).to include("(contacts.custom_attributes ->> 'signed_in_at')::date < :value_0")
+        expect(service.instance_variable_get(:@filter_values)['value_0']).to eq(Date.iso8601(date_value))
+      end
+
+      it 'binds custom numeric comparison values as decimals' do
+        params[:payload] = [
+          {
+            attribute_key: 'lifetime_value',
+            filter_operator: 'is_greater_than',
+            values: ['100.25'],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        service = filter_service.new(account, first_user, params)
+        filters = service.instance_variable_get(:@filters)['contacts']
+        condition_query = service.send(:build_condition_query, filters, params[:payload].first, 0)
+
+        expect(condition_query).to include("(contacts.custom_attributes ->> 'lifetime_value')::numeric > :value_0")
+        expect(service.instance_variable_get(:@filter_values)['value_0']).to eq(BigDecimal('100.25'))
+      end
+
+      it 'filters by custom numeric attributes' do
+        params[:payload] = [
+          {
+            attribute_key: 'lifetime_value',
+            filter_operator: 'is_greater_than',
+            values: ['100.25'],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        result = filter_service.new(account, first_user, params).perform
+
+        expect(result[:contacts].pluck(:id)).to eq([cs_contact.id])
+      end
+
+      it 'rejects invalid custom date comparison values' do
+        malicious_value = "2024-01-01'::date OR (SELECT pg_sleep(5)) IS NOT NULL --"
+        params[:payload] = [
+          {
+            attribute_key: 'signed_in_at',
+            filter_operator: 'is_less_than',
+            values: [malicious_value],
+            query_operator: nil
+          }.with_indifferent_access
+        ]
+
+        expect { filter_service.new(account, first_user, params).perform }.to raise_error(CustomExceptions::CustomFilter::InvalidValue)
+      end
+>>>>>>> upstream/develop
     end
   end
 end

@@ -99,6 +99,7 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <InboxReconnectionRequired class="mx-8 mt-5" @reauthorize="startLogin" />
 </template>
 
@@ -109,6 +110,16 @@ export default {
   img {
     max-width: 240px;
     padding: $space-normal 0;
+=======
+  <InboxReconnectionRequired class="mx-6" @reauthorize="startLogin" />
+</template>
+
+<style lang="scss" scoped>
+.fb--login {
+  img {
+    max-width: 240px;
+    padding: 1rem 0;
+>>>>>>> upstream/develop
   }
 }
 </style>

@@ -9,6 +9,10 @@
       "ADMINISTRATOR": "Pentadbir",
       "AGENT": "Ejen"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agent | {n} agents",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Tiada ejen yang dikaitkan ke akaun ini",
       "TITLE": "Tadbir ejen dalam pasukan anda",
@@ -96,6 +100,11 @@
         "ERROR_MESSAGE": "Masalah untuk hubungi Woot Server, Sila cuba sebentar lagi"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Cari ejen...",
+    "NO_RESULTS": "No agents found matching your search",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Tiada dijumpa."
     },

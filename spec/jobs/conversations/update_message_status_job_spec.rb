@@ -10,7 +10,11 @@ RSpec.describe Conversations::UpdateMessageStatusJob do
   it 'enqueues the job' do
     expect { job }.to have_enqueued_job(described_class)
       .with(conversation.id, conversation.contact_last_seen_at, :read)
+<<<<<<< HEAD
       .on_queue('low')
+=======
+      .on_queue('deferred')
+>>>>>>> upstream/develop
   end
 
   context 'when called' do

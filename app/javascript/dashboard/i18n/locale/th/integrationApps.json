@@ -3,6 +3,12 @@
     "FETCHING": "กำลังโหลดการเชื่อมต่อ",
     "NO_HOOK_CONFIGURED": "ไม่มี {integrationId} ที่ตั้งค่าไว้กับบัญชีนี้",
     "HEADER": "โปรแกรม",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "เปิด",
       "DISABLED": "ปิด"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "กำลังโหลด Hook",
       "INBOX": "กล่องข้อความ",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "การกระทำ",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "ลบ"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "เลือกกล่องข้อความ"
         },
         "SUBMIT": "สร้าง",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "ยกเลิก"
       },
       "API": {

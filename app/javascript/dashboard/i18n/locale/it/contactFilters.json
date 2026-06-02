@@ -1,6 +1,10 @@
 {
   "CONTACTS_FILTER": {
+<<<<<<< HEAD
     "TITLE": "Filtra contatti",
+=======
+    "TITLE": "Filtra Contatti",
+>>>>>>> upstream/develop
     "SUBTITLE": "Aggiungi filtri qui sotto e premi 'Invia' per filtrare i contatti.",
     "EDIT_CUSTOM_SEGMENT": "Edit Segment",
     "CUSTOM_VIEWS_SUBTITLE": "Add or remove filters and update your segment.",
@@ -8,12 +12,21 @@
     "CLEAR_ALL_FILTERS": "Cancella tutti i filtri",
     "FILTER_DELETE_ERROR": "Dovresti avere almeno un filtro da salvare",
     "SUBMIT_BUTTON_LABEL": "Invia",
+<<<<<<< HEAD
     "UPDATE_BUTTON_LABEL": "Update Segment",
     "CANCEL_BUTTON_LABEL": "Annulla",
     "CLEAR_BUTTON_LABEL": "Cancella filtri",
     "EMPTY_VALUE_ERROR": "Il valore è obbligatorio",
     "SEGMENT_LABEL": "Segment Name",
     "SEGMENT_QUERY_LABEL": "Segment Query",
+=======
+    "UPDATE_BUTTON_LABEL": "Aggiorna Segmento",
+    "CANCEL_BUTTON_LABEL": "Annulla",
+    "CLEAR_BUTTON_LABEL": "Rimuovi Filtri",
+    "EMPTY_VALUE_ERROR": "Valore richiesto",
+    "SEGMENT_LABEL": "Nome Segmento",
+    "SEGMENT_QUERY_LABEL": "Query Segmento",
+>>>>>>> upstream/develop
     "TOOLTIP_LABEL": "Filtra contatti",
     "QUERY_DROPDOWN_LABELS": {
       "AND": "E",
@@ -46,6 +59,7 @@
       "CUSTOM_ATTRIBUTE_LINK": "Link",
       "CUSTOM_ATTRIBUTE_CHECKBOX": "Checkbox",
       "CREATED_AT": "Creato il",
+<<<<<<< HEAD
       "LAST_ACTIVITY": "Ultima attività",
       "REFERER_LINK": "Link di riferimento",
       "BLOCKED": "Blocked"
@@ -54,6 +68,17 @@
       "STANDARD_FILTERS": "Filtri standard",
       "ADDITIONAL_FILTERS": "Filtri addizionali",
       "CUSTOM_ATTRIBUTES": "Attributi personalizzati"
+=======
+      "LAST_ACTIVITY": "Ultima Attività",
+      "REFERER_LINK": "Link referente",
+      "BLOCKED": "Bloccato",
+      "LABELS": "Etichette"
+    },
+    "GROUPS": {
+      "STANDARD_FILTERS": "Filtri Standard",
+      "ADDITIONAL_FILTERS": "Filtri Aggiuntivi",
+      "CUSTOM_ATTRIBUTES": "Attributi Personalizzati"
+>>>>>>> upstream/develop
     }
   }
 }

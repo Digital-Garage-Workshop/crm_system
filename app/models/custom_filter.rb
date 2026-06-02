@@ -17,7 +17,10 @@
 #  index_custom_filters_on_user_id     (user_id)
 #
 class CustomFilter < ApplicationRecord
+<<<<<<< HEAD
   MAX_FILTER_PER_USER = 50
+=======
+>>>>>>> upstream/develop
   belongs_to :user
   belongs_to :account
 
@@ -25,7 +28,11 @@ class CustomFilter < ApplicationRecord
   validate :validate_number_of_filters
 
   def validate_number_of_filters
+<<<<<<< HEAD
     return true if account.custom_filters.where(user_id: user_id).size < MAX_FILTER_PER_USER
+=======
+    return true if account.custom_filters.where(user_id: user_id).size < Limits::MAX_CUSTOM_FILTERS_PER_USER
+>>>>>>> upstream/develop
 
     errors.add :account_id, I18n.t('errors.custom_filters.number_of_records')
   end

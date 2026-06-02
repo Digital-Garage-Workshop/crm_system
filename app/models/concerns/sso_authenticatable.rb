@@ -20,6 +20,13 @@ module SsoAuthenticatable
     "#{ENV.fetch('FRONTEND_URL', nil)}/app/login?email=#{encoded_email}&sso_auth_token=#{generate_sso_auth_token}"
   end
 
+<<<<<<< HEAD
+=======
+  def generate_sso_link_with_impersonation
+    "#{generate_sso_link}&impersonation=true"
+  end
+
+>>>>>>> upstream/develop
   private
 
   def sso_token_key(token)

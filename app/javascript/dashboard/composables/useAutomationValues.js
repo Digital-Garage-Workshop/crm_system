@@ -8,15 +8,29 @@ import {
   getActionOptions,
   getConditionOptions,
 } from 'dashboard/helper/automationHelper';
+<<<<<<< HEAD
 
 /**
  * This is a shared composables that holds utilites used to build dropdown and file options
+=======
+import {
+  MESSAGE_CONDITION_VALUES,
+  PRIORITY_CONDITION_VALUES,
+} from 'dashboard/constants/automation';
+
+/**
+ * This is a shared composables that holds utilities used to build dropdown and file options
+>>>>>>> upstream/develop
  * @returns {Object} An object containing various automation-related functions and computed properties.
  */
 export default function useAutomationValues() {
   const getters = useStoreGetters();
   const { t } = useI18n();
+<<<<<<< HEAD
   const agents = useMapGetter('agents/getAgents');
+=======
+  const agents = useMapGetter('agents/getVerifiedAgents');
+>>>>>>> upstream/develop
   const campaigns = useMapGetter('campaigns/getAllCampaigns');
   const contacts = useMapGetter('contacts/getContacts');
   const inboxes = useMapGetter('inboxes/getInboxes');
@@ -60,6 +74,23 @@ export default function useAutomationValues() {
     ];
   });
 
+<<<<<<< HEAD
+=======
+  const messageTypeOptions = computed(() =>
+    MESSAGE_CONDITION_VALUES.map(item => ({
+      id: item.id,
+      name: t(`AUTOMATION.MESSAGE_TYPES.${item.i18nKey}`),
+    }))
+  );
+
+  const priorityOptions = computed(() =>
+    PRIORITY_CONDITION_VALUES.map(item => ({
+      id: item.id,
+      name: t(`AUTOMATION.PRIORITY_TYPES.${item.i18nKey}`),
+    }))
+  );
+
+>>>>>>> upstream/develop
   /**
    * Adds a translated "None" option to the beginning of a list
    * @param {Array} list - The list to add "None" to
@@ -86,7 +117,14 @@ export default function useAutomationValues() {
       contacts: contacts.value,
       customAttributes: getters['attributes/getAttributes'].value,
       inboxes: inboxes.value,
+<<<<<<< HEAD
       statusFilterOptions: statusFilterOptions.value,
+=======
+      labels: labels.value,
+      statusFilterOptions: statusFilterOptions.value,
+      priorityOptions: priorityOptions.value,
+      messageTypeOptions: messageTypeOptions.value,
+>>>>>>> upstream/develop
       teams: teams.value,
       languages,
       countries,
@@ -100,14 +138,34 @@ export default function useAutomationValues() {
    * @returns {Array} An array of action dropdown values.
    */
   const getActionDropdownValues = type => {
+<<<<<<< HEAD
     return getActionOptions({
       agents: agents.value,
+=======
+    let agentsList = agents.value;
+    if (type === 'assign_agent') {
+      agentsList = [
+        {
+          id: 'last_responding_agent',
+          name: t('AUTOMATION.LAST_RESPONDING_AGENT'),
+        },
+        ...agentsList,
+      ];
+    }
+
+    return getActionOptions({
+      agents: agentsList,
+>>>>>>> upstream/develop
       labels: labels.value,
       teams: teams.value,
       slaPolicies: slaPolicies.value,
       languages,
       type,
       addNoneToListFn: addNoneToList,
+<<<<<<< HEAD
+=======
+      priorityOptions: priorityOptions.value,
+>>>>>>> upstream/develop
     });
   };
 
@@ -115,6 +173,11 @@ export default function useAutomationValues() {
     booleanFilterOptions,
     statusFilterItems,
     statusFilterOptions,
+<<<<<<< HEAD
+=======
+    priorityOptions,
+    messageTypeOptions,
+>>>>>>> upstream/develop
     getConditionDropdownValues,
     getActionDropdownValues,
     agents,

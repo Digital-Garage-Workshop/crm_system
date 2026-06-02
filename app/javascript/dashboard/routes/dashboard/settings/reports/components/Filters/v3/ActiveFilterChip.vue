@@ -8,8 +8,13 @@ const props = defineProps({
     required: true,
   },
   id: {
+<<<<<<< HEAD
     type: Number,
     required: true,
+=======
+    type: [Number, null],
+    default: null,
+>>>>>>> upstream/develop
   },
   type: {
     type: String,
@@ -35,6 +40,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+<<<<<<< HEAD
+=======
+  showClearFilter: {
+    type: Boolean,
+    default: true,
+  },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits([
@@ -60,7 +72,11 @@ const closeDropdown = () => emit('closeDropdown');
       <FilterListDropdown
         v-if="options"
         v-on-clickaway="closeDropdown"
+<<<<<<< HEAD
         show-clear-filter
+=======
+        :show-clear-filter="showClearFilter"
+>>>>>>> upstream/develop
         :list-items="options"
         :active-filter-id="id"
         :input-placeholder="placeholder"

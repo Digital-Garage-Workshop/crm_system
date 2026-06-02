@@ -5,6 +5,25 @@
     "LOADING": "Vonzó egyedi tulajdonság",
     "DESCRIPTION": "A custom attribute tracks additional details about your contacts or conversations—such as the subscription plan or the date of their first purchase. You can add different types of custom attributes, such as text, lists, or numbers, to capture the specific information you need.",
     "LEARN_MORE": "Learn more about custom attributes",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} attribute | {n} attributes",
+    "SEARCH_PLACEHOLDER": "Tulajdonságok keresése...",
+    "NO_RESULTS": "No attributes found matching your search",
+    "ATTRIBUTE_MODELS": {
+      "CONVERSATION": "Beszélgetés",
+      "CONTACT": "Kontakt",
+      "COMPANY": "Cég"
+    },
+    "ATTRIBUTE_TYPES": {
+      "TEXT": "Szöveg",
+      "NUMBER": "Szám",
+      "LINK": "Link",
+      "DATE": "Date",
+      "LIST": "Lista",
+      "CHECKBOX": "Jelölőnégyzet"
+    },
+>>>>>>> upstream/develop
     "ADD": {
       "TITLE": "Adj meg egyedi tulajdonságot",
       "SUBMIT": "Létrehozás",
@@ -51,6 +70,13 @@
         },
         "ENABLE_REGEX": {
           "LABEL": "Enable regex validation"
+<<<<<<< HEAD
+=======
+        },
+        "BADGES": {
+          "PRE_CHAT": "Pre-chat",
+          "RESOLUTION": "Resolution"
+>>>>>>> upstream/develop
         }
       },
       "API": {
@@ -66,7 +92,11 @@
       },
       "CONFIRM": {
         "TITLE": "Biztosan törölni akarod: {attributeName}",
+<<<<<<< HEAD
         "PLACE_HOLDER": "Kérlek gépeld a megerősítéshez",
+=======
+        "PLACE_HOLDER": "Kérlek írd be: {attributeName}",
+>>>>>>> upstream/develop
         "MESSAGE": "A törlés eltávolítja az egyéni tulajdonságot",
         "YES": "Törlés ",
         "NO": "Mégse"
@@ -89,7 +119,12 @@
     "TABS": {
       "HEADER": "Egyedi atribútumok",
       "CONVERSATION": "Beszélgetés",
+<<<<<<< HEAD
       "CONTACT": "Kontakt"
+=======
+      "CONTACT": "Kontakt",
+      "COMPANY": "Cég"
+>>>>>>> upstream/develop
     },
     "LIST": {
       "TABLE_HEADER": {
@@ -117,6 +152,13 @@
       "ENABLE_REGEX": {
         "LABEL": "Enable regex validation"
       }
+<<<<<<< HEAD
+=======
+    },
+    "BADGES": {
+      "PRE_CHAT": "Pre-chat",
+      "RESOLUTION": "Resolution"
+>>>>>>> upstream/develop
     }
   }
 }

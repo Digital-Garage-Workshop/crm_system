@@ -19,6 +19,11 @@ properties:
         description: 'array of conversations'
         items:
           allOf:
+<<<<<<< HEAD
             - $ref: '#/definitions/generic_id'
             - $ref: '#/definitions/conversation'
+=======
+            - $ref: '#/components/schemas/generic_id'
+            - $ref: '#/components/schemas/conversation'
+>>>>>>> upstream/develop
             - $ref: '../contact/conversation.yml'

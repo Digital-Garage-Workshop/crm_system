@@ -161,12 +161,21 @@ RSpec.describe 'Enterprise SLA API', type: :request do
     let(:sla_policy) { create(:sla_policy, account: account) }
 
     context 'when it is an authenticated user' do
+<<<<<<< HEAD
       it 'deletes the sla_policy' do
+=======
+      it 'queues the sla_policy for deletion' do
+        expect(DeleteObjectJob).to receive(:perform_later).with(sla_policy, administrator, kind_of(String))
+
+>>>>>>> upstream/develop
         delete "/api/v1/accounts/#{account.id}/sla_policies/#{sla_policy.id}",
                headers: administrator.create_new_auth_token
 
         expect(response).to have_http_status(:success)
+<<<<<<< HEAD
         expect(SlaPolicy.count).to eq(1)
+=======
+>>>>>>> upstream/develop
       end
     end
 

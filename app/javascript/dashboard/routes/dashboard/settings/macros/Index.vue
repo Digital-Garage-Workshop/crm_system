@@ -1,5 +1,9 @@
 <script setup>
 import { useAlert } from 'dashboard/composables';
+<<<<<<< HEAD
+=======
+import { picoSearch } from '@scmmishra/pico-search';
+>>>>>>> upstream/develop
 import MacrosTableRow from './MacrosTableRow.vue';
 import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
 import SettingsLayout from '../SettingsLayout.vue';
@@ -7,17 +11,39 @@ import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStoreGetters, useStore } from 'dashboard/composables/store';
 import Button from 'dashboard/components-next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import { BaseTable } from 'dashboard/components-next/table';
+import { useAdmin } from 'dashboard/composables/useAdmin';
+>>>>>>> upstream/develop
 
 const getters = useStoreGetters();
 const store = useStore();
 const { t } = useI18n();
+<<<<<<< HEAD
 
 const showDeleteConfirmationPopup = ref(false);
 const selectedMacro = ref({});
+=======
+const { isAdmin } = useAdmin();
+
+const showDeleteConfirmationPopup = ref(false);
+const selectedMacro = ref({});
+const searchQuery = ref('');
+>>>>>>> upstream/develop
 
 const records = computed(() => getters['macros/getMacros'].value);
 const uiFlags = computed(() => getters['macros/getUIFlags'].value);
 
+<<<<<<< HEAD
+=======
+const filteredRecords = computed(() => {
+  const query = searchQuery.value.trim();
+  if (!query) return records.value;
+  return picoSearch(records.value, query, ['name']);
+});
+
+>>>>>>> upstream/develop
 const deleteMessage = computed(() => ` ${selectedMacro.value.name}?`);
 
 onMounted(() => {
@@ -53,6 +79,10 @@ const tableHeaders = computed(() => {
     t('MACROS.LIST.TABLE_HEADER.CREATED BY'),
     t('MACROS.LIST.TABLE_HEADER.LAST_UPDATED_BY'),
     t('MACROS.LIST.TABLE_HEADER.VISIBILITY'),
+<<<<<<< HEAD
+=======
+    t('MACROS.LIST.TABLE_HEADER.ACTIONS'),
+>>>>>>> upstream/develop
   ];
 });
 </script>
@@ -67,6 +97,7 @@ const tableHeaders = computed(() => {
   >
     <template #header>
       <BaseSettingsHeader
+<<<<<<< HEAD
         :title="$t('MACROS.HEADER')"
         :description="$t('MACROS.DESCRIPTION')"
         :link-text="$t('MACROS.LEARN_MORE')"
@@ -78,11 +109,29 @@ const tableHeaders = computed(() => {
               icon="i-lucide-circle-plus"
               :label="$t('MACROS.HEADER_BTN_TXT')"
             />
+=======
+        v-model:search-query="searchQuery"
+        :title="$t('MACROS.HEADER')"
+        :description="$t('MACROS.DESCRIPTION')"
+        :link-text="$t('MACROS.LEARN_MORE')"
+        :search-placeholder="$t('MACROS.SEARCH_PLACEHOLDER')"
+        feature-name="macros"
+      >
+        <template v-if="records?.length" #count>
+          <span class="text-body-main text-n-slate-11">
+            {{ $t('MACROS.COUNT', { n: records.length }) }}
+          </span>
+        </template>
+        <template #actions>
+          <router-link :to="{ name: 'macros_new' }">
+            <Button :label="$t('MACROS.HEADER_BTN_TXT')" size="sm" />
+>>>>>>> upstream/develop
           </router-link>
         </template>
       </BaseSettingsHeader>
     </template>
     <template #body>
+<<<<<<< HEAD
       <table class="min-w-full divide-y divide-slate-75 dark:divide-slate-700">
         <thead>
           <th
@@ -102,6 +151,25 @@ const tableHeaders = computed(() => {
           />
         </tbody>
       </table>
+=======
+      <BaseTable
+        :headers="tableHeaders"
+        :items="filteredRecords"
+        :no-data-message="
+          searchQuery ? $t('MACROS.NO_RESULTS') : $t('MACROS.LIST.404')
+        "
+      >
+        <template #row="{ items }">
+          <MacrosTableRow
+            v-for="macro in items"
+            :key="macro.id"
+            :macro="macro"
+            :can-manage-public-macros="isAdmin"
+            @delete="openDeletePopup(macro)"
+          />
+        </template>
+      </BaseTable>
+>>>>>>> upstream/develop
       <woot-delete-modal
         v-model:show="showDeleteConfirmationPopup"
         :on-close="closeDeletePopup"

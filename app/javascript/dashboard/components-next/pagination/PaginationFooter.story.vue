@@ -23,7 +23,11 @@ const singlePageState = createPaginationState(1, 10, 16);
     :layout="{ type: 'grid', width: '957' }"
   >
     <Variant title="Default">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <PaginationFooter
           :current-page="defaultState.currentPage.value"
           :total-items="defaultState.totalItems"
@@ -34,7 +38,11 @@ const singlePageState = createPaginationState(1, 10, 16);
     </Variant>
 
     <Variant title="Middle Page">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <PaginationFooter
           :current-page="middlePageState.currentPage.value"
           :total-items="middlePageState.totalItems"
@@ -45,7 +53,11 @@ const singlePageState = createPaginationState(1, 10, 16);
     </Variant>
 
     <Variant title="Last Page">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <PaginationFooter
           :current-page="lastPageState.currentPage.value"
           :total-items="lastPageState.totalItems"
@@ -56,7 +68,11 @@ const singlePageState = createPaginationState(1, 10, 16);
     </Variant>
 
     <Variant title="Custom Items Per Page">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <PaginationFooter
           :current-page="customItemsState.currentPage.value"
           :total-items="customItemsState.totalItems"
@@ -67,7 +83,11 @@ const singlePageState = createPaginationState(1, 10, 16);
     </Variant>
 
     <Variant title="Single Page">
+<<<<<<< HEAD
       <div class="p-4 bg-white dark:bg-slate-900">
+=======
+      <div class="p-4 bg-n-background">
+>>>>>>> upstream/develop
         <PaginationFooter
           :current-page="singlePageState.currentPage.value"
           :total-items="singlePageState.totalItems"

@@ -69,7 +69,11 @@ export default {
     },
   },
   watch: {
+<<<<<<< HEAD
     value() {
+=======
+    modelValue() {
+>>>>>>> upstream/develop
       this.resizeTextarea();
       // 🚨 watch triggers every time the value is changed, we cannot set this to focus then
       // when this runs, it sets the cursor to the end of the body, ignoring the signature
@@ -111,10 +115,22 @@ export default {
     // watcher, this means that if the value is true, the signature
     // is supposed to be added, else we remove it.
     toggleSignatureInEditor(signatureEnabled) {
+<<<<<<< HEAD
       const valueWithSignature = signatureEnabled
         ? appendSignature(this.modelValue, this.cleanedSignature)
         : removeSignature(this.modelValue, this.cleanedSignature);
 
+=======
+      let valueWithSignature = signatureEnabled
+        ? appendSignature(this.modelValue, this.cleanedSignature)
+        : removeSignature(this.modelValue, this.cleanedSignature);
+
+      // Clean up whitespace when removing signature from empty body
+      if (!signatureEnabled && !valueWithSignature.trim()) {
+        valueWithSignature = '';
+      }
+
+>>>>>>> upstream/develop
       this.$emit('update:modelValue', valueWithSignature);
       this.$emit('input', valueWithSignature);
 

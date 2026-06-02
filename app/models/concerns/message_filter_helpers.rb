@@ -14,7 +14,11 @@ module MessageFilterHelpers
   end
 
   def notifiable?
+<<<<<<< HEAD
     incoming? || outgoing?
+=======
+    (incoming? || outgoing?) && !private?
+>>>>>>> upstream/develop
   end
 
   def conversation_transcriptable?

@@ -3,11 +3,19 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 import { useAlert } from 'dashboard/composables';
 import { parseAPIErrorResponse } from 'dashboard/store/utils/api';
+<<<<<<< HEAD
 import FormButton from 'v3/components/Form/Button.vue';
 
 export default {
   components: {
     FormButton,
+=======
+import NextButton from 'dashboard/components-next/button/Button.vue';
+
+export default {
+  components: {
+    NextButton,
+>>>>>>> upstream/develop
   },
   setup() {
     return { v$: useVuelidate() };
@@ -62,10 +70,17 @@ export default {
       }
       let alertMessage = this.$t('PROFILE_SETTINGS.PASSWORD_UPDATE_SUCCESS');
       try {
+<<<<<<< HEAD
         await this.$store.dispatch('updateProfile', {
           password: this.password,
           password_confirmation: this.passwordConfirmation,
           current_password: this.currentPassword,
+=======
+        await this.$store.dispatch('updatePassword', {
+          password: this.password,
+          passwordConfirmation: this.passwordConfirmation,
+          currentPassword: this.currentPassword,
+>>>>>>> upstream/develop
         });
       } catch (error) {
         alertMessage =
@@ -130,6 +145,7 @@ export default {
         @blur="v$.passwordConfirmation.$touch"
       />
 
+<<<<<<< HEAD
       <FormButton
         type="submit"
         color-scheme="primary"
@@ -139,6 +155,15 @@ export default {
       >
         {{ $t('PROFILE_SETTINGS.FORM.PASSWORD_SECTION.BTN_TEXT') }}
       </FormButton>
+=======
+      <div>
+        <NextButton
+          type="submit"
+          :label="$t('PROFILE_SETTINGS.FORM.PASSWORD_SECTION.BTN_TEXT')"
+          :disabled="isButtonDisabled"
+        />
+      </div>
+>>>>>>> upstream/develop
     </div>
   </form>
 </template>

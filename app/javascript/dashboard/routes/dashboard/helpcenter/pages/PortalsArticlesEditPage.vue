@@ -40,11 +40,18 @@ const articleLink = computed(() => {
   );
 });
 
+<<<<<<< HEAD
 const saveArticle = async ({ ...values }, isAsync = false) => {
   const actionToDispatch = isAsync ? 'articles/updateAsync' : 'articles/update';
   isUpdating.value = true;
   try {
     await store.dispatch(actionToDispatch, {
+=======
+const saveArticle = async ({ ...values }) => {
+  isUpdating.value = true;
+  try {
+    await store.dispatch('articles/update', {
+>>>>>>> upstream/develop
       portalSlug,
       articleId: articleSlug,
       ...values,
@@ -62,10 +69,13 @@ const saveArticle = async ({ ...values }, isAsync = false) => {
   }
 };
 
+<<<<<<< HEAD
 const saveArticleAsync = async ({ ...values }) => {
   saveArticle({ ...values }, true);
 };
 
+=======
+>>>>>>> upstream/develop
 const isCategoryArticles = computed(() => {
   return (
     route.name === 'portals_categories_articles_index' ||
@@ -112,7 +122,10 @@ onMounted(fetchArticleDetails);
     :is-updating="isUpdating"
     :is-saved="isSaved"
     @save-article="saveArticle"
+<<<<<<< HEAD
     @save-article-async="saveArticleAsync"
+=======
+>>>>>>> upstream/develop
     @preview-article="previewArticle"
     @go-back="goBackToArticles"
   />

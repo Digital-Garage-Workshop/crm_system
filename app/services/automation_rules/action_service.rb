@@ -47,11 +47,28 @@ class AutomationRules::ActionService < ActionService
     Messages::MessageBuilder.new(nil, @conversation, params).perform
   end
 
+<<<<<<< HEAD
+=======
+  def add_private_note(message)
+    return if conversation_a_tweet?
+
+    params = { content: message[0], private: true, content_attributes: { automation_rule_id: @rule.id } }
+    Messages::MessageBuilder.new(nil, @conversation.reload, params).perform
+  end
+
+>>>>>>> upstream/develop
   def send_email_to_team(params)
     teams = Team.where(id: params[0][:team_ids])
 
     teams.each do |team|
+<<<<<<< HEAD
       TeamNotifications::AutomationNotificationMailer.conversation_creation(@conversation, team, params[0][:message])&.deliver_now
+=======
+      break unless @account.within_email_rate_limit?
+
+      TeamNotifications::AutomationNotificationMailer.conversation_creation(@conversation, team, params[0][:message])&.deliver_now
+      @account.increment_email_sent_count
+>>>>>>> upstream/develop
     end
   end
 end

@@ -26,11 +26,17 @@ export default {
 
 <style lang="scss" scoped>
 .dropdown-menu__item {
+<<<<<<< HEAD
   ::v-deep {
     a,
     .button {
       @apply inline-flex whitespace-nowrap w-full text-left rtl:text-right;
     }
+=======
+  :deep(a),
+  :deep(.button) {
+    @apply inline-flex whitespace-nowrap w-full text-left rtl:text-right;
+>>>>>>> upstream/develop
   }
 }
 

@@ -118,12 +118,20 @@ export default {
   }
 
   .clear-button {
+<<<<<<< HEAD
     transition: all 0.3s var(--ease-in-cubic);
+=======
+    transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+>>>>>>> upstream/develop
     @apply bg-transparent text-n-brand border-none border-0 font-semibold text-base ml-1 py-0 pl-0 pr-2.5 hover:brightness-75 hover:translate-x-1;
   }
 
   .close-unread-button {
+<<<<<<< HEAD
     transition: all 0.3s var(--ease-in-cubic);
+=======
+    transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+>>>>>>> upstream/develop
     @apply bg-n-slate-3 dark:bg-n-slate-12 text-n-slate-12 dark:text-n-slate-1 hover:brightness-95 border-none border-0 font-medium text-xxs rounded-2xl mb-3;
   }
 }

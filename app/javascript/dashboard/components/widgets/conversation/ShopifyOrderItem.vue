@@ -27,7 +27,11 @@ const getStatusClass = status => {
   const classes = {
     paid: 'bg-n-teal-5 text-n-teal-12',
   };
+<<<<<<< HEAD
   return classes[status] || 'bg-slate-50 text-slate-700';
+=======
+  return classes[status] || 'bg-n-solid-3 text-n-slate-12';
+>>>>>>> upstream/develop
 };
 
 const getStatusI18nKey = (type, status = '') => {
@@ -52,11 +56,19 @@ const financialStatus = computed(() => {
 
 const getFulfillmentClass = status => {
   const classes = {
+<<<<<<< HEAD
     fulfilled: 'text-green-600',
     partial: 'text-yellow-600',
     unfulfilled: 'text-red-600',
   };
   return classes[status] || 'text-slate-600';
+=======
+    fulfilled: 'text-n-teal-9',
+    partial: 'text-n-amber-9',
+    unfulfilled: 'text-n-ruby-9',
+  };
+  return classes[status] || 'text-n-slate-11';
+>>>>>>> upstream/develop
 };
 </script>
 

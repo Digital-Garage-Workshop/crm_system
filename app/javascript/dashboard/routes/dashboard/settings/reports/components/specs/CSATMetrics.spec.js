@@ -6,7 +6,10 @@ describe('CsatMetrics.vue', () => {
   let getters;
   let store;
   let wrapper;
+<<<<<<< HEAD
   const filters = { rating: 3 };
+=======
+>>>>>>> upstream/develop
 
   beforeEach(() => {
     getters = {
@@ -18,8 +21,21 @@ describe('CsatMetrics.vue', () => {
         4: 30,
         5: 10,
       }),
+<<<<<<< HEAD
       'csat/getSatisfactionScore': () => 85,
       'csat/getResponseRate': () => 90,
+=======
+      'csat/getRatingCount': () => ({
+        1: 10,
+        2: 20,
+        3: 30,
+        4: 30,
+        5: 10,
+      }),
+      'csat/getSatisfactionScore': () => 85,
+      'csat/getResponseRate': () => 90,
+      'csat/getUIFlags': () => ({ isFetchingMetrics: false }),
+>>>>>>> upstream/develop
     };
 
     store = createStore({
@@ -28,6 +44,7 @@ describe('CsatMetrics.vue', () => {
 
     wrapper = shallowMount(CsatMetrics, {
       global: {
+<<<<<<< HEAD
         plugins: [store], // Ensure the store is injected here
         mocks: {
           $t: msg => msg, // mock translation function
@@ -38,11 +55,23 @@ describe('CsatMetrics.vue', () => {
         },
       },
       props: { filters },
+=======
+        plugins: [store],
+        mocks: {
+          $t: msg => msg,
+        },
+        stubs: {
+          CsatMetricCard: true,
+          CsatRatingDistribution: true,
+        },
+      },
+>>>>>>> upstream/develop
     });
   });
 
   it('computes response count correctly', () => {
     expect(wrapper.vm.responseCount).toBe('100');
+<<<<<<< HEAD
     expect(wrapper.html()).toMatchSnapshot();
   });
 
@@ -63,5 +92,19 @@ describe('CsatMetrics.vue', () => {
   it('shows report card if rating filter is not enabled', async () => {
     await wrapper.setProps({ filters: {} });
     expect(wrapper.html()).toContain('bar-chart-stub');
+=======
+  });
+
+  it('renders metric cards with correct values', () => {
+    const metricCards = wrapper.findAllComponents({ name: 'CsatMetricCard' });
+    expect(metricCards).toHaveLength(3);
+  });
+
+  it('renders rating distribution component', () => {
+    const distribution = wrapper.findComponent({
+      name: 'CsatRatingDistribution',
+    });
+    expect(distribution.exists()).toBe(true);
+>>>>>>> upstream/develop
   });
 });

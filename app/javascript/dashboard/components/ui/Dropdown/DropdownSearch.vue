@@ -1,5 +1,8 @@
 <script setup>
+<<<<<<< HEAD
 import { defineEmits, defineModel } from 'vue';
+=======
+>>>>>>> upstream/develop
 import NextButton from 'dashboard/components-next/button/Button.vue';
 
 defineProps({
@@ -34,8 +37,13 @@ const value = defineModel({
       <input
         v-model="value"
         :placeholder="inputPlaceholder"
+<<<<<<< HEAD
         type="text"
         class="w-full mb-0 text-sm !outline-0 bg-transparent text-n-slate-12 placeholder:text-n-slate-10 reset-base"
+=======
+        type="search"
+        class="w-full mb-0 text-sm !outline-0 !outline-none bg-transparent text-n-slate-12 placeholder:text-n-slate-10 reset-base"
+>>>>>>> upstream/develop
       />
     </div>
     <!-- Clear filter button -->

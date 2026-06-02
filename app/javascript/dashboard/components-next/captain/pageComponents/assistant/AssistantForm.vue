@@ -35,6 +35,10 @@ const initialState = {
   productName: '',
   featureFaq: false,
   featureMemory: false,
+<<<<<<< HEAD
+=======
+  featureCitation: false,
+>>>>>>> upstream/develop
 };
 
 const state = reactive({ ...initialState });
@@ -70,6 +74,10 @@ const prepareAssistantDetails = () => ({
     product_name: state.productName,
     feature_faq: state.featureFaq,
     feature_memory: state.featureMemory,
+<<<<<<< HEAD
+=======
+    feature_citation: state.featureCitation,
+>>>>>>> upstream/develop
   },
 });
 
@@ -93,6 +101,10 @@ const updateStateFromAssistant = assistant => {
     productName: config.product_name,
     featureFaq: config.feature_faq || false,
     featureMemory: config.feature_memory || false,
+<<<<<<< HEAD
+=======
+    featureCitation: config.feature_citation || false,
+>>>>>>> upstream/develop
   });
 };
 
@@ -151,6 +163,16 @@ watch(
           {{ t('CAPTAIN.ASSISTANTS.FORM.FEATURES.ALLOW_MEMORIES') }}
         </span>
       </label>
+<<<<<<< HEAD
+=======
+
+      <label class="flex items-center gap-2">
+        <input v-model="state.featureCitation" type="checkbox" />
+        <span class="text-sm font-medium text-n-slate-12">
+          {{ t('CAPTAIN.ASSISTANTS.FORM.FEATURES.ALLOW_CITATIONS') }}
+        </span>
+      </label>
+>>>>>>> upstream/develop
     </fieldset>
 
     <div class="flex items-center justify-between w-full gap-3">
@@ -159,7 +181,11 @@ watch(
         variant="faded"
         color="slate"
         :label="t('CAPTAIN.FORM.CANCEL')"
+<<<<<<< HEAD
         class="w-full bg-n-alpha-2 n-blue-text hover:bg-n-alpha-3"
+=======
+        class="w-full bg-n-alpha-2 text-n-blue-11 hover:bg-n-alpha-3"
+>>>>>>> upstream/develop
         @click="handleCancel"
       />
       <Button

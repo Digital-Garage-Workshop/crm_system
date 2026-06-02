@@ -25,6 +25,15 @@ class CategoriesAPI extends PortalsAPI {
   delete({ portalSlug, categoryId }) {
     return axios.delete(`${this.url}/${portalSlug}/categories/${categoryId}`);
   }
+<<<<<<< HEAD
+=======
+
+  reorder({ portalSlug, reorderedGroup }) {
+    return axios.post(`${this.url}/${portalSlug}/categories/reorder`, {
+      positions_hash: reorderedGroup,
+    });
+  }
+>>>>>>> upstream/develop
 }
 
 export default new CategoriesAPI();

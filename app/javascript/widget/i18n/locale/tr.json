@@ -12,15 +12,36 @@
       "ERROR_MESSAGE": "Gönderilemedi, tekrar deneyin"
     }
   },
+<<<<<<< HEAD
   "TEAM_AVAILABILITY": {
     "ONLINE": "Çevrimiçi",
     "OFFLINE": "Şu an operatörlerimiz müsait değil"
+=======
+  "THUMBNAIL": {
+    "AUTHOR": {
+      "NOT_AVAILABLE": "Şu anda müsait değil"
+    }
+  },
+  "TEAM_AVAILABILITY": {
+    "ONLINE": "Çevrimiçi",
+    "OFFLINE": "Şu an operatörlerimiz müsait değil",
+    "BACK_AS_SOON_AS_POSSIBLE": "En kısa sürede geri döneceğiz"
+>>>>>>> upstream/develop
   },
   "REPLY_TIME": {
     "IN_A_FEW_MINUTES": "Genellikle birkaç dakika içinde yanıt verir",
     "IN_A_FEW_HOURS": "Genellikle birkaç saat içinde yanıt verir",
     "IN_A_DAY": "Genellikle bir gün içinde yanıtlar",
+<<<<<<< HEAD
     "BACK_IN": "Tekrar çevrim içi olacağız"
+=======
+    "BACK_IN_HOURS": "{n} saat içinde çevrimiçi olacağız  | {n} saat içinde çevrimiçi olacağız",
+    "BACK_IN_MINUTES": "{time} dakika içinde çevrimiçi olacağız",
+    "BACK_AT_TIME": "{time} saatinde çevrimiçi olacağız",
+    "BACK_ON_DAY": "{day} günü çevrimiçi olacağız",
+    "BACK_TOMORROW": "Yarın çevrimiçi olacağız",
+    "BACK_IN_SOME_TIME": "Bir süre sonra çevrimiçi olacağız"
+>>>>>>> upstream/develop
   },
   "DAY_NAMES": {
     "SUNDAY": "Pazar",

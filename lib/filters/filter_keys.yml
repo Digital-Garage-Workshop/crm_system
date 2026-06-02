@@ -4,7 +4,11 @@
 # 3. Automation Filters  (app/services/automation_rules/conditions_filter_service.rb), (app/services/automation_rules/condition_validation_service.rb)
 
 
+<<<<<<< HEAD
 # Format 
+=======
+# Format
+>>>>>>> upstream/develop
 # - Parent Key (conversation, contact, messages)
 #   - Key (attribute_name)
 #     - attribute_type: "standard" : supported ["standard", "additional_attributes (only for conversations and messages)"]
@@ -86,12 +90,15 @@ conversations:
     filter_operators:
       - "equal_to"
       - "not_equal_to"
+<<<<<<< HEAD
   country_code:
     attribute_type: "additional_attributes"
     data_type: "text"
     filter_operators:
       - "equal_to"
       - "not_equal_to"
+=======
+>>>>>>> upstream/develop
   referer:
     attribute_type: "additional_attributes"
     data_type: "link"
@@ -138,7 +145,11 @@ contacts:
       - "does_not_contain"
   phone_number:
     attribute_type: "standard"
+<<<<<<< HEAD
     data_type: "text_case_insensitive"
+=======
+    data_type: "text" # Text is not explicity defined in filters, default filter will be used
+>>>>>>> upstream/develop
     filter_operators:
       - "equal_to"
       - "not_equal_to"
@@ -173,7 +184,11 @@ contacts:
       - "not_equal_to"
       - "contains"
       - "does_not_contain"
+<<<<<<< HEAD
   company:
+=======
+  company_name:
+>>>>>>> upstream/develop
     attribute_type: "additional_attributes"
     data_type: "text_case_insensitive"
     filter_operators:
@@ -220,6 +235,15 @@ messages:
     filter_operators:
       - "equal_to"
       - "not_equal_to"
+<<<<<<< HEAD
+=======
+  private_note:
+    attribute_type: "standard"
+    data_type: "boolean"
+    filter_operators:
+      - "equal_to"
+      - "not_equal_to"
+>>>>>>> upstream/develop
   content:
     attribute_type: "standard"
     data_type: "text"

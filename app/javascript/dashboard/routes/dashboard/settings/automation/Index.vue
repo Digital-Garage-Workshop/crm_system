@@ -7,8 +7,15 @@ import SettingsLayout from '../SettingsLayout.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStoreGetters, useStore } from 'dashboard/composables/store';
+<<<<<<< HEAD
 import AutomationRuleRow from './AutomationRuleRow.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
+=======
+import { picoSearch } from '@scmmishra/pico-search';
+import AutomationRuleRow from './AutomationRuleRow.vue';
+import Button from 'dashboard/components-next/button/Button.vue';
+import { BaseTable } from 'dashboard/components-next/table';
+>>>>>>> upstream/develop
 
 const getters = useStoreGetters();
 const store = useStore();
@@ -16,16 +23,33 @@ const { t } = useI18n();
 const confirmDialog = ref(null);
 
 const loading = ref({});
+<<<<<<< HEAD
 const showAddPopup = ref(false);
 const showEditPopup = ref(false);
 const showDeleteConfirmationPopup = ref(false);
 const selectedAutomation = ref({});
+=======
+const addDialogRef = ref(null);
+const editDialogRef = ref(null);
+const showDeleteConfirmationPopup = ref(false);
+const selectedAutomation = ref({});
+const searchQuery = ref('');
+>>>>>>> upstream/develop
 const toggleModalTitle = ref(t('AUTOMATION.TOGGLE.ACTIVATION_TITLE'));
 const toggleModalDescription = ref(
   t('AUTOMATION.TOGGLE.ACTIVATION_DESCRIPTION')
 );
 
 const records = computed(() => getters['automations/getAutomations'].value);
+<<<<<<< HEAD
+=======
+
+const filteredRecords = computed(() => {
+  const query = searchQuery.value.trim();
+  if (!query) return records.value;
+  return picoSearch(records.value, query, ['name', 'description']);
+});
+>>>>>>> upstream/develop
 const uiFlags = computed(() => getters['automations/getUIFlags'].value);
 const accountId = computed(() => getters.getCurrentAccountId.value);
 
@@ -57,6 +81,7 @@ onMounted(() => {
 });
 
 const openAddPopup = () => {
+<<<<<<< HEAD
   showAddPopup.value = true;
 };
 const hideAddPopup = () => {
@@ -69,6 +94,20 @@ const openEditPopup = response => {
 };
 const hideEditPopup = () => {
   showEditPopup.value = false;
+=======
+  addDialogRef.value?.open();
+};
+const hideAddPopup = () => {
+  addDialogRef.value?.close();
+};
+
+const openEditPopup = response => {
+  selectedAutomation.value = { ...response };
+  editDialogRef.value?.open();
+};
+const hideEditPopup = () => {
+  editDialogRef.value?.close();
+>>>>>>> upstream/develop
 };
 
 const openDeletePopup = response => {
@@ -165,9 +204,15 @@ const toggleAutomation = async ({ id, name, status }) => {
 const tableHeaders = computed(() => {
   return [
     t('AUTOMATION.LIST.TABLE_HEADER.NAME'),
+<<<<<<< HEAD
     t('AUTOMATION.LIST.TABLE_HEADER.DESCRIPTION'),
     t('AUTOMATION.LIST.TABLE_HEADER.ACTIVE'),
     t('AUTOMATION.LIST.TABLE_HEADER.CREATED_ON'),
+=======
+    t('AUTOMATION.LIST.TABLE_HEADER.ACTIVE'),
+    t('AUTOMATION.LIST.TABLE_HEADER.CREATED_ON'),
+    t('AUTOMATION.LIST.TABLE_HEADER.ACTIONS'),
+>>>>>>> upstream/develop
   ];
 });
 </script>
@@ -181,6 +226,7 @@ const tableHeaders = computed(() => {
   >
     <template #header>
       <BaseSettingsHeader
+<<<<<<< HEAD
         :title="$t('AUTOMATION.HEADER')"
         :description="$t('AUTOMATION.DESCRIPTION')"
         :link-text="$t('AUTOMATION.LEARN_MORE')"
@@ -190,12 +236,31 @@ const tableHeaders = computed(() => {
           <Button
             icon="i-lucide-circle-plus"
             :label="$t('AUTOMATION.HEADER_BTN_TXT')"
+=======
+        v-model:search-query="searchQuery"
+        :title="$t('AUTOMATION.HEADER')"
+        :description="$t('AUTOMATION.DESCRIPTION')"
+        :link-text="$t('AUTOMATION.LEARN_MORE')"
+        :search-placeholder="$t('AUTOMATION.SEARCH_PLACEHOLDER')"
+        feature-name="automation"
+      >
+        <template v-if="records?.length" #count>
+          <span class="text-body-main text-n-slate-11">
+            {{ $t('AUTOMATION.COUNT', { n: records.length }) }}
+          </span>
+        </template>
+        <template #actions>
+          <Button
+            :label="$t('AUTOMATION.HEADER_BTN_TXT')"
+            size="sm"
+>>>>>>> upstream/develop
             @click="openAddPopup"
           />
         </template>
       </BaseSettingsHeader>
     </template>
     <template #body>
+<<<<<<< HEAD
       <table class="min-w-full divide-y divide-slate-75 dark:divide-slate-700">
         <thead>
           <th
@@ -209,6 +274,18 @@ const tableHeaders = computed(() => {
         <tbody class="divide-y divide-n-weak text-n-slate-11">
           <AutomationRuleRow
             v-for="automation in records"
+=======
+      <BaseTable
+        :headers="tableHeaders"
+        :items="filteredRecords"
+        :no-data-message="
+          searchQuery ? $t('AUTOMATION.NO_RESULTS') : $t('AUTOMATION.LIST.404')
+        "
+      >
+        <template #row="{ items }">
+          <AutomationRuleRow
+            v-for="automation in items"
+>>>>>>> upstream/develop
             :key="automation.id"
             :automation="automation"
             :loading="loading[automation.id]"
@@ -217,6 +294,7 @@ const tableHeaders = computed(() => {
             @edit="openEditPopup"
             @delete="openDeletePopup"
           />
+<<<<<<< HEAD
         </tbody>
       </table>
     </template>
@@ -232,6 +310,13 @@ const tableHeaders = computed(() => {
         @save-automation="submitAutomation"
       />
     </woot-modal>
+=======
+        </template>
+      </BaseTable>
+    </template>
+
+    <AddAutomationRule ref="addDialogRef" @save-automation="submitAutomation" />
+>>>>>>> upstream/develop
 
     <woot-delete-modal
       v-model:show="showDeleteConfirmationPopup"
@@ -244,6 +329,7 @@ const tableHeaders = computed(() => {
       :reject-text="deleteRejectText"
     />
 
+<<<<<<< HEAD
     <woot-modal
       v-model:show="showEditPopup"
       size="medium"
@@ -256,6 +342,13 @@ const tableHeaders = computed(() => {
         @save-automation="submitAutomation"
       />
     </woot-modal>
+=======
+    <EditAutomationRule
+      ref="editDialogRef"
+      :selected-response="selectedAutomation"
+      @save-automation="submitAutomation"
+    />
+>>>>>>> upstream/develop
     <woot-confirm-modal
       ref="confirmDialog"
       :title="toggleModalTitle"

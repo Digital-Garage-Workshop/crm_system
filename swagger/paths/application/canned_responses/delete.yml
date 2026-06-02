@@ -8,6 +8,7 @@ security:
 parameters:
   - in: path
     name: id
+<<<<<<< HEAD
     type: integer
     required: true
     description: The ID of the canned response to be deleted
@@ -18,3 +19,24 @@ responses:
     description: Canned Response not found
   403:
     description: Access denied
+=======
+    schema:
+      type: integer
+    required: true
+    description: The ID of the canned response to be deleted
+responses:
+  '200':
+    description: Success
+  '404':
+    description: Canned Response not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '403':
+    description: Access denied
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

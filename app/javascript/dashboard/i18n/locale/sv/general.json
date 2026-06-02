@@ -4,6 +4,20 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Sök",
       "EMPTY_STATE": "Inga resultat hittades"
+<<<<<<< HEAD
     }
+=======
+    },
+    "CLOSE": "Stäng",
+    "BETA": "Beta",
+    "BETA_DESCRIPTION": "This feature is in beta and may change as we improve it.",
+    "ACCEPT": "Accept",
+    "DISCARD": "Discard",
+    "PREFERRED": "Preferred"
+  },
+  "CHOICE_TOGGLE": {
+    "YES": "Ja",
+    "NO": "Nej"
+>>>>>>> upstream/develop
   }
 }

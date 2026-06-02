@@ -2,7 +2,11 @@ import fromUnixTime from 'date-fns/fromUnixTime';
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
 import isYesterday from 'date-fns/isYesterday';
+<<<<<<< HEAD
 import { endOfDay, getUnixTime, startOfDay, differenceInDays } from 'date-fns';
+=======
+import { endOfDay, getUnixTime, startOfDay } from 'date-fns';
+>>>>>>> upstream/develop
 
 export const formatUnixDate = (date, dateFormat = 'MMM dd, yyyy') => {
   const unixDate = fromUnixTime(date);
@@ -16,10 +20,13 @@ export const formatDate = ({ date, todayText, yesterdayText }) => {
   return date;
 };
 
+<<<<<<< HEAD
 export const formatDigitToString = val => {
   return val > 9 ? `${val}` : `0${val}`;
 };
 
+=======
+>>>>>>> upstream/develop
 export const isTimeAfter = (h1, m1, h2, m2) => {
   if (h1 < h2) {
     return false;
@@ -45,8 +52,11 @@ export const generateRelativeTime = (value, unit, languageCode) => {
   });
   return rtf.format(value, unit);
 };
+<<<<<<< HEAD
 
 export const getDayDifferenceFromNow = (now, timestampInSeconds) => {
   const date = new Date(timestampInSeconds * 1000);
   return differenceInDays(now, date);
 };
+=======
+>>>>>>> upstream/develop

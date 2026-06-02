@@ -19,7 +19,11 @@ class Api::V1::Widget::ContactsController < Api::V1::Widget::BaseController
       contact = @contact
     end
 
+<<<<<<< HEAD
     @contact_inbox.update(hmac_verified: true) if should_verify_hmac? && valid_hmac?
+=======
+    @contact_inbox.update(hmac_verified: true) if should_verify_hmac?
+>>>>>>> upstream/develop
 
     identify_contact(contact)
   end

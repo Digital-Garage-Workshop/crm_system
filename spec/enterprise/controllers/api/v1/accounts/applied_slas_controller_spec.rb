@@ -152,7 +152,11 @@ RSpec.describe 'Applied SLAs API', type: :request do
         body = JSON.parse(response.body)
         expect(body['payload'].size).to eq(1)
         expect(body['payload'].first).to include('applied_sla')
+<<<<<<< HEAD
         expect(body['payload'].first['conversation']['id']).to eq(conversation2.id)
+=======
+        expect(body['payload'].first['conversation']['id']).to eq(conversation2.display_id)
+>>>>>>> upstream/develop
         expect(body['meta']).to include('count' => 1)
       end
 

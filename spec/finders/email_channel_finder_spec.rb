@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe EmailChannelFinder do
   include ActionMailbox::TestHelper
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
   let!(:channel_email) { create(:channel_email) }
 
   describe '#perform' do
@@ -48,6 +52,78 @@ describe EmailChannelFinder do
         expect(channel).to eq(channel_email)
       end
 
+<<<<<<< HEAD
+=======
+      it 'skip bcc email when account is configured to skip BCC processing' do
+        channel_email.update(email: 'test@example.com')
+        reply_mail.mail['to'] = nil
+        reply_mail.mail['bcc'] = 'test@example.com'
+
+        allow(GlobalConfigService).to receive(:load)
+          .with('SKIP_INCOMING_BCC_PROCESSING', '')
+          .and_return(channel_email.account_id.to_s)
+
+        channel = described_class.new(reply_mail.mail).perform
+        expect(channel).to be_nil
+      end
+
+      it 'skip bcc email when account is in multiple account ids config' do
+        channel_email.update(email: 'test@example.com')
+        reply_mail.mail['to'] = nil
+        reply_mail.mail['bcc'] = 'test@example.com'
+
+        # Include this account along with other account IDs
+        other_account_ids = [123, 456, channel_email.account_id, 789]
+        allow(GlobalConfigService).to receive(:load)
+          .with('SKIP_INCOMING_BCC_PROCESSING', '')
+          .and_return(other_account_ids.join(','))
+
+        channel = described_class.new(reply_mail.mail).perform
+        expect(channel).to be_nil
+      end
+
+      it 'process bcc email when account is not in skip config' do
+        channel_email.update(email: 'test@example.com')
+        reply_mail.mail['to'] = nil
+        reply_mail.mail['bcc'] = 'test@example.com'
+
+        # Configure other account IDs but not this one
+        other_account_ids = [channel_email.account_id + 1, channel_email.account_id + 2, channel_email.account_id + 3]
+        allow(GlobalConfigService).to receive(:load)
+          .with('SKIP_INCOMING_BCC_PROCESSING', '')
+          .and_return(other_account_ids.join(','))
+
+        channel = described_class.new(reply_mail.mail).perform
+        expect(channel).to eq(channel_email)
+      end
+
+      it 'process bcc email when skip config is empty' do
+        channel_email.update(email: 'test@example.com')
+        reply_mail.mail['to'] = nil
+        reply_mail.mail['bcc'] = 'test@example.com'
+
+        allow(GlobalConfigService).to receive(:load)
+          .with('SKIP_INCOMING_BCC_PROCESSING', '')
+          .and_return('')
+
+        channel = described_class.new(reply_mail.mail).perform
+        expect(channel).to eq(channel_email)
+      end
+
+      it 'process bcc email when skip config is nil' do
+        channel_email.update(email: 'test@example.com')
+        reply_mail.mail['to'] = nil
+        reply_mail.mail['bcc'] = 'test@example.com'
+
+        allow(GlobalConfigService).to receive(:load)
+          .with('SKIP_INCOMING_BCC_PROCESSING', '')
+          .and_return(nil)
+
+        channel = described_class.new(reply_mail.mail).perform
+        expect(channel).to eq(channel_email)
+      end
+
+>>>>>>> upstream/develop
       it 'return channel with X-Original-To email' do
         channel_email.update(email: 'test@example.com')
         reply_mail.mail['to'] = nil
@@ -55,6 +131,22 @@ describe EmailChannelFinder do
         channel = described_class.new(reply_mail.mail).perform
         expect(channel).to eq(channel_email)
       end
+<<<<<<< HEAD
+=======
+
+      it 'process X-Original-To email even when account is configured to skip BCC processing' do
+        channel_email.update(email: 'test@example.com')
+        reply_mail.mail['to'] = nil
+        reply_mail.mail['X-Original-To'] = 'test@example.com'
+
+        allow(GlobalConfigService).to receive(:load)
+          .with('SKIP_INCOMING_BCC_PROCESSING', '')
+          .and_return(channel_email.account_id.to_s)
+
+        channel = described_class.new(reply_mail.mail).perform
+        expect(channel).to eq(channel_email)
+      end
+>>>>>>> upstream/develop
     end
   end
 end

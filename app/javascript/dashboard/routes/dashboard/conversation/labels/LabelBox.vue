@@ -102,6 +102,7 @@ export default {
           @remove="removeLabelFromConversation"
         />
 
+<<<<<<< HEAD
         <div class="dropdown-wrap">
           <div
             :class="{ 'dropdown-pane--open': showSearchDropdownLabel }"
@@ -116,6 +117,23 @@ export default {
               @remove="removeLabelFromConversation"
             />
           </div>
+=======
+        <div
+          :class="{
+            'block visible': showSearchDropdownLabel,
+            'hidden invisible': !showSearchDropdownLabel,
+          }"
+          class="border rounded-lg bg-n-alpha-3 top-6 backdrop-blur-[100px] absolute w-full shadow-lg border-n-strong dark:border-n-strong p-2 box-border z-[9999]"
+        >
+          <LabelDropdown
+            v-if="showSearchDropdownLabel"
+            :account-labels="accountLabels"
+            :selected-labels="savedLabels"
+            :allow-creation="isAdmin"
+            @add="addLabelToConversation"
+            @remove="removeLabelFromConversation"
+          />
+>>>>>>> upstream/develop
         </div>
       </div>
     </div>
@@ -131,6 +149,7 @@ export default {
   width: 100%;
 
   .label-wrap {
+<<<<<<< HEAD
     line-height: var(--space-medium);
     position: relative;
 
@@ -155,4 +174,10 @@ export default {
   font-size: var(--font-size-mini);
   font-weight: var(--font-weight-medium);
 }
+=======
+    line-height: 1.5rem;
+    position: relative;
+  }
+}
+>>>>>>> upstream/develop
 </style>

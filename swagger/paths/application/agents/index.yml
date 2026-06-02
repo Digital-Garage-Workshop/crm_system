@@ -8,6 +8,7 @@ security:
 responses:
   200:
     description: Success
+<<<<<<< HEAD
     schema:
         type: array
         description: 'Array of all active agents'
@@ -15,3 +16,18 @@ responses:
           $ref: '#/definitions/agent'
   403:
     description: Access denied
+=======
+    content:
+      application/json:
+        schema:
+          type: array
+          description: 'Array of all active agents'
+          items:
+            $ref: '#/components/schemas/agent'
+  403:
+    description: Access denied
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

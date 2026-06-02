@@ -12,6 +12,14 @@ export default {
     SNOOZED: 'snoozed',
     ALL: 'all',
   },
+<<<<<<< HEAD
+=======
+  CONVERSATION_TYPE: {
+    MENTION: 'mention',
+    PARTICIPATING: 'participating',
+    UNATTENDED: 'unattended',
+  },
+>>>>>>> upstream/develop
   SORT_BY_TYPE: {
     LAST_ACTIVITY_AT_ASC: 'last_activity_at_asc',
     LAST_ACTIVITY_AT_DESC: 'last_activity_at_desc',
@@ -21,6 +29,10 @@ export default {
     PRIORITY_DESC: 'priority_desc',
     WAITING_SINCE_ASC: 'waiting_since_asc',
     WAITING_SINCE_DESC: 'waiting_since_desc',
+<<<<<<< HEAD
+=======
+    PRIORITY_DESC_CREATED_AT_ASC: 'priority_desc_created_at_asc',
+>>>>>>> upstream/develop
   },
   ARTICLE_STATUS_TYPES: {
     DRAFT: 0,
@@ -34,8 +46,17 @@ export default {
   DOCS_URL: 'https://www.chatwoot.com/docs/product/',
   HELP_CENTER_DOCS_URL:
     'https://www.chatwoot.com/docs/product/others/help-center',
+<<<<<<< HEAD
   TESTIMONIAL_URL: 'https://testimonials.cdn.chatwoot.com/content.json',
   SMALL_SCREEN_BREAKPOINT: 1200,
+=======
+  TESTIMONIAL_URL:
+    'https://testimonials.cdn.chatwoot.com/testimonial-content.json',
+  WHATSAPP_EMBEDDED_SIGNUP_DOCS_URL:
+    'https://developers.facebook.com/docs/whatsapp/embedded-signup/custom-flows/onboarding-business-app-users#limitations',
+  SMALL_SCREEN_BREAKPOINT: 768,
+  LARGE_SCREEN_BREAKPOINT: 1024,
+>>>>>>> upstream/develop
   AVAILABILITY_STATUS_KEYS: ['online', 'busy', 'offline'],
   SNOOZE_OPTIONS: {
     UNTIL_NEXT_REPLY: 'until_next_reply',

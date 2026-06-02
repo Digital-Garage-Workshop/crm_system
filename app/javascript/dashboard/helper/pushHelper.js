@@ -68,13 +68,24 @@ export const registerSubscription = (onSuccess = () => {}) => {
     .then(() => {
       onSuccess();
     })
+<<<<<<< HEAD
     .catch(() => {
+=======
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.error('Push subscription registration failed:', error);
+>>>>>>> upstream/develop
       useAlert('This browser does not support desktop notification');
     });
 };
 
 export const requestPushPermissions = ({ onSuccess }) => {
   if (!('Notification' in window)) {
+<<<<<<< HEAD
+=======
+    // eslint-disable-next-line no-console
+    console.warn('Notification is not supported');
+>>>>>>> upstream/develop
     useAlert('This browser does not support desktop notification');
   } else if (Notification.permission === 'granted') {
     registerSubscription(onSuccess);

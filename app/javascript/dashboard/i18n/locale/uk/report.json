@@ -3,7 +3,11 @@
     "HEADER": "Бесіди",
     "LOADING_CHART": "Завантаження даних діаграми...",
     "NO_ENOUGH_DATA": "Ми не отримали достатньо даних для генерації звіту. Будь ласка, спробуйте ще раз пізніше.",
+<<<<<<< HEAD
     "DOWNLOAD_AGENT_REPORTS": "Завантажити звіти агентів",
+=======
+    "DOWNLOAD_CONVERSATION_REPORTS": "Download conversation reports",
+>>>>>>> upstream/develop
     "DATA_FETCHING_FAILED": "Не вдалося отримати дані. Будь ласка, повторіть спробу пізніше.",
     "SUMMARY_FETCHING_FAILED": "Не вдалося отримати дані. Будь ласка, повторіть спробу пізніше.",
     "METRICS": {
@@ -51,7 +55,14 @@
     },
     "DATE_RANGE_OPTIONS": {
       "LAST_7_DAYS": "Останні 7 днів",
+<<<<<<< HEAD
       "LAST_30_DAYS": "Останні 30 днів",
+=======
+      "LAST_14_DAYS": "Останні 14 днів",
+      "LAST_30_DAYS": "Останні 30 днів",
+      "THIS_MONTH": "This month",
+      "LAST_MONTH": "Last month",
+>>>>>>> upstream/develop
       "LAST_3_MONTHS": "Останні 3 місяці",
       "LAST_6_MONTHS": "Останні 6 місяців",
       "LAST_YEAR": "Минулий рік",
@@ -125,11 +136,23 @@
   },
   "AGENT_REPORTS": {
     "HEADER": "Огляд Агентів",
+<<<<<<< HEAD
     "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent’s name to learn more.",
+=======
+    "DESCRIPTION": "Easily track agent performance with key metrics such as conversations, response times, resolution times, and resolved cases. Click an agent's name to learn more.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Завантаження даних діаграми...",
     "NO_ENOUGH_DATA": "Ми не отримали достатньо даних для генерації звіту. Будь ласка, спробуйте ще раз пізніше.",
     "DOWNLOAD_AGENT_REPORTS": "Завантажити звіти агентів",
     "FILTER_DROPDOWN_LABEL": "Виберіть агента",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Пошук агентів"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Бесіди",
@@ -193,10 +216,22 @@
   },
   "LABEL_REPORTS": {
     "HEADER": "Огляд міток",
+<<<<<<< HEAD
+=======
+    "DESCRIPTION": "Track label performance with key metrics including conversations, response times, resolution times, and resolved cases. Click a label name for detailed insights.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Завантаження даних діаграми...",
     "NO_ENOUGH_DATA": "Ми не отримали достатньо даних для генерації звіту. Будь ласка, спробуйте ще раз пізніше.",
     "DOWNLOAD_LABEL_REPORTS": "Завантажити звіти по міткам",
     "FILTER_DROPDOWN_LABEL": "Виберіть Мітку",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "LABELS": "Пошук міток"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Бесіди",
@@ -265,6 +300,16 @@
     "NO_ENOUGH_DATA": "Ми не отримали достатньо даних для генерації звіту. Будь ласка, спробуйте ще раз пізніше.",
     "DOWNLOAD_INBOX_REPORTS": "Завантажити звіти вхідних повідомлень",
     "FILTER_DROPDOWN_LABEL": "Вибрати \"Вхідний\" канал",
+<<<<<<< HEAD
+=======
+    "ALL_INBOXES": "All Inboxes",
+    "SEARCH_INBOX": "Search Inbox",
+    "FILTERS": {
+      "INPUT_PLACEHOLDER": {
+        "INBOXES": "Search inboxes"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Бесіди",
@@ -328,11 +373,26 @@
   },
   "TEAM_REPORTS": {
     "HEADER": "Огляд команди",
+<<<<<<< HEAD
     "DESCRIPTION": "Get a snapshot of your team’s performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+=======
+    "DESCRIPTION": "Get a snapshot of your team's performance with essential metrics, including conversations, response times, resolution times, and resolved cases. Click a team name for more details.",
+>>>>>>> upstream/develop
     "LOADING_CHART": "Завантаження даних діаграми...",
     "NO_ENOUGH_DATA": "Ми не отримали достатньо даних для генерації звіту. Будь ласка, спробуйте ще раз пізніше.",
     "DOWNLOAD_TEAM_REPORTS": "Завантажити звіти команд",
     "FILTER_DROPDOWN_LABEL": "Оберіть команду",
+<<<<<<< HEAD
+=======
+    "FILTERS": {
+      "ADD_FILTER": "Додати фільтр",
+      "CLEAR_ALL": "Очистити все",
+      "NO_FILTER": "Немає доступних фільтрів",
+      "INPUT_PLACEHOLDER": {
+        "TEAMS": "Пошук команд"
+      }
+    },
+>>>>>>> upstream/develop
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Бесіди",
@@ -396,22 +456,65 @@
   },
   "CSAT_REPORTS": {
     "HEADER": "Звіти CSAT",
+<<<<<<< HEAD
     "NO_RECORDS": "Немає доступних відповідей для опитувань CSAT.",
     "DOWNLOAD": "Завантажити CSAT звіти",
     "DOWNLOAD_FAILED": "Не вдалося завантажити звіти CSAT",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Виберіть Агентів"
+=======
+    "NO_RECORDS": "No responses yet",
+    "NO_RECORDS_DESCRIPTION": "CSAT survey responses will appear here once customers start providing feedback.",
+    "DOWNLOAD": "Завантажити CSAT звіти",
+    "DOWNLOAD_FAILED": "Не вдалося завантажити звіти CSAT",
+    "FILTERS": {
+      "ADD_FILTER": "Додати фільтр",
+      "CLEAR_ALL": "Очистити все",
+      "NO_FILTER": "Немає доступних фільтрів",
+      "INPUT_PLACEHOLDER": {
+        "AGENTS": "Пошук агентів",
+        "INBOXES": "Search inboxes",
+        "TEAMS": "Пошук команд",
+        "RATINGS": "Search ratings"
+      },
+      "AGENTS": {
+        "LABEL": "Агент"
+      },
+      "INBOXES": {
+        "LABEL": "Вхідні"
+      },
+      "TEAMS": {
+        "LABEL": "Команда"
+      },
+      "RATINGS": {
+        "LABEL": "Оцінка"
+>>>>>>> upstream/develop
       }
     },
     "TABLE": {
       "HEADER": {
         "CONTACT_NAME": "Контакт",
+<<<<<<< HEAD
         "AGENT_NAME": "Призначений агент",
         "RATING": "Оцінка",
         "FEEDBACK_TEXT": "Відгук"
       }
     },
+=======
+        "AGENT_NAME": "Агент",
+        "RATING": "Оцінка",
+        "FEEDBACK_TEXT": "Відгук",
+        "CONVERSATION": "Діалог",
+        "CUSTOMER": "Customer",
+        "RESPONSE": "Response",
+        "HANDLED_BY": "Handled by"
+      },
+      "UNKNOWN_CUSTOMER": "Unknown customer"
+    },
+    "NO_AGENT": "No assigned agent",
+    "NO_FEEDBACK": "No feedback provided",
+>>>>>>> upstream/develop
     "METRIC": {
       "TOTAL_RESPONSES": {
         "LABEL": "Всього відповідей",
@@ -424,6 +527,28 @@
       "RESPONSE_RATE": {
         "LABEL": "Показник відповідей",
         "TOOLTIP": "Загальна кількість відповідей / Загальна кількість повідомлень опитування CSAT відправлено * 100"
+<<<<<<< HEAD
+=======
+      },
+      "RATING_DISTRIBUTION": "Rating distribution"
+    },
+    "REVIEW_NOTES": {
+      "TITLE": "Review notes",
+      "PLACEHOLDER": "Add review notes about this rating...",
+      "SAVE": "Зберегти",
+      "CANCEL": "Скасувати",
+      "SAVING": "Збереження...",
+      "SAVED": "Notes saved successfully",
+      "SAVE_ERROR": "Failed to save notes",
+      "UPDATED_BY": "Updated by {name} {time}",
+      "UPDATED_BY_LABEL": "Updated by",
+      "PAYWALL": {
+        "TITLE": "Upgrade to add review notes",
+        "AVAILABLE_ON": "The review notes feature is only available in the Business and Enterprise plans.",
+        "UPGRADE_PROMPT": "Add internal context to every CSAT response with review notes. Capture what really happened, spot patterns faster, and make better decisions from your feedback.",
+        "UPGRADE_NOW": "Оновити зараз",
+        "CANCEL_ANYTIME": "Ви можете змінити або скасувати план у будь-який час"
+>>>>>>> upstream/develop
       }
     }
   },
@@ -466,6 +591,16 @@
       "CONVERSATIONS": "{count} бесід",
       "DOWNLOAD_REPORT": "Download report"
     },
+<<<<<<< HEAD
+=======
+    "RESOLUTION_HEATMAP": {
+      "HEADER": "Resolutions",
+      "NO_CONVERSATIONS": "Немає бесід",
+      "CONVERSATION": "{count} бесід",
+      "CONVERSATIONS": "{count} бесід",
+      "DOWNLOAD_REPORT": "Download report"
+    },
+>>>>>>> upstream/develop
     "AGENT_CONVERSATIONS": {
       "HEADER": "Розмови агентів",
       "LOADING_MESSAGE": "Завантаження метрик агента...",
@@ -559,6 +694,10 @@
     "INBOX": "Вхідні",
     "AGENT": "Агент",
     "TEAM": "Команда",
+<<<<<<< HEAD
+=======
+    "LABEL": "Мітка",
+>>>>>>> upstream/develop
     "AVG_RESOLUTION_TIME": "Avg. Resolution Time",
     "AVG_FIRST_RESPONSE_TIME": "Avg. First Response Time",
     "AVG_REPLY_TIME": "Avg. Customer Waiting Time",

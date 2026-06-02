@@ -1,6 +1,9 @@
 <script setup>
 import EmojiOrIcon from 'shared/components/EmojiOrIcon.vue';
+<<<<<<< HEAD
 import { defineEmits } from 'vue';
+=======
+>>>>>>> upstream/develop
 
 defineProps({
   title: {
@@ -47,7 +50,11 @@ const onToggle = () => {
       </div>
       <div class="flex flex-row">
         <slot name="button" />
+<<<<<<< HEAD
         <div class="flex justify-end w-3 text-n-blue-text cursor-pointer">
+=======
+        <div class="flex justify-end w-3 text-n-blue-11 cursor-pointer">
+>>>>>>> upstream/develop
           <fluent-icon v-if="isOpen" size="24" icon="subtract" type="solid" />
           <fluent-icon v-else size="24" icon="add" type="solid" />
         </div>
@@ -55,7 +62,11 @@ const onToggle = () => {
     </button>
     <div
       v-if="isOpen"
+<<<<<<< HEAD
       class="bg-n-background outline outline-1 outline-n-weak -mt-[-1px] border-t-0 rounded-br-lg rounded-bl-lg"
+=======
+      class="outline outline-1 outline-n-weak -mt-[-1px] border-t-0 rounded-br-lg rounded-bl-lg"
+>>>>>>> upstream/develop
       :class="compact ? 'p-0' : 'px-2 py-4'"
     >
       <slot />

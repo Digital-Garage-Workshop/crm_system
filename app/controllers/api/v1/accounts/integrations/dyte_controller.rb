@@ -22,7 +22,11 @@ class Api::V1::Accounts::Integrations::DyteController < Api::V1::Accounts::BaseC
   private
 
   def authorize_request
+<<<<<<< HEAD
     authorize @conversation.inbox, :show?
+=======
+    authorize @conversation, :show?
+>>>>>>> upstream/develop
   end
 
   def render_response(response)

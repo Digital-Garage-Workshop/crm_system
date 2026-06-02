@@ -72,6 +72,16 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     widgetStyle: getWidgetStyle(chatwootSettings.widgetStyle) || 'standard',
     resetTriggered: false,
     darkMode: getDarkMode(chatwootSettings.darkMode),
+<<<<<<< HEAD
+=======
+    welcomeTitle: chatwootSettings.welcomeTitle || '',
+    welcomeDescription: chatwootSettings.welcomeDescription || '',
+    availableMessage: chatwootSettings.availableMessage || '',
+    unavailableMessage: chatwootSettings.unavailableMessage || '',
+    enableFileUpload: chatwootSettings.enableFileUpload,
+    enableEmojiPicker: chatwootSettings.enableEmojiPicker ?? true,
+    enableEndConversation: chatwootSettings.enableEndConversation ?? true,
+>>>>>>> upstream/develop
 
     toggle(state) {
       IFrameHelper.events.toggleBubble(state);

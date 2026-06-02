@@ -17,6 +17,7 @@ module Api::V1::InboxesHelper
   def validate_imap(channel_data)
     return unless channel_data.key?('imap_enabled') && channel_data[:imap_enabled]
 
+<<<<<<< HEAD
     Mail.defaults do
       retriever_method :imap, { address: channel_data[:imap_address],
                                 port: channel_data[:imap_port],
@@ -26,6 +27,14 @@ module Api::V1::InboxesHelper
     end
 
     check_imap_connection(channel_data)
+=======
+    # Validate the user-selected auth mechanism before opening the connection.
+    authentication = Imap::Authentication.validate_user_configurable!(channel_data[:imap_authentication])
+
+    # Use the same auth adapter as the fetch service so LOGIN uses the IMAP LOGIN command,
+    # not SASL AUTH=LOGIN.
+    check_imap_connection(channel_data, authentication)
+>>>>>>> upstream/develop
   end
 
   def validate_smtp(channel_data)
@@ -37,8 +46,13 @@ module Api::V1::InboxesHelper
     check_smtp_connection(channel_data, smtp)
   end
 
+<<<<<<< HEAD
   def check_imap_connection(channel_data)
     Mail.connection {} # rubocop:disable:block
+=======
+  def check_imap_connection(channel_data, authentication)
+    imap = open_imap_connection(channel_data, authentication)
+>>>>>>> upstream/develop
   rescue SocketError => e
     raise StandardError, I18n.t('errors.inboxes.imap.socket_error')
   rescue Net::IMAP::NoResponseError => e
@@ -53,6 +67,7 @@ module Api::V1::InboxesHelper
   rescue StandardError => e
     raise StandardError, e.message
   ensure
+<<<<<<< HEAD
     Rails.logger.error "[Api::V1::InboxesHelper] check_imap_connection failed with #{e.message}" if e.present?
   end
 
@@ -60,10 +75,42 @@ module Api::V1::InboxesHelper
     smtp.start(channel_data[:smtp_domain], channel_data[:smtp_login], channel_data[:smtp_password],
                channel_data[:smtp_authentication]&.to_sym || :login)
     smtp.finish
+=======
+    imap.disconnect if imap.present? && !imap.disconnected?
+    Rails.logger.error "[Api::V1::InboxesHelper] check_imap_connection failed with #{e.message}" if e.present?
+  end
+
+  def open_imap_connection(channel_data, authentication)
+    imap = build_imap_connection(channel_data)
+    Imap::Authentication.authenticate!(imap, authentication, channel_data[:imap_login], channel_data[:imap_password])
+    imap
+  end
+
+  def build_imap_connection(channel_data)
+    Net::IMAP.new(channel_data[:imap_address], port: channel_data[:imap_port], ssl: channel_data[:imap_enable_ssl])
+  end
+
+  def check_smtp_connection(channel_data, smtp)
+    smtp.open_timeout = 10
+    smtp.start(channel_data[:smtp_domain], channel_data[:smtp_login], channel_data[:smtp_password],
+               channel_data[:smtp_authentication]&.to_sym || :login)
+    smtp.finish
+  rescue Net::SMTPAuthenticationError
+    raise StandardError, I18n.t('errors.inboxes.smtp.authentication_error')
+  rescue SocketError, Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::ENETUNREACH, Net::OpenTimeout
+    raise StandardError, I18n.t('errors.inboxes.smtp.connection_error')
+  rescue OpenSSL::SSL::SSLError
+    raise StandardError, I18n.t('errors.inboxes.smtp.ssl_error')
+  rescue Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError
+    raise StandardError, I18n.t('errors.inboxes.smtp.smtp_error')
+  rescue StandardError => e
+    raise StandardError, e.message
+>>>>>>> upstream/develop
   end
 
   def set_smtp_encryption(channel_data, smtp)
     if channel_data[:smtp_enable_ssl_tls]
+<<<<<<< HEAD
       set_enable_tls(channel_data, smtp)
     elsif channel_data[:smtp_enable_starttls_auto]
       set_enable_starttls_auto(channel_data, smtp)
@@ -90,6 +137,19 @@ module Api::V1::InboxesHelper
     else
       smtp.enable_tls
     end
+=======
+      set_smtp_ssl_method(smtp, :enable_tls, channel_data[:smtp_openssl_verify_mode])
+    elsif channel_data[:smtp_enable_starttls_auto]
+      set_smtp_ssl_method(smtp, :enable_starttls_auto, channel_data[:smtp_openssl_verify_mode])
+    end
+  end
+
+  def set_smtp_ssl_method(smtp, method, openssl_verify_mode)
+    return unless smtp.respond_to?(method)
+
+    context = enable_openssl_mode(openssl_verify_mode) if openssl_verify_mode
+    context ? smtp.send(method, context) : smtp.send(method)
+>>>>>>> upstream/develop
   end
 
   def enable_openssl_mode(smtp_openssl_verify_mode)

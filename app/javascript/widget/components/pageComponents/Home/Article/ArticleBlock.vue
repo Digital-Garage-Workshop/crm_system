@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { defineProps, defineEmits, computed } from 'vue';
+=======
+import { computed } from 'vue';
+>>>>>>> upstream/develop
 import ArticleListItem from './ArticleListItem.vue';
 import { useMapGetter } from 'dashboard/composables/store';
 

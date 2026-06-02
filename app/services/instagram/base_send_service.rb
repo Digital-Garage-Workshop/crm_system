@@ -30,7 +30,11 @@ class Instagram::BaseSendService < Base::SendOnChannelService
     params = {
       recipient: { id: contact.get_source_id(inbox.id) },
       message: {
+<<<<<<< HEAD
         text: message.content
+=======
+        text: message.outgoing_content
+>>>>>>> upstream/develop
       }
     }
 

@@ -10,6 +10,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  translationKey: {
+    type: String,
+    required: true,
+  },
+>>>>>>> upstream/develop
   entity: {
     type: Object,
     required: true,
@@ -25,7 +32,13 @@ const emit = defineEmits(['deleteSuccess']);
 const { t } = useI18n();
 const store = useStore();
 const deleteDialogRef = ref(null);
+<<<<<<< HEAD
 const i18nKey = computed(() => props.type.toUpperCase());
+=======
+const i18nKey = computed(() => {
+  return props.translationKey || props.type.toUpperCase();
+});
+>>>>>>> upstream/develop
 
 const deleteEntity = async payload => {
   if (!payload) return;

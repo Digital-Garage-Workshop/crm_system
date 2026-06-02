@@ -82,6 +82,12 @@ export const getters = {
       ),
     };
   },
+<<<<<<< HEAD
+=======
+  getRatingCount(_state) {
+    return _state.metrics.ratingsCount;
+  },
+>>>>>>> upstream/develop
 };
 
 export const actions = {
@@ -115,6 +121,16 @@ export const actions = {
       });
     });
   },
+<<<<<<< HEAD
+=======
+  update: async ({ commit }, { id, reviewNotes }) => {
+    const response = await CSATReports.update(id, {
+      csat_review_notes: reviewNotes,
+    });
+    commit(types.UPDATE_CSAT_RESPONSE, response.data);
+    return response.data;
+  },
+>>>>>>> upstream/develop
 };
 
 export const mutations = {
@@ -144,6 +160,10 @@ export const mutations = {
     };
     _state.metrics.totalSentMessagesCount = totalSentMessagesCount || 0;
   },
+<<<<<<< HEAD
+=======
+  [types.UPDATE_CSAT_RESPONSE]: MutationHelpers.update,
+>>>>>>> upstream/develop
 };
 
 export default {

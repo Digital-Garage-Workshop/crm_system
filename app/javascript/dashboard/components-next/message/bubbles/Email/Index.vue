@@ -1,12 +1,22 @@
 <script setup>
 import { computed, useTemplateRef, ref, onMounted } from 'vue';
 import { Letter } from 'vue-letter';
+<<<<<<< HEAD
 import { allowedCssProperties } from 'lettersanitizer';
 
 import Icon from 'next/icon/Icon.vue';
 import { EmailQuoteExtractor } from './removeReply.js';
 import BaseBubble from 'next/message/bubbles/Base.vue';
 import FormattedContent from 'next/message/bubbles/Text/FormattedContent.vue';
+=======
+import { sanitizeTextForRender } from '@chatwoot/utils';
+import { allowedCssProperties } from 'lettersanitizer';
+
+import Icon from 'next/icon/Icon.vue';
+import { EmailQuoteExtractor } from 'dashboard/helper/emailQuoteExtractor.js';
+import FormattedContent from 'next/message/bubbles/Text/FormattedContent.vue';
+import BaseBubble from 'next/message/bubbles/Base.vue';
+>>>>>>> upstream/develop
 import AttachmentChips from 'next/message/chips/AttachmentChips.vue';
 import EmailMeta from './EmailMeta.vue';
 import TranslationToggle from 'dashboard/components-next/message/TranslationToggle.vue';
@@ -37,15 +47,33 @@ const { hasTranslations, translationContent } =
 const originalEmailText = computed(() => {
   const text =
     contentAttributes?.value?.email?.textContent?.full ?? content.value;
+<<<<<<< HEAD
   return text?.replace(/\n/g, '<br>');
+=======
+  return sanitizeTextForRender(text);
+>>>>>>> upstream/develop
 });
 
 const originalEmailHtml = computed(
   () =>
+<<<<<<< HEAD
     contentAttributes?.value?.email?.htmlContent?.full ??
     originalEmailText.value
 );
 
+=======
+    contentAttributes?.value?.email?.htmlContent?.full ||
+    originalEmailText.value
+);
+
+const hasEmailContent = computed(() => {
+  return (
+    contentAttributes?.value?.email?.textContent?.full ||
+    contentAttributes?.value?.email?.htmlContent?.full
+  );
+});
+
+>>>>>>> upstream/develop
 const messageContent = computed(() => {
   // If translations exist and we're showing translations (not original)
   if (hasTranslations.value && !renderOriginal.value) {
@@ -119,7 +147,17 @@ const handleSeeOriginal = () => {
       >
         <div
           v-if="isExpandable && !isExpanded"
+<<<<<<< HEAD
           class="absolute left-0 right-0 bottom-0 h-40 px-8 flex items-end bg-gradient-to-t from-n-slate-4 via-n-slate-4 via-20% to-transparent"
+=======
+          class="absolute left-0 right-0 bottom-0 h-40 px-8 flex items-end"
+          :class="{
+            'bg-gradient-to-t from-n-slate-4 via-n-slate-4 via-20% to-transparent':
+              isIncoming,
+            'bg-gradient-to-t from-n-solid-blue via-n-solid-blue via-20% to-transparent':
+              isOutgoing,
+          }"
+>>>>>>> upstream/develop
         >
           <button
             class="text-n-slate-12 py-2 px-8 mx-auto text-center flex items-center gap-2"
@@ -130,7 +168,11 @@ const handleSeeOriginal = () => {
           </button>
         </div>
         <FormattedContent
+<<<<<<< HEAD
           v-if="isOutgoing && content"
+=======
+          v-if="isOutgoing && content && !hasEmailContent"
+>>>>>>> upstream/develop
           class="text-n-slate-12"
           :content="messageContent"
         />
@@ -212,4 +254,13 @@ const handleSeeOriginal = () => {
     }
   }
 }
+<<<<<<< HEAD
+=======
+
+// Email clients (Gmail, Outlook) hardcode dir="ltr" on wrapper elements.
+// In RTL apps this forces email content LTR regardless of actual text.
+[dir='rtl'] .letter-render [dir='ltr'] {
+  direction: inherit;
+}
+>>>>>>> upstream/develop
 </style>

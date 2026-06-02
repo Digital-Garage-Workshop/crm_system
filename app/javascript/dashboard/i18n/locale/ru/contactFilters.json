@@ -48,7 +48,12 @@
       "CREATED_AT": "Дата создания",
       "LAST_ACTIVITY": "Последние действия",
       "REFERER_LINK": "Реферальная ссылка",
+<<<<<<< HEAD
       "BLOCKED": "Заблокирован"
+=======
+      "BLOCKED": "Заблокирован",
+      "LABELS": "Категории"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Стандартные фильтры",

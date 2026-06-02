@@ -30,6 +30,13 @@ const props = defineProps({
     type: String,
     default: '',
   },
+<<<<<<< HEAD
+=======
+  provider: {
+    type: String,
+    default: '',
+  },
+>>>>>>> upstream/develop
   customRoleId: {
     type: Number,
     default: null,
@@ -203,6 +210,10 @@ const resetPassword = async () => {
       <div class="flex flex-row justify-start w-full gap-2 px-0 py-2">
         <div class="w-[50%] ltr:text-left rtl:text-right">
           <Button
+<<<<<<< HEAD
+=======
+            v-if="provider !== 'saml'"
+>>>>>>> upstream/develop
             ghost
             type="button"
             icon="i-lucide-lock-keyhole"

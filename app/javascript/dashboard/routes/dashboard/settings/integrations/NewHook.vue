@@ -4,6 +4,10 @@ import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
 import { useIntegrationHook } from 'dashboard/composables/useIntegrationHook';
 import { FormKit } from '@formkit/vue';
+<<<<<<< HEAD
+=======
+import { useBranding } from 'shared/composables/useBranding';
+>>>>>>> upstream/develop
 
 import NextButton from 'dashboard/components-next/button/Button.vue';
 
@@ -23,8 +27,14 @@ export default {
     const { integration, isHookTypeInbox } = useIntegrationHook(
       props.integrationId
     );
+<<<<<<< HEAD
 
     return { integration, isHookTypeInbox };
+=======
+    const { replaceInstallationName } = useBranding();
+
+    return { integration, isHookTypeInbox, replaceInstallationName };
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -61,6 +71,16 @@ export default {
     isIntegrationDialogflow() {
       return this.integration.id === 'dialogflow';
     },
+<<<<<<< HEAD
+=======
+    submitButtonLabel() {
+      if (this.integration.id === 'openai' && this.uiFlags.isCreatingHook) {
+        return this.$t('INTEGRATION_APPS.ADD.FORM.VALIDATING_OPENAI');
+      }
+
+      return this.$t('INTEGRATION_APPS.ADD.FORM.SUBMIT');
+    },
+>>>>>>> upstream/develop
   },
   methods: {
     onClose() {
@@ -117,7 +137,11 @@ export default {
   <div class="flex flex-col h-auto overflow-auto integration-hooks">
     <woot-modal-header
       :header-title="integration.name"
+<<<<<<< HEAD
       :header-content="integration.short_description || integration.description"
+=======
+      :header-content="replaceInstallationName(integration.short_description)"
+>>>>>>> upstream/develop
     />
     <FormKit
       v-model="values"
@@ -152,7 +176,11 @@ export default {
         />
         <NextButton
           type="submit"
+<<<<<<< HEAD
           :label="$t('INTEGRATION_APPS.ADD.FORM.SUBMIT')"
+=======
+          :label="submitButtonLabel"
+>>>>>>> upstream/develop
           :is-loading="uiFlags.isCreatingHook"
         />
       </div>
@@ -179,7 +207,11 @@ export default {
 }
 
 [data-invalid] .formkit-message {
+<<<<<<< HEAD
   @apply text-red-500 block text-xs font-normal my-1 w-full;
+=======
+  @apply text-n-ruby-9 block text-xs font-normal my-1 w-full;
+>>>>>>> upstream/develop
 }
 
 .formkit-outer[data-type='checkbox'] .formkit-wrapper {

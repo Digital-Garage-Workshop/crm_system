@@ -69,6 +69,12 @@
     },
     "ACCOUNT": {
       "EDIT": "{agentName} atjaunināja konta konfigurāciju (#{id})"
+<<<<<<< HEAD
+=======
+    },
+    "CONVERSATION": {
+      "DELETE": "{agentName} deleted conversation #{id}"
+>>>>>>> upstream/develop
     }
   }
 }

@@ -1,11 +1,17 @@
 {
   "FILTER": {
+<<<<<<< HEAD
     "TITLE": "סינון שיחות",
     "SUBTITLE": "הוסף את המסננים שלך למטה ולחץ על 'החל מסננים' כדי לסנן את הצ'אטים.",
+=======
+    "TITLE": "סנן שיחות",
+    "SUBTITLE": "הוסף את המסננים שלך למטה ולחץ על 'החל מסננים' כדי לחתוך דרך עומס הצ'אט.",
+>>>>>>> upstream/develop
     "EDIT_CUSTOM_FILTER": "ערוך תיקיה",
     "CUSTOM_VIEWS_SUBTITLE": "הוסף או הסר מסננים ועדכן את התיקיה שלך.",
     "ADD_NEW_FILTER": "הוסף מסנן",
     "FILTER_DELETE_ERROR": "אופס, נראה שלא ניתן לשמור שום דבר! אנא הוסף לפחות מסנן אחד כדי לשמור.",
+<<<<<<< HEAD
     "SUBMIT_BUTTON_LABEL": "שמור סננים",
     "UPDATE_BUTTON_LABEL": "עדכן תיקייה",
     "CANCEL_BUTTON_LABEL": "ביטול",
@@ -19,6 +25,21 @@
       "OR": "או"
     },
     "INPUT_PLACEHOLDER": "הזן ערך",
+=======
+    "SUBMIT_BUTTON_LABEL": "החל מסננים",
+    "UPDATE_BUTTON_LABEL": "עדכן תיקיה",
+    "CANCEL_BUTTON_LABEL": "ביטול",
+    "CLEAR_BUTTON_LABEL": "נקה מסננים",
+    "FOLDER_LABEL": "שם התיקיה",
+    "FOLDER_QUERY_LABEL": "שאילתת תיקיה",
+    "EMPTY_VALUE_ERROR": "ערך נדרש.",
+    "TOOLTIP_LABEL": "סנן שיחות",
+    "QUERY_DROPDOWN_LABELS": {
+      "AND": "ו",
+      "OR": "או"
+    },
+    "INPUT_PLACEHOLDER": "הכנס ערך",
+>>>>>>> upstream/develop
     "OPERATOR_LABELS": {
       "equal_to": "שווה ל",
       "not_equal_to": "לא שווה ל",
@@ -36,7 +57,11 @@
       "isPresent": "נוכח",
       "isNotPresent": "לא נוכח",
       "isGreaterThan": "גדול מ",
+<<<<<<< HEAD
       "isLessThan": "הוא פחות מ",
+=======
+      "isLessThan": "קטן מ",
+>>>>>>> upstream/develop
       "daysBefore": "הוא x ימים לפני",
       "startsWith": "מתחיל עם"
     },
@@ -45,6 +70,7 @@
       "FALSE": "לא נכון"
     },
     "ATTRIBUTES": {
+<<<<<<< HEAD
       "STATUS": "מצב",
       "ASSIGNEE_NAME": "משויך ל",
       "INBOX_NAME": "שם תיבת הדואר הנכנס",
@@ -55,12 +81,25 @@
       "BROWSER_LANGUAGE": "שפת הדפדפן",
       "PRIORITY": "Priority",
       "COUNTRY_NAME": "שם המדינה",
+=======
+      "STATUS": "סטטוס",
+      "ASSIGNEE_NAME": "שם מוקצה",
+      "INBOX_NAME": "שם תיבת דואר נכנס",
+      "TEAM_NAME": "שם צוות",
+      "CONVERSATION_IDENTIFIER": "מזהה שיחה",
+      "CAMPAIGN_NAME": "שם קמפיין",
+      "LABELS": "תוויות",
+      "BROWSER_LANGUAGE": "שפת דפדפן",
+      "PRIORITY": "עדיפות",
+      "COUNTRY_NAME": "שם מדינה",
+>>>>>>> upstream/develop
       "REFERER_LINK": "קישור מפנה",
       "CUSTOM_ATTRIBUTE_LIST": "רשימה",
       "CUSTOM_ATTRIBUTE_TEXT": "טקסט",
       "CUSTOM_ATTRIBUTE_NUMBER": "מספר",
       "CUSTOM_ATTRIBUTE_LINK": "קישור",
       "CUSTOM_ATTRIBUTE_CHECKBOX": "תיבת סימון",
+<<<<<<< HEAD
       "CREATED_AT": "נוצר בזמן",
       "LAST_ACTIVITY": "פעילות אחרונה"
     },
@@ -73,6 +112,20 @@
     "GROUPS": {
       "STANDARD_FILTERS": "סננים סטנדרטיים",
       "ADDITIONAL_FILTERS": "פילטרים נוספים",
+=======
+      "CREATED_AT": "נוצר ב",
+      "LAST_ACTIVITY": "פעילות אחרונה"
+    },
+    "ERRORS": {
+      "VALUE_REQUIRED": "ערך נדרש",
+      "ATTRIBUTE_KEY_REQUIRED": "מפתח מאפיין נדרש",
+      "FILTER_OPERATOR_REQUIRED": "אופרטור מסנן נדרש",
+      "VALUE_MUST_BE_BETWEEN_1_AND_998": "הערך חייב להיות בין 1 ל-998"
+    },
+    "GROUPS": {
+      "STANDARD_FILTERS": "מסננים סטנדרטיים",
+      "ADDITIONAL_FILTERS": "מסננים נוספים",
+>>>>>>> upstream/develop
       "CUSTOM_ATTRIBUTES": "מאפיינים מותאמים אישית"
     },
     "CUSTOM_VIEWS": {
@@ -80,6 +133,7 @@
         "TITLE": "האם אתה רוצה לשמור את המסנן הזה?",
         "LABEL": "תן שם למסנן הזה",
         "PLACEHOLDER": "תן שם למסנן שלך כדי להתייחס אליו מאוחר יותר.",
+<<<<<<< HEAD
         "ERROR_MESSAGE": "שם שדה חובה.",
         "SAVE_BUTTON": "שמור מסנן",
         "CANCEL_BUTTON": "ביטול",
@@ -94,24 +148,54 @@
       },
       "EDIT": {
         "EDIT_BUTTON": "Edit folder"
+=======
+        "ERROR_MESSAGE": "שם נדרש.",
+        "SAVE_BUTTON": "שמור מסנן",
+        "CANCEL_BUTTON": "ביטול",
+        "API_FOLDERS": {
+          "SUCCESS_MESSAGE": "תיקיה נוצרה בהצלחה.",
+          "ERROR_MESSAGE": "שגיאה ביצירת תיקיה."
+        },
+        "API_SEGMENTS": {
+          "SUCCESS_MESSAGE": "סגמנט נוצר בהצלחה.",
+          "ERROR_MESSAGE": "שגיאה ביצירת סגמנט."
+        }
+      },
+      "EDIT": {
+        "EDIT_BUTTON": "ערוך תיקיה"
+>>>>>>> upstream/develop
       },
       "DELETE": {
         "DELETE_BUTTON": "מחק מסנן",
         "MODAL": {
           "CONFIRM": {
             "TITLE": "אשר מחיקה",
+<<<<<<< HEAD
             "MESSAGE": "האם אתה בטוח למחוק הסנן הזה ",
             "YES": "Yes, delete",
             "NO": "לא, שמור את זה"
+=======
+            "MESSAGE": "האם אתה בטוח למחוק את המסנן ",
+            "YES": "כן, מחק",
+            "NO": "לא, שמור אותו"
+>>>>>>> upstream/develop
           }
         },
         "API_FOLDERS": {
           "SUCCESS_MESSAGE": "תיקיה נמחקה בהצלחה.",
+<<<<<<< HEAD
           "ERROR_MESSAGE": "שגיאה או תקלה במחיקת תיקיה."
         },
         "API_SEGMENTS": {
           "SUCCESS_MESSAGE": "סגמנט נמחק בהצלחה.",
           "ERROR_MESSAGE": "שגיאה במחיקת הערך."
+=======
+          "ERROR_MESSAGE": "שגיאה במחיקת תיקיה."
+        },
+        "API_SEGMENTS": {
+          "SUCCESS_MESSAGE": "סגמנט נמחק בהצלחה.",
+          "ERROR_MESSAGE": "שגיאה במחיקת סגמנט."
+>>>>>>> upstream/develop
         }
       }
     }

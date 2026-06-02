@@ -45,6 +45,13 @@ describe('#resolveTeamIds', () => {
     const resolvedTeams = '⚙️ sales team, 🤷‍♂️ fayaz';
     expect(resolveTeamIds(teams, [1, 2])).toEqual(resolvedTeams);
   });
+<<<<<<< HEAD
+=======
+
+  it('resolves nil as None', () => {
+    expect(resolveTeamIds(teams, ['nil'])).toEqual('None');
+  });
+>>>>>>> upstream/develop
 });
 
 describe('#resolveLabels', () => {
@@ -59,6 +66,13 @@ describe('#resolveAgents', () => {
     const resolvedAgents = 'John Doe';
     expect(resolveAgents(agents, [1])).toEqual(resolvedAgents);
   });
+<<<<<<< HEAD
+=======
+
+  it('resolves nil and self values', () => {
+    expect(resolveAgents(agents, ['nil', 'self'])).toEqual('None, Self');
+  });
+>>>>>>> upstream/develop
 });
 
 describe('#getFileName', () => {

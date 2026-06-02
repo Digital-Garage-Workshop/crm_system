@@ -12,10 +12,13 @@ class Api::V1::Accounts::Contacts::ConversationsController < Api::V1::Accounts::
       Current.account
     ).perform
 
+<<<<<<< HEAD
     # Only allow conversations from inboxes the user has access to
     inbox_ids = Current.user.assigned_inboxes.pluck(:id)
     conversations = conversations.where(inbox_id: inbox_ids)
 
+=======
+>>>>>>> upstream/develop
     @conversations = conversations.order(last_activity_at: :desc).limit(20)
   end
 end

@@ -3,6 +3,11 @@ class Imap::ImapMailbox
   include IncomingEmailValidityHelper
   attr_accessor :channel, :account, :inbox, :conversation, :processed_mail
 
+<<<<<<< HEAD
+=======
+  FALLBACK_CONVERSATION_PATTERN = %r{account/(\d+)/conversation/([a-zA-Z0-9-]+)@}
+
+>>>>>>> upstream/develop
   def process(mail, channel)
     @inbound_mail = mail
     @channel = channel
@@ -42,13 +47,18 @@ class Imap::ImapMailbox
 
     message = @inbox.messages.find_by(source_id: in_reply_to)
     if message.nil?
+<<<<<<< HEAD
       @inbox.conversations.where("additional_attributes->>'in_reply_to' = ?", in_reply_to).first
+=======
+      @inbox.conversations.find_by("additional_attributes->>'in_reply_to' = ?", in_reply_to)
+>>>>>>> upstream/develop
     else
       @inbox.conversations.find(message.conversation_id)
     end
   end
 
   def find_conversation_by_reference_ids
+<<<<<<< HEAD
     return if @inbound_mail.references.blank? && in_reply_to.present?
 
     message = find_message_by_references
@@ -56,12 +66,37 @@ class Imap::ImapMailbox
     return if message.nil?
 
     @inbox.conversations.find(message.conversation_id)
+=======
+    return if @inbound_mail.references.blank?
+
+    message = find_message_by_references
+    if message.present?
+      conversation = @inbox.conversations.find_by(id: message.conversation_id)
+      return conversation if conversation.present?
+    end
+
+    # FALLBACK_PATTERN use to find a conversation that is started by an agent (no incoming message yet)
+    conversation_id = find_conversation_by_references
+    @inbox.conversations.find_by(uuid: conversation_id) if conversation_id.present?
+>>>>>>> upstream/develop
   end
 
   def in_reply_to
     @processed_mail.in_reply_to
   end
 
+<<<<<<< HEAD
+=======
+  def find_conversation_by_references
+    references = Array.wrap(@inbound_mail.references)
+    references.each do |message_id|
+      match = FALLBACK_CONVERSATION_PATTERN.match(message_id)
+
+      return match[2] if match.present?
+    end
+  end
+
+>>>>>>> upstream/develop
   def find_message_by_references
     message_to_return = nil
 
@@ -84,6 +119,10 @@ class Imap::ImapMailbox
         additional_attributes: {
           source: 'email',
           in_reply_to: in_reply_to,
+<<<<<<< HEAD
+=======
+          auto_reply: @processed_mail.auto_reply?,
+>>>>>>> upstream/develop
           mail_subject: @processed_mail.subject,
           initiated_at: {
             timestamp: Time.now.utc

@@ -6,12 +6,22 @@ import { useAlert } from 'dashboard/composables';
 import { useAccount } from 'dashboard/composables/useAccount';
 import { required } from '@vuelidate/validators';
 import LoadingState from 'dashboard/components/widgets/LoadingState.vue';
+<<<<<<< HEAD
 import { mapGetters } from 'vuex';
 import ChannelApi from '../../../../../api/channels';
 import PageHeader from '../../SettingsSubPageHeader.vue';
 import router from '../../../../index';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+=======
+
+import ChannelApi from '../../../../../api/channels';
+import PageHeader from '../../SettingsSubPageHeader.vue';
+import router from '../../../../index';
+import { useBranding } from 'shared/composables/useBranding';
+import NextButton from 'dashboard/components-next/button/Button.vue';
+import ComboBox from 'dashboard/components-next/combobox/ComboBox.vue';
+>>>>>>> upstream/develop
 
 import { loadScript } from 'dashboard/helper/DOMHelpers';
 import * as Sentry from '@sentry/vue';
@@ -21,12 +31,23 @@ export default {
     LoadingState,
     PageHeader,
     NextButton,
+<<<<<<< HEAD
   },
   mixins: [globalConfigMixin],
   setup() {
     const { accountId } = useAccount();
     return {
       accountId,
+=======
+    ComboBox,
+  },
+  setup() {
+    const { accountId } = useAccount();
+    const { replaceInstallationName } = useBranding();
+    return {
+      accountId,
+      replaceInstallationName,
+>>>>>>> upstream/develop
       v$: useVuelidate(),
     };
   },
@@ -66,9 +87,18 @@ export default {
     getSelectablePages() {
       return this.pageList.filter(item => !item.exists);
     },
+<<<<<<< HEAD
     ...mapGetters({
       globalConfig: 'globalConfig/get',
     }),
+=======
+    comboBoxPageOptions() {
+      return this.getSelectablePages.map(({ id, name }) => ({
+        value: id,
+        label: name,
+      }));
+    },
+>>>>>>> upstream/develop
   },
 
   mounted() {
@@ -96,9 +126,22 @@ export default {
       }
     },
 
+<<<<<<< HEAD
     setPageName({ name }) {
       this.v$.selectedPage.$touch();
       this.pageName = name;
+=======
+    setPageName(pageId) {
+      const page = this.pageList.find(p => p.id === pageId);
+      if (page) {
+        this.selectedPage = page;
+        this.pageName = page.name;
+      } else {
+        this.selectedPage = { name: null, id: null };
+        this.pageName = '';
+      }
+      this.v$.selectedPage.$touch();
+>>>>>>> upstream/develop
     },
 
     initChannelAuth(channel) {
@@ -181,7 +224,11 @@ export default {
         user_access_token: this.user_access_token,
         page_access_token: this.selectedPage.access_token,
         page_id: this.selectedPage.id,
+<<<<<<< HEAD
         inbox_name: this.selectedPage.name,
+=======
+        inbox_name: this.selectedPage.name?.trim(),
+>>>>>>> upstream/develop
       };
     },
 
@@ -208,27 +255,39 @@ export default {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div
     class="w-full h-full col-span-6 p-6 overflow-auto border border-b-0 rounded-t-lg border-n-weak bg-n-solid-1"
   >
+=======
+  <div class="w-full h-full col-span-6 p-6 overflow-auto">
+>>>>>>> upstream/develop
     <div
       v-if="!hasLoginStarted"
       class="flex flex-col items-center justify-center h-full text-center"
     >
       <a href="#" @click="startLogin()">
         <img
+<<<<<<< HEAD
           class="w-auto h-10"
+=======
+          class="w-auto h-10 rounded-md"
+>>>>>>> upstream/develop
           src="~dashboard/assets/images/channels/facebook_login.png"
           alt="Facebook-logo"
         />
       </a>
       <p class="py-6">
+<<<<<<< HEAD
         {{
           useInstallationName(
             $t('INBOX_MGMT.ADD.FB.HELP'),
             globalConfig.installationName
           )
         }}
+=======
+        {{ replaceInstallationName($t('INBOX_MGMT.ADD.FB.HELP')) }}
+>>>>>>> upstream/develop
       </p>
     </div>
     <div v-else>
@@ -249,14 +308,19 @@ export default {
           <PageHeader
             :header-title="$t('INBOX_MGMT.ADD.DETAILS.TITLE')"
             :header-content="
+<<<<<<< HEAD
               useInstallationName(
                 $t('INBOX_MGMT.ADD.DETAILS.DESC'),
                 globalConfig.installationName
               )
+=======
+              replaceInstallationName($t('INBOX_MGMT.ADD.DETAILS.DESC'))
+>>>>>>> upstream/develop
             "
           />
         </div>
         <div class="w-3/5">
+<<<<<<< HEAD
           <div class="w-full">
             <div class="input-wrap" :class="{ error: v$.selectedPage.$error }">
               {{ $t('INBOX_MGMT.ADD.FB.CHOOSE_PAGE') }}
@@ -274,6 +338,22 @@ export default {
                 @select="setPageName"
               />
               <span v-if="v$.selectedPage.$error" class="message">
+=======
+          <div class="w-full mb-2">
+            <div class="input-wrap" :class="{ error: v$.selectedPage.$error }">
+              <span class="text-n-slate-12 text-start">
+                {{ $t('INBOX_MGMT.ADD.FB.CHOOSE_PAGE') }}
+              </span>
+              <ComboBox
+                :model-value="selectedPage.id"
+                :options="comboBoxPageOptions"
+                :placeholder="$t('INBOX_MGMT.ADD.FB.PICK_A_VALUE')"
+                :has-error="v$.selectedPage.$error"
+                class="[&>div>button]:!bg-n-alpha-black2 mt-1"
+                @update:model-value="setPageName"
+              />
+              <span v-if="v$.selectedPage.$error" class="message mt-0.5">
+>>>>>>> upstream/develop
                 {{ $t('INBOX_MGMT.ADD.FB.CHOOSE_PLACEHOLDER') }}
               </span>
             </div>

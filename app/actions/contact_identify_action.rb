@@ -6,6 +6,10 @@
 # We don't want to update the name of the identified original contact.
 
 class ContactIdentifyAction
+<<<<<<< HEAD
+=======
+  include UrlHelper
+>>>>>>> upstream/develop
   pattr_initialize [:contact!, :params!, { retain_original_contact_name: false, discard_invalid_attrs: false }]
 
   def perform
@@ -103,8 +107,20 @@ class ContactIdentifyAction
     # blank identifier or email will throw unique index error
     # TODO: replace reject { |_k, v| v.blank? } with compact_blank when rails is upgraded
     @contact.discard_invalid_attrs if discard_invalid_attrs
+<<<<<<< HEAD
     @contact.save!
     Avatar::AvatarFromUrlJob.perform_later(@contact, params[:avatar_url]) if params[:avatar_url].present? && !@contact.avatar.attached?
+=======
+    @contact.save! if @contact.changed?
+    enqueue_avatar_job
+  end
+
+  def enqueue_avatar_job
+    return unless params[:avatar_url].present? && !@contact.avatar.attached?
+    return unless url_valid?(params[:avatar_url])
+
+    Avatar::AvatarFromUrlJob.perform_later(@contact, params[:avatar_url])
+>>>>>>> upstream/develop
   end
 
   def merge_contact(base_contact, merge_contact)

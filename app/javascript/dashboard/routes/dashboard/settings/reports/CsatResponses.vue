@@ -3,7 +3,11 @@ import { mapGetters } from 'vuex';
 import { useAlert, useTrack } from 'dashboard/composables';
 import CsatMetrics from './components/CsatMetrics.vue';
 import CsatTable from './components/CsatTable.vue';
+<<<<<<< HEAD
 import ReportFilterSelector from './components/FilterSelector.vue';
+=======
+import CsatFilters from './components/Csat/CsatFilters.vue';
+>>>>>>> upstream/develop
 import { generateFileName } from '../../../../helper/downloadHelper';
 import { REPORTS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
 import { FEATURE_FLAGS } from '../../../../featureFlags';
@@ -15,7 +19,11 @@ export default {
   components: {
     CsatMetrics,
     CsatTable,
+<<<<<<< HEAD
     ReportFilterSelector,
+=======
+    CsatFilters,
+>>>>>>> upstream/develop
     ReportHeader,
     V4Button,
   },
@@ -52,6 +60,12 @@ export default {
       );
     },
   },
+<<<<<<< HEAD
+=======
+  mounted() {
+    this.$store.dispatch('agents/get');
+  },
+>>>>>>> upstream/develop
   methods: {
     getAllData() {
       try {
@@ -90,7 +104,11 @@ export default {
       selectedTeam,
       selectedRating,
     }) {
+<<<<<<< HEAD
       // do not track filter change on inital load
+=======
+      // do not track filter change on initial load
+>>>>>>> upstream/develop
       if (this.from !== 0 && this.to !== 0) {
         useTrack(REPORTS_EVENTS.FILTER_REPORT, {
           filterType: 'date',
@@ -121,6 +139,7 @@ export default {
     />
   </ReportHeader>
 
+<<<<<<< HEAD
   <div class="flex flex-col gap-4">
     <ReportFilterSelector
       show-agents-filter
@@ -131,6 +150,13 @@ export default {
       @filter-change="onFilterChange"
     />
 
+=======
+  <div class="flex flex-col gap-6">
+    <CsatFilters
+      :show-team-filter="isTeamsEnabled"
+      @filter-change="onFilterChange"
+    />
+>>>>>>> upstream/develop
     <CsatMetrics :filters="requestPayload" />
     <CsatTable :page-index="pageIndex" @page-change="onPageNumberChange" />
   </div>

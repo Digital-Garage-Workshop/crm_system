@@ -1,7 +1,11 @@
 <script>
 import { useAlert, useTrack } from 'dashboard/composables';
 import BotMetrics from './components/BotMetrics.vue';
+<<<<<<< HEAD
 import ReportFilterSelector from './components/FilterSelector.vue';
+=======
+import ReportFilters from './components/ReportFilters.vue';
+>>>>>>> upstream/develop
 import { GROUP_BY_FILTER } from './constants';
 import ReportContainer from './ReportContainer.vue';
 import { REPORTS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
@@ -12,7 +16,11 @@ export default {
   components: {
     BotMetrics,
     ReportHeader,
+<<<<<<< HEAD
     ReportFilterSelector,
+=======
+    ReportFilters,
+>>>>>>> upstream/develop
     ReportContainer,
   },
   data() {
@@ -88,10 +96,17 @@ export default {
 <template>
   <ReportHeader :header-title="$t('BOT_REPORTS.HEADER')" />
   <div class="flex flex-col gap-4">
+<<<<<<< HEAD
     <ReportFilterSelector
       :show-agents-filter="false"
       show-group-by-filter
       :show-business-hours-switch="false"
+=======
+    <ReportFilters
+      :show-entity-filter="false"
+      show-group-by
+      :show-business-hours="false"
+>>>>>>> upstream/develop
       @filter-change="onFilterChange"
     />
 

@@ -3,6 +3,12 @@
     "FETCHING": "Integraties ophalen",
     "NO_HOOK_CONFIGURED": "Er zijn geen {integrationId} integraties geconfigureerd in dit account.",
     "HEADER": "Applicaties",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Ingeschakeld",
       "DISABLED": "Uitgeschakeld"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Ophalen van integratie-hooks",
       "INBOX": "Postvak In",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Acties",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Verwijderen"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Selecteer een inbox"
         },
         "SUBMIT": "Aanmaken",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Annuleren"
       },
       "API": {

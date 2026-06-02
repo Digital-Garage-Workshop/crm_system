@@ -36,6 +36,14 @@ const props = defineProps({
   },
   focusOnMount: { type: Boolean, default: false },
   allowCreate: { type: Boolean, default: false },
+<<<<<<< HEAD
+=======
+  // Skip label-based dedup when the consumer already filters menuItems by ID.
+  // Prevents removing all same-name items when one is selected (e.g. duplicate agent names).
+  skipLabelDedup: { type: Boolean, default: false },
+  // When false, the dropdown won't auto-open on mount; it opens only on click/focus.
+  autoOpenDropdown: { type: Boolean, default: true },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits([
@@ -56,7 +64,11 @@ const modelValue = defineModel({
 const tagInputRef = ref(null);
 const tags = ref(props.modelValue);
 const newTag = ref('');
+<<<<<<< HEAD
 const isFocused = ref(true);
+=======
+const isFocused = ref(props.autoOpenDropdown);
+>>>>>>> upstream/develop
 
 const rules = computed(() => getValidationRules(props.type));
 const v$ = useVuelidate(rules, { newTag });
@@ -67,18 +79,30 @@ const isNewTagInValidType = computed(() =>
 
 const showInput = computed(() =>
   props.mode === MODE.SINGLE
+<<<<<<< HEAD
     ? isFocused.value && !tags.value.length
+=======
+    ? !tags.value.length
+>>>>>>> upstream/develop
     : isFocused.value || !tags.value.length
 );
 
 const showDropdownMenu = computed(() =>
   props.mode === MODE.SINGLE && tags.value.length >= 1
     ? false
+<<<<<<< HEAD
     : props.showDropdown
 );
 
 const filteredMenuItems = computed(() =>
   buildTagMenuItems({
+=======
+    : props.showDropdown && isFocused.value
+);
+
+const filteredMenuItems = computed(() => {
+  const items = buildTagMenuItems({
+>>>>>>> upstream/develop
     mode: props.mode,
     tags: tags.value,
     menuItems: props.menuItems,
@@ -86,8 +110,19 @@ const filteredMenuItems = computed(() =>
     isLoading: props.isLoading,
     type: props.type,
     isNewTagInValidType: isNewTagInValidType.value,
+<<<<<<< HEAD
   })
 );
+=======
+    allowCreate: props.allowCreate,
+    skipLabelDedup: props.skipLabelDedup,
+  });
+  if (props.type !== INPUT_TYPES.TEXT) return items;
+  const query = newTag.value?.trim()?.toLowerCase();
+  if (!query) return items;
+  return items.filter(item => item.label?.toLowerCase().includes(query));
+});
+>>>>>>> upstream/develop
 
 const emitDataOnAdd = value => {
   const matchingMenuItem = findMatchingMenuItem(props.menuItems, value);
@@ -112,10 +147,20 @@ const addTag = async () => {
     return;
   }
 
+<<<<<<< HEAD
   if (
     [INPUT_TYPES.EMAIL, INPUT_TYPES.TEL].includes(props.type) ||
     props.allowCreate
   ) {
+=======
+  const isValidatedType = [INPUT_TYPES.EMAIL, INPUT_TYPES.TEL].includes(
+    props.type
+  );
+
+  if (!isValidatedType && !props.allowCreate && props.showDropdown) return;
+
+  if (isValidatedType || props.allowCreate) {
+>>>>>>> upstream/develop
     if (!(await v$.value.$validate())) return;
     emitDataOnAdd(trimmedTag);
   }
@@ -125,17 +170,26 @@ const addTag = async () => {
 const removeTag = index => {
   tags.value.splice(index, 1);
   modelValue.value = tags.value;
+<<<<<<< HEAD
   emit('remove');
+=======
+  emit('remove', index);
+>>>>>>> upstream/develop
 };
 
 const handleDropdownAction = async ({
   email: emailAddress,
   phoneNumber,
+<<<<<<< HEAD
+=======
+  label,
+>>>>>>> upstream/develop
   ...rest
 }) => {
   if (props.mode === MODE.SINGLE && tags.value.length >= 1) return;
   if (!props.showDropdown) return;
 
+<<<<<<< HEAD
   const isEmail = props.type === 'email';
   newTag.value = isEmail ? emailAddress : phoneNumber;
 
@@ -147,6 +201,21 @@ const handleDropdownAction = async ({
 
   emit('add', payload);
   updateValueAndFocus(emailAddress);
+=======
+  const isEmail = props.type === INPUT_TYPES.EMAIL;
+  const tagValue = isEmail ? emailAddress : phoneNumber || label;
+
+  if (isEmail || props.type === INPUT_TYPES.TEL) {
+    newTag.value = tagValue;
+    if (!(await v$.value.$validate())) return;
+  }
+
+  emit(
+    'add',
+    isEmail ? { email: emailAddress, ...rest } : { phoneNumber, label, ...rest }
+  );
+  updateValueAndFocus(tagValue);
+>>>>>>> upstream/develop
 };
 
 const handleFocus = () => {
@@ -163,7 +232,11 @@ const handleKeydown = event => {
 };
 
 const handleClickOutside = () => {
+<<<<<<< HEAD
   if (tags.value.length) isFocused.value = false;
+=======
+  isFocused.value = false;
+>>>>>>> upstream/develop
   emit('onClickOutside');
 };
 
@@ -230,7 +303,11 @@ const handleBlur = e => emit('blur', e);
         v-if="showDropdownMenu"
         :menu-items="filteredMenuItems"
         :is-searching="isLoading"
+<<<<<<< HEAD
         class="left-0 z-[100] top-8 overflow-y-auto max-h-60 w-[inherit] max-w-md dark:!outline-n-slate-5"
+=======
+        class="ltr:left-0 rtl:right-0 z-[100] top-8 max-h-56 w-[inherit] max-w-md dark:!outline-n-slate-5"
+>>>>>>> upstream/develop
         @action="handleDropdownAction"
       />
     </div>

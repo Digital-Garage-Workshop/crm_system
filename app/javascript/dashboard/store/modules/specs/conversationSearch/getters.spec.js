@@ -37,6 +37,18 @@ describe('#getters', () => {
     ]);
   });
 
+<<<<<<< HEAD
+=======
+  it('getArticleRecords', () => {
+    const state = {
+      articleRecords: [{ id: 1, title: 'Article 1' }],
+    };
+    expect(getters.getArticleRecords(state)).toEqual([
+      { id: 1, title: 'Article 1' },
+    ]);
+  });
+
+>>>>>>> upstream/develop
   it('getUIFlags', () => {
     const state = {
       uiFlags: {
@@ -45,6 +57,10 @@ describe('#getters', () => {
         contact: { isFetching: true },
         message: { isFetching: false },
         conversation: { isFetching: false },
+<<<<<<< HEAD
+=======
+        article: { isFetching: false },
+>>>>>>> upstream/develop
       },
     };
     expect(getters.getUIFlags(state)).toEqual({
@@ -53,6 +69,10 @@ describe('#getters', () => {
       contact: { isFetching: true },
       message: { isFetching: false },
       conversation: { isFetching: false },
+<<<<<<< HEAD
+=======
+      article: { isFetching: false },
+>>>>>>> upstream/develop
     });
   });
 });

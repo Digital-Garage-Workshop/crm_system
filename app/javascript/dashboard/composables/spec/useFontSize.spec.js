@@ -43,28 +43,48 @@ describe('useFontSize', () => {
 
   it('returns fontSizeOptions with correct structure', () => {
     const { fontSizeOptions } = useFontSize();
+<<<<<<< HEAD
     expect(fontSizeOptions).toHaveLength(6);
     expect(fontSizeOptions[0]).toHaveProperty('value');
     expect(fontSizeOptions[0]).toHaveProperty('label');
 
     // Check specific options
     expect(fontSizeOptions.find(option => option.value === '16px')).toEqual({
+=======
+    expect(fontSizeOptions.value).toHaveLength(5);
+    expect(fontSizeOptions.value[0]).toHaveProperty('value');
+    expect(fontSizeOptions.value[0]).toHaveProperty('label');
+
+    // Check specific options
+    expect(
+      fontSizeOptions.value.find(option => option.value === '16px')
+    ).toEqual({
+>>>>>>> upstream/develop
       value: '16px',
       label:
         'PROFILE_SETTINGS.FORM.INTERFACE_SECTION.FONT_SIZE.OPTIONS.DEFAULT',
     });
 
+<<<<<<< HEAD
     expect(fontSizeOptions.find(option => option.value === '14px')).toEqual({
+=======
+    expect(
+      fontSizeOptions.value.find(option => option.value === '14px')
+    ).toEqual({
+>>>>>>> upstream/develop
       value: '14px',
       label:
         'PROFILE_SETTINGS.FORM.INTERFACE_SECTION.FONT_SIZE.OPTIONS.SMALLER',
     });
+<<<<<<< HEAD
 
     expect(fontSizeOptions.find(option => option.value === '22px')).toEqual({
       value: '22px',
       label:
         'PROFILE_SETTINGS.FORM.INTERFACE_SECTION.FONT_SIZE.OPTIONS.EXTRA_LARGE',
     });
+=======
+>>>>>>> upstream/develop
   });
 
   it('returns currentFontSize from UI settings', () => {
@@ -84,9 +104,12 @@ describe('useFontSize', () => {
     applyFontSize('14px');
     expect(document.documentElement.style.fontSize).toBe('14px');
 
+<<<<<<< HEAD
     applyFontSize('22px');
     expect(document.documentElement.style.fontSize).toBe('22px');
 
+=======
+>>>>>>> upstream/develop
     applyFontSize('16px');
     expect(document.documentElement.style.fontSize).toBe('16px');
   });
@@ -145,8 +168,11 @@ describe('useFontSize', () => {
           'Smaller',
         'PROFILE_SETTINGS.FORM.INTERFACE_SECTION.FONT_SIZE.OPTIONS.DEFAULT':
           'Default',
+<<<<<<< HEAD
         'PROFILE_SETTINGS.FORM.INTERFACE_SECTION.FONT_SIZE.OPTIONS.EXTRA_LARGE':
           'Extra Large',
+=======
+>>>>>>> upstream/develop
       };
       return translations[key] || key;
     });
@@ -154,6 +180,7 @@ describe('useFontSize', () => {
     const { fontSizeOptions } = useFontSize();
 
     // Check that translation is applied
+<<<<<<< HEAD
     expect(fontSizeOptions.find(option => option.value === '14px').label).toBe(
       'Smaller'
     );
@@ -163,6 +190,14 @@ describe('useFontSize', () => {
     expect(fontSizeOptions.find(option => option.value === '22px').label).toBe(
       'Extra Large'
     );
+=======
+    expect(
+      fontSizeOptions.value.find(option => option.value === '14px').label
+    ).toBe('Smaller');
+    expect(
+      fontSizeOptions.value.find(option => option.value === '16px').label
+    ).toBe('Default');
+>>>>>>> upstream/develop
 
     // Verify translation function was called with correct keys
     expect(mockTranslate).toHaveBeenCalledWith(

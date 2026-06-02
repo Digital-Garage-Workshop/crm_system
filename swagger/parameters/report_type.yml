@@ -1,5 +1,6 @@
 in: query
 name: type
+<<<<<<< HEAD
 type: string
 enum:
   - account
@@ -7,5 +8,15 @@ enum:
   - inbox
   - label
   - team
+=======
+schema:
+  type: string
+  enum:
+    - account
+    - agent
+    - inbox
+    - label
+    - team
+>>>>>>> upstream/develop
 required: true
 description: Type of report

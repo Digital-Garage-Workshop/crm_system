@@ -1,5 +1,8 @@
 import {
+<<<<<<< HEAD
   buildPermissionsFromRouter,
+=======
+>>>>>>> upstream/develop
   getCurrentAccount,
   getUserPermissions,
   hasPermissions,
@@ -43,6 +46,7 @@ describe('hasPermissions', () => {
   });
 });
 
+<<<<<<< HEAD
 describe('buildPermissionsFromRouter', () => {
   it('returns a valid object when routes have permissions defined', () => {
     expect(
@@ -107,6 +111,8 @@ describe('buildPermissionsFromRouter', () => {
   });
 });
 
+=======
+>>>>>>> upstream/develop
 describe('filterItemsByPermission', () => {
   const items = {
     item1: { name: 'Item 1', permissions: ['agent', 'administrator'] },

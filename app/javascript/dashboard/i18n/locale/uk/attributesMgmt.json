@@ -5,6 +5,25 @@
     "LOADING": "Отримання користувацьких атрибутів",
     "DESCRIPTION": "A custom attribute tracks additional details about your contacts or conversations—such as the subscription plan or the date of their first purchase. You can add different types of custom attributes, such as text, lists, or numbers, to capture the specific information you need.",
     "LEARN_MORE": "Learn more about custom attributes",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} attribute | {n} attributes",
+    "SEARCH_PLACEHOLDER": "Атрибути пошуку...",
+    "NO_RESULTS": "No attributes found matching your search",
+    "ATTRIBUTE_MODELS": {
+      "CONVERSATION": "Розмови",
+      "CONTACT": "Контакт",
+      "COMPANY": "Організація"
+    },
+    "ATTRIBUTE_TYPES": {
+      "TEXT": "Текст",
+      "NUMBER": "Номер",
+      "LINK": "Лінк",
+      "DATE": "Date",
+      "LIST": "Список",
+      "CHECKBOX": "Прапорець"
+    },
+>>>>>>> upstream/develop
     "ADD": {
       "TITLE": "Додати свій атрибут",
       "SUBMIT": "Створити",
@@ -51,6 +70,13 @@
         },
         "ENABLE_REGEX": {
           "LABEL": "Увімкнути перевірку регулярного виразу"
+<<<<<<< HEAD
+=======
+        },
+        "BADGES": {
+          "PRE_CHAT": "Пре-чат",
+          "RESOLUTION": "Вирішення"
+>>>>>>> upstream/develop
         }
       },
       "API": {
@@ -89,7 +115,12 @@
     "TABS": {
       "HEADER": "Свої атрибути",
       "CONVERSATION": "Діалог",
+<<<<<<< HEAD
       "CONTACT": "Контакт"
+=======
+      "CONTACT": "Контакт",
+      "COMPANY": "Організація"
+>>>>>>> upstream/develop
     },
     "LIST": {
       "TABLE_HEADER": {
@@ -117,6 +148,13 @@
       "ENABLE_REGEX": {
         "LABEL": "Увімкнути перевірку регулярного виразу"
       }
+<<<<<<< HEAD
+=======
+    },
+    "BADGES": {
+      "PRE_CHAT": "Пре-чат",
+      "RESOLUTION": "Вирішення"
+>>>>>>> upstream/develop
     }
   }
 }

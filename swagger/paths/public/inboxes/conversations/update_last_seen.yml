@@ -3,6 +3,7 @@ tags:
 operationId: update-last-seen
 summary: Update last seen
 description: Updates the last seen time of the contact in a conversation
+<<<<<<< HEAD
 responses:
   200:
     description: Last seen updated successfully
@@ -10,3 +11,21 @@ responses:
     description: Unauthorized
   404:
     description: Conversation not found
+=======
+security: []
+responses:
+  '200':
+    description: Last seen updated successfully
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '404':
+    description: Conversation not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

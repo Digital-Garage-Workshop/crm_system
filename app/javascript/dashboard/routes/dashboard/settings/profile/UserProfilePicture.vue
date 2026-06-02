@@ -24,7 +24,11 @@ const deleteProfilePicture = () => {
 
 <template>
   <div class="flex flex-col gap-2">
+<<<<<<< HEAD
     <span class="text-sm font-medium text-ash-900">
+=======
+    <span class="text-sm font-medium text-n-slate-12">
+>>>>>>> upstream/develop
       {{ $t('PROFILE_SETTINGS.FORM.PICTURE') }}
     </span>
     <Avatar

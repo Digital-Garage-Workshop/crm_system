@@ -1,5 +1,6 @@
 import { adjustColorForContrast } from '../shared/helpers/colorHelper.js';
 
+<<<<<<< HEAD
 export const setPortalHoverColor = theme => {
   // This function is to set the hover color for the portal
   if (theme === 'system') {
@@ -11,6 +12,23 @@ export const setPortalHoverColor = theme => {
 
   const portalColor = window.portalConfig.portalColor;
   const bgColor = theme === 'dark' ? '#151718' : 'white';
+=======
+const getResolvedTheme = theme => {
+  // Helper to get resolved theme (handles 'system' -> 'dark'/'light')
+  if (theme === 'system') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+  return theme;
+};
+
+export const setPortalHoverColor = theme => {
+  // This function is to set the hover color for the portal
+  const resolvedTheme = getResolvedTheme(theme);
+  const portalColor = window.portalConfig.portalColor;
+  const bgColor = resolvedTheme === 'dark' ? '#151718' : 'white';
+>>>>>>> upstream/develop
   const hoverColor = adjustColorForContrast(portalColor, bgColor);
 
   // Set hover color for border and text dynamically
@@ -36,6 +54,7 @@ export const removeQueryParamsFromUrl = (queryParam = 'theme') => {
 export const updateThemeInHeader = theme => {
   // This function is to update the theme selection in the header in real time
   const themeToggleButton = document.getElementById('toggle-appearance');
+<<<<<<< HEAD
 
   if (!themeToggleButton) return;
   const allElementInButton =
@@ -45,10 +64,22 @@ export const updateThemeInHeader = theme => {
   allElementInButton.forEach(button => {
     button.classList.toggle('hidden', button.dataset.theme !== theme);
     button.classList.toggle('flex', button.dataset.theme === theme);
+=======
+  if (!themeToggleButton) return;
+
+  const allThemeButtons = themeToggleButton.querySelectorAll('.theme-button');
+  if (!allThemeButtons.length) return;
+
+  allThemeButtons.forEach(button => {
+    const isActive = button.dataset.theme === theme;
+    button.classList.toggle('hidden', !isActive);
+    button.classList.toggle('flex', isActive);
+>>>>>>> upstream/develop
   });
 };
 
 export const switchTheme = theme => {
+<<<<<<< HEAD
   if (theme === 'system') {
     localStorage.removeItem('theme');
     const prefersDarkMode = window.matchMedia(
@@ -97,6 +128,69 @@ export const initializeToggleButton = () => {
     const isCurrentlyHidden = appearanceDropdown.style.display === 'none';
     // Toggle the appearanceDropdown
     appearanceDropdown.style.display = isCurrentlyHidden ? 'flex' : 'none';
+=======
+  // Update localStorage
+  if (theme === 'system') {
+    localStorage.removeItem('theme');
+  } else {
+    localStorage.theme = theme;
+  }
+
+  const resolvedTheme = getResolvedTheme(theme);
+  document.documentElement.classList.remove('dark', 'light');
+  document.documentElement.classList.add(resolvedTheme);
+
+  setPortalHoverColor(theme);
+  updateThemeInHeader(theme);
+  removeQueryParamsFromUrl();
+  // Update both dropdown data attributes
+  document.querySelectorAll('.appearance-menu').forEach(menu => {
+    menu.dataset.currentTheme = theme;
+  });
+};
+
+export const initializeThemeHandlers = () => {
+  const toggle = document.getElementById('toggle-appearance');
+  const dropdown = document.getElementById('appearance-dropdown');
+  if (!toggle || !dropdown) return;
+
+  // Toggle appearance dropdown
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    dropdown.dataset.dropdownOpen = String(
+      dropdown.dataset.dropdownOpen !== 'true'
+    );
+  });
+
+  document.addEventListener('click', ({ target }) => {
+    if (toggle.contains(target)) return;
+
+    const themeBtn = target.closest('.appearance-menu button[data-theme]');
+    const menu = themeBtn?.closest('.appearance-menu');
+
+    if (themeBtn && menu) {
+      switchTheme(themeBtn.dataset.theme);
+      menu.dataset.dropdownOpen = 'false';
+
+      if (menu.id === 'mobile-appearance-dropdown') {
+        // Set the mobile menu toggle to false after a delay to ensure the transition is completed
+        setTimeout(() => {
+          const mobileToggle = document.getElementById('mobile-menu-toggle');
+          if (mobileToggle) mobileToggle.checked = false;
+        }, 300);
+      }
+
+      return;
+    }
+
+    // Close the desktop appearance dropdown if clicked outside
+    if (
+      dropdown.dataset.dropdownOpen === 'true' &&
+      !dropdown.contains(target)
+    ) {
+      dropdown.dataset.dropdownOpen = 'false';
+    }
+>>>>>>> upstream/develop
   });
 };
 
@@ -114,6 +208,7 @@ export const initializeTheme = () => {
   if (window.portalConfig.isPlainLayoutEnabled === 'true') return;
   // start with updating the theme in the header, this will set the current theme on the button
   // and set the hover color at the start of init, this is set again when the theme is switched
+<<<<<<< HEAD
   setPortalHoverColor(localStorage.theme || 'system');
   window.updateThemeInHeader = updateThemeInHeader;
   updateThemeInHeader(localStorage.theme || 'system');
@@ -121,6 +216,14 @@ export const initializeTheme = () => {
   // add the event listeners for the dropdown toggle and theme buttons
   initializeToggleButton();
   initializeThemeSwitchButtons();
+=======
+  switchTheme(localStorage.theme || 'system');
+
+  window.updateThemeInHeader = updateThemeInHeader;
+
+  // add the event listeners for the dropdown toggle and theme buttons
+  initializeThemeHandlers();
+>>>>>>> upstream/develop
 
   // add the media query listener to update the theme when the system theme changes
   initializeMediaQueryListener();

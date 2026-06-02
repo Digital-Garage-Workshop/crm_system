@@ -74,7 +74,11 @@ const action = computed(() => ({
 
 <style lang="scss">
 .join-call-button {
+<<<<<<< HEAD
   margin: var(--space-small) 0;
+=======
+  margin: 0.5rem 0;
+>>>>>>> upstream/develop
 }
 
 .video-call--container {
@@ -83,9 +87,15 @@ const action = computed(() => ({
   right: 0;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   z-index: var(--z-index-high);
   padding: var(--space-smaller);
   background: var(--b-800);
+=======
+  z-index: 1000;
+  padding: 0.25rem;
+  @apply bg-n-background;
+>>>>>>> upstream/develop
 
   iframe {
     width: 100%;
@@ -95,7 +105,11 @@ const action = computed(() => ({
 
   button {
     position: absolute;
+<<<<<<< HEAD
     top: var(--space-smaller);
+=======
+    top: 0.25rem;
+>>>>>>> upstream/develop
     right: 10rem;
   }
 }

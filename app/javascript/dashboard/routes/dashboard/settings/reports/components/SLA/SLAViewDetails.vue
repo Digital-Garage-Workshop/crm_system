@@ -34,7 +34,11 @@ export default {
 <template>
   <div
     v-on-clickaway="closeSlaEvents"
+<<<<<<< HEAD
     class="flex items-center col-span-2 text-slate-11 justify-end"
+=======
+    class="flex items-center col-span-2 text-n-slate-11 justify-end"
+>>>>>>> upstream/develop
   >
     <div class="relative">
       <NextButton

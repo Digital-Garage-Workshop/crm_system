@@ -66,6 +66,7 @@ export const getArticleStatus = status => {
   }
 };
 
+<<<<<<< HEAD
 // Constants
 export const HELP_CENTER_MENU_ITEMS = [
   {
@@ -102,6 +103,8 @@ export const HELP_CENTER_MENU_ITEMS = [
   },
 ];
 
+=======
+>>>>>>> upstream/develop
 export const ARTICLE_STATUSES = {
   DRAFT: 'draft',
   PUBLISHED: 'published',
@@ -127,6 +130,16 @@ export const ARTICLE_MENU_ITEMS = {
     action: 'archive',
     icon: 'i-lucide-archive-restore',
   },
+<<<<<<< HEAD
+=======
+  translate: {
+    label:
+      'HELP_CENTER.ARTICLES_PAGE.ARTICLE_CARD.CARD.DROPDOWN_MENU.TRANSLATE',
+    value: 'translate',
+    action: 'translate',
+    icon: 'i-lucide-languages',
+  },
+>>>>>>> upstream/develop
   delete: {
     label: 'HELP_CENTER.ARTICLES_PAGE.ARTICLE_CARD.CARD.DROPDOWN_MENU.DELETE',
     value: 'delete',
@@ -136,9 +149,15 @@ export const ARTICLE_MENU_ITEMS = {
 };
 
 export const ARTICLE_MENU_OPTIONS = {
+<<<<<<< HEAD
   [ARTICLE_STATUSES.ARCHIVED]: ['publish', 'draft'],
   [ARTICLE_STATUSES.DRAFT]: ['publish', 'archive'],
   [ARTICLE_STATUSES.PUBLISHED]: ['draft', 'archive'],
+=======
+  [ARTICLE_STATUSES.ARCHIVED]: ['publish', 'draft', 'translate'],
+  [ARTICLE_STATUSES.DRAFT]: ['publish', 'archive', 'translate'],
+  [ARTICLE_STATUSES.PUBLISHED]: ['draft', 'archive', 'translate'],
+>>>>>>> upstream/develop
 };
 
 export const ARTICLE_TABS = {
@@ -169,20 +188,68 @@ export const ARTICLE_TABS_OPTIONS = [
   },
 ];
 
+<<<<<<< HEAD
 export const LOCALE_MENU_ITEMS = [
   {
+=======
+export const LOCALE_MENU_ITEMS = {
+  makeDefault: {
+>>>>>>> upstream/develop
     label: 'HELP_CENTER.LOCALES_PAGE.LOCALE_CARD.DROPDOWN_MENU.MAKE_DEFAULT',
     action: 'change-default',
     value: 'default',
     icon: 'i-lucide-star',
   },
+<<<<<<< HEAD
   {
+=======
+  moveToDraft: {
+    label: 'HELP_CENTER.LOCALES_PAGE.LOCALE_CARD.DROPDOWN_MENU.MOVE_TO_DRAFT',
+    action: 'move-to-draft',
+    value: 'draft',
+    icon: 'i-lucide-eye-off',
+  },
+  publishLocale: {
+    label: 'HELP_CENTER.LOCALES_PAGE.LOCALE_CARD.DROPDOWN_MENU.PUBLISH_LOCALE',
+    action: 'publish-locale',
+    value: 'publish',
+    icon: 'i-lucide-eye',
+  },
+  delete: {
+>>>>>>> upstream/develop
     label: 'HELP_CENTER.LOCALES_PAGE.LOCALE_CARD.DROPDOWN_MENU.DELETE',
     action: 'delete',
     value: 'delete',
     icon: 'i-lucide-trash',
   },
+<<<<<<< HEAD
 ];
+=======
+};
+
+const disableLocaleMenuItems = menuItems =>
+  menuItems.map(item => ({ ...item, disabled: true }));
+
+export const buildLocaleMenuItems = ({ isDefault, isDraft }) => {
+  if (isDefault) {
+    return disableLocaleMenuItems([
+      LOCALE_MENU_ITEMS.makeDefault,
+      LOCALE_MENU_ITEMS.moveToDraft,
+      LOCALE_MENU_ITEMS.delete,
+    ]);
+  }
+
+  if (isDraft) {
+    return [LOCALE_MENU_ITEMS.publishLocale, LOCALE_MENU_ITEMS.delete];
+  }
+
+  return [
+    LOCALE_MENU_ITEMS.makeDefault,
+    LOCALE_MENU_ITEMS.moveToDraft,
+    LOCALE_MENU_ITEMS.delete,
+  ];
+};
+>>>>>>> upstream/develop
 
 export const ARTICLE_EDITOR_STATUS_OPTIONS = {
   published: ['archive', 'draft'],

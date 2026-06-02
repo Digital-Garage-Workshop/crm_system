@@ -3,6 +3,7 @@ class V2::Reports::Conversations::BaseReportBuilder
 
   private
 
+<<<<<<< HEAD
   AVG_METRICS = %w[avg_first_response_time avg_resolution_time reply_time].freeze
   COUNT_METRICS = %w[
     conversations_count
@@ -20,6 +21,12 @@ class V2::Reports::Conversations::BaseReportBuilder
     when *COUNT_METRICS
       V2::Reports::Timeseries::CountReportBuilder
     end
+=======
+  def builder_class(metric)
+    return unless Reports::ReportMetricRegistry.supported?(metric)
+
+    V2::Reports::Timeseries::ReportBuilder
+>>>>>>> upstream/develop
   end
 
   def log_invalid_metric

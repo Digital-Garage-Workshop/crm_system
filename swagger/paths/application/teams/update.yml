@@ -2,6 +2,7 @@ tags:
   - Teams
 operationId: update-a-team
 summary: Update a team
+<<<<<<< HEAD
 description: Update a team's attributes
 parameters:
   - name: data
@@ -16,3 +17,27 @@ responses:
       $ref: '#/definitions/team'
   401:
     description: Unauthorized
+=======
+security:
+  - userApiKey: []
+description: Update a team's attributes
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '#/components/schemas/team_create_update_payload'
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/team'
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

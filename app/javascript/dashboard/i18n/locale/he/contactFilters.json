@@ -2,18 +2,32 @@
   "CONTACTS_FILTER": {
     "TITLE": "סינון אנשי קשר",
     "SUBTITLE": "הוסיפו פילטרים מתחת ולחצו 'אישור' בכדי לסנן אנשי קשר.",
+<<<<<<< HEAD
     "EDIT_CUSTOM_SEGMENT": "Edit Segment",
     "CUSTOM_VIEWS_SUBTITLE": "Add or remove filters and update your segment.",
+=======
+    "EDIT_CUSTOM_SEGMENT": "ערוך מקטע",
+    "CUSTOM_VIEWS_SUBTITLE": "הוסף או הסר מסננים ועדכן את המקטע שלך.",
+>>>>>>> upstream/develop
     "ADD_NEW_FILTER": "הוסף מסנן",
     "CLEAR_ALL_FILTERS": "ניקוי כל הפילטרים",
     "FILTER_DELETE_ERROR": "צריך להיות לפחות מסנן אחד כדי לשמור",
     "SUBMIT_BUTTON_LABEL": "שלח",
+<<<<<<< HEAD
     "UPDATE_BUTTON_LABEL": "Update Segment",
     "CANCEL_BUTTON_LABEL": "ביטול",
     "CLEAR_BUTTON_LABEL": "מחק סננים",
     "EMPTY_VALUE_ERROR": "חובה ערך",
     "SEGMENT_LABEL": "Segment Name",
     "SEGMENT_QUERY_LABEL": "Segment Query",
+=======
+    "UPDATE_BUTTON_LABEL": "עדכן מקטע",
+    "CANCEL_BUTTON_LABEL": "ביטול",
+    "CLEAR_BUTTON_LABEL": "מחק סננים",
+    "EMPTY_VALUE_ERROR": "חובה ערך",
+    "SEGMENT_LABEL": "שם מקטע",
+    "SEGMENT_QUERY_LABEL": "שאילתת מקטע",
+>>>>>>> upstream/develop
     "TOOLTIP_LABEL": "סינון אנשי קשר",
     "QUERY_DROPDOWN_LABELS": {
       "AND": "ו/גם",
@@ -48,7 +62,12 @@
       "CREATED_AT": "הוקם ב",
       "LAST_ACTIVITY": "פעילות אחרונה",
       "REFERER_LINK": "קישור מפנה",
+<<<<<<< HEAD
       "BLOCKED": "Blocked"
+=======
+      "BLOCKED": "חסום",
+      "LABELS": "תוויות"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "סננים סטנדרטיים",

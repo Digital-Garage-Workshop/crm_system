@@ -3,12 +3,20 @@ import { onMounted, computed, ref, toRefs } from 'vue';
 import { useTimeoutFn } from '@vueuse/core';
 import { provideMessageContext } from './provider.js';
 import { useTrack } from 'dashboard/composables';
+<<<<<<< HEAD
+=======
+import { useMapGetter } from 'dashboard/composables/store';
+>>>>>>> upstream/develop
 import { emitter } from 'shared/helpers/mitt';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 import { LocalStorage } from 'shared/helpers/localStorage';
 import { ACCOUNT_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
 import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
+<<<<<<< HEAD
+=======
+import { getInboxIconByType } from 'dashboard/helper/inbox';
+>>>>>>> upstream/develop
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import {
   MESSAGE_TYPES,
@@ -28,6 +36,11 @@ import ImageBubble from './bubbles/Image.vue';
 import FileBubble from './bubbles/File.vue';
 import AudioBubble from './bubbles/Audio.vue';
 import VideoBubble from './bubbles/Video.vue';
+<<<<<<< HEAD
+=======
+import EmbedBubble from './bubbles/Embed.vue';
+import FallbackBubble from './bubbles/Fallback.vue';
+>>>>>>> upstream/develop
 import InstagramStoryBubble from './bubbles/InstagramStory.vue';
 import EmailBubble from './bubbles/Email/Index.vue';
 import UnsupportedBubble from './bubbles/Unsupported.vue';
@@ -36,9 +49,17 @@ import DyteBubble from './bubbles/Dyte.vue';
 import LocationBubble from './bubbles/Location.vue';
 import CSATBubble from './bubbles/CSAT.vue';
 import FormBubble from './bubbles/Form.vue';
+<<<<<<< HEAD
 
 import MessageError from './MessageError.vue';
 import ContextMenu from 'dashboard/modules/conversations/components/MessageContextMenu.vue';
+=======
+import VoiceCallBubble from './bubbles/VoiceCall.vue';
+
+import MessageError from './MessageError.vue';
+import ContextMenu from 'dashboard/modules/conversations/components/MessageContextMenu.vue';
+import { useBranding } from 'shared/composables/useBranding';
+>>>>>>> upstream/develop
 
 /**
  * @typedef {Object} Attachment
@@ -108,6 +129,10 @@ const props = defineProps({
     validator: value => Object.values(MESSAGE_STATUS).includes(value),
   },
   attachments: { type: Array, default: () => [] },
+<<<<<<< HEAD
+=======
+  call: { type: Object, default: null }, // eslint-disable-line vue/no-unused-properties
+>>>>>>> upstream/develop
   content: { type: String, default: null },
   contentAttributes: { type: Object, default: () => ({}) },
   contentType: {
@@ -124,17 +149,32 @@ const props = defineProps({
   inReplyTo: { type: Object, default: null }, // eslint-disable-line vue/no-unused-properties
   isEmailInbox: { type: Boolean, default: false },
   private: { type: Boolean, default: false },
+<<<<<<< HEAD
+=======
+  additionalAttributes: { type: Object, default: () => ({}) }, // eslint-disable-line vue/no-unused-properties
+>>>>>>> upstream/develop
   sender: { type: Object, default: null },
   senderId: { type: Number, default: null },
   senderType: { type: String, default: null },
   sourceId: { type: String, default: '' }, // eslint-disable-line vue/no-unused-properties
 });
 
+<<<<<<< HEAD
+=======
+const emit = defineEmits(['retry']);
+
+>>>>>>> upstream/develop
 const contextMenuPosition = ref({});
 const showBackgroundHighlight = ref(false);
 const showContextMenu = ref(false);
 const { t } = useI18n();
 const route = useRoute();
+<<<<<<< HEAD
+=======
+const inboxGetter = useMapGetter('inboxes/getInbox');
+const inbox = computed(() => inboxGetter.value(props.inboxId) || {});
+const { replaceInstallationName } = useBranding();
+>>>>>>> upstream/develop
 
 /**
  * Computes the message variant based on props
@@ -158,7 +198,18 @@ const variant = computed(() => {
   if (props.contentAttributes?.isUnsupported)
     return MESSAGE_VARIANTS.UNSUPPORTED;
 
+<<<<<<< HEAD
   const isBot = !props.sender || props.sender.type === SENDER_TYPES.AGENT_BOT;
+=======
+  if (props.contentAttributes?.externalEcho) {
+    return MESSAGE_VARIANTS.AGENT;
+  }
+
+  const isBot =
+    props.sender?.type === SENDER_TYPES.AGENT_BOT ||
+    props.senderType === SENDER_TYPES.AGENT_BOT ||
+    (!props.sender && !props.additionalAttributes?.senderName);
+>>>>>>> upstream/develop
   if (isBot && props.messageType === MESSAGE_TYPES.OUTGOING) {
     return MESSAGE_VARIANTS.BOT;
   }
@@ -186,12 +237,27 @@ const isBotOrAgentMessage = computed(() => {
     return true;
   }
   const senderId = props.senderId ?? props.sender?.id;
+<<<<<<< HEAD
   const senderType = props.senderType ?? props.sender?.type;
+=======
+  const senderType = props.sender?.type ?? props.senderType;
+>>>>>>> upstream/develop
 
   if (!senderType || !senderId) {
     return true;
   }
 
+<<<<<<< HEAD
+=======
+  if (
+    [SENDER_TYPES.AGENT_BOT, SENDER_TYPES.CAPTAIN_ASSISTANT].includes(
+      senderType
+    )
+  ) {
+    return true;
+  }
+
+>>>>>>> upstream/develop
   return senderType.toLowerCase() === SENDER_TYPES.USER.toLowerCase();
 });
 
@@ -272,6 +338,13 @@ const componentToRender = computed(() => {
     return FormBubble;
   }
 
+<<<<<<< HEAD
+=======
+  if (props.contentType === CONTENT_TYPES.VOICE_CALL) {
+    return VoiceCallBubble;
+  }
+
+>>>>>>> upstream/develop
   if (props.contentType === CONTENT_TYPES.INCOMING_EMAIL) {
     return EmailBubble;
   }
@@ -284,19 +357,38 @@ const componentToRender = computed(() => {
     return DyteBubble;
   }
 
+<<<<<<< HEAD
   if (props.contentAttributes.imageType === 'story_mention') {
+=======
+  const instagramSharedTypes = [
+    ATTACHMENT_TYPES.STORY_MENTION,
+    ATTACHMENT_TYPES.IG_STORY,
+    ATTACHMENT_TYPES.IG_STORY_REPLY,
+    ATTACHMENT_TYPES.IG_POST,
+  ];
+  if (instagramSharedTypes.includes(props.contentAttributes.imageType)) {
+>>>>>>> upstream/develop
     return InstagramStoryBubble;
   }
 
   if (Array.isArray(props.attachments) && props.attachments.length === 1) {
     const fileType = props.attachments[0].fileType;
 
+<<<<<<< HEAD
+=======
+    if (fileType === ATTACHMENT_TYPES.FALLBACK) return FallbackBubble;
+
+>>>>>>> upstream/develop
     if (!props.content) {
       if (fileType === ATTACHMENT_TYPES.IMAGE) return ImageBubble;
       if (fileType === ATTACHMENT_TYPES.FILE) return FileBubble;
       if (fileType === ATTACHMENT_TYPES.AUDIO) return AudioBubble;
       if (fileType === ATTACHMENT_TYPES.VIDEO) return VideoBubble;
       if (fileType === ATTACHMENT_TYPES.IG_REEL) return VideoBubble;
+<<<<<<< HEAD
+=======
+      if (fileType === ATTACHMENT_TYPES.EMBED) return EmbedBubble;
+>>>>>>> upstream/develop
       if (fileType === ATTACHMENT_TYPES.LOCATION) return LocationBubble;
     }
     // Attachment content is the name of the contact
@@ -307,11 +399,15 @@ const componentToRender = computed(() => {
 });
 
 const shouldShowContextMenu = computed(() => {
+<<<<<<< HEAD
   return !(
     props.status === MESSAGE_STATUS.FAILED ||
     props.status === MESSAGE_STATUS.PROGRESS ||
     props.contentAttributes?.isUnsupported
   );
+=======
+  return !props.contentAttributes?.isUnsupported;
+>>>>>>> upstream/develop
 });
 
 const isBubble = computed(() => {
@@ -336,12 +432,32 @@ const contextMenuEnabledOptions = computed(() => {
   const hasAttachments = !!(props.attachments && props.attachments.length > 0);
 
   const isOutgoing = props.messageType === MESSAGE_TYPES.OUTGOING;
+<<<<<<< HEAD
 
   return {
     copy: hasText,
     delete: hasText || hasAttachments,
     cannedResponse: isOutgoing && hasText,
     replyTo: !props.private && props.inboxSupportsReplyTo.outgoing,
+=======
+  const isFailedOrProcessing =
+    props.status === MESSAGE_STATUS.FAILED ||
+    props.status === MESSAGE_STATUS.PROGRESS;
+
+  return {
+    copy: hasText,
+    delete:
+      (hasText || hasAttachments) &&
+      !isFailedOrProcessing &&
+      !isMessageDeleted.value,
+    cannedResponse: isOutgoing && hasText && !isMessageDeleted.value,
+    copyLink: !isFailedOrProcessing,
+    translate: !isFailedOrProcessing && !isMessageDeleted.value && hasText,
+    replyTo:
+      !props.private &&
+      props.inboxSupportsReplyTo.outgoing &&
+      !isFailedOrProcessing,
+>>>>>>> upstream/develop
   };
 });
 
@@ -351,20 +467,35 @@ const shouldRenderMessage = computed(() => {
   const isUnsupported = props.contentAttributes?.isUnsupported;
   const isAnIntegrationMessage =
     props.contentType === CONTENT_TYPES.INTEGRATIONS;
+<<<<<<< HEAD
+=======
+  const isFailedMessage = props.status === MESSAGE_STATUS.FAILED;
+  const hasExternalError = !!props.contentAttributes?.externalError;
+>>>>>>> upstream/develop
 
   return (
     hasAttachments ||
     props.content ||
     isEmailContentType ||
     isUnsupported ||
+<<<<<<< HEAD
     isAnIntegrationMessage
+=======
+    isAnIntegrationMessage ||
+    isFailedMessage ||
+    hasExternalError
+>>>>>>> upstream/develop
   );
 });
 
 function openContextMenu(e) {
   const shouldSkipContextMenu =
     e.target?.classList.contains('skip-context-menu') ||
+<<<<<<< HEAD
     e.target?.tagName.toLowerCase() === 'a';
+=======
+    ['a', 'img'].includes(e.target?.tagName.toLowerCase());
+>>>>>>> upstream/develop
   if (shouldSkipContextMenu || getSelection().toString()) {
     return;
   }
@@ -394,6 +525,7 @@ function handleReplyTo() {
 }
 
 const avatarInfo = computed(() => {
+<<<<<<< HEAD
   // If no sender, return bot info
   if (!props.sender) {
     return {
@@ -402,11 +534,38 @@ const avatarInfo = computed(() => {
     };
   }
 
+=======
+  if (props.contentAttributes?.externalEcho) {
+    const { name, avatar_url, channel_type, medium } = inbox.value;
+    const iconName = avatar_url
+      ? null
+      : getInboxIconByType(channel_type, medium);
+    return {
+      name: iconName ? '' : name || t('CONVERSATION.NATIVE_APP'),
+      src: avatar_url || '',
+      iconName,
+    };
+  }
+
+  // If no sender, check for Slack (or other integration) sender info
+  if (!props.sender) {
+    const { senderName, senderAvatarUrl } = props.additionalAttributes || {};
+    if (senderName) {
+      return { name: senderName, src: senderAvatarUrl ?? '' };
+    }
+    return { name: t('CONVERSATION.BOT'), src: '' };
+  }
+
+>>>>>>> upstream/develop
   const { sender } = props;
   const { name, type, avatarUrl, thumbnail } = sender || {};
 
   // If sender type is agent bot, use avatarUrl
+<<<<<<< HEAD
   if (type === SENDER_TYPES.AGENT_BOT) {
+=======
+  if ([SENDER_TYPES.AGENT_BOT, SENDER_TYPES.CAPTAIN_ASSISTANT].includes(type)) {
+>>>>>>> upstream/develop
     return {
       name: name ?? '',
       src: avatarUrl ?? '',
@@ -421,6 +580,12 @@ const avatarInfo = computed(() => {
 });
 
 const avatarTooltip = computed(() => {
+<<<<<<< HEAD
+=======
+  if (props.contentAttributes?.externalEcho) {
+    return replaceInstallationName(t('CONVERSATION.NATIVE_APP_ADVISORY'));
+  }
+>>>>>>> upstream/develop
   if (avatarInfo.value.name === '') return '';
   return `${t('CONVERSATION.SENT_BY')} ${avatarInfo.value.name}`;
 });
@@ -454,7 +619,11 @@ provideMessageContext({
   <div
     v-if="shouldRenderMessage"
     :id="`message${props.id}`"
+<<<<<<< HEAD
     class="flex w-full message-bubble-container mb-2"
+=======
+    class="flex w-full mb-2 message-bubble-container"
+>>>>>>> upstream/develop
     :data-message-id="props.id"
     :class="[
       flexOrientationClass,
@@ -489,11 +658,18 @@ provideMessageContext({
         <Avatar v-bind="avatarInfo" :size="24" />
       </div>
       <div
+<<<<<<< HEAD
         class="[grid-area:bubble] flex"
         :class="{
           'ltr:pl-8 rtl:pr-8 justify-end': orientation === ORIENTATION.RIGHT,
           'ltr:pr-8 rtl:pl-8': orientation === ORIENTATION.LEFT,
           'min-w-0': variant === MESSAGE_VARIANTS.EMAIL,
+=======
+        class="[grid-area:bubble] flex min-w-0"
+        :class="{
+          'ltr:ml-8 rtl:mr-8 justify-end': orientation === ORIENTATION.RIGHT,
+          'ltr:mr-8 rtl:ml-8': orientation === ORIENTATION.LEFT,
+>>>>>>> upstream/develop
         }"
         @contextmenu="openContextMenu($event)"
       >
@@ -504,11 +680,19 @@ provideMessageContext({
         class="[grid-area:meta]"
         :class="flexOrientationClass"
         :error="contentAttributes.externalError"
+<<<<<<< HEAD
+=======
+        @retry="emit('retry')"
+>>>>>>> upstream/develop
       />
     </div>
     <div v-if="shouldShowContextMenu" class="context-menu-wrap">
       <ContextMenu
+<<<<<<< HEAD
         v-if="isBubble && !isMessageDeleted"
+=======
+        v-if="isBubble"
+>>>>>>> upstream/develop
         :context-menu-position="contextMenuPosition"
         :is-open="showContextMenu"
         :enabled-options="contextMenuEnabledOptions"

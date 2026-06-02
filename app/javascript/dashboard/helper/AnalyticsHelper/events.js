@@ -6,6 +6,10 @@ export const CONVERSATION_EVENTS = Object.freeze({
   TRANSLATE_A_MESSAGE: 'Translated a message',
   INSERTED_A_VARIABLE: 'Inserted a variable',
   INSERTED_AN_EMOJI: 'Inserted an emoji',
+<<<<<<< HEAD
+=======
+  INSERTED_A_TOOL: 'Inserted a tool',
+>>>>>>> upstream/develop
   USED_MENTIONS: 'Used mentions',
   SEARCH_CONVERSATION: 'Searched conversations',
   APPLY_FILTER: 'Applied filters in the conversation list',
@@ -83,6 +87,7 @@ export const PORTALS_EVENTS = Object.freeze({
   PREVIEW_ARTICLE: 'Previewed article',
 });
 
+<<<<<<< HEAD
 export const OPEN_AI_EVENTS = Object.freeze({
   SUMMARIZE: 'OpenAI: Used summarize',
   REPLY_SUGGESTION: 'OpenAI: Used reply suggestion',
@@ -98,6 +103,35 @@ export const OPEN_AI_EVENTS = Object.freeze({
   ADDED_AI_INTEGRATION_VIA_CTA_BUTTON:
     'OpenAI: Added AI integration via CTA button',
   DISMISS_AI_SUGGESTION: 'OpenAI: Dismiss AI suggestions',
+=======
+export const CAPTAIN_EVENTS = Object.freeze({
+  // Editor funnel events
+  EDITOR_AI_MENU_OPENED: 'Captain: Editor AI menu opened',
+  GENERATION_FAILED: 'Captain: Generation failed',
+  AI_ASSISTED_MESSAGE_SENT: 'Captain: AI-assisted message sent',
+
+  // Rewrite events (with operation attribute in payload)
+  REWRITE_USED: 'Captain: Rewrite used',
+  REWRITE_APPLIED: 'Captain: Rewrite applied',
+  REWRITE_DISMISSED: 'Captain: Rewrite dismissed',
+
+  // Summarize events
+  SUMMARIZE_USED: 'Captain: Summarize used',
+  SUMMARIZE_APPLIED: 'Captain: Summarize applied',
+  SUMMARIZE_DISMISSED: 'Captain: Summarize dismissed',
+
+  // Reply suggestion events
+  REPLY_SUGGESTION_USED: 'Captain: Reply suggestion used',
+  REPLY_SUGGESTION_APPLIED: 'Captain: Reply suggestion applied',
+  REPLY_SUGGESTION_DISMISSED: 'Captain: Reply suggestion dismissed',
+
+  // Follow-up events
+  FOLLOW_UP_SENT: 'Captain: Follow-up sent',
+
+  // Label suggestions
+  LABEL_SUGGESTION_APPLIED: 'Captain: Label suggestion applied',
+  LABEL_SUGGESTION_DISMISSED: 'Captain: Label suggestion dismissed',
+>>>>>>> upstream/develop
 });
 
 export const COPILOT_EVENTS = Object.freeze({
@@ -106,6 +140,13 @@ export const COPILOT_EVENTS = Object.freeze({
   USE_CAPTAIN_RESPONSE: 'Copilot: Used captain response',
 });
 
+<<<<<<< HEAD
+=======
+export const SNOOZE_EVENTS = Object.freeze({
+  NLP_SNOOZE_APPLIED: 'Applied snooze via text-to-date input',
+});
+
+>>>>>>> upstream/develop
 export const GENERAL_EVENTS = Object.freeze({
   COMMAND_BAR: 'Used commandbar',
 });
@@ -130,3 +171,17 @@ export const LINEAR_EVENTS = Object.freeze({
   LINK_ISSUE: 'Linked a linear issue',
   UNLINK_ISSUE: 'Unlinked a linear issue',
 });
+<<<<<<< HEAD
+=======
+
+export const YEAR_IN_REVIEW_EVENTS = Object.freeze({
+  MODAL_OPENED: 'Year in Review: Modal opened',
+  NEXT_CLICKED: 'Year in Review: Next clicked',
+  SHARE_CLICKED: 'Year in Review: Share clicked',
+});
+
+export const ONBOARDING_EVENTS = Object.freeze({
+  ACCOUNT_DETAILS_VISITED: 'Onboarding: Account details visited',
+  ACCOUNT_DETAILS_COMPLETED: 'Onboarding: Account details completed',
+});
+>>>>>>> upstream/develop

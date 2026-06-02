@@ -11,6 +11,7 @@ class V2::Reports::InboxSummaryBuilder < V2::Reports::BaseSummaryBuilder
   attr_reader :conversations_count, :resolved_count,
               :avg_resolution_time, :avg_first_response_time, :avg_reply_time
 
+<<<<<<< HEAD
   def load_data
     @conversations_count = fetch_conversations_count
     @resolved_count = fetch_resolved_count
@@ -23,6 +24,8 @@ class V2::Reports::InboxSummaryBuilder < V2::Reports::BaseSummaryBuilder
     account.conversations.where(created_at: range).group(group_by_key).count
   end
 
+=======
+>>>>>>> upstream/develop
   def prepare_report
     account.inboxes.map do |inbox|
       build_inbox_stats(inbox)
@@ -43,8 +46,11 @@ class V2::Reports::InboxSummaryBuilder < V2::Reports::BaseSummaryBuilder
   def group_by_key
     :inbox_id
   end
+<<<<<<< HEAD
 
   def average_value_key
     ActiveModel::Type::Boolean.new.cast(params[:business_hours]) ? :value_in_business_hours : :value
   end
+=======
+>>>>>>> upstream/develop
 end

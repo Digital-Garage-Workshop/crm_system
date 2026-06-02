@@ -38,6 +38,7 @@ export default {
     }
     return false;
   },
+<<<<<<< HEAD
   profileUpdate({
     password,
     password_confirmation,
@@ -45,6 +46,9 @@ export default {
     avatar,
     ...profileAttributes
   }) {
+=======
+  profileUpdate({ displayName, avatar, ...profileAttributes }) {
+>>>>>>> upstream/develop
     const formData = new FormData();
     Object.keys(profileAttributes).forEach(key => {
       const hasValue = profileAttributes[key] === undefined;
@@ -53,16 +57,32 @@ export default {
       }
     });
     formData.append('profile[display_name]', displayName || '');
+<<<<<<< HEAD
     if (password && password_confirmation) {
       formData.append('profile[password]', password);
       formData.append('profile[password_confirmation]', password_confirmation);
     }
+=======
+>>>>>>> upstream/develop
     if (avatar) {
       formData.append('profile[avatar]', avatar);
     }
     return axios.put(endPoints('profileUpdate').url, formData);
   },
 
+<<<<<<< HEAD
+=======
+  profilePasswordUpdate({ currentPassword, password, passwordConfirmation }) {
+    return axios.put(endPoints('profileUpdate').url, {
+      profile: {
+        current_password: currentPassword,
+        password,
+        password_confirmation: passwordConfirmation,
+      },
+    });
+  },
+
+>>>>>>> upstream/develop
   updateUISettings({ uiSettings }) {
     return axios.put(endPoints('profileUpdate').url, {
       profile: { ui_settings: uiSettings },
@@ -102,4 +122,11 @@ export default {
     const urlData = endPoints('resendConfirmation');
     return axios.post(urlData.url);
   },
+<<<<<<< HEAD
+=======
+  resetAccessToken() {
+    const urlData = endPoints('resetAccessToken');
+    return axios.post(urlData.url);
+  },
+>>>>>>> upstream/develop
 };

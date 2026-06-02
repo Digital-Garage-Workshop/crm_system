@@ -47,6 +47,10 @@ export default {
   emits: ['open', 'close', 'replyTo'],
   setup() {
     const { getPlainText } = useMessageFormatter();
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/develop
     return {
       getPlainText,
     };
@@ -61,6 +65,10 @@ export default {
     ...mapGetters({
       getAccount: 'accounts/getAccount',
       currentAccountId: 'getCurrentAccountId',
+<<<<<<< HEAD
+=======
+      getUISettings: 'getUISettings',
+>>>>>>> upstream/develop
     }),
     plainTextContent() {
       return this.getPlainText(this.messageContent);
@@ -116,11 +124,21 @@ export default {
       this.$emit('close', e);
     },
     handleTranslate() {
+<<<<<<< HEAD
       const { locale } = this.getAccount(this.currentAccountId);
       this.$store.dispatch('translateMessage', {
         conversationId: this.conversationId,
         messageId: this.messageId,
         targetLanguage: locale || 'en',
+=======
+      const { locale: accountLocale } = this.getAccount(this.currentAccountId);
+      const agentLocale = this.getUISettings?.locale;
+      const targetLanguage = agentLocale || accountLocale || 'en';
+      this.$store.dispatch('translateMessage', {
+        conversationId: this.conversationId,
+        messageId: this.messageId,
+        targetLanguage,
+>>>>>>> upstream/develop
       });
       useTrack(CONVERSATION_EVENTS.TRANSLATE_A_MESSAGE);
       this.handleClose();
@@ -167,7 +185,11 @@ export default {
     </woot-modal>
     <!-- Confirm Deletion -->
     <woot-delete-modal
+<<<<<<< HEAD
       v-if="showDeleteModal"
+=======
+      v-if="showDeleteModal && enabledOptions['delete']"
+>>>>>>> upstream/develop
       v-model:show="showDeleteModal"
       class="context-menu--delete-modal"
       :on-close="closeDeleteModal"
@@ -212,7 +234,11 @@ export default {
           @click.stop="handleCopy"
         />
         <MenuItem
+<<<<<<< HEAD
           v-if="enabledOptions['copy']"
+=======
+          v-if="enabledOptions['translate']"
+>>>>>>> upstream/develop
           :option="{
             icon: 'translate',
             label: $t('CONVERSATION.CONTEXT_MENU.TRANSLATE'),
@@ -222,6 +248,10 @@ export default {
         />
         <hr />
         <MenuItem
+<<<<<<< HEAD
+=======
+          v-if="enabledOptions['copyLink']"
+>>>>>>> upstream/develop
           :option="{
             icon: 'link',
             label: $t('CONVERSATION.CONTEXT_MENU.COPY_PERMALINK'),
@@ -255,7 +285,11 @@ export default {
 
 <style lang="scss" scoped>
 .menu-container {
+<<<<<<< HEAD
   @apply p-1 bg-white dark:bg-slate-900 shadow-xl rounded-md;
+=======
+  @apply p-1 bg-n-background shadow-xl rounded-md;
+>>>>>>> upstream/develop
 
   hr:first-child {
     @apply hidden;
@@ -267,6 +301,7 @@ export default {
 }
 
 .context-menu--delete-modal {
+<<<<<<< HEAD
   ::v-deep {
     .modal-container {
       @apply max-w-[30rem];
@@ -278,6 +313,13 @@ export default {
 
     .modal-footer {
       @apply pt-4 pb-8 px-8;
+=======
+  :deep(.modal-container) {
+    @apply max-w-[30rem];
+
+    h2 {
+      @apply font-medium text-base;
+>>>>>>> upstream/develop
     }
   }
 }

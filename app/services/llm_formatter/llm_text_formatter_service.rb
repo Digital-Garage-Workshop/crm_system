@@ -3,9 +3,15 @@ class LlmFormatter::LlmTextFormatterService
     @record = record
   end
 
+<<<<<<< HEAD
   def format
     formatter_class = find_formatter
     formatter_class.new(@record).format
+=======
+  def format(config = {})
+    formatter_class = find_formatter
+    formatter_class.new(@record).format(config)
+>>>>>>> upstream/develop
   end
 
   private

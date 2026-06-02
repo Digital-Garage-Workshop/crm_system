@@ -17,6 +17,10 @@ module FileTypeHelper
   def image_file?(content_type)
     [
       'image/jpeg',
+<<<<<<< HEAD
+=======
+      'image/jpg',
+>>>>>>> upstream/develop
       'image/png',
       'image/gif',
       'image/bmp',

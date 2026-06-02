@@ -34,6 +34,7 @@ const formatOperatorLabel = operator => {
 };
 
 const formatFilterValue = value => {
+<<<<<<< HEAD
   if (!value) return '';
   if (Array.isArray(value)) {
     return value.join(', ');
@@ -42,6 +43,19 @@ const formatFilterValue = value => {
     return value.name;
   }
   return value;
+=======
+  // Case 1: null, undefined, empty string
+  if (!value) return '';
+
+  // Case 2: array → map each item, use name if present, else the item itself
+  if (Array.isArray(value)) {
+    return value.map(item => item?.name ?? item).join(', ');
+  }
+
+  // Case 3: object with a "name" property → return name
+  // Case 4: primitive (string, number, etc.) → return as is
+  return value?.name ?? value;
+>>>>>>> upstream/develop
 };
 </script>
 
@@ -66,6 +80,10 @@ const formatFilterValue = value => {
           </span>
           <span
             v-if="filter.values"
+<<<<<<< HEAD
+=======
+            :title="formatFilterValue(filter.values)"
+>>>>>>> upstream/develop
             class="lowercase truncate text-n-slate-12"
             :class="{
               'first-letter:capitalize': shouldCapitalizeFirstLetter(

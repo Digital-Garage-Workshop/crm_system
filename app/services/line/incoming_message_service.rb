@@ -10,11 +10,14 @@ class Line::IncomingMessageService
     # probably test events
     return if params[:events].blank?
 
+<<<<<<< HEAD
     line_contact_info
     return if line_contact_info['userId'].blank?
 
     set_contact
     set_conversation
+=======
+>>>>>>> upstream/develop
     parse_events
   end
 
@@ -22,6 +25,17 @@ class Line::IncomingMessageService
 
   def parse_events
     params[:events].each do |event|
+<<<<<<< HEAD
+=======
+      next unless event_type_message?(event)
+
+      get_line_contact_info(event)
+      next if @line_contact_info['userId'].blank?
+
+      set_contact
+      set_conversation
+
+>>>>>>> upstream/develop
       next unless message_created? event
 
       attach_files event['message']
@@ -30,8 +44,11 @@ class Line::IncomingMessageService
   end
 
   def message_created?(event)
+<<<<<<< HEAD
     return unless event_type_message?(event)
 
+=======
+>>>>>>> upstream/develop
     @message = @conversation.messages.build(
       content: message_content(event),
       account_id: @inbox.account_id,
@@ -76,7 +93,12 @@ class Line::IncomingMessageService
 
     response = inbox.channel.client.get_message_content(message['id'])
 
+<<<<<<< HEAD
     file_name = "media-#{message['id']}.#{response.content_type.split('/')[1]}"
+=======
+    extension = get_file_extension(response)
+    file_name = message['fileName'] || "media-#{message['id']}.#{extension}"
+>>>>>>> upstream/develop
     temp_file = Tempfile.new(file_name)
     temp_file.binmode
     temp_file << response.body
@@ -93,25 +115,54 @@ class Line::IncomingMessageService
     )
   end
 
+<<<<<<< HEAD
+=======
+  def get_file_extension(response)
+    if response.content_type&.include?('/')
+      response.content_type.split('/')[1]
+    else
+      'bin'
+    end
+  end
+
+>>>>>>> upstream/develop
   def event_type_message?(event)
     event['type'] == 'message' || event['type'] == 'sticker'
   end
 
   def message_type_non_text?(type)
+<<<<<<< HEAD
     [Line::Bot::Event::MessageType::Video, Line::Bot::Event::MessageType::Audio, Line::Bot::Event::MessageType::Image].include?(type)
+=======
+    [
+      Line::Bot::Event::MessageType::Video,
+      Line::Bot::Event::MessageType::Audio,
+      Line::Bot::Event::MessageType::Image,
+      Line::Bot::Event::MessageType::File
+    ].include?(type)
+>>>>>>> upstream/develop
   end
 
   def account
     @account ||= inbox.account
   end
 
+<<<<<<< HEAD
   def line_contact_info
     @line_contact_info ||= JSON.parse(inbox.channel.client.get_profile(params[:events].first['source']['userId']).body)
+=======
+  def get_line_contact_info(event)
+    @line_contact_info = JSON.parse(inbox.channel.client.get_profile(event['source']['userId']).body)
+>>>>>>> upstream/develop
   end
 
   def set_contact
     contact_inbox = ::ContactInboxWithContactBuilder.new(
+<<<<<<< HEAD
       source_id: line_contact_info['userId'],
+=======
+      source_id: @line_contact_info['userId'],
+>>>>>>> upstream/develop
       inbox: inbox,
       contact_attributes: contact_attributes
     ).perform
@@ -130,7 +181,16 @@ class Line::IncomingMessageService
   end
 
   def set_conversation
+<<<<<<< HEAD
     @conversation = @contact_inbox.conversations.first
+=======
+    # if lock to single conversation is disabled, we will create a new conversation if previous conversation is resolved
+    @conversation = if @inbox.lock_to_single_conversation
+                      @contact_inbox.conversations.last
+                    else
+                      @contact_inbox.conversations.where.not(status: :resolved).last
+                    end
+>>>>>>> upstream/develop
     return if @conversation
 
     @conversation = ::Conversation.create!(conversation_params)
@@ -138,15 +198,24 @@ class Line::IncomingMessageService
 
   def contact_attributes
     {
+<<<<<<< HEAD
       name: line_contact_info['displayName'],
       avatar_url: line_contact_info['pictureUrl'],
+=======
+      name: @line_contact_info['displayName'],
+      avatar_url: @line_contact_info['pictureUrl'],
+>>>>>>> upstream/develop
       additional_attributes: additional_attributes
     }
   end
 
   def additional_attributes
     {
+<<<<<<< HEAD
       social_line_user_id: line_contact_info['userId']
+=======
+      social_line_user_id: @line_contact_info['userId']
+>>>>>>> upstream/develop
     }
   end
 

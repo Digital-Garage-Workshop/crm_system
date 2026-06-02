@@ -4,13 +4,20 @@
     "LOAD_MORE_CONVERSATIONS": "載入更多對話",
     "EOF": "所有對話已載入 🎉",
     "LIST": {
+<<<<<<< HEAD
       "404": "這個群組中無有效對話"
     },
     "FAILED_TO_SEND": "Failed to send",
+=======
+      "404": "這個群組中沒有進行中的對話"
+    },
+    "FAILED_TO_SEND": "傳送失敗",
+>>>>>>> upstream/develop
     "TAB_HEADING": "對話",
     "MENTION_HEADING": "被提及",
     "UNATTENDED_HEADING": "無人處理",
     "SEARCH": {
+<<<<<<< HEAD
       "INPUT": "搜尋人、聊天室、保存回覆"
     },
     "FILTER_ALL": "所有的",
@@ -18,6 +25,15 @@
       "me": "我的",
       "unassigned": "未指派的",
       "all": "所有的"
+=======
+      "INPUT": "搜尋人員、對話、預設回覆…"
+    },
+    "FILTER_ALL": "全部",
+    "ASSIGNEE_TYPE_TABS": {
+      "me": "我的",
+      "unassigned": "未指派",
+      "all": "全部"
+>>>>>>> upstream/develop
     },
     "CHAT_STATUS_FILTER_ITEMS": {
       "open": {
@@ -30,6 +46,7 @@
         "TEXT": "待處理"
       },
       "snoozed": {
+<<<<<<< HEAD
         "TEXT": "擱置"
       },
       "all": {
@@ -50,10 +67,33 @@
       "LAST_ACTIVITY": {
         "NOT_ACTIVE": "Last activity:",
         "ACTIVE": "Last activity"
+=======
+        "TEXT": "已擱置"
+      },
+      "all": {
+        "TEXT": "全部"
+      }
+    },
+    "VIEW_FILTER": "檢視",
+    "SORT_TOOLTIP_LABEL": "排序對話",
+    "CHAT_SORT": {
+      "STATUS": "狀態",
+      "ORDER_BY": "排序方式"
+    },
+    "CHAT_TIME_STAMP": {
+      "CREATED": {
+        "LATEST": "建立時間",
+        "OLDEST": "建立於："
+      },
+      "LAST_ACTIVITY": {
+        "NOT_ACTIVE": "最後活動：",
+        "ACTIVE": "最後活動"
+>>>>>>> upstream/develop
       }
     },
     "SORT_ORDER_ITEMS": {
       "last_activity_at_asc": {
+<<<<<<< HEAD
         "TEXT": "最後收到訊息: 舊的在前"
       },
       "last_activity_at_desc": {
@@ -76,6 +116,33 @@
       },
       "waiting_since_desc": {
         "TEXT": "等待回應: 近的在前"
+=======
+        "TEXT": "最後活動：舊的在前"
+      },
+      "last_activity_at_desc": {
+        "TEXT": "最後活動：新的在前"
+      },
+      "created_at_desc": {
+        "TEXT": "建立日期：新的在前"
+      },
+      "created_at_asc": {
+        "TEXT": "建立日期：舊的在前"
+      },
+      "priority_desc": {
+        "TEXT": "優先順序：高的在前"
+      },
+      "priority_asc": {
+        "TEXT": "優先順序：低的在前"
+      },
+      "waiting_since_asc": {
+        "TEXT": "等待回應：最久的在前"
+      },
+      "waiting_since_desc": {
+        "TEXT": "等待回應：最短的在前"
+      },
+      "priority_desc_created_at_asc": {
+        "TEXT": "優先順序：高的在前，建立日期：舊的在前"
+>>>>>>> upstream/develop
       }
     },
     "ATTACHMENTS": {
@@ -83,13 +150,21 @@
         "CONTENT": "圖片訊息"
       },
       "audio": {
+<<<<<<< HEAD
         "CONTENT": "聲音訊息"
+=======
+        "CONTENT": "語音訊息"
+>>>>>>> upstream/develop
       },
       "video": {
         "CONTENT": "影片訊息"
       },
       "file": {
+<<<<<<< HEAD
         "CONTENT": "附件"
+=======
+        "CONTENT": "檔案附件"
+>>>>>>> upstream/develop
       },
       "location": {
         "CONTENT": "位置"
@@ -101,6 +176,7 @@
         "CONTENT": "分享了一個網址"
       },
       "contact": {
+<<<<<<< HEAD
         "CONTENT": "Shared contact"
       }
     },
@@ -129,11 +205,50 @@
     "SENT": "傳送成功",
     "READ": "Read successfully",
     "DELIVERED": "Delivered successfully",
+=======
+        "CONTENT": "分享的聯絡人"
+      },
+      "embed": {
+        "CONTENT": "嵌入內容"
+      }
+    },
+    "CHAT_SORT_BY_FILTER": {
+      "TITLE": "排序對話",
+      "DROPDOWN_TITLE": "排序方式",
+      "ITEMS": {
+        "LATEST": {
+          "NAME": "最後活動時間",
+          "LABEL": "最後活動"
+        },
+        "CREATED_AT": {
+          "NAME": "建立時間",
+          "LABEL": "建立時間"
+        },
+        "LAST_USER_MESSAGE_AT": {
+          "NAME": "最後使用者訊息時間",
+          "LABEL": "最後訊息"
+        }
+      }
+    },
+    "RECEIVED_VIA_EMAIL": "透過電子郵件接收",
+    "VIEW_TWEET_IN_TWITTER": "在 Twitter 上查看推文",
+    "REPLY_TO_TWEET": "回覆此推文",
+    "LINK_TO_STORY": "前往 Instagram 限時動態",
+    "SENT": "傳送成功",
+    "READ": "已讀",
+    "DELIVERED": "已送達",
+>>>>>>> upstream/develop
     "NO_MESSAGES": "沒有訊息",
     "NO_CONTENT": "沒有可用內容",
     "HIDE_QUOTED_TEXT": "隱藏引用文字",
     "SHOW_QUOTED_TEXT": "顯示引用文字",
+<<<<<<< HEAD
     "MESSAGE_READ": "Read",
     "SENDING": "Sending"
+=======
+    "MESSAGE_READ": "已讀",
+    "SENDING": "傳送中",
+    "UNREAD_COUNT_OVERFLOW": "9+"
+>>>>>>> upstream/develop
   }
 }

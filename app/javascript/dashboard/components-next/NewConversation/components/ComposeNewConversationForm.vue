@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import { reactive, ref, computed } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, requiredIf } from '@vuelidate/validators';
@@ -7,6 +8,17 @@ import {
   appendSignature,
   removeSignature,
   extractTextFromMarkdown,
+=======
+import { ref, computed } from 'vue';
+import { useVuelidate } from '@vuelidate/core';
+import { required, requiredIf } from '@vuelidate/validators';
+import { INBOX_TYPES, isVoiceCallEnabled } from 'dashboard/helper/inbox';
+import {
+  appendSignature,
+  removeSignature,
+  getEffectiveChannelType,
+  stripUnsupportedMarkdown,
+>>>>>>> upstream/develop
 } from 'dashboard/helper/editorHelper';
 import {
   buildContactableInboxesList,
@@ -14,6 +26,12 @@ import {
   prepareWhatsAppMessagePayload,
 } from 'dashboard/components-next/NewConversation/helpers/composeConversationHelper.js';
 
+<<<<<<< HEAD
+=======
+import { useCopilotReply } from 'dashboard/composables/useCopilotReply';
+import { useKeyboardEvents } from 'dashboard/composables/useKeyboardEvents';
+
+>>>>>>> upstream/develop
 import ContactSelector from './ContactSelector.vue';
 import InboxSelector from './InboxSelector.vue';
 import EmailOptions from './EmailOptions.vue';
@@ -21,6 +39,10 @@ import MessageEditor from './MessageEditor.vue';
 import ActionButtons from './ActionButtons.vue';
 import InboxEmptyState from './InboxEmptyState.vue';
 import AttachmentPreviews from './AttachmentPreviews.vue';
+<<<<<<< HEAD
+=======
+import CopilotReplyBottomPanel from 'dashboard/components/widgets/WootWriter/CopilotReplyBottomPanel.vue';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   contacts: { type: Array, default: () => [] },
@@ -36,10 +58,18 @@ const props = defineProps({
   contactsUiFlags: { type: Object, default: null },
   messageSignature: { type: String, default: '' },
   sendWithSignature: { type: Boolean, default: false },
+<<<<<<< HEAD
+=======
+  formState: { type: Object, required: true },
+>>>>>>> upstream/develop
 });
 
 const emit = defineEmits([
   'searchContacts',
+<<<<<<< HEAD
+=======
+  'resetContactSearch',
+>>>>>>> upstream/develop
   'discard',
   'updateSelectedContact',
   'updateTargetInbox',
@@ -47,6 +77,13 @@ const emit = defineEmits([
   'createConversation',
 ]);
 
+<<<<<<< HEAD
+=======
+const DEFAULT_FORMATTING = 'Context::Default';
+
+const copilot = useCopilotReply();
+
+>>>>>>> upstream/develop
 const showContactsDropdown = ref(false);
 const showInboxesDropdown = ref(false);
 const showCcEmailsDropdown = ref(false);
@@ -54,13 +91,21 @@ const showBccEmailsDropdown = ref(false);
 
 const isCreating = computed(() => props.contactConversationsUiFlags.isCreating);
 
+<<<<<<< HEAD
 const state = reactive({
+=======
+const state = props.formState || {
+>>>>>>> upstream/develop
   message: '',
   subject: '',
   ccEmails: '',
   bccEmails: '',
   attachedFiles: [],
+<<<<<<< HEAD
 });
+=======
+};
+>>>>>>> upstream/develop
 
 const inboxTypes = computed(() => ({
   isEmail: props.targetInbox?.channelType === INBOX_TYPES.EMAIL,
@@ -74,6 +119,12 @@ const inboxTypes = computed(() => ({
   isTwilioSMS:
     props.targetInbox?.channelType === INBOX_TYPES.TWILIO &&
     props.targetInbox?.medium === 'sms',
+<<<<<<< HEAD
+=======
+  isTwilioWhatsapp:
+    props.targetInbox?.channelType === INBOX_TYPES.TWILIO &&
+    props.targetInbox?.medium === 'whatsapp',
+>>>>>>> upstream/develop
 }));
 
 const whatsappMessageTemplates = computed(() =>
@@ -84,6 +135,17 @@ const whatsappMessageTemplates = computed(() =>
 
 const inboxChannelType = computed(() => props.targetInbox?.channelType || '');
 
+<<<<<<< HEAD
+=======
+const inboxMedium = computed(() => props.targetInbox?.medium || '');
+
+const voiceCallEnabled = computed(() => isVoiceCallEnabled(props.targetInbox));
+
+const effectiveChannelType = computed(() =>
+  getEffectiveChannelType(inboxChannelType.value, inboxMedium.value)
+);
+
+>>>>>>> upstream/develop
 const validationRules = computed(() => ({
   selectedContact: { required },
   targetInbox: { required },
@@ -144,11 +206,16 @@ const isAnyDropdownActive = computed(() => {
 });
 
 const handleContactSearch = value => {
+<<<<<<< HEAD
   showContactsDropdown.value = true;
   emit('searchContacts', {
     keys: ['email', 'phone_number', 'name'],
     query: value,
   });
+=======
+  showContactsDropdown.value = value.trim().length > 1;
+  emit('searchContacts', value);
+>>>>>>> upstream/develop
 };
 
 const handleDropdownUpdate = (type, value) => {
@@ -162,6 +229,7 @@ const handleDropdownUpdate = (type, value) => {
 };
 
 const searchCcEmails = value => {
+<<<<<<< HEAD
   showCcEmailsDropdown.value = true;
   emit('searchContacts', { keys: ['email'], query: value });
 };
@@ -169,6 +237,19 @@ const searchCcEmails = value => {
 const searchBccEmails = value => {
   showBccEmailsDropdown.value = true;
   emit('searchContacts', { keys: ['email'], query: value });
+=======
+  showBccEmailsDropdown.value = false;
+  emit('resetContactSearch');
+  showCcEmailsDropdown.value = value.trim().length >= 2;
+  emit('searchContacts', value);
+};
+
+const searchBccEmails = value => {
+  showCcEmailsDropdown.value = false;
+  emit('resetContactSearch');
+  showBccEmailsDropdown.value = value.trim().length >= 2;
+  emit('searchContacts', value);
+>>>>>>> upstream/develop
 };
 
 const setSelectedContact = async ({ value, action, ...rest }) => {
@@ -178,13 +259,34 @@ const setSelectedContact = async ({ value, action, ...rest }) => {
   showInboxesDropdown.value = true;
 };
 
+<<<<<<< HEAD
 const handleInboxAction = ({ value, action, ...rest }) => {
   v$.value.$reset();
   emit('updateTargetInbox', { ...rest });
+=======
+const stripMessageFormatting = channelType => {
+  if (!state.message || !channelType) return;
+
+  state.message = stripUnsupportedMarkdown(state.message, channelType, false);
+};
+
+const handleInboxAction = ({ value, action, channelType, medium, ...rest }) => {
+  v$.value.$reset();
+  copilot.reset(false);
+
+  // Strip unsupported formatting when changing the target inbox
+  if (channelType) {
+    const newChannelType = getEffectiveChannelType(channelType, medium);
+    stripMessageFormatting(newChannelType);
+  }
+
+  emit('updateTargetInbox', { ...rest, channelType, medium });
+>>>>>>> upstream/develop
   showInboxesDropdown.value = false;
   state.attachedFiles = [];
 };
 
+<<<<<<< HEAD
 const removeTargetInbox = value => {
   v$.value.$reset();
   // Remove the signature from message content
@@ -195,12 +297,40 @@ const removeTargetInbox = value => {
       : extractTextFromMarkdown(props.messageSignature);
     state.message = removeSignature(state.message, signatureToRemove);
   }
+=======
+const removeSignatureFromMessage = () => {
+  // Always remove the signature from message content when inbox/contact is removed
+  // to ensure no leftover signature content remains
+  if (props.messageSignature) {
+    state.message = removeSignature(
+      state.message,
+      props.messageSignature,
+      effectiveChannelType.value
+    );
+  }
+};
+
+const removeTargetInbox = value => {
+  v$.value.$reset();
+  copilot.reset(false);
+  removeSignatureFromMessage();
+
+  stripMessageFormatting(DEFAULT_FORMATTING);
+
+>>>>>>> upstream/develop
   emit('updateTargetInbox', value);
   state.attachedFiles = [];
 };
 
 const clearSelectedContact = () => {
+<<<<<<< HEAD
   emit('clearSelectedContact');
+=======
+  copilot.reset(false);
+  removeSignatureFromMessage();
+  emit('clearSelectedContact');
+  state.message = '';
+>>>>>>> upstream/develop
   state.attachedFiles = [];
 };
 
@@ -209,11 +339,27 @@ const onClickInsertEmoji = emoji => {
 };
 
 const handleAddSignature = signature => {
+<<<<<<< HEAD
   state.message = appendSignature(state.message, signature);
 };
 
 const handleRemoveSignature = signature => {
   state.message = removeSignature(state.message, signature);
+=======
+  state.message = appendSignature(
+    state.message,
+    signature,
+    effectiveChannelType.value
+  );
+};
+
+const handleRemoveSignature = signature => {
+  state.message = removeSignature(
+    state.message,
+    signature,
+    effectiveChannelType.value
+  );
+>>>>>>> upstream/develop
 };
 
 const handleAttachFile = files => {
@@ -221,6 +367,10 @@ const handleAttachFile = files => {
 };
 
 const clearForm = () => {
+<<<<<<< HEAD
+=======
+  copilot.reset(false);
+>>>>>>> upstream/develop
   Object.assign(state, {
     message: '',
     subject: '',
@@ -261,10 +411,54 @@ const handleSendWhatsappMessage = async ({ message, templateParams }) => {
     isFromWhatsApp: true,
   });
 };
+<<<<<<< HEAD
+=======
+
+const handleSendTwilioMessage = async ({ message, templateParams }) => {
+  const twilioMessagePayload = prepareWhatsAppMessagePayload({
+    targetInbox: props.targetInbox,
+    selectedContact: props.selectedContact,
+    message,
+    templateParams,
+    currentUser: props.currentUser,
+  });
+  await emit('createConversation', {
+    payload: twilioMessagePayload,
+    isFromWhatsApp: true,
+  });
+};
+
+const shouldShowMessageEditor = computed(() => {
+  return (
+    !inboxTypes.value.isWhatsapp &&
+    !showNoInboxAlert.value &&
+    !inboxTypes.value.isTwilioWhatsapp
+  );
+});
+
+const isCopilotActive = computed(() => copilot.isActive?.value ?? false);
+
+const onSubmitCopilotReply = () => {
+  const acceptedMessage = copilot.accept();
+  state.message = acceptedMessage;
+};
+
+useKeyboardEvents({
+  '$mod+Enter': {
+    action: () => {
+      if (isCopilotActive.value && !copilot.isButtonDisabled.value) {
+        onSubmitCopilotReply();
+      }
+    },
+    allowOnFocusedInput: true,
+  },
+});
+>>>>>>> upstream/develop
 </script>
 
 <template>
   <div
+<<<<<<< HEAD
     class="w-[42rem] divide-y divide-n-strong overflow-visible transition-all duration-300 ease-in-out top-full justify-between flex flex-col bg-n-alpha-3 border border-n-strong shadow-sm backdrop-blur-[100px] rounded-xl"
   >
     <ContactSelector
@@ -327,15 +521,102 @@ const handleSendWhatsappMessage = async ({ message, templateParams }) => {
     />
 
     <ActionButtons
+=======
+    class="w-full md:w-[42rem] divide-y divide-n-strong overflow-visible transition-all duration-300 ease-in-out top-full flex flex-col bg-n-alpha-3 border border-n-strong shadow-sm backdrop-blur-[100px] rounded-xl min-w-0 max-h-[calc(100vh-8rem)]"
+  >
+    <div class="flex-1 overflow-y-auto divide-y divide-n-strong">
+      <ContactSelector
+        :contacts="contacts"
+        :selected-contact="selectedContact"
+        :show-contacts-dropdown="showContactsDropdown"
+        :is-loading="isLoading"
+        :is-creating-contact="isCreatingContact"
+        :contact-id="contactId"
+        :contactable-inboxes-list="contactableInboxesList"
+        :show-inboxes-dropdown="showInboxesDropdown"
+        :has-errors="validationStates.isContactInvalid"
+        @search-contacts="handleContactSearch"
+        @set-selected-contact="setSelectedContact"
+        @clear-selected-contact="clearSelectedContact"
+        @update-dropdown="handleDropdownUpdate"
+      />
+      <InboxEmptyState v-if="showNoInboxAlert" />
+      <InboxSelector
+        v-else
+        :target-inbox="targetInbox"
+        :selected-contact="selectedContact"
+        :show-inboxes-dropdown="showInboxesDropdown"
+        :contactable-inboxes-list="contactableInboxesList"
+        :has-errors="validationStates.isInboxInvalid"
+        :is-fetching-inboxes="isFetchingInboxes"
+        @update-inbox="removeTargetInbox"
+        @toggle-dropdown="showInboxesDropdown = $event"
+        @handle-inbox-action="handleInboxAction"
+      />
+
+      <EmailOptions
+        v-if="inboxTypes.isEmail"
+        v-model:cc-emails="state.ccEmails"
+        v-model:bcc-emails="state.bccEmails"
+        v-model:subject="state.subject"
+        :contacts="contacts"
+        :show-cc-emails-dropdown="showCcEmailsDropdown"
+        :show-bcc-emails-dropdown="showBccEmailsDropdown"
+        :is-loading="isLoading"
+        :has-errors="validationStates.isSubjectInvalid"
+        @search-cc-emails="searchCcEmails"
+        @search-bcc-emails="searchBccEmails"
+        @update-dropdown="handleDropdownUpdate"
+      />
+
+      <MessageEditor
+        v-if="shouldShowMessageEditor"
+        v-model="state.message"
+        :message-signature="messageSignature"
+        :send-with-signature="sendWithSignature"
+        :has-errors="validationStates.isMessageInvalid"
+        :channel-type="inboxChannelType"
+        :medium="targetInbox?.medium || ''"
+        :copilot="copilot"
+      />
+
+      <AttachmentPreviews
+        v-if="state.attachedFiles.length > 0"
+        :attachments="state.attachedFiles"
+        @update:attachments="state.attachedFiles = $event"
+      />
+    </div>
+
+    <CopilotReplyBottomPanel
+      v-if="isCopilotActive"
+      :is-generating-content="copilot.isButtonDisabled.value"
+      class="h-[3.25rem] !px-4 !py-2"
+      @submit="onSubmitCopilotReply"
+      @cancel="copilot.reset"
+    />
+    <ActionButtons
+      v-else
+>>>>>>> upstream/develop
       :attached-files="state.attachedFiles"
       :is-whatsapp-inbox="inboxTypes.isWhatsapp"
       :is-email-or-web-widget-inbox="inboxTypes.isEmailOrWebWidget"
       :is-twilio-sms-inbox="inboxTypes.isTwilioSMS"
+<<<<<<< HEAD
       :message-templates="whatsappMessageTemplates"
       :channel-type="inboxChannelType"
       :is-loading="isCreating"
       :disable-send-button="isCreating"
       :has-selected-inbox="!!targetInbox"
+=======
+      :is-twilio-whats-app-inbox="inboxTypes.isTwilioWhatsapp"
+      :message-templates="whatsappMessageTemplates"
+      :channel-type="inboxChannelType"
+      :voice-enabled="voiceCallEnabled"
+      :is-loading="isCreating"
+      :disable-send-button="isCreating"
+      :has-selected-inbox="!!targetInbox"
+      :inbox-id="targetInbox?.id"
+>>>>>>> upstream/develop
       :has-no-inbox="showNoInboxAlert"
       :is-dropdown-active="isAnyDropdownActive"
       :message-signature="messageSignature"
@@ -346,6 +627,10 @@ const handleSendWhatsappMessage = async ({ message, templateParams }) => {
       @discard="$emit('discard')"
       @send-message="handleSendMessage"
       @send-whatsapp-message="handleSendWhatsappMessage"
+<<<<<<< HEAD
+=======
+      @send-twilio-message="handleSendTwilioMessage"
+>>>>>>> upstream/develop
     />
   </div>
 </template>

@@ -1,5 +1,10 @@
 in: path
 name: webhook_id
+<<<<<<< HEAD
 type: integer
+=======
+schema:
+  type: integer
+>>>>>>> upstream/develop
 required: true
 description: The numeric ID of the webhook

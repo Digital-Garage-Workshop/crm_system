@@ -3,6 +3,10 @@ import { ref, computed } from 'vue';
 import { useStore } from 'dashboard/composables/store';
 import { useAlert } from 'dashboard/composables';
 import { useI18n } from 'vue-i18n';
+<<<<<<< HEAD
+=======
+import { useRoute } from 'vue-router';
+>>>>>>> upstream/develop
 
 import Dialog from 'dashboard/components-next/dialog/Dialog.vue';
 import ResponseForm from './ResponseForm.vue';
@@ -21,6 +25,10 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 const { t } = useI18n();
 const store = useStore();
+<<<<<<< HEAD
+=======
+const route = useRoute();
+>>>>>>> upstream/develop
 
 const dialogRef = ref(null);
 const responseForm = ref(null);
@@ -39,9 +47,21 @@ const createResponse = responseDetails =>
 const handleSubmit = async updatedResponse => {
   try {
     if (props.type === 'edit') {
+<<<<<<< HEAD
       await updateResponse(updatedResponse);
     } else {
       await createResponse(updatedResponse);
+=======
+      await updateResponse({
+        ...updatedResponse,
+        assistant_id: route.params.assistantId,
+      });
+    } else {
+      await createResponse({
+        ...updatedResponse,
+        assistant_id: route.params.assistantId,
+      });
+>>>>>>> upstream/develop
     }
     useAlert(t(`${i18nKey.value}.SUCCESS_MESSAGE`));
     dialogRef.value.close();

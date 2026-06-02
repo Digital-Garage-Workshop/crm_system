@@ -3,6 +3,12 @@
     "FETCHING": "Pobieranie integracji",
     "NO_HOOK_CONFIGURED": "W tym koncie nie skonfigurowano integracji {integrationId}.",
     "HEADER": "Aplikacje",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Włączone",
       "DISABLED": "Wyłączone"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Pobieranie hooków integracyjnych",
       "INBOX": "Skrzynka odbiorcza",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Akcje",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Usuń"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Wybierz skrzynkę odbiorczą"
         },
         "SUBMIT": "Dodaj",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Anuluj"
       },
       "API": {

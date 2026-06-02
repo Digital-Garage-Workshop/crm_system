@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 require 'simplecov'
 require 'webmock/rspec'
 
 SimpleCov.start 'rails'
+=======
+require 'webmock/rspec'
+
+>>>>>>> upstream/develop
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|

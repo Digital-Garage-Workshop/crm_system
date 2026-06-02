@@ -186,7 +186,11 @@ const isSubmitDisabled = computed(
       </div>
 
       <div class="w-full">
+<<<<<<< HEAD
         <label :class="{ 'text-red-500': v$.selectedPermissions.$error }">
+=======
+        <label :class="{ 'text-n-ruby-9': v$.selectedPermissions.$error }">
+>>>>>>> upstream/develop
           {{ $t('CUSTOM_ROLE.FORM.PERMISSIONS.LABEL') }}
         </label>
         <div class="flex flex-col gap-2.5 mb-4 mt-2">

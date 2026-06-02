@@ -3,6 +3,12 @@
     "FETCHING": "S'estan obtenint integracions",
     "NO_HOOK_CONFIGURED": "No hi ha integracions {integrationId} configurades en aquest compte.",
     "HEADER": "Aplicacions",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Habilita",
       "DISABLED": "Inhabilita"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Recollint els hooks d'integració",
       "INBOX": "Safata d'entrada",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Accions",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Esborrar"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Selecciona Safata d'entrada"
         },
         "SUBMIT": "Crear",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Cancel·la"
       },
       "API": {

@@ -48,7 +48,12 @@
       "CREATED_AT": "Aangemaakt op",
       "LAST_ACTIVITY": "Laatste Activiteit",
       "REFERER_LINK": "Verwijzer link",
+<<<<<<< HEAD
       "BLOCKED": "Blocked"
+=======
+      "BLOCKED": "Blocked",
+      "LABELS": "Labelen"
+>>>>>>> upstream/develop
     },
     "GROUPS": {
       "STANDARD_FILTERS": "Standaard Filters",

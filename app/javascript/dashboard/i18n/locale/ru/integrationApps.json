@@ -3,6 +3,12 @@
     "FETCHING": "Загрузка интеграций",
     "NO_HOOK_CONFIGURED": "В этой учетной записи не настроено ни одной {integrationId} интеграции.",
     "HEADER": "Приложения",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Поиск...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Включено",
       "DISABLED": "Выключено"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Получение хуков",
       "INBOX": "Электронная почта",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Действия",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Удалить"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Выбрать \"Входящий\" канал"
         },
         "SUBMIT": "Создать",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Отменить"
       },
       "API": {

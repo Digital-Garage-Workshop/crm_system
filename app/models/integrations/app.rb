@@ -39,7 +39,12 @@ class Integrations::App
   def action
     case params[:id]
     when 'slack'
+<<<<<<< HEAD
       "#{params[:action]}&client_id=#{ENV.fetch('SLACK_CLIENT_ID', nil)}&redirect_uri=#{self.class.slack_integration_url}"
+=======
+      client_id = GlobalConfigService.load('SLACK_CLIENT_ID', nil)
+      "#{params[:action]}&client_id=#{client_id}&redirect_uri=#{self.class.slack_integration_url}"
+>>>>>>> upstream/develop
     when 'linear'
       build_linear_action
     else
@@ -50,6 +55,7 @@ class Integrations::App
   def active?(account)
     case params[:id]
     when 'slack'
+<<<<<<< HEAD
       ENV['SLACK_CLIENT_SECRET'].present?
     when 'linear'
       GlobalConfigService.load('LINEAR_CLIENT_ID', nil).present?
@@ -57,6 +63,17 @@ class Integrations::App
       account.feature_enabled?('shopify_integration') && GlobalConfigService.load('SHOPIFY_CLIENT_ID', nil).present?
     when 'leadsquared'
       account.feature_enabled?('crm_integration')
+=======
+      GlobalConfigService.load('SLACK_CLIENT_SECRET', nil).present?
+    when 'linear'
+      account.feature_enabled?('linear_integration') && GlobalConfigService.load('LINEAR_CLIENT_ID', nil).present?
+    when 'shopify'
+      shopify_enabled?(account)
+    when 'leadsquared'
+      account.feature_enabled?('crm_integration')
+    when 'notion'
+      notion_enabled?(account)
+>>>>>>> upstream/develop
     else
       true
     end
@@ -70,7 +87,12 @@ class Integrations::App
       "redirect_uri=#{self.class.linear_integration_url}",
       "state=#{encode_state}",
       'scope=read,write',
+<<<<<<< HEAD
       'prompt=consent'
+=======
+      'prompt=consent',
+      'actor=app'
+>>>>>>> upstream/develop
     ].join('&')
   end
 
@@ -112,4 +134,17 @@ class Integrations::App
       all.detect { |app| app.id == params[:id] }
     end
   end
+<<<<<<< HEAD
+=======
+
+  private
+
+  def shopify_enabled?(account)
+    account.feature_enabled?('shopify_integration') && GlobalConfigService.load('SHOPIFY_CLIENT_ID', nil).present?
+  end
+
+  def notion_enabled?(account)
+    account.feature_enabled?('notion_integration') && GlobalConfigService.load('NOTION_CLIENT_ID', nil).present?
+  end
+>>>>>>> upstream/develop
 end

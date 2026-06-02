@@ -6,10 +6,18 @@ import { CONTACTS_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
 import { vOnClickOutside } from '@vueuse/components';
 import { useTrack } from 'dashboard/composables';
 import NextButton from 'next/button/Button.vue';
+<<<<<<< HEAD
+=======
+import NextInput from 'dashboard/components-next/input/Input.vue';
+>>>>>>> upstream/develop
 
 export default {
   components: {
     NextButton,
+<<<<<<< HEAD
+=======
+    NextInput,
+>>>>>>> upstream/develop
   },
   directives: {
     onClickOutside: vOnClickOutside,
@@ -103,6 +111,7 @@ export default {
       {{ $t('FILTER.CUSTOM_VIEWS.ADD.TITLE') }}
     </h3>
     <form class="w-full grid gap-6" @submit.prevent="saveCustomViews">
+<<<<<<< HEAD
       <label :class="{ error: v$.name.$error }">
         <input
           v-model="name"
@@ -117,6 +126,15 @@ export default {
           {{ $t('FILTER.CUSTOM_VIEWS.ADD.ERROR_MESSAGE') }}
         </span>
       </label>
+=======
+      <NextInput
+        v-model="name"
+        :placeholder="$t('FILTER.CUSTOM_VIEWS.ADD.PLACEHOLDER')"
+        :message="v$.name.$error && $t('FILTER.CUSTOM_VIEWS.ADD.ERROR_MESSAGE')"
+        :message-type="v$.name.$error && 'error'"
+        @blur="v$.name.$touch"
+      />
+>>>>>>> upstream/develop
       <div class="flex flex-row justify-end w-full gap-2">
         <NextButton faded slate sm @click.prevent="onClose">
           {{ $t('FILTER.CUSTOM_VIEWS.ADD.CANCEL_BUTTON') }}

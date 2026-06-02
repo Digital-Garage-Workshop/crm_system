@@ -12,7 +12,11 @@ describe BaseMarkdownRenderer do
     context 'when image has a height' do
       it 'renders the img tag with the correct attributes' do
         markdown = '![Sample Title](https://example.com/image.jpg?cw_image_height=100)'
+<<<<<<< HEAD
         expect(render_markdown(markdown)).to include('<img src="https://example.com/image.jpg?cw_image_height=100" height="100" width="auto" />')
+=======
+        expect(render_markdown(markdown)).to include('<img src="https://example.com/image.jpg?cw_image_height=100" style="height: 100;" />')
+>>>>>>> upstream/develop
       end
     end
 

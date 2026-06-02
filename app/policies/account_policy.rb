@@ -30,4 +30,11 @@ class AccountPolicy < ApplicationPolicy
   def toggle_deletion?
     @account_user.administrator?
   end
+<<<<<<< HEAD
+=======
+
+  def topup_checkout?
+    @account_user.administrator?
+  end
+>>>>>>> upstream/develop
 end

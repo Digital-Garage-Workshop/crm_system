@@ -4,12 +4,18 @@ import { setHeader } from 'widget/helpers/axios';
 import addHours from 'date-fns/addHours';
 import { IFrameHelper, RNHelper } from 'widget/helpers/utils';
 import configMixin from './mixins/configMixin';
+<<<<<<< HEAD
 import availabilityMixin from 'widget/mixins/availability';
+=======
+>>>>>>> upstream/develop
 import { getLocale } from './helpers/urlParamsHelper';
 import { getLanguageDirection } from 'dashboard/components/widgets/conversation/advancedFilterItems/languages';
 import { isEmptyObject } from 'widget/helpers/utils';
 import Spinner from 'shared/components/Spinner.vue';
+<<<<<<< HEAD
 import routerMixin from './mixins/routerMixin';
+=======
+>>>>>>> upstream/develop
 import {
   getExtraSpaceToScroll,
   loadedEventConfig,
@@ -20,6 +26,11 @@ import {
   ON_UNREAD_MESSAGE_CLICK,
 } from './constants/widgetBusEvents';
 import { useDarkMode } from 'widget/composables/useDarkMode';
+<<<<<<< HEAD
+=======
+import { useRouter } from 'vue-router';
+import { useAvailability } from 'widget/composables/useAvailability';
+>>>>>>> upstream/develop
 import { SDK_SET_BUBBLE_VISIBILITY } from '../shared/constants/sharedFrameEvents';
 import { emitter } from 'shared/helpers/mitt';
 
@@ -28,10 +39,20 @@ export default {
   components: {
     Spinner,
   },
+<<<<<<< HEAD
   mixins: [availabilityMixin, configMixin, routerMixin],
   setup() {
     const { prefersDarkMode } = useDarkMode();
     return { prefersDarkMode };
+=======
+  mixins: [configMixin],
+  setup() {
+    const { prefersDarkMode } = useDarkMode();
+    const router = useRouter();
+    const { isInWorkingHours } = useAvailability();
+
+    return { prefersDarkMode, router, isInWorkingHours };
+>>>>>>> upstream/develop
   },
   data() {
     return {
@@ -79,6 +100,10 @@ export default {
     const { websiteToken, locale, widgetColor } = window.chatwootWebChannel;
     this.setLocale(locale);
     this.setWidgetColor(widgetColor);
+<<<<<<< HEAD
+=======
+    this.setWidgetColorVariable(widgetColor);
+>>>>>>> upstream/develop
     setHeader(window.authToken);
     if (this.isIFrame) {
       this.registerListeners();
@@ -111,6 +136,17 @@ export default {
       'resetCampaign',
     ]),
     ...mapActions('agent', ['fetchAvailableAgents']),
+<<<<<<< HEAD
+=======
+    setWidgetColorVariable(widgetColor) {
+      if (widgetColor) {
+        document.documentElement.style.setProperty(
+          '--widget-color',
+          widgetColor
+        );
+      }
+    },
+>>>>>>> upstream/develop
     scrollConversationToBottom() {
       const container = this.$el.querySelector('.conversation-wrap');
       container.scrollTop = container.scrollHeight;
@@ -157,15 +193,27 @@ export default {
         this.setUnreadView();
       });
       emitter.on(ON_UNREAD_MESSAGE_CLICK, () => {
+<<<<<<< HEAD
         this.replaceRoute('messages').then(() => this.unsetUnreadView());
+=======
+        this.router
+          .replace({ name: 'messages' })
+          .then(() => this.unsetUnreadView());
+>>>>>>> upstream/develop
       });
     },
     registerCampaignEvents() {
       emitter.on(ON_CAMPAIGN_MESSAGE_CLICK, () => {
         if (this.shouldShowPreChatForm) {
+<<<<<<< HEAD
           this.replaceRoute('prechat-form');
         } else {
           this.replaceRoute('messages');
+=======
+          this.router.replace({ name: 'prechat-form' });
+        } else {
+          this.router.replace({ name: 'messages' });
+>>>>>>> upstream/develop
           emitter.emit('execute-campaign', {
             campaignId: this.activeCampaign.id,
           });
@@ -176,7 +224,11 @@ export default {
         const { customAttributes, campaignId } = campaignDetails;
         const { websiteToken } = window.chatwootWebChannel;
         this.executeCampaign({ campaignId, websiteToken, customAttributes });
+<<<<<<< HEAD
         this.replaceRoute('messages');
+=======
+        this.router.replace({ name: 'messages' });
+>>>>>>> upstream/develop
       });
       emitter.on('snooze-campaigns', () => {
         const expireBy = addHours(new Date(), 1);
@@ -192,7 +244,11 @@ export default {
         !messageCount &&
         !shouldSnoozeCampaign;
       if (this.isIFrame && isCampaignReadyToExecute) {
+<<<<<<< HEAD
         this.replaceRoute('campaigns').then(() => {
+=======
+        this.router.replace({ name: 'campaigns' }).then(() => {
+>>>>>>> upstream/develop
           this.setIframeHeight(true);
           IFrameHelper.sendMessage({ event: 'setUnreadMode' });
         });
@@ -207,7 +263,11 @@ export default {
         unreadMessageCount > 0 &&
         !this.isWidgetOpen
       ) {
+<<<<<<< HEAD
         this.replaceRoute('unread-messages').then(() => {
+=======
+        this.router.replace({ name: 'unread-messages' }).then(() => {
+>>>>>>> upstream/develop
           this.setIframeHeight(true);
           IFrameHelper.sendMessage({ event: 'setUnreadMode' });
         });
@@ -263,7 +323,11 @@ export default {
           this.initCampaigns({
             currentURL: referrerURL,
             websiteToken,
+<<<<<<< HEAD
             isInBusinessHours: this.isInBusinessHours,
+=======
+            isInBusinessHours: this.isInWorkingHours,
+>>>>>>> upstream/develop
           });
           window.referrerURL = referrerURL;
           this.setReferrerHost(referrerHost);
@@ -314,12 +378,20 @@ export default {
             ['unread-messages', 'campaigns'].includes(this.$route.name);
 
           if (shouldShowMessageView) {
+<<<<<<< HEAD
             this.replaceRoute('messages');
+=======
+            this.router.replace({ name: 'messages' });
+>>>>>>> upstream/develop
           }
           if (shouldShowHomeView) {
             this.$store.dispatch('conversation/setUserLastSeen');
             this.unsetUnreadView();
+<<<<<<< HEAD
             this.replaceRoute('home');
+=======
+            this.router.replace({ name: 'home' });
+>>>>>>> upstream/develop
           }
           if (!message.isOpen) {
             this.resetCampaign();

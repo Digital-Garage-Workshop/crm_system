@@ -1,6 +1,11 @@
 class OnlineStatusTracker
   # NOTE: You can customise the environment variable to keep your agents/contacts as online for longer
   PRESENCE_DURATION = ENV.fetch('PRESENCE_DURATION', 20).to_i.seconds
+<<<<<<< HEAD
+=======
+  # Widget pings every 60s, so contacts need a longer presence window
+  CONTACT_PRESENCE_DURATION = ENV.fetch('CONTACT_PRESENCE_DURATION', 90).to_i.seconds
+>>>>>>> upstream/develop
 
   # presence : sorted set with timestamp as the score & object id as value
 
@@ -11,7 +16,12 @@ class OnlineStatusTracker
 
   def self.get_presence(account_id, obj_type, obj_id)
     connected_time = ::Redis::Alfred.zscore(presence_key(account_id, obj_type), obj_id)
+<<<<<<< HEAD
     connected_time && connected_time > (Time.zone.now - PRESENCE_DURATION).to_i
+=======
+    duration = obj_type == 'Contact' ? CONTACT_PRESENCE_DURATION : PRESENCE_DURATION
+    connected_time && connected_time > (Time.zone.now - duration).to_i
+>>>>>>> upstream/develop
   end
 
   def self.presence_key(account_id, type)
@@ -39,7 +49,11 @@ class OnlineStatusTracker
   end
 
   def self.get_available_contact_ids(account_id)
+<<<<<<< HEAD
     range_start = (Time.zone.now - PRESENCE_DURATION).to_i
+=======
+    range_start = (Time.zone.now - CONTACT_PRESENCE_DURATION).to_i
+>>>>>>> upstream/develop
     # exclusive minimum score is specified by prefixing (
     # we are clearing old records because this could clogg up the sorted set
     ::Redis::Alfred.zremrangebyscore(presence_key(account_id, 'Contact'), '-inf', "(#{range_start}")

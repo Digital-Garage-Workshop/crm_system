@@ -22,18 +22,33 @@ class Integrations::Linear::ProcessorService
     }
   end
 
+<<<<<<< HEAD
   def create_issue(params)
     response = linear_client.create_issue(params)
+=======
+  def create_issue(params, user = nil)
+    response = linear_client.create_issue(params, user)
+>>>>>>> upstream/develop
     return response if response[:error]
 
     {
       data: { id: response['issueCreate']['issue']['id'],
+<<<<<<< HEAD
               title: response['issueCreate']['issue']['title'] }
     }
   end
 
   def link_issue(link, issue_id, title)
     response = linear_client.link_issue(link, issue_id, title)
+=======
+              title: response['issueCreate']['issue']['title'],
+              identifier: response['issueCreate']['issue']['identifier'] }
+    }
+  end
+
+  def link_issue(link, issue_id, title, user = nil)
+    response = linear_client.link_issue(link, issue_id, title, user)
+>>>>>>> upstream/develop
     return response if response[:error]
 
     {
@@ -76,6 +91,14 @@ class Integrations::Linear::ProcessorService
   end
 
   def linear_client
+<<<<<<< HEAD
     @linear_client ||= Linear.new(linear_hook.access_token)
+=======
+    @linear_client ||= Linear.new(linear_access_token)
+  end
+
+  def linear_access_token
+    @linear_access_token ||= Integrations::Linear::AccessTokenService.new(hook: linear_hook).access_token
+>>>>>>> upstream/develop
   end
 end

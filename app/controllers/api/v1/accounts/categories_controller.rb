@@ -1,7 +1,11 @@
 class Api::V1::Accounts::CategoriesController < Api::V1::Accounts::BaseController
   before_action :portal
   before_action :check_authorization
+<<<<<<< HEAD
   before_action :fetch_category, except: [:index, :create]
+=======
+  before_action :fetch_category, except: [:index, :create, :reorder]
+>>>>>>> upstream/develop
   before_action :set_current_page, only: [:index]
 
   def index
@@ -32,6 +36,14 @@ class Api::V1::Accounts::CategoriesController < Api::V1::Accounts::BaseControlle
     head :ok
   end
 
+<<<<<<< HEAD
+=======
+  def reorder
+    Category.update_positions(portal: @portal, positions_hash: params[:positions_hash])
+    head :ok
+  end
+
+>>>>>>> upstream/develop
   private
 
   def fetch_category
@@ -39,7 +51,11 @@ class Api::V1::Accounts::CategoriesController < Api::V1::Accounts::BaseControlle
   end
 
   def portal
+<<<<<<< HEAD
     @portal ||= Current.account.portals.find_by(slug: params[:portal_id])
+=======
+    @portal ||= Current.account.portals.find_by!(slug: params[:portal_id])
+>>>>>>> upstream/develop
   end
 
   def related_categories_records

@@ -159,7 +159,11 @@ const handleTabChange = value => {
               v-if="isLocaleMenuOpen"
               :menu-items="localeMenuItems"
               show-search
+<<<<<<< HEAD
               class="left-0 w-40 max-w-[300px] mt-2 overflow-y-auto xl:right-0 top-full max-h-60"
+=======
+              class="left-0 w-40 max-w-[300px] mt-2 xl:right-0 top-full max-h-60"
+>>>>>>> upstream/develop
               @action="handleLocaleAction"
             />
           </OnClickOutside>
@@ -180,7 +184,11 @@ const handleTabChange = value => {
               v-if="isCategoryMenuOpen"
               :menu-items="categoryMenuItems"
               show-search
+<<<<<<< HEAD
               class="left-0 w-48 mt-2 overflow-y-auto xl:right-0 top-full max-h-60"
+=======
+              class="left-0 w-48 mt-2 xl:right-0 top-full max-h-60"
+>>>>>>> upstream/develop
               @action="handleCategoryAction"
             />
           </OnClickOutside>

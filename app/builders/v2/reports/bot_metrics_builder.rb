@@ -31,6 +31,7 @@ class V2::Reports::BotMetricsBuilder
   end
 
   def bot_resolutions_count
+<<<<<<< HEAD
     account.reporting_events.joins(:conversation).select(:conversation_id).where(account_id: account.id, name: :conversation_bot_resolved,
                                                                                  created_at: range).distinct.count
   end
@@ -38,6 +39,26 @@ class V2::Reports::BotMetricsBuilder
   def bot_handoffs_count
     account.reporting_events.joins(:conversation).select(:conversation_id).where(account_id: account.id, name: :conversation_bot_handoff,
                                                                                  created_at: range).distinct.count
+=======
+    # Exclude conversations that also had a handoff in the same range — handoff wins
+    account.reporting_events.joins(:conversation).select(:conversation_id)
+           .where(account_id: account.id, name: :conversation_bot_resolved, created_at: range)
+           .where.not(conversation_id: bot_handoff_conversation_ids_subquery)
+           .distinct.count
+  end
+
+  def bot_handoffs_count
+    account.reporting_events.joins(:conversation).select(:conversation_id)
+           .where(account_id: account.id, name: :conversation_bot_handoff, created_at: range)
+           .distinct.count
+  end
+
+  def bot_handoff_conversation_ids_subquery
+    account.reporting_events
+           .where(name: :conversation_bot_handoff, created_at: range)
+           .where.not(conversation_id: nil)
+           .select(:conversation_id)
+>>>>>>> upstream/develop
   end
 
   def bot_resolution_rate

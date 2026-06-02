@@ -6,7 +6,11 @@ import FooterReplyTo from 'widget/components/FooterReplyTo.vue';
 import ChatInputWrap from 'widget/components/ChatInputWrap.vue';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { sendEmailTranscript } from 'widget/api/conversation';
+<<<<<<< HEAD
 import routerMixin from 'widget/mixins/routerMixin';
+=======
+import { useRouter } from 'vue-router';
+>>>>>>> upstream/develop
 import { IFrameHelper } from '../helpers/utils';
 import { CHATWOOT_ON_START_CONVERSATION } from '../constants/sdkEvents';
 import { emitter } from 'shared/helpers/mitt';
@@ -17,7 +21,14 @@ export default {
     CustomButton,
     FooterReplyTo,
   },
+<<<<<<< HEAD
   mixins: [routerMixin],
+=======
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+>>>>>>> upstream/develop
   data() {
     return {
       inReplyTo: null,
@@ -55,6 +66,7 @@ export default {
     emitter.on(BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE, this.toggleReplyTo);
   },
   methods: {
+<<<<<<< HEAD
     ...mapActions('conversation', [
       'sendMessage',
       'sendAttachment',
@@ -64,6 +76,10 @@ export default {
       'getAttributes',
       'clearConversationAttributes',
     ]),
+=======
+    ...mapActions('conversation', ['sendMessage', 'sendAttachment']),
+    ...mapActions('conversationAttributes', ['getAttributes']),
+>>>>>>> upstream/develop
     async handleSendMessage(content) {
       await this.sendMessage({
         content,
@@ -84,9 +100,13 @@ export default {
       this.inReplyTo = null;
     },
     startNewConversation() {
+<<<<<<< HEAD
       this.clearConversations();
       this.clearConversationAttributes();
       this.replaceRoute('prechat-form');
+=======
+      this.router.replace({ name: 'prechat-form' });
+>>>>>>> upstream/develop
       IFrameHelper.sendMessage({
         event: 'onEvent',
         eventIdentifier: CHATWOOT_ON_START_CONVERSATION,

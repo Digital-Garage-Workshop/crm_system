@@ -1,6 +1,10 @@
 class GlobalConfigService
   def self.load(config_key, default_value)
+<<<<<<< HEAD
     config = ENV.fetch(config_key) { GlobalConfig.get(config_key)[config_key] }
+=======
+    config = GlobalConfig.get(config_key)[config_key]
+>>>>>>> upstream/develop
     return config if config.present?
 
     # To support migrating existing instance relying on env variables
@@ -14,4 +18,11 @@ class GlobalConfigService
     GlobalConfig.clear_cache
     i.value
   end
+<<<<<<< HEAD
+=======
+
+  def self.account_signup_enabled?
+    load('ENABLE_ACCOUNT_SIGNUP', 'false').to_s != 'false'
+  end
+>>>>>>> upstream/develop
 end

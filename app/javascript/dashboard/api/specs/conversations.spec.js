@@ -11,6 +11,10 @@ describe('#ConversationApi', () => {
     expect(conversationsAPI).toHaveProperty('delete');
     expect(conversationsAPI).toHaveProperty('getLabels');
     expect(conversationsAPI).toHaveProperty('updateLabels');
+<<<<<<< HEAD
+=======
+    expect(conversationsAPI).toHaveProperty('getUnreadCounts');
+>>>>>>> upstream/develop
   });
 
   describe('API calls', () => {
@@ -47,5 +51,15 @@ describe('#ConversationApi', () => {
         }
       );
     });
+<<<<<<< HEAD
+=======
+
+    it('#getUnreadCounts', () => {
+      conversationsAPI.getUnreadCounts();
+      expect(axiosMock.get).toHaveBeenCalledWith(
+        '/api/v1/conversations/unread_counts'
+      );
+    });
+>>>>>>> upstream/develop
   });
 });

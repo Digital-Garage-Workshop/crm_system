@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { getLoginRedirectURL } from '../AuthHelper';
+=======
+import { getLoginRedirectURL, getCredentialsFromEmail } from '../AuthHelper';
+>>>>>>> upstream/develop
 
 describe('#URL Helpers', () => {
   describe('getLoginRedirectURL', () => {
@@ -40,4 +44,44 @@ describe('#URL Helpers', () => {
       expect(getLoginRedirectURL('7500', null)).toBe('/app/');
     });
   });
+<<<<<<< HEAD
+=======
+
+  describe('getCredentialsFromEmail', () => {
+    it('should capitalize fullName and accountName from a standard email', () => {
+      expect(getCredentialsFromEmail('john@company.com')).toEqual({
+        fullName: 'John',
+        accountName: 'Company',
+      });
+    });
+
+    it('should handle subdomains by using the first part of the domain', () => {
+      expect(getCredentialsFromEmail('jane@mail.example.org')).toEqual({
+        fullName: 'Jane',
+        accountName: 'Mail',
+      });
+    });
+
+    it('should split by dots and capitalize each word', () => {
+      expect(getCredentialsFromEmail('john.doe@acme.co')).toEqual({
+        fullName: 'John Doe',
+        accountName: 'Acme',
+      });
+    });
+
+    it('should omit everything after + in the local part', () => {
+      expect(getCredentialsFromEmail('user+tag@startup.io')).toEqual({
+        fullName: 'User',
+        accountName: 'Startup',
+      });
+    });
+
+    it('should split by underscores and hyphens', () => {
+      expect(getCredentialsFromEmail('first_last@my-company.com')).toEqual({
+        fullName: 'First Last',
+        accountName: 'My Company',
+      });
+    });
+  });
+>>>>>>> upstream/develop
 });

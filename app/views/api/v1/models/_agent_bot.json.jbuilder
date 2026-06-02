@@ -7,4 +7,8 @@ json.bot_type resource.bot_type
 json.bot_config resource.bot_config
 json.account_id resource.account_id
 json.access_token resource.access_token if resource.access_token.present?
+<<<<<<< HEAD
+=======
+json.secret resource.secret if !resource.system_bot? && Current.account_user&.administrator?
+>>>>>>> upstream/develop
 json.system_bot resource.system_bot?

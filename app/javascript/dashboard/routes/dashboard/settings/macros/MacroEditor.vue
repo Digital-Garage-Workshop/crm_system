@@ -8,6 +8,10 @@ import { MACRO_ACTION_TYPES } from './constants';
 import { useAlert } from 'dashboard/composables';
 import actionQueryGenerator from 'dashboard/helper/actionQueryGenerator.js';
 import { useMacros } from 'dashboard/composables/useMacros';
+<<<<<<< HEAD
+=======
+import { useAdmin } from 'dashboard/composables/useAdmin';
+>>>>>>> upstream/develop
 
 const store = useStore();
 const getters = useStoreGetters();
@@ -18,6 +22,10 @@ const router = useRouter();
 const { t } = useI18n();
 
 const { getMacroDropdownValues } = useMacros();
+<<<<<<< HEAD
+=======
+const { isAdmin } = useAdmin();
+>>>>>>> upstream/develop
 
 const macro = ref(null);
 const mode = ref('CREATE');
@@ -33,6 +41,12 @@ provide('macroActionTypes', macroActionTypes);
 
 const uiFlags = computed(() => getters['macros/getUIFlags'].value);
 const macroId = computed(() => route.params.macroId);
+<<<<<<< HEAD
+=======
+const isPublicMacroReadOnly = computed(
+  () => macro.value?.visibility === 'global' && !isAdmin.value
+);
+>>>>>>> upstream/develop
 
 const fetchDropdownData = () => {
   store.dispatch('agents/get');
@@ -92,7 +106,11 @@ const initNewMacro = () => {
         action_params: [],
       },
     ],
+<<<<<<< HEAD
     visibility: 'global',
+=======
+    visibility: isAdmin.value ? 'global' : 'personal',
+>>>>>>> upstream/develop
   };
 };
 
@@ -110,6 +128,11 @@ watch(
 );
 
 const saveMacro = async macroData => {
+<<<<<<< HEAD
+=======
+  if (isPublicMacroReadOnly.value) return;
+
+>>>>>>> upstream/develop
   try {
     const action = mode.value === 'EDIT' ? 'macros/update' : 'macros/create';
     const successMessage =
@@ -128,7 +151,11 @@ const saveMacro = async macroData => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="flex flex-col flex-1 h-full overflow-auto">
+=======
+  <div class="flex flex-col gap-6 mb-8 max-w-7xl mx-auto h-full w-full !px-6">
+>>>>>>> upstream/develop
     <woot-loading-state
       v-if="uiFlags.isFetchingItem"
       :message="t('MACROS.EDITOR.LOADING')"
@@ -136,6 +163,11 @@ const saveMacro = async macroData => {
     <MacroForm
       v-if="macro && !uiFlags.isFetchingItem"
       :macro-data="macro"
+<<<<<<< HEAD
+=======
+      :can-manage-public-macros="isAdmin"
+      :read-only="isPublicMacroReadOnly"
+>>>>>>> upstream/develop
       @update:macro-data="macro = $event"
       @submit="saveMacro"
     />

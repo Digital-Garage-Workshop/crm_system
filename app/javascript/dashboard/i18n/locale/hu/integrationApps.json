@@ -3,6 +3,12 @@
     "FETCHING": "Integrációk lekérése",
     "NO_HOOK_CONFIGURED": "Ebben a fiókban nincs beállítva {integrationId} integráció",
     "HEADER": "Alkalmazások",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} integration | {n} integrations",
+    "SEARCH_PLACEHOLDER": "Search...",
+    "NO_RESULTS": "No results found matching your search",
+>>>>>>> upstream/develop
     "STATUS": {
       "ENABLED": "Engedélyezve",
       "DISABLED": "Letiltva"
@@ -31,6 +37,10 @@
     "LIST": {
       "FETCHING": "Integrációs hookok betöltése",
       "INBOX": "Fiók",
+<<<<<<< HEAD
+=======
+      "ACTIONS": "Műveletek",
+>>>>>>> upstream/develop
       "DELETE": {
         "BUTTON_TEXT": "Törlés"
       }
@@ -42,6 +52,10 @@
           "PLACEHOLDER": "Válassz fiókot"
         },
         "SUBMIT": "Létrehozás",
+<<<<<<< HEAD
+=======
+        "VALIDATING_OPENAI": "Validating with OpenAI...",
+>>>>>>> upstream/develop
         "CANCEL": "Mégse"
       },
       "API": {

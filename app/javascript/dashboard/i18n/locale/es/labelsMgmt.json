@@ -5,6 +5,12 @@
     "LOADING": "Obteniendo etiquetas",
     "DESCRIPTION": "Las etiquetas le ayudan a clasificar y priorizar conversaciones y clientes potenciales. Puede asignar una etiqueta a una conversación o contacto usando el panel lateral.",
     "LEARN_MORE": "Aprende más sobre etiquetas",
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} label | {n} labels",
+    "SEARCH_PLACEHOLDER": "Buscar etiquetas...",
+    "NO_RESULTS": "No labels found matching your search",
+>>>>>>> upstream/develop
     "SEARCH_404": "No hay elementos que coincidan con esta consulta",
     "LIST": {
       "404": "No hay etiquetas disponibles en esta cuenta.",
@@ -13,7 +19,12 @@
       "TABLE_HEADER": {
         "NAME": "Nombre",
         "DESCRIPTION": "Descripción",
+<<<<<<< HEAD
         "COLOR": "Color"
+=======
+        "COLOR": "Color",
+        "ACTION": "Acciones"
+>>>>>>> upstream/develop
       }
     },
     "FORM": {

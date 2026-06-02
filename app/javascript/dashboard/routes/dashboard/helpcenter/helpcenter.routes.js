@@ -64,6 +64,17 @@ const portalRoutes = [
   },
   {
     path: getPortalRoute(
+<<<<<<< HEAD
+=======
+      ':portalSlug/:locale/categories/:categorySlug/articles/new'
+    ),
+    name: 'portals_categories_articles_new',
+    meta,
+    component: PortalsArticlesNewPage,
+  },
+  {
+    path: getPortalRoute(
+>>>>>>> upstream/develop
       ':portalSlug/:locale/categories/:categorySlug/articles/:articleSlug'
     ),
     name: 'portals_categories_articles_edit',

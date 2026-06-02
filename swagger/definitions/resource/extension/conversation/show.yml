@@ -1,4 +1,8 @@
 type: object
 allOf:
+<<<<<<< HEAD
   - $ref: '#/definitions/conversation'
+=======
+  - $ref: '#/components/schemas/conversation'
+>>>>>>> upstream/develop
   - $ref: '../contact/conversation.yml'

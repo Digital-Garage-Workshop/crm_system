@@ -22,6 +22,17 @@ class Line::SendOnLineService < Base::SendOnChannelService
   end
 
   def build_payload
+<<<<<<< HEAD
+=======
+    if message.content_type == 'input_select' && message.content_attributes['items'].any?
+      build_input_select_payload
+    else
+      build_text_payload
+    end
+  end
+
+  def build_text_payload
+>>>>>>> upstream/develop
     if message.content && message.attachments.any?
       [text_message, *attachments]
     elsif message.content.nil? && message.attachments.any?
@@ -36,10 +47,22 @@ class Line::SendOnLineService < Base::SendOnChannelService
       # Support only image and video for now, https://developers.line.biz/en/reference/messaging-api/#image-message
       next unless attachment.file_type == 'image' || attachment.file_type == 'video'
 
+<<<<<<< HEAD
       {
         type: attachment.file_type,
         originalContentUrl: attachment.download_url,
         previewImageUrl: attachment.download_url
+=======
+      # Use file_url (permanent redirect-based URL) instead of download_url (signed URL that expires in 5 minutes).
+      # LINE mobile app lazy-loads images and may fetch them well after the message is sent.
+      original_url = attachment.file_url
+      preview_url = attachment.thumb_url.presence || original_url
+
+      {
+        type: attachment.file_type,
+        originalContentUrl: original_url,
+        previewImageUrl: preview_url
+>>>>>>> upstream/develop
       }
     end
   end
@@ -48,10 +71,55 @@ class Line::SendOnLineService < Base::SendOnChannelService
   def text_message
     {
       type: 'text',
+<<<<<<< HEAD
       text: message.content
     }
   end
 
+=======
+      text: message.outgoing_content
+    }
+  end
+
+  # https://developers.line.biz/en/reference/messaging-api/#flex-message
+  def build_input_select_payload
+    {
+      type: 'flex',
+      altText: message.content,
+      contents: {
+        type: 'bubble',
+        body: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: message.content,
+              wrap: true
+            },
+            *input_select_to_button
+          ]
+        }
+      }
+    }
+  end
+
+  def input_select_to_button
+    message.content_attributes['items'].map do |item|
+      {
+        type: 'button',
+        style: 'link',
+        height: 'sm',
+        action: {
+          type: 'message',
+          label: item['title'],
+          text: item['value']
+        }
+      }
+    end
+  end
+
+>>>>>>> upstream/develop
   # https://developers.line.biz/en/reference/messaging-api/#error-responses
   def external_error(error)
     # Message containing information about the error. See https://developers.line.biz/en/reference/messaging-api/#error-messages

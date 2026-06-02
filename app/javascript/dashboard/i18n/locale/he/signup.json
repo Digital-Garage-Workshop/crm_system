@@ -1,6 +1,10 @@
 {
   "REGISTER": {
     "TRY_WOOT": "צור חשבון",
+<<<<<<< HEAD
+=======
+    "GET_STARTED": "Get started with Chatwoot",
+>>>>>>> upstream/develop
     "TITLE": "הירשם",
     "TESTIMONIAL_HEADER": "כל מה שצריך זה צעד אחד כדי להתקדם",
     "TESTIMONIAL_CONTENT": "אתה במרחק צעד אחד מלהפעיל את הלקוחות שלך, לשמר אותם ולמצוא חדשים.",
@@ -27,18 +31,42 @@
       "LABEL": "סיסמה",
       "PLACEHOLDER": "סיסמה",
       "ERROR": "הסיסמה קצרה מדי",
+<<<<<<< HEAD
       "IS_INVALID_PASSWORD": "הסיסמה צריכה להכיל לפחות אות אחת גדולה, אות קטנה אחת, מספר אחד ותו מיוחד אחד"
+=======
+      "IS_INVALID_PASSWORD": "הסיסמה צריכה להכיל לפחות אות אחת גדולה, אות קטנה אחת, מספר אחד ותו מיוחד אחד",
+      "REQUIREMENTS_LENGTH": "לפחות 6 תווים",
+      "REQUIREMENTS_UPPERCASE": "לפחות אות אחת גדולה",
+      "REQUIREMENTS_LOWERCASE": "לפחות אות אחת קטנה",
+      "REQUIREMENTS_NUMBER": "לפחות מספר אחד",
+      "REQUIREMENTS_SPECIAL": "לפחות תו מיוחד אחד"
+>>>>>>> upstream/develop
     },
     "CONFIRM_PASSWORD": {
       "LABEL": "אמת סיסמה",
       "PLACEHOLDER": "אמת סיסמה",
+<<<<<<< HEAD
       "ERROR": "סיסמה לא מתאימה"
+=======
+      "ERROR": "סיסמאות לא תואמות"
+>>>>>>> upstream/develop
     },
     "API": {
       "SUCCESS_MESSAGE": "ההרשמה הצליחה",
       "ERROR_MESSAGE": "לא ניתן להתחבר לשרת Woot, נסה שוב מאוחר יותר"
     },
     "SUBMIT": "צור חשבון",
+<<<<<<< HEAD
     "HAVE_AN_ACCOUNT": "כבר יש לך חשבון?"
+=======
+    "HAVE_AN_ACCOUNT": "כבר יש לך חשבון?",
+    "VERIFY_EMAIL": {
+      "TITLE": "Check your inbox",
+      "DESCRIPTION": "We sent a verification link to {email}. Click the link to verify your email and get started.",
+      "RESEND": "שלח מחדש דוא\"ל אימות",
+      "RESEND_SUCCESS": "Verification email sent. Please check your inbox.",
+      "RESEND_ERROR": "Could not send verification email. Please try again."
+    }
+>>>>>>> upstream/develop
   }
 }

@@ -1,6 +1,17 @@
 class MessageTemplates::Template::OutOfOffice
   pattr_initialize [:conversation!]
 
+<<<<<<< HEAD
+=======
+  def self.perform_if_applicable(conversation)
+    inbox = conversation.inbox
+    return unless inbox.out_of_office?
+    return if inbox.out_of_office_message.blank?
+
+    new(conversation: conversation).perform
+  end
+
+>>>>>>> upstream/develop
   def perform
     ActiveRecord::Base.transaction do
       conversation.messages.create!(out_of_office_message_params)

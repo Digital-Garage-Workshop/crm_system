@@ -1,6 +1,10 @@
 module AccessTokenAuthHelper
   BOT_ACCESSIBLE_ENDPOINTS = {
+<<<<<<< HEAD
     'api/v1/accounts/conversations' => %w[toggle_status toggle_priority create update],
+=======
+    'api/v1/accounts/conversations' => %w[toggle_status toggle_typing_status toggle_priority create update custom_attributes],
+>>>>>>> upstream/develop
     'api/v1/accounts/conversations/messages' => ['create'],
     'api/v1/accounts/conversations/assignments' => ['create']
   }.freeze
@@ -14,6 +18,10 @@ module AccessTokenAuthHelper
     ensure_access_token
     render_unauthorized('Invalid Access Token') && return if @access_token.blank?
 
+<<<<<<< HEAD
+=======
+    # NOTE: This ensures that current_user is set and available for the rest of the controller actions
+>>>>>>> upstream/develop
     @resource = @access_token.owner
     Current.user = @resource if allowed_current_user_type?(@resource)
   end
@@ -27,7 +35,11 @@ module AccessTokenAuthHelper
 
   def validate_bot_access_token!
     return if Current.user.is_a?(User)
+<<<<<<< HEAD
     return if agent_bot_accessible?
+=======
+    return if @resource.is_a?(AgentBot) && agent_bot_accessible?
+>>>>>>> upstream/develop
 
     render_unauthorized('Access to this endpoint is not authorized for bots')
   end

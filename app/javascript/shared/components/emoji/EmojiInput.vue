@@ -210,6 +210,7 @@ export default {
 </style>
 
 <style lang="scss">
+<<<<<<< HEAD
 @import 'dashboard/assets/scss/mixins';
 
 .emoji-dialog {
@@ -227,6 +228,12 @@ export default {
     }
 
     @apply -bottom-3 absolute right-5;
+=======
+.emoji-dialog {
+  &::before {
+    @apply absolute -bottom-3 h-3 w-6 bg-n-slate-3 content-[""];
+    clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+>>>>>>> upstream/develop
   }
 }
 

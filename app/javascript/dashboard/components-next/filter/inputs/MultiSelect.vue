@@ -1,5 +1,9 @@
 <script setup>
+<<<<<<< HEAD
 import { defineModel, computed } from 'vue';
+=======
+import { computed } from 'vue';
+>>>>>>> upstream/develop
 import { useI18n } from 'vue-i18n';
 import Icon from 'next/icon/Icon.vue';
 import Button from 'next/button/Button.vue';
@@ -8,7 +12,11 @@ import DropdownSection from 'next/dropdown-menu/base/DropdownSection.vue';
 import DropdownBody from 'next/dropdown-menu/base/DropdownBody.vue';
 import DropdownItem from 'next/dropdown-menu/base/DropdownItem.vue';
 
+<<<<<<< HEAD
 const { options, maxChips } = defineProps({
+=======
+const { options, maxChips, dropdownMaxHeight } = defineProps({
+>>>>>>> upstream/develop
   options: {
     type: Array,
     required: true,
@@ -17,6 +25,13 @@ const { options, maxChips } = defineProps({
     type: Number,
     default: 3,
   },
+<<<<<<< HEAD
+=======
+  dropdownMaxHeight: {
+    type: String,
+    default: 'max-h-80',
+  },
+>>>>>>> upstream/develop
 });
 
 const { t } = useI18n();
@@ -123,7 +138,11 @@ const toggleOption = option => {
       </Button>
     </template>
     <DropdownBody class="top-0 min-w-48 z-50" strong>
+<<<<<<< HEAD
       <DropdownSection class="max-h-80 overflow-scroll">
+=======
+      <DropdownSection :height="dropdownMaxHeight">
+>>>>>>> upstream/develop
         <DropdownItem
           v-for="option in options"
           :key="option.id"

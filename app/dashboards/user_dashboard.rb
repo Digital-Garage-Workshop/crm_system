@@ -25,7 +25,11 @@ class UserDashboard < Administrate::BaseDashboard
     current_sign_in_ip: Field::String,
     last_sign_in_ip: Field::String,
     confirmation_token: Field::String,
+<<<<<<< HEAD
     confirmed_at: Field::DateTime,
+=======
+    confirmed_at: ConfirmedAtField,
+>>>>>>> upstream/develop
     confirmation_sent_at: Field::DateTime,
     unconfirmed_email: Field::String,
     name: Field::String.with_options(searchable: true),
@@ -59,11 +63,18 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     avatar_url
+<<<<<<< HEAD
     unconfirmed_email
+=======
+>>>>>>> upstream/develop
     name
     type
     display_name
     email
+<<<<<<< HEAD
+=======
+    unconfirmed_email
+>>>>>>> upstream/develop
     created_at
     updated_at
     confirmed_at

@@ -1,6 +1,10 @@
 module ActivityMessageHandler
   extend ActiveSupport::Concern
 
+<<<<<<< HEAD
+=======
+  include AssigneeActivityMessageHandler
+>>>>>>> upstream/develop
   include PriorityActivityMessageHandler
   include LabelActivityMessageHandler
   include SlaActivityMessageHandler
@@ -104,6 +108,7 @@ module ActivityMessageHandler
     content = I18n.t("conversations.activity.#{change_type}", user_name: Current.user.name)
     ::Conversations::ActivityMessageJob.perform_later(self, activity_message_params(content)) if content
   end
+<<<<<<< HEAD
 
   def generate_assignee_change_activity_content(user_name)
     params = { assignee_name: assignee&.name, user_name: user_name }.compact
@@ -126,3 +131,8 @@ module ActivityMessageHandler
     user_name
   end
 end
+=======
+end
+
+ActivityMessageHandler.prepend_mod_with('ActivityMessageHandler')
+>>>>>>> upstream/develop

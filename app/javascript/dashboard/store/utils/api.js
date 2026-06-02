@@ -2,7 +2,13 @@ import fromUnixTime from 'date-fns/fromUnixTime';
 import differenceInDays from 'date-fns/differenceInDays';
 import Cookies from 'js-cookie';
 import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
+<<<<<<< HEAD
 import { LocalStorage } from 'shared/helpers/localStorage';
+=======
+import { SESSION_STORAGE_KEYS } from 'dashboard/constants/sessionStorage';
+import { LocalStorage } from 'shared/helpers/localStorage';
+import SessionStorage from 'shared/helpers/sessionStorage';
+>>>>>>> upstream/develop
 import { emitter } from 'shared/helpers/mitt';
 import {
   ANALYTICS_IDENTITY,
@@ -44,6 +50,13 @@ export const clearLocalStorageOnLogout = () => {
   LocalStorage.remove(LOCAL_STORAGE_KEYS.DRAFT_MESSAGES);
 };
 
+<<<<<<< HEAD
+=======
+export const clearSessionStorageOnLogout = () => {
+  SessionStorage.remove(SESSION_STORAGE_KEYS.IMPERSONATION_USER);
+};
+
+>>>>>>> upstream/develop
 export const deleteIndexedDBOnLogout = async () => {
   let dbs = [];
   try {
@@ -75,6 +88,10 @@ export const clearCookiesOnLogout = () => {
   emitter.emit(ANALYTICS_RESET);
   clearBrowserSessionCookies();
   clearLocalStorageOnLogout();
+<<<<<<< HEAD
+=======
+  clearSessionStorageOnLogout();
+>>>>>>> upstream/develop
   const globalConfig = window.globalConfig || {};
   const logoutRedirectLink = globalConfig.LOGOUT_REDIRECT_LINK || '/';
   window.location = logoutRedirectLink;

@@ -6,6 +6,10 @@
 #  email                     :string           not null
 #  forward_to_email          :string           not null
 #  imap_address              :string           default("")
+<<<<<<< HEAD
+=======
+#  imap_authentication       :string           default("plain")
+>>>>>>> upstream/develop
 #  imap_enable_ssl           :boolean          default(TRUE)
 #  imap_enabled              :boolean          default(FALSE)
 #  imap_login                :string           default("")
@@ -23,6 +27,10 @@
 #  smtp_openssl_verify_mode  :string           default("none")
 #  smtp_password             :string           default("")
 #  smtp_port                 :integer          default(0)
+<<<<<<< HEAD
+=======
+#  verified_for_sending      :boolean          default(FALSE), not null
+>>>>>>> upstream/develop
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  account_id                :integer          not null
@@ -39,10 +47,23 @@ class Channel::Email < ApplicationRecord
 
   AUTHORIZATION_ERROR_THRESHOLD = 10
 
+<<<<<<< HEAD
   self.table_name = 'channel_email'
   EDITABLE_ATTRS = [:email, :imap_enabled, :imap_login, :imap_password, :imap_address, :imap_port, :imap_enable_ssl,
                     :smtp_enabled, :smtp_login, :smtp_password, :smtp_address, :smtp_port, :smtp_domain, :smtp_enable_starttls_auto,
                     :smtp_enable_ssl_tls, :smtp_openssl_verify_mode, :smtp_authentication, :provider].freeze
+=======
+  # TODO: Remove guard once encryption keys become mandatory (target 3-4 releases out).
+  if Chatwoot.encryption_configured?
+    encrypts :imap_password
+    encrypts :smtp_password
+  end
+
+  self.table_name = 'channel_email'
+  EDITABLE_ATTRS = [:email, :imap_enabled, :imap_login, :imap_password, :imap_address, :imap_port, :imap_enable_ssl, :imap_authentication,
+                    :smtp_enabled, :smtp_login, :smtp_password, :smtp_address, :smtp_port, :smtp_domain, :smtp_enable_starttls_auto,
+                    :smtp_enable_ssl_tls, :smtp_openssl_verify_mode, :smtp_authentication, :provider, :verified_for_sending].freeze
+>>>>>>> upstream/develop
 
   validates :email, uniqueness: true
   validates :forward_to_email, uniqueness: true

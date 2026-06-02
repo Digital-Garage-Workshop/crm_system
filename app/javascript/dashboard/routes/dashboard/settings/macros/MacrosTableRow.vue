@@ -1,15 +1,30 @@
 <script setup>
 import { computed } from 'vue';
+<<<<<<< HEAD
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import { useI18n } from 'vue-i18n';
 
 import Button from 'dashboard/components-next/button/Button.vue';
+=======
+import Avatar from 'next/avatar/Avatar.vue';
+import { useI18n } from 'vue-i18n';
+
+import Button from 'dashboard/components-next/button/Button.vue';
+import { BaseTableRow, BaseTableCell } from 'dashboard/components-next/table';
+>>>>>>> upstream/develop
 
 const props = defineProps({
   macro: {
     type: Object,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  canManagePublicMacros: {
+    type: Boolean,
+    default: true,
+  },
+>>>>>>> upstream/develop
 });
 defineEmits(['delete']);
 const { t } = useI18n();
@@ -31,6 +46,7 @@ const visibilityLabel = computed(() => {
       : 'MACROS.EDITOR.VISIBILITY.PERSONAL.LABEL';
   return t(i18nKey);
 });
+<<<<<<< HEAD
 </script>
 
 <template>
@@ -71,4 +87,86 @@ const visibilityLabel = computed(() => {
       />
     </td>
   </tr>
+=======
+
+const canManageMacro = computed(
+  () => props.canManagePublicMacros || props.macro.visibility !== 'global'
+);
+
+const editTooltip = computed(() =>
+  canManageMacro.value ? t('MACROS.EDIT.TOOLTIP') : t('MACROS.VIEW.TOOLTIP')
+);
+</script>
+
+<template>
+  <BaseTableRow :item="macro">
+    <template #default>
+      <BaseTableCell class="max-w-0 min-w-0">
+        <span class="text-body-main text-n-slate-12 truncate block">
+          {{ macro.name }}
+        </span>
+      </BaseTableCell>
+
+      <BaseTableCell class="max-w-0">
+        <div v-if="macro.created_by" class="flex items-center gap-2 min-w-0">
+          <Avatar
+            :name="createdByName"
+            :size="24"
+            rounded-full
+            class="flex-shrink-0"
+          />
+          <span class="text-body-main text-n-slate-12 truncate">
+            {{ createdByName }}
+          </span>
+        </div>
+        <span v-else class="text-body-main text-n-slate-11">--</span>
+      </BaseTableCell>
+
+      <BaseTableCell class="max-w-0">
+        <div v-if="macro.updated_by" class="flex items-center gap-2 min-w-0">
+          <Avatar
+            :name="updatedByName"
+            :size="24"
+            rounded-full
+            class="flex-shrink-0"
+          />
+          <span class="text-body-main text-n-slate-12 truncate">
+            {{ updatedByName }}
+          </span>
+        </div>
+        <span v-else class="text-body-main text-n-slate-11">--</span>
+      </BaseTableCell>
+
+      <BaseTableCell class="max-w-0">
+        <span class="text-body-main text-n-slate-12 whitespace-nowrap">
+          {{ visibilityLabel }}
+        </span>
+      </BaseTableCell>
+
+      <BaseTableCell align="end" class="w-24">
+        <div class="flex gap-3 justify-end flex-shrink-0">
+          <router-link
+            :to="{ name: 'macros_edit', params: { macroId: macro.id } }"
+          >
+            <Button
+              v-tooltip.top="editTooltip"
+              icon="i-woot-edit-pen"
+              slate
+              sm
+            />
+          </router-link>
+          <Button
+            v-if="canManageMacro"
+            v-tooltip.top="$t('MACROS.DELETE.TOOLTIP')"
+            icon="i-woot-bin"
+            slate
+            sm
+            class="hover:enabled:text-n-ruby-11 hover:enabled:bg-n-ruby-2"
+            @click="$emit('delete')"
+          />
+        </div>
+      </BaseTableCell>
+    </template>
+  </BaseTableRow>
+>>>>>>> upstream/develop
 </template>

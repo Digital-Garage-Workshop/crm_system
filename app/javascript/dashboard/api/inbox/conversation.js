@@ -63,10 +63,16 @@ class ConversationApi extends ApiClient {
   }
 
   assignAgent({ conversationId, agentId }) {
+<<<<<<< HEAD
     return axios.post(
       `${this.url}/${conversationId}/assignments?assignee_id=${agentId}`,
       {}
     );
+=======
+    return axios.post(`${this.url}/${conversationId}/assignments`, {
+      assignee_id: agentId,
+    });
+>>>>>>> upstream/develop
   }
 
   assignTeam({ conversationId, teamId }) {
@@ -134,6 +140,7 @@ class ConversationApi extends ApiClient {
     return axios.get(`${this.url}/${conversationId}/attachments`);
   }
 
+<<<<<<< HEAD
   requestCopilot(conversationId, body) {
     return axios.post(`${this.url}/${conversationId}/copilot`, body);
   }
@@ -141,6 +148,15 @@ class ConversationApi extends ApiClient {
   getInboxAssistant(conversationId) {
     return axios.get(`${this.url}/${conversationId}/inbox_assistant`);
   }
+=======
+  getInboxAssistant(conversationId) {
+    return axios.get(`${this.url}/${conversationId}/inbox_assistant`);
+  }
+
+  delete(conversationId) {
+    return axios.delete(`${this.url}/${conversationId}`);
+  }
+>>>>>>> upstream/develop
 }
 
 export default new ConversationApi();

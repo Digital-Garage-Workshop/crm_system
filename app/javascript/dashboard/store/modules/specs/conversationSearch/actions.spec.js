@@ -75,6 +75,20 @@ describe('#actions', () => {
         q: 'test',
       });
       expect(dispatch).toHaveBeenCalledWith('messageSearch', { q: 'test' });
+<<<<<<< HEAD
+=======
+      expect(dispatch).toHaveBeenCalledWith('articleSearch', { q: 'test' });
+    });
+
+    it('should pass filters to all search actions including articleSearch', async () => {
+      const payload = { q: 'test', since: 1700000000, until: 1732000000 };
+      await actions.fullSearch({ commit, dispatch }, payload);
+
+      expect(dispatch).toHaveBeenCalledWith('contactSearch', payload);
+      expect(dispatch).toHaveBeenCalledWith('conversationSearch', payload);
+      expect(dispatch).toHaveBeenCalledWith('messageSearch', payload);
+      expect(dispatch).toHaveBeenCalledWith('articleSearch', payload);
+>>>>>>> upstream/develop
     });
   });
 
@@ -150,6 +164,49 @@ describe('#actions', () => {
     });
   });
 
+<<<<<<< HEAD
+=======
+  describe('#articleSearch', () => {
+    it('should handle successful article search', async () => {
+      axios.get.mockResolvedValue({
+        data: { payload: { articles: [{ id: 1 }] } },
+      });
+
+      await actions.articleSearch({ commit }, { q: 'test', page: 1 });
+      expect(commit.mock.calls).toEqual([
+        [types.ARTICLE_SEARCH_SET_UI_FLAG, { isFetching: true }],
+        [types.ARTICLE_SEARCH_SET, [{ id: 1 }]],
+        [types.ARTICLE_SEARCH_SET_UI_FLAG, { isFetching: false }],
+      ]);
+    });
+
+    it('should handle article search with date filters', async () => {
+      axios.get.mockResolvedValue({
+        data: { payload: { articles: [{ id: 1 }] } },
+      });
+
+      await actions.articleSearch(
+        { commit },
+        { q: 'test', page: 1, since: 1700000000, until: 1732000000 }
+      );
+      expect(commit.mock.calls).toEqual([
+        [types.ARTICLE_SEARCH_SET_UI_FLAG, { isFetching: true }],
+        [types.ARTICLE_SEARCH_SET, [{ id: 1 }]],
+        [types.ARTICLE_SEARCH_SET_UI_FLAG, { isFetching: false }],
+      ]);
+    });
+
+    it('should handle failed article search', async () => {
+      axios.get.mockRejectedValue({});
+      await actions.articleSearch({ commit }, { q: 'test' });
+      expect(commit.mock.calls).toEqual([
+        [types.ARTICLE_SEARCH_SET_UI_FLAG, { isFetching: true }],
+        [types.ARTICLE_SEARCH_SET_UI_FLAG, { isFetching: false }],
+      ]);
+    });
+  });
+
+>>>>>>> upstream/develop
   describe('#clearSearchResults', () => {
     it('should commit clear search results mutation', () => {
       actions.clearSearchResults({ commit });

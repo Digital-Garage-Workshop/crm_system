@@ -1,5 +1,11 @@
 {
   "DATE_PICKER": {
+<<<<<<< HEAD
+=======
+    "PREVIOUS_PERIOD": "Previous period",
+    "NEXT_PERIOD": "Next period",
+    "WEEK_NUMBER": "Hafta #{weekNumber}",
+>>>>>>> upstream/develop
     "APPLY_BUTTON": "Uygula",
     "CLEAR_BUTTON": "Clear",
     "DATE_RANGE_INPUT": {
@@ -13,6 +19,11 @@
       "LAST_3_MONTHS": "Son 3 ay",
       "LAST_6_MONTHS": "Son 6 ay",
       "LAST_YEAR": "Geçen yıl",
+<<<<<<< HEAD
+=======
+      "THIS_WEEK": "Bu hafta",
+      "MONTH_TO_DATE": "This month",
+>>>>>>> upstream/develop
       "CUSTOM_RANGE": "Özel tarih aralığı"
     }
   }

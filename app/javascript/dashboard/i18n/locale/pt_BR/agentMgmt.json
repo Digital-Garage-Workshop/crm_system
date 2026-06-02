@@ -9,13 +9,21 @@
       "ADMINISTRATOR": "Administrador",
       "AGENT": "Agente"
     },
+<<<<<<< HEAD
+=======
+    "COUNT": "{n} agente | {n} agentes",
+>>>>>>> upstream/develop
     "LIST": {
       "404": "Não existem agentes associados a esta conta",
       "TITLE": "Gerenciar agentes de seu time",
       "DESC": "Você pode adicionar e/ou remover agentes de um time.",
       "NAME": "Nome",
       "EMAIL": "E-mail",
+<<<<<<< HEAD
       "STATUS": "Situação",
+=======
+      "STATUS": "Status",
+>>>>>>> upstream/develop
       "ACTIONS": "Ações",
       "VERIFIED": "Verificado",
       "VERIFICATION_PENDING": "Verificação Pendente",
@@ -96,6 +104,11 @@
         "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
       }
     },
+<<<<<<< HEAD
+=======
+    "SEARCH_PLACEHOLDER": "Pesquisar agentes...",
+    "NO_RESULTS": "Nenhum agente encontrado correspondente à sua busca",
+>>>>>>> upstream/develop
     "SEARCH": {
       "NO_RESULTS": "Nenhum resultado encontrado."
     },

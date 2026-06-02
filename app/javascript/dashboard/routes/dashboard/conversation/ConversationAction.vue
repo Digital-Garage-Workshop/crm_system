@@ -36,27 +36,47 @@ export default {
         {
           id: null,
           name: this.$t('CONVERSATION.PRIORITY.OPTIONS.NONE'),
+<<<<<<< HEAD
           thumbnail: `/assets/images/dashboard/priority/none.svg`,
+=======
+          icon: 'i-woot-priority-empty',
+>>>>>>> upstream/develop
         },
         {
           id: CONVERSATION_PRIORITY.URGENT,
           name: this.$t('CONVERSATION.PRIORITY.OPTIONS.URGENT'),
+<<<<<<< HEAD
           thumbnail: `/assets/images/dashboard/priority/${CONVERSATION_PRIORITY.URGENT}.svg`,
+=======
+          icon: 'i-woot-priority-urgent',
+>>>>>>> upstream/develop
         },
         {
           id: CONVERSATION_PRIORITY.HIGH,
           name: this.$t('CONVERSATION.PRIORITY.OPTIONS.HIGH'),
+<<<<<<< HEAD
           thumbnail: `/assets/images/dashboard/priority/${CONVERSATION_PRIORITY.HIGH}.svg`,
+=======
+          icon: 'i-woot-priority-high',
+>>>>>>> upstream/develop
         },
         {
           id: CONVERSATION_PRIORITY.MEDIUM,
           name: this.$t('CONVERSATION.PRIORITY.OPTIONS.MEDIUM'),
+<<<<<<< HEAD
           thumbnail: `/assets/images/dashboard/priority/${CONVERSATION_PRIORITY.MEDIUM}.svg`,
+=======
+          icon: 'i-woot-priority-medium',
+>>>>>>> upstream/develop
         },
         {
           id: CONVERSATION_PRIORITY.LOW,
           name: this.$t('CONVERSATION.PRIORITY.OPTIONS.LOW'),
+<<<<<<< HEAD
           thumbnail: `/assets/images/dashboard/priority/${CONVERSATION_PRIORITY.LOW}.svg`,
+=======
+          icon: 'i-woot-priority-low',
+>>>>>>> upstream/develop
         },
       ],
     };
@@ -84,8 +104,16 @@ export default {
         return this.currentChat.meta.assignee;
       },
       set(agent) {
+<<<<<<< HEAD
         const agentId = agent ? agent.id : 0;
         this.$store.dispatch('setCurrentChatAssignee', agent);
+=======
+        const agentId = agent ? agent.id : null;
+        this.$store.dispatch('setCurrentChatAssignee', {
+          conversationId: this.currentChat.id,
+          assignee: agent,
+        });
+>>>>>>> upstream/develop
         this.$store
           .dispatch('assignAgent', {
             conversationId: this.currentChat.id,
@@ -122,7 +150,11 @@ export default {
       set(priorityItem) {
         const conversationId = this.currentChat.id;
         const oldValue = this.currentChat?.priority;
+<<<<<<< HEAD
         const priority = priorityItem ? priorityItem.id : null;
+=======
+        const priority = priorityItem.id;
+>>>>>>> upstream/develop
 
         this.$store.dispatch('setCurrentChatPriority', {
           priority,
@@ -200,15 +232,26 @@ export default {
         this.assignedPriority &&
         this.assignedPriority.id === selectedPriorityItem.id;
 
+<<<<<<< HEAD
       this.assignedPriority = isSamePriority ? null : selectedPriorityItem;
+=======
+      this.assignedPriority = isSamePriority
+        ? this.priorityOptions[0]
+        : selectedPriorityItem;
+>>>>>>> upstream/develop
     },
   },
 };
 </script>
 
 <template>
+<<<<<<< HEAD
   <div class="bg-white dark:bg-slate-900">
     <div class="multiselect-wrap--small">
+=======
+  <div>
+    <div>
+>>>>>>> upstream/develop
       <ContactDetailsItem
         compact
         :title="$t('CONVERSATION_SIDEBAR.ASSIGNEE_LABEL')"
@@ -239,7 +282,11 @@ export default {
         @select="onClickAssignAgent"
       />
     </div>
+<<<<<<< HEAD
     <div class="multiselect-wrap--small">
+=======
+    <div>
+>>>>>>> upstream/develop
       <ContactDetailsItem
         compact
         :title="$t('CONVERSATION_SIDEBAR.TEAM_LABEL')"
@@ -258,7 +305,11 @@ export default {
         @select="onClickAssignTeam"
       />
     </div>
+<<<<<<< HEAD
     <div class="multiselect-wrap--small">
+=======
+    <div>
+>>>>>>> upstream/develop
       <ContactDetailsItem compact :title="$t('CONVERSATION.PRIORITY.TITLE')" />
       <MultiselectDropdown
         :options="priorityOptions"

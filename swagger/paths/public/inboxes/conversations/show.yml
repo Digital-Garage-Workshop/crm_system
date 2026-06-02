@@ -3,6 +3,7 @@ tags:
 operationId: get-single-conversation
 summary: Get a single conversation
 description: Retrieves the details of a specific conversation
+<<<<<<< HEAD
 responses:
   200:
     description: Success
@@ -12,3 +13,25 @@ responses:
     description: Unauthorized
   404:
     description: Conversation not found
+=======
+security: []
+responses:
+  '200':
+    description: Success
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/public_conversation'
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+  '404':
+    description: Conversation not found
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/bad_request_error'
+>>>>>>> upstream/develop

@@ -25,7 +25,11 @@ export const generateLabelForContactableInboxesList = ({
     channelType === INBOX_TYPES.TWILIO ||
     channelType === INBOX_TYPES.WHATSAPP
   ) {
+<<<<<<< HEAD
     return `${name} (${phoneNumber})`;
+=======
+    return phoneNumber ? `${name} (${phoneNumber})` : name;
+>>>>>>> upstream/develop
   }
   return name;
 };
@@ -36,10 +40,18 @@ const transformInbox = ({
   email,
   channelType,
   phoneNumber,
+<<<<<<< HEAD
   ...rest
 }) => ({
   id,
   icon: getInboxIconByType(channelType, phoneNumber, 'line'),
+=======
+  medium,
+  ...rest
+}) => ({
+  id,
+  icon: getInboxIconByType(channelType, medium, 'line'),
+>>>>>>> upstream/develop
   label: generateLabelForContactableInboxesList({
     name,
     email,
@@ -52,6 +64,10 @@ const transformInbox = ({
   email,
   phoneNumber,
   channelType,
+<<<<<<< HEAD
+=======
+  medium,
+>>>>>>> upstream/develop
   ...rest,
 });
 
@@ -174,6 +190,7 @@ export const prepareWhatsAppMessagePayload = ({
   };
 };
 
+<<<<<<< HEAD
 export const generateContactQuery = ({ keys = ['email'], query }) => {
   return {
     payload: keys.map(key => {
@@ -206,6 +223,45 @@ export const searchContacts = async ({ keys, query }) => {
     contact => contact.phoneNumber || contact.email
   );
   return filteredPayload || [];
+=======
+// API Calls
+const MIN_SEARCH_LENGTH = 2;
+
+export const createContactSearcher = () => {
+  let controller = null;
+
+  return async (query, { skipMinLength = false } = {}) => {
+    const trimmed = typeof query === 'string' ? query.trim() : '';
+
+    controller?.abort();
+
+    if (!trimmed || (!skipMinLength && trimmed.length < MIN_SEARCH_LENGTH))
+      return [];
+
+    controller = new AbortController();
+    const { signal } = controller;
+
+    try {
+      const {
+        data: { payload },
+      } = await ContactAPI.search(trimmed, 1, 'name', '', { signal });
+
+      const camelCasedPayload = camelcaseKeys(payload, { deep: true });
+      // Filter contacts that have either phone_number or email
+      const filteredPayload = camelCasedPayload?.filter(
+        contact => contact.phoneNumber || contact.email
+      );
+      return filteredPayload || [];
+    } catch (error) {
+      // Return null for aborted requests so callers can distinguish
+      // "request was cancelled" from "no results found"
+      if (error?.name === 'AbortError' || error?.name === 'CanceledError') {
+        return null;
+      }
+      throw error;
+    }
+  };
+>>>>>>> upstream/develop
 };
 
 export const createNewContact = async input => {
