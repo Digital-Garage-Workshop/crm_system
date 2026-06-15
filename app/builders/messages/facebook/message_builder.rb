@@ -131,8 +131,11 @@ class Messages::Facebook::MessageBuilder < Messages::Messenger::MessageBuilder
   end
 
   def process_contact_params_result(result)
+    name = result['name'].presence ||
+           [result['first_name'], result['last_name']].compact_blank.join(' ').presence ||
+           'Unknown'
     {
-      name: "#{result['first_name'] || 'John'} #{result['last_name'] || 'Doe'}",
+      name: name,
       account_id: @inbox.account_id,
       avatar_url: result['profile_pic']
     }
@@ -143,7 +146,7 @@ class Messages::Facebook::MessageBuilder < Messages::Messenger::MessageBuilder
   def contact_params
     begin
       k = Koala::Facebook::API.new(@inbox.channel.page_access_token) if @inbox.facebook?
-      result = k.get_object(@sender_id) || {}
+      result = k.get_object(@sender_id, fields: 'name,first_name,last_name,profile_pic') || {}
     rescue Koala::Facebook::AuthenticationError => e
       Rails.logger.warn("Facebook authentication error for inbox: #{@inbox.id} with error: #{e.message}")
       Rails.logger.error e
