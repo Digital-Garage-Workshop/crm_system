@@ -45,12 +45,13 @@ class Facebook::SendOnFacebookService < Base::SendOnChannelService
   end
 
   def fb_text_message_params
-    {
+    params = {
       recipient: { id: contact.get_source_id(inbox.id) },
       message: fb_text_message_payload,
-      messaging_type: 'MESSAGE_TAG',
-      tag: message_tag
+      messaging_type: messaging_type
     }
+    params[:tag] = 'HUMAN_AGENT' if human_agent_enabled?
+    params
   end
 
   def fb_text_message_payload
@@ -79,7 +80,7 @@ class Facebook::SendOnFacebookService < Base::SendOnChannelService
   end
 
   def fb_attachment_message_params(attachment)
-    {
+    params = {
       recipient: { id: contact.get_source_id(inbox.id) },
       message: {
         attachment: {
@@ -89,13 +90,18 @@ class Facebook::SendOnFacebookService < Base::SendOnChannelService
           }
         }
       },
-      messaging_type: 'MESSAGE_TAG',
-      tag: message_tag
+      messaging_type: messaging_type
     }
+    params[:tag] = 'HUMAN_AGENT' if human_agent_enabled?
+    params
   end
 
-  def message_tag
-    @message_tag ||= GlobalConfigService.load('ENABLE_MESSENGER_CHANNEL_HUMAN_AGENT', nil) ? 'HUMAN_AGENT' : 'ACCOUNT_UPDATE'
+  def messaging_type
+    human_agent_enabled? ? 'MESSAGE_TAG' : 'RESPONSE'
+  end
+
+  def human_agent_enabled?
+    GlobalConfigService.load('ENABLE_MESSENGER_CHANNEL_HUMAN_AGENT', nil).present?
   end
 
   def attachment_type(attachment)
