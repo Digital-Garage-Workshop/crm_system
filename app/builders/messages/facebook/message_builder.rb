@@ -141,8 +141,26 @@ class Messages::Facebook::MessageBuilder < Messages::Messenger::MessageBuilder
     }
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
+  # `GET /<psid>` (user profile API) requires advanced access to `pages_messaging`.
+  # The conversations edge still returns the participant name under standard access.
+  def profile_from_conversations(api)
+    conversations = api.get_connections('me', 'conversations', user_id: @sender_id, fields: 'participants')
+    participant = conversations&.first&.dig('participants', 'data')&.find { |data| data['id'] == @sender_id }
+    participant.present? ? { 'name' => participant['name'] } : {}
+  rescue StandardError => e
+    Rails.logger.warn("Facebook conversations lookup failed for inbox: #{@inbox.id} with error: #{e.message}")
+    {}
+  end
+
+  # OAuthException, code: 100, error_subcode: 2018218, message: (#100) No profile available for this user
+  # We don't need to capture this error as we don't care about contact params in case of echo messages
+  def handle_profile_client_error(error, result)
+    return Rails.logger.warn(error) if error.message.include?('2018218')
+    return if result.present? || @outgoing_echo
+
+    ChatwootExceptionTracker.new(error, account: @inbox.account).capture_exception
+  end
+
   def contact_params
     begin
       k = Koala::Facebook::API.new(@inbox.channel.page_access_token) if @inbox.facebook?
@@ -153,20 +171,12 @@ class Messages::Facebook::MessageBuilder < Messages::Messenger::MessageBuilder
       @inbox.channel.authorization_error!
       raise
     rescue Koala::Facebook::ClientError => e
-      result = {}
-      # OAuthException, code: 100, error_subcode: 2018218, message: (#100) No profile available for this user
-      # We don't need to capture this error as we don't care about contact params in case of echo messages
-      if e.message.include?('2018218')
-        Rails.logger.warn e
-      else
-        ChatwootExceptionTracker.new(e, account: @inbox.account).capture_exception unless @outgoing_echo
-      end
+      result = @outgoing_echo ? {} : profile_from_conversations(k)
+      handle_profile_client_error(e, result)
     rescue StandardError => e
       result = {}
       ChatwootExceptionTracker.new(e, account: @inbox.account).capture_exception
     end
     process_contact_params_result(result)
   end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
 end
